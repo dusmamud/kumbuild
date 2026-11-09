@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* Kumbuild theme — Option A "Trust Blue" (THEME.md, LOCKED).
+   Next.js app: system / light / dark. Tokens CSS variables me hain —
+   :root light, [data-theme="dark"] dark. Components kabhi hard-coded
+   colour nahi likhte — hamesha token (bg-surface, text-muted...) use karo. */
+
+@theme inline {
+  --color-primary-50: #ebf6ff;
+  --color-primary-100: #cce8ff;
+  --color-primary-200: #99d2fe;
+  --color-primary-300: #66bbfe;
+  --color-primary-400: #33a5fd;
+  --color-primary-500: #008efd;
+  --color-primary-600: #0079d7;
+  --color-primary-700: #0063b1;
+  --color-primary-800: #00477e;
+  --color-primary-900: #002b4c;
+
+  /* Semantic tokens — ye vars :root / [data-theme="dark"] se aate hain,
+     isliye theme badalte hi har jagah badal jate hain. */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-ink: var(--text-heading);
+  --color-body: var(--text-body);
+  --color-muted: var(--text-muted);
+  --color-on-primary: var(--text-on-primary);
+  --color-primary-text: var(--primary-text);
+  --color-primary-tint: var(--primary-tint);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-error: var(--error);
+  --color-error-bg: var(--error-bg);
+  --color-info: var(--info);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    "Noto Sans Devanagari", "Noto Sans Bengali", sans-serif;
+}
+
+/* Dark variant data-theme attribute se chalega (prefers-color-scheme se nahi),
+   kyunki user ki choice cookie me save hoti hai. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #f8fafc;
+  --surface-hover: #f1f5f9;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text-heading: #0f172a;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-on-primary: #ffffff;
+  --primary: #008efd;
+  --primary-hover: #0079d7;
+  --primary-text: #0063b1;
+  --primary-tint: #ebf6ff;
+  --success: #16a34a;
+  --success-bg: #f0fdf4;
+  --warning: #d97706;
+  --warning-bg: #fffbeb;
+  --error: #dc2626;
+  --error-bg: #fef2f2;
+  --info: #0284c7;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-hover: #283449;
+  --border: #334155;
+  --border-strong: #475569;
+  --text-heading: #f1f5f9;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-on-primary: #ffffff;
+  --primary: #008efd;
+  --primary-hover: #33a5fd;
+  --primary-text: #33a5fd;
+  --primary-tint: #1e293b;
+  --success: #4ade80;
+  --success-bg: #1e293b;
+  --warning: #fbbf24;
+  --warning-bg: #1e293b;
+  --error: #f87171;
+  --error-bg: #1e293b;
+  --info: #38bdf8;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+}
