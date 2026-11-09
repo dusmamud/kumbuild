@@ -1,0 +1,36 @@
+# Kumbuild — deploy kumbuild-app (Next.js) to Cloudflare Workers via OpenNext.
+# Trigger: push to main (app ya shared packages badle to) ya manual dispatch.
+# Pehla deploy `kumbuild-app` Worker khud bana dega (dashboard me blank
+# Hello World Worker pehle se bana ho to usi naam se overwrite hoga).
+# NOTE: git-database API se kiye gaye push `push` trigger NAHI chalate
+# (Creestion me verify hua tha) — aise push ke baad deploy ke liye
+# Actions tab se "Run workflow" (workflow_dispatch) use karo.
+# Normal git push (user ke computer se) par ye apne aap chalega.
+name: Deploy app
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/apps/app/**"
+      - "frontend/packages/**"
+      - ".github/workflows/deploy-app.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter kumbuild-app deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

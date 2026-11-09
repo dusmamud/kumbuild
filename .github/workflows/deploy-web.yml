@@ -1,0 +1,35 @@
+# Kumbuild — deploy kumbuild-web (Astro) to Cloudflare Pages.
+# Trigger: push to main (web ya shared packages badle to) ya manual dispatch.
+# NOTE: git-database API se kiye gaye push `push` trigger NAHI chalate
+# (Creestion me verify hua tha) — aise push ke baad deploy ke liye
+# Actions tab se "Run workflow" (workflow_dispatch) use karo.
+# Normal git push (user ke computer se) par ye apne aap chalega.
+name: Deploy web
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/apps/web/**"
+      - "frontend/packages/**"
+      - ".github/workflows/deploy-web.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter kumbuild-web build
+      - run: pnpm exec wrangler pages deploy frontend/apps/web/dist --project-name=kumbuild-web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

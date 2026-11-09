@@ -4,8 +4,11 @@ node_modules/
 # Build outputs
 dist/
 .next/
+.open-next/
+.wrangler/
 .astro/
 .turbo/
+cloudflare-env.d.ts
 
 # Env / secrets — never commit
 .env
