@@ -1,9 +1,9 @@
 # Kumbuild — deploy kumbuild-web (Astro) to Cloudflare Pages.
 # Trigger: push to main (web ya shared packages badle to) ya manual dispatch.
-# NOTE: git-database API se kiye gaye push `push` trigger NAHI chalate
-# (Creestion me verify hua tha) — aise push ke baad deploy ke liye
-# Actions tab se "Run workflow" (workflow_dispatch) use karo.
-# Normal git push (user ke computer se) par ye apne aap chalega.
+# NOTE (verified is repo me): git-database API se kiye gaye push `push`
+# trigger CHALATE hain (runs 42619040220, 42621871402 push-triggered) —
+# Creestion wala gotcha yahan lagu nahi hota. Har main push par ye
+# workflow apne aap chalta hai; workflow_dispatch sirf manual backup hai.
 name: Deploy web
 
 on:

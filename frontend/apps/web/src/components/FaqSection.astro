@@ -6,13 +6,13 @@ const items = limit ? dict.faq.items.slice(0, limit) : dict.faq.items;
 ---
 
 <section class="mx-auto max-w-6xl px-4 py-12">
-  <h2 class="text-2xl font-extrabold sm:text-3xl">{dict.faq.title}</h2>
-  <p class="mt-2 max-w-2xl text-slate-600">{dict.faq.subtitle}</p>
+  <h2 class="text-2xl font-bold sm:text-3xl">{dict.faq.title}</h2>
+  <p class="mt-2 max-w-2xl text-body">{dict.faq.subtitle}</p>
   <div class="mt-6 space-y-3">
     {items.map((item) => (
-      <details class="rounded-xl border border-slate-200 bg-white px-5 py-4">
+      <details class="rounded-xl border border-line bg-white px-5 py-4">
         <summary class="cursor-pointer font-bold">{item.q}</summary>
-        <p class="mt-2 text-sm leading-relaxed text-slate-600">{item.a}</p>
+        <p class="mt-2 text-sm leading-relaxed text-body">{item.a}</p>
       </details>
     ))}
   </div>

@@ -19,9 +19,9 @@ const { dict, locale } = Astro.props;
   <Examples dict={dict} />
   <FaqSection dict={dict} limit={5} />
   <section class="mx-auto max-w-6xl px-4 pb-16">
-    <div class="rounded-2xl bg-primary-500 px-6 py-10 text-center text-white">
-      <h2 class="text-2xl font-extrabold text-white">{dict.hero.title}</h2>
-      <p class="mx-auto mt-2 max-w-xl text-primary-100">{dict.hero.subtitle}</p>
+    <div class="rounded-2xl bg-primary-700 px-6 py-10 text-center text-white">
+      <h2 class="text-2xl font-bold text-white">{dict.hero.title}</h2>
+      <p class="mx-auto mt-2 max-w-xl text-white">{dict.hero.subtitle}</p>
       <a href={pageUrl(locale, "/order")} class="mt-6 inline-block rounded-lg bg-white px-6 py-3 font-bold text-primary-700">{dict.hero.ctaOrder}</a>
     </div>
   </section>

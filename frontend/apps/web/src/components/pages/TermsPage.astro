@@ -7,7 +7,7 @@ const { dict, locale } = Astro.props;
 
 <Layout title={dict.terms.title} description={dict.terms.intro} locale={locale} dict={dict} slug="/terms">
   <section class="mx-auto max-w-3xl px-4 py-12">
-    <h1 class="text-2xl font-extrabold sm:text-3xl">{dict.terms.title}</h1>
-    <p class="mt-4 leading-relaxed text-slate-600">{dict.terms.intro}</p>
+    <h1 class="text-2xl font-bold sm:text-3xl">{dict.terms.title}</h1>
+    <p class="mt-4 leading-relaxed text-body">{dict.terms.intro}</p>
   </section>
 </Layout>

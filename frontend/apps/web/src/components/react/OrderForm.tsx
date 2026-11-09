@@ -7,8 +7,8 @@ interface Props {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100";
-const labelCls = "mb-1 block text-sm font-bold text-slate-900";
+  "w-full rounded-lg border border-line bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100";
+const labelCls = "mb-1 block text-sm font-bold text-ink";
 
 /**
  * Order form — React island (client:load).
@@ -47,10 +47,10 @@ export default function OrderForm({ dict, locale }: Props) {
   if (referenceFor) {
     return (
       <div className="rounded-xl border border-green-200 bg-green-50 p-6">
-        <h2 className="text-xl font-extrabold text-slate-900">{o.successTitle}</h2>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">{o.successText}</p>
+        <h2 className="text-xl font-bold text-ink">{o.successTitle}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-body">{o.successText}</p>
         <p className="mt-4 text-sm">
-          <span className="font-bold text-slate-900">{o.reference}: </span>
+          <span className="font-bold text-ink">{o.reference}: </span>
           <code className="rounded bg-white px-2 py-1 font-mono font-bold text-primary-700">{referenceFor}</code>
         </p>
       </div>
@@ -58,7 +58,7 @@ export default function OrderForm({ dict, locale }: Props) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-xl border border-slate-200 bg-white p-6" noValidate>
+    <form onSubmit={onSubmit} className="rounded-xl border border-line bg-white p-6" noValidate>
       {errors.length > 0 && (
         <p className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">
           {o.required}: {errors.join(", ")}
@@ -113,7 +113,7 @@ export default function OrderForm({ dict, locale }: Props) {
       <button type="submit" className="mt-6 rounded-lg bg-primary-500 px-6 py-3 font-bold text-white hover:bg-primary-600">
         {o.submit}
       </button>
-      <p className="mt-3 text-xs text-slate-400">{o.note}</p>
+      <p className="mt-3 text-xs text-muted">{o.note}</p>
     </form>
   );
 }
