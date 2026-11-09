@@ -47,7 +47,10 @@ export default function OrderForm({ dict, locale }: Props) {
   if (referenceFor) {
     return (
       <div className="rounded-xl border border-green-200 bg-green-50 p-6">
-        <h2 className="text-xl font-bold text-ink">{o.successTitle}</h2>
+        <div className="flex items-center gap-2">
+          <svg className="h-6 w-6 shrink-0 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></svg>
+          <h2 className="text-xl font-bold text-ink">{o.successTitle}</h2>
+        </div>
         <p className="mt-2 text-sm leading-relaxed text-body">{o.successText}</p>
         <p className="mt-4 text-sm">
           <span className="font-bold text-ink">{o.reference}: </span>
@@ -110,7 +113,7 @@ export default function OrderForm({ dict, locale }: Props) {
           </select>
         </div>
       </div>
-      <button type="submit" className="mt-6 rounded-lg bg-primary-500 px-6 py-3 font-bold text-white hover:bg-primary-600">
+      <button type="submit" className="mt-6 w-full rounded-lg bg-primary-500 px-6 py-3 font-bold text-white hover:bg-primary-600 sm:w-auto">
         {o.submit}
       </button>
       <p className="mt-3 text-xs text-muted">{o.note}</p>
