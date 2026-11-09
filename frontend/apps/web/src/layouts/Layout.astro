@@ -13,6 +13,7 @@ interface Props {
 
 const { title, description, locale, dict, slug } = Astro.props;
 const nav = dict.nav;
+const current = pageUrl(locale, slug);
 const links = [
   { href: pageUrl(locale, "/services"), label: nav.services },
   { href: pageUrl(locale, "/pricing"), label: nav.pricing },
@@ -26,6 +27,14 @@ const locales: { code: Locale; label: string }[] = [
   { code: "hi", label: "हिन्दी" },
   { code: "bn", label: "বাংলা" },
 ];
+const desktopLink = (active: boolean) =>
+  active
+    ? "font-semibold text-primary-700"
+    : "text-body hover:text-primary-700";
+const mobileLink = (active: boolean) =>
+  active
+    ? "rounded-lg bg-primary-50 px-3 py-2.5 text-[15px] font-semibold text-primary-700"
+    : "rounded-lg px-3 py-2.5 text-[15px] text-body hover:bg-surface hover:text-primary-700";
 ---
 
 <!doctype html>
@@ -38,19 +47,30 @@ const locales: { code: Locale; label: string }[] = [
     <link rel="icon" type="image/svg+xml" href="/logo/kumbuild-logo.svg" />
   </head>
   <body class="min-h-screen bg-white text-body">
-    <header class="border-b border-line bg-white">
-      <div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
+    <header class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-sm">
+      <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+        <button
+          id="menu-btn"
+          type="button"
+          class="rounded-lg border border-line p-2 text-ink hover:bg-surface md:hidden"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Menu"
+        >
+          <svg id="icon-open" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          <svg id="icon-close" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+        </button>
         <a href={pageUrl(locale, "/")} class="flex items-center gap-2 font-bold text-ink">
           <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" />
-          <span class="hidden text-lg sm:inline">Kumbuild</span>
+          <span class="text-lg">Kumbuild</span>
         </a>
-        <nav class="ml-4 hidden items-center gap-5 text-sm md:flex">
+        <nav class="ml-4 hidden items-center gap-5 text-sm md:flex" aria-label="Main">
           {links.map((l) => (
-            <a href={l.href} class="text-body hover:text-primary-700">{l.label}</a>
+            <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={desktopLink(l.href === current)}>{l.label}</a>
           ))}
         </nav>
         <div class="ml-auto flex items-center gap-3">
-          <div class="flex items-center gap-1 text-xs font-semibold">
+          <div class="hidden items-center gap-1 text-xs font-semibold md:flex">
             {locales.map((l) => (
               <a
                 href={pageUrl(l.code, slug)}
@@ -60,16 +80,46 @@ const locales: { code: Locale; label: string }[] = [
               >{l.label}</a>
             ))}
           </div>
-          <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-semibold text-body hover:text-primary-700 sm:block">{nav.login}</a>
+          <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-semibold text-body hover:text-primary-700 md:block">{nav.login}</a>
           <a href={pageUrl(locale, "/order")} class="whitespace-nowrap rounded-lg bg-primary-500 px-4 py-2 text-sm font-bold text-white hover:bg-primary-600">{nav.order}</a>
         </div>
       </div>
-      <nav class="flex gap-4 overflow-x-auto border-t border-line px-4 py-2 text-sm md:hidden">
-        {links.map((l) => (
-          <a href={l.href} class="whitespace-nowrap text-body hover:text-primary-700">{l.label}</a>
-        ))}
-      </nav>
+      <div id="mobile-menu" class="hidden border-t border-line bg-white px-4 pb-4 pt-2 md:hidden">
+        <nav class="flex flex-col gap-0.5" aria-label="Mobile">
+          {links.map((l) => (
+            <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={mobileLink(l.href === current)}>{l.label}</a>
+          ))}
+        </nav>
+        <div class="mt-3 flex items-center gap-1 border-t border-line pt-3 text-xs font-semibold">
+          {locales.map((l) => (
+            <a
+              href={pageUrl(l.code, slug)}
+              class={l.code === locale
+                ? "rounded-md bg-primary-50 px-2 py-1 text-primary-700"
+                : "rounded-md px-2 py-1 text-muted hover:text-primary-700"}
+            >{l.label}</a>
+          ))}
+          <a href="https://auth.kumbuild.com/login" class="ml-auto rounded-md px-2 py-1 text-muted hover:text-primary-700">{nav.login}</a>
+        </div>
+      </div>
     </header>
+    <script>
+      const btn = document.getElementById("menu-btn");
+      const menu = document.getElementById("mobile-menu");
+      const iconOpen = document.getElementById("icon-open");
+      const iconClose = document.getElementById("icon-close");
+      function setOpen(open) {
+        menu.classList.toggle("hidden", !open);
+        iconOpen.classList.toggle("hidden", open);
+        iconClose.classList.toggle("hidden", !open);
+        btn.setAttribute("aria-expanded", String(open));
+      }
+      btn.addEventListener("click", () => setOpen(menu.classList.contains("hidden")));
+      menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setOpen(false);
+      });
+    </script>
 
     <main>
       <slot />
