@@ -22,6 +22,7 @@ kumbuild/                  <- ye root. Saare docs (.md / .pdf) yahin rahenge.
   PRICING.md / SERVICES.md / DELIVERY.md / CONTENT.md / FAQ.md
   PRIVACY.md / TERMS.md / REFUND.md   <- legal docs (DRAFT)
   STACK.md                 <- tech stack summary
+  THEME.md                 <- theme + colors (Option A Trust Blue, LOCKED) + locales (en-US/hi/bn)
   ARCHITECTURE.md          <- monorepo + tech stack (locked)
   SUBDOMAINS.md            <- kumbuild.com / auth / home / admin — har page
   DEPLOYMENT.md            <- GitHub Actions -> Cloudflare Pages
@@ -51,6 +52,7 @@ kumbuild/                  <- ye root. Saare docs (.md / .pdf) yahin rahenge.
 | `TERMS.md` | Terms and conditions (DRAFT — legal advice nahi) | Website pe publish karne se pehle |
 | `REFUND.md` | Refund policy (DRAFT — final nahi hui) | Refund ka sawaal aaye to |
 | `STACK.md` | Tech stack ka ek jagah summary | Stack batana ho to |
+| `THEME.md` | Theme + color grading (Option A Trust Blue, LOCKED) + locales en-US/hi/bn — Astro light-only, Next.js system/light/dark | Colour, theme ya language ka sawaal aaye to |
 | `ARCHITECTURE.md` | Monorepo, tech stack, frontend + backend structure, auth flow, security | Code likhne se pehle |
 | `SUBDOMAINS.md` | Har subdomain pe kaunse pages, kaun khol sakta hai, redirects, DNS | Pages ya routing banate time |
 | `DEPLOYMENT.md` | GitHub Actions → Cloudflare Pages, secrets, domains, limits | Deploy karte time |
@@ -69,6 +71,8 @@ kumbuild/                  <- ye root. Saare docs (.md / .pdf) yahin rahenge.
 | Admin | Alag app NAHI — ek hi app me `(admin)` route group, role guard |
 | Deploy | Poora frontend GitHub Actions se Cloudflare Pages pe (Vercel plan hata diya) |
 | Payment provider | Razorpay (LOCKED 2026-11-09) — UPI, cards, netbanking, wallets; 2% + 18% GST on fee |
+| Theme | Option A Trust Blue (LOCKED 2026-11-09) — primary #008EFD (logo wala); Astro sirf light (pure white), Next.js system/light/dark |
+| Locales | en-US (default, no URL prefix), hi (`/hi/`), bn (`/bn/`) — shared dictionaries `packages/lib/src/i18n/` (LOCKED 2026-11-09) |
 | Backend | Baad me — pehle frontend mock data se complete hoga |
 | Code | Abhi code nahi likhna — sirf plan + docs stage hai |
 
