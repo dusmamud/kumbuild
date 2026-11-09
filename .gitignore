@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.next/
+.astro/
+.turbo/
+
+# Env / secrets — never commit
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+*.log

@@ -99,7 +99,7 @@ Wildcard `*.kumbuild.com` DNS record se teenon app subdomains ek hi project pe j
 
 ## 9. Pehle deploy se pehle checklist
 
-- [ ] GitHub repo bana (naam + public/private — TBD)
+- [x] GitHub repo bana — `dusmamud/kumbuild`, public (2026-11-09, commit f32dca7; production pe private karna hai — user khud karega)
 - [ ] `kumbuild.com` domain ki status confirm (khareeda ya nahi — TBD)
 - [ ] Cloudflare me 2 projects bane (web + app)
 - [ ] GitHub Secrets add hue (`CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` — user khud)

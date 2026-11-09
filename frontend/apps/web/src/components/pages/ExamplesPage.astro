@@ -1,0 +1,11 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Examples from "../Examples.astro";
+import type { Dictionary, Locale } from "../../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; }
+const { dict, locale } = Astro.props;
+---
+
+<Layout title={dict.examples.title} description={dict.examples.subtitle} locale={locale} dict={dict} slug="/examples">
+  <Examples dict={dict} />
+</Layout>

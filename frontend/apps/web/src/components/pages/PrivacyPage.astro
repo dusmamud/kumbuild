@@ -1,0 +1,13 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import type { Dictionary, Locale } from "../../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; }
+const { dict, locale } = Astro.props;
+---
+
+<Layout title={dict.privacy.title} description={dict.privacy.intro} locale={locale} dict={dict} slug="/privacy">
+  <section class="mx-auto max-w-3xl px-4 py-12">
+    <h1 class="text-2xl font-extrabold sm:text-3xl">{dict.privacy.title}</h1>
+    <p class="mt-4 leading-relaxed text-slate-600">{dict.privacy.intro}</p>
+  </section>
+</Layout>

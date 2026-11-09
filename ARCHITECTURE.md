@@ -14,7 +14,7 @@ Status: **LOCKED (2026-11-09, user approved).** Ye file code likhne se pehle pad
 | 6 | Backend baad me, frontend pehle (mock) | LOCKED | Frontend mock data + api-client se complete hoga. Backend aane pe sirf base URL badlega |
 | 7 | Language: TypeScript everywhere | LOCKED | Dono apps + packages me ek hi language, shared types |
 | 8 | Styling: Tailwind CSS | LOCKED | Dono apps me ek hi design system (`packages/ui`) |
-| 9 | Design tokens | TBD | Kumbuild ke apne colors / font abhi lock nahi hue. ShrinkIt ke tokens yahan automatically apply nahi honge — alag brand hai |
+| 9 | Design tokens — colors | LOCKED (THEME.md, 2026-11-09) | Option A Trust Blue, primary logo wala #008EFD (scale 50–900). Font abhi final nahi — Inter/system stack (Latin) + Noto Sans Devanagari/Bengali, final font build ke time lock hoga. ShrinkIt ke tokens yahan automatically apply nahi honge — alag brand hai |
 
 ## 2. Monorepo tree
 
@@ -156,7 +156,7 @@ Split ka tareeka pehle se tay hai: `(admin)` route group ko utha ke `apps/admin`
 
 ## 11. Kya is doc me nahi hai (TBD)
 
-- Kumbuild ke design tokens (colors, font) — lock nahi hue
+- Kumbuild ke design tokens: colors lock hain (THEME.md — Option A Trust Blue); font final nahi — build ke time lock hoga
 - Backend stack — decide nahi hua
 - Payment provider — Razorpay (LOCKED 2026-11-09)
 - Database — decide nahi hua

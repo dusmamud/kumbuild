@@ -1,0 +1,113 @@
+---
+import "../styles/theme.css";
+import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  dict: Dictionary;
+  /** page slug without locale prefix, e.g. "/pricing" or "/" */
+  slug: string;
+}
+
+const { title, description, locale, dict, slug } = Astro.props;
+const nav = dict.nav;
+const links = [
+  { href: pageUrl(locale, "/services"), label: nav.services },
+  { href: pageUrl(locale, "/pricing"), label: nav.pricing },
+  { href: pageUrl(locale, "/how-it-works"), label: nav.howItWorks },
+  { href: pageUrl(locale, "/examples"), label: nav.examples },
+  { href: pageUrl(locale, "/faq"), label: nav.faq },
+  { href: pageUrl(locale, "/contact"), label: nav.contact },
+];
+const locales: { code: Locale; label: string }[] = [
+  { code: "en-US", label: "English" },
+  { code: "hi", label: "हिन्दी" },
+  { code: "bn", label: "বাংলা" },
+];
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Kumbuild</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/logo/kumbuild-logo.svg" />
+  </head>
+  <body class="min-h-screen bg-white text-slate-700">
+    <header class="border-b border-slate-200 bg-white">
+      <div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
+        <a href={pageUrl(locale, "/")} class="flex items-center gap-2 font-bold text-slate-900">
+          <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" />
+          <span class="text-lg">Kumbuild</span>
+        </a>
+        <nav class="ml-4 hidden items-center gap-5 text-sm md:flex">
+          {links.map((l) => (
+            <a href={l.href} class="text-slate-600 hover:text-primary-700">{l.label}</a>
+          ))}
+        </nav>
+        <div class="ml-auto flex items-center gap-3">
+          <div class="flex items-center gap-1 text-xs font-semibold">
+            {locales.map((l) => (
+              <a
+                href={pageUrl(l.code, slug)}
+                class={l.code === locale
+                  ? "rounded-md bg-primary-50 px-2 py-1 text-primary-700"
+                  : "rounded-md px-2 py-1 text-slate-500 hover:text-primary-700"}
+              >{l.label}</a>
+            ))}
+          </div>
+          <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-semibold text-slate-600 hover:text-primary-700 sm:block">{nav.login}</a>
+          <a href={pageUrl(locale, "/order")} class="rounded-lg bg-primary-500 px-4 py-2 text-sm font-bold text-white hover:bg-primary-600">{nav.order}</a>
+        </div>
+      </div>
+      <nav class="flex gap-4 overflow-x-auto border-t border-slate-100 px-4 py-2 text-sm md:hidden">
+        {links.map((l) => (
+          <a href={l.href} class="whitespace-nowrap text-slate-600 hover:text-primary-700">{l.label}</a>
+        ))}
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="mt-16 border-t border-slate-200 bg-slate-50">
+      <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
+        <div>
+          <div class="flex items-center gap-2 font-bold text-slate-900">
+            <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="28" height="28" />
+            <span>Kumbuild</span>
+          </div>
+          <p class="mt-2 text-sm text-slate-500">{dict.footer.tagline}</p>
+          <p class="mt-2 text-xs text-slate-400">{dict.footer.draftNote}</p>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-slate-900">{dict.footer.services}</p>
+          <ul class="mt-2 space-y-1 text-sm text-slate-500">
+            {dict.services.items.map((s) => (
+              <li><a href={pageUrl(locale, "/services")} class="hover:text-primary-700">{s.title}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-slate-900">{dict.footer.company}</p>
+          <ul class="mt-2 space-y-1 text-sm text-slate-500">
+            <li><a href={pageUrl(locale, "/about")} class="hover:text-primary-700">{dict.about.title}</a></li>
+            <li><a href={pageUrl(locale, "/pricing")} class="hover:text-primary-700">{nav.pricing}</a></li>
+            <li><a href={pageUrl(locale, "/faq")} class="hover:text-primary-700">{nav.faq}</a></li>
+            <li><a href={pageUrl(locale, "/contact")} class="hover:text-primary-700">{nav.contact}</a></li>
+            <li><a href={pageUrl(locale, "/privacy")} class="hover:text-primary-700">{dict.privacy.title}</a></li>
+            <li><a href={pageUrl(locale, "/terms")} class="hover:text-primary-700">{dict.terms.title}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-200 py-4 text-center text-xs text-slate-400">
+        © 2026 Kumbuild · {dict.footer.rights}
+      </div>
+    </footer>
+  </body>
+</html>

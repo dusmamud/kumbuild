@@ -82,7 +82,7 @@ kumbuild/                  <- ye root. Saare docs (.md / .pdf) yahin rahenge.
 - **Delivery 3–5 din draft hai.**
 - **`kumbuild.com` domain ki status TBD hai** — khareeda hai ya nahi, ye doc nahi batata.
 - **`auth.kumbuild.com` vs `auth.kumbuilds.com`** — user ne ek baar `kumbuilds` likha tha, typo assume kiya hai, confirm pending hai.
-- **Repo ka naam / public-private TBD hai.**
+- **Repo: `dusmamud/kumbuild`, public** (2026-11-09; production pe private karna hai — user khud karega).
 
 ## Kaam ka order
 

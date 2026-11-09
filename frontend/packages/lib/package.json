@@ -1,0 +1,1 @@
+{"exports":{".":"./src/index.ts","./i18n":"./src/i18n/index.ts"},"name":"@kumbuild/lib","private":true,"typesVersions":{"*":{".":["./src/index.ts"],"i18n":["./src/i18n/index.ts"]}},"version":"0.1.0"}

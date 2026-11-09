@@ -1,0 +1,1 @@
+{"compilerOptions":{"baseUrl":".","paths":{"@kumbuild/config":["../../packages/config/theme.ts"],"@kumbuild/lib":["../../packages/lib/src/index.ts"]},"strict":true},"extends":"astro/tsconfigs/strict","include":["src"]}

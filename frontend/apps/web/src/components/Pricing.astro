@@ -1,0 +1,36 @@
+---
+import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; }
+const { dict, locale } = Astro.props;
+const p = dict.pricing;
+---
+
+<section class="mx-auto max-w-6xl px-4 py-12">
+  <h2 class="text-2xl font-extrabold sm:text-3xl">{p.title}</h2>
+  <p class="mt-2 max-w-2xl text-slate-600">{p.subtitle}</p>
+  <div class="mt-8 grid gap-4 lg:grid-cols-3">
+    {p.packages.map((pkg) => (
+      <article class={`rounded-xl border p-6 ${pkg.slug === "business" ? "border-primary-500 bg-primary-50/40 ring-1 ring-primary-500" : "border-slate-200 bg-white"}`}>
+        <h3 class="text-lg font-bold">{pkg.name}</h3>
+        <p class="mt-1 text-3xl font-extrabold">{pkg.price} <span class="text-sm font-medium text-slate-500">/ {pkg.per}</span></p>
+        <p class="mt-2 text-sm text-slate-600">{pkg.bestFor}</p>
+        <ul class="mt-4 space-y-2 text-sm">
+          {pkg.features.map((f) => (
+            <li class="flex gap-2"><span class="text-primary-600">✓</span><span>{f}</span></li>
+          ))}
+        </ul>
+        <a href={pageUrl(locale, "/order")} class="mt-6 block rounded-lg bg-primary-500 px-4 py-2.5 text-center font-bold text-white hover:bg-primary-600">{pkg.cta}</a>
+      </article>
+    ))}
+  </div>
+  <div class="mt-6 rounded-xl border border-slate-200 bg-white p-6">
+    <div class="flex flex-wrap items-baseline gap-2">
+      <h3 class="text-lg font-bold">{p.renewal.title}</h3>
+      <span class="text-xl font-extrabold">{p.renewal.price}</span>
+      <span class="text-sm text-slate-500">/ {p.renewal.per}</span>
+    </div>
+    <p class="mt-1 text-sm text-slate-600">{p.renewal.desc}</p>
+  </div>
+  <p class="mt-4 text-xs text-slate-400">{p.terms}</p>
+  <p class="mt-1 text-xs text-slate-400">{p.note}</p>
+</section>

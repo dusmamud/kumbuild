@@ -1,0 +1,1 @@
+{"exports":{".":"./theme.ts","./theme":"./theme.ts"},"name":"@kumbuild/config","private":true,"typesVersions":{"*":{".":["./theme.ts"],"theme":["./theme.ts"]}},"version":"0.1.0"}
