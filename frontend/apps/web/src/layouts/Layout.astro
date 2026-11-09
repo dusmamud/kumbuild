@@ -42,7 +42,7 @@ const locales: { code: Locale; label: string }[] = [
       <div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
         <a href={pageUrl(locale, "/")} class="flex items-center gap-2 font-bold text-ink">
           <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" />
-          <span class="text-lg">Kumbuild</span>
+          <span class="hidden text-lg sm:inline">Kumbuild</span>
         </a>
         <nav class="ml-4 hidden items-center gap-5 text-sm md:flex">
           {links.map((l) => (
@@ -61,7 +61,7 @@ const locales: { code: Locale; label: string }[] = [
             ))}
           </div>
           <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-semibold text-body hover:text-primary-700 sm:block">{nav.login}</a>
-          <a href={pageUrl(locale, "/order")} class="rounded-lg bg-primary-500 px-4 py-2 text-sm font-bold text-white hover:bg-primary-600">{nav.order}</a>
+          <a href={pageUrl(locale, "/order")} class="whitespace-nowrap rounded-lg bg-primary-500 px-4 py-2 text-sm font-bold text-white hover:bg-primary-600">{nav.order}</a>
         </div>
       </div>
       <nav class="flex gap-4 overflow-x-auto border-t border-line px-4 py-2 text-sm md:hidden">
