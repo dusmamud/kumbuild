@@ -52,7 +52,7 @@ const mobileLink = (active: boolean) =>
         <button
           id="menu-btn"
           type="button"
-          class="rounded-lg border border-line p-2 text-ink hover:bg-surface md:hidden"
+          class="rounded-lg border border-line p-2 text-ink hover:bg-surface lg:hidden"
           aria-expanded="false"
           aria-controls="mobile-menu"
           aria-label="Menu"
@@ -64,13 +64,13 @@ const mobileLink = (active: boolean) =>
           <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" />
           <span class="text-lg">Kumbuild</span>
         </a>
-        <nav class="ml-4 hidden items-center gap-5 text-sm md:flex" aria-label="Main">
+        <nav class="ml-4 hidden items-center gap-5 text-sm lg:flex" aria-label="Main">
           {links.map((l) => (
             <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={desktopLink(l.href === current)}>{l.label}</a>
           ))}
         </nav>
         <div class="ml-auto flex items-center gap-2 sm:gap-3">
-          <div class="relative hidden md:block">
+          <div class="relative hidden lg:block">
             <button
               id="locale-btn"
               type="button"
@@ -94,11 +94,11 @@ const mobileLink = (active: boolean) =>
               ))}
             </div>
           </div>
-          <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-semibold text-body hover:text-primary-700 md:block">{nav.login}</a>
+          <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-semibold text-body hover:text-primary-700 lg:block">{nav.login}</a>
           <a href={pageUrl(locale, "/order")} class="whitespace-nowrap rounded-lg bg-primary-500 px-4 py-2 text-sm font-bold text-white hover:bg-primary-600">{nav.order}</a>
         </div>
       </div>
-      <div id="mobile-menu" class="hidden border-t border-line bg-white px-4 pb-4 pt-2 md:hidden">
+      <div id="mobile-menu" class="hidden border-t border-line bg-white px-4 pb-4 pt-2 lg:hidden">
         <nav class="flex flex-col gap-0.5" aria-label="Mobile">
           {links.map((l) => (
             <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={mobileLink(l.href === current)}>{l.label}</a>
