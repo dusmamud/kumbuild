@@ -10,10 +10,19 @@ const e = dict.examples;
   <p class="mt-2 max-w-2xl text-body">{e.subtitle}</p>
   <div class="mt-8 grid gap-4 sm:grid-cols-3">
     {e.items.map((item) => (
-      <article class="rounded-xl border border-line bg-white p-5">
-        <span class="inline-block rounded-full bg-primary-50 px-2.5 py-1 text-xs font-bold text-primary-700">{e.comingSoon}</span>
-        <h3 class="mt-3 font-bold">{item.title}</h3>
-        <p class="mt-1 text-sm leading-relaxed text-body">{item.desc}</p>
+      <article class="overflow-hidden rounded-xl border border-line bg-white">
+        {/* Wireframe preview — demos are not built yet (Phase 3), so no fake screenshot. */}
+        <div class="border-b border-line bg-surface px-5 py-4" aria-hidden="true">
+          <div class="h-2.5 w-24 rounded bg-line"></div>
+          <div class="mt-2 h-2 w-full rounded bg-line"></div>
+          <div class="mt-2 h-2 w-2/3 rounded bg-line"></div>
+          <div class="mt-3 h-6 w-20 rounded-md bg-primary-100"></div>
+        </div>
+        <div class="p-5">
+          <span class="inline-block rounded-full bg-primary-50 px-2.5 py-1 text-xs font-bold text-primary-700">{e.comingSoon}</span>
+          <h3 class="mt-3 font-bold">{item.title}</h3>
+          <p class="mt-1 text-sm leading-relaxed text-body">{item.desc}</p>
+        </div>
       </article>
     ))}
   </div>
