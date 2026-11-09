@@ -1,13 +1,16 @@
-import { getLocale } from "next-intl/server";
+"use client";
+
+import { useLocale } from "next-intl";
 import { payments } from "@/lib/mock";
 import { formatDate, inr } from "@/lib/format";
 import { Card, PageTitle } from "@/components/ui";
 
 // Admin payments — admin.kumbuild.com/payments.
 // Saare payments, advance / final / renewal (mock).
-export default async function AdminPaymentsPage() {
-  const locale = await getLocale();
-  const paid = payments
+// locale context se aata hai (useLocale) — getLocale() static export me
+// next-intl ka headers() fallback padhta hai, isliye use nahi karte.
+export default function AdminPaymentsPage() {
+  const locale = useLocale();  const paid = payments
     .filter((p) => p.status === "Paid")
     .reduce((s, p) => s + p.amount, 0);
   const pending = payments

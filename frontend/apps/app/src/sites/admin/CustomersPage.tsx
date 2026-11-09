@@ -1,13 +1,16 @@
-import { getLocale } from "next-intl/server";
+"use client";
+
+import { useLocale } from "next-intl";
 import { customers } from "@/lib/mock";
 import { formatDate } from "@/lib/format";
 import { Card, PageTitle } from "@/components/ui";
 
 // Admin customers — admin.kumbuild.com/customers.
 // Saare customers, unki websites aur orders (mock).
-export default async function AdminCustomersPage() {
-  const locale = await getLocale();
-
+// locale context se aata hai (useLocale) — getLocale() static export me
+// next-intl ka headers() fallback padhta hai, isliye use nahi karte.
+export default function AdminCustomersPage() {
+  const locale = useLocale();
   return (
     <div>
       <PageTitle

@@ -1,14 +1,10 @@
-import { cookies, headers } from "next/headers";
-import { redirect } from "next/navigation";
-
-// MOCK AUTH — frontend phase only (ARCHITECTURE.md Section 5).
-// Koi real authentication nahi hai, koi password kahin save/store NAHI hota.
-// Login form jo password bhejta hai, use action turant discard kar deta hai.
-// Asli session + role check backend aane pe banega. Frontend guard sirf UX hai.
-//
-// ADMIN-ONLY (2026-11-09, landing + admin only): sirf admin (Dus) login
-// kar sakta hai — customer ka koi account nahi hai, isliye signup nahi hai.
-
+// Mock admin session — CLIENT SIDE ONLY (static export).
+// Static Pages pe koi server nahi hai: na cookie padhi ja sakti hai, na
+// server action chal sakta hai. Isliye session browser ke localStorage
+// me hai (key "kb_session"). Sirf admin (Dus) login kar sakta hai —
+// customer ka koi account nahi hai, isliye signup nahi hai.
+// Ye guard sirf UX hai, security nahi — asli role check backend karega
+// (ARCHITECTURE.md Section 9).
 export type Role = "admin";
 
 export interface Session {
@@ -17,129 +13,53 @@ export interface Session {
   email: string;
 }
 
-export const SESSION_COOKIE = "kb_session";
-
-/** Demo admin account — mock me sirf ye email login kar sakta hai. */
 export const DEMO_ADMIN_EMAIL = "admin@kumbuild.com";
 
-function encodeSession(s: Session): string {
-  return Buffer.from(JSON.stringify(s), "utf-8").toString("base64url");
+const SESSION_KEY = "kb_session";
+
+function isValidSession(value: unknown): value is Session {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    (value as Session).role === "admin" &&
+    typeof (value as Session).email === "string"
+  );
 }
 
-function decodeSession(value: string): Session | null {
+export function getSession(): Session | null {
+  if (typeof window === "undefined") return null;
   try {
-    const parsed = JSON.parse(
-      Buffer.from(value, "base64url").toString("utf-8"),
-    ) as Session;
-    if (parsed.role !== "admin") return null;
-    if (typeof parsed.email !== "string" || !parsed.email.includes("@"))
-      return null;
-    return {
-      role: parsed.role,
-      name: typeof parsed.name === "string" ? parsed.name : parsed.email,
-      email: parsed.email,
-    };
+    const raw = window.localStorage.getItem(SESSION_KEY);
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    return isValidSession(parsed) ? parsed : null;
   } catch {
     return null;
   }
 }
 
-export async function getSession(): Promise<Session | null> {
-  const store = await cookies();
-  const raw = store.get(SESSION_COOKIE)?.value;
-  if (!raw) return null;
-  return decodeSession(raw);
-}
+export type LoginResult =
+  | { ok: true; session: Session }
+  | { ok: false; error: "invalid-email" | "not-admin" };
 
-/**
- * Cookie domain: production me `.kumbuild.com` taaki ek login dono
- * subdomains (auth/admin) par chale. Localhost par domain set nahi
- * karte — host-only cookie, warna browser reject kar dega.
- */
-async function cookieDomain(): Promise<string | undefined> {
-  const host = (await headers()).get("host") ?? "";
-  const bare = host.split(":")[0];
-  if (bare.endsWith(".kumbuild.com") || bare === "kumbuild.com")
-    return ".kumbuild.com";
-  return undefined;
-}
-
-async function setSessionCookie(session: Session): Promise<void> {
-  const store = await cookies();
-  store.set(SESSION_COOKIE, encodeSession(session), {
-    httpOnly: true,
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7, // 7 din
-    domain: await cookieDomain(),
-    secure: process.env.NODE_ENV === "production",
-  });
-}
-
-async function clearSessionCookie(): Promise<void> {
-  const store = await cookies();
-  store.delete(SESSION_COOKIE);
-}
-
-/** Mock admin login: sirf admin@kumbuild.com chalta hai, baaki sab reject. */
-export async function loginAction(formData: FormData): Promise<never> {
-  "use server";
-  const email = String(formData.get("email") ?? "").trim().toLowerCase();
-  // Password ko padhte hi nahi — mock me iski koi zaroorat nahi, aur ise
-  // kahin save karna to bilkul mana hai.
-  if (!email.includes("@")) {
-    redirect("/login?error=invalid-email");
+export function login(email: string): LoginResult {
+  const normalized = email.trim().toLowerCase();
+  if (!normalized || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) {
+    return { ok: false, error: "invalid-email" };
   }
-  if (email !== DEMO_ADMIN_EMAIL) {
-    redirect("/login?error=not-admin");
+  if (normalized !== DEMO_ADMIN_EMAIL) {
+    return { ok: false, error: "not-admin" };
   }
-  await setSessionCookie({
+  const session: Session = {
     role: "admin",
     name: "Dus Mamud",
-    email,
-  });
-  redirect(await dashboardUrl());
+    email: DEMO_ADMIN_EMAIL,
+  };
+  window.localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  return { ok: true, session };
 }
 
-/** Mock forgot-password: koi email asal me nahi bheja jata (backend aane pe). */
-export async function forgotPasswordAction(
-  formData: FormData,
-): Promise<never> {
-  "use server";
-  const email = String(formData.get("email") ?? "").trim().toLowerCase();
-  if (!email.includes("@")) {
-    redirect("/forgot-password?error=invalid-email");
-  }
-  redirect("/forgot-password?sent=1");
-}
-
-export async function logoutAction(): Promise<never> {
-  "use server";
-  await clearSessionCookie();
-  redirect("/login");
-}
-
-/**
- * Admin dashboard ka URL — host ke hisaab se:
- * - `auth.localhost:3000` -> `http://admin.localhost:3000/`
- * - `auth.kumbuild.com` -> `https://admin.kumbuild.com/`
- * - plain `localhost:3000` -> path fallback `/admin` (README dekho)
- */
-export async function dashboardUrl(): Promise<string> {
-  const h = await headers();
-  const host = h.get("host") ?? "localhost:3000";
-  const proto =
-    h.get("x-forwarded-proto") ??
-    (process.env.NODE_ENV === "production" ? "https" : "http");
-  const bare = host.split(":")[0];
-  const port = host.includes(":") ? `:${host.split(":")[1]}` : "";
-  if (bare === "localhost" || bare === "127.0.0.1") {
-    return "/admin";
-  }
-  const parts = bare.split(".");
-  if (parts.length >= 2) {
-    parts[0] = "admin";
-    return `${proto}://${parts.join(".")}${port}/`;
-  }
-  return "/admin";
+export function logout(): void {
+  if (typeof window === "undefined") return;
+  window.localStorage.removeItem(SESSION_KEY);
 }

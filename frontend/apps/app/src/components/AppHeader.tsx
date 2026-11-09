@@ -1,10 +1,14 @@
-import { getSession, logoutAction } from "@/lib/auth";
-import { Link } from "@/i18n/navigation";
+"use client";
+
+import { useEffect, useState } from "react";
+import { getSession, logout, type Session } from "@/lib/auth";
+import { Link, useRouter } from "@/i18n/navigation";
 import LocaleSwitcher from "./LocaleSwitcher";
 import ThemeToggle from "./ThemeToggle";
 
 // Admin header — logo + nav + locale switcher + theme toggle + logout.
 // Sirf admin dashboard me use hota hai (customer dashboard nahi hai).
+// Client component hai — session localStorage se aata hai (static export).
 const ADMIN_LINKS = [
   { href: "/", label: "Dashboard" },
   { href: "/orders", label: "Orders" },
@@ -14,8 +18,18 @@ const ADMIN_LINKS = [
   { href: "/settings", label: "Settings" },
 ];
 
-export default async function AppHeader() {
-  const session = await getSession();
+export default function AppHeader() {
+  const router = useRouter();
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    setSession(getSession());
+  }, []);
+
+  function onLogout() {
+    logout();
+    router.push("/login");
+  }
 
   return (
     <header className="border-b border-line bg-bg">
@@ -48,17 +62,18 @@ export default async function AppHeader() {
           <LocaleSwitcher />
           <ThemeToggle />
           {session ? (
-            <form action={logoutAction} className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <span className="hidden text-xs text-muted sm:inline">
                 {session.name} ({session.role})
               </span>
               <button
-                type="submit"
+                type="button"
+                onClick={onLogout}
                 className="rounded-lg border border-line-strong px-3 py-1.5 text-xs font-semibold text-ink hover:bg-surface-hover"
               >
                 Logout
               </button>
-            </form>
+            </div>
           ) : null}
         </div>
       </div>

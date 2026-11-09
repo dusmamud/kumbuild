@@ -16,7 +16,7 @@ Detail architecture `ARCHITECTURE.md` me hai. Ye file stack ka ek jagah summary 
 | Shared config | `packages/config` | LOCKED (structure) |
 | Shared lib | `packages/lib` (types + mock data + api-client) | LOCKED (structure) |
 | Deploy (web) | Cloudflare Pages via GitHub Actions | LOCKED |
-| Deploy (app) | Cloudflare via `@opennextjs/cloudflare` | LOCKED |
+| Deploy (app) | Cloudflare Pages via GitHub Actions (static export) | LOCKED |
 | CI/CD | GitHub Actions | LOCKED |
 | DNS / domains | Cloudflare | LOCKED |
 | Backend | TBD — frontend ke baad decide hoga | TBD |
@@ -27,9 +27,9 @@ Detail architecture `ARCHITECTURE.md` me hai. Ye file stack ka ek jagah summary 
 ## Kyun ye stack? (Exa-verified, 2026-11-09)
 
 - **Astro (public site):** same marketing site pe Astro ne 14 KB JS bheja, Next.js ne 82 KB; Lighthouse 99 vs 92; INP 90ms vs 210ms. Source: ssg-production.com, 2026-06-18. Marketing pages mostly static hain, isliye Astro best hai.
-- **Next.js (app):** admin dashboard + admin login — interactive app ke liye. Subdomain middleware routing Vercel Platforms Starter Kit wala proven pattern hai.
+- **Next.js (app):** admin dashboard + admin login — interactive app ke liye. **Static export** (`output: "export"`) — Cloudflare Pages pe host hota hai, koi Worker nahi (user decision 2026-11-09).
 - **Turborepo:** JS/TS-only monorepo task runner, Vercel maintain karta hai. Nx zyada powerful hai (polyglot, distributed CI) par solo builder ke liye heavy hai. Source: nx.dev.
-- **Cloudflare:** Creestion / dusrel wala deploy flow pehle se verified hai — GitHub Actions → `wrangler pages deploy dist`. Next.js ke liye `@opennextjs/cloudflare` adapter supported path hai; purana `@cloudflare/next-on-pages` sirf Edge runtime tha. Source: freecodecamp.org, 2026-04-29; blog.blazingcdn.com, 2026-09-18.
+- **Cloudflare:** Creestion / dusrel wala deploy flow pehle se verified hai — GitHub Actions → `wrangler pages deploy`. Dono apps static hain (Astro `dist/`, Next.js `out/`).
 
 ## Versions
 

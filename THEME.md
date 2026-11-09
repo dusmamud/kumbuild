@@ -163,9 +163,8 @@ export const routing = defineRouting({
 });
 ```
 
-- App Router me Next.js ka purana built-in `i18n` config **kaam nahi karta** (wo Pages Router ka tha) — isliye `next-intl` use hoga, middleware locale detect karega.
-- **Detection priority (LOCKED):** 1) URL me locale, 2) user ki saved choice (cookie), 3) `Accept-Language` header (pehli visit), 4) default `en-US`. URL hamesha jeetega — cookie se redirect loop nahi banana.
-- **Middleware matcher:** `/api`, `/_next`, static files ko locale redirect se bahar rakho — warna images/API 404 honge.
+- App Router me Next.js ka purana built-in `i18n` config **kaam nahi karta** (wo Pages Router ka tha) — isliye `next-intl` use hoga. **Static export me middleware nahi chalta** (Exa-verified, next-intl docs 2026-11-09): default locale (en-US) root par hai (bina prefix), hi/bn `[locale]/` tree me hain; locale server se negotiate nahi hota.
+- **Detection priority (LOCKED):** 1) URL me locale, 2) user ki saved choice (LocaleSwitcher link — client-side), 3) default `en-US`. URL hamesha jeetega — cookie se redirect loop nahi banana. `Accept-Language` header server pe nahi padha jata (koi server hi nahi hai).
 
 ### 6.3 Shared dictionaries — ek source of truth
 
@@ -202,7 +201,7 @@ export const routing = defineRouting({
 ## 8. Sources — Exa se verify (2026-11-09)
 
 - Astro i18n routing: locales + defaultLocale + `prefixDefaultLocale` (false = default unprefixed), `getRelativeLocaleUrl()`, fallback strategies. Source: docs.astro.build/en/guides/internationalization/; getastrothemes.com/blog/astro-multilingual-website-guide/ (2026-10-12).
-- Next.js App Router i18n: built-in `i18n` config App Router me kaam nahi karta; `[locale]` segment + next-intl middleware; `localePrefix: "as-needed"` vs `"always"`. Source: next-intl.dev/docs/routing/configuration; pagepro.co (2026-11-05); webtranslateit.com (2026-08-13).
+- Next.js App Router i18n: built-in `i18n` config App Router me kaam nahi karta; static export me default locale root par + hi/bn `[locale]/` tree, next-intl, `localePrefix: "as-needed"` (middleware nahi — Exa-verified 2026-11-09, next-intl.dev/docs/routing/middleware "Usage without proxy/middleware (static export)" + GitHub discussion #2132/#2332).
 - hreflang: reciprocity zaroori, absolute URLs, sirf existing locales, `x-default` default locale par. Source: olafboettcher.de/blog/multilingual-nextjs-hreflang (2026-09-09).
 - Contrast ratios khud calculate kiye gaye hain (WCAG formula): white on #008EFD = 3.34:1, white on #0063B1 = 6.14:1, #008EFD on #0F172A = 5.61:1.
 - Palette Option A: 2026-11-09 ko 4 options me se assistant pick — user ne "best theme apply karo" bola.

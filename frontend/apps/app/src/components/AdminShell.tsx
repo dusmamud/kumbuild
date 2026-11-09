@@ -1,11 +1,16 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
-import { getTranslations } from "next-intl/server";
 import AppHeader from "@/components/AppHeader";
 
 // Admin dashboard layout — admin.kumbuild.com.
-// Guard proxy me hai: sirf admin role; bina login ke /login redirect hota hai.
-export default async function AdminShell({ children }: { children: ReactNode }) {
-  const t = await getTranslations("footer");
+// Guard RequireAdmin (client-side) me hai: bina session ke /login.
+// NOTE: client component hai — next-intl ka getTranslations server
+// component me static export ke time headers() padhta hai, aur footer
+// tagline context se aata hai.
+export default function AdminShell({ children }: { children: ReactNode }) {
+  const t = useTranslations("footer");
   return (
     <div className="flex min-h-screen flex-col">
       <AppHeader />

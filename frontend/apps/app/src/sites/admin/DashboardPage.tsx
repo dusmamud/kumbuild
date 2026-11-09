@@ -1,3 +1,5 @@
+"use client";
+
 import { customers, orders, payments } from "@/lib/mock";
 import { inr } from "@/lib/format";
 import { Link } from "@/i18n/navigation";
@@ -5,6 +7,9 @@ import { Card, PageTitle, StatusBadge } from "@/components/ui";
 
 // Admin dashboard — admin.kumbuild.com/ (SUBDOMAINS.md Section 4).
 // Aaj ke orders, pending kaam, revenue summary (mock).
+// NOTE: client component hai — next-intl ka Link server component me
+// static export ke time headers() padhta hai (getServerLocale), isliye
+// Link wale pages client hone chahiye.
 export default function AdminDashboardPage() {
   const pending = orders.filter(
     (o) => o.status !== "live" && o.status !== "approved",

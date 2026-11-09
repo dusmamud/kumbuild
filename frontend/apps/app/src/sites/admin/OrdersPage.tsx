@@ -1,4 +1,6 @@
-import { getLocale } from "next-intl/server";
+"use client";
+
+import { useLocale } from "next-intl";
 import { orders } from "@/lib/mock";
 import { formatDate, inr } from "@/lib/format";
 import { Card, PageTitle, StatusBadge, buttonPrimaryClass } from "@/components/ui";
@@ -6,9 +8,12 @@ import { Link } from "@/i18n/navigation";
 
 // Admin orders — admin.kumbuild.com/orders.
 // Har order, status ke saath (mock — status change backend aane pe aayega).
-export default async function AdminOrdersPage() {
-  const locale = await getLocale();
-
+// locale context se aata hai (useLocale) — getLocale() static export me
+// next-intl ka headers() fallback padhta hai, isliye use nahi karte.
+// NOTE: client component hai — next-intl ka Link server component me
+// static export ke time headers() padhta hai (getServerLocale).
+export default function AdminOrdersPage() {
+  const locale = useLocale();
   return (
     <div>
       <div className="flex flex-wrap items-start justify-between gap-3">

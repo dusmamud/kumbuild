@@ -14,7 +14,7 @@ Note: `auth.kumbuild.com` mana gaya hai. User ne ek baar `auth.kumbuilds.com` li
 | `auth.kumbuild.com` | `frontend/apps/app` (Next.js) | Admin login (sirf Dus) | Koi bhi, bina login — login karne ki jagah hai |
 | `admin.kumbuild.com` | `frontend/apps/app` (Next.js) | Admin dashboard | Sirf logged-in admin (Dus) |
 
-`auth` aur `admin` — dono ek hi Next.js app hain. Middleware host dekh ke sahi route group pe bhejta hai. User ko do alag apps lagenge, andar ek hi codebase hai.
+`auth` aur `admin` — dono ek hi Next.js app hain, **ek hi Cloudflare Pages project** (`kumbuild-app`, STATIC export). Dono subdomains same static files serve karte hain; login vs dashboard **route** se tay hota hai (koi middleware/proxy nahi hai — static export me server hota hi nahi). User ko do alag apps lagenge, andar ek hi codebase hai.
 
 ## 1. kumbuild.com — Public website (Astro)
 
@@ -47,13 +47,13 @@ Login nahi chahiye — ye login karne ki jagah hai. **Sirf admin (Dus) login kar
 | `/login` | Admin login | Email + password (sirf admin ka account) |
 | `/forgot-password` | Password reset | Reset link / OTP bhejega (backend ke saath, admin ke liye) |
 
-**Login ke baad:** seedha `admin.kumbuild.com` pe bhej do.
+**Login ke baad:** seedha `/` (admin dashboard) pe bhej do — same app hai, subdomain badalne ki zaroorat nahi (login client-side hota hai, session localStorage me hai).
 
-**Pehle se logged-in admin auth khole to:** seedha admin dashboard pe bhej do, dobara login page mat dikhao.
+**Pehle se logged-in admin auth khole to:** seedha admin dashboard pe bhej do, dobara login page mat dikhao (login page khud session check karke `/` pe bhejta hai).
 
 ## 3. admin.kumbuild.com — Admin dashboard (Next.js)
 
-Sirf logged-in admin (Dus). Bina login ke koi bhi page kholo to `auth.kumbuild.com/login` pe redirect.
+Sirf logged-in admin (Dus). Bina login ke koi bhi page kholo to `/login` pe redirect (client-side guard `RequireAdmin` — static export me server guard nahi hota).
 
 | Route | Page | Kya hoga |
 |---|---|---|
@@ -67,25 +67,26 @@ Sirf logged-in admin (Dus). Bina login ke koi bhi page kholo to `auth.kumbuild.c
 
 **Order add karna admin ka kaam hai:** WhatsApp DM, Instagram DM ya form se jo order aaye aur confirm ho, admin use yahan add karega. Customer khud kuch add nahi karta — uska koi account hi nahi hai.
 
-## Guards matrix
+## Guards matrix (client-side — static export me server guard nahi hota)
 
 | Kholne wala | `kumbuild.com` | `auth.kumbuild.com` | `admin.kumbuild.com` |
 |---|---|---|---|
-| Bina login | ✅ khulega | ✅ khulega | ❌ → login |
-| Admin (logged in) | ✅ khulega | → admin | ✅ khulega |
+| Bina login | ✅ khulega | ✅ khulega | ❌ → `/login` (client-side) |
+| Admin (logged in) | ✅ khulega | → `/` (dashboard) | ✅ khulega |
 
 Customer ka koi login nahi hai, isliye customer wali row is matrix me hai hi nahi.
 
 ## Redirects
 
-| From | To |
-|---|---|
-| `www.kumbuild.com/*` | `kumbuild.com/*` (same path) |
-| `kumbuild.com/login` (agar koi type kare) | `auth.kumbuild.com/login` |
-| `kumbuild.com/dashboard` (agar koi type kare) | `admin.kumbuild.com` |
-| `home.kumbuild.com/*` (purana plan — ab nahi hai) | `kumbuild.com` |
-| Unknown subdomain, jaise `xyz.kumbuild.com` | `kumbuild.com` |
-| Login ke baad `/` (auth pe) | `admin.kumbuild.com` |
+| From | To | Kaise |
+|---|---|---|
+| `www.kumbuild.com/*` | `kumbuild.com/*` (same path) | DNS / Pages setting |
+| `kumbuild.com/login` (agar koi type kare) | `auth.kumbuild.com/login` | Web app (Astro) ki `_redirects` se (baad me) |
+| `kumbuild.com/dashboard` (agar koi type kare) | `admin.kumbuild.com` | Web app (Astro) ki `_redirects` se (baad me) |
+| `home.kumbuild.com/*` (purana plan — ab nahi hai) | `kumbuild.com` | **Bulk Redirects** (Cloudflare dashboard, user khud) — app ki `_redirects` file se domain-level redirect nahi hota (Pages limitation) |
+| Unknown subdomain, jaise `xyz.kumbuild.com` | `kumbuild.com` | DNS me record na banao |
+| Login ke baad `/` (auth pe) | `/` (dashboard, same app) | Client-side (router) |
+| `/en-US/*` (purana prefixed URL) | `/*` (same path) | App ki `_redirects`: `/en-US/* /:splat 301` |
 
 ## Poora flow — ek order ki kahani
 
@@ -106,11 +107,14 @@ Cloudflare dashboard me (user khud karega, assistant account nahi chhedega):
 | Record | Type | Value / target |
 |---|---|---|
 | `kumbuild.com` | A / CNAME | Web wala Pages project (Astro) |
-| `*.kumbuild.com` | CNAME | App wala project (Next.js / OpenNext) |
+| `*.kumbuild.com` | CNAME | App wala Pages project (`kumbuild-app`, Next.js static export) |
 | `www` | CNAME | `kumbuild.com` (redirect ke liye) |
 
-Wildcard `*.kumbuild.com` se `auth` aur `admin` — dono ek hi app project pe jayenge, andar middleware baant dega.
+Wildcard `*.kumbuild.com` se `auth` aur `admin` — dono ek hi Pages project pe jayenge; andar route se tay hota hai (koi middleware nahi hai).
 
-## Local development (plan)
+## Local development
 
-Localhost pe subdomain test karne ke liye `*.localhost` ya `lvh.me` jaisi trick use hoti hai (jaise `auth.localhost`). Exact setup aur port implementation ke time decide hoga — is doc me koi localhost port lock nahi kiya gaya hai.
+Static export hai — subdomain ki zaroorat nahi hai:
+
+- **Dev:** `pnpm dev:app` → `http://localhost:3000` (Next dev server, `/login`, `/orders`...)
+- **Static preview (Pages jaisa):** `pnpm --filter kumbuild-app run preview` → `wrangler pages dev out` — clean URLs + `_redirects` ke saath, bilkul production jaisa.

@@ -8,7 +8,7 @@ Status: **LOCKED (2026-11-09, user approved).** Ye file code likhne se pehle pad
 |---|---|---|---|
 | 1 | Monorepo: pnpm workspaces + Turborepo | LOCKED | JS/TS-only, solo builder ke liye simple. Turborepo Vercel maintain karta hai, task running + caching ke liye bana hai. Nx zyada powerful hai (polyglot, distributed CI, release management) par solo ke liye heavy hai. Source: nx.dev |
 | 2 | Public site: Astro + React islands | LOCKED | Marketing site mostly static hai. Astro zero JS bhejta hai by default, sirf interactive jagah React island. Exa-verified: same site pe Astro 14 KB JS vs Next.js 82 KB, Lighthouse 99 vs 92, INP 90ms vs 210ms |
-| 3 | App: ek hi Next.js App Router app (auth + home + admin) | LOCKED | Teen alag apps me teen deploy, teen baar auth, aur `.kumbuild.com` cookie share karne ki dikkat hoti. Ek app me ek login session, ek design system, ek deploy |
+| 3 | App: ek hi Next.js App Router app (auth + admin) | LOCKED | Do alag apps me do deploy, do baar auth ki dikkat hoti. Ek app me ek login session, ek design system, ek deploy. **STATIC export** (2026-11-09, user decision) — Cloudflare Pages, koi Worker nahi |
 | 4 | Admin alag app NAHI | LOCKED (user ne samajh ke approve kiya) | Admin sirf ek aadmi use karega. Alag app se security nahi milti — asli security backend ke role check se milti hai. Code me `(admin)` route group alag hai, role guard se protected. Future me team/scale badhe to split possible |
 | 5 | Deploy: GitHub Actions → Cloudflare | LOCKED | Vercel plan hata diya. Creestion / dusrel wala flow pehle se verified hai |
 | 6 | Backend baad me, frontend pehle (mock) | LOCKED | Frontend mock data + api-client se complete hoga. Backend aane pe sirf base URL badlega |
@@ -24,7 +24,7 @@ kumbuild/                      <- workspace root (ye folder; future GitHub repo 
   frontend/                    <- frontend monorepo
     apps/
       web/                     <- kumbuild.com — Astro + React
-      app/                     <- auth + home + admin — Next.js App Router
+      app/                     <- auth + admin — Next.js App Router (STATIC export)
     packages/
       ui/                      <- shared components + Tailwind tokens
       config/                  <- shared tsconfig / eslint / tailwind
@@ -44,7 +44,7 @@ kumbuild/                      <- workspace root (ye folder; future GitHub repo 
 | App | Next.js App Router + React 19 | Admin dashboard, admin login — interactive app |
 | Styling | Tailwind CSS | Shared tokens `packages/ui` me |
 | Deploy (web) | Cloudflare Pages via GitHub Actions | `wrangler pages deploy dist` |
-| Deploy (app) | Cloudflare via `@opennextjs/cloudflare` | `opennextjs-cloudflare build` → `wrangler deploy` |
+| Deploy (app) | Cloudflare Pages via GitHub Actions (static export) | `next build` (`output: "export"`) → `wrangler pages deploy out` — koi Worker/OpenNext nahi |
 | Backend | TBD (baad me) | Frontend phase me mock data |
 
 Version note: exact versions (Astro 5, Next.js 15/16 era) build ke time latest stable se leni hain. Is doc me koi version pin nahi kiya gaya hai, taaki likhte time galat version lock na ho.
@@ -57,38 +57,51 @@ Version note: exact versions (Astro 5, Next.js 15/16 era) build ke time latest s
 - **Performance:** Astro by default zero JS bhejta hai. Isliye marketing pages fast aur SEO-friendly hote hain — yehi reason hai Astro chunne ka.
 - **Shared use:** `packages/ui` se components, `packages/lib` se types (jaise package list, order form fields)
 
-## 5. Frontend — apps/app (admin only)
+## 5. Frontend — apps/app (admin only, STATIC)
 
-Ek hi Next.js app, do subdomains (admin login + admin dashboard). Middleware host dekh ke rewrite karta hai — ye Vercel Platforms Starter Kit wala proven pattern hai. **Customer ka is app me kuch nahi hai — na signup, na customer dashboard, na customer login.**
+Ek hi Next.js app, do subdomains (admin login + admin dashboard) — **sirf static export** (user decision 2026-11-09: "Next.js ka sirf static Cloudflare Pages me host karna hai, not Workers"). Pehle OpenNext/Worker ka plan tha — superseded. **Koi server nahi hai: no proxy/middleware, no server actions, no SSR.** Customer ka is app me kuch nahi hai — na signup, na customer dashboard, na customer login.
 
 ```
 apps/app/
-  middleware.ts                <- host dekh ke auth / admin me rewrite
+  next.config.ts               <- output: "export" (static)
+  public/_redirects            <- /en-US/* -> /:splat 301
   app/
-    (auth)/                    <- auth.kumbuild.com (sirf admin login)
-      login/ forgot-password/
-    (admin)/                   <- admin.kumbuild.com (admin role lazmi)
-      dashboard, orders, orders/new, orders/[id], customers, builds, payments, settings
+    layout.tsx                 <- root layout: en-US (default locale, bina prefix)
+    (auth)/                    <- /login, /forgot-password (sirf admin login)
+    (admin)/                   <- /, /orders, /orders/new, /customers, /builds, /payments, /settings
+    [locale]/                  <- hi/bn ke liye nested provider + wahi (auth)/(admin) routes
+      layout.tsx               <- sirf hi/bn (generateStaticParams: default locale nahi)
   lib/
-    auth.ts                    <- session check (frontend phase: mock)
+    auth.ts                    <- session (frontend phase: mock, localStorage)
     api.ts                     <- packages/lib ke api-client ka use
+  components/
+    RequireAdmin.tsx           <- client-side guard: bina session ke /login
 ```
 
 ### Route groups ka matlab
 
 `(auth)`, `(admin)` — ye brackets wale folders URL me nahi aate. Ye sirf code ko alag rakhne ke liye hain: alag layout, alag menu, alag guard.
 
-### Auth flow (frontend phase — mock)
+### Locale routing — static export (Exa-verified, next-intl docs)
+
+Static export me middleware nahi chalta, isliye `localePrefix: "as-needed"` ke liye middleware wala tareeka kaam nahi karta. Structure is hisaab se hai:
+
+- **Default locale (en-US) root par hai** — `/login`, `/orders` (koi `/en-US` prefix nahi). `out/` me `/en-US/...` files banti hi nahi.
+- **hi/bn `[locale]/` tree me hain** — `/hi/login`, `/bn/orders`. Root layout en-US provider deta hai, `[locale]` layout ka nested provider use override karta hai.
+- **next-intl server APIs bina locale ke NAHI chalti** — `getMessages({ locale })`, `getTranslations({ locale, namespace })` jaise seedha locale pass karo, warna `headers()` fallback build fail kar deta hai. `setRequestLocale` ka cache pages tak nahi pahunchta.
+- **next-intl ka `Link` server component me mat use karo** — woh `getServerLocale()` se `headers()` padhta hai. Link wale components client hone chahiye. `LocaleSwitcher` plain `next/link` + khud ka href banata hai (locale prop force-prefix karta hai — static export me `/en-US/...` 404 hota).
+
+### Auth flow (frontend phase — mock, CLIENT SIDE)
 
 ```
 Bina login:
-  admin.kumbuild.com/* -> auth.kumbuild.com/login
+  admin.kumbuild.com/* -> /login (RequireAdmin client-side redirect)
 
 Login success (admin):
-  role = admin -> admin.kumbuild.com
+  session localStorage me (key "kb_session") -> /
 ```
 
-Session frontend phase me mock hogi (localStorage / cookie stub — implementation ke time decide hoga). Asli session backend aane pe banegi. **Frontend guard sirf UX hai, security nahi** — asli security backend ke API role check se aayegi. Ye baat bhoolna nahi hai.
+Session frontend phase me mock hai — sirf `admin@kumbuild.com` login kar sakta hai, password padha hi nahi jata. Asli session backend aane pe banegi. **Frontend guard sirf UX hai, security nahi** — asli security backend ke API role check se aayegi. Ye baat bhoolna nahi hai.
 
 ## 6. Shared packages
 

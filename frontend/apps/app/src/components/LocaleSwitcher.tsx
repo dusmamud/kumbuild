@@ -1,10 +1,24 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { routing } from "@/i18n/routing";
 
 // Language switcher — wahi page dusri locale me kholta hai (THEME.md 6.1).
-// EN | हिंदी | বাংলা. next-intl ka Link locale prop se prefix lagata hai.
+// EN | हिंदी | বাংলা.
+//
+// NOTE (static export): next-intl ka Link `locale` prop ke saath default
+// locale par bhi prefix force karta hai (/en-US/...) — aur static export
+// me /en-US/... files hoti hi nahi (default locale unprefixed hai).
+// Isliye yahan plain next/link + khud ka href banate hain:
+// current path se prefix hatao, phir target locale ka prefix lagao.
+function localeHref(pathname: string, target: string): string {
+  const stripped = pathname.replace(/^\/(hi|bn)(?=\/|$)/, "") || "/";
+  if (target === routing.defaultLocale) return stripped;
+  return stripped === "/" ? `/${target}` : `/${target}${stripped}`;
+}
+
 const LOCALES = [
   { code: "en-US", label: "EN" },
   { code: "hi", label: "हिंदी" },
@@ -24,8 +38,7 @@ export default function LocaleSwitcher() {
             <span className="text-primary-text">{l.label}</span>
           ) : (
             <Link
-              href={pathname}
-              locale={l.code}
+              href={localeHref(pathname, l.code)}
               className="text-muted hover:text-ink"
             >
               {l.label}

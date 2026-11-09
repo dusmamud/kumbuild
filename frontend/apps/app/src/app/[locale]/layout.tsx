@@ -1,17 +1,18 @@
-import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
-import "../globals.css";
 
-// No-flash theme script (THEME.md Section 5): paint se PEHLE data-theme
-// set karo — warna page pehle light dikhega, phir dark hoga.
-// Cookie kb_theme: "system" | "light" | "dark" (default system).
-const THEME_SCRIPT = `(function(){try{var m=document.cookie.match(/(?:^|; )kb_theme=([^;]*)/);var t=m?decodeURIComponent(m[1]):"system";var d=t==="dark"||(t!=="light"&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";document.documentElement.setAttribute("data-theme",d);}catch(e){}})();`;
-
+// Nested locale layout — sirf NON-default locales (hi, bn) ke liye.
+// Default locale (en-US) root layout (src/app/layout.tsx) se aata hai.
+// Ye provider root wale en-US provider ko override karta hai.
+// <html>/<body> yahan NAHI — sirf root layout me hota hai.
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return routing.locales
+    .filter((locale) => locale !== routing.defaultLocale)
+    .map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({
@@ -27,18 +28,14 @@ export default async function LocaleLayout({
   }
   // Static rendering ke liye next-intl ko locale batana zaroori hai.
   setRequestLocale(locale);
-  const messages = await getMessages();
+  // NOTE (static export): getMessages({ locale }) — locale seedha pass
+  // karo. Bina locale ke ye next-intl ka headers() fallback padhta hai,
+  // jo static export me build fail kar deta hai.
+  const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
-      </head>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      {children}
+    </NextIntlClientProvider>
   );
 }

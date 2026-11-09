@@ -1,19 +1,42 @@
-import { getTranslations } from "next-intl/server";
-import { loginAction, DEMO_ADMIN_EMAIL } from "@/lib/auth";
-import { Link } from "@/i18n/navigation";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { DEMO_ADMIN_EMAIL, getSession, login } from "@/lib/auth";
+import { Link, useRouter } from "@/i18n/navigation";
 import { buttonGhostClass, buttonPrimaryClass, Field, inputClass } from "@/components/ui";
 
-// Admin login — auth.kumbuild.com/login (SUBDOMAINS.md Section 2).
-// MOCK: sirf admin@kumbuild.com login kar sakta hai. Password kahin
-// save/store nahi hota — action use discard kar deta hai.
+// Admin login — /login (SUBDOMAINS.md Section 2).
+// MOCK, CLIENT SIDE: sirf admin@kumbuild.com login kar sakta hai.
+// Password kahin save/store nahi hota — form use padhta hi nahi.
 // Customer ka yahan koi kaam nahi hai — na signup hai, na customer login.
-export default async function LoginPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ error?: string }>;
-}) {
-  const { error } = await searchParams;
-  const t = await getTranslations("nav");
+export default function LoginPage() {
+  const t = useTranslations("nav");
+  const router = useRouter();
+  const [error, setError] = useState<"" | "invalid-email" | "not-admin">("");
+  const [email, setEmail] = useState("");
+
+  // Pehle se logged-in admin dobara login page na dekhe — dashboard pe bhejo.
+  useEffect(() => {
+    if (getSession()) {
+      router.replace("/");
+    }
+  }, [router]);
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const res = login(email);
+    if (!res.ok) {
+      setError(res.error);
+      return;
+    }
+    router.push("/");
+  }
+
+  function demo() {
+    login(DEMO_ADMIN_EMAIL);
+    router.push("/");
+  }
 
   return (
     <div>
@@ -33,20 +56,20 @@ export default async function LoginPage({
         </p>
       ) : null}
 
-      <form action={loginAction} className="mt-6 space-y-4">
+      <form onSubmit={submit} className="mt-6 space-y-4">
         <Field label="Email">
           <input
-            name="email"
             type="email"
             required
             autoComplete="email"
             placeholder="admin@kumbuild.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className={inputClass}
           />
         </Field>
         <Field label="Password">
           <input
-            name="password"
             type="password"
             required
             autoComplete="current-password"
@@ -64,13 +87,9 @@ export default async function LoginPage({
           MOCK LOGIN — demo ke liye (koi real password nahi):
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
-          <form action={loginAction}>
-            <input type="hidden" name="email" value={DEMO_ADMIN_EMAIL} />
-            <input type="hidden" name="password" value="demo" />
-            <button type="submit" className={buttonGhostClass}>
-              Demo admin
-            </button>
-          </form>
+          <button type="button" onClick={demo} className={buttonGhostClass}>
+            Demo admin
+          </button>
         </div>
       </div>
 

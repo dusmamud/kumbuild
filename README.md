@@ -98,8 +98,8 @@ Tech claims Exa se verify kiye gaye hain (2026-11-09):
 
 - Astro vs Next.js marketing site: same site pe Astro ne 14 KB JS bheja, Next.js ne 82 KB; Lighthouse 99 vs 92; INP 90ms vs 210ms. Source: ssg-production.com, 2026-06-18.
 - Turborepo: JS/TS-only monorepo task runner, Vercel maintain karta hai. Nx zyada powerful hai par polyglot / distributed CI ke liye hai — solo builder ke liye heavy hai. Source: nx.dev docs.
-- Subdomain routing: Next.js middleware se subdomain detect karke rewrite karna Vercel Platforms Starter Kit wala proven pattern hai.
-- Next.js on Cloudflare: purana `@cloudflare/next-on-pages` sirf Edge runtime tha; ab supported path `@opennextjs/cloudflare` adapter hai, jo Next.js ko Cloudflare Worker (nodejs_compat) me compile karta hai. Source: freecodecamp.org, 2026-04-29; blog.blazingcdn.com, 2026-09-18.
+- Subdomain routing: `auth` + `admin` dono ek hi Cloudflare Pages project (`kumbuild-app`, static export) pe point karte hain — koi middleware nahi, route se tay hota hai. (Static export + next-intl, Exa-verified 2026-11-09.)
+- Next.js on Cloudflare: app **sirf static** host hoti hai — `output: "export"` → `wrangler pages deploy out`. Koi Worker/OpenNext nahi (user decision 2026-11-09).
 - Creestion deploy pattern: GitHub Actions → `wrangler pages deploy dist` — Dus ke dusrel / creestion projects me pehle se verified hai.
 
 Business claims (problem, customer, pricing) user ke apne words aur decisions se hain — koi market statistic invent nahi ki gayi hai.

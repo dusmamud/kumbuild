@@ -1,0 +1,7 @@
+# Kumbuild app — Cloudflare Pages redirects.
+# Static export me /en-US/... files hoti hi nahi (default locale ka koi
+# prefix nahi hota), isliye purane prefixed URLs ko unprefixed par bhejo.
+# (next-intl `localePrefix: as-needed`, THEME.md Section 6.)
+
+/en-US/* /:splat 301
+/en-US / 301

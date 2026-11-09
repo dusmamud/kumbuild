@@ -1,12 +1,17 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
 
 // Auth layout — beech me chhota card, upar logo. Sidebar nahi hota.
-export default async function AuthShell({ children }: { children: ReactNode }) {
-  const t = await getTranslations("footer");
+// NOTE: client component hai — next-intl ka Link server component me
+// static export ke time headers() padhta hai (getServerLocale), isliye
+// Link wale shells client hone chahiye. Tagline context se aata hai.
+export default function AuthShell({ children }: { children: ReactNode }) {
+  const t = useTranslations("footer");
   return (
     <div className="flex min-h-screen flex-col">
       <header className="border-b border-line bg-bg">

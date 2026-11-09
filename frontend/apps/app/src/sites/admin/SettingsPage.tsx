@@ -1,11 +1,24 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { getSession } from "@/lib/auth";
 import { buttonPrimaryClass, Card, Field, inputClass, PageTitle } from "@/components/ui";
 import ThemeToggle from "@/components/ThemeToggle";
 
-// Admin settings — admin.kumbuild.com/settings.
-// Admin profile aur settings (mock).
-export default async function AdminSettingsPage() {
-  const session = await getSession();
+// Admin settings — /settings.
+// Admin profile aur settings (mock). Session localStorage se aata hai
+// (static export) — profile fields usi se prefill hote hain.
+export default function AdminSettingsPage() {
+  const [name, setName] = useState("Dus Mamud");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    const session = getSession();
+    if (session) {
+      setName(session.name);
+      setEmail(session.email);
+    }
+  }, []);
 
   return (
     <div>
@@ -13,18 +26,19 @@ export default async function AdminSettingsPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
           <h2 className="text-lg font-bold">Profile</h2>
-          <form className="mt-4 space-y-4">
+          <form className="mt-4 space-y-4" onSubmit={(e) => e.preventDefault()}>
             <Field label="Name">
               <input
                 type="text"
-                defaultValue={session?.name ?? "Dus Mamud"}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className={inputClass}
               />
             </Field>
             <Field label="Email">
               <input
                 type="email"
-                defaultValue={session?.email ?? ""}
+                value={email}
                 disabled
                 className={`${inputClass} opacity-60`}
               />

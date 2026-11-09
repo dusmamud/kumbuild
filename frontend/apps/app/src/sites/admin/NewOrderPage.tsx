@@ -1,38 +1,47 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import { useState } from "react";
 import { PACKAGE_PRICE, type PackageName } from "@/lib/mock";
 import { Card, PageTitle, Field, inputClass, buttonPrimaryClass } from "@/components/ui";
 import { Link } from "@/i18n/navigation";
 
 // Admin — naya order add karo (SUBDOMAINS.md Section 3).
 // Order WhatsApp DM / Instagram DM / website form se aata hai; confirm
-// hone ke baad admin use yahan add karta hai. MOCK: backend nahi hai,
-// isliye order abhi save nahi hota — form bharne par reference number
-// milta hai (landing OrderForm jaisa pattern). Backend aane pe yahi
-// action order ko save karega.
+// hone ke baad admin use yahan add karta hai. MOCK, CLIENT SIDE: backend
+// nahi hai, isliye order abhi save nahi hota — form bharne par reference
+// number milta hai (landing OrderForm jaisa pattern). Backend aane pe
+// yahin se save hoga.
 const PACKAGES: PackageName[] = ["Starter", "Business", "Premium"];
 const BUSINESS_TYPES = ["Shop", "Clinic", "Tuition / Coaching", "Salon", "Restaurant / Cafe", "Other"];
 const SOURCES = ["WhatsApp", "Instagram", "Website form"];
 
-async function addOrderAction(formData: FormData): Promise<never> {
-  "use server";
-  const customerName = String(formData.get("customerName") ?? "").trim();
-  const phone = String(formData.get("phone") ?? "").trim();
-  const businessName = String(formData.get("businessName") ?? "").trim();
-  const packageName = String(formData.get("packageName") ?? "") as PackageName;
-  if (!customerName || !phone || !businessName || !PACKAGES.includes(packageName)) {
-    redirect("/orders/new?error=invalid");
-  }
-  const ref = `KB-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
-  redirect(`/orders/new?success=${ref}&package=${packageName}`);
+interface Success {
+  ref: string;
+  pkg: PackageName;
 }
 
-export default async function NewOrderPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ error?: string; success?: string; package?: string }>;
-}) {
-  const { error, success, package: pkg } = await searchParams;
-  const price = pkg && PACKAGES.includes(pkg as PackageName) ? PACKAGE_PRICE[pkg as PackageName] : null;
+export default function NewOrderPage() {
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState<Success | null>(null);
+
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const customerName = String(formData.get("customerName") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
+    const businessName = String(formData.get("businessName") ?? "").trim();
+    const packageName = String(formData.get("packageName") ?? "") as PackageName;
+    if (!customerName || !phone || !businessName || !PACKAGES.includes(packageName)) {
+      setError(true);
+      setSuccess(null);
+      return;
+    }
+    setError(false);
+    const ref = `KB-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+    setSuccess({ ref, pkg: packageName });
+  }
+
+  const price = success ? PACKAGE_PRICE[success.pkg] : null;
 
   return (
     <div>
@@ -41,7 +50,7 @@ export default async function NewOrderPage({
         subtitle="Confirm hua order yahan add karo — WhatsApp / Instagram DM / form se aaya ho. Status: Received se shuru hoga."
       />
 
-      {error === "invalid" ? (
+      {error ? (
         <p className="mb-4 rounded-lg bg-error-bg px-3 py-2 text-sm font-medium text-error">
           Customer ka naam, phone, business ka naam aur package bharna lazmi hai.
         </p>
@@ -50,10 +59,10 @@ export default async function NewOrderPage({
       {success ? (
         <Card className="mb-6 border-success bg-success-bg">
           <p className="text-sm font-bold text-success">
-            Order add ho gaya (mock) — reference: {success}
+            Order add ho gaya (mock) — reference: {success.ref}
           </p>
           <p className="mt-1 text-sm text-body">
-            {pkg ? `${pkg} package — ₹${price?.toLocaleString("en-IN")} (advance 50%: ₹${price ? Math.round(price / 2).toLocaleString("en-IN") : ""}). ` : ""}
+            {success.pkg} package — ₹{price?.toLocaleString("en-IN")} (advance 50%: ₹{price ? Math.round(price / 2).toLocaleString("en-IN") : ""}).{" "}
             Ye mock hai — order abhi save nahi hua. Backend aane pe yahin se
             save hoga aur Orders list me dikhega.
           </p>
@@ -64,7 +73,7 @@ export default async function NewOrderPage({
       ) : null}
 
       <Card>
-        <form action={addOrderAction} className="grid gap-4 sm:grid-cols-2">
+        <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
           <Field label="Customer ka naam *">
             <input name="customerName" required placeholder="Ramesh Sharma" className={inputClass} />
           </Field>
