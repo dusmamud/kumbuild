@@ -1,26 +1,45 @@
+import { forgotPasswordAction } from "@/lib/auth";
 import { Link } from "@/i18n/navigation";
 import { buttonPrimaryClass, Field, inputClass } from "@/components/ui";
 
-// Forgot password — auth.kumbuild.com/forgot-password.
-// MOCK: koi email/OTP asal me nahi bheja jata. Form bharne par verify
-// page ka link dikhata hai (backend aane pe yahan reset link jayega).
-export default function ForgotPasswordPage() {
+// Forgot password — auth.kumbuild.com/forgot-password (sirf admin ke liye).
+// MOCK: koi email/OTP asal me nahi bheja jata. Form bharne par sent message
+// dikhata hai (backend aane pe yahan reset link jayega).
+export default async function ForgotPasswordPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string; sent?: string }>;
+}) {
+  const { error, sent } = await searchParams;
+
   return (
     <div>
       <h1 className="text-2xl font-bold">Forgot password</h1>
       <p className="mt-1 text-sm text-muted">
-        Apna email likho — reset link / OTP bhejenge (mock me kuch nahi bheja
-        jata).
+        Apna admin email likho — reset link / OTP bhejenge (mock me kuch nahi
+        bheja jata).
       </p>
 
-      <form className="mt-6 space-y-4" action="/verify">
+      {error === "invalid-email" ? (
+        <p className="mt-4 rounded-lg bg-error-bg px-3 py-2 text-sm font-medium text-error">
+          Sahi email address likho.
+        </p>
+      ) : null}
+      {sent === "1" ? (
+        <p className="mt-4 rounded-lg bg-primary-tint px-3 py-2 text-sm font-medium text-primary-text">
+          Mock hai — koi email nahi bheja gaya. Backend aane pe yahan reset
+          link jayega.
+        </p>
+      ) : null}
+
+      <form className="mt-6 space-y-4" action={forgotPasswordAction}>
         <Field label="Email">
           <input
             name="email"
             type="email"
             required
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder="admin@kumbuild.com"
             className={inputClass}
           />
         </Field>

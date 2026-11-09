@@ -5,8 +5,11 @@ import { redirect } from "next/navigation";
 // Koi real authentication nahi hai, koi password kahin save/store NAHI hota.
 // Login form jo password bhejta hai, use action turant discard kar deta hai.
 // Asli session + role check backend aane pe banega. Frontend guard sirf UX hai.
+//
+// ADMIN-ONLY (2026-11-09, landing + admin only): sirf admin (Dus) login
+// kar sakta hai — customer ka koi account nahi hai, isliye signup nahi hai.
 
-export type Role = "customer" | "admin";
+export type Role = "admin";
 
 export interface Session {
   role: Role;
@@ -16,9 +19,8 @@ export interface Session {
 
 export const SESSION_COOKIE = "kb_session";
 
-/** Demo admin account — mock me ye email admin banta hai. */
+/** Demo admin account — mock me sirf ye email login kar sakta hai. */
 export const DEMO_ADMIN_EMAIL = "admin@kumbuild.com";
-export const DEMO_CUSTOMER_EMAIL = "customer@example.com";
 
 function encodeSession(s: Session): string {
   return Buffer.from(JSON.stringify(s), "utf-8").toString("base64url");
@@ -29,7 +31,7 @@ function decodeSession(value: string): Session | null {
     const parsed = JSON.parse(
       Buffer.from(value, "base64url").toString("utf-8"),
     ) as Session;
-    if (parsed.role !== "customer" && parsed.role !== "admin") return null;
+    if (parsed.role !== "admin") return null;
     if (typeof parsed.email !== "string" || !parsed.email.includes("@"))
       return null;
     return {
@@ -50,8 +52,8 @@ export async function getSession(): Promise<Session | null> {
 }
 
 /**
- * Cookie domain: production me `.kumbuild.com` taaki ek login teeno
- * subdomains (auth/home/admin) par chale. Localhost par domain set nahi
+ * Cookie domain: production me `.kumbuild.com` taaki ek login dono
+ * subdomains (auth/admin) par chale. Localhost par domain set nahi
  * karte — host-only cookie, warna browser reject kar dega.
  */
 async function cookieDomain(): Promise<string | undefined> {
@@ -79,7 +81,7 @@ async function clearSessionCookie(): Promise<void> {
   store.delete(SESSION_COOKIE);
 }
 
-/** Mock login: koi bhi email + koi bhi password chalta hai. */
+/** Mock admin login: sirf admin@kumbuild.com chalta hai, baaki sab reject. */
 export async function loginAction(formData: FormData): Promise<never> {
   "use server";
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
@@ -88,26 +90,27 @@ export async function loginAction(formData: FormData): Promise<never> {
   if (!email.includes("@")) {
     redirect("/login?error=invalid-email");
   }
-  const isAdmin = email === DEMO_ADMIN_EMAIL;
+  if (email !== DEMO_ADMIN_EMAIL) {
+    redirect("/login?error=not-admin");
+  }
   await setSessionCookie({
-    role: isAdmin ? "admin" : "customer",
-    name: isAdmin ? "Dus Mamud" : email.split("@")[0],
+    role: "admin",
+    name: "Dus Mamud",
     email,
   });
-  redirect(await dashboardUrl(isAdmin ? "admin" : "customer"));
+  redirect(await dashboardUrl());
 }
 
-/** Mock signup: account banta hai, turant customer login ho jata hai. */
-export async function signupAction(formData: FormData): Promise<never> {
+/** Mock forgot-password: koi email asal me nahi bheja jata (backend aane pe). */
+export async function forgotPasswordAction(
+  formData: FormData,
+): Promise<never> {
   "use server";
-  const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
-  // Password discard — mock.
-  if (!name || !email.includes("@")) {
-    redirect("/signup?error=invalid");
+  if (!email.includes("@")) {
+    redirect("/forgot-password?error=invalid-email");
   }
-  await setSessionCookie({ role: "customer", name, email });
-  redirect(await dashboardUrl("customer"));
+  redirect("/forgot-password?sent=1");
 }
 
 export async function logoutAction(): Promise<never> {
@@ -117,27 +120,26 @@ export async function logoutAction(): Promise<never> {
 }
 
 /**
- * Role ke dashboard ka URL — host ke hisaab se:
- * - `auth.localhost:3000` -> `http://home.localhost:3000/`
- * - `auth.kumbuild.com` -> `https://home.kumbuild.com/`
- * - plain `localhost:3000` -> path fallback `/home` (README dekho)
+ * Admin dashboard ka URL — host ke hisaab se:
+ * - `auth.localhost:3000` -> `http://admin.localhost:3000/`
+ * - `auth.kumbuild.com` -> `https://admin.kumbuild.com/`
+ * - plain `localhost:3000` -> path fallback `/admin` (README dekho)
  */
-export async function dashboardUrl(role: Role): Promise<string> {
+export async function dashboardUrl(): Promise<string> {
   const h = await headers();
   const host = h.get("host") ?? "localhost:3000";
   const proto =
     h.get("x-forwarded-proto") ??
     (process.env.NODE_ENV === "production" ? "https" : "http");
-  const group = role === "admin" ? "admin" : "home";
   const bare = host.split(":")[0];
   const port = host.includes(":") ? `:${host.split(":")[1]}` : "";
   if (bare === "localhost" || bare === "127.0.0.1") {
-    return `/${group}`;
+    return "/admin";
   }
   const parts = bare.split(".");
   if (parts.length >= 2) {
-    parts[0] = group;
+    parts[0] = "admin";
     return `${proto}://${parts.join(".")}${port}/`;
   }
-  return `/${group}`;
+  return "/admin";
 }

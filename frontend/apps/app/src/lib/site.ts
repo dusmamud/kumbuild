@@ -1,21 +1,25 @@
 import { notFound } from "next/navigation";
 
-// Site param — [site] dynamic segment: "auth" | "home" | "admin".
+// Site param — [site] dynamic segment: "auth" | "admin".
 // Middleware (proxy.ts) host dekh ke is segment me rewrite karta hai,
 // URL me ye segment kabhi nahi dikhta.
 //
 // NOTE (route groups wali koshish): pehle (auth)/(home)/(admin) route
 // groups try kiye the, par Next.js build fail hota hai — "You cannot have
-// two parallel pages that resolve to the same path" — kyunki teeno groups
+// two parallel pages that resolve to the same path" — kyunki groups
 // me `/`, `/orders`, `/payments`, `/settings` same URL par resolve hote
-// hain. Isliye [site] segment + src/sites/{auth,home,admin} modules:
+// hain. Isliye [site] segment + src/sites/{auth,admin} modules:
 // code ab bhi site ke hisaab se alag hai, routing segment se hoti hai.
-export type Site = "auth" | "home" | "admin";
+//
+// NOTE (2026-11-09, landing + admin only): customer dashboard (home)
+// hata diya gaya — customer ka koi account nahi hai. Sirf admin login
+// (auth) aur admin dashboard (admin) bache hain.
+export type Site = "auth" | "admin";
 
-export const SITES: Site[] = ["auth", "home", "admin"];
+export const SITES: Site[] = ["auth", "admin"];
 
 export function isSite(value: string | undefined): value is Site {
-  return value === "auth" || value === "home" || value === "admin";
+  return value === "auth" || value === "admin";
 }
 
 /** Page sirf ek site ke liye hai — galat site ho to 404. */

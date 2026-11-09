@@ -79,13 +79,6 @@ export interface Payment {
   date: string | null;
 }
 
-export const MOCK_CUSTOMER = {
-  name: "Ramesh Sharma",
-  email: "customer@example.com",
-  phone: "+91 98765 43210",
-  businessName: "Sharma General Store",
-};
-
 export const orders: Order[] = [
   {
     id: "ORD-1001",
@@ -220,8 +213,4 @@ export const payments: Payment[] = [
 
 export function getOrder(id: string): Order | undefined {
   return orders.find((o) => o.id.toLowerCase() === id.toLowerCase());
-}
-
-export function getCustomerOrders(email: string): Order[] {
-  return orders.filter((o) => o.customerEmail === email);
 }

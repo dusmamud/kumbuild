@@ -1,7 +1,8 @@
 import { getLocale } from "next-intl/server";
 import { orders } from "@/lib/mock";
 import { formatDate, inr } from "@/lib/format";
-import { Card, PageTitle, StatusBadge } from "@/components/ui";
+import { Card, PageTitle, StatusBadge, buttonPrimaryClass } from "@/components/ui";
+import { Link } from "@/i18n/navigation";
 
 // Admin orders — admin.kumbuild.com/orders.
 // Har order, status ke saath (mock — status change backend aane pe aayega).
@@ -10,10 +11,15 @@ export default async function AdminOrdersPage() {
 
   return (
     <div>
-      <PageTitle
-        title="All orders"
-        subtitle="Har order — status change aur customer message backend aane pe."
-      />
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <PageTitle
+          title="All orders"
+          subtitle="Har order — status change aur customer message backend aane pe."
+        />
+        <Link href="/orders/new" className={buttonPrimaryClass}>
+          + Add order
+        </Link>
+      </div>
       <Card className="p-0">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] text-left text-sm">

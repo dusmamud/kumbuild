@@ -1,22 +1,24 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-// Kumbuild app — ONE Next.js app, teen subdomains (ARCHITECTURE.md Section 5).
+// Kumbuild app — ONE Next.js app, do subdomains (ARCHITECTURE.md Section 5).
 // Ye proxy (Next 16 me middleware ka naya naam) host dekh ke route karta hai:
-//   auth.kumbuild.com  -> (auth)  — login / signup / forgot-password / verify
-//   home.kumbuild.com  -> (home)  — customer dashboard
+//   auth.kumbuild.com  -> (auth)  — admin login / forgot-password
 //   admin.kumbuild.com -> (admin) — admin dashboard
+// Customer dashboard (home) hata diya gaya (2026-11-09, landing + admin
+// only) — customer ka koi account nahi hai. `home.*` host aaye to seedha
+// kumbuild.com pe bhej do (SUBDOMAINS.md Redirects).
 // Saath me locale routing bhi yahi karta hai (next-intl middleware ki jagah,
 // taaki subdomain + locale ek hi jagah compose ho):
 //   en-US default, URL me prefix nahi; hi -> /hi/, bn -> /bn/ (THEME.md 6.2).
 //
 // Local dev: *.localhost trick (auth.localhost:3000) ya plain localhost par
-// path fallback (/auth/login, /home/orders, /admin) — README dekho.
+// path fallback (/auth/login, /admin) — README dekho.
 //
 // NOTE: ye sirf UX guard hai, security nahi (ARCHITECTURE.md Section 9).
 // Asli role check backend karega.
 
-type Group = "auth" | "home" | "admin";
-type Role = "customer" | "admin";
+type Group = "auth" | "admin";
+type Role = "admin";
 
 interface Session {
   role: Role;
@@ -24,7 +26,7 @@ interface Session {
   email: string;
 }
 
-const GROUPS: Group[] = ["auth", "home", "admin"];
+const GROUPS: Group[] = ["auth", "admin"];
 const LOCALES = ["en-US", "hi", "bn"] as const;
 const SESSION_COOKIE = "kb_session";
 const LOCALE_COOKIE = "NEXT_LOCALE";
@@ -39,7 +41,9 @@ function decodeSession(value: string): Session | null {
     const parsed = JSON.parse(
       new TextDecoder().decode(bytes),
     ) as Session;
-    if (parsed.role !== "customer" && parsed.role !== "admin") return null;
+    // Admin-only app: sirf admin role wali session valid hai. Purani
+    // customer session (agar cookie bachi ho) invalid mani jayegi.
+    if (parsed.role !== "admin") return null;
     if (typeof parsed.email !== "string" || !parsed.email.includes("@"))
       return null;
     return parsed;
@@ -83,12 +87,12 @@ function parseRequest(req: NextRequest): Addressing {
     GROUPS.includes(parts[0] as Group) &&
     (bare.endsWith(".localhost") || bare.endsWith(".kumbuild.com"))
   ) {
-    // auth.localhost:3000, home.kumbuild.com, ...
+    // auth.localhost:3000, admin.kumbuild.com, ...
     group = parts[0] as Group;
     mode = "subdomain";
   } else {
-    // Plain localhost / preview domain: /auth/..., /home/..., /admin/...
-    // Locale pehle bhi aa sakta hai: /hi/home/orders aur /home/hi/orders
+    // Plain localhost / preview domain: /auth/..., /admin/...
+    // Locale pehle bhi aa sakta hai: /hi/admin/orders aur /admin/hi/orders
     // dono chalte hain (canonical form group-first hai).
     const segs = path.split("/").filter(Boolean);
     let rest = segs;
@@ -163,6 +167,14 @@ function localeUrl(
 }
 
 export default function proxy(req: NextRequest) {
+  // home.* host (purana customer dashboard) — ab nahi hai, seedha
+  // kumbuild.com (landing) pe bhej do (SUBDOMAINS.md Redirects).
+  const host = req.headers.get("host") ?? "";
+  const bareHost = host.split(":")[0].toLowerCase();
+  if (bareHost === "home.kumbuild.com" || bareHost === "home.localhost") {
+    return NextResponse.redirect(new URL("https://kumbuild.com/"));
+  }
+
   const addressing = parseRequest(req);
   const { group, path } = addressing;
   const session = decodeSession(
@@ -196,33 +208,16 @@ export default function proxy(req: NextRequest) {
         );
       }
       if (session) {
-        // Pehle se logged-in — dobara login page mat dikhao.
+        // Pehle se logged-in admin — dobara login page mat dikhao.
         return NextResponse.redirect(
-          groupUrl(
-            req,
-            addressing,
-            session.role === "admin" ? "admin" : "home",
-            "/",
-            addressing.locale,
-          ),
+          groupUrl(req, addressing, "admin", "/", addressing.locale),
         );
       }
-    }
-    if (group === "home" && !session) {
-      return NextResponse.redirect(
-        groupUrl(req, addressing, "auth", "/login", addressing.locale),
-      );
     }
     if (group === "admin") {
-      if (!session) {
+      if (!session || session.role !== "admin") {
         return NextResponse.redirect(
           groupUrl(req, addressing, "auth", "/login", addressing.locale),
-        );
-      }
-      if (session.role === "customer") {
-        // Customer admin nahi khol sakta — wapas home.
-        return NextResponse.redirect(
-          groupUrl(req, addressing, "home", "/", addressing.locale),
         );
       }
     }
@@ -230,8 +225,8 @@ export default function proxy(req: NextRequest) {
 
   // 3. Rewrite — visible URL wahi, andar [locale] + [site] segment.
   //    /login            -> /en-US/auth/login
-  //    /hi/orders        -> /hi/home/orders
-  // [site] segment zaroori hai: (auth)/(home)/(admin) route groups se
+  //    /hi/orders        -> /hi/admin/orders
+  // [site] segment zaroori hai: (auth)/(admin) route groups se
   // build fail hota hai (same-path conflict) — src/lib/site.ts dekho.
   const url = req.nextUrl.clone();
   url.pathname = `/${addressing.locale}/${group}${path}`;

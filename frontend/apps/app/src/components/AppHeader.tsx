@@ -3,17 +3,8 @@ import { Link } from "@/i18n/navigation";
 import LocaleSwitcher from "./LocaleSwitcher";
 import ThemeToggle from "./ThemeToggle";
 
-// Header — logo + nav + locale switcher + theme toggle + logout.
-// Nav group ke hisaab se badalta hai (home vs admin vs auth).
-const HOME_LINKS = [
-  { href: "/", label: "Dashboard" },
-  { href: "/orders", label: "My orders" },
-  { href: "/my-website", label: "My website" },
-  { href: "/payments", label: "Payments" },
-  { href: "/support", label: "Support" },
-  { href: "/settings", label: "Settings" },
-];
-
+// Admin header — logo + nav + locale switcher + theme toggle + logout.
+// Sirf admin dashboard me use hota hai (customer dashboard nahi hai).
 const ADMIN_LINKS = [
   { href: "/", label: "Dashboard" },
   { href: "/orders", label: "Orders" },
@@ -23,9 +14,8 @@ const ADMIN_LINKS = [
   { href: "/settings", label: "Settings" },
 ];
 
-export default async function AppHeader({ group }: { group: "home" | "admin" }) {
+export default async function AppHeader() {
   const session = await getSession();
-  const links = group === "admin" ? ADMIN_LINKS : HOME_LINKS;
 
   return (
     <header className="border-b border-line bg-bg">
@@ -41,13 +31,13 @@ export default async function AppHeader({ group }: { group: "home" | "admin" }) 
           <span className="text-lg font-bold text-ink">
             Kumbuild
             <span className="ml-2 rounded-full bg-primary-tint px-2 py-0.5 text-xs font-semibold text-primary-text">
-              {group === "admin" ? "Admin" : "Home"}
+              Admin
             </span>
           </span>
         </Link>
 
         <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium">
-          {links.map((l) => (
+          {ADMIN_LINKS.map((l) => (
             <Link key={l.href} href={l.href} className="text-body hover:text-primary-text">
               {l.label}
             </Link>

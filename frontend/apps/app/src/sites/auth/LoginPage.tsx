@@ -1,12 +1,12 @@
 import { getTranslations } from "next-intl/server";
-import { loginAction, DEMO_ADMIN_EMAIL, DEMO_CUSTOMER_EMAIL } from "@/lib/auth";
+import { loginAction, DEMO_ADMIN_EMAIL } from "@/lib/auth";
 import { Link } from "@/i18n/navigation";
 import { buttonGhostClass, buttonPrimaryClass, Field, inputClass } from "@/components/ui";
 
-// Login — auth.kumbuild.com/login (SUBDOMAINS.md Section 2).
-// MOCK: koi bhi email + koi bhi password chalta hai. Password kahin
+// Admin login — auth.kumbuild.com/login (SUBDOMAINS.md Section 2).
+// MOCK: sirf admin@kumbuild.com login kar sakta hai. Password kahin
 // save/store nahi hota — action use discard kar deta hai.
-// admin@kumbuild.com -> admin role, baaki sab -> customer role.
+// Customer ka yahan koi kaam nahi hai — na signup hai, na customer login.
 export default async function LoginPage({
   searchParams,
 }: {
@@ -19,12 +19,17 @@ export default async function LoginPage({
     <div>
       <h1 className="text-2xl font-bold">{t("login")}</h1>
       <p className="mt-1 text-sm text-muted">
-        Apne Kumbuild account me login karo.
+        Kumbuild Admin — sirf admin (Dus) login kar sakta hai.
       </p>
 
       {error === "invalid-email" ? (
         <p className="mt-4 rounded-lg bg-error-bg px-3 py-2 text-sm font-medium text-error">
           Sahi email address likho.
+        </p>
+      ) : null}
+      {error === "not-admin" ? (
+        <p className="mt-4 rounded-lg bg-error-bg px-3 py-2 text-sm font-medium text-error">
+          Sirf admin login kar sakta hai — admin@kumbuild.com se login karo.
         </p>
       ) : null}
 
@@ -35,7 +40,7 @@ export default async function LoginPage({
             type="email"
             required
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder="admin@kumbuild.com"
             className={inputClass}
           />
         </Field>
@@ -60,13 +65,6 @@ export default async function LoginPage({
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
           <form action={loginAction}>
-            <input type="hidden" name="email" value={DEMO_CUSTOMER_EMAIL} />
-            <input type="hidden" name="password" value="demo" />
-            <button type="submit" className={buttonGhostClass}>
-              Demo customer
-            </button>
-          </form>
-          <form action={loginAction}>
             <input type="hidden" name="email" value={DEMO_ADMIN_EMAIL} />
             <input type="hidden" name="password" value="demo" />
             <button type="submit" className={buttonGhostClass}>
@@ -77,11 +75,6 @@ export default async function LoginPage({
       </div>
 
       <p className="mt-6 text-center text-sm text-muted">
-        Account nahi hai?{" "}
-        <Link href="/signup" className="font-semibold text-primary-text">
-          Signup karo
-        </Link>
-        {" · "}
         <Link href="/forgot-password" className="font-semibold text-primary-text">
           Password bhool gaye?
         </Link>
