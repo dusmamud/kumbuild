@@ -1,1 +1,0 @@
-export { handler } from "./frontend/apps/app/index.mjs";
