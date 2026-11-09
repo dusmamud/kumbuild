@@ -12,8 +12,7 @@ Kumbuild mobile app, full e-commerce store (online payment checkout wala), live 
 
 ## 2. Order kaise hoga?
 
-- Customer `kumbuild.com/order` pe form bharega aur package choose karega
-- Account banana hoga (`auth.kumbuild.com/signup`)
+- Customer `kumbuild.com/order` pe form bharega aur package choose karega, ya WhatsApp / Instagram DM pe order karega
 - Advance 50% payment karna hoga — advance ke bina kaam shuru nahi hoga
 - Order ke time di gayi details sahi honi chahiye. Galat details se bani website ki zimmedari customer ki hogi.
 
@@ -38,7 +37,6 @@ Customer ye dega aur iski zimmedari uski hogi:
 - Sahi business details, services aur price
 - Apni real photos aur logo — photos aur content par customer ka haq hona chahiye, kisi aur ki photo / copyrighted cheez nahi honi chahiye
 - Koi galat, jhoothi ya kanoon ke khilaf information nahi dega
-- Apne account ka password kisi ko nahi dega
 
 Agar customer galat ya copyrighted content dega aur us se koi problem hogi to zimmedari customer ki hogi.
 
@@ -46,7 +44,7 @@ Agar customer galat ya copyrighted content dega aur us se koi problem hogi to zi
 
 - Package ke hisaab se website bana ke dena
 - Website mobile pe sahi dikhe, fast load ho, aur likhe gaye features kaam karein
-- Order ka status dashboard pe dikhana
+- Order ka status WhatsApp pe batana
 - Website live karne ke baad renewal period me hosting aur domain sambhalna (renewal fees ke saath)
 
 Kumbuild is baat ki guarantee nahi deta ki website se kitne customer aayenge ya kitni sale hogi. Website ek tool hai, business ki sale ki guarantee nahi hai.
@@ -61,7 +59,7 @@ Kumbuild is baat ki guarantee nahi deta ki website se kitne customer aayenge ya 
 
 - Renewal ₹1,999 / saal (draft) hai — domain + hosting + chhoti updates + support
 - Renewal na karne pe kya hoga — TBD, policy final karni hai
-- Customer kabhi bhi apna account band karwa sakta hai — uske baad website ka kya hoga, ye renewal policy ke saath final hoga (TBD)
+- Customer kabhi bhi apni details delete karwa sakta hai — uske baad website ka kya hoga, ye renewal policy ke saath final hoga (TBD)
 - Kumbuild kisi bhi order ko mana kar sakta hai agar content galat, jhootha ya kanoon ke khilaf ho
 
 ## 9. Liability (zimmedari ki limit) — DRAFT

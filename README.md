@@ -5,9 +5,8 @@ Done-for-you website service for small businesses. Customer batayega kya chahiye
 - **Brand:** Kumbuild
 - **Tagline:** Tell us what to build.
 - **Website (plan):** kumbuild.com — landing + pricing + order
-- **Customer dashboard (plan):** home.kumbuild.com — login ke baad
 - **Admin dashboard (plan):** admin.kumbuild.com — sirf admin ke liye
-- **Auth (plan):** auth.kumbuild.com — login / signup
+- **Auth (plan):** auth.kumbuild.com — admin login (sirf Dus)
 - **Status (2026-11-09):** Plan stage hai. Kuch build nahi hua, koi code nahi likha gaya. Architecture, subdomains aur deployment locked hain. Pricing draft hai, final nahi hui.
 
 ## Ye folder kya hai?
@@ -24,11 +23,11 @@ kumbuild/                  <- ye root. Saare docs (.md / .pdf) yahin rahenge.
   STACK.md                 <- tech stack summary
   THEME.md                 <- theme + colors (Option A Trust Blue, LOCKED) + locales (en-US/hi/bn)
   ARCHITECTURE.md          <- monorepo + tech stack (locked)
-  SUBDOMAINS.md            <- kumbuild.com / auth / home / admin — har page
+  SUBDOMAINS.md            <- kumbuild.com / auth / admin — har page
   DEPLOYMENT.md            <- GitHub Actions -> Cloudflare Pages
   frontend/                <- frontend monorepo (Astro + Next.js)
     apps/web/              <- kumbuild.com
-    apps/app/              <- auth + home + admin (ek hi Next.js app)
+    apps/app/              <- auth (admin login) + admin (ek hi Next.js app)
     packages/ui/           <- shared components
     packages/config/       <- shared config
     packages/lib/          <- shared types + mock data + api-client
@@ -67,7 +66,7 @@ kumbuild/                  <- ye root. Saare docs (.md / .pdf) yahin rahenge.
 | Service | Done-for-you websites, small business ke liye |
 | Monorepo | pnpm workspaces + Turborepo |
 | Public site | Astro + React islands (`apps/web`) |
-| App | Ek hi Next.js App Router app — auth + home + admin (`apps/app`) |
+| App | Ek hi Next.js App Router app — admin login + admin dashboard (`apps/app`) |
 | Admin | Alag app NAHI — ek hi app me `(admin)` route group, role guard |
 | Deploy | Poora frontend GitHub Actions se Cloudflare Pages pe (Vercel plan hata diya) |
 | Payment provider | Razorpay (LOCKED 2026-11-09) — UPI, cards, netbanking, wallets; 2% + 18% GST on fee |
@@ -88,7 +87,7 @@ kumbuild/                  <- ye root. Saare docs (.md / .pdf) yahin rahenge.
 
 1. Plan + pricing final karo (`PLAN.md` ke open decisions)
 2. `frontend/apps/web` — kumbuild.com landing + order form
-3. `frontend/apps/app` — auth + home + admin (mock data)
+3. `frontend/apps/app` — admin login + admin dashboard (mock data)
 4. 3 demo sites — shop, clinic, tuition (portfolio)
 5. Launch
 6. Backend — auth, orders, payments, chat (frontend ke baad)

@@ -17,7 +17,7 @@ Decision: **poora frontend GitHub Actions se Cloudflare pe host hoga.** Pehle Ve
 | Project | App | Type | Custom domain |
 |---|---|---|---|
 | `kumbuild-web` | `frontend/apps/web` (Astro) | Cloudflare Pages (static) | `kumbuild.com` |
-| `kumbuild-app` | `frontend/apps/app` (Next.js) | Cloudflare (OpenNext / Worker) | `auth.kumbuild.com`, `home.kumbuild.com`, `admin.kumbuild.com` |
+| `kumbuild-app` | `frontend/apps/app` (Next.js) | Cloudflare (OpenNext / Worker) | `auth.kumbuild.com`, `admin.kumbuild.com` |
 
 Project ke naam draft hain — Cloudflare dashboard me banate time final honge. `kumbuild-web` naam is doc me sirf example ke liye hai, kyunki pehle wale short doc me yahi naam likha tha.
 
@@ -31,7 +31,7 @@ Ye hissa bilkul Creestion jaisa hai, pehle se verified pattern hai.
 
 ## 4. App — Next.js (Cloudflare, OpenNext adapter)
 
-Ye hissa static nahi hai. Isme login, dashboard, middleware aur SSR hai, isliye Pages pe static deploy nahi ho sakta.
+Ye hissa static nahi hai. Isme admin login, admin dashboard, middleware aur SSR hai, isliye Pages pe static deploy nahi ho sakta.
 
 - Adapter: `@opennextjs/cloudflare` — Exa-verified, Cloudflare ka ab supported tareeka hai
 - Purana tareeka `@cloudflare/next-on-pages` ab recommended nahi hai — woh sirf Edge runtime support karta tha, aur App Router ke features usme poori tarah nahi chalte
@@ -79,11 +79,10 @@ User khud karega (assistant account nahi chhedega — standing boundary):
 |---|---|
 | `kumbuild.com` | Web wala Pages project |
 | `auth.kumbuild.com` | App wala project |
-| `home.kumbuild.com` | App wala project |
 | `admin.kumbuild.com` | App wala project |
 | `www.kumbuild.com` | `kumbuild.com` pe redirect |
 
-Wildcard `*.kumbuild.com` DNS record se teenon app subdomains ek hi project pe jayenge.
+Wildcard `*.kumbuild.com` DNS record se dono app subdomains ek hi project pe jayenge.
 
 ## 7. Preview vs production
 

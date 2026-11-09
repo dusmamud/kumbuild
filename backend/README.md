@@ -2,10 +2,10 @@
 
 ```
 backend/
-  auth/         login / signup / sessions / roles
-  orders/       order create, status, tracking
+  auth/         admin login / sessions / admin role
+  orders/       order create (admin add karega), status, tracking
   payments/     advance + final payment, renewal
-  chat/         customer <-> admin messages / support
+  chat/         WhatsApp / Instagram DM — in-app chat nahi hoga
   websites/     delivered websites, builds, domains
   shared/       shared types, utils, DB access
 ```

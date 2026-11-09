@@ -48,7 +48,7 @@ Photos ki quality:
 ## 6. Content bhejne ka tareeka
 
 - Order form bharte time hi bhej do — form me photo upload hoga (frontend banne pe)
-- Baad me bhejna ho to dashboard (`home.kumbuild.com/support`) se ya WhatsApp pe bhej sakte ho
+- Baad me bhejna ho to WhatsApp pe bhej do
 - Content Hindi ya English — dono chalega (website ki language customer ki pasand se hogi — ye baat order form me poochhi jayegi, TBD)
 
 ## 7. Content ki zimmedari

@@ -88,27 +88,29 @@ Ye prices **draft** hain. User ne final nahi kiye. Inko website pe daalne se peh
 
 1. **Dekho** — `kumbuild.com` pe aao, examples aur pricing dekho
 2. **Choose karo** — package choose karo
-3. **Form bharo** — `/order` pe form: business ka naam, kya karte ho, services, WhatsApp number, photos, location
-4. **Account banao** — `auth.kumbuild.com/signup` pe account (order track karne ke liye)
-5. **Advance do** — 50% payment (Razorpay se)
-6. **Preview dekho** — 3–5 din (draft) me `home.kumbuild.com` pe preview link + status dikhega
-7. **Revision / approve** — changes batao (2 free rounds), approve karo
-8. **Baaki payment + live** — baaki 50% do, website live
-9. **Renewal** — har saal ₹1,999 (draft) pe domain + hosting + support
+3. **Baat karo** — WhatsApp DM karo, Instagram DM karo, ya `/order` pe form bharo: business ka naam, kya karte ho, services, WhatsApp number, photos, location
+4. **Confirm karo** — admin (Dus) details aur package confirm karega, phir advance 50% ka payment link bhejega (Razorpay se)
+5. **Advance do** — 50% payment karo; milne ke baad admin order ko `admin.kumbuild.com` me add karega, status: Received
+6. **Preview dekho** — 3–5 din (draft) me preview link WhatsApp pe milega; dekho, changes batao ya approve karo (2 free rounds)
+7. **Baaki payment + live** — baaki 50% do, website live; live link WhatsApp pe milega
+8. **Renewal** — har saal ₹1,999 (draft) pe domain + hosting + support
 
-### Order status (customer ko kya dikhega)
+**Customer ka koi account nahi hai, koi dashboard nahi hai.** Order WhatsApp / Instagram DM / form se aata hai; jo confirm hoga use admin khud admin dashboard me add karega aur saari progress wahin track karega. Customer ko status aur preview link WhatsApp pe milega.
+
+### Order status (admin dashboard me — customer ko WhatsApp pe bataya jayega)
 
 Received → In progress → Preview ready → Revision → Approved → Live
 
 ## 7. Delivery process — andar ka kaam (admin)
 
-1. Order aaya (`admin.kumbuild.com/orders` pe dikhega)
-2. Form details + photos check karo — kuch missing ho to customer ko message karo (chat / WhatsApp)
-3. Website banao (package ke hisaab se pages)
-4. Preview link customer ko bhejo, status `Preview ready` karo
-5. Revision lo, changes karo, dobara preview bhejo
-6. Approval + final payment confirm karo, status `Live` karo
-7. Website ka record `admin.kumbuild.com/builds` me rakho — domain, renewal date, package
+1. Order aaya — WhatsApp DM, Instagram DM ya `/order` form se. Details + package confirm karo.
+2. Advance 50% ka payment link bhejo (Razorpay se); advance milne ke baad order ko `admin.kumbuild.com/orders` me add karo, status: Received
+3. Form details + photos check karo — kuch missing ho to customer ko WhatsApp pe message karo
+4. Website banao (package ke hisaab se pages)
+5. Preview link customer ko WhatsApp pe bhejo, status `Preview ready` karo
+6. Revision lo (WhatsApp pe), changes karo, dobara preview bhejo
+7. Approval + final payment confirm karo, status `Live` karo, live link WhatsApp pe bhejo
+8. Website ka record `admin.kumbuild.com/builds` me rakho — domain, renewal date, package
 
 ## 8. Revenue model
 
@@ -132,7 +134,7 @@ Kharcha: domain + hosting per website, Razorpay fees 2% + 18% GST on fee (detail
 ### Phase 2 — kumbuild.com (frontend pehle)
 
 - Landing + pricing + services + examples + order form
-- Auth + customer dashboard + admin dashboard (mock data se, frontend complete)
+- Admin dashboard + admin login (mock data se, frontend complete) — customer ka koi account / dashboard nahi hoga
 - GitHub Actions → Cloudflare Pages deploy
 
 ### Phase 3 — Demo sites (portfolio)

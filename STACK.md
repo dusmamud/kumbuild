@@ -10,7 +10,7 @@ Detail architecture `ARCHITECTURE.md` me hai. Ye file stack ka ek jagah summary 
 | Monorepo | pnpm workspaces + Turborepo | LOCKED |
 | Language | TypeScript (strict) | LOCKED |
 | Public site | Astro + React islands | LOCKED |
-| App (auth/home/admin) | Next.js App Router + React 19 | LOCKED |
+| App (admin only) | Next.js App Router + React 19 | LOCKED |
 | Styling | Tailwind CSS | LOCKED |
 | Shared UI | `packages/ui` | LOCKED (structure) |
 | Shared config | `packages/config` | LOCKED (structure) |
@@ -27,7 +27,7 @@ Detail architecture `ARCHITECTURE.md` me hai. Ye file stack ka ek jagah summary 
 ## Kyun ye stack? (Exa-verified, 2026-11-09)
 
 - **Astro (public site):** same marketing site pe Astro ne 14 KB JS bheja, Next.js ne 82 KB; Lighthouse 99 vs 92; INP 90ms vs 210ms. Source: ssg-production.com, 2026-06-18. Marketing pages mostly static hain, isliye Astro best hai.
-- **Next.js (app):** dashboard, auth, forms — interactive app ke liye. Subdomain middleware routing Vercel Platforms Starter Kit wala proven pattern hai.
+- **Next.js (app):** admin dashboard + admin login — interactive app ke liye. Subdomain middleware routing Vercel Platforms Starter Kit wala proven pattern hai.
 - **Turborepo:** JS/TS-only monorepo task runner, Vercel maintain karta hai. Nx zyada powerful hai (polyglot, distributed CI) par solo builder ke liye heavy hai. Source: nx.dev.
 - **Cloudflare:** Creestion / dusrel wala deploy flow pehle se verified hai — GitHub Actions → `wrangler pages deploy dist`. Next.js ke liye `@opennextjs/cloudflare` adapter supported path hai; purana `@cloudflare/next-on-pages` sirf Edge runtime tha. Source: freecodecamp.org, 2026-04-29; blog.blazingcdn.com, 2026-09-18.
 

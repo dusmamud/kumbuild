@@ -25,7 +25,7 @@ Ye rules draft hain — user ko approve karna hai ki advance kab se "kaam shuru"
 
 ## 3. Refund kaise milega?
 
-- Customer `home.kumbuild.com/support` se ya WhatsApp pe refund maangega
+- Customer WhatsApp pe refund maangega
 - Kumbuild 7 working days (draft) me request check karega aur batayega refund milega ya nahi, aur kitna milega
 - Refund Razorpay se usi payment method pe milega jis se payment aaya tha
 - Razorpay ki refund processing fee ₹0 hai (pricing page, May 2026). Original transaction pe kati platform fee ka treatment Razorpay dashboard / activation ke time confirm karna hai.
@@ -39,8 +39,8 @@ Ye rules draft hain — user ko approve karna hai ki advance kab se "kaam shuru"
 
 ## 5. Order cancel kaise karein?
 
-- Order cancel karne ke liye customer ko support pe message karna hoga — order ID ke saath
-- Cancel karne ke baad order ka status dashboard pe dikhega
+- Order cancel karne ke liye customer ko WhatsApp pe message karna hoga — order ID ke saath
+- Cancel karne ke baad order ka status admin dashboard me dikhega, aur admin customer ko WhatsApp pe batayega
 - Jo refund banta hoga, woh upar wale rules ke hisaab se milega
 
 ## 6. Open decisions — refund policy final karne se pehle

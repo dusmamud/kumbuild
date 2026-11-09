@@ -42,7 +42,7 @@ Renewal me kya milega:
 - Domain renewal
 - Hosting
 - Chhoti updates (phone number, timing, ek-do lines badalna — "chhoti" ki limit TBD)
-- Support (WhatsApp / dashboard se message)
+- Support (WhatsApp se message)
 
 Renewal me kya nahi milega:
 

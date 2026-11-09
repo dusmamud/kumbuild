@@ -2,7 +2,7 @@
 
 Status: **DRAFT (2026-11-09). Ye legal document nahi hai aur legal advice bhi nahi hai. Website pe daalne se pehle user ko padh ke final karna hai, aur zaroorat pade to kisi lawyer se check karwana hai.**
 
-Ye policy `kumbuild.com` aur uske subdomains (`auth.kumbuild.com`, `home.kumbuild.com`, `admin.kumbuild.com`) pe lagu hogi.
+Ye policy `kumbuild.com` aur uske subdomains (`auth.kumbuild.com`, `admin.kumbuild.com`) pe lagu hogi. Customer ka koi account nahi hai — customer sirf `kumbuild.com` use karta hai.
 
 ## 1. Hum kaunsi information lete hain?
 
@@ -48,17 +48,17 @@ Customer ye maang sakta hai:
 
 - Apni details dekhna
 - Galat details theek karwana
-- Apna account aur data delete karwana (website live hone ke baad delete karne pe kya hoga — renewal / live website ka kya hoga — ye policy final karte time likhni hai, TBD)
+- Apni details delete karwana (website live hone ke baad delete karne pe kya hoga — renewal / live website ka kya hoga — ye policy final karte time likhni hai, TBD)
 
 Request karne ke liye contact: TBD (email / WhatsApp — website launch se pehle bharna hai).
 
 ## 6. Cookies
 
-Website pe cookies use hongi — login session ke liye aur website kaise use ho rahi hai ye samajhne ke liye. Exact cookies ki list backend / analytics tool decide hone ke baad likhi jayegi (TBD).
+Website pe cookies use hongi — admin login session ke liye aur website kaise use ho rahi hai ye samajhne ke liye. Exact cookies ki list backend / analytics tool decide hone ke baad likhi jayegi (TBD).
 
 ## 7. Bachchon ka data
 
-Ye service business ke liye hai, bachchon ke liye nahi hai. 18 saal se kam umar ke vyakti ko account nahi banana chahiye. (Ye line draft hai — Play Store listing me target audience 18+ rakha gaya tha, par Kumbuild ke liye ye abhi final nahi hua hai.)
+Ye service business ke liye hai, bachchon ke liye nahi hai. Customer ka koi account nahi banta — order WhatsApp / Instagram DM / form se hota hai. (Ye line draft hai — Play Store listing me target audience 18+ rakha gaya tha, par Kumbuild ke liye ye abhi final nahi hua hai.)
 
 ## 8. Policy me badlav
 

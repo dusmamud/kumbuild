@@ -41,7 +41,7 @@ kumbuild/                      <- workspace root (ye folder; future GitHub repo 
 | Task runner | Turborepo | `turbo.json` se build / lint / test tasks, caching |
 | Language | TypeScript (strict) | Har app + package me |
 | Public site | Astro + React islands | Static pages, `client:*` sirf jahan interaction chahiye |
-| App | Next.js App Router + React 19 | Dashboard, auth, forms — interactive app |
+| App | Next.js App Router + React 19 | Admin dashboard, admin login — interactive app |
 | Styling | Tailwind CSS | Shared tokens `packages/ui` me |
 | Deploy (web) | Cloudflare Pages via GitHub Actions | `wrangler pages deploy dist` |
 | Deploy (app) | Cloudflare via `@opennextjs/cloudflare` | `opennextjs-cloudflare build` → `wrangler deploy` |
@@ -57,20 +57,18 @@ Version note: exact versions (Astro 5, Next.js 15/16 era) build ke time latest s
 - **Performance:** Astro by default zero JS bhejta hai. Isliye marketing pages fast aur SEO-friendly hote hain — yehi reason hai Astro chunne ka.
 - **Shared use:** `packages/ui` se components, `packages/lib` se types (jaise package list, order form fields)
 
-## 5. Frontend — apps/app (auth + home + admin)
+## 5. Frontend — apps/app (admin only)
 
-Ek hi Next.js app, teen subdomains. Middleware host dekh ke rewrite karta hai — ye Vercel Platforms Starter Kit wala proven pattern hai.
+Ek hi Next.js app, do subdomains (admin login + admin dashboard). Middleware host dekh ke rewrite karta hai — ye Vercel Platforms Starter Kit wala proven pattern hai. **Customer ka is app me kuch nahi hai — na signup, na customer dashboard, na customer login.**
 
 ```
 apps/app/
-  middleware.ts                <- host dekh ke auth / home / admin me rewrite
+  middleware.ts                <- host dekh ke auth / admin me rewrite
   app/
-    (auth)/                    <- auth.kumbuild.com
-      login/ signup/ forgot-password/ verify/
-    (home)/                    <- home.kumbuild.com (customer, login lazmi)
-      dashboard, orders, orders/[id], my-website, payments, support, settings
+    (auth)/                    <- auth.kumbuild.com (sirf admin login)
+      login/ forgot-password/
     (admin)/                   <- admin.kumbuild.com (admin role lazmi)
-      dashboard, orders, customers, builds, payments, settings
+      dashboard, orders, orders/new, orders/[id], customers, builds, payments, settings
   lib/
     auth.ts                    <- session check (frontend phase: mock)
     api.ts                     <- packages/lib ke api-client ka use
@@ -78,21 +76,16 @@ apps/app/
 
 ### Route groups ka matlab
 
-`(auth)`, `(home)`, `(admin)` — ye brackets wale folders URL me nahi aate. Ye sirf code ko alag rakhne ke liye hain: alag layout, alag menu, alag guard. Customer ko admin ka code download bhi nahi hota — Next.js route-wise code split karta hai.
+`(auth)`, `(admin)` — ye brackets wale folders URL me nahi aate. Ye sirf code ko alag rakhne ke liye hain: alag layout, alag menu, alag guard.
 
 ### Auth flow (frontend phase — mock)
 
 ```
 Bina login:
-  home.kumbuild.com/*  -> auth.kumbuild.com/login
   admin.kumbuild.com/* -> auth.kumbuild.com/login
 
-Login success:
-  role = customer -> home.kumbuild.com
-  role = admin    -> admin.kumbuild.com
-
-Customer admin khole:
-  admin.kumbuild.com/* -> home.kumbuild.com (wapas bhej do)
+Login success (admin):
+  role = admin -> admin.kumbuild.com
 ```
 
 Session frontend phase me mock hogi (localStorage / cookie stub — implementation ke time decide hoga). Asli session backend aane pe banegi. **Frontend guard sirf UX hai, security nahi** — asli security backend ke API role check se aayegi. Ye baat bhoolna nahi hai.
@@ -128,10 +121,10 @@ Backend phase (baad me):
 
 | Service | Zimmedari |
 |---|---|
-| `auth/` | Login / signup, sessions, roles (customer vs admin), password reset, OTP / verify |
-| `orders/` | Order create, status (received → in progress → preview → delivered), tracking, revisions |
+| `auth/` | Admin login, session, admin role, password reset |
+| `orders/` | Order create (admin khud add karega), status (received → in progress → preview → delivered), revisions |
 | `payments/` | Advance 50% + final 50%, yearly renewal, payment history (provider: Razorpay) |
-| `chat/` | Customer ↔ admin messages / support, preview feedback |
+| `chat/` | In-app chat nahi hoga — customer se baat WhatsApp / Instagram DM pe hogi |
 | `websites/` | Delivered websites ka record — stage, domain, hosting, renewal date |
 | `shared/` | Shared types, utils, DB access |
 
@@ -142,7 +135,7 @@ Backend ka stack (language, framework, database, hosting) abhi decide nahi hua �
 1. **Frontend guard ≠ security.** Login check aur role check UI me sirf user ko sahi jagah bhejne ke liye hai. Data ki raksha backend karega.
 2. **Admin data sirf admin role ko.** Har admin API call pe backend role check karega — frontend alag app ho ya ek app, isse koi farq nahi padta.
 3. **Secrets kabhi code me nahi.** Cloudflare token, API keys — sirf GitHub Secrets / Cloudflare dashboard me. User khud add karega.
-4. **Customer ka data customer ko hi.** Ek customer doosre customer ka order / website nahi dekh sakta — ye backend ka rule hoga, frontend ka nahi.
+4. **Customer ka data sirf admin ko.** Customer ka koi login nahi hai, isliye customer-facing data exposure ka sawaal hi nahi hai — orders, payments aur websites sirf admin dashboard me dikhenge.
 
 ## 10. Future split — admin ko kab alag karna hai
 

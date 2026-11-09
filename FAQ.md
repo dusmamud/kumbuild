@@ -38,10 +38,10 @@ A: Chhoti updates (phone, timing, ek-do lines) renewal me included hain. Bade ch
 ## Order aur delivery
 
 **Q: Order kaise karun?**
-A: `kumbuild.com/order` pe form bharo, package choose karo, account banao, advance do. Poora flow `PLAN.md` me hai.
+A: WhatsApp DM karo, Instagram DM karo, ya `kumbuild.com/order` pe form bharo — package choose karo, business details do, advance do. Poora flow `PLAN.md` me hai. Koi account banane ki zaroorat nahi hai.
 
 **Q: Order ka status kahan dekhu?**
-A: `home.kumbuild.com` pe login karke — Orders me status dikhega: Received → In progress → Preview ready → Revision → Approved → Live.
+A: Koi dashboard nahi hai — status admin tumhe WhatsApp pe batayega: Received → In progress → Preview ready → Revision → Approved → Live. Preview link aur live link bhi WhatsApp pe milenge.
 
 **Q: Meri website ka domain kya hoga?**
 A: Domain naam tum choose karoge. Pehle saal ka domain package price me mana gaya hai (draft — final karte time saaf hoga), renewal me domain renewal included hai.
@@ -54,4 +54,4 @@ A: Kaam shuru hone se pehle cancel karo to poora advance refund hoga. Kaam shuru
 ## Support
 
 **Q: Website live hone ke baad koi problem aaye to?**
-A: `home.kumbuild.com/support` se ya WhatsApp pe message karo. Support ka response time abhi decide nahi hua hai — TBD.
+A: WhatsApp pe message karo. Support ka response time abhi decide nahi hua hai — TBD.

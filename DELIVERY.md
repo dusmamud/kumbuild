@@ -10,14 +10,14 @@ Status: **DRAFT (2026-11-09). Ye policy website pe daalne se pehle user ko final
 
 ## Delivery stages
 
-| Stage | Matlab | Customer ko kya dikhega |
+| Stage | Matlab | Customer ko kaise pata chalega |
 |---|---|---|
-| Received | Order aur advance mil gaya | `home.kumbuild.com/orders` pe status: Received |
-| In progress | Website ban rahi hai | Status: In progress |
-| Preview ready | Preview link bhej diya | Status: Preview ready — link kholo, dekho |
-| Revision | Customer ne changes bole | Status: Revision |
-| Approved | Customer ne approve kiya, final payment ho gaya | Status: Approved |
-| Live | Website live hai | Status: Live — `my-website` pe link |
+| Received | Order aur advance mil gaya (admin ne admin dashboard me order add kiya) | Admin WhatsApp pe batayega: order mil gaya |
+| In progress | Website ban rahi hai | Admin batayega jab kaam shuru ho |
+| Preview ready | Preview link bhej diya | Preview link WhatsApp pe milega — kholo, dekho |
+| Revision | Customer ne changes bole | WhatsApp pe changes batao |
+| Approved | Customer ne approve kiya, final payment ho gaya | WhatsApp pe confirm hoga |
+| Live | Website live hai | Live link WhatsApp pe milega |
 
 ## Revision policy — DRAFT
 
@@ -39,16 +39,16 @@ Kuch missing ho to Kumbuild customer ko message karega aur order ruk jayega — 
 
 ## Approval aur go-live
 
-1. Preview link milega — customer dekhega, changes batayega ya approve karega
+1. Preview link milega (WhatsApp pe) — customer dekhega, changes batayega ya approve karega
 2. Approve karne ke baad final 50% payment karna hoga
 3. Final payment milne ke baad website live ki jayegi
-4. Live hone ke baad customer ko `home.kumbuild.com/my-website` pe link milega
+4. Live hone ke baad customer ko live link WhatsApp pe milega
 
 ## Delivery ke baad
 
 - **Chhoti updates** renewal me included hain (phone, timing, ek-do lines — limit TBD)
 - **Bade changes** (naya page, design badalna) alag charge honge — amount TBD
-- **Support:** dashboard / WhatsApp se message kar sakte ho — response time TBD (koi waada abhi nahi kiya gaya hai)
+- **Support:** WhatsApp se message kar sakte ho — response time TBD (koi waada abhi nahi kiya gaya hai)
 
 ## Agar customer jawab na de
 
