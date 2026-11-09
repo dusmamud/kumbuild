@@ -48,7 +48,7 @@ const mobileLink = (active: boolean) =>
   </head>
   <body class="min-h-screen bg-white text-body">
     <header class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-sm">
-      <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+      <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-2.5">
         <button
           id="menu-btn"
           type="button"
@@ -69,16 +69,30 @@ const mobileLink = (active: boolean) =>
             <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={desktopLink(l.href === current)}>{l.label}</a>
           ))}
         </nav>
-        <div class="ml-auto flex items-center gap-3">
-          <div class="hidden items-center gap-1 text-xs font-semibold md:flex">
-            {locales.map((l) => (
-              <a
-                href={pageUrl(l.code, slug)}
-                class={l.code === locale
-                  ? "rounded-md bg-primary-50 px-2 py-1 text-primary-700"
-                  : "rounded-md px-2 py-1 text-muted hover:text-primary-700"}
-              >{l.label}</a>
-            ))}
+        <div class="ml-auto flex items-center gap-2 sm:gap-3">
+          <div class="relative hidden md:block">
+            <button
+              id="locale-btn"
+              type="button"
+              class="flex items-center gap-1.5 rounded-lg border border-line px-2.5 py-1.5 text-xs font-semibold text-body hover:bg-surface"
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="Change language"
+            >
+              <svg class="h-3.5 w-3.5 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg>
+              {locales.find((l) => l.code === locale)?.label}
+              <svg class="h-3 w-3 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="locale-menu" class="absolute right-0 top-full z-50 mt-2 hidden w-40 overflow-hidden rounded-xl border border-line bg-white py-1 shadow-[0_8px_24px_rgba(15,23,42,0.12)]">
+              {locales.map((l) => (
+                <a
+                  href={pageUrl(l.code, slug)}
+                  class={l.code === locale
+                    ? "block bg-primary-50 px-3 py-2 text-sm font-semibold text-primary-700"
+                    : "block px-3 py-2 text-sm text-body hover:bg-surface hover:text-primary-700"}
+                >{l.label}</a>
+              ))}
+            </div>
           </div>
           <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-semibold text-body hover:text-primary-700 md:block">{nav.login}</a>
           <a href={pageUrl(locale, "/order")} class="whitespace-nowrap rounded-lg bg-primary-500 px-4 py-2 text-sm font-bold text-white hover:bg-primary-600">{nav.order}</a>
@@ -117,8 +131,29 @@ const mobileLink = (active: boolean) =>
       btn.addEventListener("click", () => setOpen(menu.classList.contains("hidden")));
       menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") setOpen(false);
+        if (e.key === "Escape") {
+          setOpen(false);
+          setLocaleOpen(false);
+        }
       });
+      const localeBtn = document.getElementById("locale-btn");
+      const localeMenu = document.getElementById("locale-menu");
+      function setLocaleOpen(open) {
+        if (!localeMenu) return;
+        localeMenu.classList.toggle("hidden", !open);
+        localeBtn.setAttribute("aria-expanded", String(open));
+      }
+      if (localeBtn) {
+        localeBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          setLocaleOpen(localeMenu.classList.contains("hidden"));
+        });
+        document.addEventListener("click", (e) => {
+          if (!localeMenu.classList.contains("hidden") && !localeMenu.contains(e.target)) {
+            setLocaleOpen(false);
+          }
+        });
+      }
     </script>
 
     <main>
