@@ -16,7 +16,7 @@ const p = dict.pricing;
         <p class="mt-2 text-sm text-body">{pkg.bestFor}</p>
         <ul class="mt-4 space-y-2 text-sm">
           {pkg.features.map((f) => (
-            <li class="flex gap-2"><span class="text-primary-600">✓</span><span>{f}</span></li>
+            <li class="flex gap-2"><img src="/logo/kumbuild-logo.svg" alt="" class="mt-0.5 h-4 w-4 shrink-0" /><span>{f}</span></li>
           ))}
         </ul>
         <a href={pageUrl(locale, "/order")} class="mt-6 block rounded-lg bg-primary-500 px-4 py-2.5 text-center font-bold text-white hover:bg-primary-600">{pkg.cta}</a>
