@@ -1,29 +1,38 @@
 ---
+import SectionHead from "./SectionHead.astro";
 import type { Dictionary } from "../i18n/utils";
-interface Props { dict: Dictionary; }
-const { dict } = Astro.props;
+interface Props { dict: Dictionary; no?: string; }
+const { dict, no } = Astro.props;
 const e = dict.examples;
+/* Real preview designs — the same screenshots the hero shows, one per
+   business type. Replace files in public/demo/ to change them. */
+const demos = [
+  { img: "/demo/shop.png", url: "sharma-general-store.in", name: "Sharma General Store", type: "Shop website", alt: "Demo shop website — Sharma General Store, with products, prices and WhatsApp ordering" },
+  { img: "/demo/clinic.png", url: "smile-dental-clinic.in", name: "Smile Dental Clinic", type: "Clinic website", alt: "Demo clinic website — Smile Dental Clinic, with treatments, prices and appointment booking" },
+  { img: "/demo/salon.png", url: "glow-salon.in", name: "Glow Salon", type: "Salon website", alt: "Demo salon website — Glow Salon, with services, prices and WhatsApp booking" },
+];
 ---
 
-<section class="mx-auto max-w-6xl px-4 py-12">
-  <h2 class="text-2xl font-semibold">{e.title}</h2>
-  <p class="mt-2 max-w-2xl text-body">{e.subtitle}</p>
-  <div class="mt-8 grid gap-4 sm:grid-cols-3">
-    {e.items.map((item) => (
-      <article class="overflow-hidden rounded-xl border border-line bg-white">
-        {/* Wireframe preview — demos are not built yet (Phase 3), so no fake screenshot. */}
-        <div class="border-b border-line bg-surface px-5 py-4" aria-hidden="true">
-          <div class="h-2.5 w-24 rounded bg-line"></div>
-          <div class="mt-2 h-2 w-full rounded bg-line"></div>
-          <div class="mt-2 h-2 w-2/3 rounded bg-line"></div>
-          <div class="mt-3 h-6 w-20 rounded-md bg-primary-100"></div>
-        </div>
-        <div class="p-5">
-          <span class="inline-block rounded-full bg-primary-50 px-2.5 py-1 text-xs font-bold text-primary-700">{e.comingSoon}</span>
-          <h3 class="mt-3 font-semibold">{item.title}</h3>
-          <p class="mt-1 text-[14.5px] leading-relaxed text-body">{item.desc}</p>
-        </div>
-      </article>
-    ))}
+<section class="border-y border-line bg-surface">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+    <SectionHead no={no} title={e.title} subtitle={e.subtitle} />
+    <div class="mt-10 grid gap-5 sm:grid-cols-3">
+      {demos.map((d) => (
+        <figure class="overflow-hidden rounded-xl border border-line bg-white">
+          <div class="flex items-center gap-2 border-b border-line bg-white px-3 py-2">
+            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
+            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
+            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
+            <span class="ml-1 truncate rounded-md border border-line bg-surface px-2 py-0.5 font-mono text-[11px] text-muted">{d.url}</span>
+          </div>
+          <img src={d.img} alt={d.alt} width="1280" height="800" loading="lazy" class="block aspect-[8/5] w-full object-cover object-top" />
+          <figcaption class="flex items-baseline justify-between gap-2 px-4 py-3">
+            <span class="font-display text-sm font-semibold text-ink">{d.name}</span>
+            <span class="shrink-0 text-xs text-muted">{d.type}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="mt-5 text-sm text-muted">{dict.home.examplesNote}</p>
   </div>
 </section>

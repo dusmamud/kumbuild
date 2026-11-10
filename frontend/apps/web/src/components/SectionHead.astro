@@ -1,0 +1,17 @@
+---
+interface Props {
+  /** Section number on the homepage, e.g. "01". Omit on standalone pages. */
+  no?: string;
+  title: string;
+  subtitle?: string;
+}
+const { no, title, subtitle } = Astro.props;
+---
+
+<div class="flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
+  <div class="flex items-baseline gap-3">
+    {no && <span class="font-mono text-sm font-medium text-primary-700">{no}</span>}
+    <h2 class="text-[28px] font-semibold leading-[36px] sm:text-[32px] sm:leading-[40px]">{title}</h2>
+  </div>
+  {subtitle && <p class="max-w-md leading-[26px] text-body">{subtitle}</p>}
+</div>

@@ -1,24 +1,21 @@
 ---
+import SectionHead from "./SectionHead.astro";
 import type { Dictionary } from "../i18n/utils";
-interface Props { dict: Dictionary; }
-const { dict } = Astro.props;
+interface Props { dict: Dictionary; no?: string; }
+const { dict, no } = Astro.props;
 const h = dict.how;
 ---
 
-<section class="bg-surface py-12">
-  <div class="mx-auto max-w-6xl px-4">
-    <h2 class="text-2xl font-semibold">{h.title}</h2>
-    <p class="mt-2 max-w-2xl text-body">{h.subtitle}</p>
-    <ol class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-      {h.steps.map((step, i) => (
-        <li class="rounded-xl border border-line bg-white p-5">
-        <div class="flex items-center gap-3">
-          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white">{i + 1}</span>
-          <h3 class="font-semibold">{step.title}</h3>
-        </div>
-        <p class="mt-2 text-[14.5px] leading-relaxed text-body">{step.desc}</p>
+<section class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+  <SectionHead no={no} title={h.title} subtitle={h.subtitle} />
+  <ol class="relative mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+    <span class="absolute left-0 right-0 top-4 hidden h-px bg-[#cbd5e1] lg:block" aria-hidden="true"></span>
+    {h.steps.map((step, i) => (
+      <li class="relative">
+        <span class="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border border-[#cbd5e1] bg-white font-mono text-[13px] font-semibold text-primary-700">{i + 1}</span>
+        <h3 class="mt-4 text-[15px] font-semibold text-ink">{step.title}</h3>
+        <p class="mt-1.5 text-sm leading-[22px] text-body">{step.desc}</p>
       </li>
-      ))}
-    </ol>
-  </div>
+    ))}
+  </ol>
 </section>

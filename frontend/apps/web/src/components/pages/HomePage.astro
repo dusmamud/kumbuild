@@ -1,7 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../Hero.astro";
+import WhoItsFor from "../WhoItsFor.astro";
 import Services from "../Services.astro";
+import Included from "../Included.astro";
 import HowItWorks from "../HowItWorks.astro";
 import Pricing from "../Pricing.astro";
 import Examples from "../Examples.astro";
@@ -13,16 +15,24 @@ const { dict, locale } = Astro.props;
 
 <Layout title={dict.hero.title} description={dict.hero.subtitle} locale={locale} dict={dict} slug="/">
   <Hero dict={dict} locale={locale} />
-  <Services dict={dict} />
-  <HowItWorks dict={dict} />
-  <Pricing dict={dict} locale={locale} />
-  <Examples dict={dict} />
-  <FaqSection dict={dict} limit={5} />
-  <section class="mx-auto max-w-6xl px-4 pb-16">
-    <div class="rounded-2xl bg-primary-700 px-6 py-10 text-center text-white">
-      <h2 class="text-[22px] font-semibold text-white">{dict.hero.title}</h2>
-      <p class="mx-auto mt-2 max-w-xl text-[15px] text-white">{dict.hero.subtitle}</p>
-      <a href={pageUrl(locale, "/order")} class="mt-6 inline-block rounded-lg bg-white px-6 py-3 text-[15px] font-semibold text-primary-700">{dict.hero.ctaOrder}</a>
+  <WhoItsFor dict={dict} no="01" />
+  <Services dict={dict} no="02" />
+  <Included dict={dict} no="03" />
+  <HowItWorks dict={dict} no="04" />
+  <Examples dict={dict} no="05" />
+  <Pricing dict={dict} locale={locale} no="06" />
+  <FaqSection dict={dict} limit={5} no="07" />
+  <section class="mx-auto max-w-6xl px-4 pb-20">
+    <div class="grid items-center gap-8 rounded-2xl bg-ink px-6 py-10 sm:px-10 lg:grid-cols-[1fr_auto]">
+      <div>
+        <p class="font-mono text-xs text-primary-300">{dict.home.slip.heading} · {dict.home.slip.ref}</p>
+        <h2 class="mt-3 text-[26px] font-semibold leading-[34px] text-white sm:text-[30px] sm:leading-[38px]">{dict.hero.title}</h2>
+        <p class="mt-2 max-w-xl leading-[26px] text-white/70">{dict.hero.subtitle}</p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+        <a href={pageUrl(locale, "/order")} class="rounded-lg bg-primary-500 px-6 py-3.5 text-center text-[15px] font-semibold text-white transition-colors hover:bg-primary-600">{dict.hero.ctaOrder}</a>
+        <a href={pageUrl(locale, "/pricing")} class="rounded-lg border border-white/25 px-6 py-3.5 text-center text-[15px] font-semibold text-white transition-colors hover:border-white/60">{dict.hero.ctaPricing}</a>
+      </div>
     </div>
   </section>
 </Layout>

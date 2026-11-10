@@ -26,6 +26,9 @@
      display, Inter for text; Noto fallbacks cover hi/bn scripts). */
   --font-display: "Sora", "Inter", "Noto Sans Devanagari",
     "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
+  /* Mono for order refs, section numbers and figures (order-slip detail). */
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
 }
 
 :root {

@@ -1,0 +1,22 @@
+---
+import SectionHead from "./SectionHead.astro";
+import type { Dictionary } from "../i18n/utils";
+interface Props { dict: Dictionary; no?: string; }
+const { dict, no } = Astro.props;
+const home = dict.home;
+---
+
+<section class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+  <SectionHead no={no} title={home.whoTitle} subtitle={home.whoSubtitle} />
+  <ul class="mt-10 border-b border-line">
+    {home.audiences.map((a, i) => (
+      <li class="grid items-baseline gap-2 border-t border-line py-5 sm:grid-cols-12 sm:gap-4">
+        <p class="flex items-baseline gap-3 sm:col-span-4">
+          <span class="font-mono text-[13px] text-muted">{String(i + 1).padStart(2, "0")}</span>
+          <span class="font-display text-[17px] font-semibold text-ink">{a.name}</span>
+        </p>
+        <p class="leading-[26px] text-body sm:col-span-8">{a.need}</p>
+      </li>
+    ))}
+  </ul>
+</section>
