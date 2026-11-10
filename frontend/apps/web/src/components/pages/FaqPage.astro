@@ -7,11 +7,48 @@ const { dict, locale } = Astro.props;
 ---
 
 <Layout title={dict.faq.title} description={dict.faq.subtitle} locale={locale} dict={dict} slug="/faq">
-  <section class="mx-auto max-w-6xl px-4 py-12">
-    <h1 class="text-[32px] font-semibold leading-[40px]">{dict.faq.title}</h1>
-    <p class="mt-2 max-w-2xl text-body">{dict.faq.subtitle}</p>
-    <div class="mt-8">
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+    <div data-reveal>
+      <h1 class="font-display text-[clamp(2rem,1.55rem+2.2vw,2.75rem)] font-semibold leading-[1.15] text-ink">{dict.faq.title}</h1>
+      <p class="mt-3 max-w-2xl text-[15px] leading-[26px] text-body sm:text-base">{dict.faq.subtitle}</p>
+    </div>
+    <div data-reveal class="relative mt-8 max-w-xl">
+      <svg class="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+      <input
+        id="faq-search"
+        type="search"
+        autocomplete="off"
+        aria-label={dict.faq.title}
+        placeholder={dict.v2.faq.searchPlaceholder}
+        class="w-full rounded-[10px] border border-line bg-white py-3 pl-11 pr-4 text-[15px] text-ink outline-none transition placeholder:text-faint focus:border-primary-500 focus:ring-2 focus:ring-primary-100 sm:text-base"
+      />
+    </div>
+    <div id="faq-list" data-reveal class="mt-8">
       <FaqAccordion client:load items={dict.faq.items} />
     </div>
+    <p id="faq-empty" class="mt-8 hidden max-w-xl rounded-2xl border border-line bg-white p-5 text-[15px] leading-[26px] text-body">{dict.v2.faq.noResults}</p>
   </section>
+  <script type="application/json" id="faq-data" set:html={JSON.stringify(dict.faq.items)}></script>
+  <script>
+    const input = document.getElementById("faq-search") as HTMLInputElement | null;
+    const list = document.getElementById("faq-list");
+    const dataEl = document.getElementById("faq-data");
+    if (input && list && dataEl) {
+      const items: { q: string; a: string }[] = JSON.parse(dataEl.textContent ?? "[]");
+      const cards = list.querySelector(":scope > div")?.children;
+      const empty = document.getElementById("faq-empty");
+      input.addEventListener("input", () => {
+        const q = input.value.trim().toLowerCase();
+        if (!cards) return;
+        let visible = 0;
+        Array.from(cards).forEach((el, i) => {
+          const item = items[i];
+          const hit = !q || !item || `${item.q} ${item.a}`.toLowerCase().includes(q);
+          (el as HTMLElement).style.display = hit ? "" : "none";
+          if (hit) visible++;
+        });
+        if (empty) empty.classList.toggle("hidden", visible > 0);
+      });
+    }
+  </script>
 </Layout>

@@ -1,0 +1,10 @@
+---
+import ServiceDetailPage from "../../../components/pages/ServiceDetailPage.astro";
+import { dictFor } from "../../../i18n/utils";
+export function getStaticPaths() {
+  return dictFor("hi").services.items.map((item) => ({ params: { slug: item.slug } }));
+}
+const dict = dictFor("hi");
+const slug = Astro.params.slug ?? "";
+---
+<ServiceDetailPage dict={dict} locale={"hi"} slug={slug} />

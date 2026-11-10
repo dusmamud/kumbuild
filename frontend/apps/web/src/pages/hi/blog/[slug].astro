@@ -1,0 +1,10 @@
+---
+import BlogPostPage from "../../../components/pages/BlogPostPage.astro";
+import { dictFor } from "../../../i18n/utils";
+export function getStaticPaths() {
+  return dictFor("hi").v2.blog.posts.map((post) => ({ params: { slug: post.slug } }));
+}
+const { slug } = Astro.params;
+const dict = dictFor("hi");
+---
+<BlogPostPage dict={dict} locale="hi" slug={slug ?? ""} />

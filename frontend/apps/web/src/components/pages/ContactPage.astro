@@ -3,15 +3,89 @@ import Layout from "../../layouts/Layout.astro";
 import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
+const c = dict.contact;
+const o = dict.order;
+const waLink = `https://wa.me/${dict.v2.contact.waNumber}?text=${encodeURIComponent(dict.v2.contact.waText)}`;
+const inputCls = "w-full rounded-[10px] border border-line bg-white px-3.5 py-3 text-[15px] text-ink outline-none transition placeholder:text-faint focus:border-primary-500 focus:ring-2 focus:ring-primary-100 sm:text-base";
+const labelCls = "mb-1.5 block text-sm font-semibold text-ink";
 ---
 
-<Layout title={dict.contact.title} description={dict.contact.subtitle} locale={locale} dict={dict} slug="/contact">
-  <section class="mx-auto max-w-3xl px-4 py-12">
-    <h1 class="text-[32px] font-semibold leading-[40px]">{dict.contact.title}</h1>
-    <p class="mt-2 text-body">{dict.contact.subtitle}</p>
-    <p class="mt-2 text-sm text-muted">{dict.contact.note}</p>
-    <div class="mt-8">
-      <a href={pageUrl(locale, "/order")} class="rounded-lg bg-primary-500 px-6 py-3 text-[15px] font-semibold text-white hover:bg-primary-600">{dict.nav.order}</a>
+<Layout title={c.title} description={c.subtitle} locale={locale} dict={dict} slug="/contact">
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+    <div data-reveal class="max-w-3xl">
+      <h1 class="font-display text-[clamp(2rem,1.55rem+2.2vw,2.75rem)] font-semibold leading-[1.15] text-ink">{c.title}</h1>
+      <p class="mt-3 text-[15px] leading-[26px] text-body sm:text-base">{c.subtitle}</p>
+    </div>
+
+    <div class="mt-10 grid gap-5 lg:grid-cols-[1fr_1.25fr] lg:gap-8">
+      <div data-reveal class="flex flex-col gap-5">
+        <a href={waLink} target="_blank" rel="noopener" class="group flex items-center gap-4 rounded-2xl border border-line bg-white p-6 transition hover:border-primary-300">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-live-soft text-live">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /><path d="M8 12h.01" /><path d="M12 12h.01" /><path d="M16 12h.01" /></svg>
+          </span>
+          <span>
+            <span class="block font-display text-[17px] font-semibold text-ink group-hover:text-primary-700">{c.whatsapp}</span>
+            <span class="mt-0.5 block font-mono text-sm text-muted">+{dict.v2.contact.waNumber}</span>
+          </span>
+          <svg class="ml-auto h-5 w-5 shrink-0 text-muted transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        </a>
+        <a href={`mailto:${dict.v2.contact.email}`} class="group flex items-center gap-4 rounded-2xl border border-line bg-white p-6 transition hover:border-primary-300">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-700">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+          </span>
+          <span>
+            <span class="block font-display text-[17px] font-semibold text-ink group-hover:text-primary-700">{c.email}</span>
+            <span class="mt-0.5 block font-mono text-sm text-muted">{dict.v2.contact.email}</span>
+          </span>
+          <svg class="ml-auto h-5 w-5 shrink-0 text-muted transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        </a>
+        <div class="rounded-2xl border border-line bg-surface p-6">
+          <p class="text-[15px] leading-[26px] text-body">{c.note}</p>
+          <a href={pageUrl(locale, "/order")} class="mt-4 inline-block rounded-[10px] bg-primary-500 px-6 py-3 text-[15px] font-semibold text-white transition hover:bg-primary-600 active:scale-[0.98]">{dict.nav.order}</a>
+        </div>
+      </div>
+
+      <div data-reveal class="rounded-2xl border border-line bg-white p-6 sm:p-8">
+        <form id="enquiry-form" novalidate>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="enq-name" class={labelCls}>{o.name}</label>
+              <input id="enq-name" name="name" type="text" required autocomplete="name" class={inputCls} />
+            </div>
+            <div>
+              <label for="enq-phone" class={labelCls}>{o.phone}</label>
+              <input id="enq-phone" name="phone" type="tel" required autocomplete="tel" class={inputCls} />
+            </div>
+          </div>
+          <div class="mt-5">
+            <label for="enq-type" class={labelCls}>{o.businessType}</label>
+            <select id="enq-type" name="businessType" class={inputCls}>
+              {o.businessTypeOptions.map((opt) => <option value={opt}>{opt}</option>)}
+            </select>
+          </div>
+          <div class="mt-5">
+            <label for="enq-message" class={labelCls}>{o.message}</label>
+            <textarea id="enq-message" name="message" rows="4" class={`${inputCls} resize-y`}></textarea>
+          </div>
+          <button type="submit" class="mt-6 w-full rounded-[10px] bg-primary-500 px-6 py-3.5 text-[15px] font-semibold text-white transition hover:bg-primary-600 active:scale-[0.98] sm:w-auto">{dict.v2.contact.submit}</button>
+        </form>
+        <div id="enquiry-success" hidden class="py-4 text-center">
+          <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-live-soft text-live">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+          </span>
+          <h2 class="mt-4 font-display text-[clamp(1.25rem,1.1rem+0.7vw,1.5rem)] font-semibold text-ink">{o.successTitle}</h2>
+          <p class="mx-auto mt-2 max-w-md text-[15px] leading-[26px] text-body">{o.successText}</p>
+        </div>
+      </div>
     </div>
   </section>
+  <script>
+    const form = document.getElementById("enquiry-form") as HTMLFormElement | null;
+    const success = document.getElementById("enquiry-success");
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      form.hidden = true;
+      if (success) success.hidden = false;
+    });
+  </script>
 </Layout>

@@ -13,12 +13,14 @@ interface Props {
 
 const { title, description, locale, dict, slug } = Astro.props;
 const nav = dict.nav;
+const v2 = dict.v2;
 const current = pageUrl(locale, slug);
+const onServices = slug.startsWith("/services");
 const links = [
-  { href: pageUrl(locale, "/services"), label: nav.services },
   { href: pageUrl(locale, "/pricing"), label: nav.pricing },
   { href: pageUrl(locale, "/how-it-works"), label: nav.howItWorks },
-  { href: pageUrl(locale, "/examples"), label: nav.examples },
+  { href: pageUrl(locale, "/examples"), label: v2.nav.work },
+  { href: pageUrl(locale, "/about"), label: dict.about.title.replace(" Kumbuild", "") },
   { href: pageUrl(locale, "/faq"), label: nav.faq },
   { href: pageUrl(locale, "/contact"), label: nav.contact },
 ];
@@ -30,11 +32,12 @@ const locales: { code: Locale; label: string }[] = [
 const desktopLink = (active: boolean) =>
   active
     ? "font-semibold text-ink underline decoration-primary-500 decoration-2 underline-offset-8"
-    : "font-medium text-body transition-colors hover:text-ink";
+    : "font-medium text-body transition-colors duration-200 hover:text-ink";
 const mobileLink = (active: boolean) =>
   active
     ? "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[26px] font-semibold leading-tight text-primary-700"
     : "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[26px] font-semibold leading-tight text-ink";
+const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v2.contact.waText)}`;
 ---
 
 <!doctype html>
@@ -44,103 +47,146 @@ const mobileLink = (active: boolean) =>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} — Kumbuild</title>
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#faf9f6" />
+    <meta property="og:title" content={`${title} — Kumbuild`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og/kumbuild-og.png" />
     <link rel="icon" type="image/svg+xml" href="/logo/kumbuild-logo.svg" />
-    {/*
-      Fonts — same as dusrel-image docs-site (Inter for text, Sora for
-      display), plus Noto Sans Devanagari/Bengali so hi/bn text renders
-      in the same stack instead of falling back to system fonts.
-      NOTE: Inter/Sora were declared in theme.css but never loaded —
-      the site rendered in system sans until now.
-    */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
     />
   </head>
-  <body class="min-h-screen bg-white text-body">
+  <body class="min-h-screen bg-paper text-body">
     <div class="hidden bg-ink text-white md:block">
       <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-1.5 text-xs sm:px-6">
-        <p class="flex items-center gap-2 text-white/80">
-          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-green-400" aria-hidden="true"></span>
+        <p class="flex items-center gap-2 text-white/85">
+          <span class="h-1.5 w-1.5 shrink-0 animate-live-pulse rounded-full bg-live" aria-hidden="true"></span>
           {dict.hero.badge}
         </p>
         <p class="hidden font-mono text-white/55 lg:block">{dict.hero.note}</p>
       </div>
     </div>
-    <header class="sticky top-0 z-50">
-      <div class="relative z-10 border-b border-line bg-white/95 backdrop-blur-md">
-      <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
-        <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2 text-ink">
-          <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" class="h-8 w-8" />
-          <span class="font-display text-[17px] font-bold">Kumbuild</span>
-        </a>
-        <nav class="ml-7 hidden items-center gap-7 text-sm lg:flex" aria-label="Main">
-          {links.map((l) => (
-            <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={desktopLink(l.href === current)}>{l.label}</a>
-          ))}
-        </nav>
-        <div class="ml-auto flex items-center gap-2 sm:gap-3">
-          <div class="relative hidden lg:block">
-            <button
-              id="locale-btn"
-              type="button"
-              class="flex items-center gap-1.5 rounded-lg border border-line px-2.5 py-1.5 text-[13px] font-semibold text-body transition-colors hover:bg-surface"
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="Change language"
-            >
-              <svg class="h-3.5 w-3.5 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg>
-              {locales.find((l) => l.code === locale)?.label}
-              <svg class="h-3 w-3 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
-            </button>
-            <div id="locale-menu" class="absolute right-0 top-full z-50 mt-2 hidden w-40 overflow-hidden rounded-xl border border-line bg-white py-1 shadow-[0_8px_24px_rgba(15,23,42,0.12)]">
-              {locales.map((l) => (
-                <a
-                  href={pageUrl(l.code, slug)}
-                  class={l.code === locale
-                    ? "block bg-primary-50 px-3 py-2 text-sm font-semibold text-primary-700"
-                    : "block px-3 py-2 text-sm text-body hover:bg-surface hover:text-primary-700"}
-                >{l.label}</a>
-              ))}
-            </div>
-          </div>
-          <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-medium text-body transition-colors hover:text-ink lg:block">{nav.login}</a>
-          <a href={pageUrl(locale, "/order")} class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-primary-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-600">
-            {nav.order}
-            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+
+    <header id="site-header" class="sticky top-0 z-50">
+      <div class="relative z-10 border-b border-line bg-paper/92 backdrop-blur-md transition-shadow duration-300" id="header-bar">
+        <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
+          <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2 text-ink">
+            <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" class="h-8 w-8" />
+            <span class="font-display text-[17px] font-bold">Kumbuild</span>
           </a>
-          <button
-            id="menu-btn"
-            type="button"
-            class="rounded-lg border border-line p-2.5 text-ink transition-colors hover:bg-surface lg:hidden"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-            aria-label="Menu"
-          >
-            <svg id="icon-open" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
-            <svg id="icon-close" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
-          </button>
+
+          <nav class="ml-7 hidden items-center gap-7 text-sm lg:flex" aria-label="Main">
+            <div class="relative" id="services-wrap">
+              <button
+                id="services-btn"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                class={`flex items-center gap-1.5 ${onServices ? "font-semibold text-ink underline decoration-primary-500 decoration-2 underline-offset-8" : "font-medium text-body transition-colors duration-200 hover:text-ink"}`}
+              >
+                {nav.services}
+                <svg class="h-3.5 w-3.5 text-muted transition-transform duration-300" id="services-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+              </button>
+              <div id="services-menu" class="invisible absolute left-1/2 top-full z-50 w-[26rem] -translate-x-1/2 pt-3 opacity-0 transition-[opacity,transform] duration-300 [transform:translate(-50%,6px)]">
+                <div class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,25,23,0.12)]">
+                  {dict.services.items.map((s) => (
+                    <a href={pageUrl(locale, `/services/${s.slug}`)} class="group flex items-start gap-3 px-5 py-3.5 transition-colors duration-200 first:pt-4 last:pb-4 hover:bg-paper">
+                      <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-primary-50 text-primary-700 transition-colors duration-200 group-hover:bg-primary-100">
+                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20Z" /></svg>
+                      </span>
+                      <span>
+                        <span class="block text-sm font-semibold text-ink">{s.title}</span>
+                        <span class="mt-0.5 block text-[13px] leading-snug text-muted">{s.for}</span>
+                      </span>
+                    </a>
+                  ))}
+                  <a href={pageUrl(locale, "/services")} class="flex items-center justify-between border-t border-line bg-paper px-5 py-3 text-[13px] font-semibold text-primary-700 transition-colors duration-200 hover:bg-primary-50">
+                    {v2.nav.allServices}
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            {links.map((l) => (
+              <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={desktopLink(l.href === current)}>{l.label}</a>
+            ))}
+          </nav>
+
+          <div class="ml-auto flex items-center gap-2 sm:gap-3">
+            <div class="relative hidden lg:block">
+              <button
+                id="locale-btn"
+                type="button"
+                class="flex items-center gap-1.5 rounded-lg border border-line bg-white px-2.5 py-1.5 text-[13px] font-semibold text-body transition-colors duration-200 hover:bg-surface"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="Change language"
+              >
+                <svg class="h-3.5 w-3.5 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg>
+                {locales.find((l) => l.code === locale)?.label}
+                <svg class="h-3 w-3 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+              </button>
+              <div id="locale-menu" class="absolute right-0 top-full z-50 mt-2 hidden w-40 overflow-hidden rounded-xl border border-line bg-white py-1 shadow-[0_12px_32px_rgba(28,25,23,0.12)]">
+                {locales.map((l) => (
+                  <a
+                    href={pageUrl(l.code, slug)}
+                    class={l.code === locale
+                      ? "block bg-primary-50 px-3 py-2 text-sm font-semibold text-primary-700"
+                      : "block px-3 py-2 text-sm text-body transition-colors duration-200 hover:bg-surface hover:text-primary-700"}
+                  >{l.label}</a>
+                ))}
+              </div>
+            </div>
+            <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-medium text-body transition-colors duration-200 hover:text-ink lg:block">{nav.login}</a>
+            <a href={pageUrl(locale, "/order")} class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-[10px] bg-primary-500 px-4 py-2 text-sm font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-600 active:scale-[0.98]">
+              {nav.order}
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+            </a>
+            <button
+              id="menu-btn"
+              type="button"
+              class="rounded-lg border border-line bg-white p-2.5 text-ink transition-colors duration-200 hover:bg-surface lg:hidden"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+              aria-label="Menu"
+            >
+              <svg id="icon-open" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+              <svg id="icon-close" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+            </button>
+          </div>
         </div>
       </div>
-      </div>
-      <div id="mobile-menu" class="fixed inset-0 z-0 hidden overflow-y-auto bg-white lg:hidden">
+
+      <div id="mobile-menu" class="fixed inset-0 z-0 hidden overflow-y-auto bg-paper lg:hidden">
         <div class="flex min-h-full flex-col px-5 pb-8 pt-[68px] sm:px-8">
           <nav class="flex flex-col" aria-label="Mobile">
+            <a href={pageUrl(locale, "/services")} class={mobileLink(onServices)}>
+              <span class="flex items-baseline gap-3.5">
+                <span class="font-mono text-xs font-normal text-muted">01</span>
+                {nav.services}
+              </span>
+              <svg class="h-5 w-5 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+            </a>
             {links.map((l, i) => (
               <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={mobileLink(l.href === current)}>
                 <span class="flex items-baseline gap-3.5">
-                  <span class="font-mono text-xs font-normal text-muted">{String(i + 1).padStart(2, "0")}</span>
+                  <span class="font-mono text-xs font-normal text-muted">{String(i + 2).padStart(2, "0")}</span>
                   {l.label}
                 </span>
                 <svg class={`h-5 w-5 shrink-0 ${l.href === current ? "text-primary-500" : "text-muted"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
               </a>
             ))}
           </nav>
-          <a href={pageUrl(locale, "/order")} class="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-500 px-4 py-4 text-base font-semibold text-white">
+          <a href={pageUrl(locale, "/order")} class="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-500 px-4 py-4 text-base font-semibold text-white transition-colors duration-200 hover:bg-primary-600">
             {nav.order}
             <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+          </a>
+          <a href={waLink} target="_blank" rel="noopener" class="mt-3 flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-4 py-4 text-base font-semibold text-ink transition-colors duration-200 hover:bg-surface">
+            {dict.contact.whatsapp}
           </a>
           <a href="https://auth.kumbuild.com/login" class="mt-4 text-center text-[15px] font-medium text-body">{nav.login}</a>
           <div class="mt-auto pt-12">
@@ -159,6 +205,7 @@ const mobileLink = (active: boolean) =>
         </div>
       </div>
     </header>
+
     <script>
       const btn = document.getElementById("menu-btn");
       const menu = document.getElementById("mobile-menu");
@@ -173,12 +220,7 @@ const mobileLink = (active: boolean) =>
       }
       btn.addEventListener("click", () => setOpen(menu.classList.contains("hidden")));
       menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          setOpen(false);
-          setLocaleOpen(false);
-        }
-      });
+
       const localeBtn = document.getElementById("locale-btn");
       const localeMenu = document.getElementById("locale-menu");
       function setLocaleOpen(open) {
@@ -197,45 +239,184 @@ const mobileLink = (active: boolean) =>
           }
         });
       }
+
+      /* Services dropdown — opens on hover (desktop) and click, closes on
+         Escape or outside click. */
+      const sWrap = document.getElementById("services-wrap");
+      const sBtn = document.getElementById("services-btn");
+      const sMenu = document.getElementById("services-menu");
+      const sChevron = document.getElementById("services-chevron");
+      let sPinned = false;
+      function setServices(open) {
+        sMenu.classList.toggle("invisible", !open);
+        sMenu.classList.toggle("opacity-0", !open);
+        sMenu.style.transform = open ? "translate(-50%, 0)" : "translate(-50%, 6px)";
+        sChevron.style.transform = open ? "rotate(180deg)" : "";
+        sBtn.setAttribute("aria-expanded", String(open));
+        if (!open) sPinned = false;
+      }
+      if (sWrap) {
+        sWrap.addEventListener("mouseenter", () => setServices(true));
+        sWrap.addEventListener("mouseleave", () => { if (!sPinned) setServices(false); });
+        sBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          sPinned = sMenu.classList.contains("invisible");
+          setServices(sPinned);
+        });
+        document.addEventListener("click", (e) => {
+          if (!sMenu.classList.contains("invisible") && !sWrap.contains(e.target)) setServices(false);
+        });
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          setOpen(false);
+          setLocaleOpen(false);
+          setServices(false);
+        }
+      });
+
+      /* Header gains depth once the page is scrolled. */
+      const headerBar = document.getElementById("header-bar");
+      const onScrollHeader = () => {
+        const sc = window.scrollY > 8;
+        headerBar.style.boxShadow = sc ? "0 8px 24px rgba(28,25,23,0.07)" : "none";
+        headerBar.style.borderColor = sc ? "#ddd6c9" : "";
+      };
+      window.addEventListener("scroll", onScrollHeader, { passive: true });
+      onScrollHeader();
+
+      /* Scroll reveal — one observer for every [data-reveal] element. */
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              en.target.classList.add("is-in");
+              io.unobserve(en.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+      document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+
+      /* Back to top. */
+      const toTop = document.getElementById("to-top");
+      window.addEventListener("scroll", () => {
+        const show = window.scrollY > 700;
+        toTop.classList.toggle("opacity-0", !show);
+        toTop.classList.toggle("pointer-events-none", !show);
+        toTop.style.transform = show ? "translateY(0)" : "translateY(8px)";
+      }, { passive: true });
+      toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     </script>
 
     <main>
       <slot />
     </main>
 
-    <footer class="mt-16 border-t border-line bg-surface">
-      <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
+    <footer class="mt-20 border-t border-line bg-surface">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
           <div class="flex items-center gap-2 font-display font-semibold text-ink">
             <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="28" height="28" />
             <span>Kumbuild</span>
           </div>
-          <p class="mt-2 text-sm text-muted">{dict.footer.tagline}</p>
-          <p class="mt-2 text-xs text-muted">{dict.footer.draftNote}</p>
+          <p class="mt-3 max-w-xs text-sm leading-relaxed text-muted">{v2.footer.about}</p>
+          <p class="mt-3 text-xs text-faint">{dict.footer.draftNote}</p>
         </div>
         <div>
           <p class="font-display text-sm font-semibold text-ink">{dict.footer.services}</p>
-          <ul class="mt-2 space-y-1 text-sm text-muted">
+          <ul class="mt-3 space-y-2 text-sm text-muted">
             {dict.services.items.map((s) => (
-              <li><a href={pageUrl(locale, "/services")} class="hover:text-primary-700">{s.title}</a></li>
+              <li><a href={pageUrl(locale, `/services/${s.slug}`)} class="transition-colors duration-200 hover:text-primary-700">{s.title}</a></li>
             ))}
+            <li><a href={pageUrl(locale, "/pricing")} class="transition-colors duration-200 hover:text-primary-700">{nav.pricing}</a></li>
           </ul>
         </div>
         <div>
           <p class="font-display text-sm font-semibold text-ink">{dict.footer.company}</p>
-          <ul class="mt-2 space-y-1 text-sm text-muted">
-            <li><a href={pageUrl(locale, "/about")} class="hover:text-primary-700">{dict.about.title}</a></li>
-            <li><a href={pageUrl(locale, "/pricing")} class="hover:text-primary-700">{nav.pricing}</a></li>
-            <li><a href={pageUrl(locale, "/faq")} class="hover:text-primary-700">{nav.faq}</a></li>
-            <li><a href={pageUrl(locale, "/contact")} class="hover:text-primary-700">{nav.contact}</a></li>
-            <li><a href={pageUrl(locale, "/privacy")} class="hover:text-primary-700">{dict.privacy.title}</a></li>
-            <li><a href={pageUrl(locale, "/terms")} class="hover:text-primary-700">{dict.terms.title}</a></li>
+          <ul class="mt-3 space-y-2 text-sm text-muted">
+            <li><a href={pageUrl(locale, "/about")} class="transition-colors duration-200 hover:text-primary-700">{dict.about.title}</a></li>
+            <li><a href={pageUrl(locale, "/examples")} class="transition-colors duration-200 hover:text-primary-700">{v2.nav.work}</a></li>
+            <li><a href={pageUrl(locale, "/blog")} class="transition-colors duration-200 hover:text-primary-700">{v2.nav.blog}</a></li>
+            <li><a href={pageUrl(locale, "/how-it-works")} class="transition-colors duration-200 hover:text-primary-700">{nav.howItWorks}</a></li>
+            <li><a href={pageUrl(locale, "/faq")} class="transition-colors duration-200 hover:text-primary-700">{nav.faq}</a></li>
+            <li><a href={pageUrl(locale, "/contact")} class="transition-colors duration-200 hover:text-primary-700">{nav.contact}</a></li>
           </ul>
         </div>
+        <div>
+          <p class="font-display text-sm font-semibold text-ink">{v2.footer.start}</p>
+          <p class="mt-3 text-sm leading-relaxed text-muted">{v2.footer.startText}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <a href={pageUrl(locale, "/order")} class="inline-flex items-center gap-1.5 rounded-[10px] bg-primary-500 px-4 py-2 text-sm font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-600 active:scale-[0.98]">
+              {nav.order}
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+            </a>
+            <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 rounded-[10px] border border-line bg-white px-4 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-paper">{dict.contact.whatsapp}</a>
+          </div>
+          <p class="mt-4 font-mono text-xs text-faint">{dict.hero.note}</p>
+        </div>
       </div>
-      <div class="border-t border-line py-4 text-center text-xs text-muted">
-        © 2026 Kumbuild · {dict.footer.rights}
+      <div class="border-t border-line">
+        <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 text-xs text-muted sm:px-6">
+          <p>© 2026 Kumbuild · {dict.footer.rights}</p>
+          <p class="flex gap-4">
+            <a href={pageUrl(locale, "/privacy")} class="transition-colors duration-200 hover:text-primary-700">{dict.privacy.title}</a>
+            <a href={pageUrl(locale, "/terms")} class="transition-colors duration-200 hover:text-primary-700">{dict.terms.title}</a>
+            <a href={pageUrl(locale, "/refund")} class="transition-colors duration-200 hover:text-primary-700">{v2.nav.refund}</a>
+          </p>
+        </div>
       </div>
     </footer>
+
+    {/* Floating actions — WhatsApp (the way Indian customers actually
+        reach a business) and back-to-top once the page is long. */}
+    <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-2.5">
+      <button
+        id="to-top"
+        type="button"
+        aria-label={v2.ui.toTop}
+        class="pointer-events-none flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-body opacity-0 shadow-[0_8px_20px_rgba(28,25,23,0.12)] transition-[opacity,transform] duration-300 hover:text-ink"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6" /></svg>
+      </button>
+      <a
+        href={waLink}
+        target="_blank"
+        rel="noopener"
+        aria-label={dict.contact.whatsapp}
+        class="flex h-13 w-13 items-center gap-2 rounded-full bg-live px-4 py-3.5 text-white shadow-[0_10px_24px_rgba(31,157,97,0.35)] transition-[background-color,transform] duration-200 hover:bg-[#1a8a54] active:scale-[0.97] sm:px-5"
+      >
+        <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.028 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.893 9.884m8.413-18.297A11.83 11.83 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.16 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.87 11.87 0 0 0-3.462-8.413Z"/></svg>
+        <span class="hidden text-sm font-semibold sm:block">{dict.contact.whatsapp}</span>
+      </a>
+    </div>
+
+    <script>
+      import Lenis from "lenis";
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduce) {
+        const lenis = new Lenis({ duration: 1.15, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+        /* Anchor links ride the smooth scroll too. */
+        document.querySelectorAll('a[href^="#"]').forEach((a) => {
+          a.addEventListener("click", (e) => {
+            const id = a.getAttribute("href");
+            if (id.length > 1) {
+              const target = document.querySelector(id);
+              if (target) {
+                e.preventDefault();
+                lenis.scrollTo(target, { offset: -76 });
+              }
+            }
+          });
+        });
+      }
+    </script>
   </body>
 </html>

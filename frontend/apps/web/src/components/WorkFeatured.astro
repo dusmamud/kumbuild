@@ -1,0 +1,55 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; no?: string; }
+const { dict, locale, no } = Astro.props;
+const w = dict.v2.work;
+const featured = w.projects.slice(0, 3);
+---
+
+<section class="bg-paper">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <div data-reveal>
+      <SectionHead no={no} title={w.title} subtitle={w.subtitle} />
+    </div>
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      {featured.map((p, i) => (
+        <a
+          href={pageUrl(locale, `/work/${p.slug}`)}
+          data-reveal
+          style={`--reveal-delay:${i * 80}ms`}
+          class="group overflow-hidden rounded-2xl border border-line bg-white transition-[border-color,box-shadow] duration-300 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
+        >
+          <span class="block overflow-hidden">
+            <img
+              src={p.img}
+              alt={`${p.name} — ${p.type} in ${p.city}`}
+              width="1200"
+              height="800"
+              class="aspect-[3/2] w-full object-cover transition-transform duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              loading="lazy"
+            />
+          </span>
+          <span class="block p-5">
+            <span class="flex items-baseline justify-between gap-3">
+              <span class="font-display text-base font-semibold text-ink">{p.name}</span>
+              <span class="font-mono text-[11px] text-muted">{p.city}</span>
+            </span>
+            <span class="mt-1 block text-[13px] font-medium text-primary-700">{p.type} · {p.service}</span>
+            <span class="mt-2.5 block text-sm leading-relaxed text-body">{p.desc}</span>
+            <span class="mt-4 flex items-center gap-2 border-t border-dashed border-line pt-3.5 text-[13px] font-semibold text-ink">
+              <span class="h-1.5 w-1.5 rounded-full bg-live" aria-hidden="true"></span>
+              {p.result}
+            </span>
+          </span>
+        </a>
+      ))}
+    </div>
+    <div class="mt-8" data-reveal>
+      <a href={pageUrl(locale, "/examples")} class="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 transition-colors duration-200 hover:text-primary-800">
+        {dict.v2.ui.allWork}
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+      </a>
+    </div>
+  </div>
+</section>

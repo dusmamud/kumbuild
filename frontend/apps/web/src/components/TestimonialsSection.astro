@@ -1,0 +1,19 @@
+---
+import SectionHead from "./SectionHead.astro";
+import Testimonials from "./react/Testimonials";
+import type { Dictionary } from "../i18n/utils";
+interface Props { dict: Dictionary; no?: string; }
+const { dict, no } = Astro.props;
+const t = dict.v2.testimonials;
+---
+
+<section class="border-y border-line bg-surface">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <div data-reveal>
+      <SectionHead no={no} title={t.title} subtitle={t.subtitle} />
+    </div>
+    <div class="mt-10" data-reveal>
+      <Testimonials items={t.items} client:visible />
+    </div>
+  </div>
+</section>

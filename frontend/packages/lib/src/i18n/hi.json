@@ -1,1 +1,715 @@
-{"about":{"p1":"Kumbuild chhote businesses ke liye done-for-you website service hai. Dukaan, clinic, tuition centre, salon aur restaurant wale batayein unhe kya chahiye — aur hum unke liye website bana dete hain.","p2":"Aapko code seekhne, designer hire karne, ya hosting aur domain samajhne ki zaroorat nahi. Bas batayein kya banana hai, preview approve karein, aur live ho jayein.","title":"Kumbuild ke baare me"},"common":{"backHome":"Home par wapas","learnMore":"Aur jaanein"},"contact":{"email":"Email karein","note":"Support hours aur response time launch par bataye jayenge.","subtitle":"Order karne se pehle koi sawaal hai? Message karein — hum WhatsApp par reply karte hain.","title":"Sampark karein","whatsapp":"WhatsApp par chat karein"},"examples":{"comingSoon":"Jald aa raha hai — Phase 3","items":[{"desc":"Dukaan ke liye catalogue website — products, price aur WhatsApp order button.","title":"Shop demo"},{"desc":"Clinic ke liye booking website — services, timing aur appointment enquiry form.","title":"Clinic demo"},{"desc":"Tuition centre ke liye business website — courses, timing aur admission enquiry.","title":"Tuition demo"}],"subtitle":"Portfolio ke liye hum demo websites bana rahe hain — ek shop, ek clinic aur ek tuition centre.","title":"Example websites"},"faq":{"items":[{"a":"Kumbuild ek done-for-you website service hai. Aap batayein kya banana hai, aur hum aapke liye website bana dete hain. Aapko code seekhne ya kisi tool me design karne ki zaroorat nahi.","q":"Kumbuild kya hai?"},{"a":"Advance payment aur poora content milne ke baad 3–5 working days — preview link milne tak. Content late mile to time aage badhega.","q":"Meri website kitne din me ban jayegi?"},{"a":"Business ka naam, services aur price, WhatsApp number, address, timing aur real photos. Poori list order page par hai.","q":"Website banane ke liye mujhe kya dena hoga?"},{"a":"Starter ₹3,999, Business ₹7,999, Premium ₹14,999 (sab draft hain). Har saal renewal ₹1,999 (draft) hai.","q":"Website kitne ki banegi?"},{"a":"Order ke time 50% advance, baaki 50% approval ke baad, website live karne se pehle. Payment Razorpay se hoga — UPI, cards, netbanking aur wallets chalenge.","q":"Payment kaise karna hoga?"},{"a":"2 revision rounds free hain. Preview dekh ke changes batayein, hum dobara preview bhejenge. Uske baad extra charge lagega — amount abhi decide nahi hua.","q":"Website pasand na aaye to kya hoga?"},{"a":"WhatsApp ya Instagram DM par message karein, ya kumbuild.com/order par form bharein aur package choose karein. Koi account ya signup nahi chahiye — order confirm hone ke baad advance dein.","q":"Order kaise karun?"},{"a":"Login ki zaroorat nahi — order ka status, preview link aur live link hum aapko WhatsApp par bhejte hain. Stages ye hain: Received → In progress → Preview ready → Revision → Approved → Live.","q":"Order ka status kahan dekhu?"},{"a":"Kaam shuru hone se pehle cancel karein to poora advance refund hoga. Kaam shuru hone ke baad advance refund nahi hoga.","q":"Order cancel karun to refund milega?"}],"subtitle":"Order karne se pehle log aksar yehi poochhte hain.","title":"Aam sawaal-jawab"},"footer":{"company":"Company","draftNote":"Dikhayi gayi prices draft hain, payment se pehle confirm ki jayengi.","legal":"Legal","rights":"All rights reserved.","services":"Services","tagline":"Tell us what to build."},"hero":{"badge":"Chhote businesses ke liye done-for-you websites","ctaOrder":"Meri website order karein","ctaPricing":"Pricing dekhein","headlineA":"Aapke business ke liye ","headlineAccent":"professional website","headlineB":", 3–5 din me taiyaar.","note":"₹3,999 se shuru · 3–5 working days me delivery · 50% advance · 2 free revisions","subtitle":"Aapki dukaan, clinic, tuition centre, salon ya restaurant ke liye fast, mobile-first website banate hain — aapko bas batana hai kya chahiye. Na code, na design tools, na jhanjhat.","title":"Tell us what to build."},"home":{"audiences":[{"name":"Dukaan aur stores","need":"Aapke products, prices aur offers — customer phone par dekh kar WhatsApp par order kare"},{"name":"Clinic aur doctors","need":"Treatments, timings aur appointment enquiry — patient call karne se pehle sab jaan le"},{"name":"Tuition aur coaching","need":"Courses, batches aur fees — parents walk-in ki jagah WhatsApp par enquiry karein"},{"name":"Salon aur parlour","need":"Services, prices aur aapke kaam ki photos — booking seedha aapke WhatsApp par aaye"},{"name":"Restaurant aur cafe","need":"Photos ke saath menu — customer aane ya order karne se pehle dekh le kya milta hai"},{"name":"Instagram aur home sellers","need":"Bio ke liye ek link, jo followers ko WhatsApp enquiry me badal de"}],"examplesNote":"Preview designs — order karne se pehle dikhane ke liye ki dukaan, clinic aur salon ki website kaisi dikhti hai.","included":["Mobile-first design — zyadaatar customer phone par hi kholenge","Har page par WhatsApp button","Aapke address ke saath Google Maps","Contact / enquiry form","Aapka apna domain name, connected","SSL (https) — wahi taala jis par customer bharosa karta hai","Basic SEO — business ka naam, area aur services Google par","Live hone se pehle preview link"],"includedSubtitle":"Koi add-on list nahi, checkout par koi upsell nahi. Ye har package me hai, Starter me bhi.","includedTitle":"Har website ke saath ye sab milta hai","notItems":["Online payment checkout — order iski jagah aapke WhatsApp par aata hai","Live booking calendar — customer time mangta hai, aap confirm karte hain","Mobile app — aapki website har phone par pehle se chalti hai"],"notNote":"Baad me surprise dene se achha hai, abhi saaf keh dein.","notTitle":"Ye hum nahi karte","slip":{"business":"Sharma General Store","heading":"Website order","ref":"KB-1001","rows":[{"k":"Package","v":"Business — ₹7,999"},{"k":"Advance","v":"Shuru karne ke liye 50%"},{"k":"Preview","v":"3–5 working days me"},{"k":"Revisions","v":"2 rounds, free"}],"status":"Live"},"stats":[{"k":"working days me aapka preview","v":"3–5"},{"k":"shuru ki keemat, ek baar","v":"₹3,999"},{"k":"advance — baaki approval ke baad","v":"50%"}],"whoSubtitle":"Customer aapko Google, Instagram ya dukaan ke saamne se guzar kar dhundhe — website us pehli impression ko kaam ka banati hai.","whoTitle":"Aap jaise businesses ke liye bana hai"},"how":{"steps":[{"desc":"Order form bharein — business details, package, photos aur WhatsApp number.","title":"Batayein"},{"desc":"Razorpay se 50% advance dein — UPI, card, netbanking ya wallet.","title":"Advance"},{"desc":"Hum aapki website banate hain aur 3–5 working days me preview link bhejte hain.","title":"Preview"},{"desc":"Changes batayein — 2 revision rounds free hain. Pasand aaye to approve karein.","title":"Approve"},{"desc":"Baaki 50% dein aur aapki website aapke domain par live ho jayegi.","title":"Go live"}],"subtitle":"Paanch steps. Aap batayein, hum banate hain — aapko sirf dekhna aur approve karna hai.","title":"Kaise kaam karta hai"},"locale":"hi","name":"Hindi","nativeName":"हिन्दी","nav":{"contact":"Sampark","examples":"Examples","faq":"FAQ","home":"Home","howItWorks":"Kaise kaam karta hai","login":"Login","order":"Abhi order karein","pricing":"Pricing","services":"Services"},"order":{"businessName":"Business ka naam","businessType":"Business ka type","businessTypeOptions":["Shop","Clinic","Tuition / Coaching","Salon","Restaurant / Cafe","Other"],"contentLanguage":"Website ki language","message":"Apne business ke baare me batayein (1–2 lines)","name":"Aapka naam","note":"Is form me koi payment nahi li jati. Advance payment order confirm hone ke baad hogi.","package":"Package choose karein","phone":"Phone number","reference":"Order reference","required":"Zaroori","submit":"Order submit karein","subtitle":"Ye form bharein. Hum aapke package aur content confirm karne ke liye WhatsApp par sampark karenge.","successText":"Dhanyavaad! Hum aapke package aur content confirm karne ke liye jald hi WhatsApp par message karenge. Aapka reference neeche hai — please save kar lein.","successTitle":"Order mil gaya!","title":"Apni website order karein","whatsapp":"WhatsApp number"},"pricing":{"note":"Prices draft hain, payment se pehle confirm ki jayengi.","packages":[{"bestFor":"Chhoti dukaan ya Instagram page — ek page hi kaafi hai.","cta":"Starter choose karein","features":["1 page","Mobile responsive","WhatsApp button","Google Maps","Contact / enquiry form","Basic SEO","SSL (https)"],"name":"Starter","per":"one-time","price":"₹3,999","slug":"starter"},{"bestFor":"Clinic, tuition, salon — poori website chahiye.","cta":"Business choose karein","features":["5 pages tak","Starter ka sab kuch","Services + gallery","Apne business ke baare me","Mobile responsive","Basic SEO","SSL (https)"],"name":"Business","per":"one-time","price":"₹7,999","slug":"business"},{"bestFor":"Booking, WhatsApp order ya catalogue chahiye.","cta":"Premium choose karein","features":["Business ka sab kuch","Booking / appointment form","WhatsApp order button","Catalogue / menu list","Zaroorat ke hisaab se zyada pages","Basic SEO","SSL (https)"],"name":"Premium","per":"one-time","price":"₹14,999","slug":"premium"}],"renewal":{"desc":"Domain renewal, hosting, chhoti updates (phone, timing, ek-do lines) aur support.","per":"per year","price":"₹1,999","title":"Yearly renewal"},"subtitle":"One-time prices. Koi hidden charges nahi. Yearly renewal se domain, hosting aur chhoti updates chalti rehti hain.","terms":"Order par 50% advance · baaki 50% approval par, go-live se pehle · 2 free revision rounds · Payment Razorpay se (UPI, cards, netbanking, wallets).","title":"Simple pricing"},"privacy":{"intro":"Draft — poori privacy policy launch se pehle yahan hogi. Order form se mili aapki details sirf aapki website banane aur aapse order ke baare me sampark karne ke liye use hoti hain.","title":"Privacy policy"},"services":{"items":[{"desc":"Aapke business ki poori website — 1 se 5 pages: Home, Services, About, Gallery aur Contact.","for":"Shop, clinic, salon, gym, restaurant","slug":"business-website","title":"Business Website"},{"desc":"Ek page, ek hi kaam ke liye — Instagram ya Facebook bio link se aane wale visitor ko enquiry ke liye WhatsApp par bhejna.","for":"Instagram / Facebook sellers aur creators","slug":"landing-page","title":"Landing Page"},{"desc":"Services, timing aur appointment ya enquiry form. Customer time batata hai — aap confirm karte hain. (Live calendar nahi hai.)","for":"Clinic, salon, tuition aur coaching","slug":"booking-website","title":"Booking / Enquiry Website"},{"desc":"Aapke products ya menu — photo, naam aur price — aur WhatsApp order button. (Payment checkout wala store nahi hai.)","for":"Shop, restaurant, cafe, boutique, home bakers","slug":"catalogue-website","title":"Catalogue / Menu Website"}],"subtitle":"Chaar services. Har website mobile-first, fast hai, aur usme WhatsApp button, Google Maps, contact form, basic SEO aur SSL milta hai.","title":"Hum aapke liye kya banate hain"},"terms":{"intro":"Draft — poori terms launch se pehle publish hongi. Short me: 50% advance, 2 free revision rounds, aur jo content aap denge wo aapka hona chahiye.","title":"Terms of service"},"trust":["Mobile-first design","Fast loading","WhatsApp button","Google Maps included"]}
+{
+  "about": {
+    "p1": "Kumbuild chhote businesses ke liye done-for-you website service hai. Dukaan, clinic, tuition centre, salon aur restaurant wale batayein unhe kya chahiye — aur hum unke liye website bana dete hain.",
+    "p2": "Aapko code seekhne, designer hire karne, ya hosting aur domain samajhne ki zaroorat nahi. Bas batayein kya banana hai, preview approve karein, aur live ho jayein.",
+    "title": "Kumbuild ke baare me"
+  },
+  "common": {
+    "backHome": "Home par wapas",
+    "learnMore": "Aur jaanein"
+  },
+  "contact": {
+    "email": "Email karein",
+    "note": "Support hours aur response time launch par bataye jayenge.",
+    "subtitle": "Order karne se pehle koi sawaal hai? Message karein — hum WhatsApp par reply karte hain.",
+    "title": "Sampark karein",
+    "whatsapp": "WhatsApp par chat karein"
+  },
+  "examples": {
+    "comingSoon": "Jald aa raha hai — Phase 3",
+    "items": [
+      {
+        "desc": "Dukaan ke liye catalogue website — products, price aur WhatsApp order button.",
+        "title": "Shop demo"
+      },
+      {
+        "desc": "Clinic ke liye booking website — services, timing aur appointment enquiry form.",
+        "title": "Clinic demo"
+      },
+      {
+        "desc": "Tuition centre ke liye business website — courses, timing aur admission enquiry.",
+        "title": "Tuition demo"
+      }
+    ],
+    "subtitle": "Portfolio ke liye hum demo websites bana rahe hain — ek shop, ek clinic aur ek tuition centre.",
+    "title": "Example websites"
+  },
+  "faq": {
+    "items": [
+      {
+        "a": "Kumbuild ek done-for-you website service hai. Aap batayein kya banana hai, aur hum aapke liye website bana dete hain. Aapko code seekhne ya kisi tool me design karne ki zaroorat nahi.",
+        "q": "Kumbuild kya hai?"
+      },
+      {
+        "a": "Advance payment aur poora content milne ke baad 3–5 working days — preview link milne tak. Content late mile to time aage badhega.",
+        "q": "Meri website kitne din me ban jayegi?"
+      },
+      {
+        "a": "Business ka naam, services aur price, WhatsApp number, address, timing aur real photos. Poori list order page par hai.",
+        "q": "Website banane ke liye mujhe kya dena hoga?"
+      },
+      {
+        "a": "Starter ₹3,999, Business ₹7,999, Premium ₹14,999 (sab draft hain). Har saal renewal ₹1,999 (draft) hai.",
+        "q": "Website kitne ki banegi?"
+      },
+      {
+        "a": "Order ke time 50% advance, baaki 50% approval ke baad, website live karne se pehle. Payment Razorpay se hoga — UPI, cards, netbanking aur wallets chalenge.",
+        "q": "Payment kaise karna hoga?"
+      },
+      {
+        "a": "2 revision rounds free hain. Preview dekh ke changes batayein, hum dobara preview bhejenge. Uske baad extra charge lagega — amount abhi decide nahi hua.",
+        "q": "Website pasand na aaye to kya hoga?"
+      },
+      {
+        "a": "WhatsApp ya Instagram DM par message karein, ya kumbuild.com/order par form bharein aur package choose karein. Koi account ya signup nahi chahiye — order confirm hone ke baad advance dein.",
+        "q": "Order kaise karun?"
+      },
+      {
+        "a": "Login ki zaroorat nahi — order ka status, preview link aur live link hum aapko WhatsApp par bhejte hain. Stages ye hain: Received → In progress → Preview ready → Revision → Approved → Live.",
+        "q": "Order ka status kahan dekhu?"
+      },
+      {
+        "a": "Kaam shuru hone se pehle cancel karein to poora advance refund hoga. Kaam shuru hone ke baad advance refund nahi hoga.",
+        "q": "Order cancel karun to refund milega?"
+      }
+    ],
+    "subtitle": "Order karne se pehle log aksar yehi poochhte hain.",
+    "title": "Aam sawaal-jawab"
+  },
+  "footer": {
+    "company": "Company",
+    "draftNote": "Dikhayi gayi prices draft hain, payment se pehle confirm ki jayengi.",
+    "legal": "Legal",
+    "rights": "All rights reserved.",
+    "services": "Services",
+    "tagline": "Tell us what to build."
+  },
+  "hero": {
+    "badge": "Chhote businesses ke liye done-for-you websites",
+    "ctaOrder": "Meri website order karein",
+    "ctaPricing": "Pricing dekhein",
+    "headlineA": "Aapke business ke liye ",
+    "headlineAccent": "professional website",
+    "headlineB": ", 3–5 din me taiyaar.",
+    "note": "₹3,999 se shuru · 3–5 working days me delivery · 50% advance · 2 free revisions",
+    "subtitle": "Aapki dukaan, clinic, tuition centre, salon ya restaurant ke liye fast, mobile-first website banate hain — aapko bas batana hai kya chahiye. Na code, na design tools, na jhanjhat.",
+    "title": "Tell us what to build."
+  },
+  "home": {
+    "audiences": [
+      {
+        "name": "Dukaan aur stores",
+        "need": "Aapke products, prices aur offers — customer phone par dekh kar WhatsApp par order kare"
+      },
+      {
+        "name": "Clinic aur doctors",
+        "need": "Treatments, timings aur appointment enquiry — patient call karne se pehle sab jaan le"
+      },
+      {
+        "name": "Tuition aur coaching",
+        "need": "Courses, batches aur fees — parents walk-in ki jagah WhatsApp par enquiry karein"
+      },
+      {
+        "name": "Salon aur parlour",
+        "need": "Services, prices aur aapke kaam ki photos — booking seedha aapke WhatsApp par aaye"
+      },
+      {
+        "name": "Restaurant aur cafe",
+        "need": "Photos ke saath menu — customer aane ya order karne se pehle dekh le kya milta hai"
+      },
+      {
+        "name": "Instagram aur home sellers",
+        "need": "Bio ke liye ek link, jo followers ko WhatsApp enquiry me badal de"
+      }
+    ],
+    "examplesNote": "Preview designs — order karne se pehle dikhane ke liye ki dukaan, clinic aur salon ki website kaisi dikhti hai.",
+    "included": [
+      "Mobile-first design — zyadaatar customer phone par hi kholenge",
+      "Har page par WhatsApp button",
+      "Aapke address ke saath Google Maps",
+      "Contact / enquiry form",
+      "Aapka apna domain name, connected",
+      "SSL (https) — wahi taala jis par customer bharosa karta hai",
+      "Basic SEO — business ka naam, area aur services Google par",
+      "Live hone se pehle preview link"
+    ],
+    "includedSubtitle": "Koi add-on list nahi, checkout par koi upsell nahi. Ye har package me hai, Starter me bhi.",
+    "includedTitle": "Har website ke saath ye sab milta hai",
+    "notItems": [
+      "Online payment checkout — order iski jagah aapke WhatsApp par aata hai",
+      "Live booking calendar — customer time mangta hai, aap confirm karte hain",
+      "Mobile app — aapki website har phone par pehle se chalti hai"
+    ],
+    "notNote": "Baad me surprise dene se achha hai, abhi saaf keh dein.",
+    "notTitle": "Ye hum nahi karte",
+    "slip": {
+      "business": "Sharma General Store",
+      "heading": "Website order",
+      "ref": "KB-1001",
+      "rows": [
+        {
+          "k": "Package",
+          "v": "Business — ₹7,999"
+        },
+        {
+          "k": "Advance",
+          "v": "Shuru karne ke liye 50%"
+        },
+        {
+          "k": "Preview",
+          "v": "3–5 working days me"
+        },
+        {
+          "k": "Revisions",
+          "v": "2 rounds, free"
+        }
+      ],
+      "status": "Live"
+    },
+    "stats": [
+      {
+        "k": "working days me aapka preview",
+        "v": "3–5"
+      },
+      {
+        "k": "shuru ki keemat, ek baar",
+        "v": "₹3,999"
+      },
+      {
+        "k": "advance — baaki approval ke baad",
+        "v": "50%"
+      }
+    ],
+    "whoSubtitle": "Customer aapko Google, Instagram ya dukaan ke saamne se guzar kar dhundhe — website us pehli impression ko kaam ka banati hai.",
+    "whoTitle": "Aap jaise businesses ke liye bana hai"
+  },
+  "how": {
+    "steps": [
+      {
+        "desc": "Order form bharein — business details, package, photos aur WhatsApp number.",
+        "title": "Batayein"
+      },
+      {
+        "desc": "Razorpay se 50% advance dein — UPI, card, netbanking ya wallet.",
+        "title": "Advance"
+      },
+      {
+        "desc": "Hum aapki website banate hain aur 3–5 working days me preview link bhejte hain.",
+        "title": "Preview"
+      },
+      {
+        "desc": "Changes batayein — 2 revision rounds free hain. Pasand aaye to approve karein.",
+        "title": "Approve"
+      },
+      {
+        "desc": "Baaki 50% dein aur aapki website aapke domain par live ho jayegi.",
+        "title": "Go live"
+      }
+    ],
+    "subtitle": "Paanch steps. Aap batayein, hum banate hain — aapko sirf dekhna aur approve karna hai.",
+    "title": "Kaise kaam karta hai"
+  },
+  "locale": "hi",
+  "name": "Hindi",
+  "nativeName": "हिन्दी",
+  "nav": {
+    "contact": "Sampark",
+    "examples": "Examples",
+    "faq": "FAQ",
+    "home": "Home",
+    "howItWorks": "Kaise kaam karta hai",
+    "login": "Login",
+    "order": "Abhi order karein",
+    "pricing": "Pricing",
+    "services": "Services"
+  },
+  "order": {
+    "businessName": "Business ka naam",
+    "businessType": "Business ka type",
+    "businessTypeOptions": [
+      "Shop",
+      "Clinic",
+      "Tuition / Coaching",
+      "Salon",
+      "Restaurant / Cafe",
+      "Other"
+    ],
+    "contentLanguage": "Website ki language",
+    "message": "Apne business ke baare me batayein (1–2 lines)",
+    "name": "Aapka naam",
+    "note": "Is form me koi payment nahi li jati. Advance payment order confirm hone ke baad hogi.",
+    "package": "Package choose karein",
+    "phone": "Phone number",
+    "reference": "Order reference",
+    "required": "Zaroori",
+    "submit": "Order submit karein",
+    "subtitle": "Ye form bharein. Hum aapke package aur content confirm karne ke liye WhatsApp par sampark karenge.",
+    "successText": "Dhanyavaad! Hum aapke package aur content confirm karne ke liye jald hi WhatsApp par message karenge. Aapka reference neeche hai — please save kar lein.",
+    "successTitle": "Order mil gaya!",
+    "title": "Apni website order karein",
+    "whatsapp": "WhatsApp number"
+  },
+  "pricing": {
+    "note": "Prices draft hain, payment se pehle confirm ki jayengi.",
+    "packages": [
+      {
+        "bestFor": "Chhoti dukaan ya Instagram page — ek page hi kaafi hai.",
+        "cta": "Starter choose karein",
+        "features": [
+          "1 page",
+          "Mobile responsive",
+          "WhatsApp button",
+          "Google Maps",
+          "Contact / enquiry form",
+          "Basic SEO",
+          "SSL (https)"
+        ],
+        "name": "Starter",
+        "per": "one-time",
+        "price": "₹3,999",
+        "slug": "starter"
+      },
+      {
+        "bestFor": "Clinic, tuition, salon — poori website chahiye.",
+        "cta": "Business choose karein",
+        "features": [
+          "5 pages tak",
+          "Starter ka sab kuch",
+          "Services + gallery",
+          "Apne business ke baare me",
+          "Mobile responsive",
+          "Basic SEO",
+          "SSL (https)"
+        ],
+        "name": "Business",
+        "per": "one-time",
+        "price": "₹7,999",
+        "slug": "business"
+      },
+      {
+        "bestFor": "Booking, WhatsApp order ya catalogue chahiye.",
+        "cta": "Premium choose karein",
+        "features": [
+          "Business ka sab kuch",
+          "Booking / appointment form",
+          "WhatsApp order button",
+          "Catalogue / menu list",
+          "Zaroorat ke hisaab se zyada pages",
+          "Basic SEO",
+          "SSL (https)"
+        ],
+        "name": "Premium",
+        "per": "one-time",
+        "price": "₹14,999",
+        "slug": "premium"
+      }
+    ],
+    "renewal": {
+      "desc": "Domain renewal, hosting, chhoti updates (phone, timing, ek-do lines) aur support.",
+      "per": "per year",
+      "price": "₹1,999",
+      "title": "Yearly renewal"
+    },
+    "subtitle": "One-time prices. Koi hidden charges nahi. Yearly renewal se domain, hosting aur chhoti updates chalti rehti hain.",
+    "terms": "Order par 50% advance · baaki 50% approval par, go-live se pehle · 2 free revision rounds · Payment Razorpay se (UPI, cards, netbanking, wallets).",
+    "title": "Simple pricing"
+  },
+  "privacy": {
+    "intro": "Draft — poori privacy policy launch se pehle yahan hogi. Order form se mili aapki details sirf aapki website banane aur aapse order ke baare me sampark karne ke liye use hoti hain.",
+    "title": "Privacy policy"
+  },
+  "services": {
+    "items": [
+      {
+        "desc": "Aapke business ki poori website — 1 se 5 pages: Home, Services, About, Gallery aur Contact.",
+        "for": "Shop, clinic, salon, gym, restaurant",
+        "slug": "business-website",
+        "title": "Business Website"
+      },
+      {
+        "desc": "Ek page, ek hi kaam ke liye — Instagram ya Facebook bio link se aane wale visitor ko enquiry ke liye WhatsApp par bhejna.",
+        "for": "Instagram / Facebook sellers aur creators",
+        "slug": "landing-page",
+        "title": "Landing Page"
+      },
+      {
+        "desc": "Services, timing aur appointment ya enquiry form. Customer time batata hai — aap confirm karte hain. (Live calendar nahi hai.)",
+        "for": "Clinic, salon, tuition aur coaching",
+        "slug": "booking-website",
+        "title": "Booking / Enquiry Website"
+      },
+      {
+        "desc": "Aapke products ya menu — photo, naam aur price — aur WhatsApp order button. (Payment checkout wala store nahi hai.)",
+        "for": "Shop, restaurant, cafe, boutique, home bakers",
+        "slug": "catalogue-website",
+        "title": "Catalogue / Menu Website"
+      }
+    ],
+    "subtitle": "Chaar services. Har website mobile-first, fast hai, aur usme WhatsApp button, Google Maps, contact form, basic SEO aur SSL milta hai.",
+    "title": "Hum aapke liye kya banate hain"
+  },
+  "terms": {
+    "intro": "Draft — poori terms launch se pehle publish hongi. Short me: 50% advance, 2 free revision rounds, aur jo content aap denge wo aapka hona chahiye.",
+    "title": "Terms of service"
+  },
+  "trust": [
+    "Mobile-first design",
+    "Fast loading",
+    "WhatsApp button",
+    "Google Maps included"
+  ],
+  "v2": {
+    "nav": {
+      "work": "हमारा काम",
+      "blog": "ब्लॉग",
+      "allServices": "सभी सेवाएँ देखें",
+      "refund": "रिफंड नीति"
+    },
+    "contact": {
+      "waNumber": "919876543210",
+      "waText": "नमस्ते Kumbuild, मुझे अपने व्यवसाय के लिए वेबसाइट चाहिए।",
+      "email": "hello@kumbuild.com",
+      "submit": "पूछताछ भेजें"
+    },
+    "ui": {
+      "toTop": "ऊपर जाएँ",
+      "readMore": "कहानी पढ़ें",
+      "viewCase": "केस स्टडी देखें",
+      "allWork": "सारा काम देखें",
+      "minRead": "मिनट में पढ़ें",
+      "from": "सिर्फ",
+      "oneTime": "एक बार",
+      "popular": "सबसे लोकप्रिय",
+      "included": "शामिल है",
+      "perYear": "/वर्ष"
+    },
+    "footer": {
+      "about": "भारतीय छोटे व्यवसायों के लिए तैयारशुदा वेबसाइटें। आप बताइए क्या बनाना है — हम डिज़ाइन, लेखन और लॉन्च करते हैं, फिर उसे चलाते भी रहते हैं।",
+      "start": "अपनी वेबसाइट शुरू करें",
+      "startText": "आज ही अपने व्यवसाय के बारे में बताइए। आपकी साइट 3–5 कार्यदिवसों में लाइव हो सकती है।"
+    },
+    "marquee": {
+      "label": "हर तरह के व्यवसाय के लिए वेबसाइट",
+      "items": [
+        "किराना दुकानें",
+        "सैलून और स्पा",
+        "क्लीनिक",
+        "ट्यूशन सेंटर",
+        "बेकरी और कैफ़े",
+        "बुटीक",
+        "जिम और योगा",
+        "रेस्तरां",
+        "इलेक्ट्रीशियन",
+        "इंटीरियर डिज़ाइनर",
+        "ट्रैवल एजेंट",
+        "होम बेकर"
+      ]
+    },
+    "homeV2": {
+      "bandKicker": "एक ऑर्डर, सब कुछ संभाला हुआ",
+      "bandTitle": "आप दुकान चलाइए। वेबसाइट हम चलाएँगे।",
+      "bandText": "डिज़ाइन, लेखन, फ़ोटो, होस्टिंग, डोमेन, अपडेट — ज़्यादातर मालिकों के पास इनमें से किसी के लिए समय नहीं होता, इसलिए सब कुछ हमारे पास रहता है। आप WhatsApp पर पेज अप्रूव कीजिए और अपने ग्राहकों पर ध्यान दीजिए।",
+      "bandPoints": [
+        "बात करने के लिए एक इंसान, सीखने के लिए कोई डैशबोर्ड नहीं",
+        "केयर प्लान पर छोटे बदलाव हम करके देते हैं",
+        "आपकी साइट तेज़, सुरक्षित और ऑनलाइन रहती है"
+      ],
+      "ctaTitle": "आपके ग्राहक खोज रहे हैं। वही परिणाम बनिए जो उन्हें मिले।",
+      "ctaText": "आज ऑर्डर कीजिए और आपकी वेबसाइट सप्ताह खत्म होने से पहले लाइव हो सकती है — हमारे द्वारा बनाई, लिखी और लॉन्च की गई।"
+    },
+    "servicesV2": {
+      "detailIncludes": "इस वेबसाइट में क्या शामिल है",
+      "detailFor": "किसके लिए सबसे अच्छा",
+      "detailCtaTitle": "इसी वेबसाइट से शुरू करें",
+      "detailCtaText": "दो मिनट में ऑर्डर कीजिए। किसी भी भुगतान से पहले हम WhatsApp पर सब कुछ कन्फर्म करते हैं।",
+      "pages": {
+        "business-website": {
+          "h1": "आपके व्यवसाय के लिए एक संपूर्ण वेबसाइट",
+          "intro": "ग्राहक को आप पर भरोसा करने और आप तक पहुँचने के लिए जो कुछ चाहिए — आपकी सेवाएँ, आपकी कहानी, आपकी फ़ोटो और कॉल या मैसेज के लिए एक टैप। यही वेबसाइट ज़्यादातर दुकानों, क्लीनिकों और स्टूडियो को शुरू करनी चाहिए।",
+          "features": [
+            "होम, सेवाएँ, परिचय, गैलरी और संपर्क पेज",
+            "हर पेज पर क्लिक-टू-कॉल और WhatsApp बटन",
+            "आपके सटीक स्थान के साथ Google Maps",
+            "आपकी फ़ोटो, कीमतें और समय, ठीक से लिखा हुआ",
+            "बुनियादी लोकल SEO के साथ Google पर दिखती है",
+            "हर फ़ोन पर तेज़ चलती है, आपके ग्राहकों की भाषा में"
+          ]
+        },
+        "landing-page": {
+          "h1": "एक पेज जो फ़ॉलोअर्स को पूछताछ में बदले",
+          "intro": "आपके Instagram या Facebook बायो लिंक के लिए बना। एक पेज, एक काम: विज़िटर आए, आपका ऑफ़र समझे, और WhatsApp पर मैसेज करे।",
+          "features": [
+            "एक ऑफ़र या कैंपेन के लिए एक केंद्रित पेज",
+            "स्क्रीन पर रहने वाला WhatsApp पूछताछ बटन",
+            "आपकी बेहतरीन फ़ोटो और ग्राहक समीक्षाएँ सबसे आगे",
+            "बिक्री के लिए लिखा ऑफ़र, कीमत और अंतिम तिथि",
+            "सोशल ऐप्स से तुरंत लोड होता है",
+            "ऑफ़र बदलने पर आसानी से बदलता है"
+          ]
+        },
+        "booking-website": {
+          "h1": "अपॉइंटमेंट और पूछताछ, बिना फ़ोन की भागदौड़ के",
+          "intro": "आपकी सेवाएँ और समय एक साफ़ पेज पर, एक फ़ॉर्म के साथ जो पसंदीदा समय पूछता है। आप WhatsApp पर कन्फर्म कीजिए — काम के घंटों में अब कॉल नहीं छूटेंगी।",
+          "features": [
+            "कीमतों और अवधि के साथ सेवाएँ",
+            "पसंदीदा समय के साथ अपॉइंटमेंट और पूछताछ फ़ॉर्म",
+            "पूछताछ आपको WhatsApp और ईमेल पर मिलती है",
+            "समय, छुट्टियाँ और स्थान हमेशा ताज़ा रहते हैं",
+            "ज़रूरत हो तो डॉक्टर, शिक्षक या स्टाइलिस्ट की प्रोफ़ाइल",
+            "साफ़ नीतियों वाला पेज — रद्दीकरण, अग्रिम, समय"
+          ]
+        },
+        "catalogue-website": {
+          "h1": "आपके उत्पाद और मेनू, WhatsApp पर ऑर्डर के लिए तैयार",
+          "intro": "फ़ोटो और कीमतों के साथ आपकी पूरी रेंज, इस तरह व्यवस्थित कि ग्राहक घर बैठे देखें और WhatsApp पर ऑर्डर करें। निजी स्पर्श आपका रहता है; दिखाने का काम वेबसाइट करती है।",
+          "features": [
+            "फ़ोटो, नाम और कीमत के साथ उत्पाद या मेनू आइटम",
+            "ग्राहक जल्दी देख सकें ऐसी श्रेणियाँ",
+            "हर आइटम पर WhatsApp ऑर्डर बटन",
+            "केयर प्लान पर नए आइटम हम जोड़ देते हैं",
+            "रोज़ के स्पेशल या मौसमी सेक्शन",
+            "किसी ऑर्डर पर कोई कमीशन नहीं — यह आपकी दुकान है"
+          ]
+        }
+      }
+    },
+    "work": {
+      "title": "हाल का काम",
+      "subtitle": "असली तरह के व्यवसाय, असली वेबसाइटें। ये नमूना प्रोजेक्ट हैं जिनके विवरण प्लेसहोल्डर हैं — आपकी वेबसाइट को भी यही देखभाल मिलेगी।",
+      "projects": [
+        {
+          "slug": "crumbs-and-craft-bakery",
+          "name": "Crumbs & Craft",
+          "type": "बेकरी और कैफ़े",
+          "city": "पुणे",
+          "service": "कैटलॉग / मेनू वेबसाइट",
+          "img": "/work/work-bakery.webp",
+          "result": "वीकेंड केक ऑर्डर अब WhatsApp से शुरू होते हैं",
+          "desc": "एक मोहल्ले की बेकरी के लिए गर्मजोशी भरी कैटलॉग साइट — फ़ोटो और कीमतों के साथ पूरा मेनू, और हर केक पर WhatsApp ऑर्डर बटन।",
+          "story": "मालकिन केक ऑर्डर उन कॉलों पर लेती थीं जो सुबह की भीड़ में छूट जाती थीं। हमने पूरे मेनू को साफ़ कीमतों के साथ ऑनलाइन डाल दिया, ताकि ग्राहक अब घर से देखकर तैयार ऑर्डर मैसेज करें।",
+          "deliverables": [
+            "40+ आइटम के साथ मेनू कैटलॉग",
+            "हर आइटम पर WhatsApp ऑर्डरिंग",
+            "कस्टम केक पूछताछ फ़ॉर्म",
+            "Google Maps और समय"
+          ]
+        },
+        {
+          "slug": "glow-and-co-salon",
+          "name": "Glow & Co.",
+          "type": "सैलून और स्पा",
+          "city": "बेंगलुरु",
+          "service": "बुकिंग / पूछताछ वेबसाइट",
+          "img": "/work/work-salon.webp",
+          "result": "कुर्सियाँ व्यस्त रहती हैं और अपॉइंटमेंट आते रहते हैं",
+          "desc": "एक यूनिसेक्स सैलून के लिए बुकिंग वेबसाइट — कीमतों और अवधि के साथ सेवाएँ, स्टाइलिस्ट प्रोफ़ाइल, और WhatsApp पर आने वाला अपॉइंटमेंट फ़ॉर्म।",
+          "story": "सैलून का फ़ोन सबसे ज़्यादा तब बजता था जब हर स्टाइलिस्ट के पास ग्राहक बैठा हो। नई साइट कीमतें और समय खुद बता देती है, और अपॉइंटमेंट अनुरोध साफ़-सुथरे WhatsApp मैसेज के रूप में आते हैं जिन्हें मालिक ग्राहकों के बीच कन्फर्म कर देते हैं।",
+          "deliverables": [
+            "कीमतों और अवधि के साथ सेवाएँ",
+            "अपॉइंटमेंट अनुरोध फ़ॉर्म",
+            "स्टाइलिस्ट प्रोफ़ाइल",
+            "महीने के ऑफ़र का सेक्शन"
+          ]
+        },
+        {
+          "slug": "thread-and-thistle-boutique",
+          "name": "Thread & Thistle",
+          "type": "कपड़ों का बुटीक",
+          "city": "जयपुर",
+          "service": "बिज़नेस वेबसाइट",
+          "img": "/work/work-boutique.webp",
+          "result": "Instagram फ़ॉलोअर्स को आखिरकार जाने की जगह मिली",
+          "desc": "एक बुटीक के लिए बिज़नेस वेबसाइट जो सिर्फ़ Instagram से बिकता था — कलेक्शन, दुकान के पीछे की कहानी, और लोगों को दरवाज़े तक लाने वाले रास्ते।",
+          "story": "फ़ॉलोअर्स को रील पसंद थीं लेकिन कीमतें, समय या दुकान खुद नहीं मिलती थी। वेबसाइट बुटीक को एक स्थायी घर देती है: देखने के लिए कलेक्शन, मालकिन की कहानी, और पार्किंग व लैंडमार्क विवरण के साथ हमसे-मिलें सेक्शन।",
+          "deliverables": [
+            "कलेक्शन गैलरी",
+            "परिचय और कहानी पेज",
+            "Maps और लैंडमार्क के साथ हमसे मिलें",
+            "Instagram फ़ीड लिंक सेक्शन"
+          ]
+        },
+        {
+          "slug": "bright-minds-tuition",
+          "name": "Bright Minds",
+          "type": "ट्यूशन सेंटर",
+          "city": "लखनऊ",
+          "service": "बिज़नेस वेबसाइट",
+          "img": "/work/work-tuition.webp",
+          "result": "पहले महीने में दाख़िला पूछताछ दोगुनी",
+          "desc": "एक ट्यूशन सेंटर के लिए साफ़, माता-पिता के अनुकूल वेबसाइट — कक्षा अनुसार कोर्स, बैच समय, परिणाम, और दाख़िला पूछताछ फ़ॉर्म।",
+          "story": "माता-पिता हर कॉल पर वही पाँच सवाल पूछते थे। साइट उन्हें पहले ही जवाब दे देती है — कक्षाएँ, बैच, फ़ीस का तरीका, परिणाम — इसलिए अब कॉल उन माता-पिता से आती हैं जो दाख़िले के लिए तैयार हैं।",
+          "deliverables": [
+            "कक्षा और विषय अनुसार कोर्स",
+            "बैच समय तालिका",
+            "परिणाम और टॉपर सेक्शन",
+            "दाख़िला पूछताछ फ़ॉर्म"
+          ]
+        }
+      ],
+      "caseLabels": {
+        "overview": "प्रोजेक्ट",
+        "story": "कहानी",
+        "deliverables": "हमने क्या बनाया",
+        "service": "सेवा",
+        "city": "शहर",
+        "result": "परिणाम"
+      }
+    },
+    "testimonials": {
+      "title": "वे मालिक जिन्होंने वेबसाइट की चिंता छोड़ दी",
+      "subtitle": "हमारे ग्राहकों के शब्दों में नमूना समीक्षाएँ — लॉन्च तक नाम और विवरण प्लेसहोल्डर हैं।",
+      "items": [
+        {
+          "name": "रमेश शर्मा",
+          "business": "शर्मा जनरल स्टोर",
+          "city": "इंदौर",
+          "stars": 5,
+          "text": "मैंने बस WhatsApp पर अपनी दुकान की फ़ोटो भेजीं। चार दिन बाद मेरी वेबसाइट लाइव थी और ग्राहक हमें Google पर खोजने लगे। मैंने एक बार भी कंप्यूटर नहीं छुआ।"
+        },
+        {
+          "name": "डॉ. अनीता वर्मा",
+          "business": "वर्मा डेंटल केयर",
+          "city": "पटना",
+          "stars": 5,
+          "text": "मरीज़ अब कॉल करने से पहले हमारे समय और सेवाएँ देख लेते हैं। सिर्फ़ अपॉइंटमेंट फ़ॉर्म से मेरी रिसेप्शनिस्ट का रोज़ एक घंटा बचता है।"
+        },
+        {
+          "name": "प्रिया नायर",
+          "business": "Glow & Co. सैलून",
+          "city": "बेंगलुरु",
+          "stars": 5,
+          "text": "यह बिल्कुल हमारी जैसी लगती है — हमारे रंग, हमारी फ़ोटो, हमारी कीमतें। पिछले हफ़्ते दो ग्राहकों ने कहा कि उन्होंने हमें इसलिए चुना क्योंकि वेबसाइट ठीक-ठाक लगी।"
+        },
+        {
+          "name": "मोहम्मद फ़ैज़",
+          "business": "फ़ैज़ इलेक्ट्रॉनिक्स",
+          "city": "हैदराबाद",
+          "stars": 5,
+          "text": "ईमानदार कीमत, कोई अपसेल कॉल नहीं, और जब मुझे कीमत बदलनी होती है तो मैं मैसेज करता हूँ और उसी दिन हो जाता है। यही पूरी समीक्षा है।"
+        },
+        {
+          "name": "सना शेख़",
+          "business": "Sana's Home Bakes",
+          "city": "मुंबई",
+          "stars": 5,
+          "text": "मेरा मेनू ऑनलाइन है और हर केक पर ऑर्डर बटन है। वीकेंड ऑर्डर तब आते हैं जब मैं बेक कर रही होती हूँ, फ़ोन पर नहीं।"
+        }
+      ]
+    },
+    "aboutV2": {
+      "stats": [
+        {
+          "value": "3–5",
+          "label": "लॉन्च तक कार्यदिवस"
+        },
+        {
+          "value": "3",
+          "label": "भाषाएँ जिनमें आपकी साइट बोल सकती है"
+        },
+        {
+          "value": "100%",
+          "label": "तैयारशुदा — डिज़ाइन से लॉन्च तक"
+        },
+        {
+          "value": "1",
+          "label": "हम तक पहुँचने के लिए WhatsApp मैसेज"
+        }
+      ],
+      "valuesTitle": "हम कैसे काम करते हैं",
+      "values": [
+        {
+          "title": "साफ़ शब्द, ईमानदार कीमतें",
+          "text": "पेज पर जो कीमत है, वही आप देते हैं। अगर कुछ शामिल नहीं है, तो हम वह पेज पर कहते हैं, छोटे अक्षरों में नहीं।"
+        },
+        {
+          "title": "पहले फ़ोन के लिए बनी",
+          "text": "आपके ग्राहक फ़ोन पर हैं, अक्सर धीमे नेटवर्क पर। हर पेज सबसे छोटी स्क्रीन के लिए पहले डिज़ाइन होता है और तेज़ लोड होता है।"
+        },
+        {
+          "title": "सब कुछ आपका है",
+          "text": "आपका डोमेन, आपकी सामग्री, आपका ग्राहक डेटा। अगर आप कभी जाएँ, तो सब कुछ आपके साथ जाता है।"
+        },
+        {
+          "title": "एक इंसान, टिकट नहीं",
+          "text": "सवाल WhatsApp पर उस इंसान के पास जाते हैं जो आपकी वेबसाइट जानता है — किसी सहायता कतार में नहीं।"
+        }
+      ],
+      "storyTitle": "Kumbuild क्यों मौजूद है",
+      "story": [
+        "भारत के हर शहर में एक दुकान है जो ज़्यादा ग्राहकों की हक़दार है — वह बेकरी जिसे पूरा मोहल्ला पसंद करता है, वह क्लीनिक जहाँ लोग बड़े अस्पताल को छोड़कर आते हैं। उनके पास बस वेबसाइट बिल्डर सीखने का समय नहीं है, और न ही एजेंसी की कीमतें देने के पैसे।",
+        "Kumbuild बीच का रास्ता है: एक पेशेवर वेबसाइट, पूरी तरह आपके लिए बनी, ऐसी कीमत पर जिस पर छोटा व्यवसाय हाँ कह सके। आप बताइए क्या बनाना है। हम उसे बनाते हैं, लॉन्च करते हैं, और चलाते रहते हैं।"
+      ]
+    },
+    "blog": {
+      "title": "व्यवसाय मालिकों के लिए नोट्स",
+      "subtitle": "इंटरनेट से ग्राहक पाने पर छोटे, व्यावहारिक लेख — कोई जार्गन नहीं, ख़रीदने के लिए कोई कोर्स नहीं।",
+      "posts": [
+        {
+          "slug": "why-your-shop-needs-a-website",
+          "title": "आपकी दुकान Google पर पहले से है। सवाल यह है कि लोगों को क्या मिलता है।",
+          "excerpt": "ग्राहक आने से पहले खोजते हैं। अगर खोज में ग़लत समय, बंद पेज, या आपका प्रतियोगी दिखे — तो वही विज़िट गई जो आपको मिलनी थी।",
+          "date": "2026-11-04",
+          "readMins": 4,
+          "tag": "दिखना",
+          "body": [
+            "Google खोलिए और अपनी दुकान को ऐसे खोजिए जैसे कोई अजनबी खोजेगा — आपकी सेवा और आपका इलाका। जो कुछ दिखता है, वही ज़्यादातर नए ग्राहकों के लिए आपकी दुकान की खिड़की है, चाहे आपने उसे बनाया हो या न हो।",
+            "कई छोटे व्यवसायों के लिए वह खिड़की आधी-अधूरी लिस्टिंग, एक पुराना फ़ोन नंबर, और ठीक नीचे फ़ोटो, समय और वेबसाइट वाला प्रतियोगी है। इसका हल जटिल नहीं है: हर जगह सही विवरण, असली फ़ोटो, और अपना एक पेज जो उन सवालों के जवाब दे जो ग्राहक सच में पूछते हैं।",
+            "आपकी अपनी वेबसाइट वह एक परिणाम है जिसे आपके सिवा कोई बदल नहीं सकता। कीमतें, समय, फ़ोटो, ऑफ़र — ताज़ा, क्योंकि उन्हें ताज़ा रखना उस काम का हिस्सा है जो आप हमें सौंपते हैं।"
+          ]
+        },
+        {
+          "slug": "whatsapp-orders-from-your-website",
+          "title": "WhatsApp आपका असली चेकआउट है। आपकी वेबसाइट को यह पता होना चाहिए।",
+          "excerpt": "भारतीय ग्राहक ₹400 के केक के लिए न कोई और ऐप चाहते हैं, न भुगतान फ़ॉर्म। वे एक बटन दबाकर आपसे बात करना चाहते हैं। उसी के लिए बनाइए।",
+          "date": "2026-10-28",
+          "readMins": 3,
+          "tag": "ऑनलाइन बिक्री",
+          "body": [
+            "देखिए आपके ग्राहक पहले से कैसे ख़रीदते हैं: वे WhatsApp पर पूछते हैं, आप कन्फर्म करते हैं, वे लेते समय या UPI से भुगतान करते हैं। बातचीत ही चेकआउट है — यह निजी है, और यह काम करती है।",
+            "इसलिए छोटे व्यवसाय की वेबसाइट को बड़े ई-कॉमर्स स्टोर की नक़ल नहीं करनी चाहिए। उसे सब कुछ साफ़ दिखाना चाहिए — फ़ोटो, नाम, कीमतें — और हर आइटम पर WhatsApp बटन लगाना चाहिए, जो ऑर्डर लिखा-लिखाया चैट खोल दे।",
+            "हर Kumbuild कैटलॉग ऐसे ही बनता है। कोई कमीशन नहीं, आपके ग्राहकों के लिए कोई नई आदत नहीं, और वह रिश्ता आपका रहता है जो उन्हें वापस लाता है।"
+          ]
+        },
+        {
+          "slug": "what-a-website-should-cost",
+          "title": "छोटे व्यवसाय की वेबसाइट की असली कीमत क्या होनी चाहिए?",
+          "excerpt": "कोट ₹2,000 से ₹2,00,000 तक के आते हैं और सब खुद को 'एक वेबसाइट' कहते हैं। यहाँ जानिए हर स्तर पर पैसा असल में क्या ख़रीदता है।",
+          "date": "2026-10-21",
+          "readMins": 5,
+          "tag": "पैसा",
+          "body": [
+            "वेबसाइट का कोट चार चीज़ें ख़रीदता है: डिज़ाइन, लेखन और फ़ोटो, तकनीकी सेटअप (डोमेन, होस्टिंग, सुरक्षा), और बाद की देखभाल। जब कोट बहुत सस्ता हो, तो चारों में से एक ग़ायब होता है — आमतौर पर आख़िरी दो, जो महीनों बाद चुपचाप विफल होते हैं।",
+            "एजेंसियाँ अकाउंट मैनेजर और दफ़्तरों के पैसे लेती हैं। फ़्रीलांसर कम लेते हैं लेकिन ग़ायब हो जाते हैं। Kumbuild जैसी फ़िक्स्ड-पैकेज सेवा काम के पैसे लेती है: पेज तय हैं, कीमत वेबसाइट पर है, और नवीनीकरण होस्टिंग, सुरक्षा और छोटे बदलावों को कवर करता है।",
+            "आप जो भी रास्ता चुनें, भुगतान से पहले तीन सवाल पूछिए: ठीक-ठीक क्या शामिल है? दूसरे साल की लागत क्या है? और अगर मैं जाऊँ, तो मैं क्या लेकर जाऊँगा? जवाब ही असली कीमत बताते हैं।"
+          ]
+        }
+      ]
+    },
+    "refund": {
+      "title": "रिफंड नीति",
+      "subtitle": "संक्षेप में: अगर हमने शुरू नहीं किया है, तो आप कुछ नहीं देते। अगर किया है, तो आप सिर्फ़ हुए काम के पैसे देते हैं।",
+      "points": [
+        {
+          "title": "काम शुरू होने से पहले",
+          "text": "बनाना शुरू करने से पहले कभी भी रद्द कीजिए और अग्रिम की हर रुपया वापस, कोई सवाल नहीं और कोई रद्दीकरण शुल्क नहीं।"
+        },
+        {
+          "title": "जब आपकी साइट बन रही हो",
+          "text": "अगर आप बीच में रद्द करते हैं, तो हम अग्रिम में से पहले से पूरा हुआ काम घटाकर बाक़ी वापस करते हैं, आपकी ऑर्डर स्लिप पर मदवार।"
+        },
+        {
+          "title": "लॉन्च के बाद",
+          "text": "अगर लॉन्च की गई वेबसाइट आपके ऑर्डर में कन्फर्म की गई बात से मेल नहीं खाती, तो 7 दिनों के भीतर बताइए — हम उसे ठीक करेंगे, या न कर सकें तो निर्माण शुल्क वापस करेंगे।"
+        },
+        {
+          "title": "नवीनीकरण",
+          "text": "केयर-प्लान नवीनीकरण कभी भी रद्द किया जा सकता है; आपकी वेबसाइट भुगतान अवधि के अंत तक लाइव रहती है, और आपका डोमेन और सामग्री आपकी रहती है।"
+        }
+      ]
+    },
+    "faq": {
+      "searchPlaceholder": "सवाल खोजें — “कीमत” या “डोमेन” आज़माएँ",
+      "noResults": "इस खोज से कोई सवाल मेल नहीं खाता। हमें WhatsApp पर पूछिए, हम वहीं जवाब देंगे।"
+    }
+  }
+}

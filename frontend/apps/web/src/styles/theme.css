@@ -1,47 +1,77 @@
 @import "tailwindcss";
 
-/* Kumbuild theme — Option A "Trust Blue" (THEME.md, LOCKED).
-   Astro is LIGHT ONLY: these are the only theme tokens on kumbuild.com. */
+/* Kumbuild theme v2 — professional light grading (BLUEPRINT 2026-11-10).
+   World: the Indian high-street shop and its paper order book — warm paper
+   neutrals, ink text, ONE accent (Trust Blue). Light theme ONLY.
+   No hue gradients, no glows, no coloured shadows (unslop colour pass). */
 @theme {
-  --color-primary-50: #ebf6ff;
-  --color-primary-100: #cce8ff;
-  --color-primary-200: #99d2fe;
-  --color-primary-300: #66bbfe;
-  --color-primary-400: #33a5fd;
+  /* Trust Blue — the brand accent, kept from v1. */
+  --color-primary-50: #e8f3fe;
+  --color-primary-100: #cce4fd;
+  --color-primary-200: #99c9fb;
+  --color-primary-300: #66adf9;
+  --color-primary-400: #3392f6;
   --color-primary-500: #008efd;
   --color-primary-600: #0079d7;
-  --color-primary-700: #0063b1;
-  --color-primary-800: #00477e;
-  --color-primary-900: #002b4c;
+  --color-primary-700: #0069c7;
+  --color-primary-800: #004e8f;
+  --color-primary-900: #00325c;
 
-  --color-ink: #0f172a;
-  --color-body: #334155;
-  --color-muted: #64748b;
-  --color-surface: #f8fafc;
-  --color-line: #e2e8f0;
+  /* Warm stone ramp, tinted toward paper and ink. */
+  --color-ink: #1c1917;
+  --color-body: #44403c;
+  --color-muted: #78716c;
+  --color-faint: #a8a29e;
+  --color-surface: #f3f1ec;
+  --color-paper: #faf9f6;
+  --color-line: #e7e2d9;
+
+  /* Semantic — meaning only, toned into the palette. */
+  --color-live: #1f9d61;
+  --color-live-soft: #e6f5ec;
+  --color-warn: #d97706;
+  --color-danger: #dc2626;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     "Noto Sans Devanagari", "Noto Sans Bengali", sans-serif;
-  /* Display face — Sora, same as dusrel-image docs-site (Sora for
-     display, Inter for text; Noto fallbacks cover hi/bn scripts). */
   --font-display: "Sora", "Inter", "Noto Sans Devanagari",
     "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
-  /* Mono for order refs, section numbers and figures (order-slip detail). */
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
+
+  /* One motion language: a single easing curve, three durations. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-live-pulse: live-pulse 2.4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes live-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(31 157 97 / 0.35); }
+    50% { box-shadow: 0 0 0 5px rgb(31 157 97 / 0); }
+  }
 }
 
 :root {
-  --bg: #ffffff;
-  --surface: #f8fafc;
-  --border: #e2e8f0;
-  --text-heading: #0f172a;
-  --text-body: #334155;
-  --text-muted: #64748b;
+  --bg: #faf9f6;
+  --surface: #f3f1ec;
+  --border: #e7e2d9;
+  --text-heading: #1c1917;
+  --text-body: #44403c;
+  --text-muted: #78716c;
 }
 
 html {
   scroll-behavior: smooth;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 body {
@@ -49,11 +79,21 @@ body {
   color: var(--text-body);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* In @layer base so an explicit text-* utility still wins over this
-   default (unlayered author CSS would beat utilities regardless of
-   specificity — that made the white CTA-band heading render dark). */
+::selection {
+  background: #cce4fd;
+  color: #1c1917;
+}
+
+:focus-visible {
+  outline: 2px solid #008efd;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* In @layer base so an explicit text-* utility still wins over this default. */
 @layer base {
   h1,
   h2,
@@ -62,4 +102,43 @@ body {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
+}
+
+/* Scroll reveal — elements with [data-reveal] start quiet and rise once
+   when they enter the viewport (JS adds .is-in). Without JS or with
+   reduced motion they are simply visible. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Marquee pauses when the reader hovers it. */
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Thin, quiet scrollbar that matches the paper. */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f3f1ec;
+}
+::-webkit-scrollbar-thumb {
+  background: #d6d0c4;
+  border-radius: 8px;
+  border: 2px solid #f3f1ec;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a29e;
 }

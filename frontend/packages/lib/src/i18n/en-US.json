@@ -1,1 +1,715 @@
-{"about":{"p1":"Kumbuild is a done-for-you website service for small businesses. Shop owners, clinics, tuition centres, salons and restaurants tell us what they need — and we build the website for them.","p2":"You don't need to learn code, hire a designer, or figure out hosting and domains. Tell us what to build, approve the preview, and go live.","title":"About Kumbuild"},"common":{"backHome":"Back to home","learnMore":"Learn more"},"contact":{"email":"Email us","note":"Support hours and response time will be announced at launch.","subtitle":"Questions before ordering? Message us — we reply on WhatsApp.","title":"Contact us","whatsapp":"Chat on WhatsApp"},"examples":{"comingSoon":"Coming soon — Phase 3","items":[{"desc":"A catalogue website for a shop — products, prices and WhatsApp order button.","title":"Shop demo"},{"desc":"A booking website for a clinic — services, timings and appointment enquiry form.","title":"Clinic demo"},{"desc":"A business website for a tuition centre — courses, timings and admission enquiry.","title":"Tuition demo"}],"subtitle":"Demo websites we are building as our portfolio — a shop, a clinic and a tuition centre.","title":"Example websites"},"faq":{"items":[{"a":"Kumbuild is a done-for-you website service. You tell us what to build, and we build the website for you. You don't need to learn code or design anything in a tool.","q":"What is Kumbuild?"},{"a":"3–5 working days after advance payment and complete content — until you get the preview link. If content comes late, the time moves ahead.","q":"How many days will my website take?"},{"a":"Business name, services and prices, WhatsApp number, address, timings, and real photos. The full list is on the order page.","q":"What do I need to give you?"},{"a":"Starter ₹3,999, Business ₹7,999, Premium ₹14,999 (all draft). Yearly renewal is ₹1,999 (draft).","q":"How much will a website cost?"},{"a":"50% advance at order time, the remaining 50% after approval, before the website goes live. Payment is through Razorpay — UPI, cards, netbanking and wallets.","q":"How do I pay?"},{"a":"2 revision rounds are free. See the preview, tell us the changes, and we will send a new preview. Extra rounds cost extra — amount to be decided.","q":"What if I don't like the website?"},{"a":"Message us on WhatsApp or Instagram DM, or fill the form on kumbuild.com/order and choose a package. No account or signup needed — pay the advance after we confirm your order.","q":"How do I order?"},{"a":"No login needed — we send your order status, preview link and live link on WhatsApp. The stages are: Received → In progress → Preview ready → Revision → Approved → Live.","q":"Where do I check my order status?"},{"a":"Cancel before work starts and the full advance is refunded. After work starts, the advance is not refunded.","q":"What if I cancel my order?"}],"subtitle":"Everything people usually ask before ordering.","title":"Frequently asked questions"},"footer":{"company":"Company","draftNote":"Prices shown are draft and will be confirmed before payment.","legal":"Legal","rights":"All rights reserved.","services":"Services","tagline":"Tell us what to build."},"hero":{"badge":"Done-for-you websites for small businesses","ctaOrder":"Order my website","ctaPricing":"See pricing","headlineA":"A ","headlineAccent":"professional website","headlineB":" for your business, ready in 3–5 days.","note":"Starting at ₹3,999 · Delivery in 3–5 working days · 50% advance · 2 free revisions","subtitle":"We build a fast, mobile-first website for your shop, clinic, tuition centre, salon or restaurant — you just tell us what you need. No code, no design tools, no hassle.","title":"Tell us what to build."},"home":{"audiences":[{"name":"Shops & stores","need":"Your products, prices and offers — customers check on their phone and order on WhatsApp"},{"name":"Clinics & doctors","need":"Treatments, timings and an appointment enquiry — patients know what to expect before they call"},{"name":"Tuition & coaching","need":"Courses, batches and fees — parents enquire on WhatsApp instead of walking in"},{"name":"Salons & parlours","need":"Services with prices and photos of your work — bookings come straight to your WhatsApp"},{"name":"Restaurants & cafes","need":"Your menu with photos — customers see what is on before they arrive or order"},{"name":"Instagram & home sellers","need":"One link for your bio that turns followers into WhatsApp enquiries"}],"examplesNote":"Preview designs — made to show what a shop, clinic and salon website looks like before you order.","included":["Mobile-first design — most customers will open it on a phone","WhatsApp button on every page","Google Maps with your address","Contact / enquiry form","Your own domain name, connected","SSL (https) — the padlock customers trust","Basic SEO — your business name, area and services on Google","A preview link before anything goes live"],"includedSubtitle":"No add-on list and no upsell at checkout. This is in every package, Starter included.","includedTitle":"Every website comes with this","notItems":["Online payment checkout — orders come to your WhatsApp instead","Live booking calendar — customers request a time, you confirm it","A mobile app — your website already works on every phone"],"notNote":"We would rather say this now than surprise you later.","notTitle":"What we don't do","slip":{"business":"Sharma General Store","heading":"Website order","ref":"KB-1001","rows":[{"k":"Package","v":"Business — ₹7,999"},{"k":"Advance","v":"50% to start"},{"k":"Preview","v":"In 3–5 working days"},{"k":"Revisions","v":"2 rounds, free"}],"status":"Live"},"stats":[{"k":"working days to your preview","v":"3–5"},{"k":"starting price, one-time","v":"₹3,999"},{"k":"advance — the rest after you approve","v":"50%"}],"whoSubtitle":"If customers find you on Google, Instagram or by walking past your shop, a website makes that first look count.","whoTitle":"Made for businesses like yours"},"how":{"steps":[{"desc":"Fill the order form — business details, package, photos and WhatsApp number.","title":"Tell us"},{"desc":"Pay 50% advance through Razorpay — UPI, card, netbanking or wallet.","title":"Advance"},{"desc":"We build your website and send you a preview link in 3–5 working days.","title":"Preview"},{"desc":"Ask for changes — 2 revision rounds are free. Approve when you love it.","title":"Approve"},{"desc":"Pay the remaining 50% and your website goes live with your domain.","title":"Go live"}],"subtitle":"Five steps. You tell us, we build — you only review and approve.","title":"How it works"},"locale":"en-US","name":"English","nativeName":"English","nav":{"contact":"Contact","examples":"Examples","faq":"FAQ","home":"Home","howItWorks":"How it works","login":"Login","order":"Order now","pricing":"Pricing","services":"Services"},"order":{"businessName":"Business name","businessType":"Business type","businessTypeOptions":["Shop","Clinic","Tuition / Coaching","Salon","Restaurant / Cafe","Other"],"contentLanguage":"Website language","message":"Tell us about your business (1–2 lines)","name":"Your name","note":"No payment is taken in this form. Advance payment happens after we confirm your order.","package":"Choose a package","phone":"Phone number","reference":"Order reference","required":"Required","submit":"Submit order","subtitle":"Fill this form. We will contact you on WhatsApp to confirm your package and content.","successText":"Thanks! We will message you on WhatsApp shortly to confirm your package and collect your content. Your reference is shown below — please save it.","successTitle":"Order received!","title":"Order your website","whatsapp":"WhatsApp number"},"pricing":{"note":"Prices are draft and will be confirmed before you pay.","packages":[{"bestFor":"Small shop or Instagram page — one page is enough.","cta":"Choose Starter","features":["1 page","Mobile responsive","WhatsApp button","Google Maps","Contact / enquiry form","Basic SEO","SSL (https)"],"name":"Starter","per":"one-time","price":"₹3,999","slug":"starter"},{"bestFor":"Clinic, tuition, salon — you need a full website.","cta":"Choose Business","features":["Up to 5 pages","Everything in Starter","Services + gallery","About your business","Mobile responsive","Basic SEO","SSL (https)"],"name":"Business","per":"one-time","price":"₹7,999","slug":"business"},{"bestFor":"Booking, WhatsApp orders or a catalogue.","cta":"Choose Premium","features":["Everything in Business","Booking / appointment form","WhatsApp order button","Catalogue / menu list","More pages as needed","Basic SEO","SSL (https)"],"name":"Premium","per":"one-time","price":"₹14,999","slug":"premium"}],"renewal":{"desc":"Domain renewal, hosting, small updates (phone, timings, a line or two) and support.","per":"per year","price":"₹1,999","title":"Yearly renewal"},"subtitle":"One-time prices. No hidden charges. Yearly renewal keeps your domain, hosting and small updates running.","terms":"50% advance on order · remaining 50% on approval, before go-live · 2 free revision rounds · Payment by Razorpay (UPI, cards, netbanking, wallets).","title":"Simple pricing"},"privacy":{"intro":"Draft — this page will carry the full privacy policy before launch. Your details from the order form are used only to build your website and contact you about your order.","title":"Privacy policy"},"services":{"items":[{"desc":"A complete website for your business — 1 to 5 pages: Home, Services, About, Gallery and Contact.","for":"Shops, clinics, salons, gyms, restaurants","slug":"business-website","title":"Business Website"},{"desc":"One page built for one job — turn visitors from your Instagram or Facebook bio link into enquiries on WhatsApp.","for":"Instagram / Facebook sellers and creators","slug":"landing-page","title":"Landing Page"},{"desc":"Services, timings and an appointment or enquiry form. Customers tell you a time — you confirm it. (Not a live calendar.)","for":"Clinics, salons, tuition and coaching","slug":"booking-website","title":"Booking / Enquiry Website"},{"desc":"Your products or menu with photo, name and price — and a WhatsApp order button. (Not a payment checkout store.)","for":"Shops, restaurants, cafes, boutiques, home bakers","slug":"catalogue-website","title":"Catalogue / Menu Website"}],"subtitle":"Four services. Every website is mobile-first, fast, and comes with a WhatsApp button, Google Maps, a contact form, basic SEO and SSL.","title":"What we build for you"},"terms":{"intro":"Draft — the full terms will be published before launch. In short: 50% advance, 2 free revision rounds, and content you provide must be yours to use.","title":"Terms of service"},"trust":["Mobile-first design","Fast loading","WhatsApp button","Google Maps included"]}
+{
+  "about": {
+    "p1": "Kumbuild is a done-for-you website service for small businesses. Shop owners, clinics, tuition centres, salons and restaurants tell us what they need — and we build the website for them.",
+    "p2": "You don't need to learn code, hire a designer, or figure out hosting and domains. Tell us what to build, approve the preview, and go live.",
+    "title": "About Kumbuild"
+  },
+  "common": {
+    "backHome": "Back to home",
+    "learnMore": "Learn more"
+  },
+  "contact": {
+    "email": "Email us",
+    "note": "Support hours and response time will be announced at launch.",
+    "subtitle": "Questions before ordering? Message us — we reply on WhatsApp.",
+    "title": "Contact us",
+    "whatsapp": "Chat on WhatsApp"
+  },
+  "examples": {
+    "comingSoon": "Coming soon — Phase 3",
+    "items": [
+      {
+        "desc": "A catalogue website for a shop — products, prices and WhatsApp order button.",
+        "title": "Shop demo"
+      },
+      {
+        "desc": "A booking website for a clinic — services, timings and appointment enquiry form.",
+        "title": "Clinic demo"
+      },
+      {
+        "desc": "A business website for a tuition centre — courses, timings and admission enquiry.",
+        "title": "Tuition demo"
+      }
+    ],
+    "subtitle": "Demo websites we are building as our portfolio — a shop, a clinic and a tuition centre.",
+    "title": "Example websites"
+  },
+  "faq": {
+    "items": [
+      {
+        "a": "Kumbuild is a done-for-you website service. You tell us what to build, and we build the website for you. You don't need to learn code or design anything in a tool.",
+        "q": "What is Kumbuild?"
+      },
+      {
+        "a": "3–5 working days after advance payment and complete content — until you get the preview link. If content comes late, the time moves ahead.",
+        "q": "How many days will my website take?"
+      },
+      {
+        "a": "Business name, services and prices, WhatsApp number, address, timings, and real photos. The full list is on the order page.",
+        "q": "What do I need to give you?"
+      },
+      {
+        "a": "Starter ₹3,999, Business ₹7,999, Premium ₹14,999 (all draft). Yearly renewal is ₹1,999 (draft).",
+        "q": "How much will a website cost?"
+      },
+      {
+        "a": "50% advance at order time, the remaining 50% after approval, before the website goes live. Payment is through Razorpay — UPI, cards, netbanking and wallets.",
+        "q": "How do I pay?"
+      },
+      {
+        "a": "2 revision rounds are free. See the preview, tell us the changes, and we will send a new preview. Extra rounds cost extra — amount to be decided.",
+        "q": "What if I don't like the website?"
+      },
+      {
+        "a": "Message us on WhatsApp or Instagram DM, or fill the form on kumbuild.com/order and choose a package. No account or signup needed — pay the advance after we confirm your order.",
+        "q": "How do I order?"
+      },
+      {
+        "a": "No login needed — we send your order status, preview link and live link on WhatsApp. The stages are: Received → In progress → Preview ready → Revision → Approved → Live.",
+        "q": "Where do I check my order status?"
+      },
+      {
+        "a": "Cancel before work starts and the full advance is refunded. After work starts, the advance is not refunded.",
+        "q": "What if I cancel my order?"
+      }
+    ],
+    "subtitle": "Everything people usually ask before ordering.",
+    "title": "Frequently asked questions"
+  },
+  "footer": {
+    "company": "Company",
+    "draftNote": "Prices shown are draft and will be confirmed before payment.",
+    "legal": "Legal",
+    "rights": "All rights reserved.",
+    "services": "Services",
+    "tagline": "Tell us what to build."
+  },
+  "hero": {
+    "badge": "Done-for-you websites for small businesses",
+    "ctaOrder": "Order my website",
+    "ctaPricing": "See pricing",
+    "headlineA": "A ",
+    "headlineAccent": "professional website",
+    "headlineB": " for your business, ready in 3–5 days.",
+    "note": "Starting at ₹3,999 · Delivery in 3–5 working days · 50% advance · 2 free revisions",
+    "subtitle": "We build a fast, mobile-first website for your shop, clinic, tuition centre, salon or restaurant — you just tell us what you need. No code, no design tools, no hassle.",
+    "title": "Tell us what to build."
+  },
+  "home": {
+    "audiences": [
+      {
+        "name": "Shops & stores",
+        "need": "Your products, prices and offers — customers check on their phone and order on WhatsApp"
+      },
+      {
+        "name": "Clinics & doctors",
+        "need": "Treatments, timings and an appointment enquiry — patients know what to expect before they call"
+      },
+      {
+        "name": "Tuition & coaching",
+        "need": "Courses, batches and fees — parents enquire on WhatsApp instead of walking in"
+      },
+      {
+        "name": "Salons & parlours",
+        "need": "Services with prices and photos of your work — bookings come straight to your WhatsApp"
+      },
+      {
+        "name": "Restaurants & cafes",
+        "need": "Your menu with photos — customers see what is on before they arrive or order"
+      },
+      {
+        "name": "Instagram & home sellers",
+        "need": "One link for your bio that turns followers into WhatsApp enquiries"
+      }
+    ],
+    "examplesNote": "Preview designs — made to show what a shop, clinic and salon website looks like before you order.",
+    "included": [
+      "Mobile-first design — most customers will open it on a phone",
+      "WhatsApp button on every page",
+      "Google Maps with your address",
+      "Contact / enquiry form",
+      "Your own domain name, connected",
+      "SSL (https) — the padlock customers trust",
+      "Basic SEO — your business name, area and services on Google",
+      "A preview link before anything goes live"
+    ],
+    "includedSubtitle": "No add-on list and no upsell at checkout. This is in every package, Starter included.",
+    "includedTitle": "Every website comes with this",
+    "notItems": [
+      "Online payment checkout — orders come to your WhatsApp instead",
+      "Live booking calendar — customers request a time, you confirm it",
+      "A mobile app — your website already works on every phone"
+    ],
+    "notNote": "We would rather say this now than surprise you later.",
+    "notTitle": "What we don't do",
+    "slip": {
+      "business": "Sharma General Store",
+      "heading": "Website order",
+      "ref": "KB-1001",
+      "rows": [
+        {
+          "k": "Package",
+          "v": "Business — ₹7,999"
+        },
+        {
+          "k": "Advance",
+          "v": "50% to start"
+        },
+        {
+          "k": "Preview",
+          "v": "In 3–5 working days"
+        },
+        {
+          "k": "Revisions",
+          "v": "2 rounds, free"
+        }
+      ],
+      "status": "Live"
+    },
+    "stats": [
+      {
+        "k": "working days to your preview",
+        "v": "3–5"
+      },
+      {
+        "k": "starting price, one-time",
+        "v": "₹3,999"
+      },
+      {
+        "k": "advance — the rest after you approve",
+        "v": "50%"
+      }
+    ],
+    "whoSubtitle": "If customers find you on Google, Instagram or by walking past your shop, a website makes that first look count.",
+    "whoTitle": "Made for businesses like yours"
+  },
+  "how": {
+    "steps": [
+      {
+        "desc": "Fill the order form — business details, package, photos and WhatsApp number.",
+        "title": "Tell us"
+      },
+      {
+        "desc": "Pay 50% advance through Razorpay — UPI, card, netbanking or wallet.",
+        "title": "Advance"
+      },
+      {
+        "desc": "We build your website and send you a preview link in 3–5 working days.",
+        "title": "Preview"
+      },
+      {
+        "desc": "Ask for changes — 2 revision rounds are free. Approve when you love it.",
+        "title": "Approve"
+      },
+      {
+        "desc": "Pay the remaining 50% and your website goes live with your domain.",
+        "title": "Go live"
+      }
+    ],
+    "subtitle": "Five steps. You tell us, we build — you only review and approve.",
+    "title": "How it works"
+  },
+  "locale": "en-US",
+  "name": "English",
+  "nativeName": "English",
+  "nav": {
+    "contact": "Contact",
+    "examples": "Examples",
+    "faq": "FAQ",
+    "home": "Home",
+    "howItWorks": "How it works",
+    "login": "Login",
+    "order": "Order now",
+    "pricing": "Pricing",
+    "services": "Services"
+  },
+  "order": {
+    "businessName": "Business name",
+    "businessType": "Business type",
+    "businessTypeOptions": [
+      "Shop",
+      "Clinic",
+      "Tuition / Coaching",
+      "Salon",
+      "Restaurant / Cafe",
+      "Other"
+    ],
+    "contentLanguage": "Website language",
+    "message": "Tell us about your business (1–2 lines)",
+    "name": "Your name",
+    "note": "No payment is taken in this form. Advance payment happens after we confirm your order.",
+    "package": "Choose a package",
+    "phone": "Phone number",
+    "reference": "Order reference",
+    "required": "Required",
+    "submit": "Submit order",
+    "subtitle": "Fill this form. We will contact you on WhatsApp to confirm your package and content.",
+    "successText": "Thanks! We will message you on WhatsApp shortly to confirm your package and collect your content. Your reference is shown below — please save it.",
+    "successTitle": "Order received!",
+    "title": "Order your website",
+    "whatsapp": "WhatsApp number"
+  },
+  "pricing": {
+    "note": "Prices are draft and will be confirmed before you pay.",
+    "packages": [
+      {
+        "bestFor": "Small shop or Instagram page — one page is enough.",
+        "cta": "Choose Starter",
+        "features": [
+          "1 page",
+          "Mobile responsive",
+          "WhatsApp button",
+          "Google Maps",
+          "Contact / enquiry form",
+          "Basic SEO",
+          "SSL (https)"
+        ],
+        "name": "Starter",
+        "per": "one-time",
+        "price": "₹3,999",
+        "slug": "starter"
+      },
+      {
+        "bestFor": "Clinic, tuition, salon — you need a full website.",
+        "cta": "Choose Business",
+        "features": [
+          "Up to 5 pages",
+          "Everything in Starter",
+          "Services + gallery",
+          "About your business",
+          "Mobile responsive",
+          "Basic SEO",
+          "SSL (https)"
+        ],
+        "name": "Business",
+        "per": "one-time",
+        "price": "₹7,999",
+        "slug": "business"
+      },
+      {
+        "bestFor": "Booking, WhatsApp orders or a catalogue.",
+        "cta": "Choose Premium",
+        "features": [
+          "Everything in Business",
+          "Booking / appointment form",
+          "WhatsApp order button",
+          "Catalogue / menu list",
+          "More pages as needed",
+          "Basic SEO",
+          "SSL (https)"
+        ],
+        "name": "Premium",
+        "per": "one-time",
+        "price": "₹14,999",
+        "slug": "premium"
+      }
+    ],
+    "renewal": {
+      "desc": "Domain renewal, hosting, small updates (phone, timings, a line or two) and support.",
+      "per": "per year",
+      "price": "₹1,999",
+      "title": "Yearly renewal"
+    },
+    "subtitle": "One-time prices. No hidden charges. Yearly renewal keeps your domain, hosting and small updates running.",
+    "terms": "50% advance on order · remaining 50% on approval, before go-live · 2 free revision rounds · Payment by Razorpay (UPI, cards, netbanking, wallets).",
+    "title": "Simple pricing"
+  },
+  "privacy": {
+    "intro": "Draft — this page will carry the full privacy policy before launch. Your details from the order form are used only to build your website and contact you about your order.",
+    "title": "Privacy policy"
+  },
+  "services": {
+    "items": [
+      {
+        "desc": "A complete website for your business — 1 to 5 pages: Home, Services, About, Gallery and Contact.",
+        "for": "Shops, clinics, salons, gyms, restaurants",
+        "slug": "business-website",
+        "title": "Business Website"
+      },
+      {
+        "desc": "One page built for one job — turn visitors from your Instagram or Facebook bio link into enquiries on WhatsApp.",
+        "for": "Instagram / Facebook sellers and creators",
+        "slug": "landing-page",
+        "title": "Landing Page"
+      },
+      {
+        "desc": "Services, timings and an appointment or enquiry form. Customers tell you a time — you confirm it. (Not a live calendar.)",
+        "for": "Clinics, salons, tuition and coaching",
+        "slug": "booking-website",
+        "title": "Booking / Enquiry Website"
+      },
+      {
+        "desc": "Your products or menu with photo, name and price — and a WhatsApp order button. (Not a payment checkout store.)",
+        "for": "Shops, restaurants, cafes, boutiques, home bakers",
+        "slug": "catalogue-website",
+        "title": "Catalogue / Menu Website"
+      }
+    ],
+    "subtitle": "Four services. Every website is mobile-first, fast, and comes with a WhatsApp button, Google Maps, a contact form, basic SEO and SSL.",
+    "title": "What we build for you"
+  },
+  "terms": {
+    "intro": "Draft — the full terms will be published before launch. In short: 50% advance, 2 free revision rounds, and content you provide must be yours to use.",
+    "title": "Terms of service"
+  },
+  "trust": [
+    "Mobile-first design",
+    "Fast loading",
+    "WhatsApp button",
+    "Google Maps included"
+  ],
+  "v2": {
+    "nav": {
+      "work": "Our work",
+      "blog": "Blog",
+      "allServices": "See all services",
+      "refund": "Refund policy"
+    },
+    "contact": {
+      "waNumber": "919876543210",
+      "waText": "Hi Kumbuild, I want a website for my business.",
+      "email": "hello@kumbuild.com",
+      "submit": "Send enquiry"
+    },
+    "ui": {
+      "toTop": "Back to top",
+      "readMore": "Read the story",
+      "viewCase": "View case study",
+      "allWork": "See all work",
+      "minRead": "min read",
+      "from": "From",
+      "oneTime": "one-time",
+      "popular": "Most chosen",
+      "included": "Included",
+      "perYear": "/year"
+    },
+    "footer": {
+      "about": "Done-for-you websites for Indian small businesses. You tell us what to build — we design, write, and launch it, then keep it running.",
+      "start": "Start your website",
+      "startText": "Tell us about your business today. Your site can be live in 3–5 working days."
+    },
+    "marquee": {
+      "label": "Websites for every kind of business",
+      "items": [
+        "General stores",
+        "Salons & spas",
+        "Clinics",
+        "Tuition centres",
+        "Bakeries & cafes",
+        "Boutiques",
+        "Gyms & yoga",
+        "Restaurants",
+        "Electricians",
+        "Interior designers",
+        "Travel agents",
+        "Home bakers"
+      ]
+    },
+    "homeV2": {
+      "bandKicker": "One order, everything handled",
+      "bandTitle": "You run the shop. We run the website.",
+      "bandText": "Design, writing, photos, hosting, domain, updates — most owners do not have time for any of it, so all of it sits with us. You approve the pages on WhatsApp and get back to your customers.",
+      "bandPoints": [
+        "A person to call, not a dashboard to learn",
+        "Small changes done for you on the care plan",
+        "Your site stays fast, secure and online"
+      ],
+      "ctaTitle": "Your customers are searching. Be the result they find.",
+      "ctaText": "Order today and your website can be live before the week ends — built, written and launched by us."
+    },
+    "servicesV2": {
+      "detailIncludes": "What this website includes",
+      "detailFor": "Best for",
+      "detailCtaTitle": "Start with this website",
+      "detailCtaText": "Order in two minutes. We confirm everything on WhatsApp before any payment.",
+      "pages": {
+        "business-website": {
+          "h1": "A complete website for your business",
+          "intro": "Everything a customer needs to trust you and reach you — your services, your story, your photos and one tap to call or message. The website most shops, clinics and studios should start with.",
+          "features": [
+            "Home, Services, About, Gallery and Contact pages",
+            "Click-to-call and WhatsApp buttons on every page",
+            "Google Maps with your exact location",
+            "Your photos, prices and timings, written up properly",
+            "Shows up on Google with basic local SEO",
+            "Works fast on every phone, in your customers' language"
+          ]
+        },
+        "landing-page": {
+          "h1": "One page that turns followers into enquiries",
+          "intro": "Built for the link in your Instagram or Facebook bio. One page, one job: a visitor lands, understands your offer, and messages you on WhatsApp.",
+          "features": [
+            "One focused page for one offer or campaign",
+            "WhatsApp enquiry button that stays on screen",
+            "Your best photos and customer reviews up front",
+            "Offer, price and deadline written to convert",
+            "Loads instantly from social apps",
+            "Easy to change when your offer changes"
+          ]
+        },
+        "booking-website": {
+          "h1": "Appointments and enquiries, without the phone tag",
+          "intro": "Your services and timings on one clear page, with a form that asks for a preferred time. You confirm on WhatsApp — no more missed calls during work hours.",
+          "features": [
+            "Services with prices and durations",
+            "Appointment and enquiry form with preferred time",
+            "Enquiries reach you on WhatsApp and email",
+            "Timings, holidays and location kept current",
+            "Doctor, teacher or stylist profiles if you need them",
+            "Clear policies page — cancellation, advance, timings"
+          ]
+        },
+        "catalogue-website": {
+          "h1": "Your products and menu, ready to order on WhatsApp",
+          "intro": "Your full range with photos and prices, organised so customers browse at home and order on WhatsApp. You keep the personal touch; the website does the showing.",
+          "features": [
+            "Products or menu items with photo, name and price",
+            "Categories customers can browse quickly",
+            "WhatsApp order button on every item",
+            "New items added for you on the care plan",
+            "Daily specials or seasonal section",
+            "No commission on any order — it is your shop"
+          ]
+        }
+      }
+    },
+    "work": {
+      "title": "Recent work",
+      "subtitle": "Real kinds of businesses, real websites. These are sample projects with placeholder details — the same care goes into yours.",
+      "projects": [
+        {
+          "slug": "crumbs-and-craft-bakery",
+          "name": "Crumbs & Craft",
+          "type": "Bakery & cafe",
+          "city": "Pune",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-bakery.webp",
+          "result": "Weekend cake orders now start on WhatsApp",
+          "desc": "A warm catalogue site for a neighbourhood bakery — full menu with photos and prices, and a WhatsApp order button on every cake.",
+          "story": "The owner took cake orders on calls she kept missing during the morning rush. We put the whole menu online with clear prices, so customers now browse at home and message a ready-made order.",
+          "deliverables": [
+            "Menu catalogue with 40+ items",
+            "WhatsApp ordering on every item",
+            "Custom cake enquiry form",
+            "Google Maps and timings"
+          ]
+        },
+        {
+          "slug": "glow-and-co-salon",
+          "name": "Glow & Co.",
+          "type": "Salon & spa",
+          "city": "Bengaluru",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-salon.webp",
+          "result": "Appointments come in while the chairs stay busy",
+          "desc": "A booking website for a unisex salon — services with prices and durations, stylist profiles, and an appointment form that lands on WhatsApp.",
+          "story": "The salon's phone rang most when every stylist had a client in the chair. The new site answers prices and timings itself, and appointment requests arrive as tidy WhatsApp messages the owner confirms between clients.",
+          "deliverables": [
+            "Services with prices and durations",
+            "Appointment request form",
+            "Stylist profiles",
+            "Offer of the month section"
+          ]
+        },
+        {
+          "slug": "thread-and-thistle-boutique",
+          "name": "Thread & Thistle",
+          "type": "Clothing boutique",
+          "city": "Jaipur",
+          "service": "Business Website",
+          "img": "/work/work-boutique.webp",
+          "result": "Instagram followers finally have somewhere to go",
+          "desc": "A business website for a boutique that sold only through Instagram — collections, the story behind the shop, and directions that bring people to the door.",
+          "story": "Followers loved the reels but could not find prices, timings or the shop itself. The website gives the boutique a permanent home: collections to browse, the owner's story, and a visit-us section with parking and landmark details.",
+          "deliverables": [
+            "Collection galleries",
+            "About and story pages",
+            "Visit-us with Maps and landmarks",
+            "Instagram feed link section"
+          ]
+        },
+        {
+          "slug": "bright-minds-tuition",
+          "name": "Bright Minds",
+          "type": "Tuition centre",
+          "city": "Lucknow",
+          "service": "Business Website",
+          "img": "/work/work-tuition.webp",
+          "result": "Admission enquiries doubled in the first month",
+          "desc": "A clear, parent-friendly website for a tuition centre — courses by class, batch timings, results, and an admission enquiry form.",
+          "story": "Parents asked the same five questions on every call. The site answers them up front — classes, batches, fees approach, results — so calls now come from parents who are ready to enrol.",
+          "deliverables": [
+            "Courses by class and subject",
+            "Batch timings table",
+            "Results and topper section",
+            "Admission enquiry form"
+          ]
+        }
+      ],
+      "caseLabels": {
+        "overview": "The project",
+        "story": "The story",
+        "deliverables": "What we built",
+        "service": "Service",
+        "city": "City",
+        "result": "The result"
+      }
+    },
+    "testimonials": {
+      "title": "Owners who stopped worrying about their website",
+      "subtitle": "Sample reviews in the words our customers use — names and details are placeholders until launch.",
+      "items": [
+        {
+          "name": "Ramesh Sharma",
+          "business": "Sharma General Store",
+          "city": "Indore",
+          "stars": 5,
+          "text": "I just sent my shop photos on WhatsApp. Four days later my website was live and customers started finding us on Google. I did not touch a computer once."
+        },
+        {
+          "name": "Dr. Anita Verma",
+          "business": "Verma Dental Care",
+          "city": "Patna",
+          "stars": 5,
+          "text": "Patients check our timings and services before they call now. The appointment form alone saves my receptionist an hour a day."
+        },
+        {
+          "name": "Priya Nair",
+          "business": "Glow & Co. Salon",
+          "city": "Bengaluru",
+          "stars": 5,
+          "text": "It looks like us — our colours, our photos, our prices. Two customers last week said they chose us because the website looked proper."
+        },
+        {
+          "name": "Mohammed Faiz",
+          "business": "Faiz Electronics",
+          "city": "Hyderabad",
+          "stars": 5,
+          "text": "Honest pricing, no upsell calls, and when I need a price changed I message them and it is done the same day. That is the whole review."
+        },
+        {
+          "name": "Sana Sheikh",
+          "business": "Sana's Home Bakes",
+          "city": "Mumbai",
+          "stars": 5,
+          "text": "My menu is online with an order button on every cake. Weekend orders come in while I am baking, not while I am on the phone."
+        }
+      ]
+    },
+    "aboutV2": {
+      "stats": [
+        {
+          "value": "3–5",
+          "label": "working days to launch"
+        },
+        {
+          "value": "3",
+          "label": "languages your site can speak"
+        },
+        {
+          "value": "100%",
+          "label": "done for you — design to launch"
+        },
+        {
+          "value": "1",
+          "label": "WhatsApp message to reach us"
+        }
+      ],
+      "valuesTitle": "How we work",
+      "values": [
+        {
+          "title": "Plain words, honest prices",
+          "text": "The price on the page is the price you pay. If something is not included, we say it on the page, not in the fine print."
+        },
+        {
+          "title": "Built for phones first",
+          "text": "Your customers are on phones, often on slow networks. Every page is designed for the smallest screen first and loads fast."
+        },
+        {
+          "title": "You own everything",
+          "text": "Your domain, your content, your customer data. If you ever leave, everything goes with you."
+        },
+        {
+          "title": "A person, not a ticket",
+          "text": "Questions go to a person on WhatsApp who knows your website — not a support queue."
+        }
+      ],
+      "storyTitle": "Why Kumbuild exists",
+      "story": [
+        "Every town in India has a shop that deserves more customers — the bakery everyone loves locally, the clinic people drive past a bigger hospital to reach. What they do not have is time to learn website builders, or money for an agency that charges agency prices.",
+        "Kumbuild is the middle path: a professional website, built completely for you, at a price a small business can say yes to. You tell us what to build. We build it, launch it, and keep it running."
+      ]
+    },
+    "blog": {
+      "title": "Notes for business owners",
+      "subtitle": "Short, practical reads on getting customers from the internet — no jargon, no courses to buy.",
+      "posts": [
+        {
+          "slug": "why-your-shop-needs-a-website",
+          "title": "Your shop is on Google already. The question is what people find.",
+          "excerpt": "Customers search before they visit. If the search shows a wrong timing, a dead page, or your competitor — that is the visit you lost.",
+          "date": "2026-11-04",
+          "readMins": 4,
+          "tag": "Getting found",
+          "body": [
+            "Open Google and search for your own business the way a stranger would — your service plus your area. Whatever appears is your shop window for most new customers, whether you built it or not.",
+            "For many small businesses that window is a half-empty listing, an old phone number, and a competitor right below with photos, timings and a website. The fix is not complicated: correct details everywhere, real photos, and one page of your own that answers the questions customers actually ask.",
+            "A website you own is the one result nobody can edit but you. Prices, timings, photos, offers — current, because keeping them current is part of the job you hand to us."
+          ]
+        },
+        {
+          "slug": "whatsapp-orders-from-your-website",
+          "title": "WhatsApp is your real checkout. Your website should know that.",
+          "excerpt": "Indian customers do not want another app or a payment form for a ₹400 cake. They want to tap a button and talk to you. Build for that.",
+          "date": "2026-10-28",
+          "readMins": 3,
+          "tag": "Selling online",
+          "body": [
+            "Watch how your customers already buy: they ask on WhatsApp, you confirm, they pay when they collect or by UPI. The conversation is the checkout — it is personal, and it works.",
+            "So a small business website should not copy a big e-commerce store. It should show everything clearly — photos, names, prices — and put a WhatsApp button on every item, opening a chat with the order already written.",
+            "That is how every Kumbuild catalogue is built. No commission, no new habits for your customers, and you keep the relationship that makes them come back."
+          ]
+        },
+        {
+          "slug": "what-a-website-should-cost",
+          "title": "What should a small business website actually cost?",
+          "excerpt": "Quotes range from ₹2,000 to ₹2,00,000 and all call themselves 'a website'. Here is what the money really buys at each level.",
+          "date": "2026-10-21",
+          "readMins": 5,
+          "tag": "Money",
+          "body": [
+            "A website quote buys four things: the design, the writing and photos, the technical setup (domain, hosting, security), and the care afterwards. When a quote is very cheap, one of the four is missing — usually the last two, which fail quietly months later.",
+            "Agencies charge for account managers and offices. Freelancers charge less but disappear. A fixed-package service like Kumbuild charges for the work itself: the pages are defined, the price is on the website, and the renewal covers hosting, security and small changes.",
+            "Whichever route you take, ask three questions before paying: What exactly is included? What does year two cost? And if I leave, what do I take with me? The answers tell you the real price."
+          ]
+        }
+      ]
+    },
+    "refund": {
+      "title": "Refund policy",
+      "subtitle": "The short version: if we have not started, you pay nothing. If we have, you only pay for work done.",
+      "points": [
+        {
+          "title": "Before work begins",
+          "text": "Cancel any time before we start building and every rupee of the advance comes back, no questions and no cancellation fee."
+        },
+        {
+          "title": "While your site is being built",
+          "text": "If you cancel mid-build, we refund the advance minus the work already completed, itemised on your order slip."
+        },
+        {
+          "title": "After launch",
+          "text": "If the launched website does not match what your order confirmed, tell us within 7 days — we fix it, or refund the build fee if we cannot."
+        },
+        {
+          "title": "Renewals",
+          "text": "Care-plan renewals can be cancelled any time; your website stays live until the end of the paid period, and your domain and content remain yours."
+        }
+      ]
+    },
+    "faq": {
+      "searchPlaceholder": "Search questions — try “price” or “domain”",
+      "noResults": "No questions match that search yet. Ask us on WhatsApp and we will answer there."
+    }
+  }
+}

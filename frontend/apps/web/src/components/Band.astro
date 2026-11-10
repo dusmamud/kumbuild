@@ -1,0 +1,43 @@
+---
+import type { Dictionary } from "../i18n/utils";
+interface Props { dict: Dictionary; }
+const { dict } = Astro.props;
+const b = dict.v2.homeV2;
+---
+
+<section class="border-y border-line bg-surface">
+  <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14">
+    <figure data-reveal class="relative overflow-hidden rounded-[20px]">
+      <img
+        src="/work/work-restaurant.webp"
+        alt="A small restaurant owner greeting guests — the kind of business Kumbuild runs websites for"
+        width="1600"
+        height="900"
+        class="aspect-[4/3] w-full object-cover"
+        loading="lazy"
+      />
+      <figcaption class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/95 py-1.5 pl-2.5 pr-3.5 text-[13px] font-semibold text-ink shadow-[0_8px_20px_-8px_rgba(28,25,23,0.4)] backdrop-blur-sm">
+        <span class="h-2 w-2 animate-live-pulse rounded-full bg-live" aria-hidden="true"></span>
+        {dict.home.slip.status} · spice-route.in
+      </figcaption>
+    </figure>
+    <div data-reveal style="--reveal-delay:90ms">
+      <p class="flex items-center gap-3 text-[13px] font-semibold text-primary-700">
+        <span class="h-px w-8 bg-primary-500" aria-hidden="true"></span>
+        {b.bandKicker}
+      </p>
+      <h2 class="mt-4 text-[clamp(1.625rem,1.28rem+1.7vw,2.125rem)] font-semibold leading-[1.2]">{b.bandTitle}</h2>
+      <p class="mt-4 max-w-lg text-[15px] leading-[26px] text-body sm:text-base sm:leading-[28px]">{b.bandText}</p>
+      <ul class="mt-6 space-y-3">
+        {b.bandPoints.map((p) => (
+          <li class="flex items-start gap-3 text-[15px] font-medium text-ink">
+            <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-live-soft">
+              <svg class="h-3 w-3 text-live" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+            </span>
+            {p}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

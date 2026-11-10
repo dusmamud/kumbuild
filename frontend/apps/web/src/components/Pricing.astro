@@ -6,13 +6,18 @@ const { dict, locale, no } = Astro.props;
 const p = dict.pricing;
 ---
 
-<section class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
-  <SectionHead no={no} title={p.title} subtitle={p.subtitle} />
+<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+  <div data-reveal>
+    <SectionHead no={no} title={p.title} subtitle={p.subtitle} />
+  </div>
   <div class="mt-10 grid gap-5 lg:grid-cols-3">
-    {p.packages.map((pkg) => {
+    {p.packages.map((pkg, pi) => {
       const featured = pkg.slug === "business";
       return (
-        <article class={`flex flex-col rounded-xl border bg-white p-6 sm:p-7 ${featured ? "border-primary-600 shadow-[0_16px_32px_-20px_rgba(0,99,177,0.45)] ring-1 ring-primary-600" : "border-line"}`}>
+        <article data-reveal style={`--reveal-delay:${pi * 80}ms`} class={`relative flex flex-col rounded-2xl border bg-white p-6 sm:p-7 ${featured ? "border-primary-500 shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)] ring-1 ring-primary-500" : "border-line"}`}>
+          {featured && (
+            <span class="absolute -top-3 left-6 rounded-full bg-primary-500 px-3 py-1 text-xs font-semibold text-white">{dict.v2.ui.popular}</span>
+          )}
           <h3 class="text-base font-semibold text-ink sm:text-lg">{pkg.name}</h3>
           <p class="mt-3 font-display text-[clamp(1.875rem,1.55rem+1.4vw,2.5rem)] font-semibold leading-none tabular-nums text-ink">{pkg.price} <span class="font-sans text-sm font-medium text-muted">/ {pkg.per}</span></p>
           <p class="mt-3 text-[15px] leading-[26px] text-body sm:text-base">{pkg.bestFor}</p>
@@ -24,7 +29,7 @@ const p = dict.pricing;
               </li>
             ))}
           </ul>
-          <a href={pageUrl(locale, "/order")} class={`mt-7 block rounded-lg px-4 py-3 text-center text-[15px] font-semibold transition-colors ${featured ? "bg-primary-500 text-white hover:bg-primary-600" : "border border-line text-primary-700 hover:border-primary-500"}`}>{pkg.cta}</a>
+          <a href={pageUrl(locale, "/order")} class={`mt-7 block rounded-[10px] px-4 py-3 text-center text-[15px] font-semibold transition-[background-color,border-color,transform] duration-200 active:scale-[0.98] ${featured ? "bg-primary-500 text-white hover:bg-primary-600" : "border border-line text-primary-700 hover:border-primary-500"}`}>{pkg.cta}</a>
         </article>
       );
     })}

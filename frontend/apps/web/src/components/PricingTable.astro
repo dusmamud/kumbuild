@@ -1,0 +1,100 @@
+---
+import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; }
+const { dict, locale } = Astro.props;
+const p = dict.pricing;
+const pkgs = p.packages;
+
+/** A feature like "Everything in Starter" (localised) is an inheritance
+    marker: it names another plan. Plan names stay in Latin script in every
+    locale, so matching the plan name is locale-safe. */
+function inheritsFrom(feature: string): string | null {
+  for (const other of pkgs) {
+    if (feature.includes(other.name)) return other.slug;
+  }
+  return null;
+}
+
+const bySlug = new Map(pkgs.map((pkg) => [pkg.slug, pkg]));
+
+/** Fully resolved feature list for a plan, inheritance expanded in place. */
+function resolvedFeatures(slug: string, seen = new Set<string>()): string[] {
+  if (seen.has(slug)) return [];
+  seen.add(slug);
+  const pkg = bySlug.get(slug);
+  if (!pkg) return [];
+  const out: string[] = [];
+  for (const f of pkg.features) {
+    const parent = inheritsFrom(f);
+    if (parent && parent !== slug) out.push(...resolvedFeatures(parent, seen));
+    else if (!parent) out.push(f);
+  }
+  return out;
+}
+
+/** Page-count features supersede rather than accumulate: a plan with its
+    own page allowance ("Up to 5 pages") does not also include the lower
+    plan's ("1 page"). Detected by the word for "page" in all 3 locales. */
+const isPageCount = (f: string) => /page|पेज|পেজ/i.test(f);
+
+function finalFeatures(slug: string): string[] {
+  const all = resolvedFeatures(slug);
+  const pkg = bySlug.get(slug);
+  const own = pkg ? pkg.features.filter((f) => !inheritsFrom(f)) : [];
+  if (!own.some(isPageCount)) return all;
+  const ownSet = new Set(own.filter(isPageCount));
+  return all.filter((f) => !isPageCount(f) || ownSet.has(f));
+}
+
+const resolved = new Map(pkgs.map((pkg) => [pkg.slug, new Set(finalFeatures(pkg.slug))]));
+
+/** Union of all features, in plan order, inheritance markers expanded. */
+const rows: string[] = [];
+for (const pkg of pkgs) {
+  for (const f of finalFeatures(pkg.slug)) {
+    if (!rows.includes(f)) rows.push(f);
+  }
+}
+
+const checkIcon = `<svg class="mx-auto h-[18px] w-[18px] text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>`;
+---
+
+<section class="mx-auto max-w-6xl px-4 pb-16 sm:pb-20">
+  <div data-reveal class="overflow-x-auto rounded-2xl border border-line bg-white">
+    <table class="w-full min-w-[560px] border-collapse text-left">
+      <thead>
+        <tr class="border-b border-line">
+          <th scope="col" class="px-5 py-4 sm:px-6"><span class="sr-only">Feature</span></th>
+          {pkgs.map((pkg) => (
+            <th scope="col" class={`px-4 py-4 text-center ${pkg.slug === "business" ? "bg-primary-50" : ""}`}>
+              <span class="font-mono text-sm font-medium text-ink">{pkg.name}</span>
+              <span class="mt-0.5 block font-display text-base font-semibold tabular-nums text-ink">{pkg.price}</span>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((feature) => (
+          <tr class="border-b border-line last:border-b-0">
+            <th scope="row" class="px-5 py-3.5 text-[15px] font-normal text-body sm:px-6">{feature}</th>
+            {pkgs.map((pkg) => (
+              <td class={`px-4 py-3.5 text-center ${pkg.slug === "business" ? "bg-primary-50" : ""}`}>
+                {resolved.get(pkg.slug)?.has(feature)
+                  ? <Fragment set:html={checkIcon} />
+                  : <span class="text-faint" aria-hidden="true">—</span>}
+              </td>
+            ))}
+          </tr>
+        ))}
+        <tr>
+          <td class="px-5 py-4 sm:px-6"></td>
+          {pkgs.map((pkg) => (
+            <td class={`px-4 py-4 text-center ${pkg.slug === "business" ? "bg-primary-50" : ""}`}>
+              <a href={pageUrl(locale, "/order")} class="inline-block rounded-[10px] bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-600 active:scale-[0.98]">{pkg.cta}</a>
+            </td>
+          ))}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
