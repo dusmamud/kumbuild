@@ -10,7 +10,7 @@ const stats = dict.v2.aboutV2.stats;
     <dl data-reveal class="grid grid-cols-2 overflow-hidden rounded-2xl border border-line bg-white lg:grid-cols-4">
       {stats.map((s, i) => (
         <div class={`px-6 py-7 sm:px-8 ${i > 0 ? "border-line max-lg:odd:border-l lg:border-l" : ""} ${i > 1 ? "max-lg:border-t" : ""}`}>
-          <dd class="font-display text-[clamp(1.75rem,1.4rem+1.6vw,2.5rem)] font-semibold tabular-nums text-ink">{s.value}</dd>
+          <dd class="font-display text-[clamp(1.625rem,1.35rem+1.3vw,2.125rem)] font-semibold tabular-nums text-ink">{s.value}</dd>
           <dt class="mt-1.5 text-sm leading-[22px] text-muted">{s.label}</dt>
         </div>
       ))}

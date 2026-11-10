@@ -14,13 +14,13 @@ const icons = ["globe", "rocket", "calendar-check", "book-open"];
     <div data-reveal>
       <SectionHead no={no} title={s.title} subtitle={s.subtitle} />
     </div>
-    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
       {s.items.map((item, i) => (
         <a
           href={pageUrl(locale, `/services/${item.slug}`)}
           data-reveal
           style={`--reveal-delay:${i * 70}ms`}
-          class="group flex flex-col rounded-2xl border border-line bg-white p-7 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.28)] sm:p-8"
+          class="group flex flex-col rounded-2xl border border-line bg-white p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.28)] sm:p-7"
         >
           <span class="flex items-start justify-between">
             <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white">

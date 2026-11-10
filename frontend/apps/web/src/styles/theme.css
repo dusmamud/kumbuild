@@ -75,7 +75,7 @@ html.lenis body {
 }
 
 body {
-  font-size: 1.0625rem;
+  font-size: 1rem;
   background: var(--bg);
   color: var(--text-body);
   font-family: var(--font-sans);

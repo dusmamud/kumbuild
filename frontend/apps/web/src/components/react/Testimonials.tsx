@@ -42,7 +42,7 @@ export default function Testimonials({ items }: { items: Testimonial[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="flex min-w-0 shrink-0 grow-0 basis-full flex-col rounded-2xl border border-line bg-white p-7 transition-shadow duration-300 hover:shadow-[0_18px_36px_-24px_rgba(28,25,23,0.3)] sm:basis-[calc(50%-10px)] lg:basis-[calc(33.333%-14px)]"
+              className="flex min-w-0 shrink-0 grow-0 basis-full flex-col rounded-2xl border border-line bg-white p-6 transition-shadow duration-300 hover:shadow-[0_18px_36px_-24px_rgba(28,25,23,0.3)] sm:basis-[calc(50%-10px)] lg:basis-[calc(33.333%-14px)]"
             >
               <span className="flex items-center justify-between">
                 <Quote className="h-6 w-6 text-primary-500" strokeWidth={1.5} aria-hidden />

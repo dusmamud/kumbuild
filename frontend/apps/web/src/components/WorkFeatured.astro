@@ -13,7 +13,7 @@ const featured = w.projects.slice(0, 3);
     <div data-reveal>
       <SectionHead no={no} title={w.title} subtitle={w.subtitle} />
     </div>
-    <div class="mt-12 grid gap-6 md:grid-cols-3">
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
       {featured.map((p, i) => (
         <a
           href={pageUrl(locale, `/work/${p.slug}`)}
