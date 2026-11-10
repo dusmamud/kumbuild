@@ -161,7 +161,7 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
         </div>
       </div>
 
-      <div id="mobile-menu" class="fixed inset-0 z-0 hidden overflow-y-auto bg-paper lg:hidden">
+      <div id="mobile-menu" data-lenis-prevent class="fixed inset-0 z-0 hidden overflow-y-auto bg-paper lg:hidden">
         <div class="flex min-h-full flex-col px-5 pb-8 pt-[68px] sm:px-8">
           <nav class="flex flex-col" aria-label="Mobile">
             <a href={pageUrl(locale, "/services")} class={mobileLink(onServices)}>
@@ -217,6 +217,10 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
         iconClose.classList.toggle("hidden", !open);
         btn.setAttribute("aria-expanded", String(open));
         document.body.style.overflow = open ? "hidden" : "";
+        /* Lenis keeps its own scroll position — body overflow alone does not
+           stop it, and the page jumps when the menu closes. Stop it for real. */
+        const lenis = window.__lenis;
+        if (lenis) open ? lenis.stop() : lenis.start();
       }
       btn.addEventListener("click", () => setOpen(menu.classList.contains("hidden")));
       menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
@@ -307,7 +311,11 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
         toTop.classList.toggle("pointer-events-none", !show);
         toTop.style.transform = show ? "translateY(0)" : "translateY(8px)";
       }, { passive: true });
-      toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+      toTop.addEventListener("click", () => {
+        /* Native smooth scroll fights Lenis's raf loop — ride Lenis when on. */
+        if (window.__lenis) window.__lenis.scrollTo(0);
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+      });
     </script>
 
     <main>
@@ -409,6 +417,7 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (!reduce) {
         const lenis = new Lenis({ duration: 1.15, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        window.__lenis = lenis;
         function raf(time) {
           lenis.raf(time);
           requestAnimationFrame(raf);
