@@ -6,30 +6,30 @@ const p = dict.pricing;
 ---
 
 <section class="mx-auto max-w-6xl px-4 py-12">
-  <h2 class="text-2xl font-bold sm:text-3xl">{p.title}</h2>
+  <h2 class="text-2xl font-semibold">{p.title}</h2>
   <p class="mt-2 max-w-2xl text-body">{p.subtitle}</p>
   <div class="mt-8 grid gap-4 lg:grid-cols-3">
     {p.packages.map((pkg) => (
       <article class={`rounded-xl border p-6 ${pkg.slug === "business" ? "border-primary-500 bg-primary-50/40 ring-1 ring-primary-500" : "border-line bg-white"}`}>
-        <h3 class="text-lg font-bold">{pkg.name}</h3>
-        <p class="mt-1 text-3xl font-extrabold">{pkg.price} <span class="text-sm font-medium text-muted">/ {pkg.per}</span></p>
-        <p class="mt-2 text-sm text-body">{pkg.bestFor}</p>
-        <ul class="mt-4 space-y-2 text-sm">
+        <h3 class="text-base font-semibold">{pkg.name}</h3>
+        <p class="mt-1 font-display text-3xl font-semibold">{pkg.price} <span class="text-sm font-medium text-muted">/ {pkg.per}</span></p>
+        <p class="mt-2 text-[14.5px] text-body">{pkg.bestFor}</p>
+        <ul class="mt-4 space-y-2 text-[14.5px]">
           {pkg.features.map((f) => (
             <li class="flex gap-2"><img src="/logo/kumbuild-logo.svg" alt="" class="mt-0.5 h-4 w-4 shrink-0" /><span>{f}</span></li>
           ))}
         </ul>
-        <a href={pageUrl(locale, "/order")} class="mt-6 block rounded-lg bg-primary-500 px-4 py-2.5 text-center font-bold text-white hover:bg-primary-600">{pkg.cta}</a>
+        <a href={pageUrl(locale, "/order")} class="mt-6 block rounded-lg bg-primary-500 px-4 py-2.5 text-center text-[15px] font-semibold text-white hover:bg-primary-600">{pkg.cta}</a>
       </article>
     ))}
   </div>
   <div class="mt-6 rounded-xl border border-line bg-white p-6">
     <div class="flex flex-wrap items-baseline gap-2">
-      <h3 class="text-lg font-bold">{p.renewal.title}</h3>
-      <span class="text-xl font-extrabold">{p.renewal.price}</span>
+      <h3 class="text-base font-semibold">{p.renewal.title}</h3>
+      <span class="font-display text-xl font-semibold">{p.renewal.price}</span>
       <span class="text-sm text-muted">/ {p.renewal.per}</span>
     </div>
-    <p class="mt-1 text-sm text-body">{p.renewal.desc}</p>
+    <p class="mt-1 text-[14.5px] text-body">{p.renewal.desc}</p>
   </div>
   <p class="mt-4 text-xs text-muted">{p.terms}</p>
   <p class="mt-1 text-xs text-muted">{p.note}</p>

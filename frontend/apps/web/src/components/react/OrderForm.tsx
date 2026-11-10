@@ -8,7 +8,7 @@ interface Props {
 
 const inputCls =
   "w-full rounded-lg border border-line bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100";
-const labelCls = "mb-1 block text-sm font-bold text-ink";
+const labelCls = "mb-1 block text-sm font-semibold text-ink";
 
 /**
  * Order form — React island (client:load).
@@ -49,11 +49,11 @@ export default function OrderForm({ dict, locale }: Props) {
       <div className="rounded-xl border border-green-200 bg-green-50 p-6">
         <div className="flex items-center gap-2">
           <svg className="h-6 w-6 shrink-0 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></svg>
-          <h2 className="text-xl font-bold text-ink">{o.successTitle}</h2>
+          <h2 className="text-xl font-semibold text-ink">{o.successTitle}</h2>
         </div>
-        <p className="mt-2 text-sm leading-relaxed text-body">{o.successText}</p>
+        <p className="mt-2 text-[14.5px] leading-relaxed text-body">{o.successText}</p>
         <p className="mt-4 text-sm">
-          <span className="font-bold text-ink">{o.reference}: </span>
+          <span className="font-semibold text-ink">{o.reference}: </span>
           <code className="rounded bg-white px-2 py-1 font-mono font-bold text-primary-700">{referenceFor}</code>
         </p>
       </div>
@@ -113,7 +113,7 @@ export default function OrderForm({ dict, locale }: Props) {
           </select>
         </div>
       </div>
-      <button type="submit" className="mt-6 w-full rounded-lg bg-primary-500 px-6 py-3 font-bold text-white hover:bg-primary-600 sm:w-auto">
+      <button type="submit" className="mt-6 w-full rounded-lg bg-primary-500 px-6 py-3 text-[15px] font-semibold text-white hover:bg-primary-600 sm:w-auto">
         {o.submit}
       </button>
       <p className="mt-3 text-xs text-muted">{o.note}</p>

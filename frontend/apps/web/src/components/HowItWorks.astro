@@ -7,16 +7,16 @@ const h = dict.how;
 
 <section class="bg-surface py-12">
   <div class="mx-auto max-w-6xl px-4">
-    <h2 class="text-2xl font-bold sm:text-3xl">{h.title}</h2>
+    <h2 class="text-2xl font-semibold">{h.title}</h2>
     <p class="mt-2 max-w-2xl text-body">{h.subtitle}</p>
     <ol class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
       {h.steps.map((step, i) => (
         <li class="rounded-xl border border-line bg-white p-5">
         <div class="flex items-center gap-3">
           <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white">{i + 1}</span>
-          <h3 class="font-bold">{step.title}</h3>
+          <h3 class="font-semibold">{step.title}</h3>
         </div>
-        <p class="mt-2 text-sm leading-relaxed text-body">{step.desc}</p>
+        <p class="mt-2 text-[14.5px] leading-relaxed text-body">{step.desc}</p>
       </li>
       ))}
     </ol>
