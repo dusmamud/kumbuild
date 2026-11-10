@@ -12,56 +12,98 @@ const moreDemos = [
 ];
 ---
 
-<section class="mx-auto max-w-6xl px-4 pb-10 pt-12 text-center sm:pt-16">
-  <span class="inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-bold text-primary-700">{hero.badge}</span>
-  <h1 class="mx-auto mt-5 max-w-3xl text-[40px] font-bold leading-[48px] sm:text-[64px] sm:leading-[72px]">{hero.headlineA}<span class="text-primary-700">{hero.headlineAccent}</span>{hero.headlineB}</h1>
-  <p class="mx-auto mt-4 max-w-2xl text-[18px] font-medium leading-[28px] text-body sm:text-2xl sm:leading-[36px]">{hero.subtitle}</p>
-  <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
-    <a href={pageUrl(locale, "/order")} class="rounded-lg bg-primary-500 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-600">{hero.ctaOrder}</a>
-    <a href={pageUrl(locale, "/pricing")} class="rounded-lg border border-line bg-white px-6 py-3 text-sm font-semibold text-primary-700 hover:border-primary-500">{hero.ctaPricing}</a>
-  </div>
-  <p class="mt-4 text-sm font-semibold text-body">{hero.note}</p>
-  <div class="mt-8 flex flex-wrap justify-center gap-2">
-    {dict.trust.map((t) => (
-      <span class="inline-flex items-center gap-1 rounded-full border border-line bg-surface px-3 py-1 text-xs font-semibold text-body">
-        <svg class="h-4 w-4 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
-        {t}
-      </span>
-    ))}
+<section class="relative overflow-hidden bg-[#04070F] text-white">
+  {/* Aurora background — layered mesh gradients + dot grid + grain (Aura / React Bits style). CSS only, no JS. */}
+  <div aria-hidden="true" class="kb-aurora pointer-events-none absolute inset-0">
+    <div class="kb-drift-a absolute -top-32 left-[8%] h-[480px] w-[480px] rounded-full bg-[#008EFD] opacity-40 blur-[120px] will-change-transform"></div>
+    <div class="kb-drift-b absolute top-10 right-[4%] h-[420px] w-[420px] rounded-full bg-[#22D3EE] opacity-25 blur-[120px] will-change-transform"></div>
+    <div class="kb-drift-c absolute bottom-[-140px] left-[38%] h-[460px] w-[460px] rounded-full bg-[#7C3AED] opacity-25 blur-[130px] will-change-transform"></div>
+    <div class="kb-dots absolute inset-0"></div>
+    <div class="kb-grain absolute inset-0 opacity-[0.05] mix-blend-overlay"></div>
   </div>
 
-  {/* Demo website preview — one big readable shot, plus two more examples. */}
-  <div class="mx-auto mt-12 text-left">
-    <figure class="mx-auto max-w-5xl overflow-hidden rounded-xl border border-line bg-white shadow-[0_2px_16px_rgba(15,23,42,0.08)]">
-      <div class="flex items-center gap-2 border-b border-line bg-surface px-3 py-2">
-        <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
-        <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
-        <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
-        <span class="ml-1 truncate rounded-md border border-line bg-white px-2 py-0.5 text-[11px] text-muted">{mainDemo.url}</span>
-      </div>
-      <img src={mainDemo.img} alt={mainDemo.alt} width="1280" height="800" class="block aspect-[8/5] w-full object-cover object-top" />
-      <figcaption class="flex items-baseline justify-between gap-2 px-4 py-3">
-        <span class="font-display text-sm font-semibold text-ink">{mainDemo.name}</span>
-        <span class="shrink-0 text-xs text-muted">{mainDemo.type}</span>
-      </figcaption>
-    </figure>
-    <div class="mx-auto mt-4 grid max-w-3xl gap-4 sm:grid-cols-2">
-      {moreDemos.map((d) => (
-        <figure class="overflow-hidden rounded-xl border border-line bg-white shadow-[0_2px_16px_rgba(15,23,42,0.08)]">
-          <div class="flex items-center gap-2 border-b border-line bg-surface px-3 py-2">
-            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
-            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
-            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
-            <span class="ml-1 truncate rounded-md border border-line bg-white px-2 py-0.5 text-[11px] text-muted">{d.url}</span>
-          </div>
-          <img src={d.img} alt={d.alt} width="1280" height="800" loading="lazy" class="block aspect-[8/5] w-full object-cover object-top" />
-          <figcaption class="flex items-baseline justify-between gap-2 px-4 py-3">
-            <span class="font-display text-sm font-semibold text-ink">{d.name}</span>
-            <span class="shrink-0 text-xs text-muted">{d.type}</span>
-          </figcaption>
-        </figure>
+  <div class="relative mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:pt-16">
+    <span class="inline-block rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-bold text-sky-200">{hero.badge}</span>
+    <h1 class="mx-auto mt-5 max-w-3xl text-[32px] font-bold leading-[40px] text-white sm:text-[56px] sm:leading-[64px]">{hero.headlineA}<span class="bg-gradient-to-r from-[#7DD3FC] via-[#38BDF8] to-[#008EFD] bg-clip-text text-transparent">{hero.headlineAccent}</span>{hero.headlineB}</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-[18px] font-medium leading-[28px] text-white/70 sm:text-2xl sm:leading-[36px]">{hero.subtitle}</p>
+    <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
+      <a href={pageUrl(locale, "/order")} class="rounded-lg bg-primary-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(0,142,253,0.45)] hover:bg-primary-600">{hero.ctaOrder}</a>
+      <a href={pageUrl(locale, "/pricing")} class="rounded-lg border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white hover:bg-white/15">{hero.ctaPricing}</a>
+    </div>
+    <p class="mt-4 text-sm font-semibold text-white/60">{hero.note}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-2">
+      {dict.trust.map((t) => (
+        <span class="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white/85">
+          <svg class="h-4 w-4 text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+          {t}
+        </span>
       ))}
     </div>
-    <p class="mt-4 text-center text-xs text-muted">Example previews — shop, clinic and salon websites, with products, prices and WhatsApp ordering.</p>
+
+    {/* Demo website preview — one big readable shot, plus two more examples. */}
+    <div class="relative mx-auto mt-12 text-left">
+      <div aria-hidden="true" class="pointer-events-none absolute left-1/2 top-8 h-[300px] w-[720px] -translate-x-1/2 rounded-full bg-[#008EFD]/30 blur-[100px]"></div>
+      <figure class="relative mx-auto max-w-5xl overflow-hidden rounded-xl border border-white/10 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.55)]">
+        <div class="flex items-center gap-2 border-b border-line bg-surface px-3 py-2">
+          <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
+          <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
+          <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
+          <span class="ml-1 truncate rounded-md border border-line bg-white px-2 py-0.5 text-[11px] text-muted">{mainDemo.url}</span>
+        </div>
+        <img src={mainDemo.img} alt={mainDemo.alt} width="1280" height="800" class="block aspect-[8/5] w-full object-cover object-top" />
+        <figcaption class="flex items-baseline justify-between gap-2 px-4 py-3">
+          <span class="font-display text-sm font-semibold text-ink">{mainDemo.name}</span>
+          <span class="shrink-0 text-xs text-muted">{mainDemo.type}</span>
+        </figcaption>
+      </figure>
+      <div class="relative mx-auto mt-4 grid max-w-3xl gap-4 sm:grid-cols-2">
+        {moreDemos.map((d) => (
+          <figure class="overflow-hidden rounded-xl border border-white/10 bg-white shadow-[0_16px_40px_rgba(0,0,0,0.45)]">
+            <div class="flex items-center gap-2 border-b border-line bg-surface px-3 py-2">
+              <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
+              <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
+              <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-line"></span>
+              <span class="ml-1 truncate rounded-md border border-line bg-white px-2 py-0.5 text-[11px] text-muted">{d.url}</span>
+            </div>
+            <img src={d.img} alt={d.alt} width="1280" height="800" loading="lazy" class="block aspect-[8/5] w-full object-cover object-top" />
+            <figcaption class="flex items-baseline justify-between gap-2 px-4 py-3">
+              <span class="font-display text-sm font-semibold text-ink">{d.name}</span>
+              <span class="shrink-0 text-xs text-muted">{d.type}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="relative mt-4 text-center text-xs text-white/50">Example previews — shop, clinic and salon websites, with products, prices and WhatsApp ordering.</p>
+    </div>
   </div>
 </section>
+
+<style>
+  .kb-dots {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.13) 1px, transparent 1px);
+    background-size: 26px 26px;
+    mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, black 15%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, black 15%, transparent 75%);
+  }
+  .kb-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+  @keyframes kb-drift-a {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(60px, 40px, 0) scale(1.15); }
+  }
+  @keyframes kb-drift-b {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1.1); }
+    50% { transform: translate3d(-70px, 30px, 0) scale(0.95); }
+  }
+  @keyframes kb-drift-c {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(40px, -50px, 0) scale(1.2); }
+  }
+  .kb-drift-a { animation: kb-drift-a 26s ease-in-out infinite; }
+  .kb-drift-b { animation: kb-drift-b 32s ease-in-out infinite; }
+  .kb-drift-c { animation: kb-drift-c 38s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .kb-drift-a, .kb-drift-b, .kb-drift-c { animation: none; }
+  }
+</style>
