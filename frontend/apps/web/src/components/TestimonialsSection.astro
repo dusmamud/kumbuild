@@ -8,12 +8,12 @@ const t = dict.v2.testimonials;
 ---
 
 <section class="border-y border-line bg-surface">
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
     <div data-reveal>
       <SectionHead no={no} title={t.title} subtitle={t.subtitle} />
     </div>
     <div class="mt-10" data-reveal>
-      <Testimonials items={t.items} client:visible />
+      <Testimonials items={t.items} labels={{ prev: dict.v2.ui.prevReviews, next: dict.v2.ui.nextReviews, pause: dict.v2.ui.pause, play: dict.v2.ui.play, rating: dict.v2.ui.ratingLabel }} client:visible />
     </div>
   </div>
 </section>

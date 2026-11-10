@@ -8,11 +8,13 @@ const c = dict.v2.compare;
 ---
 
 <section class="bg-paper">
-  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
     <div data-reveal>
       <SectionHead no={no} title={c.title} subtitle={c.subtitle} />
     </div>
-    <div data-reveal class="mt-10 overflow-x-auto rounded-2xl border border-line bg-white" data-lenis-prevent>
+    <div data-reveal class="relative mt-10">
+      <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 rounded-r-2xl bg-gradient-to-l from-white to-transparent sm:hidden" aria-hidden="true"></div>
+      <div class="overflow-x-auto rounded-2xl border border-line bg-white" data-lenis-prevent>
       <table class="w-full min-w-[620px] border-collapse text-left">
         <thead>
           <tr class="border-b border-line">
@@ -55,6 +57,7 @@ const c = dict.v2.compare;
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 </section>

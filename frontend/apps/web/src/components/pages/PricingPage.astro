@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import Pricing from "../Pricing.astro";
 import PricingTable from "../PricingTable.astro";
+import SectionHead from "../SectionHead.astro";
+import CtaBand from "../CtaBand.astro";
 import type { Dictionary, Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
@@ -9,7 +11,14 @@ const r = dict.pricing.renewal;
 ---
 
 <Layout title={dict.pricing.title} description={dict.pricing.subtitle} locale={locale} dict={dict} slug="/pricing">
-  <Pricing dict={dict} locale={locale} />
+  <section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+    <h1 class="max-w-2xl font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.15] text-ink">{dict.pricing.title}</h1>
+    <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">{dict.pricing.subtitle}</p>
+  </section>
+  <Pricing dict={dict} locale={locale} hideHead showRenewal={false} />
+  <div class="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
+    <SectionHead title={dict.v2.pricingTable.title} subtitle={dict.v2.pricingTable.subtitle} />
+  </div>
   <PricingTable dict={dict} locale={locale} />
   <section class="mx-auto max-w-6xl px-4 pb-16 sm:pb-20">
     <div data-reveal class="grid items-center gap-6 rounded-2xl border border-line bg-surface px-6 py-8 sm:px-8 lg:grid-cols-[auto_1fr_auto] lg:gap-10">
@@ -18,9 +27,10 @@ const r = dict.pricing.renewal;
       </span>
       <div>
         <h2 class="font-display text-[clamp(1.25rem,1.1rem+0.7vw,1.5rem)] font-semibold leading-snug text-ink">{r.title}</h2>
-        <p class="mt-1.5 max-w-2xl text-base leading-[28px] text-body sm:text-base">{r.desc}</p>
+        <p class="mt-1.5 max-w-2xl text-base leading-[28px] text-body">{r.desc}</p>
       </div>
       <p class="font-display text-[clamp(1.5rem,1.3rem+1vw,1.875rem)] font-semibold tabular-nums text-ink">{r.price} <span class="font-sans text-sm font-medium text-muted">/ {r.per}</span></p>
     </div>
   </section>
+  <CtaBand dict={dict} locale={locale} />
 </Layout>

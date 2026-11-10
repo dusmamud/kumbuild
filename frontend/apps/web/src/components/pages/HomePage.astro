@@ -33,14 +33,12 @@ const chips = [
 <Layout title={dict.hero.title} description={dict.hero.subtitle} locale={locale} dict={dict} slug="/">
   <Hero dict={dict} locale={locale} />
   <Marquee dict={dict} />
-  <div class="pt-14 sm:pt-16">
-    <StatsBand dict={dict} />
-  </div>
+  <StatsBand dict={dict} />
   <div data-reveal>
     <WhoItsFor dict={dict} />
   </div>
   <Services dict={dict} locale={locale} />
-  <Industries dict={dict} />
+  <Industries dict={dict} locale={locale} />
   <Band dict={dict} />
   <div data-reveal>
     <HowItWorks dict={dict} />
@@ -73,11 +71,11 @@ const chips = [
             ))}
           </ul>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a href={pageUrl(locale, "/order")} class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-500 px-7 py-3.5 text-base font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-600 active:scale-[0.98]">
+            <a href={pageUrl(locale, "/order")} class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-7 py-3.5 text-base font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-700 active:scale-[0.98]">
               {dict.hero.ctaOrder}
               <Icon name="arrow-right" class="h-[18px] w-[18px]" />
             </a>
-            <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/25 px-7 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:border-white/60">
+            <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/25 px-7 py-3.5 text-base font-semibold text-white transition-[border-color,transform] duration-200 hover:border-white/60 active:scale-[0.98]">
               <Icon name="message-circle" class="h-[18px] w-[18px]" />
               {dict.contact.whatsapp}
             </a>

@@ -11,7 +11,7 @@ const items = [...m.items, ...m.items];
     <p class="text-center font-mono text-xs text-muted">{m.label}</p>
   </div>
   <div class="marquee-track relative overflow-hidden py-6 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-    <div class="animate-marquee flex w-max items-center gap-10 pr-10">
+    <div class="animate-marquee flex w-max items-center gap-10 pr-10" aria-hidden="true">
       {items.map((item) => (
         <span class="flex items-center gap-10 whitespace-nowrap font-display text-lg font-semibold text-ink/60">
           {item}

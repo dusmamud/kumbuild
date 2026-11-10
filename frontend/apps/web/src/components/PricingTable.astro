@@ -64,10 +64,10 @@ const checkIcon = `<svg class="mx-auto h-[18px] w-[18px] text-primary-600" viewB
     <table class="w-full min-w-[560px] border-collapse text-left">
       <thead>
         <tr class="border-b border-line">
-          <th scope="col" class="px-5 py-4 sm:px-6"><span class="sr-only">Feature</span></th>
+          <th scope="col" class="sticky left-0 z-20 bg-white px-5 py-4 sm:px-6"><span class="sr-only">Feature</span></th>
           {pkgs.map((pkg) => (
             <th scope="col" class={`px-4 py-4 text-center ${pkg.slug === "business" ? "bg-primary-50" : ""}`}>
-              <span class="font-mono text-sm font-medium text-ink">{pkg.name}</span>
+              <span class="font-display text-base font-semibold text-ink">{pkg.name}</span>
               <span class="mt-0.5 block font-display text-base font-semibold tabular-nums text-ink">{pkg.price}</span>
             </th>
           ))}
@@ -76,12 +76,12 @@ const checkIcon = `<svg class="mx-auto h-[18px] w-[18px] text-primary-600" viewB
       <tbody>
         {rows.map((feature) => (
           <tr class="border-b border-line last:border-b-0">
-            <th scope="row" class="px-5 py-3.5 text-base font-normal text-body sm:px-6">{feature}</th>
+            <th scope="row" class="sticky left-0 z-10 bg-white px-5 py-3.5 text-base font-normal text-body shadow-[10px_0_14px_-12px_rgba(28,25,23,0.25)] sm:px-6">{feature}</th>
             {pkgs.map((pkg) => (
               <td class={`px-4 py-3.5 text-center ${pkg.slug === "business" ? "bg-primary-50" : ""}`}>
                 {resolved.get(pkg.slug)?.has(feature)
                   ? <Fragment set:html={checkIcon} />
-                  : <span class="text-faint" aria-hidden="true">—</span>}
+                  : <><span class="text-faint" aria-hidden="true">—</span><span class="sr-only">{dict.v2.ui.notIncluded}</span></>}
               </td>
             ))}
           </tr>
@@ -90,7 +90,7 @@ const checkIcon = `<svg class="mx-auto h-[18px] w-[18px] text-primary-600" viewB
           <td class="px-5 py-4 sm:px-6"></td>
           {pkgs.map((pkg) => (
             <td class={`px-4 py-4 text-center ${pkg.slug === "business" ? "bg-primary-50" : ""}`}>
-              <a href={pageUrl(locale, "/order")} class="inline-block rounded-xl bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-600 active:scale-[0.98]">{pkg.cta}</a>
+              <a href={pageUrl(locale, "/order")} class="inline-block rounded-xl bg-primary-600 px-5 py-3 text-base font-semibold text-white transition hover:bg-primary-700 active:scale-[0.98]">{pkg.cta}</a>
             </td>
           ))}
         </tr>

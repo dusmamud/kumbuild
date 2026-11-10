@@ -247,7 +247,9 @@
     "successText": "Dhanyavaad! Hum aapke package aur content confirm karne ke liye jald hi WhatsApp par message karenge. Aapka reference neeche hai — please save kar lein.",
     "successTitle": "Order mil gaya!",
     "title": "Apni website order karein",
-    "whatsapp": "WhatsApp number"
+    "whatsapp": "WhatsApp number",
+    "waHint": "अगर नंबर फ़ोन वाला ही है तो खाली छोड़ दें",
+    "invalidPhone": "सही फ़ोन नंबर डालें (कम से कम 10 अंक)"
   },
   "pricing": {
     "note": "Prices draft hain, payment se pehle confirm ki jayengi.",
@@ -369,7 +371,8 @@
       "waNumber": "919876543210",
       "waText": "नमस्ते Kumbuild, मुझे अपने व्यवसाय के लिए वेबसाइट चाहिए।",
       "email": "hello@kumbuild.com",
-      "submit": "पूछताछ भेजें"
+      "submit": "पूछताछ भेजें",
+      "sendAnother": "एक और संदेश भेजें"
     },
     "ui": {
       "toTop": "ऊपर जाएँ",
@@ -381,7 +384,14 @@
       "oneTime": "एक बार",
       "popular": "सबसे लोकप्रिय",
       "included": "शामिल है",
-      "perYear": "/वर्ष"
+      "perYear": "/वर्ष",
+      "notIncluded": "शामिल नहीं है",
+      "pause": "रोकें",
+      "play": "चलाएँ",
+      "prevReviews": "पिछली समीक्षाएँ",
+      "nextReviews": "अगली समीक्षाएँ",
+      "ratingLabel": "5 में से {n} स्टार",
+      "clearSearch": "खोज साफ़ करें"
     },
     "footer": {
       "about": "भारतीय छोटे व्यवसायों के लिए तैयारशुदा वेबसाइटें। आप बताइए क्या बनाना है — हम डिज़ाइन, लेखन और लॉन्च करते हैं, फिर उसे चलाते भी रहते हैं।",
@@ -729,7 +739,8 @@
           ],
           "img": "/blog/blog-cost.webp"
         }
-      ]
+      ],
+      "readNext": "आगे पढ़ें"
     },
     "refund": {
       "title": "रिफंड नीति",
@@ -751,7 +762,11 @@
           "title": "नवीनीकरण",
           "text": "केयर-प्लान नवीनीकरण कभी भी रद्द किया जा सकता है; आपकी वेबसाइट भुगतान अवधि के अंत तक लाइव रहती है, और आपका डोमेन और सामग्री आपकी रहती है।"
         }
-      ]
+      ],
+      "help": {
+        "title": "रिफ़ंड पर सवाल है?",
+        "text": "WhatsApp पर संदेश भेजें या संपर्क पेज का उपयोग करें — हम एक कार्य-दिवस में जवाब देते हैं।"
+      }
     },
     "faq": {
       "searchPlaceholder": "सवाल खोजें — “कीमत” या “डोमेन” आज़माएँ",
@@ -801,6 +816,15 @@
           "free": "₹15,000+"
         }
       ]
+    },
+    "pricingTable": {
+      "title": "हर प्लान की तुलना करें",
+      "subtitle": "हर सुविधा, साथ-साथ — बाद में कोई हैरानी नहीं।"
+    },
+    "notFound": {
+      "title": "पेज नहीं मिला",
+      "text": "आप जो पेज खोज रहे हैं वह हट गया है या मौजूद ही नहीं है।",
+      "home": "होम पर वापस जाएँ"
     }
   }
 }

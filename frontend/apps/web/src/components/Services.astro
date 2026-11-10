@@ -2,25 +2,27 @@
 import SectionHead from "./SectionHead.astro";
 import Icon from "./Icon.astro";
 import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
-interface Props { dict: Dictionary; locale: Locale; no?: string; }
-const { dict, locale, no } = Astro.props;
+interface Props { dict: Dictionary; locale: Locale; no?: string; bare?: boolean; }
+const { dict, locale, no, bare } = Astro.props;
 const s = dict.services;
 /* One proper icon per service (locked dictionary order). */
 const icons = ["globe", "rocket", "calendar-check", "book-open"];
 ---
 
 <section class="bg-paper">
-  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-    <div data-reveal>
-      <SectionHead no={no} title={s.title} subtitle={s.subtitle} />
-    </div>
-    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+  <div class={`mx-auto max-w-6xl px-4 sm:px-6 ${bare ? "pb-14 sm:pb-16" : "py-16 sm:py-24"}`}>
+    {!bare && (
+      <div data-reveal>
+        <SectionHead no={no} title={s.title} subtitle={s.subtitle} />
+      </div>
+    )}
+    <div class={`${bare ? "" : "mt-10 "}grid gap-6 sm:grid-cols-2`}>
       {s.items.map((item, i) => (
         <a
           href={pageUrl(locale, `/services/${item.slug}`)}
           data-reveal
           style={`--reveal-delay:${i * 70}ms`}
-          class="group flex flex-col rounded-2xl border border-line bg-white p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.28)] sm:p-7"
+          class="group flex flex-col rounded-2xl border border-line bg-white p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)] sm:p-7"
         >
           <span class="flex items-start justify-between">
             <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white">
@@ -32,7 +34,7 @@ const icons = ["globe", "rocket", "calendar-check", "book-open"];
           <p class="mt-2 text-base leading-[28px] text-body">{item.desc}</p>
           <ul class="mt-5 flex-1 space-y-2.5 border-t border-dashed border-line pt-5">
             {dict.v2.servicesV2.pages[item.slug].features.slice(0, 3).map((f) => (
-              <li class="flex items-start gap-2.5 text-[15px] leading-[24px] text-body">
+              <li class="flex items-start gap-2.5 text-base leading-[26px] text-body">
                 <span class="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-live-soft text-live">
                   <Icon name="check" class="h-3 w-3" />
                 </span>
@@ -40,7 +42,7 @@ const icons = ["globe", "rocket", "calendar-check", "book-open"];
               </li>
             ))}
           </ul>
-          <p class="mt-5 text-[13px] font-medium text-muted">{item.for}</p>
+          <p class="mt-5 text-sm font-medium text-muted">{item.for}</p>
         </a>
       ))}
     </div>

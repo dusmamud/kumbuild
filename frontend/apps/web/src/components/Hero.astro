@@ -25,18 +25,18 @@ const miniProducts = [
         <h1 class="mt-6 max-w-[560px] text-[clamp(2.25rem,1.55rem+3.4vw,3.75rem)] font-semibold leading-[1.08]">{hero.headlineA}<span class="text-primary-700 underline decoration-primary-200 decoration-[6px] underline-offset-[8px]">{hero.headlineAccent}</span>{hero.headlineB}</h1>
         <p class="mt-6 max-w-[520px] text-[clamp(1.0625rem,0.97rem+0.6vw,1.25rem)] leading-[1.6] text-body">{hero.subtitle}</p>
         <div class="mt-9 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:items-center">
-          <a href={pageUrl(locale, "/order")} class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-500 px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-primary-600">
+          <a href={pageUrl(locale, "/order")} class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-7 py-3.5 text-base font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-700 active:scale-[0.98]">
             {hero.ctaOrder}
             <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
           </a>
-          <a href={pageUrl(locale, "/pricing")} class="inline-flex items-center justify-center rounded-xl border border-[#ddd6c9] bg-white px-7 py-3.5 text-base font-semibold text-primary-700 transition-colors hover:border-primary-500">{hero.ctaPricing}</a>
+          <a href={pageUrl(locale, "/pricing")} class="inline-flex items-center justify-center rounded-xl border border-[#ddd6c9] bg-white px-7 py-3.5 text-base font-semibold text-primary-700 transition-[border-color,transform] duration-200 hover:border-primary-500 active:scale-[0.98]">{hero.ctaPricing}</a>
         </div>
         <p class="mt-5 text-sm text-muted">{hero.note}</p>
         <dl class="mt-12 grid max-w-[520px] grid-cols-3 gap-6">
           {home.stats.map((s) => (
-            <div class="border-l-2 border-primary-500/70 pl-4">
-              <dd class="font-display text-[clamp(1.375rem,1.12rem+1vw,1.625rem)] font-semibold leading-none tabular-nums text-ink">{s.v}</dd>
-              <dt class="mt-2 text-[13px] leading-[18px] text-muted">{s.k}</dt>
+            <div class="flex flex-col border-l-2 border-primary-500/70 pl-4">
+              <dt class="order-2 mt-2 text-[13px] leading-[18px] text-muted">{s.k}</dt>
+              <dd class="order-1 font-display text-[clamp(1.375rem,1.12rem+1vw,1.625rem)] font-semibold leading-none tabular-nums text-ink">{s.v}</dd>
             </div>
           ))}
         </dl>
@@ -48,8 +48,8 @@ const miniProducts = [
           <img
             src="/hero/shop-owner.jpg"
             alt="A shop owner smiling in his general store — the kind of business Kumbuild builds websites for"
-            width="1280"
-            height="1920"
+            width="1000"
+            height="1080"
             class="aspect-[4/5] w-full rounded-[24px] object-cover object-[50%_22%] shadow-[0_32px_64px_-32px_rgba(28,25,23,0.4)] sm:aspect-[5/5.4]"
             loading="eager"
           />

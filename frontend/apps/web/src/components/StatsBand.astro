@@ -5,13 +5,13 @@ const { dict } = Astro.props;
 const stats = dict.v2.aboutV2.stats;
 ---
 
-<section class="bg-paper">
+<section class="bg-paper pt-14 sm:pt-16">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <dl data-reveal class="grid grid-cols-2 overflow-hidden rounded-2xl border border-line bg-white lg:grid-cols-4">
       {stats.map((s, i) => (
-        <div class={`px-6 py-7 sm:px-8 ${i > 0 ? "border-line max-lg:odd:border-l lg:border-l" : ""} ${i > 1 ? "max-lg:border-t" : ""}`}>
-          <dd class="font-display text-[clamp(1.625rem,1.35rem+1.3vw,2.125rem)] font-semibold tabular-nums text-ink">{s.value}</dd>
-          <dt class="mt-1.5 text-sm leading-[22px] text-muted">{s.label}</dt>
+        <div class={`flex flex-col px-6 py-7 sm:px-8 ${i % 2 === 1 ? "border-l border-line lg:border-l-0" : ""} ${i > 0 ? "lg:border-l lg:border-line" : ""} ${i > 1 ? "max-lg:border-t max-lg:border-line" : ""}`}>
+          <dt class="order-2 mt-1.5 text-sm leading-[22px] text-muted">{s.label}</dt>
+          <dd class="order-1 font-display text-[clamp(1.625rem,1.35rem+1.3vw,2.125rem)] font-semibold tabular-nums text-ink">{s.value}</dd>
         </div>
       ))}
     </dl>

@@ -17,17 +17,17 @@ const fmtDate = (iso: string) =>
 <Layout title={post.title} description={post.excerpt} locale={locale} dict={dict} slug={`/blog/${post.slug}`}>
   <article class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
     <div class="mx-auto max-w-prose">
-      <a data-reveal href={pageUrl(locale, "/blog")} class="inline-flex items-center gap-1.5 text-base font-semibold text-primary-700 hover:text-primary-600">
+      <a data-reveal href={pageUrl(locale, "/blog")} class="-my-2 inline-flex min-h-[40px] items-center gap-1.5 py-2 text-base font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700">
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5" /><path d="m12 19-7-7 7-7" /></svg>
         {dict.v2.nav.blog}
       </a>
       <div data-reveal class="mt-8">
         <span class="w-fit rounded-full bg-primary-50 px-2.5 py-1 font-mono text-xs font-medium text-primary-700">{post.tag}</span>
-        <h1 class="mt-4 font-display text-[clamp(1.875rem,1.45rem+2vw,2.5rem)] font-semibold leading-[1.2] text-ink">{post.title}</h1>
+        <h1 class="mt-4 font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.2] text-ink">{post.title}</h1>
         <p class="mt-4 font-mono text-xs text-muted">{fmtDate(post.date)} · {post.readMins} {dict.v2.ui.minRead}</p>
       </div>
       <div data-reveal class="mt-8 overflow-hidden rounded-2xl border border-line">
-        <img src={post.img} alt="" class="aspect-[21/9] w-full object-cover" />
+        <img src={post.img} alt={post.title} width="1600" height="686" class="aspect-[21/9] w-full object-cover" />
       </div>
       <div data-reveal class="mt-8 border-t border-line pt-8">
         {post.body.map((para) => (
@@ -36,5 +36,23 @@ const fmtDate = (iso: string) =>
       </div>
     </div>
   </article>
+  <section class="mx-auto max-w-6xl px-4 pb-14 sm:px-6 sm:pb-16">
+    <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{b.readNext}</h2>
+    <div class="mt-6 grid gap-5 sm:grid-cols-2">
+      {b.posts.filter((p) => p.slug !== post.slug).map((p) => (
+        <a data-reveal href={pageUrl(locale, `/blog/${p.slug}`)} class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
+          <span class="relative block overflow-hidden">
+            <img src={p.img} alt={p.title} width="1200" height="675" loading="lazy" class="aspect-[16/9] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+            <span class="absolute bottom-3 left-3 rounded-full bg-white/95 px-2.5 py-1 font-mono text-xs font-medium text-primary-700 shadow-sm">{p.tag}</span>
+          </span>
+          <span class="flex flex-1 flex-col p-6">
+            <span class="font-display text-[clamp(1.125rem,1.02rem+0.5vw,1.25rem)] font-semibold leading-snug text-ink group-hover:text-primary-700">{p.title}</span>
+            <span class="mt-2 flex-1 text-base leading-[28px] text-body">{p.excerpt}</span>
+            <span class="mt-5 font-mono text-xs text-muted">{fmtDate(p.date)} · {p.readMins} {dict.v2.ui.minRead}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
   <CtaBand dict={dict} locale={locale} />
 </Layout>

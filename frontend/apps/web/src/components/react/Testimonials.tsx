@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "motion/react";
-import { Star, ArrowLeft, ArrowRight, Quote } from "lucide-react";
+import { Star, ArrowLeft, ArrowRight, Quote, Pause, Play } from "lucide-react";
 
 export interface Testimonial {
   name: string;
@@ -15,10 +15,18 @@ export interface Testimonial {
 
 /** Testimonial carousel — Embla + autoplay (pauses on hover/touch),
     one card language with the order-slip mono meta line. */
-export default function Testimonials({ items }: { items: Testimonial[] }) {
+interface Labels { prev: string; next: string; pause: string; play: string; rating: string; }
+
+export default function Testimonials({ items, labels }: { items: Testimonial[]; labels: Labels }) {
   const autoplay = useRef(
-    Autoplay({ delay: 5200, stopOnInteraction: false, stopOnMouseEnter: true })
+    Autoplay({ delay: 5200, stopOnInteraction: true, stopOnMouseEnter: true })
   );
+  const [playing, setPlaying] = useState(true);
+  const togglePlay = useCallback(() => {
+    if (playing) autoplay.current.stop();
+    else autoplay.current.play();
+    setPlaying(!playing);
+  }, [playing]);
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: "start", skipSnaps: false },
     [autoplay.current]
@@ -28,7 +36,7 @@ export default function Testimonials({ items }: { items: Testimonial[] }) {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) autoplay.current.stop();
+    if (reduce) { autoplay.current.stop(); setPlaying(false); }
   }, []);
 
   return (
@@ -42,11 +50,11 @@ export default function Testimonials({ items }: { items: Testimonial[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="flex min-w-0 shrink-0 grow-0 basis-full flex-col rounded-2xl border border-line bg-white p-6 transition-shadow duration-300 hover:shadow-[0_18px_36px_-24px_rgba(28,25,23,0.3)] sm:basis-[calc(50%-10px)] lg:basis-[calc(33.333%-14px)]"
+              className="flex min-w-0 shrink-0 grow-0 basis-full flex-col rounded-2xl border border-line bg-white p-6 transition-shadow duration-300 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)] sm:basis-[calc(50%-10px)] lg:basis-[calc(33.333%-14px)]"
             >
               <span className="flex items-center justify-between">
                 <Quote className="h-6 w-6 text-primary-500" strokeWidth={1.5} aria-hidden />
-                <span className="flex items-center gap-1" aria-label={`${t.stars} out of 5 stars`}>
+                <span className="flex items-center gap-1" aria-label={labels.rating.replace("{n}", String(t.stars))}>
                   {Array.from({ length: t.stars }).map((_, s) => (
                     <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden />
                   ))}
@@ -81,18 +89,27 @@ export default function Testimonials({ items }: { items: Testimonial[] }) {
         <button
           type="button"
           onClick={scrollPrev}
-          aria-label="Previous reviews"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-body transition-colors duration-200 hover:bg-surface hover:text-ink active:scale-[0.97]"
+          aria-label={labels.prev}
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-body transition-colors duration-200 hover:bg-surface hover:text-ink active:scale-[0.97]"
         >
           <ArrowLeft className="h-4 w-4" strokeWidth={1.5} />
         </button>
         <button
           type="button"
           onClick={scrollNext}
-          aria-label="Next reviews"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-body transition-colors duration-200 hover:bg-surface hover:text-ink active:scale-[0.97]"
+          aria-label={labels.next}
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-body transition-colors duration-200 hover:bg-surface hover:text-ink active:scale-[0.97]"
         >
           <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+        </button>
+        <button
+          type="button"
+          onClick={togglePlay}
+          aria-label={playing ? labels.pause : labels.play}
+          aria-pressed={!playing}
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-body transition-colors duration-200 hover:bg-surface hover:text-ink active:scale-[0.97]"
+        >
+          {playing ? <Pause className="h-4 w-4" strokeWidth={1.5} /> : <Play className="h-4 w-4" strokeWidth={1.5} />}
         </button>
       </div>
     </div>

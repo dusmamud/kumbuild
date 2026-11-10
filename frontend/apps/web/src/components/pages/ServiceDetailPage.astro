@@ -16,14 +16,18 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
 <Layout title={item.title} description={page.intro} locale={locale} dict={dict} slug={`/services/${item.slug}`}>
   {/* Breadcrumb + intro */}
   <section class="mx-auto max-w-6xl px-4 pt-10 sm:pt-14" data-reveal>
-    <nav aria-label="breadcrumb" class="flex flex-wrap items-center gap-1.5 text-sm text-muted">
-      <a href={pageUrl(locale, "/services")} class="font-medium text-primary-700 transition-colors duration-200 hover:text-primary-600">{dict.nav.services}</a>
-      <svg class="h-4 w-4 text-faint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={chevronIcon} />
-      <span class="text-body" aria-current="page">{item.title}</span>
+    <nav aria-label="breadcrumb">
+      <ol class="flex flex-wrap items-center gap-1.5 text-sm text-muted">
+        <li>
+          <a href={pageUrl(locale, "/services")} class="-my-2 inline-flex min-h-[40px] items-center font-medium text-primary-600 transition-colors duration-200 hover:text-primary-700">{dict.nav.services}</a>
+        </li>
+        <li aria-hidden="true"><Icon name="chevron-right" class="h-4 w-4 text-faint" /></li>
+        <li class="text-body" aria-current="page">{item.title}</li>
+      </ol>
     </nav>
-    <h1 class="mt-6 max-w-3xl font-display text-[clamp(1.625rem,1.32rem+1.5vw,2.25rem)] font-semibold leading-[1.15] text-ink">{page.h1}</h1>
+    <h1 class="mt-6 max-w-3xl font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.15] text-ink">{page.h1}</h1>
     <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{page.intro}</p>
-    <p class="mt-5 flex flex-wrap items-baseline gap-x-2 text-base sm:text-base">
+    <p class="mt-5 flex flex-wrap items-baseline gap-x-2 text-base">
       <span class="font-mono text-[13px] font-medium uppercase tracking-wide text-muted">{sv.detailFor}</span>
       <span class="font-medium text-primary-700">{item.for}</span>
     </p>
@@ -32,13 +36,13 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
   {/* Hero image in a browser-chrome frame */}
   <section class="mx-auto max-w-6xl px-4 pt-10 sm:pt-12" data-reveal>
     <figure class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,25,23,0.08)]">
-      <div class="flex items-center gap-1.5 border-b border-line bg-paper px-4 py-2.5">
-        <span class="h-2.5 w-2.5 rounded-full bg-[#DE6B4F]" aria-hidden="true"></span>
-        <span class="h-2.5 w-2.5 rounded-full bg-[#E5B84C]" aria-hidden="true"></span>
-        <span class="h-2.5 w-2.5 rounded-full bg-live" aria-hidden="true"></span>
-        <span class="ml-2 truncate rounded-md bg-surface px-2.5 py-0.5 font-mono text-[12px] text-muted">{item.slug}.in</span>
+      <div class="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-2.5">
+        <span class="h-2.5 w-2.5 rounded-full bg-[#E8B4AE]" aria-hidden="true"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#EBD9A8]" aria-hidden="true"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#AED8BC]" aria-hidden="true"></span>
+        <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{item.slug}.in</span>
       </div>
-      <img src={page.img} alt={item.title} width="1600" height="800" class="block aspect-[16/10] w-full object-cover object-top sm:aspect-[16/8]" />
+      <img src={page.img} alt={`${item.title} — ${item.for}`} width="1600" height="1000" class="block aspect-[16/10] w-full object-cover object-top sm:aspect-[16/8]" />
     </figure>
   </section>
 
@@ -49,7 +53,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
         <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{sv.detailIncludes}</h2>
         <ul class="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2">
           {page.features.map((f) => (
-            <li class="flex gap-3 text-base leading-[24px] text-body sm:text-base">
+            <li class="flex gap-3 text-base leading-[26px] text-body">
               <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-live-soft text-live">
                 <Icon name="check" class="h-4 w-4" />
               </span>
@@ -58,14 +62,14 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
           ))}
         </ul>
       </div>
-      <aside class="h-fit rounded-2xl border border-line bg-white p-6 sm:p-7">
+      <aside class="h-fit rounded-2xl border border-line bg-white p-6 sm:p-7 lg:sticky lg:top-24">
         <h2 class="font-display text-lg font-semibold text-ink">{dict.pricing.title}</h2>
         <p class="mt-2 text-base leading-[28px] text-body">{dict.hero.note}</p>
-        <a href={orderUrl} class="mt-5 flex items-center justify-center gap-2 rounded-xl bg-primary-500 px-4 py-3 text-base font-semibold text-white transition duration-200 hover:bg-primary-600 active:scale-[0.98]">
+        <a href={orderUrl} class="mt-5 flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-4 py-3 text-base font-semibold text-white transition duration-200 hover:bg-primary-700 active:scale-[0.98]">
           {dict.nav.order}
           <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
         </a>
-        <a href={pageUrl(locale, "/pricing")} class="mt-4 inline-flex items-center gap-1.5 text-base font-semibold text-primary-700 transition-colors duration-200 hover:text-primary-600">
+        <a href={pageUrl(locale, "/pricing")} class="mt-4 inline-flex items-center gap-1.5 text-base font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700">
           {dict.hero.ctaPricing}
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
         </a>
@@ -80,12 +84,28 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
       <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{dict.how.title}</h2>
       <ol class="mt-7 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-5">
         {dict.how.steps.map((step, i) => (
-          <li class="flex items-baseline gap-3 border-t border-line pt-4 lg:border-t-0 lg:pt-0">
+          <li class="flex min-w-0 items-baseline gap-3 border-t border-line pt-4 lg:border-t-0 lg:pt-0">
             <span class="font-mono text-sm font-medium text-primary-700">{String(i + 1).padStart(2, "0")}</span>
-            <span class="text-base font-medium text-ink sm:text-base">{step.title}</span>
+            <span class="text-base font-medium leading-[24px] text-ink">{step.title}</span>
           </li>
         ))}
       </ol>
+    </div>
+  </section>
+
+  {/* Other services — the way onward from a detail page */}
+  <section class="mx-auto max-w-6xl px-4 pt-12 sm:pt-14" data-reveal>
+    <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{dict.services.title}</h2>
+    <div class="mt-6 grid gap-4 sm:grid-cols-3">
+      {dict.services.items.filter((o) => o.slug !== item.slug).map((o) => (
+        <a href={pageUrl(locale, `/services/${o.slug}`)} class="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white px-5 py-4 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
+          <span>
+            <span class="block text-base font-semibold text-ink">{o.title}</span>
+            <span class="mt-0.5 block text-sm text-muted">{o.for}</span>
+          </span>
+          <Icon name="arrow-right" class="h-5 w-5 shrink-0 text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-primary-600" />
+        </a>
+      ))}
     </div>
   </section>
 
@@ -95,10 +115,10 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
       <div class="flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
         <div class="max-w-xl">
           <h2 class="font-display text-[clamp(1.5rem,1.3rem+1vw,2rem)] font-semibold leading-[1.25] text-ink">{sv.detailCtaTitle}</h2>
-          <p class="mt-2 text-base leading-[28px] text-body sm:text-base">{sv.detailCtaText}</p>
+          <p class="mt-2 text-base leading-[28px] text-body">{sv.detailCtaText}</p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-          <a href={orderUrl} class="inline-flex items-center gap-2 rounded-xl bg-primary-500 px-5 py-3 text-base font-semibold text-white transition duration-200 hover:bg-primary-600 active:scale-[0.98]">
+          <a href={orderUrl} class="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-5 py-3 text-base font-semibold text-white transition duration-200 hover:bg-primary-700 active:scale-[0.98]">
             {dict.nav.order}
             <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
           </a>

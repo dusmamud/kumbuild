@@ -1,30 +1,31 @@
 ---
 import SectionHead from "./SectionHead.astro";
 import Icon from "./Icon.astro";
-import type { Dictionary } from "../i18n/utils";
-interface Props { dict: Dictionary; no?: string; }
-const { dict, no } = Astro.props;
+import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; no?: string; }
+const { dict, locale, no } = Astro.props;
 /* Icons matched to the marquee business types, same order in all locales. */
 const icons = ["store", "scissors", "stethoscope", "graduation-cap", "coffee", "shirt", "dumbbell", "utensils", "zap", "sofa", "plane", "chef-hat"];
 const items = dict.v2.marquee.items;
 ---
 
 <section class="border-y border-line bg-surface">
-  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
     <div data-reveal>
       <SectionHead no={no} title={dict.v2.marquee.label} />
     </div>
     <ul class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
       {items.map((label, i) => (
-        <li
-          data-reveal
-          style={`--reveal-delay:${(i % 4) * 60}ms`}
-          class="group flex items-center gap-3.5 rounded-2xl border border-line bg-white px-5 py-4 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_14px_30px_-20px_rgba(28,25,23,0.3)]"
-        >
-          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white">
-            <Icon name={icons[i] ?? "store"} class="h-5 w-5" />
-          </span>
-          <span class="text-[15px] font-semibold leading-[22px] text-ink">{label}</span>
+        <li data-reveal style={`--reveal-delay:${(i % 4) * 60}ms`}>
+          <a
+            href={pageUrl(locale, "/services")}
+            class="group flex items-center gap-3.5 rounded-2xl border border-line bg-white px-5 py-4 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
+          >
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white">
+              <Icon name={icons[i] ?? "store"} class="h-5 w-5" />
+            </span>
+            <span class="text-[15px] font-semibold leading-[22px] text-ink">{label}</span>
+          </a>
         </li>
       ))}
     </ul>

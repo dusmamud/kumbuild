@@ -1,5 +1,6 @@
 ---
 import "../styles/theme.css";
+import Icon from "../components/Icon.astro";
 import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
 
 interface Props {
@@ -89,14 +90,14 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
                 class={`flex items-center gap-1.5 ${onServices ? "font-semibold text-ink underline decoration-primary-500 decoration-2 underline-offset-8" : "font-medium text-body transition-colors duration-200 hover:text-ink"}`}
               >
                 {nav.services}
-                <svg class="h-3.5 w-3.5 text-muted transition-transform duration-300" id="services-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                <svg class="h-3.5 w-3.5 text-muted transition-transform duration-200" id="services-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
-              <div id="services-menu" class="invisible absolute left-1/2 top-full z-50 w-[26rem] -translate-x-1/2 pt-3 transition-transform duration-150 [transform:translate(-50%,6px)]">
+              <div id="services-menu" class="invisible absolute left-1/2 top-full z-50 w-[26rem] -translate-x-1/2 pt-3 transition-transform duration-200 [transform:translate(-50%,6px)]">
                 <div class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,25,23,0.12)]">
-                  {dict.services.items.map((s) => (
+                  {dict.services.items.map((s, si) => (
                     <a href={pageUrl(locale, `/services/${s.slug}`)} class="group flex items-start gap-3 px-5 py-3.5 transition-colors duration-200 first:pt-4 last:pb-4 hover:bg-paper">
                       <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-200 group-hover:bg-primary-100">
-                        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20Z" /></svg>
+                        <Icon name={["globe", "rocket", "calendar-check", "book-open"][si] ?? "globe"} class="h-[18px] w-[18px]" />
                       </span>
                       <span>
                         <span class="block text-[15px] font-semibold text-ink">{s.title}</span>
@@ -130,7 +131,7 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
                 {locales.find((l) => l.code === locale)?.label}
                 <svg class="h-3 w-3 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
-              <div id="locale-menu" class="absolute right-0 top-full z-50 mt-2 hidden w-40 overflow-hidden rounded-xl border border-line bg-white py-1 shadow-[0_12px_32px_rgba(28,25,23,0.12)]">
+              <div id="locale-menu" class="invisible absolute right-0 top-full z-50 mt-2 w-40 translate-y-1 overflow-hidden rounded-xl border border-line bg-white py-1 opacity-0 shadow-[0_12px_32px_rgba(28,25,23,0.12)] transition-[opacity,transform,visibility] duration-200">
                 {locales.map((l) => (
                   <a
                     href={pageUrl(l.code, slug)}
@@ -142,7 +143,7 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
               </div>
             </div>
             <a href="https://auth.kumbuild.com/login" class="hidden text-[15px] font-medium text-body transition-colors duration-200 hover:text-ink lg:block">{nav.login}</a>
-            <a href={pageUrl(locale, "/order")} class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-primary-500 px-4 py-2 text-[15px] font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-600 active:scale-[0.98]">
+            <a href={pageUrl(locale, "/order")} class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-primary-600 px-4 py-2.5 text-[15px] font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-700 active:scale-[0.98]">
               {nav.order}
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
             </a>
@@ -161,7 +162,7 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
         </div>
       </div>
 
-      <div id="mobile-menu" data-lenis-prevent class="fixed inset-0 z-0 hidden overflow-y-auto bg-paper lg:hidden">
+      <div id="mobile-menu" data-lenis-prevent class="invisible fixed inset-0 z-0 translate-y-2 overflow-y-auto bg-paper opacity-0 transition-[opacity,transform,visibility] duration-200 lg:hidden">
         <div class="flex min-h-full flex-col px-5 pb-8 pt-[68px] sm:px-8">
           <nav class="flex flex-col" aria-label="Mobile">
             <a href={pageUrl(locale, "/services")} class={mobileLink(onServices)}>
@@ -181,7 +182,7 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
               </a>
             ))}
           </nav>
-          <a href={pageUrl(locale, "/order")} class="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-500 px-4 py-4 text-base font-semibold text-white transition-colors duration-200 hover:bg-primary-600">
+          <a href={pageUrl(locale, "/order")} class="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-4 py-4 text-base font-semibold text-white transition-colors duration-200 hover:bg-primary-700">
             {nav.order}
             <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
           </a>
@@ -195,8 +196,8 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
                 <a
                   href={pageUrl(l.code, slug)}
                   class={l.code === locale
-                    ? "rounded-full bg-primary-50 px-3.5 py-1.5 text-[13px] font-semibold text-primary-700 ring-1 ring-primary-500"
-                    : "rounded-full px-3.5 py-1.5 text-[13px] font-semibold text-muted ring-1 ring-line"}
+                    ? "rounded-full bg-primary-50 px-3.5 py-2.5 text-[13px] font-semibold text-primary-700 ring-1 ring-primary-500"
+                    : "rounded-full px-3.5 py-2.5 text-[13px] font-semibold text-muted ring-1 ring-line"}
                 >{l.label}</a>
               ))}
             </div>
@@ -212,7 +213,9 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
       const iconOpen = document.getElementById("icon-open");
       const iconClose = document.getElementById("icon-close");
       function setOpen(open) {
-        menu.classList.toggle("hidden", !open);
+        menu.classList.toggle("invisible", !open);
+        menu.classList.toggle("opacity-0", !open);
+        menu.classList.toggle("translate-y-2", !open);
         iconOpen.classList.toggle("hidden", open);
         iconClose.classList.toggle("hidden", !open);
         btn.setAttribute("aria-expanded", String(open));
@@ -222,23 +225,25 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
         const lenis = window.__lenis;
         if (lenis) open ? lenis.stop() : lenis.start();
       }
-      btn.addEventListener("click", () => setOpen(menu.classList.contains("hidden")));
+      btn.addEventListener("click", () => setOpen(menu.classList.contains("invisible")));
       menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
 
       const localeBtn = document.getElementById("locale-btn");
       const localeMenu = document.getElementById("locale-menu");
       function setLocaleOpen(open) {
         if (!localeMenu) return;
-        localeMenu.classList.toggle("hidden", !open);
+        localeMenu.classList.toggle("invisible", !open);
+        localeMenu.classList.toggle("opacity-0", !open);
+        localeMenu.classList.toggle("translate-y-1", !open);
         localeBtn.setAttribute("aria-expanded", String(open));
       }
       if (localeBtn) {
         localeBtn.addEventListener("click", (e) => {
           e.stopPropagation();
-          setLocaleOpen(localeMenu.classList.contains("hidden"));
+          setLocaleOpen(localeMenu.classList.contains("invisible"));
         });
         document.addEventListener("click", (e) => {
-          if (!localeMenu.classList.contains("hidden") && !localeMenu.contains(e.target)) {
+          if (!localeMenu.classList.contains("invisible") && !localeMenu.contains(e.target)) {
             setLocaleOpen(false);
           }
         });
@@ -308,6 +313,7 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
       window.addEventListener("scroll", () => {
         const show = window.scrollY > 700;
         toTop.classList.toggle("opacity-0", !show);
+        toTop.classList.toggle("invisible", !show);
         toTop.classList.toggle("pointer-events-none", !show);
         toTop.style.transform = show ? "translateY(0)" : "translateY(8px)";
       }, { passive: true });
@@ -342,7 +348,7 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
               </a>
             ))}
           </div>
-          <p class="mt-4 text-xs text-faint">{dict.footer.draftNote}</p>
+          <p class="mt-4 text-xs text-muted">{dict.footer.draftNote}</p>
         </div>
         <div>
           <p class="font-display text-[15px] font-semibold text-ink">{dict.footer.services}</p>
@@ -368,13 +374,13 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
           <p class="font-display text-[15px] font-semibold text-ink">{v2.footer.start}</p>
           <p class="mt-3 text-[15px] leading-relaxed text-muted">{v2.footer.startText}</p>
           <div class="mt-4 flex flex-wrap gap-2">
-            <a href={pageUrl(locale, "/order")} class="inline-flex items-center gap-1.5 rounded-xl bg-primary-500 px-4 py-2 text-[15px] font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-600 active:scale-[0.98]">
+            <a href={pageUrl(locale, "/order")} class="inline-flex items-center gap-1.5 rounded-xl bg-primary-600 px-4 py-2.5 text-[15px] font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-700 active:scale-[0.98]">
               {nav.order}
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
             </a>
             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 rounded-xl border border-line bg-white px-4 py-2 text-[15px] font-semibold text-ink transition-colors duration-200 hover:bg-paper">{dict.contact.whatsapp}</a>
           </div>
-          <p class="mt-4 font-mono text-xs text-faint">{dict.hero.note}</p>
+          <p class="mt-4 font-mono text-xs text-muted">{dict.hero.note}</p>
         </div>
       </div>
       <div class="border-t border-line">
@@ -396,7 +402,7 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
         id="to-top"
         type="button"
         aria-label={v2.ui.toTop}
-        class="pointer-events-none flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-body opacity-0 shadow-[0_8px_20px_rgba(28,25,23,0.12)] transition-[opacity,transform] duration-300 hover:text-ink"
+        class="invisible pointer-events-none flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-body opacity-0 shadow-[0_8px_20px_rgba(28,25,23,0.12)] transition-[opacity,transform,visibility] duration-300 hover:text-ink"
       >
         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6" /></svg>
       </button>

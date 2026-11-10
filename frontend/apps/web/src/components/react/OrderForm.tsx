@@ -1,4 +1,5 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { motion } from "motion/react";
 import type { Dictionary } from "@kumbuild/lib";
 
 interface Props {
@@ -6,14 +7,23 @@ interface Props {
   locale: string;
 }
 
+type FieldKey = "name" | "phone" | "businessName" | "message";
+
 const inputCls =
-  "w-full rounded-lg border border-line bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100";
-const labelCls = "mb-1 block text-sm font-semibold text-ink";
+  "w-full rounded-xl border border-line bg-white px-3.5 py-3 text-base text-ink outline-none transition-[border-color,box-shadow] duration-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100";
+const inputErrCls = "border-danger focus:border-danger focus:ring-danger/20";
+const labelCls = "mb-1.5 block text-sm font-semibold text-ink";
+
+function validPhone(v: string): boolean {
+  const digits = v.replace(/\D/g, "").replace(/^91(?=\d{10}$)/, "");
+  return digits.length >= 10;
+}
 
 /**
  * Order form — React island (client:load).
- * No backend yet: on submit it validates locally and shows a mock
- * confirmation with a reference. Nothing is sent anywhere.
+ * No backend yet: on submit it validates locally (per-field errors,
+ * phone format) and shows a mock confirmation with a reference.
+ * Nothing is sent anywhere.
  */
 export default function OrderForm({ dict, locale }: Props) {
   const o = dict.order;
@@ -25,64 +35,104 @@ export default function OrderForm({ dict, locale }: Props) {
   const [pkg, setPkg] = useState(dict.pricing.packages[1].slug);
   const [message, setMessage] = useState("");
   const [contentLanguage, setContentLanguage] = useState(locale);
-  const [errors, setErrors] = useState<string[]>([]);
+  const [errors, setErrors] = useState<Partial<Record<FieldKey, string>>>({});
   const [reference, setReference] = useState<string | null>(null);
+  const summaryRef = useRef<HTMLParagraphElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
-  const referenceFor = useMemo(() => reference, [reference]);
+  useEffect(() => {
+    if (reference) successRef.current?.focus();
+  }, [reference]);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    const missing: string[] = [];
-    if (!name.trim()) missing.push(o.name);
-    if (!phone.trim()) missing.push(o.phone);
-    if (!businessName.trim()) missing.push(o.businessName);
-    if (!message.trim()) missing.push(o.message);
-    setErrors(missing);
-    if (missing.length > 0) return;
+    const errs: Partial<Record<FieldKey, string>> = {};
+    if (!name.trim()) errs.name = o.required;
+    if (!phone.trim()) errs.phone = o.required;
+    else if (!validPhone(phone)) errs.phone = o.invalidPhone;
+    if (!businessName.trim()) errs.businessName = o.required;
+    if (!message.trim()) errs.message = o.required;
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) {
+      requestAnimationFrame(() => summaryRef.current?.focus());
+      return;
+    }
     const ref = `KB-${Date.now().toString(36).toUpperCase().slice(-6)}`;
     setReference(ref);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  if (referenceFor) {
+  const fieldErr = (key: FieldKey) =>
+    errors[key] ? (
+      <p id={`of-${key}-err`} className="mt-1.5 text-sm font-medium text-danger">
+        {errors[key]}
+      </p>
+    ) : null;
+  const ariaFor = (key: FieldKey) =>
+    errors[key]
+      ? { "aria-invalid": true as const, "aria-describedby": `of-${key}-err` }
+      : {};
+
+  if (reference) {
     return (
-      <div className="rounded-xl border border-green-200 bg-green-50 p-6">
+      <motion.div
+        ref={successRef}
+        tabIndex={-1}
+        role="status"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-2xl border border-green-200 bg-green-50 p-6 outline-none sm:p-8"
+      >
         <div className="flex items-center gap-2">
           <svg className="h-6 w-6 shrink-0 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></svg>
-          <h2 className="text-xl font-semibold text-ink">{o.successTitle}</h2>
+          <h2 className="font-display text-xl font-semibold text-ink">{o.successTitle}</h2>
         </div>
-        <p className="mt-2 text-[14.5px] leading-relaxed text-body">{o.successText}</p>
+        <p className="mt-2 text-base leading-[28px] text-body">{o.successText}</p>
         <p className="mt-4 text-sm">
           <span className="font-semibold text-ink">{o.reference}: </span>
-          <code className="rounded bg-white px-2 py-1 font-mono font-bold text-primary-700">{referenceFor}</code>
+          <code className="rounded bg-white px-2 py-1 font-mono font-bold text-primary-700">{reference}</code>
         </p>
-      </div>
+      </motion.div>
     );
   }
 
+  const errList = (Object.keys(errors) as FieldKey[]).map(
+    (k) => ({ name: o.name, phone: o.phone, businessName: o.businessName, message: o.message })[k],
+  );
+
   return (
-    <form onSubmit={onSubmit} className="rounded-xl border border-line bg-white p-6" noValidate>
-      {errors.length > 0 && (
-        <p className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">
-          {o.required}: {errors.join(", ")}
+    <form onSubmit={onSubmit} className="rounded-2xl border border-line bg-white p-6 sm:p-8" noValidate>
+      {errList.length > 0 && (
+        <p
+          ref={summaryRef}
+          tabIndex={-1}
+          role="alert"
+          className="mb-5 rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700 outline-none"
+        >
+          {o.required}: {errList.join(", ")}
         </p>
       )}
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label className={labelCls} htmlFor="of-name">{o.name} *</label>
-          <input id="of-name" className={inputCls} value={name} onChange={(e) => setName(e.target.value)} />
+          <input id="of-name" className={`${inputCls} ${errors.name ? inputErrCls : ""}`} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" {...ariaFor("name")} />
+          {fieldErr("name")}
         </div>
         <div>
           <label className={labelCls} htmlFor="of-phone">{o.phone} *</label>
-          <input id="of-phone" className={inputCls} type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <input id="of-phone" className={`${inputCls} ${errors.phone ? inputErrCls : ""}`} type="tel" inputMode="tel" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" {...ariaFor("phone")} />
+          {fieldErr("phone")}
         </div>
         <div>
           <label className={labelCls} htmlFor="of-wa">{o.whatsapp}</label>
-          <input id="of-wa" className={inputCls} type="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder={phone} />
+          <input id="of-wa" className={inputCls} type="tel" inputMode="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} autoComplete="tel" aria-describedby="of-wa-hint" />
+          <p id="of-wa-hint" className="mt-1.5 text-sm text-muted">{o.waHint}</p>
         </div>
         <div>
           <label className={labelCls} htmlFor="of-biz">{o.businessName} *</label>
-          <input id="of-biz" className={inputCls} value={businessName} onChange={(e) => setBusinessName(e.target.value)} />
+          <input id="of-biz" className={`${inputCls} ${errors.businessName ? inputErrCls : ""}`} value={businessName} onChange={(e) => setBusinessName(e.target.value)} autoComplete="organization" {...ariaFor("businessName")} />
+          {fieldErr("businessName")}
         </div>
         <div>
           <label className={labelCls} htmlFor="of-type">{o.businessType}</label>
@@ -102,7 +152,8 @@ export default function OrderForm({ dict, locale }: Props) {
         </div>
         <div className="sm:col-span-2">
           <label className={labelCls} htmlFor="of-msg">{o.message} *</label>
-          <textarea id="of-msg" className={inputCls} rows={3} value={message} onChange={(e) => setMessage(e.target.value)} />
+          <textarea id="of-msg" className={`${inputCls} ${errors.message ? inputErrCls : ""}`} rows={3} value={message} onChange={(e) => setMessage(e.target.value)} {...ariaFor("message")} />
+          {fieldErr("message")}
         </div>
         <div>
           <label className={labelCls} htmlFor="of-lang">{o.contentLanguage}</label>
@@ -113,10 +164,10 @@ export default function OrderForm({ dict, locale }: Props) {
           </select>
         </div>
       </div>
-      <button type="submit" className="mt-6 w-full rounded-lg bg-primary-500 px-6 py-3 text-base font-semibold text-white hover:bg-primary-600 sm:w-auto">
+      <button type="submit" className="mt-7 w-full rounded-xl bg-primary-600 px-6 py-3.5 text-base font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-700 active:scale-[0.98] sm:w-auto">
         {o.submit}
       </button>
-      <p className="mt-3 text-xs text-muted">{o.note}</p>
+      <p className="mt-3 text-sm text-muted">* {o.required} · {o.note}</p>
     </form>
   );
 }

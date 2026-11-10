@@ -5,13 +5,13 @@ const { dict } = Astro.props;
 const b = dict.v2.homeV2;
 ---
 
-<section class="border-y border-line bg-surface">
-  <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14">
+<section class="bg-paper">
+  <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:gap-14">
     <figure data-reveal class="relative overflow-hidden rounded-[20px]">
       <img
         src="/work/work-restaurant.webp"
         alt="A small restaurant owner greeting guests — the kind of business Kumbuild runs websites for"
-        width="1600"
+        width="1200"
         height="900"
         class="aspect-[4/3] w-full object-cover"
         loading="lazy"
@@ -27,7 +27,7 @@ const b = dict.v2.homeV2;
         {b.bandKicker}
       </p>
       <h2 class="mt-4 text-[clamp(1.625rem,1.32rem+1.5vw,2.25rem)] font-semibold leading-[1.2]">{b.bandTitle}</h2>
-      <p class="mt-4 max-w-lg text-base leading-[28px] text-body sm:text-base sm:leading-[28px]">{b.bandText}</p>
+      <p class="mt-4 max-w-lg text-base leading-[28px] text-body">{b.bandText}</p>
       <ul class="mt-6 space-y-3">
         {b.bandPoints.map((p) => (
           <li class="flex items-start gap-3 text-base font-medium text-ink">

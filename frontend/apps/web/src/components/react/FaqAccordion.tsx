@@ -28,7 +28,7 @@ export default function FaqAccordion({ items, variant = "cards" }: Props) {
             className={
               rows
                 ? "border-t border-line"
-                : `rounded-xl border bg-white transition-[border-color,box-shadow] duration-300 ${
+                : `rounded-2xl border bg-white transition-[border-color,box-shadow] duration-300 ${
                     isOpen
                       ? "border-primary-200 shadow-[0_14px_30px_-22px_rgba(28,25,23,0.35)]"
                       : "border-line"
@@ -68,7 +68,7 @@ export default function FaqAccordion({ items, variant = "cards" }: Props) {
             >
               <div className="min-h-0 overflow-hidden">
                 <p
-                  className={`text-[15px] leading-[26px] text-body transition-opacity duration-300 motion-reduce:transition-none ${
+                  className={`text-base leading-[28px] text-body transition-opacity duration-300 motion-reduce:transition-none ${
                     rows ? "pb-5 pr-8" : "px-5 pb-5"
                   } ${isOpen ? "opacity-100 delay-75" : "opacity-0"}`}
                 >
