@@ -24,8 +24,8 @@ const icons = [
             <svg class="h-5 w-5 text-primary-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icons[i] ?? icons[0]} />
           </span>
           <div>
-            <h3 class="text-[17px] font-semibold text-ink">{item.title}</h3>
-            <p class="mt-1.5 leading-[26px] text-body">{item.desc}</p>
+            <h3 class="text-[clamp(1rem,0.94rem+0.35vw,1.125rem)] font-semibold text-ink">{item.title}</h3>
+            <p class="mt-1.5 text-[15px] leading-[26px] text-body sm:text-base">{item.desc}</p>
             <p class="mt-2.5 text-[13px] font-medium text-primary-700">{item.for}</p>
           </div>
         </article>
