@@ -68,7 +68,6 @@ html {
 }
 html.lenis,
 html.lenis body {
-  font-size: 1.0625rem;
   height: auto;
 }
 .lenis.lenis-smooth {

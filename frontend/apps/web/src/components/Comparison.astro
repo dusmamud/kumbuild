@@ -30,9 +30,9 @@ const c = dict.v2.compare;
         <tbody>
           {c.rows.map((r) => (
             <tr class="border-b border-line last:border-b-0">
-              <th scope="row" class="px-6 py-4 text-[15px] font-semibold text-ink">{r.label}</th>
+              <th scope="row" class="px-6 py-4 text-base font-semibold text-ink">{r.label}</th>
               <td class="bg-primary-50 px-5 py-4">
-                <span class="flex items-center gap-2.5 text-[15px] font-medium text-ink">
+                <span class="flex items-center gap-2.5 text-base font-medium text-ink">
                   <span class="flex h-[20px] w-[20px] shrink-0 items-center justify-center rounded-full bg-live text-white">
                     <Icon name="check" class="h-3 w-3" />
                   </span>
@@ -40,13 +40,13 @@ const c = dict.v2.compare;
                 </span>
               </td>
               <td class="px-5 py-4">
-                <span class="flex items-center gap-2.5 text-[15px] text-muted">
+                <span class="flex items-center gap-2.5 text-base text-muted">
                   <Icon name="x" class="h-4 w-4 shrink-0 text-faint" />
                   {r.diy}
                 </span>
               </td>
               <td class="px-5 py-4">
-                <span class="flex items-center gap-2.5 text-[15px] text-muted">
+                <span class="flex items-center gap-2.5 text-base text-muted">
                   <Icon name="minus" class="h-4 w-4 shrink-0 text-faint" />
                   {r.free}
                 </span>
