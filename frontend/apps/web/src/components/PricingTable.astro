@@ -76,7 +76,7 @@ const checkIcon = `<svg class="mx-auto h-[18px] w-[18px] text-primary-600" viewB
       <tbody>
         {rows.map((feature) => (
           <tr class="border-b border-line last:border-b-0">
-            <th scope="row" class="px-5 py-3.5 text-[15px] font-normal text-body sm:px-6">{feature}</th>
+            <th scope="row" class="px-5 py-3.5 text-base font-normal text-body sm:px-6">{feature}</th>
             {pkgs.map((pkg) => (
               <td class={`px-4 py-3.5 text-center ${pkg.slug === "business" ? "bg-primary-50" : ""}`}>
                 {resolved.get(pkg.slug)?.has(feature)
@@ -90,7 +90,7 @@ const checkIcon = `<svg class="mx-auto h-[18px] w-[18px] text-primary-600" viewB
           <td class="px-5 py-4 sm:px-6"></td>
           {pkgs.map((pkg) => (
             <td class={`px-4 py-4 text-center ${pkg.slug === "business" ? "bg-primary-50" : ""}`}>
-              <a href={pageUrl(locale, "/order")} class="inline-block rounded-[10px] bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-600 active:scale-[0.98]">{pkg.cta}</a>
+              <a href={pageUrl(locale, "/order")} class="inline-block rounded-xl bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-600 active:scale-[0.98]">{pkg.cta}</a>
             </td>
           ))}
         </tr>

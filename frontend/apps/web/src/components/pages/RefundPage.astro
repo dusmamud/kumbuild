@@ -8,17 +8,17 @@ const r = dict.v2.refund;
 ---
 
 <Layout title={r.title} description={r.subtitle} locale={locale} dict={dict} slug="/refund">
-  <section class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:py-24">
     <div data-reveal class="max-w-3xl">
-      <h1 class="font-display text-[clamp(2rem,1.55rem+2.2vw,2.75rem)] font-semibold leading-[1.15] text-ink">{r.title}</h1>
-      <p class="mt-3 text-[15px] leading-[26px] text-body sm:text-base">{r.subtitle}</p>
+      <h1 class="font-display text-[clamp(2.375rem,1.85rem+2.6vw,3.5rem)] font-semibold leading-[1.15] text-ink">{r.title}</h1>
+      <p class="mt-3 text-base leading-[28px] text-body sm:text-base">{r.subtitle}</p>
     </div>
     <div class="mt-10 grid gap-5 sm:grid-cols-2">
       {r.points.map((point, i) => (
         <article data-reveal class="rounded-2xl border border-line bg-white p-6 sm:p-7">
           <span class="font-mono text-sm font-medium text-primary-700">{String(i + 1).padStart(2, "0")}</span>
           <h2 class="mt-3 font-display text-[clamp(1.125rem,1.02rem+0.5vw,1.25rem)] font-semibold leading-snug text-ink">{point.title}</h2>
-          <p class="mt-2 text-[15px] leading-[26px] text-body">{point.text}</p>
+          <p class="mt-2 text-base leading-[28px] text-body">{point.text}</p>
         </article>
       ))}
     </div>

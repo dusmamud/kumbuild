@@ -113,7 +113,7 @@ export default function OrderForm({ dict, locale }: Props) {
           </select>
         </div>
       </div>
-      <button type="submit" className="mt-6 w-full rounded-lg bg-primary-500 px-6 py-3 text-[15px] font-semibold text-white hover:bg-primary-600 sm:w-auto">
+      <button type="submit" className="mt-6 w-full rounded-lg bg-primary-500 px-6 py-3 text-base font-semibold text-white hover:bg-primary-600 sm:w-auto">
         {o.submit}
       </button>
       <p className="mt-3 text-xs text-muted">{o.note}</p>

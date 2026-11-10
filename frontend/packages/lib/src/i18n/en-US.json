@@ -433,7 +433,8 @@
             "Your photos, prices and timings, written up properly",
             "Shows up on Google with basic local SEO",
             "Works fast on every phone, in your customers' language"
-          ]
+          ],
+          "img": "/services/service-business.webp"
         },
         "landing-page": {
           "h1": "One page that turns followers into enquiries",
@@ -445,7 +446,8 @@
             "Offer, price and deadline written to convert",
             "Loads instantly from social apps",
             "Easy to change when your offer changes"
-          ]
+          ],
+          "img": "/services/service-landing.webp"
         },
         "booking-website": {
           "h1": "Appointments and enquiries, without the phone tag",
@@ -457,7 +459,8 @@
             "Timings, holidays and location kept current",
             "Doctor, teacher or stylist profiles if you need them",
             "Clear policies page — cancellation, advance, timings"
-          ]
+          ],
+          "img": "/services/service-booking.webp"
         },
         "catalogue-website": {
           "h1": "Your products and menu, ready to order on WhatsApp",
@@ -469,7 +472,8 @@
             "New items added for you on the care plan",
             "Daily specials or seasonal section",
             "No commission on any order — it is your shop"
-          ]
+          ],
+          "img": "/services/service-catalogue.webp"
         }
       }
     },
@@ -544,6 +548,40 @@
             "Results and topper section",
             "Admission enquiry form"
           ]
+        },
+        {
+          "slug": "iron-paradise-gym",
+          "name": "Iron Paradise",
+          "type": "Gym & fitness",
+          "city": "Hyderabad",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-gym.webp",
+          "result": "Trial-class bookings doubled in the first month",
+          "desc": "A high-energy gym site with class timings, trainer profiles and one-tap trial booking on WhatsApp.",
+          "story": "Iron Paradise had a strong Instagram following but no way to convert it — every enquiry meant manual DM replies. The new site puts class timings, trainer profiles and pricing up front, with a trial-booking button that opens WhatsApp with the message pre-written.",
+          "deliverables": [
+            "5-page gym website",
+            "Class timetable page",
+            "Trainer profiles",
+            "WhatsApp trial booking"
+          ]
+        },
+        {
+          "slug": "spice-route-restaurant",
+          "name": "Spice Route",
+          "type": "Restaurant & cafe",
+          "city": "Kochi",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-restaurant.webp",
+          "result": "Weekend table bookings moved fully online",
+          "desc": "A warm restaurant site with the full menu, photos of signature dishes and table booking in two taps.",
+          "story": "Spice Route's menu lived in blurry photos on a review site, and weekend bookings came through phone calls the staff kept missing. The new site carries the full menu with prices, photos of the signature dishes and a booking button that has taken weekend reservations fully online.",
+          "deliverables": [
+            "Menu website with prices",
+            "Dish photo gallery",
+            "Table booking button",
+            "Google Maps & hours"
+          ]
         }
       ],
       "caseLabels": {
@@ -564,35 +602,40 @@
           "business": "Sharma General Store",
           "city": "Indore",
           "stars": 5,
-          "text": "I just sent my shop photos on WhatsApp. Four days later my website was live and customers started finding us on Google. I did not touch a computer once."
+          "text": "I just sent my shop photos on WhatsApp. Four days later my website was live and customers started finding us on Google. I did not touch a computer once.",
+          "avatar": "/people/avatar-ramesh.webp"
         },
         {
           "name": "Dr. Anita Verma",
           "business": "Verma Dental Care",
           "city": "Patna",
           "stars": 5,
-          "text": "Patients check our timings and services before they call now. The appointment form alone saves my receptionist an hour a day."
+          "text": "Patients check our timings and services before they call now. The appointment form alone saves my receptionist an hour a day.",
+          "avatar": "/people/avatar-anita.webp"
         },
         {
           "name": "Priya Nair",
           "business": "Glow & Co. Salon",
           "city": "Bengaluru",
           "stars": 5,
-          "text": "It looks like us — our colours, our photos, our prices. Two customers last week said they chose us because the website looked proper."
+          "text": "It looks like us — our colours, our photos, our prices. Two customers last week said they chose us because the website looked proper.",
+          "avatar": "/people/avatar-priya.webp"
         },
         {
           "name": "Mohammed Faiz",
           "business": "Faiz Electronics",
           "city": "Hyderabad",
           "stars": 5,
-          "text": "Honest pricing, no upsell calls, and when I need a price changed I message them and it is done the same day. That is the whole review."
+          "text": "Honest pricing, no upsell calls, and when I need a price changed I message them and it is done the same day. That is the whole review.",
+          "avatar": "/people/avatar-faiz.webp"
         },
         {
           "name": "Sana Sheikh",
           "business": "Sana's Home Bakes",
           "city": "Mumbai",
           "stars": 5,
-          "text": "My menu is online with an order button on every cake. Weekend orders come in while I am baking, not while I am on the phone."
+          "text": "My menu is online with an order button on every cake. Weekend orders come in while I am baking, not while I am on the phone.",
+          "avatar": "/people/avatar-sana.webp"
         }
       ]
     },
@@ -655,7 +698,8 @@
             "Open Google and search for your own business the way a stranger would — your service plus your area. Whatever appears is your shop window for most new customers, whether you built it or not.",
             "For many small businesses that window is a half-empty listing, an old phone number, and a competitor right below with photos, timings and a website. The fix is not complicated: correct details everywhere, real photos, and one page of your own that answers the questions customers actually ask.",
             "A website you own is the one result nobody can edit but you. Prices, timings, photos, offers — current, because keeping them current is part of the job you hand to us."
-          ]
+          ],
+          "img": "/blog/blog-shop.webp"
         },
         {
           "slug": "whatsapp-orders-from-your-website",
@@ -668,7 +712,8 @@
             "Watch how your customers already buy: they ask on WhatsApp, you confirm, they pay when they collect or by UPI. The conversation is the checkout — it is personal, and it works.",
             "So a small business website should not copy a big e-commerce store. It should show everything clearly — photos, names, prices — and put a WhatsApp button on every item, opening a chat with the order already written.",
             "That is how every Kumbuild catalogue is built. No commission, no new habits for your customers, and you keep the relationship that makes them come back."
-          ]
+          ],
+          "img": "/blog/blog-whatsapp.webp"
         },
         {
           "slug": "what-a-website-should-cost",
@@ -681,7 +726,8 @@
             "A website quote buys four things: the design, the writing and photos, the technical setup (domain, hosting, security), and the care afterwards. When a quote is very cheap, one of the four is missing — usually the last two, which fail quietly months later.",
             "Agencies charge for account managers and offices. Freelancers charge less but disappear. A fixed-package service like Kumbuild charges for the work itself: the pages are defined, the price is on the website, and the renewal covers hosting, security and small changes.",
             "Whichever route you take, ask three questions before paying: What exactly is included? What does year two cost? And if I leave, what do I take with me? The answers tell you the real price."
-          ]
+          ],
+          "img": "/blog/blog-cost.webp"
         }
       ]
     },
@@ -710,6 +756,51 @@
     "faq": {
       "searchPlaceholder": "Search questions — try “price” or “domain”",
       "noResults": "No questions match that search yet. Ask us on WhatsApp and we will answer there."
+    },
+    "compare": {
+      "title": "Why not do it yourself?",
+      "subtitle": "A fair look at the three ways to get a website — and what each one really costs you.",
+      "colUs": "Kumbuild",
+      "colDiy": "DIY builders",
+      "colFree": "A freelancer",
+      "rows": [
+        {
+          "label": "Your time",
+          "us": "One short form",
+          "diy": "Weekends for weeks",
+          "free": "Endless follow-ups"
+        },
+        {
+          "label": "Design & writing",
+          "us": "Done for you",
+          "diy": "You figure it out",
+          "free": "Depends on luck"
+        },
+        {
+          "label": "Hosting, domain & SSL",
+          "us": "Set up & managed",
+          "diy": "You manage it",
+          "free": "Usually extra"
+        },
+        {
+          "label": "Changes later",
+          "us": "Message us — done",
+          "diy": "You edit it",
+          "free": "Pay per change"
+        },
+        {
+          "label": "Support",
+          "us": "A person on WhatsApp",
+          "diy": "Help articles",
+          "free": "If they reply"
+        },
+        {
+          "label": "First-year cost",
+          "us": "From ₹5,998",
+          "diy": "₹8,000+ and your time",
+          "free": "₹15,000+"
+        }
+      ]
     }
   }
 }

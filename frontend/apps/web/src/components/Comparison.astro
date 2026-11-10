@@ -1,0 +1,60 @@
+---
+import SectionHead from "./SectionHead.astro";
+import Icon from "./Icon.astro";
+import type { Dictionary } from "../i18n/utils";
+interface Props { dict: Dictionary; no?: string; }
+const { dict, no } = Astro.props;
+const c = dict.v2.compare;
+---
+
+<section class="bg-paper">
+  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+    <div data-reveal>
+      <SectionHead no={no} title={c.title} subtitle={c.subtitle} />
+    </div>
+    <div data-reveal class="mt-12 overflow-x-auto rounded-2xl border border-line bg-white">
+      <table class="w-full min-w-[620px] border-collapse text-left">
+        <thead>
+          <tr class="border-b border-line">
+            <th scope="col" class="px-6 py-5"><span class="sr-only">Compare</span></th>
+            <th scope="col" class="bg-primary-50 px-5 py-5">
+              <span class="flex items-center gap-2 font-display text-base font-semibold text-ink">
+                <img src="/logo/kumbuild-logo.svg" alt="" width="22" height="22" class="h-[22px] w-[22px]" />
+                {c.colUs}
+              </span>
+            </th>
+            <th scope="col" class="px-5 py-5 font-display text-base font-semibold text-muted">{c.colDiy}</th>
+            <th scope="col" class="px-5 py-5 font-display text-base font-semibold text-muted">{c.colFree}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {c.rows.map((r) => (
+            <tr class="border-b border-line last:border-b-0">
+              <th scope="row" class="px-6 py-4 text-[15px] font-semibold text-ink">{r.label}</th>
+              <td class="bg-primary-50 px-5 py-4">
+                <span class="flex items-center gap-2.5 text-[15px] font-medium text-ink">
+                  <span class="flex h-[20px] w-[20px] shrink-0 items-center justify-center rounded-full bg-live text-white">
+                    <Icon name="check" class="h-3 w-3" />
+                  </span>
+                  {r.us}
+                </span>
+              </td>
+              <td class="px-5 py-4">
+                <span class="flex items-center gap-2.5 text-[15px] text-muted">
+                  <Icon name="x" class="h-4 w-4 shrink-0 text-faint" />
+                  {r.diy}
+                </span>
+              </td>
+              <td class="px-5 py-4">
+                <span class="flex items-center gap-2.5 text-[15px] text-muted">
+                  <Icon name="minus" class="h-4 w-4 shrink-0 text-faint" />
+                  {r.free}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

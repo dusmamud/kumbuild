@@ -68,6 +68,7 @@ html {
 }
 html.lenis,
 html.lenis body {
+  font-size: 1.0625rem;
   height: auto;
 }
 .lenis.lenis-smooth {
@@ -75,6 +76,7 @@ html.lenis body {
 }
 
 body {
+  font-size: 1.0625rem;
   background: var(--bg);
   color: var(--text-body);
   font-family: var(--font-sans);
@@ -141,4 +143,13 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a29e;
+}
+
+/* Hero website-card float — disabled for reduced motion. */
+@keyframes kb-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[kb-float_7s_ease-in-out_infinite\] { animation: none; }
 }

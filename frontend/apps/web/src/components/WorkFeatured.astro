@@ -1,5 +1,6 @@
 ---
 import SectionHead from "./SectionHead.astro";
+import Icon from "./Icon.astro";
 import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; no?: string; }
 const { dict, locale, no } = Astro.props;
@@ -8,18 +9,32 @@ const featured = w.projects.slice(0, 3);
 ---
 
 <section class="bg-paper">
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
     <div data-reveal>
       <SectionHead no={no} title={w.title} subtitle={w.subtitle} />
     </div>
-    <div class="mt-10 grid gap-5 md:grid-cols-3">
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
       {featured.map((p, i) => (
         <a
           href={pageUrl(locale, `/work/${p.slug}`)}
           data-reveal
           style={`--reveal-delay:${i * 80}ms`}
-          class="group overflow-hidden rounded-2xl border border-line bg-white transition-[border-color,box-shadow] duration-300 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
+          class="group overflow-hidden rounded-2xl border border-line bg-white transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_24px_44px_-24px_rgba(28,25,23,0.3)]"
         >
+          {/* Browser chrome — every project is a live website, so it is
+              presented in a browser frame, not as a bare photo. */}
+          <span class="flex items-center gap-2 border-b border-line bg-surface px-4 py-2.5">
+            <span class="flex gap-1.5" aria-hidden="true">
+              <span class="h-2.5 w-2.5 rounded-full bg-[#E8B4AE]"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-[#EBD9A8]"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-[#AED8BC]"></span>
+            </span>
+            <span class="mx-auto flex items-center gap-1.5 rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-muted">
+              <Icon name="lock" class="h-3 w-3 text-live" />
+              {p.slug}.in
+            </span>
+            <span class="w-10" aria-hidden="true"></span>
+          </span>
           <span class="block overflow-hidden">
             <img
               src={p.img}
@@ -30,25 +45,25 @@ const featured = w.projects.slice(0, 3);
               loading="lazy"
             />
           </span>
-          <span class="block p-5">
+          <span class="block p-6">
             <span class="flex items-baseline justify-between gap-3">
-              <span class="font-display text-base font-semibold text-ink">{p.name}</span>
-              <span class="font-mono text-[11px] text-muted">{p.city}</span>
+              <span class="font-display text-[17px] font-semibold text-ink">{p.name}</span>
+              <span class="font-mono text-[11px] uppercase tracking-wide text-muted">{p.city}</span>
             </span>
             <span class="mt-1 block text-[13px] font-medium text-primary-700">{p.type} · {p.service}</span>
-            <span class="mt-2.5 block text-sm leading-relaxed text-body">{p.desc}</span>
+            <span class="mt-2.5 block text-[15px] leading-[26px] text-body">{p.desc}</span>
             <span class="mt-4 flex items-center gap-2 border-t border-dashed border-line pt-3.5 text-[13px] font-semibold text-ink">
-              <span class="h-1.5 w-1.5 rounded-full bg-live" aria-hidden="true"></span>
+              <Icon name="trending-up" class="h-4 w-4 shrink-0 text-live" />
               {p.result}
             </span>
           </span>
         </a>
       ))}
     </div>
-    <div class="mt-8" data-reveal>
-      <a href={pageUrl(locale, "/examples")} class="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 transition-colors duration-200 hover:text-primary-800">
+    <div class="mt-10" data-reveal>
+      <a href={pageUrl(locale, "/examples")} class="inline-flex items-center gap-2 text-base font-semibold text-primary-700 transition-colors duration-200 hover:text-primary-800">
         {dict.v2.ui.allWork}
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        <Icon name="arrow-right" class="h-4 w-4" />
       </a>
     </div>
   </div>
