@@ -60,24 +60,21 @@ const mobileLink = (active: boolean) =>
     />
   </head>
   <body class="min-h-screen bg-white text-body">
-    <header class="sticky top-0 z-50">
-      <div class="relative z-10 hidden bg-ink text-white md:block">
-        <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-2 text-xs sm:px-6">
-          <p class="flex items-center gap-2 text-white/80">
-            <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-green-400" aria-hidden="true"></span>
-            {dict.hero.badge}
-          </p>
-          <p class="hidden font-mono text-white/55 lg:block">{dict.hero.note}</p>
-        </div>
+    <div class="hidden bg-ink text-white md:block">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-2 text-xs sm:px-6">
+        <p class="flex items-center gap-2 text-white/80">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-green-400" aria-hidden="true"></span>
+          {dict.hero.badge}
+        </p>
+        <p class="hidden font-mono text-white/55 lg:block">{dict.hero.note}</p>
       </div>
+    </div>
+    <header class="sticky top-0 z-50">
       <div class="relative z-10 border-b border-line bg-white/95 backdrop-blur-md">
       <div class="mx-auto flex h-[72px] max-w-6xl items-center gap-3 px-4 sm:px-6">
         <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2.5 text-ink">
           <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="40" height="40" class="h-10 w-10" />
-          <span class="flex flex-col leading-none">
-            <span class="font-display text-[19px] font-bold">Kumbuild</span>
-            <span class="mt-1 hidden text-[11px] font-medium text-muted min-[420px]:block">{dict.footer.tagline}</span>
-          </span>
+          <span class="font-display text-[19px] font-bold">Kumbuild</span>
         </a>
         <nav class="ml-8 hidden items-center gap-8 text-[15px] lg:flex" aria-label="Main">
           {links.map((l) => (
@@ -129,7 +126,7 @@ const mobileLink = (active: boolean) =>
       </div>
       </div>
       <div id="mobile-menu" class="fixed inset-0 z-0 hidden overflow-y-auto bg-white lg:hidden">
-        <div class="flex min-h-full flex-col px-5 pb-8 pt-[88px] sm:px-8 md:pt-[121px]">
+        <div class="flex min-h-full flex-col px-5 pb-8 pt-[88px] sm:px-8">
           <nav class="flex flex-col" aria-label="Mobile">
             {links.map((l, i) => (
               <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={mobileLink(l.href === current)}>
