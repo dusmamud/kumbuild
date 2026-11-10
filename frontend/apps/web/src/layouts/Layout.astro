@@ -33,8 +33,8 @@ const desktopLink = (active: boolean) =>
     : "font-medium text-body transition-colors hover:text-ink";
 const mobileLink = (active: boolean) =>
   active
-    ? "flex items-center justify-between rounded-xl bg-primary-50 px-4 py-3.5 text-[17px] font-semibold text-primary-700"
-    : "flex items-center justify-between rounded-xl px-4 py-3.5 text-[17px] font-medium text-ink hover:bg-surface";
+    ? "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[26px] font-semibold leading-tight text-primary-700"
+    : "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[26px] font-semibold leading-tight text-ink";
 ---
 
 <!doctype html>
@@ -61,7 +61,7 @@ const mobileLink = (active: boolean) =>
   </head>
   <body class="min-h-screen bg-white text-body">
     <header class="sticky top-0 z-50">
-      <div class="hidden bg-ink text-white md:block">
+      <div class="relative z-10 hidden bg-ink text-white md:block">
         <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-2 text-xs sm:px-6">
           <p class="flex items-center gap-2 text-white/80">
             <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-green-400" aria-hidden="true"></span>
@@ -70,7 +70,7 @@ const mobileLink = (active: boolean) =>
           <p class="hidden font-mono text-white/55 lg:block">{dict.hero.note}</p>
         </div>
       </div>
-      <div class="border-b border-line bg-white/95 backdrop-blur-md">
+      <div class="relative z-10 border-b border-line bg-white/95 backdrop-blur-md">
       <div class="mx-auto flex h-[72px] max-w-6xl items-center gap-3 px-4 sm:px-6">
         <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2.5 text-ink">
           <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="40" height="40" class="h-10 w-10" />
@@ -128,26 +128,37 @@ const mobileLink = (active: boolean) =>
         </div>
       </div>
       </div>
-      <div id="mobile-menu" class="hidden border-t border-line bg-white px-4 pb-6 pt-3 shadow-[0_24px_32px_-24px_rgba(15,23,42,0.25)] sm:px-6 lg:hidden">
-        <nav class="flex flex-col" aria-label="Mobile">
-          {links.map((l) => (
-            <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={mobileLink(l.href === current)}>
-              <span>{l.label}</span>
-              <svg class="h-4 w-4 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
-            </a>
-          ))}
-        </nav>
-        <a href={pageUrl(locale, "/order")} class="mt-4 block rounded-xl bg-primary-500 px-4 py-3.5 text-center text-base font-semibold text-white">{nav.order}</a>
-        <div class="mt-4 flex items-center gap-1 border-t border-line pt-4 text-[13px] font-semibold">
-          {locales.map((l) => (
-            <a
-              href={pageUrl(l.code, slug)}
-              class={l.code === locale
-                ? "rounded-md bg-primary-50 px-2 py-1 text-primary-700"
-                : "rounded-md px-2 py-1 text-muted hover:text-primary-700"}
-            >{l.label}</a>
-          ))}
-          <a href="https://auth.kumbuild.com/login" class="ml-auto rounded-md px-2 py-1 text-muted hover:text-primary-700">{nav.login}</a>
+      <div id="mobile-menu" class="fixed inset-0 z-0 hidden overflow-y-auto bg-white lg:hidden">
+        <div class="flex min-h-full flex-col px-5 pb-8 pt-[88px] sm:px-8 md:pt-[121px]">
+          <nav class="flex flex-col" aria-label="Mobile">
+            {links.map((l, i) => (
+              <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={mobileLink(l.href === current)}>
+                <span class="flex items-baseline gap-3.5">
+                  <span class="font-mono text-xs font-normal text-muted">{String(i + 1).padStart(2, "0")}</span>
+                  {l.label}
+                </span>
+                <svg class={`h-5 w-5 shrink-0 ${l.href === current ? "text-primary-500" : "text-muted"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </a>
+            ))}
+          </nav>
+          <a href={pageUrl(locale, "/order")} class="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-500 px-4 py-4 text-base font-semibold text-white">
+            {nav.order}
+            <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+          </a>
+          <a href="https://auth.kumbuild.com/login" class="mt-4 text-center text-[15px] font-medium text-body">{nav.login}</a>
+          <div class="mt-auto pt-12">
+            <div class="flex items-center gap-2">
+              {locales.map((l) => (
+                <a
+                  href={pageUrl(l.code, slug)}
+                  class={l.code === locale
+                    ? "rounded-full bg-primary-50 px-3.5 py-1.5 text-[13px] font-semibold text-primary-700 ring-1 ring-primary-500"
+                    : "rounded-full px-3.5 py-1.5 text-[13px] font-semibold text-muted ring-1 ring-line"}
+                >{l.label}</a>
+              ))}
+            </div>
+            <p class="mt-5 text-[13px] text-muted">{dict.footer.tagline} · {dict.hero.note}</p>
+          </div>
         </div>
       </div>
     </header>
@@ -161,6 +172,7 @@ const mobileLink = (active: boolean) =>
         iconOpen.classList.toggle("hidden", open);
         iconClose.classList.toggle("hidden", !open);
         btn.setAttribute("aria-expanded", String(open));
+        document.body.style.overflow = open ? "hidden" : "";
       }
       btn.addEventListener("click", () => setOpen(menu.classList.contains("hidden")));
       menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
