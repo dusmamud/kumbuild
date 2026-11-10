@@ -61,7 +61,7 @@ const mobileLink = (active: boolean) =>
   </head>
   <body class="min-h-screen bg-white text-body">
     <div class="hidden bg-ink text-white md:block">
-      <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-2 text-xs sm:px-6">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-1.5 text-xs sm:px-6">
         <p class="flex items-center gap-2 text-white/80">
           <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-green-400" aria-hidden="true"></span>
           {dict.hero.badge}
@@ -71,12 +71,12 @@ const mobileLink = (active: boolean) =>
     </div>
     <header class="sticky top-0 z-50">
       <div class="relative z-10 border-b border-line bg-white/95 backdrop-blur-md">
-      <div class="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
-        <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2.5 text-ink">
-          <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="36" height="36" class="h-9 w-9" />
-          <span class="font-display text-lg font-bold">Kumbuild</span>
+      <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
+        <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2 text-ink">
+          <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" class="h-8 w-8" />
+          <span class="font-display text-[17px] font-bold">Kumbuild</span>
         </a>
-        <nav class="ml-8 hidden items-center gap-8 text-[15px] lg:flex" aria-label="Main">
+        <nav class="ml-7 hidden items-center gap-7 text-sm lg:flex" aria-label="Main">
           {links.map((l) => (
             <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={desktopLink(l.href === current)}>{l.label}</a>
           ))}
@@ -86,7 +86,7 @@ const mobileLink = (active: boolean) =>
             <button
               id="locale-btn"
               type="button"
-              class="flex items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-[13px] font-semibold text-body transition-colors hover:bg-surface"
+              class="flex items-center gap-1.5 rounded-lg border border-line px-2.5 py-1.5 text-[13px] font-semibold text-body transition-colors hover:bg-surface"
               aria-expanded="false"
               aria-haspopup="true"
               aria-label="Change language"
@@ -106,8 +106,8 @@ const mobileLink = (active: boolean) =>
               ))}
             </div>
           </div>
-          <a href="https://auth.kumbuild.com/login" class="hidden text-[15px] font-medium text-body transition-colors hover:text-ink lg:block">{nav.login}</a>
-          <a href={pageUrl(locale, "/order")} class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-primary-500 px-5 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-primary-600">
+          <a href="https://auth.kumbuild.com/login" class="hidden text-sm font-medium text-body transition-colors hover:text-ink lg:block">{nav.login}</a>
+          <a href={pageUrl(locale, "/order")} class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-primary-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-600">
             {nav.order}
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
           </a>
@@ -126,7 +126,7 @@ const mobileLink = (active: boolean) =>
       </div>
       </div>
       <div id="mobile-menu" class="fixed inset-0 z-0 hidden overflow-y-auto bg-white lg:hidden">
-        <div class="flex min-h-full flex-col px-5 pb-8 pt-20 sm:px-8">
+        <div class="flex min-h-full flex-col px-5 pb-8 pt-[68px] sm:px-8">
           <nav class="flex flex-col" aria-label="Mobile">
             {links.map((l, i) => (
               <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={mobileLink(l.href === current)}>
