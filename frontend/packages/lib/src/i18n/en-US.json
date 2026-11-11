@@ -740,7 +740,8 @@
           "img": "/blog/blog-cost.webp"
         }
       ],
-      "readNext": "Read next"
+      "readNext": "Read next",
+      "allPosts": "All articles"
     },
     "refund": {
       "title": "Refund policy",
@@ -825,6 +826,44 @@
       "title": "Page not found",
       "text": "The page you are looking for has moved or does not exist.",
       "home": "Back to home"
+    },
+    "tech": {
+      "title": "Technologies we use",
+      "subtitle": "No page builders, no borrowed templates. Your website is hand-built on the same modern stack used by fast, serious websites — and hosted close to your customers.",
+      "items": [
+        {
+          "name": "HTML5",
+          "desc": "Clean, semantic markup that search engines and screen readers understand."
+        },
+        {
+          "name": "Tailwind CSS",
+          "desc": "One design system across every page — consistent, polished, easy to extend."
+        },
+        {
+          "name": "JavaScript",
+          "desc": "Lightweight interactions only where they help — nothing that slows the page."
+        },
+        {
+          "name": "React",
+          "desc": "Smooth, app-like behaviour for forms, galleries and booking flows."
+        },
+        {
+          "name": "Cloudflare",
+          "desc": "Global CDN hosting with HTTPS — your site loads fast, everywhere in India."
+        },
+        {
+          "name": "Razorpay",
+          "desc": "UPI, cards and net-banking payments, set up and tested for you."
+        },
+        {
+          "name": "WhatsApp Business",
+          "desc": "Chat and order buttons wired straight to your WhatsApp number."
+        },
+        {
+          "name": "Google SEO setup",
+          "desc": "Titles, maps listing and sitemap configured so customers find you first."
+        }
+      ]
     }
   }
 }

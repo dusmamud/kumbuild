@@ -740,7 +740,8 @@
           "img": "/blog/blog-cost.webp"
         }
       ],
-      "readNext": "আরও পড়ুন"
+      "readNext": "আরও পড়ুন",
+      "allPosts": "সব আর্টিকেল"
     },
     "refund": {
       "title": "রিফান্ড নীতি",
@@ -825,6 +826,44 @@
       "title": "পেজ পাওয়া যায়নি",
       "text": "আপনি যে পেজটি খুঁজছেন তা সরে গেছে বা নেই।",
       "home": "হোমে ফিরে যান"
+    },
+    "tech": {
+      "title": "আমরা যেসব technology ব্যবহার করি",
+      "subtitle": "কোনো page builder নয়, ধার করা template নয়। আপনার website হাতে তৈরি সেই আধুনিক stack-এ, যেটায় দ্রুত, গুরুত্বপূর্ণ website চলে — আর হোস্ট করা আপনার গ্রাহকদের কাছাকাছি।",
+      "items": [
+        {
+          "name": "HTML5",
+          "desc": "পরিষ্কার, semantic markup যা search engine ও screen reader দুটোই বোঝে।"
+        },
+        {
+          "name": "Tailwind CSS",
+          "desc": "প্রতিটি পেজে একটাই design system — consistent, polished, বাড়ানো সহজ।"
+        },
+        {
+          "name": "JavaScript",
+          "desc": "হালকা interaction শুধু যেখানে কাজে লাগে — পেজ ধীর করার মতো কিছু নয়।"
+        },
+        {
+          "name": "React",
+          "desc": "Form, gallery ও booking flow-এর জন্য মসৃণ, app-এর মতো আচরণ।"
+        },
+        {
+          "name": "Cloudflare",
+          "desc": "HTTPS সহ global CDN hosting — আপনার site পুরো ভারতে দ্রুত খোলে।"
+        },
+        {
+          "name": "Razorpay",
+          "desc": "UPI, card ও net-banking payment, আপনার জন্য setup ও test করে দেওয়া।"
+        },
+        {
+          "name": "WhatsApp Business",
+          "desc": "Chat ও order button সরাসরি আপনার WhatsApp নম্বরে যুক্ত।"
+        },
+        {
+          "name": "Google SEO setup",
+          "desc": "Title, Maps listing ও sitemap এমনভাবে set যাতে গ্রাহক আগে আপনাকেই খুঁজে পায়।"
+        }
+      ]
     }
   }
 }
