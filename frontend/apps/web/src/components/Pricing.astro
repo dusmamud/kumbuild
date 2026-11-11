@@ -6,7 +6,7 @@ const { dict, locale, no, hideHead, showRenewal = true } = Astro.props;
 const p = dict.pricing;
 ---
 
-<section class={`mx-auto max-w-6xl px-4 sm:px-6 ${hideHead ? "pt-10 pb-16 sm:pb-24" : "py-16 sm:py-24"}`}>
+<section class={`mx-auto max-w-6xl px-4 sm:px-6 ${hideHead ? "pt-8 pb-12 sm:pb-16" : "py-12 sm:py-16"}`}>
   {!hideHead && (
     <div data-reveal>
       <SectionHead no={no} title={p.title} subtitle={p.subtitle} />

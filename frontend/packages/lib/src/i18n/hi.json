@@ -91,7 +91,7 @@
     "headlineA": "Aapke business ke liye ",
     "headlineAccent": "professional website",
     "headlineB": ", 3–5 din me taiyaar.",
-    "note": "₹3,999 se shuru · 3–5 working days me delivery · 50% advance · 2 free revisions",
+    "note": "₹3,999 se shuru · 3–5 kaam ke dinon mein delivery · 50% advance · 2 muft revision",
     "subtitle": "Aapki dukaan, clinic, tuition centre, salon ya restaurant ke liye fast, mobile-first website banate hain — aapko bas batana hai kya chahiye. Na code, na design tools, na jhanjhat.",
     "title": "Tell us what to build."
   },
@@ -157,18 +157,18 @@
         },
         {
           "k": "Preview",
-          "v": "3–5 working days me"
+          "v": "3–5 kaam ke dinon mein"
         },
         {
           "k": "Revisions",
-          "v": "2 rounds, free"
+          "v": "2 round, muft"
         }
       ],
       "status": "Live"
     },
     "stats": [
       {
-        "k": "working days me aapka preview",
+        "k": "kaam ke dinon mein aapka preview",
         "v": "3–5"
       },
       {
@@ -214,14 +214,15 @@
   "nativeName": "हिन्दी",
   "nav": {
     "contact": "Sampark",
-    "examples": "Examples",
-    "faq": "FAQ",
+    "examples": "Udaharan",
+    "faq": "Sawaal",
     "home": "Home",
     "howItWorks": "Kaise kaam karta hai",
     "login": "Login",
-    "order": "Abhi order karein",
-    "pricing": "Pricing",
-    "services": "Services"
+    "order": "Order karein",
+    "pricing": "Keemat",
+    "services": "Seva",
+    "about": "Baare mein"
   },
   "order": {
     "businessName": "Business ka naam",
@@ -249,7 +250,9 @@
     "title": "Apni website order karein",
     "whatsapp": "WhatsApp number",
     "waHint": "अगर नंबर फ़ोन वाला ही है तो खाली छोड़ दें",
-    "invalidPhone": "सही फ़ोन नंबर डालें (कम से कम 10 अंक)"
+    "invalidPhone": "सही फ़ोन नंबर डालें (कम से कम 10 अंक)",
+    "summaryTitle": "Aapka order ek nazar mein",
+    "summarySteps": "Aage kya hoga"
   },
   "pricing": {
     "note": "Prices draft hain, payment se pehle confirm ki jayengi.",
@@ -391,7 +394,8 @@
       "prevReviews": "पिछली समीक्षाएँ",
       "nextReviews": "अगली समीक्षाएँ",
       "ratingLabel": "5 में से {n} स्टार",
-      "clearSearch": "खोज साफ़ करें"
+      "clearSearch": "खोज साफ़ करें",
+      "swipeToCompare": "Tulna karne ke liye swipe karein →"
     },
     "footer": {
       "about": "भारतीय छोटे व्यवसायों के लिए तैयारशुदा वेबसाइटें। आप बताइए क्या बनाना है — हम डिज़ाइन, लेखन और लॉन्च करते हैं, फिर उसे चलाते भी रहते हैं।",

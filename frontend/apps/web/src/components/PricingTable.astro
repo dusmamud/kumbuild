@@ -59,7 +59,9 @@ for (const pkg of pkgs) {
 const checkIcon = `<svg class="mx-auto h-[18px] w-[18px] text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>`;
 ---
 
-<section class="mx-auto max-w-6xl px-4 pb-16 sm:pb-20">
+<section class="mx-auto max-w-6xl px-4 pb-12 sm:pb-16">
+  {/* On mobile the table scrolls sideways — say so, or nobody finds it. */}
+  <p class="mb-3 text-right text-sm font-medium text-muted sm:hidden">{dict.v2.ui.swipeToCompare}</p>
   <div data-reveal class="overflow-x-auto rounded-2xl border border-line bg-white" data-lenis-prevent>
     <table class="w-full min-w-[560px] border-collapse text-left">
       <thead>
@@ -90,7 +92,7 @@ const checkIcon = `<svg class="mx-auto h-[18px] w-[18px] text-primary-600" viewB
           <td class="px-5 py-4 sm:px-6"></td>
           {pkgs.map((pkg) => (
             <td class={`px-4 py-4 text-center ${pkg.slug === "business" ? "bg-primary-50" : ""}`}>
-              <a href={pageUrl(locale, "/order")} class="inline-block rounded-xl bg-cta px-5 py-3 text-base font-semibold text-white transition hover:bg-cta-hover active:scale-[0.98]">{pkg.cta}</a>
+              <a href={pageUrl(locale, "/order")} class={pkg.slug === "business" ? "inline-block rounded-xl bg-cta px-5 py-3 text-base font-semibold text-white transition hover:bg-cta-hover active:scale-[0.98]" : "inline-block rounded-xl border border-line bg-white px-5 py-3 text-base font-semibold text-primary-700 transition hover:border-primary-500 active:scale-[0.98]"}>{pkg.cta}</a>
             </td>
           ))}
         </tr>

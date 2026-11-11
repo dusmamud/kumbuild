@@ -3,11 +3,69 @@ import Layout from "../../layouts/Layout.astro";
 import type { Dictionary, Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
+/* Sections condensed from the TERMS.md draft (2026-11-09). The wording
+   below adds no new claims — anything still undecided is marked TBD,
+   exactly as in the draft. */
+const sections = [
+  {
+    title: "1. What the service is",
+    body: "Kumbuild builds websites for small businesses — business websites, landing pages, booking / enquiry websites, and catalogue / menu websites. We do not build mobile apps, full e-commerce stores with online payment checkout, live booking calendars, logo design, or social media management.",
+  },
+  {
+    title: "2. How to order",
+    body: "Order through the form on kumbuild.com/order, or over WhatsApp / Instagram DM. A 50% advance is required before work starts. The details you give at order time must be correct — a website built from wrong details is the customer's responsibility.",
+  },
+  {
+    title: "3. Payment",
+    body: "50% advance at order time, and the remaining 50% on approval, before go-live. Payment is through Razorpay — UPI, cards, netbanking, or wallets. Kumbuild never takes your card details. If a payment fails, the order does not move forward.",
+  },
+  {
+    title: "4. Delivery",
+    body: "Delivery takes 3–5 working days after the advance and complete content are received, until you get the preview link. Late content moves the delivery time ahead. 2 revision rounds are free; extra rounds cost extra (amount TBD). If you do not reply within 7 days of receiving the preview, the order moves to On hold.",
+  },
+  {
+    title: "5. Your responsibilities",
+    body: "You provide correct business details, services and prices, your own real photos and logo, and no false, misleading, or unlawful information. Photos and content must be yours to use — nothing copied or copyrighted. Problems caused by wrong or copyrighted content you provide are your responsibility.",
+  },
+  {
+    title: "6. Our responsibilities",
+    body: "We build the website as per your package, mobile-friendly and fast, with the features listed. We keep you updated on the order status over WhatsApp, and handle hosting and the domain during the renewal period. We do not guarantee how many customers or how much sale your website will bring — a website is a tool, not a guarantee of sales.",
+  },
+  {
+    title: "7. Content and ownership",
+    body: "Your content (name, photos, text) stays yours. The design and code of the website are Kumbuild's work — you get the right to use the website, not to copy and resell the design or code. After go-live, small content updates are covered in renewal; bigger changes are charged separately.",
+  },
+  {
+    title: "8. Renewal and termination",
+    body: "Renewal is ₹1,999 / year (draft) — domain, hosting, small updates, and support. What happens if you do not renew is TBD and will be finalised with the renewal policy. You can ask for your details to be deleted at any time. Kumbuild may refuse any order whose content is false, misleading, or unlawful.",
+  },
+  {
+    title: "9. Liability — draft",
+    body: "Kumbuild's liability is limited to the fees you paid for that order, at most. This section is a draft — please have it checked before publishing.",
+  },
+  {
+    title: "10. Governing law — draft",
+    body: "These terms follow the law of India (draft — to be confirmed while finalising). Any dispute will first be tried to be resolved through discussion.",
+  },
+  {
+    title: "11. Changes to these terms",
+    body: "If the terms change, the new version will be published here with a new date. Orders already placed keep the terms from their order time.",
+  },
+];
 ---
 
 <Layout title={dict.terms.title} description={dict.terms.intro} locale={locale} dict={dict} slug="/terms">
-  <section class="mx-auto max-w-3xl px-4 py-12">
+  <section class="mx-auto max-w-3xl px-4 py-14 sm:py-20">
     <h1 class="text-[32px] font-semibold leading-[40px]">{dict.terms.title}</h1>
     <p class="mt-4 leading-relaxed text-body">{dict.terms.intro}</p>
+    <p class="mt-4 rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-[22px] text-muted">Draft — 9 November 2026. This is not a legal document or legal advice. Please read it and finalise it before publishing, and have it checked by a lawyer if needed.</p>
+    <div class="mt-10 space-y-9">
+      {sections.map((s) => (
+        <section>
+          <h2 class="font-display text-xl font-semibold text-ink">{s.title}</h2>
+          <p class="mt-2 leading-relaxed text-body">{s.body}</p>
+        </section>
+      ))}
+    </div>
   </section>
 </Layout>

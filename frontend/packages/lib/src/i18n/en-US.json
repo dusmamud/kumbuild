@@ -221,7 +221,8 @@
     "login": "Login",
     "order": "Order now",
     "pricing": "Pricing",
-    "services": "Services"
+    "services": "Services",
+    "about": "About"
   },
   "order": {
     "businessName": "Business name",
@@ -249,7 +250,9 @@
     "title": "Order your website",
     "whatsapp": "WhatsApp number",
     "waHint": "Leave blank if it is the same as your phone number",
-    "invalidPhone": "Enter a valid phone number (at least 10 digits)"
+    "invalidPhone": "Enter a valid phone number (at least 10 digits)",
+    "summaryTitle": "Your order at a glance",
+    "summarySteps": "What happens next"
   },
   "pricing": {
     "note": "Prices are draft and will be confirmed before you pay.",
@@ -391,7 +394,8 @@
       "prevReviews": "Previous reviews",
       "nextReviews": "Next reviews",
       "ratingLabel": "{n} out of 5 stars",
-      "clearSearch": "Clear search"
+      "clearSearch": "Clear search",
+      "swipeToCompare": "Swipe to compare →"
     },
     "footer": {
       "about": "Done-for-you websites for Indian small businesses. You tell us what to build — we design, write, and launch it, then keep it running.",

@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import HowItWorks from "../HowItWorks.astro";
+import FaqSection from "../FaqSection.astro";
+import CtaBand from "../CtaBand.astro";
 import type { Dictionary, Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
@@ -8,4 +10,8 @@ const { dict, locale } = Astro.props;
 
 <Layout title={dict.how.title} description={dict.how.subtitle} locale={locale} dict={dict} slug="/how-it-works">
   <HowItWorks dict={dict} />
+  {/* The steps alone left this page half-empty — a short FAQ teaser and
+      the order CTA give it a reason to exist beyond the timeline. */}
+  <FaqSection dict={dict} limit={3} />
+  <CtaBand dict={dict} locale={locale} />
 </Layout>

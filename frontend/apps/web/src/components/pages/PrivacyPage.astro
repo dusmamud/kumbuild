@@ -3,11 +3,61 @@ import Layout from "../../layouts/Layout.astro";
 import type { Dictionary, Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
+/* Sections condensed from the PRIVACY.md draft (2026-11-09). The wording
+   below adds no new claims — anything still undecided is marked TBD,
+   exactly as in the draft. */
+const sections = [
+  {
+    title: "1. What information we collect",
+    body: "From customers ordering a website: name, phone number, email address, business name, address, timings, services and prices, WhatsApp number, business photos and logo, and order and payment details (how much was paid and when — payment goes through Razorpay, so Kumbuild never takes or stores card details). From visitors: details filled in the contact / enquiry form (name, phone, message), and basic analytics on how the website is used (tool TBD, so no tool is named here).",
+  },
+  {
+    title: "2. How we use it",
+    body: "To build and deliver your website, tell you the order status and send the preview link, take payment and give receipts, answer your messages, remind you about renewal, and improve the website. Your information is not used for any other purpose.",
+  },
+  {
+    title: "3. Who we share it with",
+    body: "Your details are never sold to anyone. They are shared only with the parties needed to run the service — hosting (Cloudflare), payment provider Razorpay, and the domain registrar (TBD) — who use the data only for their own work. If the law or a court order requires it, information must be shared.",
+  },
+  {
+    title: "4. Where it is stored",
+    body: "The frontend is hosted on Cloudflare. The backend and database are not decided yet (TBD) — where data is stored and how long it is kept will be written here once the backend is built. Passwords are never stored in plain text (hashing will be used when the backend is built).",
+  },
+  {
+    title: "5. Your rights",
+    body: "You can ask to see your details, correct wrong details, or have your details deleted. What happens to a live website after deletion will be written while finalising the policy. To make a request, contact us — the email / WhatsApp contact will be filled in before launch (TBD).",
+  },
+  {
+    title: "6. Cookies",
+    body: "The website uses cookies for the admin login session and to understand how the website is used. The exact list of cookies will be written once the backend and analytics tool are decided (TBD).",
+  },
+  {
+    title: "7. Children",
+    body: "This service is for businesses, not children. No customer account is created — orders come through WhatsApp, Instagram DM, or the form.",
+  },
+  {
+    title: "8. Changes to this policy",
+    body: "If the policy changes, the new version will be published here with a new date. Big changes will be told to customers.",
+  },
+  {
+    title: "9. Contact",
+    body: "Questions about privacy? Contact us — the email / WhatsApp contact will be filled in before launch (TBD).",
+  },
+];
 ---
 
 <Layout title={dict.privacy.title} description={dict.privacy.intro} locale={locale} dict={dict} slug="/privacy">
-  <section class="mx-auto max-w-3xl px-4 py-12">
+  <section class="mx-auto max-w-3xl px-4 py-14 sm:py-20">
     <h1 class="text-[32px] font-semibold leading-[40px]">{dict.privacy.title}</h1>
     <p class="mt-4 leading-relaxed text-body">{dict.privacy.intro}</p>
+    <p class="mt-4 rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-[22px] text-muted">Draft — 9 November 2026. This is not a legal document or legal advice. Please read it and finalise it before publishing, and have it checked by a lawyer if needed.</p>
+    <div class="mt-10 space-y-9">
+      {sections.map((s) => (
+        <section>
+          <h2 class="font-display text-xl font-semibold text-ink">{s.title}</h2>
+          <p class="mt-2 leading-relaxed text-body">{s.body}</p>
+        </section>
+      ))}
+    </div>
   </section>
 </Layout>

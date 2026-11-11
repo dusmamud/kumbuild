@@ -6,7 +6,7 @@ const { dict, no } = Astro.props;
 const home = dict.home;
 ---
 
-<section class="mx-auto max-w-6xl px-4 py-16 sm:py-24">
+<section class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
   <SectionHead no={no} title={home.whoTitle} subtitle={home.whoSubtitle} />
   <ul class="mt-10 border-b border-line">
     {home.audiences.map((a, i) => (

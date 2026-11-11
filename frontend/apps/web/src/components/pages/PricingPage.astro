@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Pricing from "../Pricing.astro";
 import PricingTable from "../PricingTable.astro";
+import TestimonialsSection from "../TestimonialsSection.astro";
 import SectionHead from "../SectionHead.astro";
 import CtaBand from "../CtaBand.astro";
 import type { Dictionary, Locale } from "../../i18n/utils";
@@ -20,6 +21,9 @@ const r = dict.pricing.renewal;
     <SectionHead title={dict.v2.pricingTable.title} subtitle={dict.v2.pricingTable.subtitle} />
   </div>
   <PricingTable dict={dict} locale={locale} />
+  {/* Social proof right after the comparison, at the moment of decision:
+      the same testimonials that sit above pricing on the home page. */}
+  <TestimonialsSection dict={dict} />
   <section class="mx-auto max-w-6xl px-4 pb-16 sm:pb-20">
     <div data-reveal class="grid items-center gap-6 rounded-2xl border border-line bg-surface px-6 py-8 sm:px-8 lg:grid-cols-[auto_1fr_auto] lg:gap-10">
       <span class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-primary-700">
