@@ -1,5 +1,6 @@
-# Kumbuild — PR check: dono apps build hote hain ya nahi, deploy nahi hota.
-# Sirf lint + build — production deploy nahi hoga.
+# Kumbuild — PR check: saaton apps build hote hain ya nahi, deploy nahi hota.
+# Sirf build — production deploy nahi hoga. (Lint ka koi step nahi hai:
+# sirf kumbuild-app me "lint" script hai, baaki 6 apps me nahi.)
 name: PR check
 
 on:
@@ -17,5 +18,17 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter kumbuild-web build
-      - run: pnpm --filter kumbuild-app build
+      - name: Build web
+        run: pnpm --filter kumbuild-web build
+      - name: Build account
+        run: pnpm --filter kumbuild-account build
+      - name: Build admin
+        run: pnpm --filter kumbuild-admin build
+      - name: Build home
+        run: pnpm --filter kumbuild-home build
+      - name: Build blog
+        run: pnpm --filter kumbuild-blog build
+      - name: Build docs
+        run: pnpm --filter kumbuild-docs build
+      - name: Build app (legacy)
+        run: pnpm --filter kumbuild-app build

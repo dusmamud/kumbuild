@@ -74,7 +74,7 @@ Ek repo, 6 workflow files (`.github/workflows/deploy-*.yml`) + `pr-check.yml`:
 | `deploy-blog` | `frontend/apps/blog/**` ya shared `packages/**` change hone pe, push to main | Build blog → `wrangler pages deploy dist` (`kumbuild-blog`) |
 | `deploy-docs` | `frontend/apps/docs/**` ya shared `packages/**` change hone pe, push to main | Build docs → `wrangler pages deploy dist` (`kumbuild-docs`) |
 | `deploy-app` (legacy) | `frontend/apps/app/**` ya shared `packages/**` change hone pe, push to main | Build legacy Next.js app (static export) → `wrangler pages deploy out` (`kumbuild-app`) |
-| PR check | Kisi bhi PR pe | Sirf lint + build — deploy nahi hoga |
+| PR check | Kisi bhi PR pe | Sirf build (saaton apps: web, account, admin, home, blog, docs, app) — deploy nahi hoga |
 
 Triggers: `push` to `main` + `workflow_dispatch` (manual). Git-database API se push karne pe bhi `push` workflow trigger hota hai (runs 42619040189/42619040220/42619755398 se verified) — Creestion wala gotcha yahan lagu nahi hota.
 
