@@ -1,0 +1,31 @@
+# Kumbuild API — systemd unit (Oracle VPS, 1GB RAM).
+#
+# Paths (VPS):
+#   binary ......... /opt/kumbuild/kumbuild-api  (copied by the deploy workflow)
+#   working dir .... /opt/kumbuild
+#   env file ....... /etc/kumbuild/api.env       (real secrets — written by the
+#                                                deploy workflow from GitHub
+#                                                Secrets; never committed)
+#   unit file ...... /etc/systemd/system/kumbuild-api.service
+#
+# The API listens on localhost:8080 only. It is reachable from the outside
+# solely through the Cloudflare Tunnel (deploy/cloudflared.service) — no
+# inbound port is opened on the VPS.
+[Unit]
+Description=Kumbuild API
+After=network-online.target postgresql.service redis-server.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kumbuild
+Group=kumbuild
+WorkingDirectory=/opt/kumbuild
+ExecStart=/opt/kumbuild/kumbuild-api
+EnvironmentFile=/etc/kumbuild/api.env
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

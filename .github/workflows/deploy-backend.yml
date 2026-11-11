@@ -1,0 +1,148 @@
+# Kumbuild — deploy backend (Go API) to the Oracle VPS.
+#
+# SKELETON — VPS secrets are placeholders; fill them in GitHub Secrets
+# before first use. The VPS does not exist yet in this setup: no secret
+# below has a real value, and the deploy job will fail until VPS_HOST /
+# VPS_USER / VPS_SSH_KEY are set. The build job runs on every backend push
+# and is real (vet + build + tests); only the deploy side is a skeleton.
+#
+# Secrets needed (GitHub repo Settings -> Secrets and variables -> Actions):
+#   VPS_HOST, VPS_USER, VPS_SSH_KEY, VPS_PORT, DATABASE_URL, BREVO_API_KEY,
+#   TURNSTILE_SECRET_KEY, REDIS_PASSWORD, COOKIE_DOMAIN, ALLOWED_ORIGINS,
+#   APP_BASE_URL, CLOUDFLARE_TUNNEL_TOKEN
+# None of these values appear in this file — only secrets.* placeholders.
+name: Deploy backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - ".github/workflows/deploy-backend.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.27"
+      - name: Vet
+        run: go vet ./...
+        working-directory: backend
+      - name: Build all packages
+        run: go build ./...
+        working-directory: backend
+      - name: Test
+        run: go test -p 1 ./... -count=1
+        working-directory: backend
+      # SKELETON: cmd/api is built by the handlers worker (router + HTTP
+      # handlers). Until it lands, this step fails — that is expected, not
+      # a regression. Once cmd/api exists this produces the deploy binary.
+      - name: Build API binary
+        run: go build -o kumbuild-api ./cmd/api
+        working-directory: backend
+      - name: Upload binary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kumbuild-api
+          path: backend/kumbuild-api
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download binary artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: kumbuild-api
+          path: backend/kumbuild-api-bin
+      # SKELETON: the copy itself runs over SCP (ssh-action alone cannot
+      # transfer files). Binary -> /opt/kumbuild/kumbuild-api, units ->
+      # /etc/systemd/system/. VPS secrets are placeholders below.
+      - name: Copy artefacts to VPS (skeleton)
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          source: "backend/kumbuild-api-bin/kumbuild-api,backend/deploy/kumbuild-api.service,backend/deploy/cloudflared.service,backend/deploy/redis.conf"
+          target: "/tmp/kumbuild-deploy"
+          strip_components: 2
+      - name: Deploy on VPS (skeleton)
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            set -euo pipefail
+            # (a) Install Go 1.27 if missing.
+            if ! command -v go >/dev/null 2>&1; then
+              curl -fsSL https://go.dev/dl/go1.27.4.linux-amd64.tar.gz -o /tmp/go.tgz
+              sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf /tmp/go.tgz
+              export PATH=/usr/local/go/bin:$PATH
+            fi
+            # (b) Install redis-server + cloudflared (deb) if missing.
+            if ! command -v redis-server >/dev/null 2>&1; then
+              sudo apt-get update && sudo apt-get install -y redis-server
+            fi
+            if ! command -v cloudflared >/dev/null 2>&1; then
+              curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o /tmp/cloudflared.deb
+              sudo dpkg -i /tmp/cloudflared.deb || sudo apt-get install -f -y
+            fi
+            # (c) Apply deploy/redis.conf, injecting REDIS_PASSWORD from secrets via sed.
+            # NOTE: a password containing '|' would need escaping — skeleton caveat.
+            sudo cp /tmp/kumbuild-deploy/redis.conf /etc/redis/redis.conf
+            sudo sed -i "s|^# requirepass .*|requirepass ${{ secrets.REDIS_PASSWORD }}|" /etc/redis/redis.conf
+            # (d) Copy artefacts into place (uploaded to /tmp/kumbuild-deploy by the SCP step).
+            sudo install -d -o kumbuild -g kumbuild /opt/kumbuild /etc/kumbuild
+            sudo install -m 0755 /tmp/kumbuild-deploy/kumbuild-api /opt/kumbuild/kumbuild-api
+            sudo install -m 0644 /tmp/kumbuild-deploy/kumbuild-api.service /etc/systemd/system/kumbuild-api.service
+            sudo install -m 0644 /tmp/kumbuild-deploy/cloudflared.service /etc/systemd/system/cloudflared.service
+            # (e) Write /etc/kumbuild/api.env from GitHub Secrets (real secrets live here only).
+            sudo tee /etc/kumbuild/api.env >/dev/null <<EOF
+            APP_ENV=prod
+            PORT=8080
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            REDIS_ADDR=localhost:6379
+            REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}
+            BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}
+            APP_BASE_URL=${{ secrets.APP_BASE_URL }}
+            TURNSTILE_SECRET_KEY=${{ secrets.TURNSTILE_SECRET_KEY }}
+            COOKIE_DOMAIN=${{ secrets.COOKIE_DOMAIN }}
+            ALLOWED_ORIGINS=${{ secrets.ALLOWED_ORIGINS }}
+            EOF
+            sudo chmod 0600 /etc/kumbuild/api.env
+            sudo chown kumbuild:kumbuild /etc/kumbuild/api.env
+            # (f) Write /etc/cloudflared/config.yml (named tunnel — prod only).
+            # SKELETON: config.yml needs `tunnel:` = the tunnel UUID and a
+            # credentials.json (AccountTag/TunnelSecret/TunnelID). Those are
+            # created once with `cloudflared tunnel create kumbuild-api`,
+            # authenticated by the CLOUDFLARE_TUNNEL_TOKEN secret (stored
+            # below for that one-time step). The token itself is NOT a valid
+            # `tunnel:` value, so it is not pasted into config.yml as one.
+            sudo mkdir -p /etc/cloudflared
+            sudo tee /etc/cloudflared/config.yml >/dev/null <<EOF
+            tunnel: kumbuild-api
+            credentials-file: /etc/cloudflared/credentials.json
+            ingress:
+              - hostname: api.kumbuild.com
+                service: http://localhost:8080
+              - service: http_status:404
+            EOF
+            sudo chmod 0600 /etc/cloudflared/config.yml
+            echo "${{ secrets.CLOUDFLARE_TUNNEL_TOKEN }}" | sudo tee /etc/cloudflared/token >/dev/null
+            sudo chmod 0600 /etc/cloudflared/token
+            # (g) Reload systemd and restart services.
+            sudo systemctl daemon-reload
+            sudo systemctl enable --now redis-server kumbuild-api cloudflared
+            sudo systemctl restart redis-server kumbuild-api cloudflared
+            # (h) Smoke check: the API must answer its health endpoint locally.
+            curl -fsS http://localhost:8080/healthz
