@@ -43,6 +43,8 @@ jobs:
             sudo pkill -x rpm || true
             sudo rm -f /var/cache/dnf/*lock* /var/lib/dnf/rpmdb_lock.pid 2>/dev/null || true
             echo "dnf lock check:"; ps aux | grep -i '[d]nf' || echo "no dnf process running"
+            echo "--- disable dnf-makecache timer: it ate 570MB RAM on this 1GB box (2026-11-12 run) ---"
+            sudo systemctl disable --now dnf-makecache.timer 2>/dev/null || echo "dnf-makecache.timer not present/disabled"
             echo "top memory users after cleanup:"; ps aux --sort=-%mem | head -8; free -h
             echo "--- extra swap: dnf was OOM-killed on 2026-11-11 with only 48Mi RAM free (945Mi total, 780Mi swap used) ---"
             if [ "$(free -m | awk '/^Swap:/ {print $2}')" -lt 2048 ]; then
@@ -81,6 +83,9 @@ jobs:
               sudo sed -i "/^#*${key}\s*=/d" "$CONF"
               echo "$kv" | sudo tee -a "$CONF" >/dev/null
             done
+            echo "--- pg_hba: TCP password auth (default host lines are ident, which rejects PGPASSWORD + the Go driver) ---"
+            sudo sed -i 's/^host\(.*\)ident$/host\1scram-sha-256/' /var/lib/pgsql/data/pg_hba.conf
+            grep -E '^host' /var/lib/pgsql/data/pg_hba.conf || true
             sudo systemctl restart postgresql
             systemctl is-active postgresql
 
