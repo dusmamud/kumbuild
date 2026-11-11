@@ -58,6 +58,8 @@
   --sl-color-hairline-shade: #e7e2d9;
 }
 
+:root { --kb-display-font: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif; }
+
 /* Display font for headings, like every other Kumbuild page. */
 .sl-markdown-content h1,
 .sl-markdown-content h2,

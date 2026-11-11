@@ -19,6 +19,11 @@ export default defineConfig({
         { icon: "github", label: "GitHub", href: "https://github.com/dusmamud/kumbuild" },
       ],
       customCss: ["./src/styles/starlight.css"],
+      components: {
+        Head: "./src/components/Head.astro",
+        Header: "./src/components/Header.astro",
+        Footer: "./src/components/Footer.astro",
+      },
       editLink: {
         baseUrl: "https://github.com/dusmamud/kumbuild/edit/main/frontend/apps/docs/",
       },

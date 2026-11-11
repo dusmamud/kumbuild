@@ -1,0 +1,36 @@
+---
+// Docs header override — Starlight's default header, plus the
+// brand's order-slip utility strip on top (live dot + offer line)
+// and a quick link row. The strip uses fixed ink/green values so it
+// reads the same in light and dark, exactly like the blog header.
+import Default from "@astrojs/starlight/components/Header.astro";
+---
+
+<div class="kb-strip">
+  <p class="kb-strip-left">
+    <span class="kb-dot" aria-hidden="true"></span>
+    Help for Kumbuild customers
+  </p>
+  <p class="kb-strip-right">
+    <a href="https://kumbuild.com/pricing">Websites from ₹3,999</a>
+    <span aria-hidden="true">·</span>
+    <a href="https://kumbuild.com/order">Order yours</a>
+  </p>
+</div>
+<Default {...Astro.props} />
+
+<style>
+  .kb-strip {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: #1c1917; color: #fff;
+    font-size: 0.78rem;
+    padding: 0.42rem 1rem;
+    margin: 0 calc(-1 * var(--sl-content-pad-x, 1rem));
+  }
+  .kb-strip p { margin: 0; display: flex; align-items: center; gap: 0.5rem; }
+  .kb-dot { width: 0.5rem; height: 0.5rem; border-radius: 999px; background: #4ade80; }
+  .kb-strip-right { color: rgba(255,255,255,0.65); font-family: var(--sl-font-mono); font-size: 0.72rem; }
+  .kb-strip a { color: #fff; text-decoration: none; font-weight: 500; }
+  .kb-strip a:hover { text-decoration: underline; }
+  @media (max-width: 40rem) { .kb-strip-right { display: none; } }
+</style>

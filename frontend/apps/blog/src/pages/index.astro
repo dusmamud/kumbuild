@@ -2,60 +2,106 @@
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { BLOG_FAQS, topicSlug, waLink } from "../lib/site";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const [featured, ...rest] = posts;
-const fmt = (d: Date) =>
-  d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+const topics = [...new Set(posts.map((p) => p.data.tag))].map((tag) => ({
+  tag,
+  slug: topicSlug(tag),
+  count: posts.filter((p) => p.data.tag === tag).length,
+}));
+const topicText: Record<string, string> = {
+  "Getting found": "How customers search, what Google shows them, and how your shop becomes the result they tap.",
+  "Selling online": "Taking orders where your customers already are — WhatsApp first, website doing the heavy lifting.",
+  Money: "What websites really cost, what the numbers include, and how to judge any quote you are given.",
+};
+const fmt = (d: Date) => d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 ---
 
 <BaseLayout title="Kumbuild Blog" description="Notes for business owners — getting found on Google, taking orders on WhatsApp, and what a website should really cost. No jargon, no courses to buy.">
-  <section class="mx-auto max-w-3xl px-4 pt-14 sm:px-6 sm:pt-20">
-    <p class="flex items-center gap-3 text-[13px] font-semibold text-primary-700">
-      <span class="h-px w-8 bg-primary-500" aria-hidden="true"></span>
-      Kumbuild Blog
-    </p>
-    <h1 class="mt-5 font-display text-[clamp(2rem,1.55rem+2.2vw,3rem)] font-semibold leading-[1.12] text-ink">
-      Notes for business owners.
-    </h1>
-    <p class="mt-4 max-w-xl text-lg leading-[30px] text-body">
-      Short, practical reads on getting customers from the internet — no jargon, no courses to buy.
-    </p>
+  <!-- Hero -->
+  <section class="border-b border-line bg-surface">
+    <div class="mx-auto max-w-6xl px-4 pb-14 pt-14 sm:px-6 sm:pb-20 sm:pt-20">
+      <p class="flex items-center gap-3 text-[13px] font-semibold text-primary-700">
+        <span class="h-px w-8 bg-primary-500" aria-hidden="true"></span>
+        Kumbuild Blog
+      </p>
+      <h1 class="mt-5 max-w-2xl font-display text-[clamp(2.1rem,1.5rem+3vw,3.4rem)] font-semibold leading-[1.1] text-ink">
+        Notes for business owners.
+      </h1>
+      <p class="mt-4 max-w-xl text-lg leading-[30px] text-body">
+        Short, practical reads on getting customers from the internet — written by the people who build the websites. No jargon, no courses to buy.
+      </p>
+      <div class="mt-7 flex flex-wrap items-center gap-3">
+        <button type="button" data-search-open class="flex items-center gap-2.5 rounded-xl border border-line bg-card py-3 pl-4 pr-3 text-base text-muted shadow-sm transition-colors hover:text-ink">
+          <Icon name="lucide:search" class="h-5 w-5" />
+          Search articles…
+          <kbd class="rounded border border-line bg-surface px-1.5 font-mono text-[11px] text-faint">⌘K</kbd>
+        </button>
+        <a href="#latest" class="rounded-xl bg-cta px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-cta-hover">Start reading</a>
+      </div>
+      <p class="mt-6 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs text-muted">
+        <span>{posts.length} articles</span>
+        <span>{topics.length} topics</span>
+        <span>4-minute average read</span>
+        <span>New post when a question earns one</span>
+      </p>
+    </div>
   </section>
 
-  {featured && (
-    <section class="mx-auto max-w-3xl px-4 pt-12 sm:px-6">
-      <a href={`/${featured.id}/`} class="group block overflow-hidden rounded-[24px] border border-line bg-card transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_24px_44px_-24px_rgba(28,25,23,0.35)]">
+  <!-- Topics -->
+  <section id="topics" class="mx-auto max-w-6xl scroll-mt-24 px-4 pt-14 sm:px-6 sm:pt-16">
+    <div class="flex items-end justify-between gap-4">
+      <h2 class="font-display text-[clamp(1.5rem,1.3rem+1vw,2rem)] font-semibold text-ink">Browse by topic</h2>
+      <p class="hidden font-mono text-xs text-muted sm:block">START WHERE YOUR QUESTION IS</p>
+    </div>
+    <div class="mt-6 grid gap-5 sm:grid-cols-3">
+      {topics.map((t) => (
+        <a href={`/topic/${t.slug}/`} class="group rounded-2xl border border-line bg-card p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
+          <span class="flex items-center justify-between">
+            <span class="font-display text-lg font-semibold text-ink group-hover:text-primary-700">{t.tag}</span>
+            <span class="rounded-full bg-primary-50 px-2.5 py-1 font-mono text-xs font-medium text-primary-700">{t.count} {t.count === 1 ? "post" : "posts"}</span>
+          </span>
+          <span class="mt-2 block text-[15px] leading-[26px] text-body">{topicText[t.tag] ?? "Practical notes for owners."}</span>
+          <span class="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold text-primary-700">
+            Read the topic
+            <Icon name="lucide:arrow-right" class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Latest: featured + grid -->
+  <section id="latest" class="mx-auto max-w-6xl scroll-mt-24 px-4 pt-14 sm:px-6 sm:pt-20">
+    <h2 class="font-display text-[clamp(1.5rem,1.3rem+1vw,2rem)] font-semibold text-ink">Latest articles</h2>
+    {featured && (
+      <a href={`/${featured.id}/`} class="group mt-6 grid overflow-hidden rounded-[24px] border border-line bg-card transition-[border-color,box-shadow] duration-300 hover:border-primary-200 hover:shadow-[0_24px_44px_-24px_rgba(28,25,23,0.35)] lg:grid-cols-2">
         {featured.data.heroImage && (
-          <img src={featured.data.heroImage} alt="" width="1200" height="675" class="aspect-[16/9] w-full object-cover" />
+          <img src={featured.data.heroImage} alt="" width="1200" height="675" class="h-full w-full object-cover" />
         )}
-        <span class="block p-6 sm:p-8">
+        <span class="flex flex-col p-6 sm:p-9">
           <span class="flex flex-wrap items-center gap-3 font-mono text-xs text-muted">
+            <span class="rounded-full bg-star-soft px-2.5 py-1 font-sans text-xs font-semibold text-star">Latest</span>
             <span class="rounded-full bg-primary-50 px-2.5 py-1 font-sans text-xs font-semibold text-primary-700">{featured.data.tag}</span>
             {fmt(featured.data.pubDate)} · {featured.data.readMins} min read
           </span>
-          <span class="mt-3 block font-display text-[clamp(1.4rem,1.2rem+1vw,1.75rem)] font-semibold leading-snug text-ink group-hover:text-primary-700">
-            {featured.data.title}
-          </span>
-          <span class="mt-2 block text-base leading-[28px] text-body">{featured.data.description}</span>
-          <span class="mt-4 inline-flex items-center gap-1.5 text-base font-semibold text-primary-700">
+          <span class="mt-4 font-display text-[clamp(1.5rem,1.25rem+1.4vw,2rem)] font-semibold leading-snug text-ink group-hover:text-primary-700">{featured.data.title}</span>
+          <span class="mt-3 flex-1 text-base leading-[28px] text-body">{featured.data.description}</span>
+          <span class="mt-6 inline-flex items-center gap-1.5 text-base font-semibold text-primary-700">
             Read the article
             <Icon name="lucide:arrow-right" class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
           </span>
         </span>
       </a>
-    </section>
-  )}
-
-  <section class="mx-auto max-w-3xl px-4 pt-12 sm:px-6">
-    <div class="grid gap-5 sm:grid-cols-2">
+    )}
+    <div class="mt-5 grid gap-5 sm:grid-cols-2">
       {rest.map((post) => (
         <a href={`/${post.id}/`} class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-card transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
-          {post.data.heroImage && (
-            <img src={post.data.heroImage} alt="" width="1200" height="675" loading="lazy" class="aspect-[16/9] w-full object-cover" />
-          )}
+          {post.data.heroImage && <img src={post.data.heroImage} alt="" width="1200" height="675" loading="lazy" class="aspect-[16/9] w-full object-cover" />}
           <span class="flex flex-1 flex-col p-6">
             <span class="flex flex-wrap items-center gap-3 font-mono text-xs text-muted">
               <span class="rounded-full bg-primary-50 px-2.5 py-1 font-sans text-xs font-semibold text-primary-700">{post.data.tag}</span>
@@ -68,14 +114,81 @@ const fmt = (d: Date) =>
         </a>
       ))}
     </div>
+  </section>
 
-    <div class="mt-16 rounded-[24px] border border-line bg-surface p-7 text-center sm:p-10">
-      <h2 class="font-display text-[clamp(1.5rem,1.3rem+1.2vw,2rem)] font-semibold text-ink">Your customers are searching. Be the result they find.</h2>
-      <p class="mx-auto mt-3 max-w-md text-base leading-[28px] text-body">Tell us what to build — a professional website for your business, live in 3–5 working days.</p>
-      <a href="https://kumbuild.com/order" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-cta px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-cta-hover">
-        Order your website
-        <Icon name="lucide:arrow-right" class="h-4 w-4" />
+  <!-- Why this blog -->
+  <section class="mx-auto max-w-6xl px-4 pt-14 sm:px-6 sm:pt-20">
+    <div class="grid gap-8 rounded-[24px] border border-line bg-card p-7 sm:p-10 lg:grid-cols-[1.2fr_1fr]">
+      <div>
+        <p class="font-mono text-xs font-medium text-muted">WHY THIS BLOG EXISTS</p>
+        <h2 class="mt-3 font-display text-[clamp(1.5rem,1.3rem+1vw,2rem)] font-semibold leading-snug text-ink">Every article starts as a WhatsApp question.</h2>
+        <p class="mt-3 text-base leading-[28px] text-body">
+          Owners ask us the same honest questions again and again — what will it cost, will Google show my shop, do I even need a website. When a question deserves more than a chat reply, it becomes an article here. Written by the team that builds the websites, checked against real shops, priced in real rupees.
+        </p>
+      </div>
+      <ul class="space-y-4 self-center">
+        {[
+          ["message-circle", "Real questions", "From real owners, in their own words — not content-farm topics."],
+          ["indian-rupee", "Real numbers", "Prices and timelines as they are, including what we charge."],
+          ["shield-check", "No selling inside", "Articles help whether you buy from us or not. That is the rule."],
+        ].map(([icon, title, text]) => (
+          <li class="flex gap-3.5">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700"><Icon name={`lucide:${icon}`} class="h-5 w-5" /></span>
+            <span>
+              <span class="block font-display text-base font-semibold text-ink">{title}</span>
+              <span class="block text-[15px] leading-[24px] text-body">{text}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="mx-auto max-w-6xl scroll-mt-24 px-4 pt-14 sm:px-6 sm:pt-20">
+    <h2 class="font-display text-[clamp(1.5rem,1.3rem+1vw,2rem)] font-semibold text-ink">Questions about this blog</h2>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      {BLOG_FAQS.map((f) => (
+        <details class="group rounded-2xl border border-line bg-card px-6 py-5">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-3 font-display text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
+            {f.q}
+            <Icon name="lucide:chevron-down" class="h-5 w-5 shrink-0 text-muted transition-transform duration-200 group-open:rotate-180" />
+          </summary>
+          <p class="mt-3 text-[15px] leading-[26px] text-body">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Newsletter (WhatsApp) -->
+  <section class="mx-auto max-w-6xl px-4 pt-14 sm:px-6 sm:pt-20">
+    <div class="flex flex-wrap items-center gap-6 rounded-[24px] bg-surface px-7 py-9 sm:px-10">
+      <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-white" style="background:#15803d">
+        <Icon name="lucide:message-circle" class="h-7 w-7" />
+      </span>
+      <div class="min-w-[240px] flex-1">
+        <h2 class="font-display text-[clamp(1.4rem,1.25rem+0.8vw,1.75rem)] font-semibold text-ink">New articles, on WhatsApp.</h2>
+        <p class="mt-1.5 text-base leading-[27px] text-body">No email list, no spam. Say "blog updates" and we will send new articles when they are published — about once or twice a month.</p>
+      </div>
+      <a href={waLink("Hi Kumbuild — blog updates ke liye add kar dijiye.")} target="_blank" rel="noopener" class="rounded-xl px-6 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90" style="background:#15803d">
+        Get updates on WhatsApp
       </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-6xl px-4 pt-14 sm:px-6 sm:pt-20">
+    <div class="rounded-[24px] border border-line bg-card p-7 text-center sm:p-12">
+      <h2 class="mx-auto max-w-xl font-display text-[clamp(1.6rem,1.35rem+1.4vw,2.25rem)] font-semibold leading-snug text-ink">Your customers are searching. Be the result they find.</h2>
+      <p class="mx-auto mt-3 max-w-md text-base leading-[28px] text-body">Tell us what to build — a professional website for your business, live in 3–5 working days.</p>
+      <div class="mt-7 flex flex-wrap justify-center gap-3">
+        <a href="https://kumbuild.com/order" class="inline-flex items-center gap-2 rounded-xl bg-cta px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-cta-hover">
+          Order your website
+          <Icon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+        <a href="https://kumbuild.com/pricing" class="rounded-xl border border-line bg-paper px-7 py-3.5 text-base font-semibold text-ink transition-colors hover:border-primary-300">See pricing</a>
+      </div>
+      <p class="mt-5 font-mono text-xs text-muted">STARTER ₹3,999 · BUSINESS ₹7,999 · PREMIUM ₹14,999 · RENEWAL ₹1,999/YR</p>
     </div>
   </section>
 </BaseLayout>

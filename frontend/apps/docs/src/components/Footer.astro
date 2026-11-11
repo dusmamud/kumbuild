@@ -1,0 +1,141 @@
+---
+// Docs footer override — replaces Starlight's minimal footer with
+// the Kumbuild brand footer: columns back to the main site, the
+// blog, help pages, and the legal row. Tokens come from
+// starlight.css (--sl-color-*), so it follows light/dark.
+import Default from "@astrojs/starlight/components/Footer.astro";
+
+const year = new Date().getFullYear();
+const cols = [
+  {
+    title: "Start here",
+    links: [
+      { label: "How Kumbuild works", href: "/getting-started/how-kumbuild-works/" },
+      { label: "Order your website", href: "/getting-started/order-your-website/" },
+      { label: "Preview and revisions", href: "/your-website/preview-and-revisions/" },
+      { label: "Payments and renewal", href: "/your-website/payments-and-renewal/" },
+    ],
+  },
+  {
+    title: "Grow",
+    links: [
+      { label: "Get found on Google", href: "/grow/get-found-on-google/" },
+      { label: "Changes after launch", href: "/your-website/changes-after-launch/" },
+      { label: "Kumbuild blog", href: "https://blog.kumbuild.com" },
+    ],
+  },
+  {
+    title: "Kumbuild",
+    links: [
+      { label: "kumbuild.com", href: "https://kumbuild.com" },
+      { label: "Pricing", href: "https://kumbuild.com/pricing" },
+      { label: "Recent work", href: "https://kumbuild.com/examples" },
+      { label: "Order a website", href: "https://kumbuild.com/order" },
+    ],
+  },
+];
+---
+
+<Default {...Astro.props} />
+<div class="kb-footer">
+  <div class="kb-footer-grid">
+    <div class="kb-brand">
+      <p class="kb-brand-row">
+        <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="30" height="30" />
+        <strong>Kumbuild</strong>
+        <span class="kb-chip">docs</span>
+      </p>
+      <p class="kb-brand-text">
+        Help and guides for Kumbuild customers — ordering, previews, payments and growing, in plain words.
+      </p>
+      <p class="kb-brand-actions">
+        <a class="kb-wa" href="https://wa.me/919876543210" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+          Ask on WhatsApp
+        </a>
+      </p>
+    </div>
+    {cols.map((col) => (
+      <nav aria-label={col.title}>
+        <p class="kb-col-title">{col.title}</p>
+        <ul>
+          {col.links.map((l) => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    ))}
+  </div>
+  <div class="kb-legal">
+    <p>© {year} Kumbuild. Docs for customers — no jargon, ever.</p>
+    <p class="kb-legal-links">
+      <a href="https://kumbuild.com/privacy">Privacy</a>
+      <a href="https://kumbuild.com/terms">Terms</a>
+      <a href="https://kumbuild.com/refund">Refund policy</a>
+    </p>
+  </div>
+</div>
+
+<style>
+  .kb-footer {
+    border-top: 1px solid var(--sl-color-hairline);
+    margin-top: 3rem;
+    padding: 2.5rem 0 0.5rem;
+  }
+  .kb-footer-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 50rem) {
+    .kb-footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+  }
+  .kb-brand-row {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: var(--kb-display-font, inherit);
+    color: var(--sl-color-white);
+    font-size: 1.05rem;
+  }
+  .kb-chip {
+    border-radius: 999px;
+    background: var(--sl-color-accent-low);
+    color: var(--sl-color-text-accent);
+    font-family: var(--sl-font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.15rem 0.55rem;
+  }
+  .kb-brand-text { margin-top: 0.8rem; max-width: 19rem; font-size: 0.94rem; line-height: 1.65; }
+  .kb-brand-actions { margin-top: 1.1rem; }
+  .kb-wa {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.75rem;
+    padding: 0.55rem 1rem;
+    font-weight: 600; font-size: 0.95rem;
+    color: var(--sl-color-white);
+    text-decoration: none;
+  }
+  .kb-wa:hover { border-color: var(--sl-color-accent); color: var(--sl-color-text-accent); }
+  .kb-col-title {
+    font-family: var(--sl-font-mono);
+    font-size: 0.72rem; letter-spacing: 0.04em;
+    color: var(--sl-color-gray-3);
+    text-transform: uppercase;
+  }
+  .kb-footer ul { list-style: none; margin: 0.8rem 0 0; padding: 0; }
+  .kb-footer li { margin: 0.5rem 0; }
+  .kb-footer li a { color: var(--sl-color-text); text-decoration: none; font-size: 0.95rem; }
+  .kb-footer li a:hover { color: var(--sl-color-text-accent); }
+  .kb-legal {
+    display: flex; flex-wrap: wrap; gap: 0.75rem 2rem;
+    justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--sl-color-hairline);
+    margin-top: 2.2rem; padding-top: 1.2rem;
+    font-size: 0.87rem; color: var(--sl-color-gray-3);
+  }
+  .kb-legal p { margin: 0; }
+  .kb-legal-links { display: flex; gap: 1.25rem; }
+  .kb-legal-links a { color: var(--sl-color-gray-3); text-decoration: none; }
+  .kb-legal-links a:hover { color: var(--sl-color-text-accent); }
+</style>

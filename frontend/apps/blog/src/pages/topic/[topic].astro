@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { NAV_LINKS, topicSlug } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const tags = [...new Set(posts.map((p) => p.data.tag))];
+  return tags.map((tag) => ({
+    params: { topic: topicSlug(tag) },
+    props: { tag, posts: posts.filter((p) => p.data.tag === tag).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()) },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+const fmt = (d: Date) => d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+---
+
+<BaseLayout title={`${tag} — Kumbuild Blog`} description={`Articles about ${tag.toLowerCase()} from the Kumbuild blog — plain, practical notes for business owners.`}>
+  <section class="mx-auto max-w-6xl px-4 pt-12 sm:px-6 sm:pt-16">
+    <a href="/#topics" class="inline-flex items-center gap-1.5 text-base font-medium text-primary-700 hover:text-primary-800">
+      <Icon name="lucide:arrow-left" class="h-4 w-4" /> All topics
+    </a>
+    <h1 class="mt-6 font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.12] text-ink">{tag}</h1>
+    <p class="mt-3 max-w-xl text-lg leading-[30px] text-body">{posts.length} {posts.length === 1 ? "article" : "articles"} in this topic.</p>
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <a href={`/${post.id}/`} class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-card transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
+          {post.data.heroImage && <img src={post.data.heroImage} alt="" width="1200" height="675" loading="lazy" class="aspect-[16/9] w-full object-cover" />}
+          <span class="flex flex-1 flex-col p-6">
+            <span class="font-mono text-xs text-muted">{fmt(post.data.pubDate)} · {post.data.readMins} min read</span>
+            <span class="mt-2.5 font-display text-lg font-semibold leading-snug text-ink group-hover:text-primary-700">{post.data.title}</span>
+            <span class="mt-2 flex-1 text-[15px] leading-[26px] text-body">{post.data.description}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
