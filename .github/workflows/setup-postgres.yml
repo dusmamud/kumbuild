@@ -78,14 +78,14 @@ jobs:
 
             echo "--- Tune for 1 GB RAM (Kumbuild backend plan) ---"
             CONF=/var/lib/pgsql/data/postgresql.conf
-            for kv in "shared_buffers=192MB" "effective_cache_size=512MB" "work_mem=4MB" "maintenance_work_mem=64MB" "max_connections=30" "max_wal_size=1GB" "autovacuum=on"; do
+            for kv in "shared_buffers=192MB" "effective_cache_size=512MB" "work_mem=4MB" "maintenance_work_mem=64MB" "max_connections=30" "max_wal_size=1GB" "autovacuum=on" "password_encryption=scram-sha-256"; do
               key="${kv%%=*}"
               sudo sed -i "/^#*${key}\s*=/d" "$CONF"
               echo "$kv" | sudo tee -a "$CONF" >/dev/null
             done
             echo "--- pg_hba: TCP password auth (default host lines are ident, which rejects PGPASSWORD + the Go driver) ---"
             sudo sed -i 's/^host\(.*\)ident$/host\1scram-sha-256/' /var/lib/pgsql/data/pg_hba.conf
-            grep -E '^host' /var/lib/pgsql/data/pg_hba.conf || true
+            sudo grep -E '^host' /var/lib/pgsql/data/pg_hba.conf || true
             sudo systemctl restart postgresql
             systemctl is-active postgresql
 
