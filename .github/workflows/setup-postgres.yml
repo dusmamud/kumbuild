@@ -22,7 +22,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
-          command_timeout: 15m
+          command_timeout: 30m
           script: |
             set -euo pipefail
             echo "--- OS / memory / disk ---"
@@ -35,10 +35,21 @@ jobs:
 
             echo "--- Install PostgreSQL (Oracle Linux 9, dnf) ---"
             echo "dnf lock check:"; ps aux | grep -i '[d]nf' || echo "no dnf process running"
-            echo "--- dnf metadata (120s timeout) ---"
-            sudo timeout 120 dnf makecache || echo "makecache rc=$? (continuing)"
-            echo "--- dnf install postgresql (600s timeout, default OL9 stream, no module enable: module enable hung with no output on 2026-11-11) ---"
-            sudo timeout 600 dnf install -y postgresql-server postgresql-contrib
+            echo "--- dnf metadata (600s timeout; OL9 mirrors are very slow ~20 kB/s on 2026-11-11) ---"
+            sudo timeout 600 dnf makecache || echo "makecache rc=$? (continuing)"
+            echo "--- dnf install postgresql (retry loop, 3 x 1500s timeout; single 600s run was killed at timeout on 2026-11-11; no module enable: module enable hung with no output) ---"
+            INSTALL_OK=0
+            for attempt in 1 2 3; do
+              echo "dnf install attempt $attempt/3"
+              if sudo timeout 1500 dnf install -y postgresql-server postgresql-contrib; then
+                INSTALL_OK=1
+                break
+              fi
+              echo "attempt $attempt failed rc=$?; retrying in 15s"
+              sleep 15
+            done
+            [ "$INSTALL_OK" -eq 1 ] || { echo "dnf install failed after 3 attempts"; exit 1; }
+            rpm -q postgresql-server || exit 1
             if [ ! -s /var/lib/pgsql/data/PG_VERSION ]; then
               sudo /usr/bin/postgresql-setup --initdb
             fi
