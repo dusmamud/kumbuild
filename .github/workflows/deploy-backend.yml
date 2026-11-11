@@ -164,4 +164,6 @@ jobs:
             sudo systemctl enable --now redis kumbuild-api cloudflared
             sudo systemctl restart redis kumbuild-api cloudflared
             # (h) Smoke check: the API must answer its health endpoint locally.
-            curl -fsS http://localhost:8080/healthz
+            # On failure, print the API journal so the exact startup error
+            # is in the logs instead of a bare curl error.
+            curl -fsS http://localhost:8080/healthz || { echo "--- kumbuild-api status ---"; systemctl status kumbuild-api --no-pager || true; echo "--- kumbuild-api journal (last 40 lines) ---"; journalctl -u kumbuild-api -n 40 --no-pager || true; exit 1; }
