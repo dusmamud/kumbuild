@@ -10,3 +10,34 @@ import Default from "@astrojs/starlight/components/Head.astro";
   href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
 />
 <meta name="theme-color" content="#faf9f6" />
+<!-- Mock phase only: pages.dev pe *.kumbuild.com links ko sibling *.pages.dev URLs pe badal do. Custom domain lagne ke baad ye kuch nahi karega. -->
+<script>
+  (function () {
+    function rewrite() {
+      if (!window.location.hostname.endsWith(".pages.dev")) return;
+      var map = {
+        "kumbuild.com": "kumbuild-web.pages.dev",
+        "blog.kumbuild.com": "kumbuild-blog.pages.dev",
+        "docs.kumbuild.com": "kumbuild-docs.pages.dev",
+        "account.kumbuild.com": "kumbuild-account.pages.dev",
+        "auth.kumbuild.com": "kumbuild-account.pages.dev",
+        "admin.kumbuild.com": "kumbuild-admin.pages.dev",
+        "home.kumbuild.com": "kumbuild-home.pages.dev",
+      };
+      document.querySelectorAll('a[href*=".kumbuild.com"]').forEach(function (a) {
+        try {
+          var u = new URL(a.getAttribute("href"), window.location.origin);
+          if (map[u.hostname]) {
+            u.hostname = map[u.hostname];
+            a.setAttribute("href", u.toString());
+          }
+        } catch (e) {}
+      });
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", rewrite);
+    } else {
+      rewrite();
+    }
+  })();
+</script>
