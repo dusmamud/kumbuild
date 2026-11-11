@@ -12,7 +12,7 @@ Status: **LOCKED (2026-11-09, user approved) — 2026-11-11 ko 6-app plan se UPD
 | 4 | Admin apni alag app hai (`apps/admin`) | LOCKED (2026-11-11 — 2026-11-09 wala "Admin alag app NAHI" decision superseded) | Admin dashboard Next.js app se Vite me port kiya gaya hai. Purana Next.js app (`apps/app`, kumbuild-app.pages.dev) LEGACY hai — abhi live hai, par naye features nahi banenge; Vite admin live hote hi use hata diya jayega |
 | 4a | Customer accounts hain (2026-11-11) | LOCKED (user order — 2026-11-09 wala "customer ka koi account nahi" lock superseded) | Customer account.kumbuild.com pe signup/login karta hai; apne orders home.kumbuild.com pe track karta hai. `auth.kumbuild.com` khatam — ab `account.kumbuild.com` hai (central login/signup, dono roles) |
 | 5 | Deploy: GitHub Actions → Cloudflare | LOCKED | Vercel plan hata diya. Creestion / dusrel wala flow pehle se verified hai |
-| 6 | Backend baad me (Go, planned), frontend pehle (mock) | LOCKED | Frontend mock data + api-client se complete hoga. Backend aane pe sirf base URL badlega (`api.kumbuild.com`) |
+| 6 | Backend Go (LOCKED 2026-11-11) — Oracle VPS pe host, deploy GitHub Actions se; frontend pehle (mock) | LOCKED | Frontend mock data + api-client se complete hoga. Backend aane pe sirf base URL badlega (`api.kumbuild.com`) |
 | 6a | Auth flow: central login + role redirect + mock handoff | LOCKED (2026-11-11) | Login/signup sirf `apps/account` me. Success pe role redirect: admin → admin.kumbuild.com, customer → home.kumbuild.com. **Mock phase:** session localStorage (`kb_session`), cross-app handoff `?demo_session=` (base64, 5-min expiry, DEMO ONLY — kabhi production auth nahi). **Production (Go backend):** HttpOnly session cookie `Domain=.kumbuild.com` = SSO; Go har API call pe auth/roles enforce karega |
 | 7 | Language: TypeScript everywhere | LOCKED | Chaaro apps + packages me ek hi language, shared types |
 | 8 | Styling: Tailwind CSS | LOCKED | Sab apps me ek hi design system (theme tokens) |
@@ -54,7 +54,7 @@ kumbuild/                      <- workspace root (ye folder; future GitHub repo 
 | Deploy (account/admin/home) | Cloudflare Pages via GitHub Actions (static) | `vite build` → `dist/` → `wrangler pages deploy dist --project-name=kumbuild-account|admin|home` — koi Worker nahi |
 | Deploy (blog/docs) | Cloudflare Pages via GitHub Actions (static) | `astro build` → `dist/` → `wrangler pages deploy dist --project-name=kumbuild-blog|docs` — koi Worker nahi |
 | Deploy (legacy app) | Cloudflare Pages via GitHub Actions (static export) | `next build` (`output: "export"`) → `wrangler pages deploy out` — koi Worker/OpenNext nahi |
-| Backend | Go (planned) — `api.kumbuild.com` | Frontend phase me mock data |
+| Backend | Go — `api.kumbuild.com`, Oracle VPS pe host, deploy GitHub Actions se | LOCKED (2026-11-11) |
 
 Version note: Astro 5 (web), Astro 7.4.10 (blog/docs), React 19, Vite 6, Tailwind v4 — ye versions build me use hui hain (2026-11-11).
 
@@ -142,7 +142,7 @@ Backend phase (baad me):
 | `websites/` | Delivered websites ka record — stage, domain, hosting, renewal date |
 | `shared/` | Shared types, utils, DB access |
 
-Backend ka stack: **Go (planned) — API `api.kumbuild.com` pe hogi.** Database aur hosting abhi decide nahi hue — TBD. Frontend complete hone ke baad decide hoga.
+Backend ka stack: **Go — API `api.kumbuild.com` pe hogi, Oracle VPS pe host hogi, deploy GitHub Actions workflow se hoga (LOCKED 2026-11-11). Database: PostgreSQL, Oracle VPS pe hi (LOCKED 2026-11-11).**
 
 ## 9. Security principles
 
@@ -157,7 +157,7 @@ Admin aur customer apps pehle se hi alag hain: `apps/admin` (admin dashboard) au
 
 ## 11. Kya is doc me nahi hai (TBD)
 
-- Backend stack — Go planned hai; database + hosting decide nahi hue
+- Backend stack — Go + Oracle VPS hosting + Postgres (VPS pe) LOCKED (2026-11-11)
 - Payment provider — Razorpay (LOCKED 2026-11-09)
-- Database — decide nahi hua
+- Database — PostgreSQL, Oracle VPS pe (LOCKED 2026-11-11)
 - 3 Vite apps ki full i18n (app pages abhi English-only hain)
