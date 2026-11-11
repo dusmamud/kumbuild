@@ -33,25 +33,41 @@ jobs:
             psql --version || echo "psql not present yet"
             systemctl is-active postgresql || echo "postgresql service not running yet"
 
-            echo "--- cleanup orphaned dnf from killed runs (previous run was killed by command_timeout) ---"
+            echo "--- cleanup orphaned processes from killed runs (previous runs were killed by command_timeout; their bash -c setup script can survive and respawn dnf, eating RAM) ---"
+            echo "top memory users before cleanup:"; ps aux --sort=-%mem | head -12; free -h
+            sudo pkill -f "timeout 600 dnf makecache" || true
+            sudo pkill -f "timeout 120 dnf makecache" || true
+            sudo pkill -f "timeout 600 dnf install -y postgresql" || true
             if pgrep -x dnf >/dev/null 2>&1; then
               echo "stale dnf process found, killing it"
               sudo pkill -x dnf || true
               sleep 5
             fi
+            sudo pkill -x rpm || true
             sudo rm -f /var/cache/dnf/*lock* /var/lib/dnf/rpmdb_lock.pid 2>/dev/null || true
             echo "dnf lock check:"; ps aux | grep -i '[d]nf' || echo "no dnf process running"
+            echo "top memory users after cleanup:"; ps aux --sort=-%mem | head -8; free -h
+            echo "--- extra swap: dnf was OOM-killed on 2026-11-11 with only 48Mi RAM free (945Mi total, 780Mi swap used) ---"
+            if [ "$(free -m | awk '/^Swap:/ {print $2}')" -lt 2048 ]; then
+              if [ ! -f /swapfile2 ]; then sudo fallocate -l 1G /swapfile2 && sudo chmod 600 /swapfile2 && sudo mkswap /swapfile2; fi
+              sudo swapon /swapfile2 || echo "swapfile2 already on"
+              grep -q '^/swapfile2' /etc/fstab || echo '/swapfile2 none swap sw 0 0' | sudo tee -a /etc/fstab >/dev/null
+            fi
+            free -h
+            sudo dnf clean all || true
 
             echo "--- Install PostgreSQL (Oracle Linux 9, dnf; no makecache: dnf install refreshes metadata itself, makecache wasted 10 min stalled on 2026-11-11) ---"
             echo "--- dnf install postgresql (retry loop, 3 x 1500s timeout; --setopt timeout/minrate fail-fast on stalled mirrors, -v shows progress; single 600s run was killed at timeout on 2026-11-11; no module enable: module enable hung with no output) ---"
             INSTALL_OK=0
             for attempt in 1 2 3; do
               echo "dnf install attempt $attempt/3"
-              if sudo timeout 1500 dnf --setopt=timeout=30 --setopt=minrate=1000 -v install -y postgresql-server postgresql-contrib; then
+              sudo timeout 1500 dnf --setopt=timeout=30 --setopt=minrate=1000 --setopt=max_parallel_downloads=1 -v install -y postgresql-server postgresql-contrib
+              rc=$?
+              if [ "$rc" -eq 0 ]; then
                 INSTALL_OK=1
                 break
               fi
-              echo "attempt $attempt failed rc=$?; retrying in 15s"
+              echo "attempt $attempt failed rc=$rc; retrying in 15s"
               sleep 15
             done
             [ "$INSTALL_OK" -eq 1 ] || { echo "dnf install failed after 3 attempts"; exit 1; }
