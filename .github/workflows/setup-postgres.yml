@@ -102,6 +102,10 @@ jobs:
               sudo chmod 0600 /etc/kumbuild/db-password
             fi
             sudo -u postgres psql -v ON_ERROR_STOP=1 -c "DO \$\$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='kumbuild') THEN CREATE USER kumbuild WITH PASSWORD '$DB_PASS'; ELSE ALTER USER kumbuild WITH PASSWORD '$DB_PASS'; END IF; END \$\$;"
+            echo "--- re-assert kumbuild password + show stored hash type (prefix only, never the secret) ---"
+            sudo -u postgres psql -c "ALTER USER kumbuild WITH PASSWORD '$DB_PASS';"
+            sudo -u postgres psql -tc "SHOW password_encryption;"
+            sudo -u postgres psql -tc "SELECT rolname, rolpassword IS NOT NULL AS has_pw, left(rolpassword, 13) AS hash_prefix FROM pg_authid WHERE rolname='kumbuild';"
             sudo -u postgres psql -tc "SELECT 1 FROM pg_database WHERE datname='kumbuild'" | grep -q 1 || sudo -u postgres psql -c "CREATE DATABASE kumbuild OWNER kumbuild;"
 
             echo "--- 1 GB swap file if none ---"
