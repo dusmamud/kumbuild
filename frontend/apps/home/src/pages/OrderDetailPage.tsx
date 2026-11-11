@@ -86,7 +86,7 @@ export default function OrderDetailPage() {
         <div className="mt-6 grid gap-4 lg:grid-cols-5">
           <section
             aria-label="Order progress"
-            className="rounded-xl border border-line bg-white p-5 lg:col-span-3"
+            className="rounded-xl border border-line bg-card p-5 lg:col-span-3"
           >
             <h2 className="font-display text-lg font-semibold">
               Order progress
@@ -99,7 +99,7 @@ export default function OrderDetailPage() {
           <div className="grid gap-4 lg:col-span-2">
             <section
               aria-label="Payment summary"
-              className="rounded-xl border border-line bg-white p-5"
+              className="rounded-xl border border-line bg-card p-5"
             >
               <h2 className="font-display text-lg font-semibold">Payment</h2>
               <dl className="mt-3 space-y-2 text-sm">
@@ -137,7 +137,7 @@ export default function OrderDetailPage() {
 
             <section
               aria-label="Links"
-              className="rounded-xl border border-line bg-white p-5"
+              className="rounded-xl border border-line bg-card p-5"
             >
               <h2 className="font-display text-lg font-semibold">
                 Your website
@@ -175,7 +175,7 @@ export default function OrderDetailPage() {
 
             <section
               aria-label="Revisions"
-              className="rounded-xl border border-line bg-white p-5"
+              className="rounded-xl border border-line bg-card p-5"
             >
               <h2 className="font-display text-lg font-semibold">
                 Revisions
@@ -191,7 +191,7 @@ export default function OrderDetailPage() {
             {order.notes && (
               <section
                 aria-label="Notes from the team"
-                className="rounded-xl border border-line bg-white p-5"
+                className="rounded-xl border border-line bg-card p-5"
               >
                 <h2 className="font-display text-lg font-semibold">
                   Notes from the team
@@ -206,7 +206,7 @@ export default function OrderDetailPage() {
               )}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-live px-4 py-3 text-sm font-semibold text-white hover:bg-[#127032]"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-live-strong px-4 py-3 text-sm font-semibold text-white hover:bg-live-strong-hover"
             >
               <MessageCircle className="h-4 w-4" />
               Message us on WhatsApp

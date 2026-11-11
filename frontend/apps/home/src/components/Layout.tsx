@@ -4,6 +4,7 @@ import { LogOut } from "lucide-react";
 import { logout } from "@kumbuild/lib";
 import { ACCOUNT_URL, WEB_URL } from "../lib/urls";
 import { LocaleSwitcher } from "../lib/i18n";
+import ThemeToggle from "./ThemeToggle";
 
 function handleLogout() {
   logout();
@@ -16,7 +17,7 @@ function handleLogout() {
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-paper">
-      <header className="border-b border-line bg-white">
+      <header className="border-b border-line bg-card">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2 sm:h-16 sm:flex-nowrap sm:py-0">
           <Link to="/" className="flex shrink-0 items-center gap-2">
             <img
@@ -58,11 +59,12 @@ export default function Layout({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="ml-auto flex shrink-0 items-center gap-2">
+            <ThemeToggle />
             <LocaleSwitcher />
             <button
               type="button"
               onClick={handleLogout}
-              className="flex items-center gap-1.5 rounded-md border border-line bg-white px-2.5 py-1.5 text-sm font-medium text-body hover:text-ink"
+              className="flex items-center gap-1.5 rounded-md border border-line bg-card px-2.5 py-1.5 text-sm font-medium text-body hover:text-ink"
             >
               <LogOut className="h-4 w-4" />
               <span className="hidden sm:inline">Log out</span>
@@ -73,7 +75,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       <div className="flex-1">{children}</div>
 
-      <footer className="border-t border-line bg-white">
+      <footer className="border-t border-line bg-card">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-5 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             Kumbuild — Tell us what to build. ·{" "}

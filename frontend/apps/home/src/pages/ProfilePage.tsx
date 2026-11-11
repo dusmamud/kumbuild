@@ -36,7 +36,7 @@ export default function ProfilePage() {
 
         <section
           aria-label="Your details"
-          className="mt-6 rounded-xl border border-line bg-white p-5"
+          className="mt-6 rounded-xl border border-line bg-card p-5"
         >
           <dl className="divide-y divide-line">
             <Row label="Name" value={customer?.name ?? session.name} />
@@ -60,7 +60,7 @@ export default function ProfilePage() {
             href={waLink("Hi Kumbuild, I'd like to update my details.")}
             target="_blank"
             rel="noreferrer"
-            className="mt-3 inline-flex items-center gap-2 rounded-lg bg-live px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#127032]"
+            className="mt-3 inline-flex items-center gap-2 rounded-lg bg-live-strong px-4 py-2.5 text-sm font-semibold text-white hover:bg-live-strong-hover"
           >
             <MessageCircle className="h-4 w-4" />
             Message us on WhatsApp
@@ -69,7 +69,7 @@ export default function ProfilePage() {
 
         <section
           aria-label="Account"
-          className="mt-4 rounded-xl border border-line bg-white p-5"
+          className="mt-4 rounded-xl border border-line bg-card p-5"
         >
           <h2 className="font-display text-lg font-semibold">Account</h2>
           <p className="mt-1 text-sm text-muted">
@@ -79,7 +79,7 @@ export default function ProfilePage() {
           <button
             type="button"
             onClick={handleLogout}
-            className="mt-4 inline-flex items-center gap-2 rounded-lg border border-line bg-white px-4 py-2.5 text-sm font-semibold text-body hover:text-ink"
+            className="mt-4 inline-flex items-center gap-2 rounded-lg border border-line bg-card px-4 py-2.5 text-sm font-semibold text-body hover:text-ink"
           >
             <LogOut className="h-4 w-4" />
             Log out

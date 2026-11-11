@@ -1,45 +1,56 @@
 @import "tailwindcss";
 
-/* Kumbuild theme v2 — professional light grading (BLUEPRINT 2026-11-10).
-   World: the Indian high-street shop and its paper order book — warm paper
-   neutrals, ink text, ONE accent (Trust Blue). Light theme ONLY.
-   No hue gradients, no glows, no coloured shadows (unslop colour pass). */
-@theme {
-  /* Trust Blue — the brand accent, kept from v1. */
-  --color-primary-50: #e8f3fe;
-  --color-primary-100: #cce4fd;
-  --color-primary-200: #99c9fb;
-  --color-primary-300: #66adf9;
-  --color-primary-400: #3392f6;
-  --color-primary-500: #008efd;
-  --color-primary-600: #0072c8;
-  --color-primary-700: #0069c7;
-  --color-primary-800: #004e8f;
-  --color-primary-900: #00325c;
-  /* CTA accent — orange, the complement of Trust Blue. Only order/submit
-     buttons use it; brand blue stays for links, badges and focus rings. */
-  --color-cta: #c2410c;
-  --color-cta-hover: #9a3412;
-
-  /* Warm stone ramp, tinted toward paper and ink. */
-  --color-ink: #1c1917;
-  --color-body: #44403c;
-  --color-muted: #6f675e;
-  --color-faint: #a8a29e;
-  --color-surface: #f3f1ec;
-  --color-paper: #faf9f6;
-  --color-line: #e7e2d9;
-
-  /* Rating — the classic review gold, graded into the warm palette
-     (deeper than amber-400 so stars read on white and paper alike). */
-  --color-star: #d97706;
-  --color-star-soft: #fef3c7;
-
-  /* Semantic — meaning only, toned into the palette. */
-  --color-live: #15803d;
-  --color-live-soft: #e6f5ec;
-  --color-warn: #d97706;
-  --color-danger: #dc2626;
+/* Kumbuild theme — canonical grading (THEME.md v3, Dus 2026-11-11):
+   ONE palette for all six apps. Light = the web app's warm paper
+   grading (source of truth: frontend/apps/web/src/styles/theme.css).
+   Dark = the blog/docs warm-charcoal set — this app has light AND
+   dark (the web app is the only light-only app). Tokens are CSS
+   variables so components stay theme-agnostic: :root is light,
+   [data-theme="dark"] overrides. No hue gradients, no glows,
+   no coloured shadows (unslop colour pass). */
+@theme inline {
+  --color-primary-50: var(--kb-primary-50);
+  --color-primary-100: var(--kb-primary-100);
+  --color-primary-200: var(--kb-primary-200);
+  --color-primary-300: var(--kb-primary-300);
+  --color-primary-400: var(--kb-primary-400);
+  --color-primary-500: var(--kb-primary-500);
+  --color-primary-600: var(--kb-primary-600);
+  --color-primary-700: var(--kb-primary-700);
+  --color-primary-800: var(--kb-primary-800);
+  --color-primary-900: var(--kb-primary-900);
+  --color-primary-text: var(--kb-primary-700);
+  --color-primary-tint: var(--kb-primary-tint);
+  --color-on-primary: #ffffff;
+  --color-cta: var(--kb-cta);
+  --color-cta-hover: var(--kb-cta-hover);
+  --color-ink: var(--kb-ink);
+  --color-body: var(--kb-body);
+  --color-muted: var(--kb-muted);
+  --color-faint: var(--kb-faint);
+  --color-surface: var(--kb-surface);
+  --color-surface-hover: var(--kb-surface-hover);
+  --color-paper: var(--kb-paper);
+  --color-bg: var(--kb-paper);
+  --color-card: var(--kb-card);
+  --color-line: var(--kb-line);
+  --color-line-strong: var(--kb-line-strong);
+  --color-live: var(--kb-live);
+  --color-live-soft: var(--kb-live-soft);
+  /* Solid green for buttons with white text — the bright dark-theme
+     --kb-live is for text/dots on dark, not a button background. */
+  --color-live-strong: #15803d;
+  --color-live-strong-hover: #127032;
+  --color-success: var(--kb-live);
+  --color-success-bg: var(--kb-live-soft);
+  --color-warn: var(--kb-warn);
+  --color-warning: var(--kb-warn);
+  --color-warning-bg: var(--kb-warn-soft);
+  --color-danger: var(--kb-danger);
+  --color-error: var(--kb-danger);
+  --color-error-bg: var(--kb-danger-soft);
+  --color-star: var(--kb-star);
+  --color-star-soft: var(--kb-star-soft);
 
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     "Noto Sans Devanagari", "Noto Sans Bengali", sans-serif;
@@ -48,39 +59,87 @@
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
 
-  /* One motion language: a single easing curve, three durations. */
+  /* One motion language: a single easing curve. */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --animate-marquee: marquee 42s linear infinite;
-  --animate-live-pulse: live-pulse 2.4s ease-in-out infinite;
-
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @keyframes live-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgb(31 157 97 / 0.35); }
-    50% { box-shadow: 0 0 0 5px rgb(31 157 97 / 0); }
-  }
 }
 
 :root {
-  --bg: #faf9f6;
-  --surface: #f3f1ec;
-  --border: #e7e2d9;
-  --text-heading: #1c1917;
-  --text-body: #44403c;
-  --text-muted: #6f675e;
+  /* Trust Blue scale — same values as the main site, both themes. */
+  --kb-primary-50: #e8f3fe;
+  --kb-primary-100: #cce4fd;
+  --kb-primary-200: #99c9fb;
+  --kb-primary-300: #66adf9;
+  --kb-primary-400: #3392f6;
+  --kb-primary-500: #008efd;
+  --kb-primary-600: #0072c8;
+  --kb-primary-700: #0069c7;
+  --kb-primary-800: #004e8f;
+  --kb-primary-900: #00325c;
+  --kb-primary-tint: #e8f3fe;
+  --kb-cta: #c2410c;
+  --kb-cta-hover: #9a3412;
+  --kb-star: #d97706;
+  --kb-star-soft: #fef3c7;
+  --kb-live: #15803d;
+  --kb-live-soft: #e6f5ec;
+  --kb-warn: #d97706;
+  --kb-warn-soft: #fef3c7;
+  --kb-danger: #dc2626;
+  --kb-danger-soft: #fef2f2;
+
+  /* Light — warm paper, exactly the main site's grading. */
+  --kb-paper: #faf9f6;
+  --kb-surface: #f3f1ec;
+  --kb-surface-hover: #e7e2d9;
+  --kb-card: #ffffff;
+  --kb-ink: #1c1917;
+  --kb-body: #44403c;
+  --kb-muted: #6f675e;
+  --kb-faint: #a8a29e;
+  --kb-line: #e7e2d9;
+  --kb-line-strong: #ddd6c9;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  /* Dark — warm charcoal, the blog/docs canonical set. Primary
+     brightens one step for text; CTA keeps the deep orange (5.2:1
+     with white text — the brighter orange fails AA). */
+  --kb-paper: #141210;
+  --kb-surface: #1d1a17;
+  --kb-surface-hover: #322d28;
+  --kb-card: #211e1a;
+  --kb-ink: #f5f2ec;
+  --kb-body: #d6d0c6;
+  --kb-muted: #a39a8d;
+  --kb-faint: #6f675e;
+  --kb-line: #322d28;
+  --kb-line-strong: #453f39;
+  --kb-primary-600: #3392f6;
+  --kb-primary-700: #66adf9;
+  --kb-primary-tint: #0b2f52;
+  --kb-star: #fbbf24;
+  --kb-star-soft: #3a2f10;
+  --kb-live: #4ade80;
+  --kb-live-soft: color-mix(in srgb, #4ade80 12%, #141210);
+  --kb-warn: #fbbf24;
+  --kb-warn-soft: #3a2f10;
+  --kb-danger: #f87171;
+  --kb-danger-soft: color-mix(in srgb, #f87171 14%, #141210);
+  color-scheme: dark;
+}
+
+:root {
+  --bg: var(--kb-paper);
+  --surface: var(--kb-surface);
+  --border: var(--kb-line);
+  --text-heading: var(--kb-ink);
+  --text-body: var(--kb-body);
+  --text-muted: var(--kb-muted);
 }
 
 html {
   scroll-behavior: smooth;
-}
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
 }
 
 body {
@@ -93,8 +152,8 @@ body {
 }
 
 ::selection {
-  background: #cce4fd;
-  color: #1c1917;
+  background: var(--kb-primary-200);
+  color: var(--kb-ink);
 }
 
 :focus-visible {
@@ -114,50 +173,18 @@ body {
   }
 }
 
-/* Scroll reveal — elements with [data-reveal] start quiet and rise once
-   when they enter the viewport (JS adds .is-in). Without JS or with
-   reduced motion they are simply visible. */
-@media (prefers-reduced-motion: no-preference) {
-  [data-reveal] {
-    opacity: 0;
-    transform: translateY(16px);
-    transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    transition-delay: var(--reveal-delay, 0ms);
-  }
-  [data-reveal].is-in {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Marquee pauses when the reader hovers it. */
-.marquee-track:hover .animate-marquee {
-  animation-play-state: paused;
-}
-
 /* Thin, quiet scrollbar that matches the paper. */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f3f1ec;
+  background: var(--kb-surface);
 }
 ::-webkit-scrollbar-thumb {
-  background: #d6d0c4;
+  background: var(--kb-line-strong);
   border-radius: 8px;
-  border: 2px solid #f3f1ec;
+  border: 2px solid var(--kb-surface);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a29e;
-}
-
-/* Hero website-card float — disabled for reduced motion. */
-@keyframes kb-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .animate-\[kb-float_7s_ease-in-out_infinite\] { animation: none; }
+  background: var(--kb-faint);
 }

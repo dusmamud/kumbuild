@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
-// Shared auth-page bits — Trust Blue theme tokens only (see index.css).
-// Light theme only; no dark mode. Orange (#C2410C) is order-buttons only
+// Shared auth-page bits — canonical theme tokens only (see index.css,
+// THEME.md v3): light + dark. Orange (#C2410C) is order-buttons only
 // and is NOT used anywhere here.
 
 export function Field({
@@ -29,7 +29,7 @@ export function Field({
 }
 
 export const inputClass =
-  "w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink outline-none placeholder:text-faint focus:border-primary-600 focus:ring-2 focus:ring-primary-600/30";
+  "w-full rounded-lg border border-line bg-card px-3 py-2 text-sm text-ink outline-none placeholder:text-faint focus:border-primary-600 focus:ring-2 focus:ring-primary-600/30";
 
 export const inputErrorClass = "border-danger focus:border-danger focus:ring-danger/30";
 
@@ -40,7 +40,7 @@ export function ErrorBanner({ children }: { children: ReactNode }) {
   return (
     <p
       role="alert"
-      className="rounded-lg border border-danger/30 bg-red-50 px-3 py-2 text-sm font-medium text-danger"
+      className="rounded-lg border border-danger/30 bg-error-bg px-3 py-2 text-sm font-medium text-danger"
     >
       {children}
     </p>

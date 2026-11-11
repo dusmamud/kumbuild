@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { LocaleSwitcher } from "../lib/i18n";
+import ThemeToggle from "./ThemeToggle";
 import { WEB_URL } from "../lib/urls";
 
 // Shared shell for the auth pages: centered card (max-w-md) on paper,
@@ -7,12 +8,13 @@ import { WEB_URL } from "../lib/urls";
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-paper">
-      <header className="flex justify-end px-4 pt-4 sm:px-6">
+      <header className="flex items-center justify-end gap-2 px-4 pt-4 sm:px-6">
+        <ThemeToggle />
         <LocaleSwitcher />
       </header>
       <main className="flex flex-1 items-center justify-center px-4 py-8">
         <div className="w-full max-w-md">
-          <div className="rounded-xl border border-line bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)] sm:p-8">
+          <div className="rounded-xl border border-line bg-card p-6 shadow-[0_1px_2px_rgba(28,25,23,0.06)] sm:p-8">
             <a
               href={WEB_URL}
               className="mb-6 flex justify-center"

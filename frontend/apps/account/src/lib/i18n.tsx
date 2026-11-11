@@ -64,7 +64,7 @@ const LOCALE_LABELS: Record<Locale, string> = {
 export function LocaleSwitcher() {
   const { locale } = useLocale();
   return (
-    <div className="flex items-center gap-1 rounded-full border border-line bg-white p-1 text-[13px] font-medium">
+    <div className="flex items-center gap-1 rounded-full border border-line bg-card p-1 text-[13px] font-medium">
       {(Object.keys(LOCALE_LABELS) as Locale[]).map((l) => (
         <button
           key={l}

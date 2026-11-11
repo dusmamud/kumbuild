@@ -25,7 +25,7 @@ function OrderCard({ order }: { order: Order }) {
       ? `${NEXT_STEP.live} Renewal due ${formatDate(order.renewalDate)}.`
       : NEXT_STEP[order.status];
   return (
-    <article className="rounded-xl border border-line bg-white p-5">
+    <article className="rounded-xl border border-line bg-card p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <Link
@@ -105,7 +105,7 @@ export default function DashboardPage() {
         </p>
 
         {orders.length === 0 ? (
-          <section className="mt-8 rounded-xl border border-line bg-white p-8 text-center">
+          <section className="mt-8 rounded-xl border border-line bg-card p-8 text-center">
             <h2 className="font-display text-xl font-semibold">
               You don&apos;t have any orders yet
             </h2>
@@ -127,7 +127,7 @@ export default function DashboardPage() {
               aria-label="Summary"
               className="mt-6 grid grid-cols-3 gap-3"
             >
-              <div className="rounded-xl border border-line bg-white p-4">
+              <div className="rounded-xl border border-line bg-card p-4">
                 <p className="text-xs font-medium tracking-wide text-muted uppercase">
                   Orders
                 </p>
@@ -135,7 +135,7 @@ export default function DashboardPage() {
                   {orders.length}
                 </p>
               </div>
-              <div className="rounded-xl border border-line bg-white p-4">
+              <div className="rounded-xl border border-line bg-card p-4">
                 <p className="text-xs font-medium tracking-wide text-muted uppercase">
                   In progress
                 </p>
@@ -147,7 +147,7 @@ export default function DashboardPage() {
                   }
                 </p>
               </div>
-              <div className="rounded-xl border border-line bg-white p-4">
+              <div className="rounded-xl border border-line bg-card p-4">
                 <p className="text-xs font-medium tracking-wide text-muted uppercase">
                   Balance due
                 </p>
@@ -165,7 +165,7 @@ export default function DashboardPage() {
 
             <section
               aria-label="Payments pending"
-              className="mt-8 rounded-xl border border-line bg-white p-5"
+              className="mt-8 rounded-xl border border-line bg-card p-5"
             >
               <h2 className="flex items-center gap-2 font-display text-lg font-semibold">
                 <Wallet className="h-5 w-5 text-primary-600" />

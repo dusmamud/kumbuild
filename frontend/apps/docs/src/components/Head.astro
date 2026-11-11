@@ -9,7 +9,8 @@ import Default from "@astrojs/starlight/components/Head.astro";
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
 />
-<meta name="theme-color" content="#faf9f6" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f6" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141210" />
 <!-- Mock phase only: pages.dev pe *.kumbuild.com links ko sibling *.pages.dev URLs pe badal do. Custom domain lagne ke baad ye kuch nahi karega. -->
 <script>
   (function () {

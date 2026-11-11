@@ -38,8 +38,8 @@ export default function Stepper({ status }: { status: OrderStatus }) {
                 state === "done"
                   ? "border-primary-600 bg-primary-600 text-white"
                   : state === "current"
-                    ? "border-primary-600 bg-white"
-                    : "border-line bg-white"
+                    ? "border-primary-600 bg-card"
+                    : "border-line bg-card"
               }`}
             >
               {state === "done" ? (

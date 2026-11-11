@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getSession, logout, type Session } from "@kumbuild/lib";
 import { LocaleSwitcher } from "../lib/i18n";
+import ThemeToggle from "./ThemeToggle";
 import { ACCOUNT_URL } from "../lib/urls";
 
-// Admin header — logo + nav + locale switcher + logout.
+// Admin header — logo + nav + locale switcher + theme toggle + logout.
 // Sirf admin dashboard me use hota hai. Ported from the Next.js app's
-// AppHeader.tsx. NO ThemeToggle — light theme only (user dislikes dark UI).
+// AppHeader.tsx. Light + dark (THEME.md v3) — ThemeToggle included.
 const ADMIN_LINKS = [
   { href: "/", label: "Dashboard", end: true },
   { href: "/orders", label: "Orders", end: false },
@@ -68,6 +69,7 @@ export default function AppHeader() {
         </nav>
 
         <div className="ml-auto flex flex-wrap items-center gap-3">
+          <ThemeToggle />
           <LocaleSwitcher />
           {session ? (
             <div className="flex items-center gap-2">
