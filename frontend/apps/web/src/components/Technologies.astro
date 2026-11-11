@@ -5,8 +5,13 @@ import type { Dictionary } from "../i18n/utils";
 interface Props { dict: Dictionary; }
 const { dict } = Astro.props;
 const t = dict.v2.tech;
-/* One icon per technology, locked to the dictionary order. */
-const icons = ["code", "layers", "zap", "smartphone", "globe", "wallet", "message-circle", "search"];
+/* Icons per group, locked to the dictionary item order:
+   Build / Experience / Hosting & payments. */
+const groupIcons = [
+  ["rocket", "layers", "smartphone", "zap", "code", "wind"],
+  ["trending-up", "gauge", "refresh-cw", "star"],
+  ["globe", "wallet", "message-circle", "search"],
+];
 ---
 
 <section class="border-y border-line bg-surface">
@@ -14,22 +19,31 @@ const icons = ["code", "layers", "zap", "smartphone", "globe", "wallet", "messag
     <div data-reveal>
       <SectionHead title={t.title} subtitle={t.subtitle} />
     </div>
-    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {t.items.map((item, i) => (
-        <li
-          data-reveal
-          style={`--reveal-delay:${(i % 4) * 60}ms`}
-          class="rounded-2xl border border-line bg-white p-5 transition-[border-color,box-shadow] duration-300 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
-        >
-          <span class="flex items-center gap-3">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700">
-              <Icon name={icons[i] ?? "code"} class="h-5 w-5" />
-            </span>
-            <span class="font-display text-base font-semibold text-ink">{item.name}</span>
-          </span>
-          <p class="mt-3 text-[15px] leading-[24px] text-body">{item.desc}</p>
-        </li>
-      ))}
-    </ul>
+    {t.groups.map((group, gi) => (
+      <div class={gi === 0 ? "mt-12" : "mt-14"}>
+        <h3 data-reveal class="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.14em] text-muted">
+          {group.label}
+          <span class="h-px flex-1 bg-line" aria-hidden="true"></span>
+        </h3>
+        <ul class={`mt-6 grid gap-4 sm:grid-cols-2 ${gi === 0 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
+          {group.items.map((item, i) => (
+            <li
+              data-reveal
+              style={`--reveal-delay:${(i % 4) * 60}ms`}
+              class="rounded-2xl border border-line bg-white p-5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
+            >
+              <span class="flex items-center gap-3">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700">
+                  <Icon name={groupIcons[gi]?.[i] ?? "code"} class="h-5 w-5" />
+                </span>
+                <span class="font-display text-base font-semibold text-ink">{item.name}</span>
+              </span>
+              <p class="mt-3 text-[15px] leading-[24px] text-body">{item.desc}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+    <p data-reveal class="mt-14 text-center font-mono text-[13px] text-muted">{t.foundation}</p>
   </div>
 </section>

@@ -830,40 +830,80 @@
     "tech": {
       "title": "আমরা যেসব technology ব্যবহার করি",
       "subtitle": "কোনো page builder নয়, ধার করা template নয়। আপনার website হাতে তৈরি সেই আধুনিক stack-এ, যেটায় দ্রুত, গুরুত্বপূর্ণ website চলে — আর হোস্ট করা আপনার গ্রাহকদের কাছাকাছি।",
-      "items": [
+      "groups": [
         {
-          "name": "HTML5",
-          "desc": "পরিষ্কার, semantic markup যা search engine ও screen reader দুটোই বোঝে।"
+          "label": "তৈরি",
+          "items": [
+            {
+              "name": "Astro",
+              "desc": "প্রায় JavaScript ছাড়াই পেজ পাঠায় — পেজ সঙ্গে সঙ্গে খোলে।"
+            },
+            {
+              "name": "Next.js",
+              "desc": "সেসব dashboard ও web app-এর জন্য যাদের login ও live data লাগে।"
+            },
+            {
+              "name": "React",
+              "desc": "Form, gallery ও booking-এর জন্য মসৃণ, app-এর মতো আচরণ।"
+            },
+            {
+              "name": "Vite",
+              "desc": "আধুনিক build tooling — দ্রুত deploy, আরও দ্রুত fix।"
+            },
+            {
+              "name": "TypeScript",
+              "desc": "Typed code — কম bug, আর বাড়ার সঙ্গে সঙ্গে বদল নিরাপদ থাকে।"
+            },
+            {
+              "name": "Tailwind CSS",
+              "desc": "প্রতিটি পেজে একটাই design system — consistent ও polished।"
+            }
+          ]
         },
         {
-          "name": "Tailwind CSS",
-          "desc": "প্রতিটি পেজে একটাই design system — consistent, polished, বাড়ানো সহজ।"
+          "label": "অভিজ্ঞতা",
+          "items": [
+            {
+              "name": "Motion",
+              "desc": "হালকা animation যা চোখকে পথ দেখায়, কেনাকাটা থেকে মন সরায় না।"
+            },
+            {
+              "name": "Lenis",
+              "desc": "পুরো website জুড়ে মাখনের মতো মসৃণ scrolling।"
+            },
+            {
+              "name": "Embla Carousel",
+              "desc": "Review, ছবি ও offer-এর জন্য touch-friendly slider।"
+            },
+            {
+              "name": "Lucide Icons",
+              "desc": "সব জায়গায় একটাই পরিষ্কার icon set — বেমানান clip-art নয়।"
+            }
+          ]
         },
         {
-          "name": "JavaScript",
-          "desc": "হালকা interaction শুধু যেখানে কাজে লাগে — পেজ ধীর করার মতো কিছু নয়।"
-        },
-        {
-          "name": "React",
-          "desc": "Form, gallery ও booking flow-এর জন্য মসৃণ, app-এর মতো আচরণ।"
-        },
-        {
-          "name": "Cloudflare",
-          "desc": "HTTPS সহ global CDN hosting — আপনার site পুরো ভারতে দ্রুত খোলে।"
-        },
-        {
-          "name": "Razorpay",
-          "desc": "UPI, card ও net-banking payment, আপনার জন্য setup ও test করে দেওয়া।"
-        },
-        {
-          "name": "WhatsApp Business",
-          "desc": "Chat ও order button সরাসরি আপনার WhatsApp নম্বরে যুক্ত।"
-        },
-        {
-          "name": "Google SEO setup",
-          "desc": "Title, Maps listing ও sitemap এমনভাবে set যাতে গ্রাহক আগে আপনাকেই খুঁজে পায়।"
+          "label": "হোস্টিং ও পেমেন্ট",
+          "items": [
+            {
+              "name": "Cloudflare",
+              "desc": "HTTPS সহ global CDN hosting — পুরো ভারতে দ্রুত।"
+            },
+            {
+              "name": "Razorpay",
+              "desc": "UPI, card ও net-banking payment, আপনার জন্য setup ও test করে দেওয়া।"
+            },
+            {
+              "name": "WhatsApp Business",
+              "desc": "Chat ও order button সরাসরি আপনার WhatsApp নম্বরে যুক্ত।"
+            },
+            {
+              "name": "Google SEO setup",
+              "desc": "Title, Maps listing ও sitemap — গ্রাহক আগে আপনাকেই খুঁজে পায়।"
+            }
+          ]
         }
-      ]
+      ],
+      "foundation": "খোলা web standard-এ তৈরি — HTML5 · CSS3 · JavaScript"
     }
   }
 }

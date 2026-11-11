@@ -830,40 +830,80 @@
     "tech": {
       "title": "Technologies we use",
       "subtitle": "No page builders, no borrowed templates. Your website is hand-built on the same modern stack used by fast, serious websites — and hosted close to your customers.",
-      "items": [
+      "groups": [
         {
-          "name": "HTML5",
-          "desc": "Clean, semantic markup that search engines and screen readers understand."
+          "label": "Build",
+          "items": [
+            {
+              "name": "Astro",
+              "desc": "Ships almost no JavaScript by default — pages open instantly."
+            },
+            {
+              "name": "Next.js",
+              "desc": "For dashboards and web apps that need logins and live data."
+            },
+            {
+              "name": "React",
+              "desc": "Smooth, app-like interactions for forms, galleries and booking."
+            },
+            {
+              "name": "Vite",
+              "desc": "Modern build tooling — quick deploys and quicker fixes."
+            },
+            {
+              "name": "TypeScript",
+              "desc": "Typed code — fewer bugs, and changes stay safe as you grow."
+            },
+            {
+              "name": "Tailwind CSS",
+              "desc": "One design system across every page — consistent and polished."
+            }
+          ]
         },
         {
-          "name": "Tailwind CSS",
-          "desc": "One design system across every page — consistent, polished, easy to extend."
+          "label": "Experience",
+          "items": [
+            {
+              "name": "Motion",
+              "desc": "Subtle animations that guide the eye, never distract from buying."
+            },
+            {
+              "name": "Lenis",
+              "desc": "Butter-smooth scrolling across the whole website."
+            },
+            {
+              "name": "Embla Carousel",
+              "desc": "Touch-friendly sliders for reviews, photos and offers."
+            },
+            {
+              "name": "Lucide Icons",
+              "desc": "One clean icon set everywhere — no mismatched clip-art."
+            }
+          ]
         },
         {
-          "name": "JavaScript",
-          "desc": "Lightweight interactions only where they help — nothing that slows the page."
-        },
-        {
-          "name": "React",
-          "desc": "Smooth, app-like behaviour for forms, galleries and booking flows."
-        },
-        {
-          "name": "Cloudflare",
-          "desc": "Global CDN hosting with HTTPS — your site loads fast, everywhere in India."
-        },
-        {
-          "name": "Razorpay",
-          "desc": "UPI, cards and net-banking payments, set up and tested for you."
-        },
-        {
-          "name": "WhatsApp Business",
-          "desc": "Chat and order buttons wired straight to your WhatsApp number."
-        },
-        {
-          "name": "Google SEO setup",
-          "desc": "Titles, maps listing and sitemap configured so customers find you first."
+          "label": "Hosting & payments",
+          "items": [
+            {
+              "name": "Cloudflare",
+              "desc": "Global CDN hosting with HTTPS — fast everywhere in India."
+            },
+            {
+              "name": "Razorpay",
+              "desc": "UPI, cards and net-banking payments, set up and tested for you."
+            },
+            {
+              "name": "WhatsApp Business",
+              "desc": "Chat and order buttons wired straight to your WhatsApp number."
+            },
+            {
+              "name": "Google SEO setup",
+              "desc": "Titles, Maps listing and sitemap — customers find you first."
+            }
+          ]
         }
-      ]
+      ],
+      "foundation": "Built on open web standards — HTML5 · CSS3 · JavaScript"
     }
   }
 }
