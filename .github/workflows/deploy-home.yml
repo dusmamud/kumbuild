@@ -1,0 +1,32 @@
+# Kumbuild — deploy kumbuild-home (React+Vite) to Cloudflare Pages.
+# Trigger: push to main (home app ya shared packages badle to) ya manual dispatch.
+# NOTE: the Pages project `kumbuild-home` must exist in the Cloudflare
+# dashboard (created by Dus) — wrangler does NOT auto-create it; until
+# then this run fails. Same pattern as deploy-web.yml.
+name: Deploy home
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/apps/home/**"
+      - "frontend/packages/**"
+      - ".github/workflows/deploy-home.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy-home:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter kumbuild-home build
+      - run: pnpm exec wrangler pages deploy frontend/apps/home/dist --project-name=kumbuild-home
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

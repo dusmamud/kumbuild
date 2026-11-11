@@ -13,6 +13,7 @@ Kumbuild mobile app, full e-commerce store (online payment checkout wala), live 
 ## 2. Order kaise hoga?
 
 - Customer `kumbuild.com/order` pe form bharega aur package choose karega, ya WhatsApp / Instagram DM pe order karega
+- Customer `account.kumbuild.com` pe signup/login karega — apne orders `home.kumbuild.com` pe track kar sakega
 - Advance 50% payment karna hoga — advance ke bina kaam shuru nahi hoga
 - Order ke time di gayi details sahi honi chahiye. Galat details se bani website ki zimmedari customer ki hogi.
 
@@ -44,7 +45,7 @@ Agar customer galat ya copyrighted content dega aur us se koi problem hogi to zi
 
 - Package ke hisaab se website bana ke dena
 - Website mobile pe sahi dikhe, fast load ho, aur likhe gaye features kaam karein
-- Order ka status WhatsApp pe batana
+- Order ka status WhatsApp pe batana **aur** `home.kumbuild.com` pe dikhana
 - Website live karne ke baad renewal period me hosting aur domain sambhalna (renewal fees ke saath)
 
 Kumbuild is baat ki guarantee nahi deta ki website se kitne customer aayenge ya kitni sale hogi. Website ek tool hai, business ki sale ki guarantee nahi hai.

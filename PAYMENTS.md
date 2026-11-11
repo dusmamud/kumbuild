@@ -59,7 +59,7 @@ Razorpay blog ke hisaab se 1 July 2026 ke baad KYC karke activate karne wale nay
 
 ## Integration — backend banega tab (plan)
 
-Frontend phase me payment mock hoga. Backend (`backend/payments/`) banega tab ye hoga:
+Backend **Go** me banega (planned, API `api.kumbuild.com` pe). Frontend phase me payment mock hoga. Backend (`backend/payments/`) banega tab ye hoga:
 
 1. Order banta hai → backend Razorpay Order banata hai (amount paise me — ₹1 = 100 paise, jaise ₹3,999 = 399900 paise)
 2. Frontend Razorpay Checkout kholta hai — customer UPI / card se pay karta hai

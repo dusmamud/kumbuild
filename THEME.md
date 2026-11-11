@@ -1,19 +1,20 @@
 # THEME.md — Kumbuild theme, color grading aur locales
 
-> **Status (2026-11-09): LOCKED.** Theme Option A "Trust Blue" user ne apply karne ko bola — best option assistant ne chuna (user: "aap best theme apply karo"). Astro sirf light theme me hoga. Next.js app me system / light / dark hoga. Shuru me 3 locales: English (US) default, Hindi, Bengali.
+> **Status (2026-11-09): LOCKED.** Theme Option A "Trust Blue" user ne apply karne ko bola — best option assistant ne chuna (user: "aap best theme apply karo"). **Sab apps sirf light theme me honge — koi dark mode nahi** (user ko dark pasand nahi, 2026-11-10). Shuru me 3 locales: English (US) default, Hindi, Bengali.
 >
-> Ye doc plan hai — code abhi nahi likha gaya. Jab frontend bane, tokens yahin se lene hain, dobara decide nahi karne.
+> Ye doc plan hai — code abhi nahi likha gaya. Jab frontend bane, tokens yahin se lene hain, dobara decide nahi karne. **2026-11-11 update:** Vite apps (account/admin/home) landing wali `theme.css` tokens share karte hain; purana Next.js app (`apps/app`) LEGACY hai — uska system/light/dark neeche Section 4–5 me legacy note ke saath hai.
 
 ## 1. Locked decisions
 
 | Decision | Kya lock hua |
 |---|---|
 | Theme | **Option A — Trust Blue** (4 options me se best, assistant pick, user approved apply karne ko) |
-| Primary colour | Logo wala hi: **#008EFD** — har jagah, dono apps me |
+| Primary colour | Logo wala hi: **#008EFD** — har jagah, sab apps me |
 | Astro (`apps/web`, kumbuild.com) | **Sirf light theme.** Pure white professional. Koi dark mode nahi, koi theme toggle nahi, `prefers-color-scheme` ko ignore karo. |
-| Next.js (`apps/app` — auth / home / admin) | **System / light / dark.** Default = system (device ki setting). User light ya dark choose kar sakta hai, choice save hoti hai. |
+| Vite apps (`apps/account`, `apps/admin`, `apps/home`) | **Sirf light theme** — landing wali `theme.css` tokens hi use karte hain. Koi dark mode nahi, koi theme toggle nahi. (2026-11-11) |
+| Legacy Next.js (`apps/app` — auth / home / admin) | **System / light / dark tha.** Default = system (device ki setting). User light ya dark choose kar sakta tha, choice save hoti thi. **Ye app LEGACY hai — naye apps me dark mode nahi hai.** |
 | Locales (shuru me) | **3: `en-US` (default), `hi` (Hindi), `bn` (Bengali).** Baad me aur add ho sakte hain, par URL structure abhi se final hai — launch ke baad badalna matlab redirects + SEO loss. |
-| Shared strings | Ek hi source of truth — dono apps wahi dictionaries use karenge (Section 6). |
+| Shared strings | Ek hi source of truth — sab apps wahi dictionaries use karenge (Section 6). Vite apps abhi English-only hain (locale plumbing scaffolded hai) — app pages ki full i18n baad me hogi. |
 
 ## 2. Primary colour scale
 
@@ -25,7 +26,7 @@ Primary logo wala `#008EFD` hai. Scale white/black mix se bana hai (verified val
 | `blue-100` | #CCE8FF | Hover tint, light border on blue surfaces |
 | `blue-200` | #99D2FE | Decorative tint, progress track |
 | `blue-300` | #66BBFE | — (scale complete karne ke liye) |
-| `blue-400` | #33A5FD | Dark mode me primary hover / light blue text on dark |
+| `blue-400` | #33A5FD | (Legacy dark mode me primary hover / light blue text on dark — naye apps me use nahi hota) |
 | `blue-500` | **#008EFD** | **Primary — buttons, links (bade/bold), active states, logo** |
 | `blue-600` | #0072C8 | Primary button hover, focus ring |
 | `blue-700` | #0063B1 | **Text links aur chhoti text — primary par nahi** |
@@ -39,12 +40,12 @@ White text `#008EFD` par **3.34:1** contrast deta hai. Ye button jaisi badi/bold
 - **Primary button:** `#008EFD` bg + **bold** white text. Hover: `#0072C8`.
 - **CTA accent (orange) — 2026-11-11, user ne "contrasting color try karo" bola:** order/submit buttons (hero, header, pricing tiers, order form, final CTA) **blue nahi, orange** `#C2410C` bg + white text (5.18:1, AA pass), hover `#9A3412`. Blue page ka complement hai — CTA pop karta hai. Brand blue links, badges ("Most chosen"), focus rings aur accents me hi rehta hai. Token: `--color-cta` / `--color-cta-hover` (theme.css).
 - **Text link / chhoti blue text:** `#0063B1` (white par 6.14:1). Kabhi bhi chhoti text ko `#008EFD` me mat likho.
-- **Dark mode me link:** `#33A5FD` (dark bg par readable hai).
+- **Dark mode me link (LEGACY only):** `#33A5FD` (dark bg par readable hai) — naye apps me dark mode hai hi nahi.
 - **Focus ring:** `#0072C8`, 2px outline, button/input par hamesha dikhna chahiye.
 
-## 3. Light theme tokens (Astro + Next.js light)
+## 3. Light theme tokens (Astro + Vite apps, light)
 
-Astro sirf yehi tokens use karega. Next.js light mode bhi yehi.
+Astro aur teeno Vite apps yehi tokens use karte hain (Vite apps landing wali `theme.css` share karte hain).
 
 | Token (CSS var) | Value | Kahan use hoga |
 |---|---|---|
@@ -62,7 +63,7 @@ Astro sirf yehi tokens use karega. Next.js light mode bhi yehi.
 | `--primary-text` | #0063B1 | Text links, chhoti blue text |
 | `--primary-tint` | #EBF6FF | Info bg, badge bg, selected state |
 
-### Semantic colours (light + dark dono me same)
+### Semantic colours (light — dark values legacy, Section 4 me hain)
 
 | Token | Value | Use |
 |---|---|---|
@@ -74,9 +75,9 @@ Astro sirf yehi tokens use karega. Next.js light mode bhi yehi.
 | `--error-bg` | #FEF2F2 | Error message background |
 | `--info` | #0284C7 | Info message (blue family, primary se alag shade) |
 
-## 4. Dark theme tokens (sirf Next.js app)
+## 4. Dark theme tokens (LEGACY — sirf purana Next.js app)
 
-Astro me ye tokens exist hi nahi karenge — kumbuild.com par dark CSS likhna bhi mana hai.
+**Naye apps (Astro + Vite) me dark mode nahi hai — ye tokens sirf legacy `apps/app` ke liye the.** Astro me ye tokens exist hi nahi karte — kumbuild.com par dark CSS likhna bhi mana hai.
 
 | Token (CSS var) | Value | Kahan use hoga |
 |---|---|---|
@@ -104,7 +105,12 @@ Semantic dark: `--success` #4ADE80 (text/icons ke liye halka green), `--warning`
 - `prefers-color-scheme: dark` wale visitor ko bhi light site dikhegi — ye decision hai, bug nahi.
 - Logo: `kumbuild-logo.svg` (transparent, blue mark) header/footer me. Dark section kabhi nahi banega, isliye blue-bg logo version ki zaroorat nahi padegi — phir bhi wo file repo me hai, future ke liye.
 
-### Next.js (`apps/app`) — system / light / dark
+### Vite apps (`apps/account`, `apps/admin`, `apps/home`) — light only
+
+- Landing wali `theme.css` tokens hi use karte hain (copy — `src/index.css`). Koi dark mode, koi toggle, koi `data-theme` nahi.
+- Light-only rule Section 3 + contrast rules (Section 2) yahan bhi lagu hote hain.
+
+### LEGACY — Next.js (`apps/app`) — system / light / dark (tha)
 
 - **Default = system.** Pehli visit par device ki `prefers-color-scheme` follow karo.
 - **Toggle:** header/settings me 3 options — System / Light / Dark. User ki choice **cookie** me save karo (localStorage nahi — cookie se server bhi theme jaan sakta hai, SSR par flash nahi hoga).
@@ -112,11 +118,11 @@ Semantic dark: `--success` #4ADE80 (text/icons ke liye halka green), `--warning`
 - **CSS variables:** dono themes ke tokens `:root` (light) aur `[data-theme="dark"]` me same variable names se. Component kabhi hard-coded colour nahi likhega — hamesha `var(--bg)` jaisa token use karega.
 - **Logo in app:** header me `kumbuild-logo.svg` light mode me; dark mode me bhi wahi (blue mark dark bg par readable hai — #008EFD on #0F172A contrast 5.61:1 hai). Blue-bg version sirf tab use karo jab logo ko square tile me dikhana ho (jaise app icon / avatar).
 
-### Dono apps me common rules
+### Sab apps me common rules
 
 - **Border radius:** cards 12px, buttons 8px, inputs 8px, badges pill. (Logo ke corner radius se match karne ke liye — gol, par zyada gol nahi.)
 - **Shadow:** light me halki — card `0 1px 2px rgba(15,23,42,.06)`. Dark me shadow nahi, border se separation.
-- **Font:** Poppins **nahi** — wo ShrinkIt ka font hai, Kumbuild ka nahi. Kumbuild font: system stack + Inter (Latin) — final font build ke time lock hoga, is doc me font decide nahi hua. Devanagari/Bengali ke liye Section 6.3 dekho.
+- **Font:** Poppins **nahi** — wo ShrinkIt ka font hai, Kumbuild ka nahi. Kumbuild font **LOCKED (2026-11-10, docs-site port): Inter 400;500;600 body, Sora 600;700;800 headings** (Google Fonts se load hota hai). Devanagari/Bengali ke liye Section 6.3 dekho.
 
 ## 6. Locales — shared i18n
 
@@ -133,7 +139,7 @@ Semantic dark: `--success` #4ADE80 (text/icons ke liye halka green), `--warning`
 - **Slugs translate nahi honge (shuru me):** `/hi/pricing/` — slug English hi rahega, sirf content Hindi me. Translated slugs SEO ke liye behtar hote hain par routing complexity badhate hain; chhoti site ke liye same slug hi sahi hai. Baad me decide karke badla ja sakta hai.
 - **Language switcher:** header me hamesha dikhega (EN | हिंदी | বাংলা). Switch karne par **wahi page** dusri locale me khulega — home par wapas nahi bhejna.
 
-### 6.2 Dono apps me ek hi setup
+### 6.2 Sab apps me ek hi setup
 
 **Astro (`apps/web`) — built-in i18n routing** (source: docs.astro.build/en/guides/internationalization/):
 
@@ -153,7 +159,13 @@ i18n: {
 - Default locale unprefixed, `hi`/`bn` prefixed. Links banate time `getRelativeLocaleUrl()` use karo — hard-coded `/hi/...` links mat likho.
 - `redirectToDefaultLocale` **false** rakho — `/` par English site khulegi, redirect nahi hoga.
 
-**Next.js (`apps/app`) — `next-intl` + `[locale]` segment** (source: next-intl.dev/docs/routing/configuration):
+**Vite apps (`apps/account`, `apps/admin`, `apps/home`) — URL prefix + shared dicts:**
+
+- Locale URL ke pehle segment se padha jata hai (`/hi/...`, `/bn/...`; en-US bina prefix). Router `basename` se kaam karta hai; `LocaleSwitcher` wahi page dusri locale me kholta hai.
+- Dicts wahi shared files hain (`frontend/packages/lib/src/i18n/*.json`).
+- **Note (2026-11-11):** 3 Vite apps abhi English-only hain — locale plumbing (`LocaleProvider` + `LocaleSwitcher`) scaffolded hai, page strings English me hain. App pages ki full i18n baad me hogi.
+
+**LEGACY — Next.js (`apps/app`) — `next-intl` + `[locale]` segment** (source: next-intl.dev/docs/routing/configuration):
 
 ```ts
 // i18n/routing.ts
@@ -169,7 +181,7 @@ export const routing = defineRouting({
 
 ### 6.3 Shared dictionaries — ek source of truth
 
-- Strings **ek jagah** rahenge: `frontend/packages/lib/src/i18n/` — `en-US.json`, `hi.json`, `bn.json`. Dono apps (Astro + Next.js) wahi files import karenge. Kisi bhi app me apni copy nahi banegi — copy bani to dono drift karenge.
+- Strings **ek jagah** rahenge: `frontend/packages/lib/src/i18n/` — `en-US.json`, `hi.json`, `bn.json`. Sab apps (Astro + Vite) wahi files import karenge. Kisi bhi app me apni copy nahi banegi — copy bani to dono drift karenge. (Legacy Next.js app bhi wahi dicts use karta tha.)
 - **Keys namespaced** honge: `nav.pricing`, `pricing.business.title`, `order.form.name.label` — flat keys nahi.
 - **Plurals / variables ICU MessageFormat se:** `{count, plural, one {# page} other {# pages}}` — Hindi/Bengali me plural rules English se alag hote hain, hard-coded `s` mat lagao.
 - **Missing key rule:** koi key kisi locale me missing ho to **en-US dikhega + build/dev me warning log hoga**. Missing page par 404 nahi — fallback English content dikhega (Astro `fallback` / next-intl me same rule). Par **hreflang/sitemap me wo locale list nahi hoga** jab tak asli translation na ho (Section 6.4).
@@ -193,16 +205,16 @@ export const routing = defineRouting({
 
 ## 7. Tokens kahan rahenge (code banate time)
 
-- Shared tokens: `frontend/packages/config/theme.ts` — dono apps wahi import karenge.
+- Shared tokens: `frontend/packages/config/theme.ts` — sab apps wahi import karenge.
 - Astro: `apps/web/src/styles/theme.css` (sirf light tokens).
-- Next.js: `apps/app/src/app/globals.css` — `:root` light + `[data-theme="dark"]` dark.
+- Vite apps: `apps/account/src/index.css`, `apps/admin/src/index.css`, `apps/home/src/index.css` — landing wali `theme.css` tokens ki copy (sirf light).
+- Legacy Next.js: `apps/app/src/app/globals.css` — `:root` light + `[data-theme="dark"]` dark.
 - Dictionaries: `frontend/packages/lib/src/i18n/*.json` (Section 6.3).
-- Ye file locations plan hain — code abhi nahi likha gaya.
 
 ## 8. Sources — Exa se verify (2026-11-09)
 
 - Astro i18n routing: locales + defaultLocale + `prefixDefaultLocale` (false = default unprefixed), `getRelativeLocaleUrl()`, fallback strategies. Source: docs.astro.build/en/guides/internationalization/; getastrothemes.com/blog/astro-multilingual-website-guide/ (2026-10-12).
-- Next.js App Router i18n: built-in `i18n` config App Router me kaam nahi karta; static export me default locale root par + hi/bn `[locale]/` tree, next-intl, `localePrefix: "as-needed"` (middleware nahi — Exa-verified 2026-11-09, next-intl.dev/docs/routing/middleware "Usage without proxy/middleware (static export)" + GitHub discussion #2132/#2332).
+- Next.js App Router i18n (LEGACY `apps/app` ke liye tha): built-in `i18n` config App Router me kaam nahi karta; static export me default locale root par + hi/bn `[locale]/` tree, next-intl, `localePrefix: "as-needed"` (middleware nahi — Exa-verified 2026-11-09, next-intl.dev/docs/routing/middleware "Usage without proxy/middleware (static export)" + GitHub discussion #2132/#2332).
 - hreflang: reciprocity zaroori, absolute URLs, sirf existing locales, `x-default` default locale par. Source: olafboettcher.de/blog/multilingual-nextjs-hreflang (2026-09-09).
 - Contrast ratios khud calculate kiye gaye hain (WCAG formula): white on #008EFD = 3.34:1, white on #0063B1 = 6.14:1, #008EFD on #0F172A = 5.61:1.
 - Palette Option A: 2026-11-09 ko 4 options me se assistant pick — user ne "best theme apply karo" bola.

@@ -35,13 +35,21 @@ A: 2 revision rounds free hain. Preview dekh ke changes batao, Kumbuild karke do
 **Q: Baad me website me kuch badalna ho to?**
 A: Chhoti updates (phone, timing, ek-do lines) renewal me included hain. Bade changes (naya page, design badalna) alag charge pe honge.
 
+## Account aur login
+
+**Q: Kya mujhe account banana hoga?**
+A: Haan — order karne ke liye `account.kumbuild.com` pe signup karo (naam + email + password). Uske baad tum apne orders `home.kumbuild.com` pe track kar sakte ho.
+
+**Q: Login kaise karun?**
+A: `account.kumbuild.com/login` pe email + password daalo. Login ke baad admin ko admin dashboard aur customer ko home dashboard (My orders) pe bheja jayega. Password bhool jao to "Forgot password" se reset link maango.
+
 ## Order aur delivery
 
 **Q: Order kaise karun?**
-A: WhatsApp DM karo, Instagram DM karo, ya `kumbuild.com/order` pe form bharo — package choose karo, business details do, advance do. Poora flow `PLAN.md` me hai. Koi account banane ki zaroorat nahi hai.
+A: WhatsApp DM karo, Instagram DM karo, ya `kumbuild.com/order` pe form bharo — package choose karo, business details do, advance do. Phir `account.kumbuild.com` pe signup/login karo — poora flow `PLAN.md` me hai.
 
 **Q: Order ka status kahan dekhu?**
-A: Koi dashboard nahi hai — status admin tumhe WhatsApp pe batayega: Received → In progress → Preview ready → Revision → Approved → Live. Preview link aur live link bhi WhatsApp pe milenge.
+A: `home.kumbuild.com` pe login karo — My orders me har order ka status dikhega: Received → In progress → Preview ready → Revision → Approved → Live. Status admin tumhe WhatsApp pe bhi batayega. Preview link aur live link dono jagah milenge.
 
 **Q: Meri website ka domain kya hoga?**
 A: Domain naam tum choose karoge. Pehle saal ka domain package price me mana gaya hai (draft — final karte time saaf hoga), renewal me domain renewal included hai.

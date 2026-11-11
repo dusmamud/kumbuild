@@ -12,12 +12,12 @@ Status: **DRAFT (2026-11-09). Ye policy website pe daalne se pehle user ko final
 
 | Stage | Matlab | Customer ko kaise pata chalega |
 |---|---|---|
-| Received | Order aur advance mil gaya (admin ne admin dashboard me order add kiya) | Admin WhatsApp pe batayega: order mil gaya |
-| In progress | Website ban rahi hai | Admin batayega jab kaam shuru ho |
-| Preview ready | Preview link bhej diya | Preview link WhatsApp pe milega — kholo, dekho |
-| Revision | Customer ne changes bole | WhatsApp pe changes batao |
-| Approved | Customer ne approve kiya, final payment ho gaya | WhatsApp pe confirm hoga |
-| Live | Website live hai | Live link WhatsApp pe milega |
+| Received | Order aur advance mil gaya (admin ne admin dashboard me order add kiya) | Admin WhatsApp pe batayega: order mil gaya — `home.kumbuild.com` pe bhi dikhega |
+| In progress | Website ban rahi hai | `home.kumbuild.com` pe status dikhega; admin batayega jab kaam shuru ho |
+| Preview ready | Preview link bhej diya | Preview link WhatsApp pe milega **aur** `home.kumbuild.com` pe khulega — kholo, dekho |
+| Revision | Customer ne changes bole | WhatsApp pe changes batao; status `home.kumbuild.com` pe dikhega |
+| Approved | Customer ne approve kiya, final payment ho gaya | WhatsApp pe confirm hoga; status `home.kumbuild.com` pe dikhega |
+| Live | Website live hai | Live link WhatsApp pe milega **aur** `home.kumbuild.com` pe dikhega |
 
 ## Revision policy — DRAFT
 
@@ -39,10 +39,10 @@ Kuch missing ho to Kumbuild customer ko message karega aur order ruk jayega — 
 
 ## Approval aur go-live
 
-1. Preview link milega (WhatsApp pe) — customer dekhega, changes batayega ya approve karega
+1. Preview link milega (WhatsApp pe **aur** `home.kumbuild.com` pe) — customer dekhega, changes batayega ya approve karega
 2. Approve karne ke baad final 50% payment karna hoga
 3. Final payment milne ke baad website live ki jayegi
-4. Live hone ke baad customer ko live link WhatsApp pe milega
+4. Live hone ke baad customer ko live link WhatsApp pe milega **aur** `home.kumbuild.com` pe dikhega
 
 ## Delivery ke baad
 

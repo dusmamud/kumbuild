@@ -1,6 +1,6 @@
 # Kumbuild — Service Plan
 
-Status: **DRAFT — plan stage (2026-11-09). Kuch build nahi hua, koi price final nahi hai, koi customer nahi hai.**
+Status: **DRAFT — plan stage (2026-11-09), 2026-11-11 ko 6-app plan se updated. Landing live hai; account/admin/home Vite apps build ho gaye hain (mock phase). Kuch price final nahi hai, koi customer nahi hai.**
 Owner: Dus Mamud. Brand: **Kumbuild**. Tagline: **Tell us what to build.**
 
 Ye file service ka poora plan hai — kya problem hai, kisko bechna hai, kya dena hai, kaise order hoga, kitne me hoga, aur kaise launch hoga. Jo cheez decide nahi hui, uske saamne saaf likha hai: DRAFT ya TBD.
@@ -89,27 +89,28 @@ Ye prices **draft** hain. User ne final nahi kiye. Inko website pe daalne se peh
 1. **Dekho** — `kumbuild.com` pe aao, examples aur pricing dekho
 2. **Choose karo** — package choose karo
 3. **Baat karo** — WhatsApp DM karo, Instagram DM karo, ya `/order` pe form bharo: business ka naam, kya karte ho, services, WhatsApp number, photos, location
-4. **Confirm karo** — admin (Dus) details aur package confirm karega, phir advance 50% ka payment link bhejega (Razorpay se)
-5. **Advance do** — 50% payment karo; milne ke baad admin order ko `admin.kumbuild.com` me add karega, status: Received
-6. **Preview dekho** — 3–5 din (draft) me preview link WhatsApp pe milega; dekho, changes batao ya approve karo (2 free rounds)
-7. **Baaki payment + live** — baaki 50% do, website live; live link WhatsApp pe milega
-8. **Renewal** — har saal ₹1,999 (draft) pe domain + hosting + support
+4. **Account banao / login karo** — `account.kumbuild.com` pe signup ya login karo (email + password). Yahi account se tum apne orders track karoge.
+5. **Confirm karo** — admin (Dus) details aur package confirm karega, phir advance 50% ka payment link bhejega (Razorpay se)
+6. **Advance do** — 50% payment karo; milne ke baad admin order ko `admin.kumbuild.com` me add karega, status: Received
+7. **Preview dekho** — 3–5 din (draft) me preview link milega — WhatsApp pe aur `home.kumbuild.com` (My orders) pe; dekho, changes batao ya approve karo (2 free rounds)
+8. **Baaki payment + live** — baaki 50% do, website live; live link WhatsApp pe aur `home.kumbuild.com` pe milega
+9. **Renewal** — har saal ₹1,999 (draft) pe domain + hosting + support
 
-**Customer ka koi account nahi hai, koi dashboard nahi hai.** Order WhatsApp / Instagram DM / form se aata hai; jo confirm hoga use admin khud admin dashboard me add karega aur saari progress wahin track karega. Customer ko status aur preview link WhatsApp pe milega.
+**Customer ka account hota hai.** Signup/login `account.kumbuild.com` pe hota hai; apne orders ka status customer `home.kumbuild.com` pe dekh sakta hai — aur status/preview/live link WhatsApp pe bhi milta rahega. (2026-11-09 wala "customer ka koi account nahi hai" plan 2026-11-11 ko superseded hai.)
 
-### Order status (admin dashboard me — customer ko WhatsApp pe bataya jayega)
+### Order status (customer home.kumbuild.com pe bhi dekhta hai; admin WhatsApp pe bhi batata hai)
 
 Received → In progress → Preview ready → Revision → Approved → Live
 
 ## 7. Delivery process — andar ka kaam (admin)
 
-1. Order aaya — WhatsApp DM, Instagram DM ya `/order` form se. Details + package confirm karo.
+1. Order aaya — WhatsApp DM, Instagram DM ya `/order` form se. Details + package confirm karo. (Customer ka account `account.kumbuild.com` pe banta hai — order form bharne ke baad signup/login karna hoga.)
 2. Advance 50% ka payment link bhejo (Razorpay se); advance milne ke baad order ko `admin.kumbuild.com/orders` me add karo, status: Received
 3. Form details + photos check karo — kuch missing ho to customer ko WhatsApp pe message karo
 4. Website banao (package ke hisaab se pages)
-5. Preview link customer ko WhatsApp pe bhejo, status `Preview ready` karo
+5. Preview link customer ko WhatsApp pe bhejo **aur** `home.kumbuild.com` pe dikhega, status `Preview ready` karo
 6. Revision lo (WhatsApp pe), changes karo, dobara preview bhejo
-7. Approval + final payment confirm karo, status `Live` karo, live link WhatsApp pe bhejo
+7. Approval + final payment confirm karo, status `Live` karo, live link WhatsApp pe bhejo — customer ko `home.kumbuild.com` pe bhi dikhega
 8. Website ka record `admin.kumbuild.com/builds` me rakho — domain, renewal date, package
 
 ## 8. Revenue model
@@ -131,11 +132,11 @@ Kharcha: domain + hosting per website, Razorpay fees 2% + 18% GST on fee (detail
 - [x] Payment provider decide karna — Razorpay (LOCKED 2026-11-09)
 - [ ] Domain `kumbuild.com` ki status confirm karna (TBD — khareeda hai ya nahi, ye doc nahi batata)
 
-### Phase 2 — kumbuild.com (frontend pehle)
+### Phase 2 — kumbuild.com + 3 apps (frontend pehle)
 
-- Landing + pricing + services + examples + order form
-- Admin dashboard + admin login (mock data se, frontend complete) — customer ka koi account / dashboard nahi hoga
-- GitHub Actions → Cloudflare Pages deploy
+- Landing + pricing + services + examples + order form — **DONE + LIVE**
+- account.kumbuild.com (login/signup) + admin.kumbuild.com (dashboard) + home.kumbuild.com (customer dashboard) — React+Vite, mock data se — **DONE (build), deploy next push pe**
+- GitHub Actions → Cloudflare Pages deploy (4 projects)
 
 ### Phase 3 — Demo sites (portfolio)
 
@@ -167,9 +168,9 @@ Kharcha: domain + hosting per website, Razorpay fees 2% + 18% GST on fee (detail
 
 - [ ] Pricing final (₹3,999 / ₹7,999 / ₹14,999 / ₹1,999 — draft hain)
 - [x] Payment provider — Razorpay (LOCKED 2026-11-09)
-- [ ] `kumbuild.com` domain — khareeda ya nahi, kab khareedna hai
+- [ ] `kumbuild.com` domain — khareeda ya nahi, kab khareedna hai (abhi nahi khareeda — user ko registrar pe check karna hai)
 - [ ] GitHub repo ka naam aur public / private
-- [ ] `auth.kumbuilds.com` vs `auth.kumbuild.com` — typo confirm karna hai
+- [x] Auth subdomain — `auth.kumbuild.com` khatam; ab `account.kumbuild.com` hai (central login/signup, 2026-11-11). `auth.kumbuilds.com` typo tha, irrelevant hai
 - [ ] Hafta me kitni websites bana sakte ho (capacity)
 - [ ] Extra revision / extra page ka charge
 - [ ] Renewal na karne pe website ka kya hoga

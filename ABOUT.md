@@ -65,11 +65,11 @@ Boutique, home baker, photographer, freelancer, handmade products. Problem: Inst
 
 ## Kaise kaam karta hai? (Customer ke liye, 5 steps)
 
-1. **Batao** — kumbuild.com pe package choose karo aur form bharo: business ka naam, kya karte ho, services, WhatsApp number, photos, location.
-2. **Advance do** — package ka 50% advance payment karo.
-3. **Preview dekho** — 3–5 din (draft) me website ka preview link milega.
-4. **Approve karo** — changes batao (2 free revision rounds, draft), phir baaki 50% payment karo.
-5. **Live** — website live ho jayegi, aur har saal renewal pe domain + hosting + chhoti updates milengi.
+1. **Batao** — kumbuild.com pe package choose karo aur form bharo: business ka naam, kya karte ho, services, WhatsApp number, photos, location. Ya WhatsApp / Instagram DM karo.
+2. **Account banao** — account.kumbuild.com pe signup/login karo. Yahi se tum apne orders track karoge.
+3. **Advance do** — package ka 50% advance payment karo.
+4. **Preview dekho** — 3–5 din (draft) me website ka preview link milega — WhatsApp pe aur home.kumbuild.com (My orders) pe. Dekho, changes batao (2 free revision rounds, draft), phir baaki 50% payment karo.
+5. **Live** — website live ho jayegi; live link WhatsApp pe aur home.kumbuild.com pe milega. Har saal renewal pe domain + hosting + chhoti updates milengi.
 
 ## Kumbuild kyun alag hai?
 

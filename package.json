@@ -17,7 +17,13 @@
     "build:blog": "turbo run build --filter=kumbuild-blog",
     "build:docs": "turbo run build --filter=kumbuild-docs",
     "dev:blog": "turbo run dev --filter=kumbuild-blog",
-    "dev:docs": "turbo run dev --filter=kumbuild-docs"
+    "dev:docs": "turbo run dev --filter=kumbuild-docs",
+    "build:account": "turbo run build --filter=kumbuild-account",
+    "build:admin": "turbo run build --filter=kumbuild-admin",
+    "build:home": "turbo run build --filter=kumbuild-home",
+    "dev:account": "turbo run dev --filter=kumbuild-account",
+    "dev:admin": "turbo run dev --filter=kumbuild-admin",
+    "dev:home": "turbo run dev --filter=kumbuild-home"
   },
   "version": "0.1.0"
 }

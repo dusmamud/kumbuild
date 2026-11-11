@@ -40,7 +40,7 @@ Ye rules draft hain — user ko approve karna hai ki advance kab se "kaam shuru"
 ## 5. Order cancel kaise karein?
 
 - Order cancel karne ke liye customer ko WhatsApp pe message karna hoga — order ID ke saath
-- Cancel karne ke baad order ka status admin dashboard me dikhega, aur admin customer ko WhatsApp pe batayega
+- Cancel karne ke baad order ka status admin dashboard me dikhega, customer ko `home.kumbuild.com` pe bhi dikhega, aur admin customer ko WhatsApp pe batayega
 - Jo refund banta hoga, woh upar wale rules ke hisaab se milega
 
 ## 6. Open decisions — refund policy final karne se pehle

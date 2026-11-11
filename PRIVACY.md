@@ -2,13 +2,13 @@
 
 Status: **DRAFT (2026-11-09). Ye legal document nahi hai aur legal advice bhi nahi hai. Website pe daalne se pehle user ko padh ke final karna hai, aur zaroorat pade to kisi lawyer se check karwana hai.**
 
-Ye policy `kumbuild.com` aur uske subdomains (`auth.kumbuild.com`, `admin.kumbuild.com`) pe lagu hogi. Customer ka koi account nahi hai — customer sirf `kumbuild.com` use karta hai.
+Ye policy `kumbuild.com` aur uske subdomains (`account.kumbuild.com`, `admin.kumbuild.com`, `home.kumbuild.com`) pe lagu hogi. Customer ka account banta hai — customer `account.kumbuild.com` pe signup/login karta hai aur `home.kumbuild.com` pe apne orders dekhta hai.
 
 ## 1. Hum kaunsi information lete hain?
 
 ### Customer (website order karne wala) se
 
-- Naam, phone number, email address
+- Naam, phone number, email address (account ke liye — login/signup pe diye jate hain)
 - Business ka naam, address, timing, services aur price
 - WhatsApp number
 - Business ki photos aur logo
@@ -39,7 +39,8 @@ Information ko kisi aur kaam ke liye use nahi kiya jayega.
 ## 4. Information kahan store hoti hai?
 
 - Frontend Cloudflare pe host hoga (locked decision).
-- Backend aur database abhi decide nahi hue (TBD) — backend banne ke baad is section me likha jayega ki data kahan store hota hai aur kitne time tak rakha jata hai.
+- Backend Go me banega (`api.kumbuild.com`, planned) — database abhi decide nahi hua (TBD). Backend banne ke baad is section me likha jayega ki data kahan store hota hai aur kitne time tak rakha jata hai.
+- **Mock phase (abhi):** koi real backend nahi hai — login session aur signup sirf browser ke localStorage me rehte hain (demo ke liye). Ye data server pe nahi jata.
 - Passwords plain text me kabhi store nahi kiye jayenge (backend banne pe hashing use hoga — ye commitment hai, implementation TBD hai).
 
 ## 5. Customer ke rights
@@ -54,11 +55,11 @@ Request karne ke liye contact: TBD (email / WhatsApp — website launch se pehle
 
 ## 6. Cookies
 
-Website pe cookies use hongi — admin login session ke liye aur website kaise use ho rahi hai ye samajhne ke liye. Exact cookies ki list backend / analytics tool decide hone ke baad likhi jayegi (TBD).
+Website pe cookies use hongi — login session (admin + customer, `account.kumbuild.com` se) ke liye aur website kaise use ho rahi hai ye samajhne ke liye. Mock phase me session browser ke localStorage me rehta hai (koi cookie nahi); production me Go backend HttpOnly session cookie use karega. Exact cookies ki list backend / analytics tool decide hone ke baad likhi jayegi (TBD).
 
 ## 7. Bachchon ka data
 
-Ye service business ke liye hai, bachchon ke liye nahi hai. Customer ka koi account nahi banta — order WhatsApp / Instagram DM / form se hota hai. (Ye line draft hai — Play Store listing me target audience 18+ rakha gaya tha, par Kumbuild ke liye ye abhi final nahi hua hai.)
+Ye service business ke liye hai, bachchon ke liye nahi hai. Account sirf business owner (18+) ke liye hai. (Ye line draft hai — Play Store listing me target audience 18+ rakha gaya tha, par Kumbuild ke liye ye abhi final nahi hua hai.)
 
 ## 8. Policy me badlav
 
