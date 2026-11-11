@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import { YouTube, Tweet } from "astro-embed";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { BLOG_AUTHOR, topicSlug, waLink } from "../lib/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -17,21 +18,92 @@ const all = (await getCollection("blog", ({ data }) => !data.draft))
   .slice(0, 2);
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+
+const pageUrl = new URL(`/${post.id}/`, Astro.site).toString();
+const topicHref = `/topic/${topicSlug(post.data.tag)}/`;
 const waText = encodeURIComponent(`I read "${post.data.title}" on the Kumbuild blog and I have a question.`);
+const shareText = encodeURIComponent(post.data.title);
+const shareWa = `https://wa.me/?text=${encodeURIComponent(`${post.data.title} — ${pageUrl}`)}`;
+const shareX = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(pageUrl)}`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      headline: post.data.title,
+      description: post.data.description,
+      image: post.data.heroImage ? new URL(post.data.heroImage, Astro.site).toString() : undefined,
+      datePublished: post.data.pubDate.toISOString(),
+      dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+      author: { "@type": "Organization", name: BLOG_AUTHOR },
+      publisher: { "@type": "Organization", name: "Kumbuild" },
+      mainEntityOfPage: pageUrl,
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Blog", item: new URL("/", Astro.site).toString() },
+        { "@type": "ListItem", position: 2, name: post.data.tag, item: new URL(topicHref, Astro.site).toString() },
+        { "@type": "ListItem", position: 3, name: post.data.title, item: pageUrl },
+      ],
+    },
+  ],
+};
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} ogImage={post.data.heroImage} type="article">
-  <article class="mx-auto w-full max-w-[44rem] px-4 pt-12 sm:px-6 sm:pt-16">
-    <a href="/" class="inline-flex min-h-[40px] items-center gap-1.5 text-base font-medium text-primary-700 transition-colors hover:text-primary-800">
-      <Icon name="lucide:arrow-left" class="h-4 w-4" />
-      All articles
-    </a>
-    <p class="mt-8 flex flex-wrap items-center gap-3 font-mono text-xs text-muted">
-      <span class="rounded-full bg-primary-50 px-2.5 py-1 font-sans text-xs font-semibold text-primary-700">{post.data.tag}</span>
-      {fmt(post.data.pubDate)} · {post.data.readMins} min read
-    </p>
-    <h1 class="mt-4 font-display text-[clamp(1.9rem,1.5rem+2.2vw,2.75rem)] font-semibold leading-[1.15] text-ink">{post.data.title}</h1>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={post.data.heroImage}
+  type="article"
+  publishedTime={post.data.pubDate}
+  modifiedTime={post.data.updatedDate}
+  jsonLd={jsonLd}
+>
+  <article class="mx-auto w-full max-w-[44rem] px-4 pt-10 sm:px-6 sm:pt-14">
+    <nav aria-label="Breadcrumb">
+      <ol class="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[15px]">
+        <li>
+          <a href="/" class="inline-flex min-h-[44px] items-center gap-1.5 font-medium text-primary-700 transition-colors hover:text-primary-800">
+            <Icon name="lucide:arrow-left" class="h-4 w-4" />
+            Blog
+          </a>
+        </li>
+        <li aria-hidden="true" class="text-faint"><Icon name="lucide:chevron-right" class="h-4 w-4" /></li>
+        <li>
+          <a href={topicHref} class="inline-flex min-h-[44px] items-center font-medium text-primary-700 transition-colors hover:text-primary-800">{post.data.tag}</a>
+        </li>
+        <li aria-hidden="true" class="text-faint"><Icon name="lucide:chevron-right" class="h-4 w-4" /></li>
+        <li aria-current="page" class="min-w-0 max-w-full truncate py-3 font-medium text-muted">{post.data.title}</li>
+      </ol>
+    </nav>
+
+    <h1 class="mt-6 font-display text-[clamp(1.9rem,1.5rem+2.2vw,2.75rem)] font-semibold leading-[1.15] text-ink">{post.data.title}</h1>
     <p class="mt-4 text-lg leading-[30px] text-body">{post.data.description}</p>
+
+    <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2.5 border-y border-line py-4 text-sm text-muted">
+      <span class="flex items-center gap-2">
+        <img src="/logo/kumbuild-logo.svg" alt="" width="22" height="22" class="h-[22px] w-[22px]" />
+        <span>By <span class="font-semibold text-ink">{BLOG_AUTHOR}</span></span>
+      </span>
+      <span class="flex items-center gap-1.5">
+        <Icon name="lucide:calendar" class="h-4 w-4 text-faint" />
+        <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+      </span>
+      <span class="flex items-center gap-1.5">
+        <Icon name="lucide:clock" class="h-4 w-4 text-faint" />
+        {post.data.readMins} min read
+      </span>
+      {post.data.updatedDate && (
+        <span class="flex items-center gap-1.5">
+          <Icon name="lucide:refresh-cw" class="h-4 w-4 text-faint" />
+          Updated <time datetime={post.data.updatedDate.toISOString()}>{fmt(post.data.updatedDate)}</time>
+        </span>
+      )}
+      <a href={topicHref} class="ml-auto rounded-full bg-primary-50 px-2.5 py-1 text-xs font-semibold text-primary-700 transition-colors hover:text-primary-800">{post.data.tag}</a>
+    </div>
+
     {post.data.heroImage && (
       <img src={post.data.heroImage} alt="" width="1200" height="675" class="mt-8 aspect-[16/9] w-full rounded-[24px] border border-line object-cover" />
     )}
@@ -39,9 +111,31 @@ const waText = encodeURIComponent(`I read "${post.data.title}" on the Kumbuild b
       <Content components={{ YouTube, Tweet }} />
     </div>
 
-    <div class="mt-12 flex flex-wrap items-center gap-3 rounded-2xl border border-line bg-card p-5 sm:p-6">
+    <div class="mt-12 flex flex-wrap items-center gap-2.5 border-t border-line pt-6">
+      <span class="flex items-center gap-2 text-base font-medium text-ink">
+        <Icon name="lucide:share-2" class="h-[18px] w-[18px] text-muted" />
+        Share this article
+      </span>
+      <span class="ml-auto flex flex-wrap gap-2.5">
+        <a href={shareWa} target="_blank" rel="noopener" class="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-semibold text-body transition-colors hover:text-primary-700">
+          <Icon name="lucide:message-circle" class="h-[18px] w-[18px]" />
+          WhatsApp
+        </a>
+        <a href={shareX} target="_blank" rel="noopener" class="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-semibold text-body transition-colors hover:text-primary-700">
+          <Icon name="lucide:twitter" class="h-[18px] w-[18px]" />
+          Post on X
+        </a>
+        <button type="button" data-copy-link data-url={pageUrl} class="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-semibold text-body transition-colors hover:text-primary-700">
+          <span data-copy-icon><Icon name="lucide:link-2" class="h-[18px] w-[18px]" /></span>
+          <span data-copy-done-icon class="hidden text-live"><Icon name="lucide:check" class="h-[18px] w-[18px]" /></span>
+          <span data-copy-label>Copy link</span>
+        </button>
+      </span>
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center gap-3 rounded-2xl border border-line bg-card p-5 sm:p-6">
       <p class="text-base font-medium text-ink">Have a question about your own website?</p>
-      <a href={`https://wa.me/919876543210?text=${waText}`} target="_blank" rel="noopener" class="ml-auto inline-flex items-center gap-2 rounded-xl bg-live px-5 py-2.5 text-base font-semibold text-white transition-opacity hover:opacity-90">
+      <a href={waLink(`I read "${post.data.title}" on the Kumbuild blog and I have a question.`)} target="_blank" rel="noopener" class="ml-auto inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-live px-5 py-2.5 text-base font-semibold text-white transition-opacity hover:opacity-90">
         <Icon name="lucide:message-circle" class="h-[18px] w-[18px]" />
         Ask on WhatsApp
       </a>
@@ -56,12 +150,44 @@ const waText = encodeURIComponent(`I read "${post.data.title}" on the Kumbuild b
           <a href={`/${p.id}/`} class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-card transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
             {p.data.heroImage && <img src={p.data.heroImage} alt="" width="1200" height="675" loading="lazy" class="aspect-[16/9] w-full object-cover" />}
             <span class="flex flex-1 flex-col p-6">
-              <span class="font-mono text-xs text-muted">{fmt(p.data.pubDate)} · {p.data.readMins} min read</span>
-              <span class="mt-2 font-display text-lg font-semibold leading-snug text-ink group-hover:text-primary-700">{p.data.title}</span>
+              <span class="flex flex-wrap items-center gap-3 font-mono text-xs text-muted">
+                <span class="rounded-full bg-primary-50 px-2.5 py-1 font-sans text-xs font-semibold text-primary-700">{p.data.tag}</span>
+                {fmt(p.data.pubDate)} · {p.data.readMins} min read
+              </span>
+              <span class="mt-2.5 font-display text-lg font-semibold leading-snug text-ink group-hover:text-primary-700">{p.data.title}</span>
+              <span class="mt-2 flex-1 text-[15px] leading-[26px] text-body">{p.data.description}</span>
             </span>
           </a>
         ))}
       </div>
     </section>
   )}
+
+  <script>
+    const btn = document.querySelector("[data-copy-link]") as HTMLButtonElement | null;
+    btn?.addEventListener("click", async () => {
+      const url = btn.dataset.url ?? window.location.href;
+      const label = btn.querySelector("[data-copy-label]");
+      const icon = btn.querySelector("[data-copy-icon]");
+      const done = btn.querySelector("[data-copy-done-icon]");
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = url;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      if (label) label.textContent = "Copied";
+      icon?.classList.add("hidden");
+      done?.classList.remove("hidden");
+      window.setTimeout(() => {
+        if (label) label.textContent = "Copy link";
+        icon?.classList.remove("hidden");
+        done?.classList.add("hidden");
+      }, 2000);
+    });
+  </script>
 </BaseLayout>

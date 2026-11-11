@@ -19,7 +19,7 @@ const fmt = (d: Date) => d.toLocaleDateString("en-IN", { day: "numeric", month: 
 
 <BaseLayout title={`${tag} — Kumbuild Blog`} description={`Articles about ${tag.toLowerCase()} from the Kumbuild blog — plain, practical notes for business owners.`}>
   <section class="mx-auto max-w-6xl px-4 pt-12 sm:px-6 sm:pt-16">
-    <a href="/#topics" class="inline-flex items-center gap-1.5 text-base font-medium text-primary-700 hover:text-primary-800">
+    <a href="/#topics" class="inline-flex min-h-[44px] items-center gap-1.5 text-base font-medium text-primary-700 hover:text-primary-800">
       <Icon name="lucide:arrow-left" class="h-4 w-4" /> All topics
     </a>
     <h1 class="mt-6 font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.12] text-ink">{tag}</h1>

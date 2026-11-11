@@ -77,8 +77,11 @@
   --kb-line: #322d28;
   --kb-primary-600: #3392f6;
   --kb-primary-700: #66adf9;
-  --kb-cta: #e8590c;
-  --kb-cta-hover: #f76707;
+  /* CTA keeps the light theme's deep orange: the brighter #e8590c
+     only reaches ~3.6:1 with white text (AA fail), #c2410c is 5.2:1
+     and still reads clearly as orange on warm charcoal. */
+  --kb-cta: #c2410c;
+  --kb-cta-hover: #9a3412;
   --kb-star: #fbbf24;
   --kb-star-soft: #3a2f10;
   --kb-live: #4ade80;
@@ -105,6 +108,31 @@ body {
   font-size: 1.0625rem;
   line-height: 1.85;
   color: var(--kb-body);
+  /* Long words and bare URLs must never push the column wider than
+     the screen on small phones. */
+  overflow-wrap: break-word;
+}
+.prose-kb table {
+  /* Wide Markdown tables scroll inside the column instead of
+     overflowing the viewport. */
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.4em 0;
+  font-size: 0.95em;
+}
+.prose-kb th,
+.prose-kb td {
+  border: 1px solid var(--kb-line);
+  padding: 0.55em 0.8em;
+  text-align: left;
+  white-space: nowrap;
+}
+.prose-kb th {
+  background: var(--kb-surface);
+  color: var(--kb-ink);
+  font-weight: 600;
 }
 .prose-kb p {
   margin: 1.15em 0;

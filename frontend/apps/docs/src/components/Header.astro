@@ -24,8 +24,13 @@ import Default from "@astrojs/starlight/components/Header.astro";
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     background: #1c1917; color: #fff;
     font-size: 0.78rem;
-    padding: 0.42rem 1rem;
-    margin: 0 calc(-1 * var(--sl-content-pad-x, 1rem));
+    /* Exact height so starlight.css can compensate --sl-nav-height by the
+       same amount; bleed to the header's edges by cancelling its actual
+       horizontal padding (--sl-nav-pad-x, equal to content-pad today). */
+    height: var(--kb-strip-height, 2rem);
+    flex: none;
+    padding: 0 1rem;
+    margin: 0 calc(-1 * var(--sl-nav-pad-x, 1rem));
   }
   .kb-strip p { margin: 0; display: flex; align-items: center; gap: 0.5rem; }
   .kb-dot { width: 0.5rem; height: 0.5rem; border-radius: 999px; background: #4ade80; }

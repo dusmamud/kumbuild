@@ -68,3 +68,44 @@ h1#_top,
 .site-title {
   font-family: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
+
+/* --- Responsive fix (audit 2026-11-11): brand strip height compensation ---
+   The Header override renders .kb-strip INSIDE Starlight's fixed <header>,
+   whose height is exactly --sl-nav-height. Starlight derives every offset
+   from that one variable (page top padding, sidebar drawer top, mobile
+   TOC position, anchor scroll padding), so before this fix the strip
+   overflowed the fixed header box by ~2rem at EVERY width and Starlight's
+   bar painted over the top of the page content — worst on mobile.
+   Fix: give the strip an exact height and add it to --sl-nav-height at
+   both of Starlight's breakpoints (3.5rem base, 4rem from 50em), and make
+   the header a column so the strip takes its exact height while
+   Starlight's inner bar flexes into the remaining space. */
+:root {
+  --kb-strip-height: 2rem;
+  --sl-nav-height: calc(3.5rem + var(--kb-strip-height));
+}
+@media (min-width: 50em) {
+  :root {
+    --sl-nav-height: calc(4rem + var(--kb-strip-height));
+  }
+}
+header.header {
+  display: flex;
+  flex-direction: column;
+}
+header.header > .header {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+}
+/* Starlight sizes the logo from --sl-nav-height; with the strip added the
+   logo would grow past the bar. Pin it to the pre-strip computed values
+   (3.5rem - 2×0.75rem pad = 2rem; 4rem - 2×0.75rem = 2.5rem from 50em). */
+.site-title img {
+  height: 2rem;
+}
+@media (min-width: 50em) {
+  .site-title img {
+    height: 2.5rem;
+  }
+}
