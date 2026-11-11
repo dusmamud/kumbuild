@@ -15,6 +15,9 @@
 # itself from /etc/kumbuild/db-password (0600, created by setup-postgres) so
 # the DB password never leaves the VPS and is never stored in GitHub.
 # None of these values appear in this file — only secrets.* placeholders.
+# NOTE (2026-11-11): re-run this workflow with a push (any change to this
+# file), NOT workflow_dispatch — two dispatch runs (43096598438, 43097466911)
+# died at startup with zero jobs started, while push-triggered runs work.
 name: Deploy backend
 
 on:
