@@ -15,7 +15,7 @@ const nf = dict.v2.notFound;
       <p class="mt-4 text-base leading-[28px] text-body">{nf.text}</p>
       <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
         <a href={pageUrl(locale, "/")} class="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-6 py-3.5 text-base font-semibold text-ink transition hover:bg-paper active:scale-[0.98]">{nf.home}</a>
-        <a href={pageUrl(locale, "/order")} class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-primary-700 active:scale-[0.98]">
+        <a href={pageUrl(locale, "/order")} class="inline-flex items-center justify-center gap-2 rounded-xl bg-cta px-6 py-3.5 text-base font-semibold text-white transition hover:bg-cta-hover active:scale-[0.98]">
           {dict.hero.ctaOrder}
           <Icon name="arrow-right" class="h-[18px] w-[18px]" />
         </a>

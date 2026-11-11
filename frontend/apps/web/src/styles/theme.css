@@ -16,6 +16,10 @@
   --color-primary-700: #0069c7;
   --color-primary-800: #004e8f;
   --color-primary-900: #00325c;
+  /* CTA accent — orange, the complement of Trust Blue. Only order/submit
+     buttons use it; brand blue stays for links, badges and focus rings. */
+  --color-cta: #c2410c;
+  --color-cta-hover: #9a3412;
 
   /* Warm stone ramp, tinted toward paper and ink. */
   --color-ink: #1c1917;

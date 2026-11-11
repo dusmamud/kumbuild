@@ -25,7 +25,7 @@ const miniProducts = [
         <h1 class="mt-6 max-w-[560px] text-[clamp(2.25rem,1.55rem+3.4vw,3.75rem)] font-semibold leading-[1.08]">{hero.headlineA}<span class="text-primary-700 underline decoration-primary-200 decoration-[6px] underline-offset-[8px]">{hero.headlineAccent}</span>{hero.headlineB}</h1>
         <p class="mt-6 max-w-[520px] text-[clamp(1.0625rem,0.97rem+0.6vw,1.25rem)] leading-[1.6] text-body">{hero.subtitle}</p>
         <div class="mt-9 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:items-center">
-          <a href={pageUrl(locale, "/order")} class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-7 py-3.5 text-base font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-primary-700 active:scale-[0.98]">
+          <a href={pageUrl(locale, "/order")} class="inline-flex items-center justify-center gap-2 rounded-xl bg-cta px-7 py-3.5 text-base font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-cta-hover active:scale-[0.98]">
             {hero.ctaOrder}
             <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
           </a>

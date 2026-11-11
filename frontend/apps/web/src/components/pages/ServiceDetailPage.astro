@@ -65,7 +65,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
       <aside class="h-fit rounded-2xl border border-line bg-white p-6 sm:p-7 lg:sticky lg:top-24">
         <h2 class="font-display text-lg font-semibold text-ink">{dict.pricing.title}</h2>
         <p class="mt-2 text-base leading-[28px] text-body">{dict.hero.note}</p>
-        <a href={orderUrl} class="mt-5 flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-4 py-3 text-base font-semibold text-white transition duration-200 hover:bg-primary-700 active:scale-[0.98]">
+        <a href={orderUrl} class="mt-5 flex items-center justify-center gap-2 rounded-xl bg-cta px-4 py-3 text-base font-semibold text-white transition duration-200 hover:bg-cta-hover active:scale-[0.98]">
           {dict.nav.order}
           <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
         </a>
@@ -118,7 +118,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
           <p class="mt-2 text-base leading-[28px] text-body">{sv.detailCtaText}</p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-          <a href={orderUrl} class="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-5 py-3 text-base font-semibold text-white transition duration-200 hover:bg-primary-700 active:scale-[0.98]">
+          <a href={orderUrl} class="inline-flex items-center gap-2 rounded-xl bg-cta px-5 py-3 text-base font-semibold text-white transition duration-200 hover:bg-cta-hover active:scale-[0.98]">
             {dict.nav.order}
             <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
           </a>

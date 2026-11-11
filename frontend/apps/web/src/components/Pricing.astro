@@ -31,7 +31,7 @@ const p = dict.pricing;
               </li>
             ))}
           </ul>
-          <a href={pageUrl(locale, "/order")} class={`mt-7 block rounded-xl px-4 py-3 text-center text-base font-semibold transition-[background-color,border-color,transform] duration-200 active:scale-[0.98] ${featured ? "bg-primary-600 text-white hover:bg-primary-700" : "border border-line text-primary-700 hover:border-primary-500"}`}>{pkg.cta}</a>
+          <a href={pageUrl(locale, "/order")} class={`mt-7 block rounded-xl px-4 py-3 text-center text-base font-semibold transition-[background-color,border-color,transform] duration-200 active:scale-[0.98] ${featured ? "bg-cta text-white hover:bg-cta-hover" : "border border-line text-primary-700 hover:border-primary-500"}`}>{pkg.cta}</a>
         </article>
       );
     })}

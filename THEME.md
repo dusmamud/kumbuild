@@ -37,6 +37,7 @@ Primary logo wala `#008EFD` hai. Scale white/black mix se bana hai (verified val
 White text `#008EFD` par **3.34:1** contrast deta hai. Ye button jaisi badi/bold text ke liye theek hai (3:1 chahiye), par chhoti body text ke liye nahi (4.5:1 chahiye).
 
 - **Primary button:** `#008EFD` bg + **bold** white text. Hover: `#0072C8`.
+- **CTA accent (orange) — 2026-11-11, user ne "contrasting color try karo" bola:** order/submit buttons (hero, header, pricing tiers, order form, final CTA) **blue nahi, orange** `#C2410C` bg + white text (5.18:1, AA pass), hover `#9A3412`. Blue page ka complement hai — CTA pop karta hai. Brand blue links, badges ("Most chosen"), focus rings aur accents me hi rehta hai. Token: `--color-cta` / `--color-cta-hover` (theme.css).
 - **Text link / chhoti blue text:** `#0063B1` (white par 6.14:1). Kabhi bhi chhoti text ko `#008EFD` me mat likho.
 - **Dark mode me link:** `#33A5FD` (dark bg par readable hai).
 - **Focus ring:** `#0072C8`, 2px outline, button/input par hamesha dikhna chahiye.

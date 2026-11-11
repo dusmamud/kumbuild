@@ -42,7 +42,7 @@ const labelCls = "mb-1.5 block text-sm font-semibold text-ink";
         </a>
         <div class="rounded-2xl border border-line bg-surface p-6">
           <p class="text-base leading-[28px] text-body">{c.note}</p>
-          <a href={pageUrl(locale, "/order")} class="mt-4 inline-block rounded-xl bg-primary-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-primary-700 active:scale-[0.98]">{dict.nav.order}</a>
+          <a href={pageUrl(locale, "/order")} class="mt-4 inline-block rounded-xl bg-cta px-6 py-3 text-base font-semibold text-white transition hover:bg-cta-hover active:scale-[0.98]">{dict.nav.order}</a>
         </div>
       </div>
 
@@ -70,7 +70,7 @@ const labelCls = "mb-1.5 block text-sm font-semibold text-ink";
             <textarea id="enq-message" name="message" rows="4" class={`${inputCls} resize-y`}></textarea>
           </div>
           <p class="mt-5 text-sm text-muted">* {o.required}</p>
-          <button type="submit" class="mt-4 w-full rounded-xl bg-primary-600 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-primary-700 active:scale-[0.98] sm:w-auto">{dict.v2.contact.submit}</button>
+          <button type="submit" class="mt-4 w-full rounded-xl bg-cta px-6 py-3.5 text-base font-semibold text-white transition hover:bg-cta-hover active:scale-[0.98] sm:w-auto">{dict.v2.contact.submit}</button>
         </form>
         <div id="enquiry-success" hidden role="status" tabindex="-1" class="py-4 text-center outline-none">
           <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-live-soft text-live">
