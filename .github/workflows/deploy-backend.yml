@@ -62,6 +62,27 @@ jobs:
         with:
           name: kumbuild-api
           path: backend/kumbuild-api-bin
+      - name: Pre-clean stale processes on VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          command_timeout: 5m
+          script: |
+            set -euo pipefail
+            echo "--- pre-clean: kill orphaned dnf/rpm from killed runs (a killed deploy left dnf running before) ---"
+            free -h
+            if pgrep -x dnf >/dev/null 2>&1; then
+              echo "stale dnf found, killing it"
+              sudo pkill -x dnf || true
+              sleep 5
+            fi
+            sudo pkill -x rpm || true
+            sudo rm -f /var/cache/dnf/*lock* /var/lib/dnf/rpmdb_lock.pid 2>/dev/null || true
+            free -h
+            echo "PRE-CLEAN-OK"
       - name: Copy artefacts to VPS
         uses: appleboy/scp-action@v1
         with:
@@ -69,6 +90,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
+          timeout: 60s
+          command_timeout: 15m
           source: "backend/kumbuild-api-bin/kumbuild-api,backend/deploy/kumbuild-api.service,backend/deploy/cloudflared.service,backend/deploy/redis.conf"
           target: "/tmp/kumbuild-deploy"
           strip_components: 2
