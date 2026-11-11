@@ -7,12 +7,13 @@
 # prod-only, after the domain is bought.
 #
 # Secrets needed (GitHub repo Settings -> Secrets and variables -> Actions):
-#   VPS_HOST, VPS_USER, VPS_SSH_KEY, VPS_PORT, DATABASE_URL, BREVO_API_KEY,
+#   VPS_HOST, VPS_USER, VPS_SSH_KEY, VPS_PORT, BREVO_API_KEY,
 #   TURNSTILE_SECRET_KEY, REDIS_PASSWORD, COOKIE_DOMAIN, ALLOWED_ORIGINS,
 #   APP_BASE_URL
 # VPS_* are set. CLOUDFLARE_TUNNEL_TOKEN is NOT needed for dev (named
-# tunnel only). DATABASE_URL password lives only on the VPS at
-# /etc/kumbuild/db-password (0600) — read it from the VPS, never in chat.
+# tunnel only). DATABASE_URL is NOT a GitHub secret: it is built on the VPS
+# itself from /etc/kumbuild/db-password (0600, created by setup-postgres) so
+# the DB password never leaves the VPS and is never stored in GitHub.
 # None of these values appear in this file — only secrets.* placeholders.
 name: Deploy backend
 
@@ -111,10 +112,14 @@ jobs:
             # (e) Write /etc/kumbuild/api.env from GitHub Secrets (real secrets live here only).
             # Dev: APP_ENV=dev, cookie SameSite=None + Secure, no Domain,
             # COOKIE_DOMAIN empty, APP_BASE_URL = Quick Tunnel URL.
+            # DATABASE_URL is built on-box from /etc/kumbuild/db-password
+            # (setup-postgres created it, 0600) — the DB password never
+            # leaves the VPS and is never a GitHub secret.
+            DB_PASS=$(sudo cat /etc/kumbuild/db-password)
             sudo tee /etc/kumbuild/api.env >/dev/null <<EOF
             APP_ENV=dev
             PORT=8080
-            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            DATABASE_URL=postgres://kumbuild:${DB_PASS}@localhost:5432/kumbuild
             REDIS_ADDR=localhost:6379
             REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}
             BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}
