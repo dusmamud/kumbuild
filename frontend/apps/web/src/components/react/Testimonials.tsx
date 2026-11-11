@@ -56,7 +56,7 @@ export default function Testimonials({ items, labels }: { items: Testimonial[]; 
                 <Quote className="h-6 w-6 text-primary-500" strokeWidth={1.5} aria-hidden />
                 <span className="flex items-center gap-1" aria-label={labels.rating.replace("{n}", String(t.stars))}>
                   {Array.from({ length: t.stars }).map((_, s) => (
-                    <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden />
+                    <Star key={s} className="h-4 w-4 fill-star text-star" aria-hidden />
                   ))}
                 </span>
               </span>

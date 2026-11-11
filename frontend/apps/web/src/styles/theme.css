@@ -30,6 +30,11 @@
   --color-paper: #faf9f6;
   --color-line: #e7e2d9;
 
+  /* Rating — the classic review gold, graded into the warm palette
+     (deeper than amber-400 so stars read on white and paper alike). */
+  --color-star: #d97706;
+  --color-star-soft: #fef3c7;
+
   /* Semantic — meaning only, toned into the palette. */
   --color-live: #15803d;
   --color-live-soft: #e6f5ec;
