@@ -114,11 +114,15 @@ body {
   }
 }
 
-/* Scroll reveal — elements with [data-reveal] start quiet and rise once
-   when they enter the viewport (JS adds .is-in). Without JS or with
-   reduced motion they are simply visible. */
+/* Scroll reveal — progressive enhancement: content is visible by default.
+   Only when JS is proven present (a tiny inline script in <head> adds
+   .js to <html> before first paint) do [data-reveal] elements start
+   hidden, and the observer in Layout.astro adds .is-in as they enter
+   the viewport. Without JS the hidden state never applies, so no
+   section can stay invisible. A <noscript> fallback in Layout.astro
+   states the same rule explicitly. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal] {
+  html.js [data-reveal] {
     opacity: 0;
     transform: translateY(16px);
     transition:
@@ -126,7 +130,7 @@ body {
       transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: var(--reveal-delay, 0ms);
   }
-  [data-reveal].is-in {
+  html.js [data-reveal].is-in {
     opacity: 1;
     transform: none;
   }

@@ -50,6 +50,10 @@ const noteParts = dict.hero.note.split(" · ");
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Proves JS runs: theme.css only hides [data-reveal] under html.js,
+         so with JS disabled (or blocked) every section stays visible. -->
+    <script>document.documentElement.classList.add("js");</script>
+    <noscript><style>[data-reveal]{opacity:1 !important;transform:none !important;}</style></noscript>
     <title>{title} — Kumbuild</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#faf9f6" />
