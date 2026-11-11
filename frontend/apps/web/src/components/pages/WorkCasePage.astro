@@ -34,7 +34,7 @@ const meta = [
     </nav>
     <div class="mt-6 flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
       <div>
-        <h1 class="font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.15] text-ink">{project.name}</h1>
+        <h1 class="font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{project.name}</h1>
         <p class="mt-3 font-mono text-[13px] text-muted">{project.type} · {project.city}</p>
       </div>
     </div>
@@ -53,9 +53,9 @@ const meta = [
   <section class="mx-auto max-w-6xl px-4 py-12 sm:py-14" data-reveal>
     <div class="grid gap-6 lg:grid-cols-[1fr_340px] lg:gap-10">
       <div>
-        <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.overview}</h2>
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.overview}</h2>
         <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{project.desc}</p>
-        <h2 class="mt-10 font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.story}</h2>
+        <h2 class="mt-10 font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.story}</h2>
         <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">{project.story}</p>
       </div>
       <aside class="h-fit rounded-2xl border border-line bg-white p-6 sm:p-7 lg:sticky lg:top-24">
@@ -74,7 +74,7 @@ const meta = [
   {/* Deliverables */}
   <section class="border-y border-line bg-surface" data-reveal>
     <div class="mx-auto max-w-6xl px-4 py-12 sm:py-14">
-      <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.deliverables}</h2>
+      <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.deliverables}</h2>
       <ul class="mt-7 grid gap-x-10 gap-y-4 sm:grid-cols-2">
         {project.deliverables.map((d) => (
           <li class="flex gap-3 text-base leading-[26px] text-body">
@@ -94,7 +94,7 @@ const meta = [
       <img src={next.img} alt={`${next.name} — ${next.type}, ${next.city}`} width="640" height="400" loading="lazy" class="block aspect-[8/5] w-full rounded-xl border border-line object-cover object-top sm:w-44" />
       <span class="min-w-0 flex-1">
         <span class="font-mono text-[12px] font-medium uppercase tracking-wide text-muted">{dict.v2.ui.viewCase}</span>
-        <span class="mt-1 block font-display text-[clamp(1.125rem,1.05rem+0.4vw,1.375rem)] font-semibold text-ink">{next.name}</span>
+        <span class="mt-1 block font-display text-[clamp(1rem,1rem+0.5vw,1.375rem)] font-semibold text-ink">{next.name}</span>
         <span class="mt-1 block text-sm text-muted">{next.type} · {next.city}</span>
       </span>
       <svg class="h-5 w-5 shrink-0 text-primary-700 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
@@ -106,7 +106,7 @@ const meta = [
     <div class="rounded-2xl border border-line bg-white p-6 sm:p-10">
       <div class="flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
         <div class="max-w-xl">
-          <h2 class="font-display text-[clamp(1.5rem,1.3rem+1vw,2rem)] font-semibold leading-[1.25] text-ink">{dict.contact.title}</h2>
+          <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-ink">{dict.contact.title}</h2>
           <p class="mt-2 text-base leading-[28px] text-body">{dict.contact.subtitle}</p>
         </div>
         <div class="flex flex-wrap items-center gap-3">

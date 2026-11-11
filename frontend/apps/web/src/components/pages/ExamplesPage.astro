@@ -10,7 +10,7 @@ const work = dict.v2.work;
 
 <Layout title={work.title} description={work.subtitle} locale={locale} dict={dict} slug={slug}>
   <section class="mx-auto max-w-6xl px-4 pt-10 pb-14 sm:pt-14 sm:pb-16" data-reveal>
-    <h1 class="max-w-2xl font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.15] text-ink">{work.title}</h1>
+    <h1 class="max-w-2xl font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{work.title}</h1>
     <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{work.subtitle}</p>
     <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {work.projects.map((p) => (
@@ -29,7 +29,7 @@ const work = dict.v2.work;
           </span>
           <span class="flex flex-1 flex-col p-6">
             <span class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-              <span class="font-display text-[clamp(1.125rem,1.05rem+0.4vw,1.375rem)] font-semibold text-ink">{p.name}</span>
+              <span class="font-display text-[clamp(1rem,1rem+0.5vw,1.375rem)] font-semibold text-ink">{p.name}</span>
               <span class="font-mono text-[12px] text-muted">{p.type} · {p.city}</span>
             </span>
             <span class="mt-2.5 flex-1 text-base leading-[28px] text-body">{p.desc}</span>

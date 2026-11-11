@@ -36,8 +36,8 @@ const desktopLink = (active: boolean) =>
     : "font-medium text-body transition-colors duration-200 hover:text-ink";
 const mobileLink = (active: boolean) =>
   active
-    ? "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[26px] font-semibold leading-tight text-primary-700"
-    : "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[26px] font-semibold leading-tight text-ink";
+    ? "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[22px] font-semibold leading-tight text-primary-700"
+    : "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[22px] font-semibold leading-tight text-ink";
 const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v2.contact.waText)}`;
 /* Footer/top-strip note ("Starting at ₹3,999 · Delivery in …") is split on
    its separators so each fact stays on one line — the strip may wrap

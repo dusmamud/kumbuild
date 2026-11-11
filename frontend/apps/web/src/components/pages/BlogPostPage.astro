@@ -23,7 +23,7 @@ const fmtDate = (iso: string) =>
       </a>
       <div data-reveal class="mt-8">
         <span class="w-fit rounded-full bg-primary-50 px-2.5 py-1 font-mono text-xs font-medium text-primary-700">{post.tag}</span>
-        <h1 class="mt-4 font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.2] text-ink">{post.title}</h1>
+        <h1 class="mt-4 font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.2] text-ink">{post.title}</h1>
         <p class="mt-4 font-mono text-xs text-muted">{fmtDate(post.date)} · {post.readMins} {dict.v2.ui.minRead}</p>
       </div>
       <div data-reveal class="mt-8 overflow-hidden rounded-2xl border border-line">
@@ -37,7 +37,7 @@ const fmtDate = (iso: string) =>
     </div>
   </article>
   <section class="mx-auto max-w-6xl px-4 pb-14 sm:px-6 sm:pb-16">
-    <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{b.readNext}</h2>
+    <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{b.readNext}</h2>
     <div class="mt-6 grid gap-5 sm:grid-cols-2">
       {b.posts.filter((p) => p.slug !== post.slug).map((p) => (
         <a data-reveal href={pageUrl(locale, `/blog/${p.slug}`)} class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
@@ -46,7 +46,7 @@ const fmtDate = (iso: string) =>
             <span class="absolute bottom-3 left-3 rounded-full bg-white/95 px-2.5 py-1 font-mono text-xs font-medium text-primary-700 shadow-sm">{p.tag}</span>
           </span>
           <span class="flex flex-1 flex-col p-6">
-            <span class="font-display text-[clamp(1.125rem,1.02rem+0.5vw,1.25rem)] font-semibold leading-snug text-ink group-hover:text-primary-700">{p.title}</span>
+            <span class="font-display text-[clamp(1rem,0.95rem+0.5vw,1.25rem)] font-semibold leading-snug text-ink group-hover:text-primary-700">{p.title}</span>
             <span class="mt-2 flex-1 text-base leading-[28px] text-body">{p.excerpt}</span>
             <span class="mt-5 font-mono text-xs text-muted">{fmtDate(p.date)} · {p.readMins} {dict.v2.ui.minRead}</span>
           </span>

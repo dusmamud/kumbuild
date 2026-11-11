@@ -25,7 +25,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
         <li class="text-body" aria-current="page">{item.title}</li>
       </ol>
     </nav>
-    <h1 class="mt-6 max-w-3xl font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.15] text-ink">{page.h1}</h1>
+    <h1 class="mt-6 max-w-3xl font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{page.h1}</h1>
     <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{page.intro}</p>
     <p class="mt-5 flex flex-wrap items-baseline gap-x-2 text-base">
       <span class="font-mono text-[13px] font-medium uppercase tracking-wide text-muted">{sv.detailFor}</span>
@@ -50,7 +50,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
   <section class="mx-auto max-w-6xl px-4 py-12 sm:py-14" data-reveal>
     <div class="grid gap-6 lg:grid-cols-[1fr_340px] lg:gap-10">
       <div class="rounded-2xl border border-line bg-white p-6 sm:p-8">
-        <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{sv.detailIncludes}</h2>
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{sv.detailIncludes}</h2>
         <ul class="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2">
           {page.features.map((f) => (
             <li class="flex gap-3 text-base leading-[26px] text-body">
@@ -81,7 +81,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
   {/* Process strip — the same five steps as How it works, titles only */}
   <section class="border-y border-line bg-surface" data-reveal>
     <div class="mx-auto max-w-6xl px-4 py-12 sm:py-14">
-      <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{dict.how.title}</h2>
+      <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{dict.how.title}</h2>
       <ol class="mt-7 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-5">
         {dict.how.steps.map((step, i) => (
           <li class="flex min-w-0 items-baseline gap-3 border-t border-line pt-4 lg:border-t-0 lg:pt-0">
@@ -95,7 +95,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
 
   {/* Other services — the way onward from a detail page */}
   <section class="mx-auto max-w-6xl px-4 pt-12 sm:pt-14" data-reveal>
-    <h2 class="font-display text-[clamp(1.25rem,1.12rem+0.6vw,1.5rem)] font-semibold text-ink">{dict.services.title}</h2>
+    <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{dict.services.title}</h2>
     <div class="mt-6 grid gap-4 sm:grid-cols-3">
       {dict.services.items.filter((o) => o.slug !== item.slug).map((o) => (
         <a href={pageUrl(locale, `/services/${o.slug}`)} class="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white px-5 py-4 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
@@ -114,7 +114,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
     <div class="rounded-2xl border border-line bg-white p-6 sm:p-10">
       <div class="flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
         <div class="max-w-xl">
-          <h2 class="font-display text-[clamp(1.5rem,1.3rem+1vw,2rem)] font-semibold leading-[1.25] text-ink">{sv.detailCtaTitle}</h2>
+          <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-ink">{sv.detailCtaTitle}</h2>
           <p class="mt-2 text-base leading-[28px] text-body">{sv.detailCtaText}</p>
         </div>
         <div class="flex flex-wrap items-center gap-3">

@@ -165,3 +165,28 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .animate-\[kb-float_7s_ease-in-out_infinite\] { animation: none; }
 }
+
+/* Mobile-only typography tightening (<640px). Everything here is scoped
+   to max-width: 639px, so sm: and larger (desktop) are untouched.
+   - Body 16px -> 15px, body leading 28px -> 26px, 30px -> 28px.
+   - 17px labels -> 16px, 15px text -> 14px.
+   - Heading leading 1.15 -> 1.1, 1.2 -> 1.15.
+   - Section padding 48px -> 40px, 56px -> 44px, 64px -> 48px, 80px -> 56px.
+   HARD RULES kept: form inputs stay 16px (iOS auto-zooms below 16px),
+   body text never goes below 14px. */
+@media (max-width: 639px) {
+  .text-base { font-size: 0.9375rem; line-height: 1.625rem; }
+  input.text-base,
+  textarea.text-base,
+  select.text-base { font-size: 1rem; line-height: 1.5rem; }
+  .text-\[15px\] { font-size: 0.875rem; }
+  .text-\[17px\] { font-size: 1rem; }
+  .leading-\[28px\] { line-height: 26px; }
+  .leading-\[30px\] { line-height: 28px; }
+  .leading-\[1\.15\] { line-height: 1.1; }
+  .leading-\[1\.2\] { line-height: 1.15; }
+  .py-12 { padding-block: 2.5rem; }
+  .py-14 { padding-block: 2.75rem; }
+  .py-16 { padding-block: 3rem; }
+  .py-20 { padding-block: 3.5rem; }
+}

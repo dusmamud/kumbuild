@@ -11,7 +11,7 @@ const stats = dict.v2.aboutV2.stats;
       {stats.map((s, i) => (
         <div class={`flex flex-col px-6 py-7 sm:px-8 ${i % 2 === 1 ? "border-l border-line lg:border-l-0" : ""} ${i > 0 ? "lg:border-l lg:border-line" : ""} ${i > 1 ? "max-lg:border-t max-lg:border-line" : ""}`}>
           <dt class="order-2 mt-1.5 text-sm leading-[22px] text-muted">{s.label}</dt>
-          <dd class="order-1 font-display text-[clamp(1.625rem,1.35rem+1.3vw,2.125rem)] font-semibold tabular-nums text-ink">{s.value}</dd>
+          <dd class="order-1 font-display text-[clamp(1.5rem,1.25rem+1.2vw,2.125rem)] font-semibold tabular-nums text-ink">{s.value}</dd>
         </div>
       ))}
     </dl>

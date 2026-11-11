@@ -9,7 +9,7 @@ const { dict, locale } = Astro.props;
 
 <Layout title={dict.services.title} description={dict.services.subtitle} locale={locale} dict={dict} slug="/services">
   <section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
-    <h1 class="max-w-2xl text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.15] text-ink">{dict.services.title}</h1>
+    <h1 class="max-w-2xl text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{dict.services.title}</h1>
     <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">{dict.services.subtitle}</p>
   </section>
   <Services dict={dict} locale={locale} bare />
