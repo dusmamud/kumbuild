@@ -119,7 +119,7 @@ jobs:
               sudo dnf --disablerepo=ol9_ksplice,ol9_oci_included --setopt=timeout=30 --setopt=minrate=1000 --setopt=max_parallel_downloads=1 -v install -y redis
             fi
             if ! command -v cloudflared >/dev/null 2>&1; then
-              curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.rpm -o /tmp/cloudflared.rpm
+              curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm -o /tmp/cloudflared.rpm
               sudo dnf --disablerepo=ol9_ksplice,ol9_oci_included --setopt=timeout=30 --setopt=minrate=1000 --setopt=max_parallel_downloads=1 -v install -y /tmp/cloudflared.rpm
             fi
             # (c) Apply deploy/redis.conf, injecting REDIS_PASSWORD from secrets via sed.
