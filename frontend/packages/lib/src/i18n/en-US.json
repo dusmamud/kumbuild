@@ -415,6 +415,26 @@
         "Home bakers"
       ]
     },
+    "trustStrip": {
+      "items": [
+        {
+          "icon": "shield-check",
+          "text": "Price confirmed before you pay"
+        },
+        {
+          "icon": "wallet",
+          "text": "50% advance — rest after you approve"
+        },
+        {
+          "icon": "refresh-cw",
+          "text": "2 free revision rounds included"
+        },
+        {
+          "icon": "check",
+          "text": "No hidden charges, ever"
+        }
+      ]
+    },
     "homeV2": {
       "bandKicker": "One order, everything handled",
       "bandTitle": "You run the shop. We run the website.",
@@ -833,8 +853,8 @@
       "home": "Back to home"
     },
     "tech": {
-      "title": "Technologies we use",
-      "subtitle": "No page builders, no borrowed templates. Your website is hand-built on the same modern stack used by fast, serious websites — and hosted close to your customers.",
+      "title": "Fast, secure, and built to last",
+      "subtitle": "No page builders, no borrowed templates. Your website is hand-built on the same modern stack fast, serious websites use — so it loads quickly, stays safe, and keeps working for years.",
       "groups": [
         {
           "label": "Build",

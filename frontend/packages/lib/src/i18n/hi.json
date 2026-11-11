@@ -415,6 +415,26 @@
         "होम बेकर"
       ]
     },
+    "trustStrip": {
+      "items": [
+        {
+          "icon": "shield-check",
+          "text": "Price pehle confirm, phir payment"
+        },
+        {
+          "icon": "wallet",
+          "text": "50% advance — baaki approval ke baad"
+        },
+        {
+          "icon": "refresh-cw",
+          "text": "2 free revisions included"
+        },
+        {
+          "icon": "check",
+          "text": "Koi hidden charges nahi"
+        }
+      ]
+    },
     "homeV2": {
       "bandKicker": "एक ऑर्डर, सब कुछ संभाला हुआ",
       "bandTitle": "आप दुकान चलाइए। वेबसाइट हम चलाएँगे।",
@@ -833,8 +853,8 @@
       "home": "होम पर वापस जाएँ"
     },
     "tech": {
-      "title": "हम कौन-सी technology उपयोग करते हैं",
-      "subtitle": "कोई page builder नहीं, कोई उधार का template नहीं। आपकी website उसी modern stack पर हाथ से बनती है जिस पर तेज़, गंभीर websites चलती हैं — और आपके ग्राहकों के पास host होती है।",
+      "title": "तेज़, सुरक्षित और लंबे समय तक चलने वाली",
+      "subtitle": "कोई page builder नहीं, कोई उधार का template नहीं। आपकी website उसी modern stack पर हाथ से बनती है जिस पर तेज़ और serious websites बनती हैं — इसलिए यह जल्दी load होती है, safe रहती है और सालों तक चलती है।",
       "groups": [
         {
           "label": "निर्माण",

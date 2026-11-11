@@ -1,0 +1,25 @@
+---
+import Icon from "./Icon.astro";
+import type { Dictionary } from "../i18n/utils";
+interface Props { dict: Dictionary; }
+const { dict } = Astro.props;
+/* Trust strip, directly under the hero: the four guarantees a shop owner
+   asks about before ordering. Every item is a fact from the pricing and
+   delivery terms — no logos, ratings or reviews we do not have yet. */
+const items = dict.v2.trustStrip.items;
+---
+
+<section class="border-b border-line bg-paper" aria-label="Our promises">
+  <div class="mx-auto max-w-6xl px-4 py-4 sm:px-6">
+    <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {items.map((item) => (
+        <li class="flex items-center gap-2.5 text-sm font-medium text-ink">
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-live-soft">
+            <Icon name={item.icon} class="h-3.5 w-3.5 text-live" />
+          </span>
+          {item.text}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

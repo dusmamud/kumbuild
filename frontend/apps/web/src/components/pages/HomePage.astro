@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../Hero.astro";
+import TrustStrip from "../TrustStrip.astro";
 import Marquee from "../Marquee.astro";
 import StatsBand from "../StatsBand.astro";
 import WhoItsFor from "../WhoItsFor.astro";
@@ -34,6 +35,7 @@ const chips = [
 
 <Layout title={dict.hero.title} description={dict.hero.subtitle} locale={locale} dict={dict} slug="/">
   <Hero dict={dict} locale={locale} />
+  <TrustStrip dict={dict} />
   <Marquee dict={dict} />
   <StatsBand dict={dict} />
   <div data-reveal>
@@ -50,8 +52,8 @@ const chips = [
     <Included dict={dict} />
   </div>
   <Comparison dict={dict} />
-  <Pricing dict={dict} locale={locale} />
   <TestimonialsSection dict={dict} />
+  <Pricing dict={dict} locale={locale} />
   <Technologies dict={dict} />
   <BlogTeaser dict={dict} locale={locale} />
   <div data-reveal>

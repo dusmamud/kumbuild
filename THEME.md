@@ -27,7 +27,7 @@ Primary logo wala `#008EFD` hai. Scale white/black mix se bana hai (verified val
 | `blue-300` | #66BBFE | — (scale complete karne ke liye) |
 | `blue-400` | #33A5FD | Dark mode me primary hover / light blue text on dark |
 | `blue-500` | **#008EFD** | **Primary — buttons, links (bade/bold), active states, logo** |
-| `blue-600` | #0079D7 | Primary button hover, focus ring |
+| `blue-600` | #0072C8 | Primary button hover, focus ring |
 | `blue-700` | #0063B1 | **Text links aur chhoti text — primary par nahi** |
 | `blue-800` | #00477E | Pressed state, dark blue text on light tint |
 | `blue-900` | #002B4C | Darkest blue — sirf text ya deep accents ke liye |
@@ -36,10 +36,10 @@ Primary logo wala `#008EFD` hai. Scale white/black mix se bana hai (verified val
 
 White text `#008EFD` par **3.34:1** contrast deta hai. Ye button jaisi badi/bold text ke liye theek hai (3:1 chahiye), par chhoti body text ke liye nahi (4.5:1 chahiye).
 
-- **Primary button:** `#008EFD` bg + **bold** white text. Hover: `#0079D7`.
+- **Primary button:** `#008EFD` bg + **bold** white text. Hover: `#0072C8`.
 - **Text link / chhoti blue text:** `#0063B1` (white par 6.14:1). Kabhi bhi chhoti text ko `#008EFD` me mat likho.
 - **Dark mode me link:** `#33A5FD` (dark bg par readable hai).
-- **Focus ring:** `#0079D7`, 2px outline, button/input par hamesha dikhna chahiye.
+- **Focus ring:** `#0072C8`, 2px outline, button/input par hamesha dikhna chahiye.
 
 ## 3. Light theme tokens (Astro + Next.js light)
 
@@ -57,7 +57,7 @@ Astro sirf yehi tokens use karega. Next.js light mode bhi yehi.
 | `--text-muted` | #64748B | Helper text, captions, footer, timestamps |
 | `--text-on-primary` | #FFFFFF | Primary button text (bold hi rakhna) |
 | `--primary` | #008EFD | CTA button, active nav, links (bade/bold) |
-| `--primary-hover` | #0079D7 | Button hover |
+| `--primary-hover` | #0072C8 | Button hover |
 | `--primary-text` | #0063B1 | Text links, chhoti blue text |
 | `--primary-tint` | #EBF6FF | Info bg, badge bg, selected state |
 
