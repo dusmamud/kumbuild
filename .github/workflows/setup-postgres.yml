@@ -22,6 +22,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
+          command_timeout: 15m
           script: |
             set -euo pipefail
             echo "--- OS / memory / disk ---"
@@ -33,8 +34,11 @@ jobs:
             systemctl is-active postgresql || echo "postgresql service not running yet"
 
             echo "--- Install PostgreSQL (Oracle Linux 9, dnf) ---"
-            sudo dnf module enable -y postgresql:16 || true
-            sudo dnf install -y postgresql-server postgresql-contrib
+            echo "dnf lock check:"; ps aux | grep -i '[d]nf' || echo "no dnf process running"
+            echo "--- dnf metadata (120s timeout) ---"
+            sudo timeout 120 dnf makecache || echo "makecache rc=$? (continuing)"
+            echo "--- dnf install postgresql (600s timeout, default OL9 stream, no module enable: module enable hung with no output on 2026-11-11) ---"
+            sudo timeout 600 dnf install -y postgresql-server postgresql-contrib
             if [ ! -s /var/lib/pgsql/data/PG_VERSION ]; then
               sudo /usr/bin/postgresql-setup --initdb
             fi
