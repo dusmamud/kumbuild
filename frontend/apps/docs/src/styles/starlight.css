@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* Kumbuild grading on Starlight — the main site's warm paper palette,
+   mapped onto Starlight's --sl-color-* variables for BOTH themes.
+   Starlight toggles via [data-theme] on <html>; its default is dark,
+   so dark values live in :root and light in [data-theme="light"] —
+   the reverse of a hand-rolled setup. Fonts: Sora + Inter, matching
+   kumbuild.com. */
+:root {
+  --sl-font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans Devanagari", "Noto Sans Bengali", sans-serif;
+  --sl-font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+  /* Dark — warm charcoal, tinted toward the main site's ink. */
+  --sl-color-white: #f5f2ec;
+  --sl-color-gray-1: #e8e2d8;
+  --sl-color-gray-2: #d6d0c6;
+  --sl-color-gray-3: #a39a8d;
+  --sl-color-gray-4: #6f675e;
+  --sl-color-gray-5: #453f39;
+  --sl-color-gray-6: #322d28;
+  --sl-color-black: #141210;
+  --sl-color-accent-low: #0b2f52;
+  --sl-color-accent: #3392f6;
+  --sl-color-accent-high: #99c9fb;
+  --sl-color-text: #d6d0c6;
+  --sl-color-text-accent: #66adf9;
+  --sl-color-bg: #141210;
+  --sl-color-bg-nav: #1d1a17;
+  --sl-color-bg-sidebar: #1d1a17;
+  --sl-color-bg-inline-code: #2a2622;
+  --sl-color-hairline: #322d28;
+  --sl-color-hairline-light: #453f39;
+  --sl-color-hairline-shade: #0d0b0a;
+}
+
+:root[data-theme="light"] {
+  /* Light — warm paper, exactly the main site's grading. */
+  --sl-color-white: #1c1917;
+  --sl-color-gray-1: #2a2521;
+  --sl-color-gray-2: #44403c;
+  --sl-color-gray-3: #6f675e;
+  --sl-color-gray-4: #a8a29e;
+  --sl-color-gray-5: #ddd6c9;
+  --sl-color-gray-6: #f3f1ec;
+  --sl-color-gray-7: #faf9f6;
+  --sl-color-black: #faf9f6;
+  --sl-color-accent-low: #e8f3fe;
+  --sl-color-accent: #0072c8;
+  --sl-color-accent-high: #00325c;
+  --sl-color-text: #44403c;
+  --sl-color-text-accent: #0069c7;
+  --sl-color-bg: #faf9f6;
+  --sl-color-bg-nav: #faf9f6;
+  --sl-color-bg-sidebar: #faf9f6;
+  --sl-color-bg-inline-code: #f3f1ec;
+  --sl-color-hairline: #e7e2d9;
+  --sl-color-hairline-light: #e7e2d9;
+  --sl-color-hairline-shade: #e7e2d9;
+}
+
+/* Display font for headings, like every other Kumbuild page. */
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+h1#_top,
+.site-title {
+  font-family: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
