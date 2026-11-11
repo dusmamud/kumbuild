@@ -92,8 +92,8 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
                 {nav.services}
                 <svg class="h-3.5 w-3.5 text-muted transition-transform duration-200" id="services-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
-              <div id="services-menu" class="invisible absolute left-1/2 top-full z-50 w-[26rem] -translate-x-1/2 pt-3 transition-transform duration-200 [transform:translate(-50%,6px)]">
-                <div class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,25,23,0.12)]">
+              <div id="services-menu" class="invisible absolute left-0 top-full z-50 w-[26rem] pt-3">
+                <div id="services-panel" class="translate-y-1.5 overflow-hidden rounded-2xl border border-line bg-white opacity-0 shadow-[0_16px_40px_rgba(28,25,23,0.12)] transition-[opacity,transform] duration-200">
                   {dict.services.items.map((s, si) => (
                     <a href={pageUrl(locale, `/services/${s.slug}`)} class="group flex items-start gap-3 px-5 py-3.5 transition-colors duration-200 first:pt-4 last:pb-4 hover:bg-paper">
                       <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-200 group-hover:bg-primary-100">
@@ -256,9 +256,11 @@ const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v
       const sMenu = document.getElementById("services-menu");
       const sChevron = document.getElementById("services-chevron");
       let sPinned = false;
+      const sPanel = document.getElementById("services-panel");
       function setServices(open) {
         sMenu.classList.toggle("invisible", !open);
-        sMenu.style.transform = open ? "translate(-50%, 0)" : "translate(-50%, 6px)";
+        sPanel.classList.toggle("opacity-0", !open);
+        sPanel.classList.toggle("translate-y-1.5", !open);
         sChevron.style.transform = open ? "rotate(180deg)" : "";
         sBtn.setAttribute("aria-expanded", String(open));
         if (!open) sPinned = false;
