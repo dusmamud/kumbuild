@@ -835,6 +835,18 @@
           "label": "তৈরি",
           "items": [
             {
+              "name": "HTML5",
+              "desc": "প্রতিটি পেজের কাঠামো — semantic ও accessible, যাতে Google ও screen reader দুটোই বোঝে।"
+            },
+            {
+              "name": "CSS3",
+              "desc": "Layout, রঙ ও responsive design — ফোন, ট্যাবলেট, ডেস্কটপ সব জায়গায় সুন্দর।"
+            },
+            {
+              "name": "JavaScript",
+              "desc": "আচরণের স্তর — menu, form ও interaction, ইচ্ছে করেই হালকা রাখা।"
+            },
+            {
               "name": "Astro",
               "desc": "প্রায় JavaScript ছাড়াই পেজ পাঠায় — পেজ সঙ্গে সঙ্গে খোলে।"
             },
@@ -901,9 +913,29 @@
               "desc": "Title, Maps listing ও sitemap — গ্রাহক আগে আপনাকেই খুঁজে পায়।"
             }
           ]
+        },
+        {
+          "label": "কর্মপ্রবাহ",
+          "items": [
+            {
+              "name": "Node.js",
+              "desc": "যে runtime-এ আমাদের build tool চলে — দ্রুত, standard ও সর্বত্র পাওয়া যায়।"
+            },
+            {
+              "name": "pnpm",
+              "desc": "দক্ষ package management — হালকা install, আপনার site-এ অকারণ বোঝা নয়।"
+            },
+            {
+              "name": "Turborepo",
+              "desc": "Monorepo build সঠিক ক্রমে — website ও dashboard একসঙ্গে ship হয়।"
+            },
+            {
+              "name": "Git & GitHub",
+              "desc": "প্রতিটি বদল versioned ও backed up — কোনো কাজ কখনো হারায় না।"
+            }
+          ]
         }
-      ],
-      "foundation": "খোলা web standard-এ তৈরি — HTML5 · CSS3 · JavaScript"
+      ]
     }
   }
 }

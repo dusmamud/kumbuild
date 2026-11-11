@@ -835,6 +835,18 @@
           "label": "Build",
           "items": [
             {
+              "name": "HTML5",
+              "desc": "The structure of every page — semantic and accessible, so Google and screen readers understand it."
+            },
+            {
+              "name": "CSS3",
+              "desc": "Layout, colour and responsive design — beautiful on phone, tablet and desktop alike."
+            },
+            {
+              "name": "JavaScript",
+              "desc": "The behaviour layer — menus, forms and interactions, kept deliberately lightweight."
+            },
+            {
               "name": "Astro",
               "desc": "Ships almost no JavaScript by default — pages open instantly."
             },
@@ -901,9 +913,29 @@
               "desc": "Titles, Maps listing and sitemap — customers find you first."
             }
           ]
+        },
+        {
+          "label": "Workflow",
+          "items": [
+            {
+              "name": "Node.js",
+              "desc": "The runtime our build tools run on — fast, standard and everywhere."
+            },
+            {
+              "name": "pnpm",
+              "desc": "Efficient package management — lean installs, no bloat carried into your site."
+            },
+            {
+              "name": "Turborepo",
+              "desc": "Monorepo builds in the right order — website and dashboard ship together."
+            },
+            {
+              "name": "Git & GitHub",
+              "desc": "Every change versioned and backed up — no work is ever lost."
+            }
+          ]
         }
-      ],
-      "foundation": "Built on open web standards — HTML5 · CSS3 · JavaScript"
+      ]
     }
   }
 }

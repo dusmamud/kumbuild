@@ -835,6 +835,18 @@
           "label": "निर्माण",
           "items": [
             {
+              "name": "HTML5",
+              "desc": "हर page की नींव — semantic और accessible, ताकि Google और screen reader दोनों समझ सकें।"
+            },
+            {
+              "name": "CSS3",
+              "desc": "Layout, रंग और responsive design — phone, tablet और desktop, हर जगह सुंदर।"
+            },
+            {
+              "name": "JavaScript",
+              "desc": "Behaviour वाली परत — menus, forms और interactions, जानबूझकर हल्के रखे हुए।"
+            },
+            {
               "name": "Astro",
               "desc": "लगभग बिना JavaScript के pages भेजता है — page तुरंत खुलता है।"
             },
@@ -901,9 +913,29 @@
               "desc": "Titles, Maps listing और sitemap — ग्राहक सबसे पहले आपको खोजें।"
             }
           ]
+        },
+        {
+          "label": "कार्यप्रणाली",
+          "items": [
+            {
+              "name": "Node.js",
+              "desc": "वह runtime जिस पर हमारे build tools चलते हैं — तेज़, standard और हर जगह उपलब्ध।"
+            },
+            {
+              "name": "pnpm",
+              "desc": "कुशल package management — हल्की installs, आपकी site पर कोई फालतू बोझ नहीं।"
+            },
+            {
+              "name": "Turborepo",
+              "desc": "Monorepo builds सही क्रम में — website और dashboard साथ-साथ ship होते हैं।"
+            },
+            {
+              "name": "Git & GitHub",
+              "desc": "हर बदलाव versioned और backed up — कोई काम कभी खोता नहीं।"
+            }
+          ]
         }
-      ],
-      "foundation": "खुले web standards पर बना — HTML5 · CSS3 · JavaScript"
+      ]
     }
   }
 }
