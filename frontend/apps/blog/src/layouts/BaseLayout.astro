@@ -323,7 +323,7 @@ const year = new Date().getFullYear();
             "admin.kumbuild.com": "kumbuild-admin.pages.dev",
             "home.kumbuild.com": "kumbuild-home.pages.dev",
           };
-          document.querySelectorAll('a[href*=".kumbuild.com"]').forEach(function (a) {
+          document.querySelectorAll('a[href*="kumbuild.com"]').forEach(function (a) {
             try {
               var u = new URL(a.getAttribute("href"), window.location.origin);
               if (map[u.hostname]) {
