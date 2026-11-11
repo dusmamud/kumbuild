@@ -3,12 +3,12 @@ import Layout from "../../layouts/Layout.astro";
 import Icon from "../Icon.astro";
 import CtaBand from "../CtaBand.astro";
 import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
-interface Props { dict: Dictionary; locale: Locale; }
-const { dict, locale } = Astro.props;
+interface Props { dict: Dictionary; locale: Locale; slug?: string; }
+const { dict, locale, slug = "/examples" } = Astro.props;
 const work = dict.v2.work;
 ---
 
-<Layout title={work.title} description={work.subtitle} locale={locale} dict={dict} slug="/examples">
+<Layout title={work.title} description={work.subtitle} locale={locale} dict={dict} slug={slug}>
   <section class="mx-auto max-w-6xl px-4 pt-10 pb-14 sm:pt-14 sm:pb-16" data-reveal>
     <h1 class="max-w-2xl font-display text-[clamp(2rem,1.6rem+2vw,3rem)] font-semibold leading-[1.15] text-ink">{work.title}</h1>
     <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{work.subtitle}</p>
