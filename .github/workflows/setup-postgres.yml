@@ -1,0 +1,84 @@
+# Kumbuild — one-off PostgreSQL setup on the Oracle VPS (Dusrel-chat).
+#
+# Run manually: Actions -> Setup PostgreSQL on VPS -> Run workflow.
+# Uses the same VPS secrets as deploy-backend.yml (VPS_HOST, VPS_USER,
+# VPS_SSH_KEY, VPS_PORT). Installs PostgreSQL on Oracle Linux 9, tunes it
+# for 1 GB RAM, creates database + user 'kumbuild', and a 1 GB swap file.
+# The database password is generated on the VPS and stored ONLY there at
+# /etc/kumbuild/db-password (0600) — it is never printed in logs.
+name: Setup PostgreSQL on VPS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-postgres:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PostgreSQL and prepare VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            set -euo pipefail
+            echo "--- OS / memory / disk ---"
+            cat /etc/os-release | head -3
+            free -h
+            df -h / | tail -1
+            echo "--- PostgreSQL already installed? ---"
+            psql --version || echo "psql not present yet"
+            systemctl is-active postgresql || echo "postgresql service not running yet"
+
+            echo "--- Install PostgreSQL (Oracle Linux 9, dnf) ---"
+            sudo dnf module enable -y postgresql:16 || true
+            sudo dnf install -y postgresql-server postgresql-contrib
+            if [ ! -s /var/lib/pgsql/data/PG_VERSION ]; then
+              sudo /usr/bin/postgresql-setup --initdb
+            fi
+            sudo systemctl enable --now postgresql
+
+            echo "--- Tune for 1 GB RAM (Kumbuild backend plan) ---"
+            CONF=/var/lib/pgsql/data/postgresql.conf
+            for kv in "shared_buffers=192MB" "effective_cache_size=512MB" "work_mem=4MB" "maintenance_work_mem=64MB" "max_connections=30" "max_wal_size=1GB" "autovacuum=on"; do
+              key="${kv%%=*}"
+              sudo sed -i "/^#*${key}\s*=/d" "$CONF"
+              echo "$kv" | sudo tee -a "$CONF" >/dev/null
+            done
+            sudo systemctl restart postgresql
+            systemctl is-active postgresql
+
+            echo "--- Create kumbuild OS user (for later API deploy) ---"
+            id kumbuild >/dev/null 2>&1 || sudo useradd -m -s /bin/bash kumbuild
+
+            echo "--- Create database + user kumbuild ---"
+            sudo install -d -m 0755 /etc/kumbuild
+            if [ -f /etc/kumbuild/db-password ]; then
+              DB_PASS=$(sudo cat /etc/kumbuild/db-password)
+            else
+              DB_PASS=$(openssl rand -hex 16)
+              echo "$DB_PASS" | sudo tee /etc/kumbuild/db-password >/dev/null
+              sudo chmod 0600 /etc/kumbuild/db-password
+            fi
+            sudo -u postgres psql -v ON_ERROR_STOP=1 -c "DO \$\$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='kumbuild') THEN CREATE USER kumbuild WITH PASSWORD '$DB_PASS'; ELSE ALTER USER kumbuild WITH PASSWORD '$DB_PASS'; END IF; END \$\$;"
+            sudo -u postgres psql -tc "SELECT 1 FROM pg_database WHERE datname='kumbuild'" | grep -q 1 || sudo -u postgres psql -c "CREATE DATABASE kumbuild OWNER kumbuild;"
+
+            echo "--- 1 GB swap file if none ---"
+            if [ "$(swapon --show | wc -l)" -eq 0 ]; then
+              sudo fallocate -l 1G /swapfile
+              sudo chmod 600 /swapfile
+              sudo mkswap /swapfile
+              sudo swapon /swapfile
+              grep -q '^/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab >/dev/null
+            fi
+
+            echo "--- Verify ---"
+            psql --version
+            systemctl is-active postgresql
+            PGPASSWORD="$DB_PASS" psql -h 127.0.0.1 -U kumbuild -d kumbuild -c 'SELECT current_database(), current_user;'
+            sudo -u postgres psql -c "SHOW shared_buffers; SHOW max_connections;"
+            free -h
+            ls -l /etc/kumbuild/db-password
+            echo "SETUP-POSTGRES-OK"
