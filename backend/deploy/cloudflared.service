@@ -1,14 +1,11 @@
-# Cloudflare Tunnel (kumbuild-api) — systemd unit (Oracle VPS).
+# Cloudflare Tunnel (kumbuild-api) — systemd unit (Oracle VPS, Oracle Linux 9).
 #
-# Dev: a quick tunnel — `cloudflared tunnel --url http://localhost:8080` —
+# Dev (current): a quick tunnel — `cloudflared tunnel --url http://localhost:8080` —
 # hands out a random https://<random>.trycloudflare.com URL that changes on
 # every restart (frontend must be rebuilt + redeployed with the new URL).
-# Prod (after the domain is bought): a NAMED tunnel via
+# Prod (after the domain is bought): swap ExecStart for a NAMED tunnel via
 # /etc/cloudflared/config.yml (tunnel create kumbuild-api + route dns to
-# api.kumbuild.com). The config file itself is created at deploy time from
-# the CLOUDFLARE_TUNNEL_TOKEN GitHub Secret — it is NOT committed here.
-# This unit runs the named-tunnel form; for a dev quick tunnel, run the
-# command above by hand (or swap ExecStart) instead.
+# api.kumbuild.com).
 [Unit]
 Description=Cloudflare Tunnel (kumbuild-api)
 After=network-online.target kumbuild-api.service
@@ -16,10 +13,8 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-# User=root: cloudflared needs to read its credentials/config under
-# /etc/cloudflared, which are root-owned (the tunnel token is a secret).
 User=root
-ExecStart=/usr/bin/cloudflared tunnel --config /etc/cloudflared/config.yml run
+ExecStart=/usr/bin/cloudflared tunnel --url http://localhost:8080
 Restart=on-failure
 RestartSec=5
 

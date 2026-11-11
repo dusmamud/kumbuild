@@ -1,15 +1,18 @@
 # Kumbuild — deploy backend (Go API) to the Oracle VPS.
 #
-# SKELETON — VPS secrets are placeholders; fill them in GitHub Secrets
-# before first use. The VPS does not exist yet in this setup: no secret
-# below has a real value, and the deploy job will fail until VPS_HOST /
-# VPS_USER / VPS_SSH_KEY are set. The build job runs on every backend push
-# and is real (vet + build + tests); only the deploy side is a skeleton.
+# Oracle Linux 9 (Dusrel-chat, E2.1.Micro, 1 GB RAM) — dnf/rpm, NOT
+# Debian/Ubuntu apt-get/dpkg. Dev only, NO custom domain: the API is
+# exposed through a Cloudflare Quick Tunnel (random trycloudflare.com
+# URL, changes on every restart). Named tunnel / api.kumbuild.com is
+# prod-only, after the domain is bought.
 #
 # Secrets needed (GitHub repo Settings -> Secrets and variables -> Actions):
 #   VPS_HOST, VPS_USER, VPS_SSH_KEY, VPS_PORT, DATABASE_URL, BREVO_API_KEY,
 #   TURNSTILE_SECRET_KEY, REDIS_PASSWORD, COOKIE_DOMAIN, ALLOWED_ORIGINS,
-#   APP_BASE_URL, CLOUDFLARE_TUNNEL_TOKEN
+#   APP_BASE_URL
+# VPS_* are set. CLOUDFLARE_TUNNEL_TOKEN is NOT needed for dev (named
+# tunnel only). DATABASE_URL password lives only on the VPS at
+# /etc/kumbuild/db-password (0600) — read it from the VPS, never in chat.
 # None of these values appear in this file — only secrets.* placeholders.
 name: Deploy backend
 
@@ -39,9 +42,6 @@ jobs:
       - name: Test
         run: go test -p 1 ./... -count=1
         working-directory: backend
-      # SKELETON: cmd/api is built by the handlers worker (router + HTTP
-      # handlers). Until it lands, this step fails — that is expected, not
-      # a regression. Once cmd/api exists this produces the deploy binary.
       - name: Build API binary
         run: go build -o kumbuild-api ./cmd/api
         working-directory: backend
@@ -61,10 +61,7 @@ jobs:
         with:
           name: kumbuild-api
           path: backend/kumbuild-api-bin
-      # SKELETON: the copy itself runs over SCP (ssh-action alone cannot
-      # transfer files). Binary -> /opt/kumbuild/kumbuild-api, units ->
-      # /etc/systemd/system/. VPS secrets are placeholders below.
-      - name: Copy artefacts to VPS (skeleton)
+      - name: Copy artefacts to VPS
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -74,7 +71,7 @@ jobs:
           source: "backend/kumbuild-api-bin/kumbuild-api,backend/deploy/kumbuild-api.service,backend/deploy/cloudflared.service,backend/deploy/redis.conf"
           target: "/tmp/kumbuild-deploy"
           strip_components: 2
-      - name: Deploy on VPS (skeleton)
+      - name: Deploy on VPS
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -83,32 +80,39 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             set -euo pipefail
-            # (a) Install Go 1.27 if missing.
+            # (a) Install Go 1.27 if missing (tarball is distro-neutral).
             if ! command -v go >/dev/null 2>&1; then
               curl -fsSL https://go.dev/dl/go1.27.4.linux-amd64.tar.gz -o /tmp/go.tgz
               sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf /tmp/go.tgz
               export PATH=/usr/local/go/bin:$PATH
             fi
-            # (b) Install redis-server + cloudflared (deb) if missing.
+            # (b) Install Redis + cloudflared on Oracle Linux 9 (dnf/rpm).
+            # OL9 AppStream has no Redis — it comes from EPEL. Service
+            # name on OL9 is `redis`, not `redis-server`.
             if ! command -v redis-server >/dev/null 2>&1; then
-              sudo apt-get update && sudo apt-get install -y redis-server
+              sudo dnf install -y oracle-epel-release-el9 || sudo dnf install -y epel-release
+              sudo dnf install -y redis
             fi
             if ! command -v cloudflared >/dev/null 2>&1; then
-              curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o /tmp/cloudflared.deb
-              sudo dpkg -i /tmp/cloudflared.deb || sudo apt-get install -f -y
+              curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.rpm -o /tmp/cloudflared.rpm
+              sudo dnf install -y /tmp/cloudflared.rpm
             fi
             # (c) Apply deploy/redis.conf, injecting REDIS_PASSWORD from secrets via sed.
-            # NOTE: a password containing '|' would need escaping — skeleton caveat.
+            # NOTE: a password containing '|' would need escaping.
+            sudo mkdir -p /etc/redis
             sudo cp /tmp/kumbuild-deploy/redis.conf /etc/redis/redis.conf
             sudo sed -i "s|^# requirepass .*|requirepass ${{ secrets.REDIS_PASSWORD }}|" /etc/redis/redis.conf
-            # (d) Copy artefacts into place (uploaded to /tmp/kumbuild-deploy by the SCP step).
+            # (d) Ensure the kumbuild OS user exists, then copy artefacts into place.
+            id kumbuild >/dev/null 2>&1 || sudo useradd -m -s /bin/bash kumbuild
             sudo install -d -o kumbuild -g kumbuild /opt/kumbuild /etc/kumbuild
             sudo install -m 0755 /tmp/kumbuild-deploy/kumbuild-api /opt/kumbuild/kumbuild-api
             sudo install -m 0644 /tmp/kumbuild-deploy/kumbuild-api.service /etc/systemd/system/kumbuild-api.service
             sudo install -m 0644 /tmp/kumbuild-deploy/cloudflared.service /etc/systemd/system/cloudflared.service
             # (e) Write /etc/kumbuild/api.env from GitHub Secrets (real secrets live here only).
+            # Dev: APP_ENV=dev, cookie SameSite=None + Secure, no Domain,
+            # COOKIE_DOMAIN empty, APP_BASE_URL = Quick Tunnel URL.
             sudo tee /etc/kumbuild/api.env >/dev/null <<EOF
-            APP_ENV=prod
+            APP_ENV=dev
             PORT=8080
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             REDIS_ADDR=localhost:6379
@@ -121,28 +125,14 @@ jobs:
             EOF
             sudo chmod 0600 /etc/kumbuild/api.env
             sudo chown kumbuild:kumbuild /etc/kumbuild/api.env
-            # (f) Write /etc/cloudflared/config.yml (named tunnel — prod only).
-            # SKELETON: config.yml needs `tunnel:` = the tunnel UUID and a
-            # credentials.json (AccountTag/TunnelSecret/TunnelID). Those are
-            # created once with `cloudflared tunnel create kumbuild-api`,
-            # authenticated by the CLOUDFLARE_TUNNEL_TOKEN secret (stored
-            # below for that one-time step). The token itself is NOT a valid
-            # `tunnel:` value, so it is not pasted into config.yml as one.
-            sudo mkdir -p /etc/cloudflared
-            sudo tee /etc/cloudflared/config.yml >/dev/null <<EOF
-            tunnel: kumbuild-api
-            credentials-file: /etc/cloudflared/credentials.json
-            ingress:
-              - hostname: api.kumbuild.com
-                service: http://localhost:8080
-              - service: http_status:404
-            EOF
-            sudo chmod 0600 /etc/cloudflared/config.yml
-            echo "${{ secrets.CLOUDFLARE_TUNNEL_TOKEN }}" | sudo tee /etc/cloudflared/token >/dev/null
-            sudo chmod 0600 /etc/cloudflared/token
-            # (g) Reload systemd and restart services.
+            # (f) Quick Tunnel (dev, no custom domain): cloudflared.service
+            # in the repo already runs `cloudflared tunnel --url
+            # http://localhost:8080`. No named tunnel, no config.yml,
+            # no credentials.json, no api.kumbuild.com in dev.
+            sudo rm -rf /etc/cloudflared/config.yml /etc/cloudflared/token
+            # (g) Reload systemd and restart services (redis, not redis-server, on OL9).
             sudo systemctl daemon-reload
-            sudo systemctl enable --now redis-server kumbuild-api cloudflared
-            sudo systemctl restart redis-server kumbuild-api cloudflared
+            sudo systemctl enable --now redis kumbuild-api cloudflared
+            sudo systemctl restart redis kumbuild-api cloudflared
             # (h) Smoke check: the API must answer its health endpoint locally.
             curl -fsS http://localhost:8080/healthz
