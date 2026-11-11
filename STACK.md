@@ -24,10 +24,10 @@ Detail architecture `ARCHITECTURE.md` me hai. Ye file stack ka ek jagah summary 
 | Deploy (account/admin/home) | Cloudflare Pages via GitHub Actions (static `dist/`) | LOCKED (2026-11-11) |
 | Deploy (blog/docs) | Cloudflare Pages via GitHub Actions (static `dist/`) | User ne banaya (2026-11-11) |
 | Deploy (legacy app) | Cloudflare Pages via GitHub Actions (static export) | LEGACY |
-| Deploy (backend) | Oracle VPS via GitHub Actions | LOCKED (2026-11-11) |
+| Deploy (backend) | Oracle VPS via GitHub Actions + Cloudflare Tunnel (dev: quick tunnel, prod: named tunnel → api.kumbuild.com) | LOCKED (2026-11-11) |
 | CI/CD | GitHub Actions | LOCKED |
 | DNS / domains | Cloudflare | LOCKED |
-| Backend | Go — `api.kumbuild.com`, Oracle VPS pe host, deploy GitHub Actions se | LOCKED (2026-11-11) |
+| Backend | Go — `api.kumbuild.com` (prod; dev: trycloudflare.com quick tunnel, no custom domain), Oracle VPS pe host, deploy GitHub Actions se | LOCKED (2026-11-11) |
 | Database | PostgreSQL — Oracle VPS pe hi (same box) | LOCKED (2026-11-11) |
 | Payment provider | Razorpay | LOCKED 2026-11-09 |
 | Auth provider | TBD (frontend phase me mock — localStorage + demo handoff) | TBD |

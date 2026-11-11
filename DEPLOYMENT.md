@@ -127,7 +127,7 @@ User khud karega (assistant account nahi chhedega — standing boundary):
 
 ## 10. Kya is doc me nahi hai (TBD)
 
-- Backend ka deploy — **LOCKED (2026-11-11): GitHub Actions workflow se Oracle VPS pe hoga** (workflow + VPS secrets setup backend build ke time pe; `api.kumbuild.com` ke liye domain khareedna baki hai)
+- Backend ka deploy — **LOCKED (2026-11-11): GitHub Actions workflow se Oracle VPS pe hoga** (workflow + VPS secrets setup backend build ke time pe; connectivity Cloudflare Tunnel se — dev me quick tunnel (`trycloudflare.com`), production me named tunnel (`api.kumbuild.com`); domain khareedna baki hai, tab tak backend build free URLs pe hoga — `backend/README.md` §3.1)
 - Database ka deploy — **LOCKED (2026-11-11): PostgreSQL, Oracle VPS pe hi** (install + nightly backup backend build ke time pe)
 - Payment provider ke secrets — TBD
 - Preview deployment ka exact tareeka (app ke liye) — build ke time check karna hai

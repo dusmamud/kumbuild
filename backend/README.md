@@ -30,7 +30,8 @@ Pehle frontend mock data se complete hoga. Backend tab banega jab frontend ready
 | Database | PostgreSQL — Oracle VPS pe hi (same box) | LOCKED 2026-11-11 |
 | Hosting | Oracle VPS | LOCKED 2026-11-11 |
 | Deploy | GitHub Actions workflow se VPS pe | LOCKED 2026-11-11 |
-| API | `api.kumbuild.com` | LOCKED |
+| Connectivity | Cloudflare Tunnel — VPS se outbound-only; koi inbound port nahi khulta | LOCKED 2026-11-11 |
+| API | `api.kumbuild.com` (production) — dev me trycloudflare.com quick tunnel URL (§3.1 dekho) | LOCKED |
 | Auth | Custom Go auth (session cookie, neeche §6 dekho) | LOCKED 2026-11-11 |
 | Email | Resend (free tier) | LOCKED 2026-11-11 |
 | Payment provider | Razorpay | LOCKED 2026-11-09 |
@@ -45,6 +46,9 @@ VPS: **1GB RAM, Oracle Linux, 50GB storage** (Always Free E2.1.Micro shape). Isi
   `work_mem = 4MB`, `maintenance_work_mem = 64MB`, `max_connections = 30`, `max_wal_size = 1GB`,
   autovacuum on. **1GB swap file** bhi banana hai — spike pe OOM se bachata hai.
 - App + DB ek hi box pe honge — isliye **nightly `pg_dump` backup off-VPS** zaroori hai.
+- **Cloudflare Tunnel:** `cloudflared` daemon ~10–20MB RAM leta hai — 1GB budget me aaram se fit. Tunnel
+  outbound-only connection banata hai, isliye VPS ke 80/443 ports public internet pe khulne hi nahi —
+  origin IP expose nahi hota.
 - **Upgrade path:** Oracle Always Free me Ampere A1 Flex bhi milta hai — **2 OCPU + 12GB total**
   (Oracle docs se verify kiya; June 2026 me 4 OCPU/24GB se halve hua tha). A1 pe Kratos bhi chal jaayega.
   Dhyaan: A1 instance 7 din idle raha to Oracle reclaim kar sakta hai.
@@ -58,10 +62,49 @@ per-user billing. Fly.io/Render, Turso/Neon reject — hosting VPS pe lock hai.
 
 ## 3. Architecture
 
-- Go API `api.kumbuild.com` pe chalegi, Oracle VPS pe (binary + systemd service, GitHub Actions se deploy).
-- Postgres same VPS pe. nginx reverse proxy + rate limiting. Cloudflare aage (proxy + WAF + DDoS).
+- Go API VPS pe chalegi (binary + systemd service, GitHub Actions se deploy). Bahar se reachable sirf
+  Cloudflare Tunnel se hogi — `cloudflared` VPS pe chalega, Go API `localhost:8080` pe sunegi. Koi inbound
+  port nahi khulta.
+- Postgres same VPS pe. nginx reverse proxy + rate limiting (tunnel ke peeche, `localhost` pe).
+  Cloudflare edge aage (proxy + WAF + DDoS + rate limit).
 - Frontend (account/admin/home/web) Cloudflare Pages pe static hai; API se cookie session se baat karega.
-- Session: HttpOnly cookie `Domain=.kumbuild.com` — teeno apps + web pe SSO chalega.
+
+### 3.1 Endpoints — dev vs production (LOCKED 2026-11-11)
+
+**Backend build karte time free URLs hi use honge — custom domain nahi.** Domain (`kumbuild.com`) abhi
+khareeda nahi hai; sab kuch final hone ke baad hi domain add hoga. Tab sirf DNS + env change hoga, code
+dobara nahi likhna padega.
+
+**Development (abhi):**
+- Frontend — Cloudflare Pages free URLs (2026-11-11 ko live verify kiye, sab HTTP 200):
+  web `https://kumbuild-web.pages.dev`, account `https://kumbuild-account.pages.dev`,
+  admin `https://kumbuild-admin.pages.dev`, home `https://kumbuild-home.pages.dev`,
+  blog `https://kumbuild-blog.pages.dev`, docs `https://kumbuild-docs.pages.dev`,
+  legacy app `https://kumbuild-app.pages.dev`.
+- API — Cloudflare **Quick Tunnel**: `cloudflared tunnel --url http://localhost:8080` se random
+  `https://<random>.trycloudflare.com` URL milta hai (HTTPS, koi account/domain nahi chahiye).
+  **Limits (Cloudflare docs, Exa-verified 2026-11-11):** URL har restart pe badalta hai — har baar naya
+  URL leke frontend ko rebuild + redeploy karna padega; koi uptime guarantee nahi; max 200 in-flight
+  requests (uske upar 429); SSE support nahi; sirf testing/development ke liye hai. Isliye `cloudflared`
+  ko systemd service bana ke chalao taaki restart kam ho.
+- **CORS:** backend ki allowed-origins list me saato `*.pages.dev` URLs + localhost ports daalne honge.
+  Frontend API ko call karta hai (browser se) — backend frontend ko call nahi karta.
+  **CORS security nahi hai** — ye sirf browser ko rokta hai; curl/Postman se koi bhi API hit kar sakta hai.
+  Asli protection login/session auth hai (§6).
+- **Cookie (dev):** `SameSite=None; Secure` — frontend aur API alag sites hain (`pages.dev` vs
+  `trycloudflare.com`), isliye Lax cookie browser bhejega hi nahi. `Domain` attribute dev me nahi lagega
+  (koi shared parent domain nahi hai).
+
+**Production (domain ke baad):**
+- API — Cloudflare **Named Tunnel**: `cloudflared tunnel create kumbuild-api` + `cloudflared tunnel route
+  dns kumbuild-api api.kumbuild.com`. Quick tunnel (trycloudflare) production me nahi — URL badalta hai,
+  koi SLA nahi, aur SSO cookie (`Domain=.kumbuild.com`) uspe chalegi nahi.
+- Frontend — `kumbuild.com` + subdomains (`account`/`admin`/`home`/`blog`/`docs`).
+- **Cookie (prod):** HttpOnly + Secure + `SameSite=Lax` + `Domain=.kumbuild.com`, 7 din — teeno apps +
+  web pe SSO chalega.
+- Named tunnel ko systemd service se chalao; HA ke liye ek hi tunnel ke 2 `cloudflared` connectors chala
+  sakte ho (ek band ho to doosra tunnel zinda rakhta hai).
+
 - Role check **har API call pe backend karega** — frontend guard sirf UX hai, security nahi.
 
 ## 4. Data model
@@ -128,8 +171,9 @@ aur loading/error states jodne honge (aaj koi nahi hai).
 - **Sessions, JWT nahi** — browser app ke liye session cookie behtar hai (revoke ho jaati hai: row delete karo,
   logout ho gaya). Cookie me 32+ random bytes ka token; DB me sirf uska SHA-256 hash. Login ke baad session
   regenerate karo (fixation rokne ke liye).
-- **Cookie:** HttpOnly + Secure (prod) + SameSite=Lax + `Domain=.kumbuild.com`, 7 din. Server-side expiry
-  enforce karo.
+- **Cookie:** HttpOnly + Secure + 7 din, server-side expiry enforce karo. **Prod:** SameSite=Lax +
+  `Domain=.kumbuild.com` (SSO). **Dev:** SameSite=None + Secure, koi `Domain` nahi — frontend
+  (`*.pages.dev`) aur API (trycloudflare) alag sites hain, isliye Lax cookie browser bhejega hi nahi (§3.1).
 - **Password hashing:** Argon2id (`golang.org/x/crypto/argon2`) — OWASP recommendation. 1GB box ke liye tune
   karo (16–32MB/hash, max 2 concurrent hashes) — OOM se bachne ke liye. Bcrypt bhi chalega (cost 11–12, 72-byte
   limit ka dhyaan rakho). Kabhi plaintext / SHA / MD5 nahi.
@@ -180,7 +224,8 @@ aur loading/error states jodne honge (aaj koi nahi hai).
 6. **Admin seeding** — sirf Dus ya admin-user table? Reset flow admin ke liye?
 7. **Email verification policy** — verify-first, verify-later, ya kabhi nahi.
 8. **Password policy** — min length + Argon2id params (box ke hisaab se tune karna hai).
-9. **Session cookie policy** — lifetime, sliding vs absolute expiry (locked: HttpOnly + `Domain=.kumbuild.com`).
+9. **Session cookie policy** — lifetime, sliding vs absolute expiry (locked: prod HttpOnly + Secure +
+   SameSite=Lax + `Domain=.kumbuild.com`; dev SameSite=None + Secure, no Domain — §3.1/§6).
 10. **Go framework** — stdlib + chi (recommendation) vs gin/echo.
 11. **Preview/live hosting** — preview sites kahan host hongi, domain/SSL/deploy kaun karega.
 12. **Renewal flow** — reminder kaun bhejega, non-payment pe kya hoga.
@@ -192,18 +237,22 @@ aur loading/error states jodne honge (aaj koi nahi hai).
 
 Layers, bahar se andar:
 
-1. **Cloudflare (edge):** unmetered DDoS mitigation, managed WAF, Bot Fight Mode, **1 rate-limiting rule**
+1. **Cloudflare Tunnel (connectivity):** VPS ka koi inbound port nahi khulta — `cloudflared` outbound-only
+   connection banata hai, isliye origin IP public internet pe dikhta hi nahi. Tunnel mode me UFW ko 443
+   allow karne ki zaroorat nahi (neeche layer 3 dekho). Dev me quick tunnel (`trycloudflare.com`),
+   production me named tunnel (`api.kumbuild.com`) — §3.1.
+2. **Cloudflare (edge):** unmetered DDoS mitigation, managed WAF, Bot Fight Mode, **1 rate-limiting rule**
    (Free = 1 rule, 10s window) — login endpoint pe lagao (POST /auth/login, 5–10/min per IP, Block).
    Turnstile (free, CAPTCHA puzzle nahi) login/signup/reset forms pe. "Under Attack Mode" panic button hai.
-2. **Origin lock (UFW):** sirf Cloudflare ke IP ranges ko 443 pe allow karo + apni IP ko SSH (key-only).
-   Warna attacker seedha VPS IP pe attack kar dega.
-3. **nginx (VPS pe):** `limit_req` zones — login 10/min, API 10/sec, general 30/sec; connection limits;
+3. **Origin lock (UFW):** tunnel mode me sirf SSH (22, key-only) khula rakho — 80/443 band rahenge.
+   (Agar kabhi tunnel ke bina direct serve karna pade to sirf Cloudflare ke IP ranges ko 443 pe allow karo.)
+4. **nginx (VPS pe):** `limit_req` zones — login 10/min, API 10/sec, general 30/sec; connection limits;
    timeouts (Slowloris se bachav); 429 responses.
-4. **fail2ban:** sshd jail + nginx-limit-req jail. **Caveat:** Cloudflare ke peeche plain IP ban Cloudflare ko
+5. **fail2ban:** sshd jail + nginx-limit-req jail. **Caveat:** Cloudflare ke peeche plain IP ban Cloudflare ko
    ban kar deta hai — `cloudflare-token` action use karo (edge pe block hota hai).
-5. **App level:** per-IP + per-account login throttling, Turnstile, HIBP breach check, generic errors,
+6. **App level:** per-IP + per-account login throttling, Turnstile, HIBP breach check, generic errors,
    password change pe saare sessions invalidate, security headers (HSTS, CSP, X-Content-Type-Options), TLS 1.2+.
-6. **VPS hygiene:** SSH key-only, UFW (sirf 22/80/443), security updates auto, secrets sirf env/GitHub Secrets
+7. **VPS hygiene:** SSH key-only, UFW (tunnel mode me sirf 22; 80/443 band), security updates auto, secrets sirf env/GitHub Secrets
    me (kabhi code me nahi), nightly `pg_dump` backup off-VPS.
 
 ## 11. Deploy
@@ -211,9 +260,15 @@ Layers, bahar se andar:
 - `.github/workflows/deploy-backend.yml` se Oracle VPS pe deploy (Go binary + systemd service; VPS SSH secrets
   GitHub Secrets me). Workflow + secrets setup backend build ke time pe — VPS connection details secure flow se
   dene honge, chat me kabhi nahi.
-- **Domain abhi khareeda nahi hai** — `api.kumbuild.com` + SSO cookie domain ispe depend karte hain.
-  Dev `*.pages.dev`/localhost pe chalega; production ko domain chahiye.
-- Frontend (Pages) ko API base URL env se milega.
+- **Cloudflare Tunnel setup (deploy ke time):** `cloudflared` install karo + systemd service banao
+  (restart pe khud start ho). **Dev:** quick tunnel — `cloudflared tunnel --url http://localhost:8080`,
+  jo `trycloudflare.com` URL dega; restart pe URL badlega, to frontend rebuild + redeploy karna hoga.
+  **Prod (domain ke baad):** named tunnel banao (`cloudflared tunnel create kumbuild-api`) aur
+  `cloudflared tunnel route dns kumbuild-api api.kumbuild.com` se route karo; HA ke liye 2 connectors.
+- **Domain abhi khareeda nahi hai** — backend build karte time free URLs hi use honge (frontend
+  `*.pages.dev`, API trycloudflare quick tunnel). Production ko domain chahiye: `api.kumbuild.com` + SSO
+  cookie domain ispe depend karte hain; domain aane pe sirf DNS + env change hoga (§3.1).
+- Frontend (Pages) ko API base URL env se milega — dev me trycloudflare URL, prod me `api.kumbuild.com`.
 
 ## 12. Build order
 
@@ -226,6 +281,6 @@ Layers, bahar se andar:
 | **4. Payments** | Razorpay payment link ya Order+Checkout (§9 decision), signature verify, webhook; `Payment` me Razorpay fields |
 | **5. Admin actions** | Status change, preview publish, revisions, approve, go-live, renewalDate rule, refunds/cancel/hold; audit trail; NewOrderPage 9-field bug fix; Dashboard title fix |
 | **6. Renewals + content** | Renewal flow + reminders, content-checklist per order, delivery-clock rule |
-| **7. Deploy + wire** | `deploy-backend.yml` se Oracle VPS pe deploy + Pages env + domain khareedne ke baad `api.kumbuild.com` DNS + SSO cookie domain switch |
+| **7. Deploy + wire** | `deploy-backend.yml` se Oracle VPS pe deploy + `cloudflared` systemd service (dev: quick tunnel, prod: named tunnel) + Pages env (API base URL) + domain khareedne ke baad `api.kumbuild.com` DNS + SSO cookie domain switch; dev poora free URLs pe chalega (§3.1) |
 
 Full analysis: `~/workspace/shot-tools/kumbuild-audit/BACKEND_BUILD_PLAN.md` (local, repo ke bahar).
