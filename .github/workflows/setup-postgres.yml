@@ -71,7 +71,7 @@ jobs:
             done
             [ "$INSTALL_OK" -eq 1 ] || { echo "dnf install failed after 3 attempts"; exit 1; }
             rpm -q postgresql-server || exit 1
-            if [ ! -s /var/lib/pgsql/data/PG_VERSION ]; then
+            if ! sudo test -s /var/lib/pgsql/data/PG_VERSION; then
               sudo /usr/bin/postgresql-setup --initdb
             fi
             sudo systemctl enable --now postgresql
