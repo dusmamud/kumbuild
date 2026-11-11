@@ -79,6 +79,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
+          command_timeout: 90m
           script: |
             set -euo pipefail
             # (a) Install Go 1.27 if missing (tarball is distro-neutral).
@@ -91,12 +92,12 @@ jobs:
             # OL9 AppStream has no Redis — it comes from EPEL. Service
             # name on OL9 is `redis`, not `redis-server`.
             if ! command -v redis-server >/dev/null 2>&1; then
-              sudo dnf install -y oracle-epel-release-el9 || sudo dnf install -y epel-release
-              sudo dnf install -y redis
+              sudo dnf --disablerepo=ol9_ksplice,ol9_oci_included --setopt=timeout=30 --setopt=minrate=1000 --setopt=max_parallel_downloads=1 -v install -y oracle-epel-release-el9 || sudo dnf --disablerepo=ol9_ksplice,ol9_oci_included --setopt=timeout=30 --setopt=minrate=1000 --setopt=max_parallel_downloads=1 -v install -y epel-release
+              sudo dnf --disablerepo=ol9_ksplice,ol9_oci_included --setopt=timeout=30 --setopt=minrate=1000 --setopt=max_parallel_downloads=1 -v install -y redis
             fi
             if ! command -v cloudflared >/dev/null 2>&1; then
               curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.rpm -o /tmp/cloudflared.rpm
-              sudo dnf install -y /tmp/cloudflared.rpm
+              sudo dnf --disablerepo=ol9_ksplice,ol9_oci_included --setopt=timeout=30 --setopt=minrate=1000 --setopt=max_parallel_downloads=1 -v install -y /tmp/cloudflared.rpm
             fi
             # (c) Apply deploy/redis.conf, injecting REDIS_PASSWORD from secrets via sed.
             # NOTE: a password containing '|' would need escaping.
