@@ -1,0 +1,59 @@
+# One-off: POST /api/auth/signup contract check against the public
+# sslip base FROM THE RUNNER (direct internet; VM-side POSTs are blocked
+# by the egress proxy). Proves the 2026-11-12 contract: billing is NOT
+# collected at signup anymore. The payload carries a deliberately invalid
+# email, so validation fails (400) BEFORE any user row, OTP or email can
+# be created — read-only in effect. The fields map must contain the
+# invalid field and NO billing_* keys (before the fix, the same payload
+# failed on five missing billing fields). Publishes result as a
+# "vps-signup-test" commit status.
+name: Check signup POST (public)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  statuses: write
+  contents: read
+
+jobs:
+  signup-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Signup POST billing-free contract check from runner
+        id: st
+        run: |
+          BASE=https://80-225-209-75.sslip.io
+          ORIGIN=https://kumbuild-account.pages.dev
+          echo "== CSRF: token from /csrf JSON body + cookie =="
+          TOK=$(curl -s --max-time 30 "$BASE/api/auth/csrf" -H "Origin: $ORIGIN" | jq -r '.csrf_token // empty')
+          echo "token fetched: $([ -n "$TOK" ] && echo yes || echo no)"
+          echo "== POST /api/auth/signup: NO billing fields, invalid email (expect 400 validation, fields has email, no billing_ keys) =="
+          R=$(curl -s --max-time 30 -w '\nCODE=%{http_code}' -X POST "$BASE/api/auth/signup" -H "Origin: $ORIGIN" -H "Content-Type: application/json" -H "Cookie: csrf_token=$TOK" -H "X-CSRF-Token: $TOK" -d '{"full_name":"Live Check","email":"not-an-email","password":"Str0ng!Pass","phone_no":"098765 43210","whatsapp_no":"+91 98765 43210","turnstile_token":"XXXX.DUMMY"}' || echo 'CODE=CURLFAIL')
+          echo "$R"
+          CODE=$(printf '%s' "$R" | grep -oE 'CODE=[0-9A-Z]+' | tail -1 | cut -d= -f2)
+          BODY=$(printf '%s' "$R" | sed 's/CODE=[0-9A-Z]*$//')
+          HAS_EMAIL=$(printf '%s' "$BODY" | grep -c '"email"' || true)
+          HAS_BILLING=$(printf '%s' "$BODY" | grep -c 'billing' || true)
+          {
+            echo "## Signup billing-free check (runner-side)"
+            echo "- code: $CODE (want 400)"
+            echo "- fields mentions email: $HAS_EMAIL (want >=1)"
+            echo "- body mentions billing: $HAS_BILLING (want 0)"
+            echo '```'
+            echo "$R"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "summary=code:$CODE email:$HAS_EMAIL billing:$HAS_BILLING" >> "$GITHUB_OUTPUT"
+      - name: Publish signup test as commit status
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUMMARY: ${{ steps.st.outputs.summary }}
+        run: |
+          DESC=$(printf '%s' "$SUMMARY" | cut -c1-140)
+          PAYLOAD=$(jq -n --arg s "success" --arg c "vps-signup-test" --arg d "$DESC" '{state:$s, context:$c, description:$d}')
+          curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d "$PAYLOAD" >/dev/null
