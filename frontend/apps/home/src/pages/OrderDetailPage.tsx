@@ -148,7 +148,7 @@ export default function OrderDetailPage() {
                     href={order.previewUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary-600 px-4 py-2.5 text-sm font-semibold text-primary-700 hover:bg-primary-50"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary-600 px-4 py-2.5 text-sm font-semibold text-primary-700 hover:bg-primary-tint"
                   >
                     View preview
                     <ExternalLink className="h-4 w-4" />
@@ -159,7 +159,7 @@ export default function OrderDetailPage() {
                     href={order.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-700"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-700 dark:hover:bg-primary-500"
                   >
                     Visit live website
                     <Globe className="h-4 w-4" />

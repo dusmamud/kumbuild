@@ -76,7 +76,7 @@ export const inputClass =
   "w-full rounded-lg border border-line-strong bg-bg px-3 py-2 text-sm text-ink outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-600/30";
 
 export const buttonPrimaryClass =
-  "inline-flex items-center justify-center rounded-lg bg-primary-600 px-4 py-2 text-sm font-bold text-on-primary hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600/50 disabled:opacity-50";
+  "inline-flex items-center justify-center rounded-lg bg-primary-600 px-4 py-2 text-sm font-bold text-on-primary hover:bg-primary-700 dark:hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-600/50 disabled:opacity-50";
 
 export const buttonGhostClass =
   "inline-flex items-center justify-center rounded-lg border border-line-strong bg-bg px-4 py-2 text-sm font-semibold text-ink hover:bg-surface-hover focus:outline-none focus:ring-2 focus:ring-primary-600/30";

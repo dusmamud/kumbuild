@@ -73,7 +73,7 @@ export function LocaleSwitcher() {
           aria-pressed={locale === l}
           className={
             locale === l
-              ? "rounded-full bg-ink px-2.5 py-1 text-white"
+              ? "rounded-full bg-ink px-2.5 py-1 text-paper"
               : "rounded-full px-2.5 py-1 text-muted hover:text-ink"
           }
         >

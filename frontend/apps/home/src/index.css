@@ -1,13 +1,28 @@
 @import "tailwindcss";
+@import "@radix-ui/colors/slate-dark.css";
+
+/* Tailwind v4's default dark: variant follows prefers-color-scheme,
+   not the app's data-theme toggle — so dark: styles (e.g. the
+   dark:hover button fix) only fired when the OS was dark. Re-point
+   it at [data-theme="dark"], like the Next.js app does. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* Kumbuild theme — canonical grading (THEME.md v3, Dus 2026-11-11):
    ONE palette for all six apps. Light = the web app's warm paper
    grading (source of truth: frontend/apps/web/src/styles/theme.css).
-   Dark = the blog/docs warm-charcoal set — this app has light AND
-   dark (the web app is the only light-only app). Tokens are CSS
-   variables so components stay theme-agnostic: :root is light,
-   [data-theme="dark"] overrides. No hue gradients, no glows,
-   no coloured shadows (unslop colour pass). */
+   Dark = Radix Colors slateDark (imported above: paper slate-1
+   #111113, surfaces slate-2/3, text slate-12). The hand-rolled
+   neutral greys (#121212 bg, #1E1E1E surfaces) were replaced by
+   the Radix scale 2026-11-12. Deep navy #020617 was rejected
+   2026-11-12: it read as black, not dark. Radix's dark scales
+   resolve under the .dark class, so index.html's no-flash script
+   and ThemeToggle sync .dark alongside data-theme.
+   NOTE: THEME.md v3 §4 still says warm-charcoal — it diverges
+   from this file; the doc needs a v4.
+   This app has light AND dark (the web app is the only light-only
+   app). Tokens are CSS variables so components stay theme-agnostic:
+   :root is light, [data-theme="dark"] overrides. No hue gradients,
+   no glows, no coloured shadows (unslop colour pass). */
 @theme inline {
   --color-primary-50: var(--kb-primary-50);
   --color-primary-100: var(--kb-primary-100);
@@ -39,8 +54,8 @@
   --color-live-soft: var(--kb-live-soft);
   /* Solid green for buttons with white text — the bright dark-theme
      --kb-live is for text/dots on dark, not a button background. */
-  --color-live-strong: #15803d;
-  --color-live-strong-hover: #127032;
+  --color-live-strong: var(--kb-live-strong);
+  --color-live-strong-hover: var(--kb-live-strong-hover);
   --color-success: var(--kb-live);
   --color-success-bg: var(--kb-live-soft);
   --color-warn: var(--kb-warn);
@@ -82,6 +97,8 @@
   --kb-star-soft: #fef3c7;
   --kb-live: #15803d;
   --kb-live-soft: #e6f5ec;
+  --kb-live-strong: #15803d;
+  --kb-live-strong-hover: #127032;
   --kb-warn: #d97706;
   --kb-warn-soft: #fef3c7;
   --kb-danger: #dc2626;
@@ -102,30 +119,34 @@
 }
 
 [data-theme="dark"] {
-  /* Dark — warm charcoal, the blog/docs canonical set. Primary
-     brightens one step for text; CTA keeps the deep orange (5.2:1
-     with white text — the brighter orange fails AA). */
-  --kb-paper: #141210;
-  --kb-surface: #1d1a17;
-  --kb-surface-hover: #322d28;
-  --kb-card: #211e1a;
-  --kb-ink: #f5f2ec;
-  --kb-body: #d6d0c6;
-  --kb-muted: #a39a8d;
-  --kb-faint: #6f675e;
-  --kb-line: #322d28;
-  --kb-line-strong: #453f39;
+  /* Dark — Radix Colors slateDark: neutrals come from the slateDark
+     scale (paper slate-1 #111113, surfaces slate-2/3, text
+     slate-12, lines slate-6/7). Primary brightens one step for
+     text; CTA keeps the deep orange (5.2:1 with white text — the
+     brighter orange fails AA). */
+  --kb-paper: var(--slate-1);
+  --kb-surface: var(--slate-2);
+  --kb-surface-hover: var(--slate-4);
+  --kb-card: var(--slate-3);
+  --kb-ink: var(--slate-12);
+  --kb-body: var(--slate-12);
+  --kb-muted: var(--slate-11);
+  --kb-faint: var(--slate-10);
+  --kb-line: var(--slate-6);
+  --kb-line-strong: var(--slate-7);
   --kb-primary-600: #3392f6;
   --kb-primary-700: #66adf9;
   --kb-primary-tint: #0b2f52;
+  --kb-cta: #c2410c;
+  --kb-cta-hover: #9a3412;
   --kb-star: #fbbf24;
   --kb-star-soft: #3a2f10;
   --kb-live: #4ade80;
-  --kb-live-soft: color-mix(in srgb, #4ade80 12%, #141210);
+  --kb-live-soft: color-mix(in srgb, #4ade80 12%, #111113);
   --kb-warn: #fbbf24;
   --kb-warn-soft: #3a2f10;
   --kb-danger: #f87171;
-  --kb-danger-soft: color-mix(in srgb, #f87171 14%, #141210);
+  --kb-danger-soft: color-mix(in srgb, #f87171 14%, #111113);
   color-scheme: dark;
 }
 
@@ -152,12 +173,22 @@ body {
 }
 
 ::selection {
-  background: var(--kb-primary-200);
+  background: var(--kb-primary-100);
+  color: var(--kb-ink);
+}
+
+/* Dark selection: the light #CCE4FD chip on near-white dark text is
+   unreadable, so dark uses the deep primary tint instead (text
+   #EDEEF0 on #0B2F52 is ~11.7:1). --kb-primary-100 is deliberately
+   NOT overridden in dark — the approved badge uses it as a light
+   chip with dark text. */
+[data-theme="dark"] ::selection {
+  background: var(--kb-primary-tint);
   color: var(--kb-ink);
 }
 
 :focus-visible {
-  outline: 2px solid #008efd;
+  outline: 2px solid var(--kb-primary-500);
   outline-offset: 2px;
   border-radius: 4px;
 }

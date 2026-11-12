@@ -26,6 +26,9 @@ importers:
       '@kumbuild/lib':
         specifier: workspace:*
         version: link:../../packages/lib
+      '@radix-ui/colors':
+        specifier: 3.0.0
+        version: 3.0.0
       '@tanstack/react-query':
         specifier: ^5.90.0
         version: 5.107.1(@types/react@19.3.0)(react@19.3.1)
@@ -78,6 +81,9 @@ importers:
       '@kumbuild/lib':
         specifier: workspace:*
         version: link:../../packages/lib
+      '@radix-ui/colors':
+        specifier: 3.0.0
+        version: 3.0.0
       '@tanstack/react-query':
         specifier: ^5.90.0
         version: 5.107.1(@types/react@19.3.0)(react@19.3.1)
@@ -277,6 +283,9 @@ importers:
       '@kumbuild/lib':
         specifier: workspace:*
         version: link:../../packages/lib
+      '@radix-ui/colors':
+        specifier: 3.0.0
+        version: 3.0.0
       '@tanstack/react-query':
         specifier: ^5.90.0
         version: 5.107.1(@types/react@19.3.0)(react@19.3.1)
@@ -1960,6 +1969,9 @@ packages:
 
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
+
+  '@radix-ui/colors@3.0.0':
+    resolution: {integrity: sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg==}
 
   '@rolldown/binding-android-arm-eabi@1.2.18':
     resolution: {integrity: sha512-ubTG+4KlidvioxjOFdsdEa2F6JVGZb8m2ByJUqQ7fYzUeT1cEn194POcsQ10PKH4p//q0YQn4SB3YpSuzcA1Yg==}
@@ -5863,6 +5875,8 @@ snapshots:
       supports-color: 10.2.2
 
   '@poppinss/exception@1.2.3': {}
+
+  '@radix-ui/colors@3.0.0': {}
 
   '@rolldown/binding-android-arm-eabi@1.2.18':
     optional: true

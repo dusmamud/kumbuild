@@ -2,9 +2,9 @@ import { ORDER_STATUS_LABEL, type OrderStatus } from "@kumbuild/lib";
 
 const BADGE_STYLES: Record<OrderStatus, string> = {
   received: "border-line bg-surface text-muted",
-  "in-progress": "border-primary-100 bg-primary-50 text-primary-700",
-  "preview-ready": "border-primary-100 bg-primary-50 text-primary-700",
-  revision: "border-primary-100 bg-primary-50 text-primary-700",
+  "in-progress": "border-primary-100 bg-primary-tint text-primary-700",
+  "preview-ready": "border-primary-100 bg-primary-tint text-primary-700",
+  revision: "border-primary-100 bg-primary-tint text-primary-700",
   approved: "border-primary-200 bg-primary-100 text-primary-800",
   live: "border-transparent bg-live-soft text-live",
 };

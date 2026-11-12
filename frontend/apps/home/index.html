@@ -11,6 +11,7 @@
         try { saved = localStorage.getItem("kb-theme"); } catch (e) {}
         var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
         document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document.documentElement.classList.toggle("dark", dark);
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />

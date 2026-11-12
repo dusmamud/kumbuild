@@ -15,6 +15,7 @@ export default function ThemeToggle() {
   function toggle() {
     const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
+    document.documentElement.classList.toggle("dark", next === "dark");
     try {
       localStorage.setItem("kb-theme", next);
     } catch {

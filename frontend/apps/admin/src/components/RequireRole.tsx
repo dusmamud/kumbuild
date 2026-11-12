@@ -45,7 +45,7 @@ export default function RequireRole({ role, children }: { role: Role; children: 
         <div className="mt-6 flex flex-col gap-2 sm:flex-row">
           <a
             href={HOME_URL}
-            className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-700"
+            className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-700 dark:hover:bg-primary-500"
           >
             Go to your dashboard
           </a>

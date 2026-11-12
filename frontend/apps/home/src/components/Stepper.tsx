@@ -58,7 +58,7 @@ export default function Stepper({ status }: { status: OrderStatus }) {
               >
                 {ORDER_STATUS_LABEL[step]}
                 {state === "current" && (
-                  <span className="rounded-full bg-primary-50 px-2 py-0.5 text-[11px] font-semibold text-primary-700">
+                  <span className="rounded-full bg-primary-tint px-2 py-0.5 text-[11px] font-semibold text-primary-700">
                     Current step
                   </span>
                 )}
