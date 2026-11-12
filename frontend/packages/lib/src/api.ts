@@ -10,14 +10,14 @@
 // - All auth calls are POSTs under /api/auth/*, JSON in/out, session is the
 //   HttpOnly `kb_session` cookie — every fetch uses credentials:"include".
 // - CSRF is double-submit (backend §6.5): GET /api/auth/csrf sets a
-//   `csrf_token` cookie (NOT HttpOnly); the client reads it from
-//   document.cookie and sends it back as the X-CSRF-Token header on every
-//   state-changing request. The cookie is only visible to JS when the app
-//   is served same-site with the API (prod: *.kumbuild.com subdomains with
-//   CookieDomain=.kumbuild.com). On the dev *.pages.dev origins the cookie
-//   sits on the API host and document.cookie cannot see it — the header is
-//   then omitted and the backend answers 403 {"error":"csrf"}. That dev
-//   topology limit is surfaced to the user as the backend's own message.
+//   `csrf_token` cookie (NOT HttpOnly) AND returns the same token in its
+//   JSON body; the client sends that value as the X-CSRF-Token header on
+//   every state-changing request. The body value is the primary source:
+//   cross-origin JS (dev apps on *.pages.dev, API on a trycloudflare
+//   host) cannot read the API host's cookie from document.cookie, but the
+//   browser still sends the cookie back automatically on credentialed
+//   fetches, so the backend's header==cookie check passes. The cookie
+//   read below remains as a same-site (prod) fallback.
 // - Error envelope: { error: string, message: string, fields?: Record<string,string> }.
 // - Turnstile is required on signup/login/forgot/reset/accept-invite.
 //   Dev uses Cloudflare's always-pass TEST site key below (the backend
@@ -104,10 +104,20 @@ function readCsrfCookie(): string | null {
   return match ? decodeURIComponent(match[1]) : null;
 }
 
-/** GET /api/auth/csrf — (re)issues the csrf_token cookie. */
+/** Token from the last /api/auth/csrf JSON body (primary CSRF source). */
+let csrfTokenFromBody: string | null = null;
+
+/**
+ * GET /api/auth/csrf — (re)issues the csrf_token cookie and returns the
+ * same token in the JSON body, which is what we keep for the header:
+ * cross-origin document.cookie cannot see the API host's cookie.
+ */
 async function ensureCsrf(): Promise<void> {
   try {
-    await fetch(`${API_BASE_URL}/api/auth/csrf`, { credentials: "include" });
+    const res = await fetch(`${API_BASE_URL}/api/auth/csrf`, { credentials: "include" });
+    const data: unknown = await res.json().catch(() => null);
+    const token = (data as { csrf_token?: unknown } | null)?.csrf_token;
+    if (typeof token === "string" && token !== "") csrfTokenFromBody = token;
   } catch {
     // Network failure: the real request below will surface the error.
   }
@@ -122,7 +132,7 @@ async function request<T>(path: string, init: { method?: string; body?: unknown 
   const headers: Record<string, string> = {};
   if (init.body !== undefined) headers["Content-Type"] = "application/json";
   if (method !== "GET") {
-    const csrf = readCsrfCookie();
+    const csrf = csrfTokenFromBody ?? readCsrfCookie();
     if (csrf) headers["X-CSRF-Token"] = csrf;
   }
   let res: Response;

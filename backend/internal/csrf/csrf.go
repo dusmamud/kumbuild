@@ -1,7 +1,12 @@
 // Package csrf implements the double-submit CSRF token pattern
 // (backend/README.md §6.5): the server sets a csrf_token cookie (NOT
 // HttpOnly, so JS can read it) and the frontend sends the same value back
-// in the X-CSRF-Token header on every state-changing request.
+// in the X-CSRF-Token header on every state-changing request. The
+// /api/auth/csrf endpoint also returns the token in its JSON body,
+// because cross-origin JS (dev *.pages.dev apps calling a trycloudflare
+// API host) cannot read another origin's cookie from document.cookie;
+// the browser still sends the cookie back automatically, so validation
+// (header == cookie) is unchanged.
 package csrf
 
 import (

@@ -28,6 +28,8 @@ jobs:
           systemctl is-active postgresql redis kumbuild-api cloudflared
           echo "--- healthz ---"
           curl -fsS http://localhost:8080/healthz && echo " HEALTHZ-OK" || echo "HEALTHZ-FAILED"
+          echo "--- csrf endpoint returns token in JSON body (count only, value never printed) ---"
+          curl -s http://localhost:8080/api/auth/csrf | grep -c '"csrf_token"' || echo "CSRF-BODY-MISSING"
           echo "--- api.env value lengths (names + lengths only) ---"
           sudo awk -F= '/^[A-Z_]+=/{print $1, "len=" length(substr($0, index($0,"=")+1))}' /etc/kumbuild/api.env
           echo "--- kumbuild-api journal (last 8) ---"

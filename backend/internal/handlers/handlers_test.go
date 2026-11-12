@@ -442,14 +442,24 @@ func TestCSRFEndpoint(t *testing.T) {
 	e := newTestEnv(t)
 	rr := e.do(t, "GET", "/api/auth/csrf", nil, reqOptions{})
 	mustStatus(t, rr, http.StatusOK)
-	var found bool
+	var cookieVal string
 	for _, c := range rr.Result().Cookies() {
 		if c.Name == csrf.CookieName && c.Value != "" {
-			found = true
+			cookieVal = c.Value
 		}
 	}
-	if !found {
+	if cookieVal == "" {
 		t.Fatal("GET /api/auth/csrf did not set a csrf_token cookie")
+	}
+	// The same token must also come back in the JSON body, so
+	// cross-origin JS (which cannot read the cookie) can send the
+	// X-CSRF-Token header.
+	var body map[string]string
+	if err := json.Unmarshal(rr.Body.Bytes(), &body); err != nil {
+		t.Fatalf("csrf body is not JSON: %v", err)
+	}
+	if body["csrf_token"] != cookieVal {
+		t.Fatalf("csrf body token %q does not match cookie %q", body["csrf_token"], cookieVal)
 	}
 }
 

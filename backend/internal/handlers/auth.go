@@ -499,11 +499,17 @@ func (h *Handler) ChangePassword(w http.ResponseWriter, r *http.Request) {
 	middleware.WriteJSON(w, http.StatusOK, map[string]string{"message": "password changed"})
 }
 
-// CSRFToken issues a fresh csrf_token cookie. Login/signup are
-// state-changing (CSRF-checked) but run before any session exists, so the
-// frontend GETs this endpoint first, reads the cookie (it is NOT HttpOnly),
-// and sends the value back in the X-CSRF-Token header on every
-// state-changing request.
+// CSRFToken issues a fresh csrf_token cookie AND returns the same token
+// in the JSON body. Login/signup are state-changing (CSRF-checked) but
+// run before any session exists, so the frontend GETs this endpoint
+// first and sends the value back in the X-CSRF-Token header on every
+// state-changing request. The cookie is NOT HttpOnly, so same-site JS
+// can read it from document.cookie — but cross-origin JS (dev apps on
+// *.pages.dev, API on a trycloudflare host) cannot read another origin's
+// cookie, so the body value is what the dev frontend uses. Validation
+// still compares the header against the cookie the browser sends back
+// automatically (SameSite=None + Secure in dev), so the double-submit
+// check is unchanged.
 func (h *Handler) CSRFToken(w http.ResponseWriter, r *http.Request) {
 	token, err := csrf.NewToken()
 	if err != nil {
@@ -511,5 +517,5 @@ func (h *Handler) CSRFToken(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	csrf.SetCookie(w, token, h.Cfg)
-	middleware.WriteJSON(w, http.StatusOK, map[string]string{"message": "csrf token set"})
+	middleware.WriteJSON(w, http.StatusOK, map[string]string{"message": "csrf token set", "csrf_token": token})
 }
