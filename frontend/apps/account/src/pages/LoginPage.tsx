@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import {
   api,
   ApiError,
@@ -16,6 +19,7 @@ import AuthLayout from "../components/AuthLayout";
 import {
   ErrorBanner,
   Field,
+  PasswordInput,
   buttonPrimaryClass,
   inputClass,
   inputErrorClass,
@@ -28,6 +32,19 @@ import {
 // needed. ?next= overrides the role default: a relative path goes to the
 // role app, an absolute URL is honoured only if it is on the admin/home
 // app origin.
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Same rules and messages as the hand-rolled checks before: a bad or
+// missing email gets one message, a missing password another.
+const loginSchema = z.object({
+  email: z
+    .string()
+    .refine((v) => EMAIL_RE.test(v.trim()), "Enter a valid email address."),
+  password: z.string().min(1, "Enter your password."),
+});
+
+type LoginValues = z.infer<typeof loginSchema>;
 
 function redirectAfterLogin(session: Session, next: string | null): void {
   const base = session.role === "admin" ? ADMIN_URL : HOME_URL;
@@ -52,15 +69,23 @@ function redirectAfterLogin(session: Session, next: string | null): void {
 
 export default function LoginPage() {
   const [searchParams] = useSearchParams();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [banner, setBanner] = useState("");
   const [busy, setBusy] = useState(false);
+  const bannerRef = useRef<HTMLParagraphElement>(null);
   const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<number | null>(null);
   const tokenRef = useRef("");
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<LoginValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: { email: "", password: "" },
+  });
 
   // Turnstile widget (dev: Cloudflare always-pass test site key).
   useEffect(() => {
@@ -81,6 +106,13 @@ export default function LoginPage() {
       cancelled = true;
     };
   }, []);
+
+  // Move focus to the banner when a server error appears (401 etc.):
+  // validation errors already focus their field; the banner was the
+  // only error surface that left focus on BODY.
+  useEffect(() => {
+    if (banner) bannerRef.current?.focus();
+  }, [banner]);
 
   // Already logged in? Ask the backend (/me) — skip the form and go
   // straight to the role app. Except after an explicit logout
@@ -107,35 +139,21 @@ export default function LoginPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function clearErrors() {
-    setEmailError("");
-    setPasswordError("");
+  async function onValid(values: LoginValues) {
     setBanner("");
-  }
-
-  async function submit(e: FormEvent) {
-    e.preventDefault();
-    clearErrors();
-    const normalized = email.trim().toLowerCase();
-    if (!normalized || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) {
-      setEmailError("Enter a valid email address.");
-      return;
-    }
-    if (!password) {
-      setPasswordError("Enter your password.");
-      return;
-    }
     if (!tokenRef.current) {
       setBanner("Please complete the verification check, then try again.");
       return;
     }
+    const normalized = values.email.trim().toLowerCase();
     setBusy(true);
     try {
-      const { user } = await api.login(normalized, password, tokenRef.current);
+      const { user } = await api.login(normalized, values.password, tokenRef.current);
       cacheUser(user);
       redirectAfterLogin(sessionForUser(user), searchParams.get("next"));
     } catch (err) {
       // Turnstile tokens are single-use — reset for the next attempt.
+      // Form data stays put (react-hook-form keeps the values).
       if (widgetIdRef.current !== null) resetTurnstile(widgetIdRef.current);
       tokenRef.current = "";
       if (err instanceof ApiError) {
@@ -144,7 +162,7 @@ export default function LoginPage() {
             "Invalid email or password. If you just signed up, verify your email first — unverified accounts can't log in.",
           );
         } else if (err.fields?.password) {
-          setPasswordError(err.message);
+          setError("password", { type: "server", message: err.message });
         } else {
           setBanner(err.message);
         }
@@ -165,37 +183,40 @@ export default function LoginPage() {
 
       {banner ? (
         <div className="mt-6">
-          <ErrorBanner>{banner}</ErrorBanner>
+          <ErrorBanner ref={bannerRef}>{banner}</ErrorBanner>
         </div>
       ) : null}
 
-      <form onSubmit={submit} className="mt-6 space-y-4" noValidate>
-        <Field label="Email" error={emailError}>
+      <form onSubmit={handleSubmit(onValid)} className="mt-6 space-y-4" noValidate>
+        <Field id="login-email" label="Email" error={errors.email?.message}>
           <input
             type="email"
-            required
-            autoComplete="email"
+            autoComplete="username webauthn"
             placeholder="you@example.com"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setEmailError("");
-            }}
-            className={`${inputClass} ${emailError ? inputErrorClass : ""}`}
+            {...register("email")}
+            className={`${inputClass} ${errors.email ? inputErrorClass : ""}`}
           />
         </Field>
-        <Field label="Password" error={passwordError}>
-          <input
-            type="password"
-            required
+        <Field
+          id="login-password"
+          label="Password"
+          error={errors.password?.message}
+          labelAction={
+            <Link
+              to="/forgot-password"
+              className="text-sm font-medium text-primary-700 hover:underline"
+            >
+              Forgot password?
+            </Link>
+          }
+        >
+          <PasswordInput
+            show={showPassword}
+            onToggleShow={() => setShowPassword((v) => !v)}
             autoComplete="current-password"
             placeholder="••••••••"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              setPasswordError("");
-            }}
-            className={`${inputClass} ${passwordError ? inputErrorClass : ""}`}
+            {...register("password")}
+            className={errors.password ? inputErrorClass : ""}
           />
         </Field>
         <div ref={turnstileRef} className="flex justify-center" />
@@ -205,11 +226,6 @@ export default function LoginPage() {
       </form>
 
       <p className="mt-6 text-center text-sm text-muted">
-        <Link to="/forgot-password" className="font-medium text-primary-700 hover:underline">
-          Forgot password?
-        </Link>
-      </p>
-      <p className="mt-2 text-center text-sm text-muted">
         Don&apos;t have an account?{" "}
         <Link to="/signup" className="font-medium text-primary-700 hover:underline">
           Sign up

@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { api, ApiError, renderTurnstile, resetTurnstile } from "@kumbuild/lib";
 import AuthLayout from "../components/AuthLayout";
 import {
@@ -17,14 +20,32 @@ import {
 // here shows the same generic message; the reset email carries a
 // /reset-password?token= link built from the backend's APP_BASE_URL.
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const forgotSchema = z.object({
+  email: z
+    .string()
+    .refine((v) => EMAIL_RE.test(v.trim()), "Enter a valid email address."),
+});
+
+type ForgotValues = z.infer<typeof forgotSchema>;
+
 export default function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<number | null>(null);
   const tokenRef = useRef("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ForgotValues>({
+    resolver: zodResolver(forgotSchema),
+    defaultValues: { email: "" },
+  });
 
   // Turnstile widget (dev: Cloudflare always-pass test site key).
   useEffect(() => {
@@ -45,13 +66,8 @@ export default function ForgotPasswordPage() {
     };
   }, []);
 
-  async function submit(e: FormEvent) {
-    e.preventDefault();
-    const normalized = email.trim().toLowerCase();
-    if (!normalized || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) {
-      setError("Enter a valid email address.");
-      return;
-    }
+  async function onValid(values: ForgotValues) {
+    const normalized = values.email.trim().toLowerCase();
     if (!tokenRef.current) {
       setError("Please complete the verification check, then try again.");
       return;
@@ -92,19 +108,14 @@ export default function ForgotPasswordPage() {
         </div>
       ) : null}
 
-      <form onSubmit={submit} className="mt-6 space-y-4" noValidate>
-        <Field label="Email">
+      <form onSubmit={handleSubmit(onValid)} className="mt-6 space-y-4" noValidate>
+        <Field id="forgot-email" label="Email" error={errors.email?.message}>
           <input
             type="email"
-            required
             autoComplete="email"
             placeholder="you@example.com"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setError("");
-            }}
-            className={`${inputClass} ${error ? inputErrorClass : ""}`}
+            {...register("email")}
+            className={`${inputClass} ${errors.email ? inputErrorClass : ""}`}
           />
         </Field>
         <div ref={turnstileRef} className="flex justify-center" />
