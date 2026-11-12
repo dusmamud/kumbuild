@@ -2,14 +2,15 @@
 #
 # Oracle Linux 9 (Dusrel-chat, E2.1.Micro, 1 GB RAM) — dnf/rpm, NOT
 # Debian/Ubuntu apt-get/dpkg. Dev only, NO custom domain: the API is
-# exposed through a Cloudflare Quick Tunnel (random trycloudflare.com
-# URL, changes on every restart). Named tunnel / api.kumbuild.com is
-# prod-only, after the domain is bought.
+# exposed through Caddy + sslip.io (stable https://<vps-ip>.sslip.io,
+# see setup-caddy.yml). The Cloudflare Quick Tunnel was retired
+# 2026-11-12 (429 rate-limiting + URL rotation). Named tunnel /
+# api.kumbuild.com is prod-only, after the domain is bought.
 #
 # Secrets needed (GitHub repo Settings -> Secrets and variables -> Actions):
 #   VPS_HOST, VPS_USER, VPS_SSH_KEY, VPS_PORT, BREVO_API_KEY,
-#   TURNSTILE_SECRET_KEY, REDIS_PASSWORD, COOKIE_DOMAIN, ALLOWED_ORIGINS,
-#   APP_BASE_URL
+#   MAIL_FROM_EMAIL, TURNSTILE_SECRET_KEY, REDIS_PASSWORD,
+#   COOKIE_DOMAIN, ALLOWED_ORIGINS, APP_BASE_URL
 # VPS_* are set. CLOUDFLARE_TUNNEL_TOKEN is NOT needed for dev (named
 # tunnel only). DATABASE_URL is NOT a GitHub secret: it is built on the VPS
 # itself from /etc/kumbuild/db-password (0600, created by setup-postgres) so
@@ -138,7 +139,10 @@ jobs:
             sudo install -m 0644 /tmp/kumbuild-deploy/cloudflared.service /etc/systemd/system/cloudflared.service
             # (e) Write /etc/kumbuild/api.env from GitHub Secrets (real secrets live here only).
             # Dev: APP_ENV=dev, cookie SameSite=None + Secure, no Domain,
-            # COOKIE_DOMAIN empty, APP_BASE_URL = Quick Tunnel URL.
+            # COOKIE_DOMAIN empty, APP_BASE_URL = sslip base (APP_BASE_URL
+            # secret — invite/reset email links use it).
+            # MAIL_FROM_EMAIL is required: Brevo rejects sends with an empty
+            # sender, so without it every OTP/invite/reset mail fails.
             # DATABASE_URL is built on-box from /etc/kumbuild/db-password
             # (setup-postgres created it, 0600) — the DB password never
             # leaves the VPS and is never a GitHub secret.
@@ -150,6 +154,7 @@ jobs:
             REDIS_ADDR=localhost:6379
             REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}
             BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}
+            MAIL_FROM_EMAIL=${{ secrets.MAIL_FROM_EMAIL }}
             APP_BASE_URL=${{ secrets.APP_BASE_URL }}
             TURNSTILE_SECRET_KEY=${{ secrets.TURNSTILE_SECRET_KEY }}
             COOKIE_DOMAIN=${{ secrets.COOKIE_DOMAIN }}
