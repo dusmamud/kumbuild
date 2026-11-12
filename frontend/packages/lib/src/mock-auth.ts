@@ -1,3 +1,7 @@
+// DEPRECATED — replaced by ./api (real Go-backend client) + ./auth (real
+// session layer). No longer exported from ./index; kept in the tree only
+// until a cleanup commit can delete files. Do NOT import this.
+//
 // Mock auth — CLIENT SIDE ONLY, frontend phase.
 // Static Pages pe koi server nahi hai: na cookie padhi ja sakti hai, na
 // session verify ho sakta hai. Isliye session browser ke localStorage me

@@ -15,6 +15,10 @@ cloudflare-env.d.ts
 .env
 .env.*
 !.env.example
+# Exception: the Vite apps' .env.production carries ONLY the public
+# VITE_API_BASE_URL (embedded in the shipped JS anyway — not a secret),
+# so the Pages builds can reach the backend. No real secrets there, ever.
+!frontend/apps/*/.env.production
 
 # OS / editor
 .DS_Store
