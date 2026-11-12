@@ -177,6 +177,25 @@ jobs:
             sudo systemctl enable --now redis kumbuild-api
             sudo systemctl restart redis kumbuild-api
             # (h) Smoke check: the API must answer its health endpoint locally.
-            # On failure, print the API journal so the exact startup error
-            # is in the logs instead of a bare curl error.
-            curl -fsS http://localhost:8080/healthz || { echo "--- kumbuild-api status ---"; systemctl status kumbuild-api --no-pager || true; echo "--- kumbuild-api journal (last 40 lines) ---"; journalctl -u kumbuild-api -n 40 --no-pager || true; exit 1; }
+            # Restart leaves a ~1s window where the old process has stopped
+            # and the new one has not bound the port yet — a single curl
+            # races that window (5 straight runs "failed" here while the
+            # deploy itself had succeeded). Retry for up to ~60s before
+            # failing. On failure, print the API journal so the exact
+            # startup error is in the logs instead of a bare curl error.
+            SMOKE_OK=0
+            for i in $(seq 1 30); do
+              if curl -fsS http://localhost:8080/healthz; then
+                SMOKE_OK=1
+                break
+              fi
+              echo "healthz not up yet (attempt $i/30), retrying in 2s..."
+              sleep 2
+            done
+            if [ "$SMOKE_OK" != "1" ]; then
+              echo "--- kumbuild-api status ---"
+              systemctl status kumbuild-api --no-pager || true
+              echo "--- kumbuild-api journal (last 40 lines) ---"
+              journalctl -u kumbuild-api -n 40 --no-pager || true
+              exit 1
+            fi
