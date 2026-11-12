@@ -65,7 +65,14 @@ export interface MeResponse {
   billing_address: ApiBillingAddress | null;
 }
 
-/** Flat signup payload — field names are the backend's §2 set, verbatim. */
+/**
+ * Flat signup payload — field names are the backend's §2 set, verbatim.
+ * NO billing address: signup does not collect one (removed 2026-11-12).
+ * The backend ignores any billing fields sent to /api/auth/signup;
+ * billing is captured later (admin create-customer, /me returns it).
+ * Phone numbers may be typed in any Indian format — the backend
+ * normalises them to E.164 before storing.
+ */
 export interface SignupInput {
   full_name: string;
   email: string;
@@ -73,14 +80,6 @@ export interface SignupInput {
   phone_no: string;
   whatsapp_no: string;
   alternative_email?: string;
-  billing_name: string;
-  address_line1: string;
-  address_line2?: string;
-  city: string;
-  state: string;
-  pincode: string;
-  country: string;
-  gstin?: string;
   turnstile_token: string;
 }
 

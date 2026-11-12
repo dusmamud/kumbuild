@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
   api,
@@ -21,17 +21,27 @@ import {
 } from "../components/ui";
 
 // account.kumbuild.com/signup — create a customer account (REAL backend).
-// POST /api/auth/signup collects the backend's full §2 field set (contact
-// + billing address) and emails a 6-digit OTP; the account stays
+// POST /api/auth/signup collects ONLY the essentials (name, email,
+// password, phone, WhatsApp, optional alternative email) — NO billing
+// address (removed 2026-11-12: minimal-field registration; billing is
+// captured later). Signup emails a 6-digit OTP; the account stays
 // "pending" until POST /api/auth/verify-email confirms the code, then
 // the session works and the customer lands in the home app.
+//
+// Phone UX follows the GOV.UK phone pattern + Indian numbering rules:
+// users type their 10-digit mobile however they know it (spaces, 0 or
+// +91 prefix); the backend normalises to E.164 before storing.
 
 const FRIENDLY_FIELD_ERRORS: Record<string, string> = {
   required: "This field is required.",
   "invalid-name": "Enter your full name (at least 2 characters).",
-  "invalid-email": "Enter a valid email address.",
-  "invalid-phone": "Enter a valid phone number with country code (e.g. +91 98XXX XXXXX).",
-  "invalid-pincode": "Enter a valid 6-digit pincode.",
+  "invalid-email": "Enter a valid email address, like you@example.com.",
+  "invalid-phone":
+    "Enter a valid 10-digit Indian mobile number, like 98765 43210.",
+  "invalid-whatsapp":
+    "Enter a valid WhatsApp number — an Indian mobile, or an international number with its country code (e.g. +1 …).",
+  "invalid-alt-email": "Enter a valid email address, or leave this blank.",
+  "alt-email-same-as-primary": "Use a different email from your main one, or leave this blank.",
   "weak-password":
     "Use at least 8 characters with an uppercase letter, a lowercase letter, a digit and a special character.",
 };
@@ -40,24 +50,35 @@ function friendlyFieldError(code: string): string {
   return FRIENDLY_FIELD_ERRORS[code] ?? "Check this field.";
 }
 
+/** Grouped form section, matching the app's card/border language. */
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <fieldset className="space-y-4">
+      <legend className="mb-3 text-sm font-semibold tracking-wide text-ink">
+        {title}
+      </legend>
+      {children}
+    </fieldset>
+  );
+}
+
 export default function SignupPage() {
   const [step, setStep] = useState<"form" | "otp">("form");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [sameAsPhone, setSameAsPhone] = useState(false);
   const [altEmail, setAltEmail] = useState("");
-  const [billingName, setBillingName] = useState("");
-  const [addressLine1, setAddressLine1] = useState("");
-  const [addressLine2, setAddressLine2] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [pincode, setPincode] = useState("");
-  const [country, setCountry] = useState("India");
-  const [gstin, setGstin] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [banner, setBanner] = useState("");
   const [existsError, setExistsError] = useState(false);
@@ -116,14 +137,22 @@ export default function SignupPage() {
     label: string,
     value: string,
     set: (v: string) => void,
-    opts: { type?: string; autoComplete?: string; placeholder?: string; optional?: boolean } = {},
+    opts: {
+      type?: string;
+      autoComplete?: string;
+      placeholder?: string;
+      optional?: boolean;
+      hint?: string;
+      inputMode?: "tel" | "email" | "numeric" | "text";
+    } = {},
   ) {
     const err = fieldError(key);
     return (
-      <Field label={opts.optional ? `${label} (optional)` : label} error={err}>
+      <Field label={opts.optional ? `${label} (optional)` : label} error={err} hint={opts.hint}>
         <input
           type={opts.type ?? "text"}
           autoComplete={opts.autoComplete}
+          inputMode={opts.inputMode}
           placeholder={opts.placeholder}
           value={value}
           onChange={(e) => {
@@ -136,11 +165,58 @@ export default function SignupPage() {
     );
   }
 
+  /** Indian mobile field with a fixed +91 prefix treatment. */
+  function phoneField(
+    key: string,
+    label: string,
+    value: string,
+    set: (v: string) => void,
+    hint: string,
+  ) {
+    const err = fieldError(key);
+    return (
+      <Field label={label} error={err} hint={hint}>
+        <div
+          className={`${inputClass} flex items-center gap-2 p-0 focus-within:border-primary-600 focus-within:ring-2 focus-within:ring-primary-600/30 ${
+            err ? inputErrorClass : ""
+          }`}
+        >
+          <span className="select-none border-r border-line py-2 pl-3 pr-2 font-medium text-muted">
+            +91
+          </span>
+          <input
+            type="tel"
+            autoComplete="tel-national"
+            inputMode="tel"
+            placeholder="98765 43210"
+            value={value}
+            onChange={(e) => {
+              set(e.target.value);
+              clearField(key);
+            }}
+            className="w-full bg-transparent py-2 pr-3 text-sm text-ink outline-none placeholder:text-faint"
+          />
+        </div>
+      </Field>
+    );
+  }
+
   async function submit(e: FormEvent) {
     e.preventDefault();
     setErrors({});
     setBanner("");
     setExistsError(false);
+    // Client-side checks are typing feedback only — the server decides.
+    const local: Record<string, string> = {};
+    if (!name.trim()) local.full_name = FRIENDLY_FIELD_ERRORS.required;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      local.email = FRIENDLY_FIELD_ERRORS["invalid-email"];
+    }
+    if (!password) local.password = FRIENDLY_FIELD_ERRORS.required;
+    if (Object.keys(local).length > 0) {
+      setErrors(local);
+      return;
+    }
     if (password !== confirm) {
       setErrors({ confirm: "Passwords do not match." });
       return;
@@ -155,17 +231,9 @@ export default function SignupPage() {
       password,
       phone_no: phone.trim(),
       whatsapp_no: (sameAsPhone ? phone : whatsapp).trim(),
-      billing_name: billingName.trim(),
-      address_line1: addressLine1.trim(),
-      city: city.trim(),
-      state: state.trim(),
-      pincode: pincode.trim(),
-      country: country.trim() || "India",
       turnstile_token: tokenRef.current,
     };
     if (altEmail.trim()) input.alternative_email = altEmail.trim().toLowerCase();
-    if (addressLine2.trim()) input.address_line2 = addressLine2.trim();
-    if (gstin.trim()) input.gstin = gstin.trim();
 
     setBusy(true);
     try {
@@ -297,13 +365,16 @@ export default function SignupPage() {
     );
   }
 
+  const errorCount = Object.keys(errors).length;
+
   return (
     <AuthLayout>
       <h1 className="text-center font-display text-2xl font-semibold text-ink">
         Create your account
       </h1>
       <p className="mt-1 text-center text-sm text-muted">
-        Sign up to track your website order with Kumbuild.
+        Sign up to order your website and track its progress with Kumbuild.
+        It takes under a minute — we only ask for the essentials.
       </p>
 
       {existsError ? (
@@ -322,101 +393,118 @@ export default function SignupPage() {
           <ErrorBanner>{banner}</ErrorBanner>
         </div>
       ) : null}
+      {errorCount > 0 ? (
+        <div className="mt-6">
+          <ErrorBanner>
+            {errorCount === 1
+              ? "Please fix the highlighted field below."
+              : `Please fix the ${errorCount} highlighted fields below.`}
+          </ErrorBanner>
+        </div>
+      ) : null}
 
-      <form onSubmit={submit} className="mt-6 space-y-4" noValidate>
-        {textField("full_name", "Your name", name, setName, {
-          autoComplete: "name",
-          placeholder: "Ramesh Sharma",
-        })}
-        {textField("email", "Email", email, setEmail, {
-          type: "email",
-          autoComplete: "email",
-          placeholder: "you@example.com",
-        })}
-        <Field
-          label="Password"
-          hint="At least 8 characters, with an uppercase letter, a lowercase letter, a digit and a special character."
-          error={fieldError("password")}
-        >
-          <input
-            type="password"
-            autoComplete="new-password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              clearField("password");
-            }}
-            className={`${inputClass} ${fieldError("password") ? inputErrorClass : ""}`}
-          />
-        </Field>
-        <Field label="Confirm password" error={fieldError("confirm")}>
-          <input
-            type="password"
-            autoComplete="new-password"
-            placeholder="••••••••"
-            value={confirm}
-            onChange={(e) => {
-              setConfirm(e.target.value);
-              clearField("confirm");
-            }}
-            className={`${inputClass} ${fieldError("confirm") ? inputErrorClass : ""}`}
-          />
-        </Field>
-        {textField("phone_no", "Phone number", phone, setPhone, {
-          type: "tel",
-          autoComplete: "tel",
-          placeholder: "+91 98765 43210",
-        })}
-        <label className="flex items-center gap-2 text-sm text-body">
-          <input
-            type="checkbox"
-            checked={sameAsPhone}
-            onChange={(e) => setSameAsPhone(e.target.checked)}
-            className="h-4 w-4 rounded border-line"
-          />
-          WhatsApp number is the same as phone
-        </label>
-        {!sameAsPhone
-          ? textField("whatsapp_no", "WhatsApp number", whatsapp, setWhatsapp, {
-              type: "tel",
-              placeholder: "+91 98765 43210",
-            })
-          : null}
-        {textField("alternative_email", "Alternative email", altEmail, setAltEmail, {
-          type: "email",
-          autoComplete: "email",
-          placeholder: "other@example.com",
-          optional: true,
-        })}
+      <form onSubmit={submit} className="mt-6 space-y-6" noValidate>
+        <Section title="Your details">
+          {textField("full_name", "Your name", name, setName, {
+            autoComplete: "name",
+            placeholder: "Ramesh Sharma",
+          })}
+          {textField("email", "Email", email, setEmail, {
+            type: "email",
+            autoComplete: "email",
+            inputMode: "email",
+            placeholder: "you@example.com",
+            hint: "We email your verification code and order updates here.",
+          })}
+          <Field
+            label="Password"
+            hint="At least 8 characters, with an uppercase letter, a lowercase letter, a digit and a special character."
+            error={fieldError("password")}
+          >
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                autoComplete="new-password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  clearField("password");
+                }}
+                className={`${inputClass} pr-16 ${fieldError("password") ? inputErrorClass : ""}`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-pressed={showPassword}
+                className="absolute inset-y-0 right-2 px-2 text-xs font-medium text-primary-700 hover:underline"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+          </Field>
+          <Field label="Confirm password" error={fieldError("confirm")}>
+            <input
+              type={showPassword ? "text" : "password"}
+              autoComplete="new-password"
+              placeholder="••••••••"
+              value={confirm}
+              onChange={(e) => {
+                setConfirm(e.target.value);
+                clearField("confirm");
+              }}
+              className={`${inputClass} ${fieldError("confirm") ? inputErrorClass : ""}`}
+            />
+          </Field>
+        </Section>
 
-        <fieldset className="space-y-4 rounded-lg border border-line p-4">
-          <legend className="px-1 text-sm font-semibold text-ink">Billing address</legend>
-          {textField("billing_name", "Billing name", billingName, setBillingName, {
-            placeholder: "Name on the invoice",
-          })}
-          {textField("address_line1", "Address line 1", addressLine1, setAddressLine1, {
-            autoComplete: "address-line1",
-            placeholder: "House / street / area",
-          })}
-          {textField("address_line2", "Address line 2", addressLine2, setAddressLine2, {
-            autoComplete: "address-line2",
+        <Section title="Contact">
+          {phoneField(
+            "phone_no",
+            "Mobile number",
+            phone,
+            setPhone,
+            "Your 10-digit Indian mobile — for order updates and support calls.",
+          )}
+          <label className="flex items-center gap-2 text-sm text-body">
+            <input
+              type="checkbox"
+              checked={sameAsPhone}
+              onChange={(e) => {
+                setSameAsPhone(e.target.checked);
+                if (e.target.checked) clearField("whatsapp_no");
+              }}
+              className="h-4 w-4 rounded border-line"
+            />
+            WhatsApp number is the same as my mobile number
+          </label>
+          {!sameAsPhone
+            ? phoneField(
+                "whatsapp_no",
+                "WhatsApp number",
+                whatsapp,
+                setWhatsapp,
+                "We share design previews and progress on WhatsApp.",
+              )
+            : null}
+          {textField("alternative_email", "Alternative email", altEmail, setAltEmail, {
+            type: "email",
+            autoComplete: "email",
+            inputMode: "email",
+            placeholder: "other@example.com",
             optional: true,
+            hint: "A backup email, in case you lose access to your main one.",
           })}
-          {textField("city", "City", city, setCity, { autoComplete: "address-level2" })}
-          {textField("state", "State", state, setState, { autoComplete: "address-level1" })}
-          {textField("pincode", "Pincode", pincode, setPincode, {
-            autoComplete: "postal-code",
-            placeholder: "110001",
-          })}
-          {textField("country", "Country", country, setCountry, { autoComplete: "country-name" })}
-          {textField("gstin", "GSTIN", gstin, setGstin, { optional: true, placeholder: "22AAAAA0000A1Z5" })}
-        </fieldset>
+        </Section>
 
         <div ref={turnstileRef} className="flex justify-center" />
         <button type="submit" className={buttonPrimaryClass} disabled={busy}>
           {busy ? "Creating account…" : "Sign up"}
         </button>
+        <p className="text-center text-xs text-muted">
+          We&apos;ll email you a 6-digit code to verify your address — no
+          payment or billing details are needed to sign up.
+        </p>
       </form>
 
       <p className="mt-6 text-center text-sm text-muted">
