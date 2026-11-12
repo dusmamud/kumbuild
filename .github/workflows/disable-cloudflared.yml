@@ -1,0 +1,63 @@
+# One-off: stop + disable cloudflared on the VPS. The Quick Tunnel was
+# replaced by Caddy + sslip.io HTTPS on 2026-11-12 (tunnel provisioning
+# was Cloudflare-rate-limited, HTTP 429, and its URL rotated on every
+# restart). The cloudflared binary/unit stay installed — this only
+# stops the service and removes it from boot. Publishes the result as a
+# "vps-cloudflared-off" commit status.
+name: Disable cloudflared on VPS
+
+on:
+  workflow_dispatch:
+
+permissions:
+  statuses: write
+  contents: read
+
+jobs:
+  disable:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Stop and disable cloudflared
+        id: off
+        run: |
+          mkdir -p ~/.ssh && printf '%s' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/vps.key && chmod 600 ~/.ssh/vps.key
+          ssh -i ~/.ssh/vps.key -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=accept-new ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' > off-output.txt 2>&1 <<'REMOTE' || true
+          set +e
+          echo "BEFORE_ACTIVE=$(systemctl is-active cloudflared)"
+          sudo systemctl stop cloudflared
+          sudo systemctl disable cloudflared
+          sleep 2
+          echo "CFD_ACTIVE=$(systemctl is-active cloudflared)"
+          echo "CFD_ENABLED=$(systemctl is-enabled cloudflared)"
+          echo "SVC_LINE=$(systemctl is-active postgresql redis kumbuild-api caddy | tr '\n' ' ')"
+          curl -fsS http://localhost:8080/healthz && echo " HEALTHZ-OK" || echo "HEALTHZ-FAILED"
+          curl -fsS https://80-225-209-75.sslip.io/healthz && echo " HTTPS-HEALTHZ-OK" || echo "HTTPS-HEALTHZ-FAILED"
+          echo "OFF-DONE"
+          REMOTE
+          rm -f ~/.ssh/vps.key
+          cat off-output.txt
+          {
+            echo "## cloudflared disabled"
+            echo '```'
+            cat off-output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          CA=$(grep -E '^CFD_ACTIVE=' off-output.txt | tail -1 | cut -d= -f2-)
+          CE=$(grep -E '^CFD_ENABLED=' off-output.txt | tail -1 | cut -d= -f2-)
+          HZ=$(grep -q 'HEALTHZ-OK' off-output.txt && echo ok || echo FAIL)
+          HH=$(grep -q 'HTTPS-HEALTHZ-OK' off-output.txt && echo ok || echo FAIL)
+          echo "summary=cloudflared:$CA/$CE healthz:$HZ https:$HH" >> "$GITHUB_OUTPUT"
+      - name: Publish result as commit status
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUMMARY: ${{ steps.off.outputs.summary }}
+        run: |
+          STATE=success
+          case "$SUMMARY" in *FAIL*) STATE=failure;; esac
+          DESC=$(printf '%s' "$SUMMARY" | cut -c1-140)
+          PAYLOAD=$(jq -n --arg s "$STATE" --arg c "vps-cloudflared-off" --arg d "$DESC" '{state:$s, context:$c, description:$d}')
+          curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d "$PAYLOAD" >/dev/null

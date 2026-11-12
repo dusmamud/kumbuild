@@ -157,15 +157,20 @@ jobs:
             EOF
             sudo chmod 0600 /etc/kumbuild/api.env
             sudo chown kumbuild:kumbuild /etc/kumbuild/api.env
-            # (f) Quick Tunnel (dev, no custom domain): cloudflared.service
-            # in the repo already runs `cloudflared tunnel --url
-            # http://localhost:8080`. No named tunnel, no config.yml,
-            # no credentials.json, no api.kumbuild.com in dev.
+            # (f) Front door is Caddy + sslip.io HTTPS since 2026-11-12
+            # (see setup-caddy.yml): the Cloudflare Quick Tunnel was
+            # replaced because its provisioning was rate-limited (429)
+            # and its URL rotated on every restart. cloudflared stays
+            # installed but stopped + disabled — do NOT enable or
+            # restart it here. The rm below only clears stale
+            # named-tunnel config files.
             sudo rm -rf /etc/cloudflared/config.yml /etc/cloudflared/token
             # (g) Reload systemd and restart services (redis, not redis-server, on OL9).
+            # cloudflared is intentionally NOT enabled/restarted: the tunnel was
+            # replaced by Caddy + sslip.io on 2026-11-12 (see (f) above).
             sudo systemctl daemon-reload
-            sudo systemctl enable --now redis kumbuild-api cloudflared
-            sudo systemctl restart redis kumbuild-api cloudflared
+            sudo systemctl enable --now redis kumbuild-api
+            sudo systemctl restart redis kumbuild-api
             # (h) Smoke check: the API must answer its health endpoint locally.
             # On failure, print the API journal so the exact startup error
             # is in the logs instead of a bare curl error.
