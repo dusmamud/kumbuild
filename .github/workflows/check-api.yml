@@ -30,4 +30,8 @@ jobs:
             sudo journalctl -u kumbuild-api -n 15 --no-pager
             echo "--- cloudflared journal (last 15, tunnel URL) ---"
             sudo journalctl -u cloudflared -n 30 --no-pager | grep -E "trycloudflare|ERR|error" | tail -5
+            echo "--- quick tunnel URL + external healthz test ---"
+            TUN=$(sudo journalctl -u cloudflared --no-pager | grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" | tail -1)
+            echo "TUNNEL_URL=$TUN"
+            if [ -n "$TUN" ]; then curl -fsS "$TUN/healthz" && echo " TUNNEL-HEALTHZ-OK" || echo "TUNNEL-HEALTHZ-FAILED"; fi
             echo "CHECK-DONE"
