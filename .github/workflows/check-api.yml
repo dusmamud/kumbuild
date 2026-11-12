@@ -45,7 +45,7 @@ jobs:
             cat check-output.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-          TUN=$(grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" | grep -v "api\.trycloudflare\.com" check-output.txt | tail -1)
+          TUN=$(grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" check-output.txt | grep -v "api\.trycloudflare\.com" | tail -1)
           HEALTH=$(grep -q "HEALTHZ-OK" check-output.txt && echo ok || echo FAIL)
           TUNHEALTH=$(grep -q "TUNNEL-HEALTHZ-OK" check-output.txt && echo ok || echo FAIL)
           echo "tunnel_url=$TUN" >> "$GITHUB_OUTPUT"
