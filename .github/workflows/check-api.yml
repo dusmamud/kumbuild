@@ -1,0 +1,33 @@
+# One-off check of the Kumbuild API on the VPS after deploy.
+# Reports service state, healthz, journal tail, and the LENGTH only of
+# each value in /etc/kumbuild/api.env (never the values themselves).
+name: Check API on VPS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check kumbuild-api on VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          command_timeout: 5m
+          script: |
+            set +e
+            echo "--- services ---"
+            systemctl is-active postgresql redis kumbuild-api cloudflared
+            echo "--- healthz ---"
+            curl -fsS http://localhost:8080/healthz && echo " HEALTHZ-OK" || echo "HEALTHZ-FAILED"
+            echo "--- api.env value lengths (names + lengths only) ---"
+            sudo awk -F= '/^[A-Z_]+=/{print $1, "len=" length(substr($0, index($0,"=")+1))}' /etc/kumbuild/api.env
+            echo "--- kumbuild-api journal (last 15) ---"
+            sudo journalctl -u kumbuild-api -n 15 --no-pager
+            echo "--- cloudflared journal (last 15, tunnel URL) ---"
+            sudo journalctl -u cloudflared -n 30 --no-pager | grep -E "trycloudflare|ERR|error" | tail -5
+            echo "CHECK-DONE"
