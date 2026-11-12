@@ -188,3 +188,43 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--kb-faint);
 }
+
+/* Multi-step form slide (signup wizard): the incoming step slides in
+   from the right when moving forward, from the left when going back,
+   with the app's one easing curve (see --ease-out above). */
+@keyframes kb-step-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes kb-step-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.kb-step-enter-right {
+  animation: kb-step-from-right 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kb-step-enter-left {
+  animation: kb-step-from-left 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kb-step-enter-right,
+  .kb-step-enter-left {
+    animation: none;
+  }
+}
