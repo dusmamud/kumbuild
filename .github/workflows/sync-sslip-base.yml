@@ -1,0 +1,62 @@
+# One-off: sync /etc/kumbuild/api.env APP_BASE_URL from the GitHub
+# secret APP_BASE_URL (the stable sslip.io HTTPS base) and restart ONLY
+# kumbuild-api. This is the secret-based counterpart of sync-app-base.yml
+# (which instead extracts the Quick Tunnel URL from the cloudflared
+# journal — that mechanism is obsolete now that the tunnel is replaced
+# by Caddy + sslip.io). Publishes the result as a "vps-sync-sslip"
+# commit status. The APP_BASE_URL value is a public URL; api.env values
+# are still reported as name + length only.
+name: Sync APP_BASE_URL (sslip)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  statuses: write
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Sync APP_BASE_URL on VPS from secret
+        id: sync
+        run: |
+          mkdir -p ~/.ssh && printf '%s' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/vps.key && chmod 600 ~/.ssh/vps.key
+          ssh -i ~/.ssh/vps.key -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=accept-new ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' > sync-output.txt 2>&1 <<'REMOTE' || true
+          set +e
+          sudo sed -i "s|^APP_BASE_URL=.*|APP_BASE_URL=${{ secrets.APP_BASE_URL }}|" /etc/kumbuild/api.env
+          sudo systemctl restart kumbuild-api
+          sleep 3
+          echo "API_ACTIVE=$(systemctl is-active kumbuild-api)"
+          echo "CADDY_ACTIVE=$(systemctl is-active caddy)"
+          curl -fsS http://localhost:8080/healthz && echo " HEALTHZ-OK" || echo "HEALTHZ-FAILED"
+          echo "ENV_LINE=$(sudo awk -F= '/^APP_BASE_URL=/{printf "APP_BASE_URL len=%d", length(substr($0, index($0,"=")+1))}' /etc/kumbuild/api.env)"
+          echo "SYNC-DONE"
+          REMOTE
+          rm -f ~/.ssh/vps.key
+          cat sync-output.txt
+          {
+            echo "## APP_BASE_URL (sslip) sync"
+            echo '```'
+            cat sync-output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          AH=$(grep -q 'HEALTHZ-OK' sync-output.txt && echo ok || echo FAIL)
+          APIA=$(grep -E '^API_ACTIVE=' sync-output.txt | tail -1 | cut -d= -f2-)
+          ENVL=$(grep -oE 'APP_BASE_URL len=[0-9]+' sync-output.txt | tail -1)
+          echo "summary=api:$APIA health:$AH $ENVL" >> "$GITHUB_OUTPUT"
+      - name: Publish sync result as commit status
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUMMARY: ${{ steps.sync.outputs.summary }}
+        run: |
+          STATE=success
+          case "$SUMMARY" in *FAIL*) STATE=failure;; esac
+          DESC=$(printf '%s' "$SUMMARY" | cut -c1-140)
+          PAYLOAD=$(jq -n --arg s "$STATE" --arg c "vps-sync-sslip" --arg d "$DESC" '{state:$s, context:$c, description:$d}')
+          curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d "$PAYLOAD" >/dev/null
