@@ -1,11 +1,14 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
-  DEMO_ADMIN_EMAIL,
-  encodeDemoSession,
-  getSession,
-  login,
+  api,
+  ApiError,
+  cacheUser,
+  fetchSession,
   logout,
+  renderTurnstile,
+  resetTurnstile,
+  sessionForUser,
   type Session,
 } from "@kumbuild/lib";
 import { ADMIN_URL, HOME_URL, redirectForRole } from "../lib/urls";
@@ -18,30 +21,25 @@ import {
   inputErrorClass,
 } from "../components/ui";
 
-// account.kumbuild.com/login — central login (mock phase).
-// Success: role app (admin -> admin.kumbuild.com, customer ->
-// home.kumbuild.com) with the demo_session handoff. ?next= overrides the
-// role default: a relative path goes to the role app, an absolute URL is
-// honoured only if it is on admin/home.kumbuild.com.
-
-const DEMO_CUSTOMER_EMAIL = "customer@example.com";
-const DEMO_PASSWORD = "demo1234";
+// account.kumbuild.com/login — central login (REAL backend).
+// POST /api/auth/login (Go API, session cookie). Success: role app
+// (staff -> admin app, customer -> home app); the sibling apps validate
+// the same cookie themselves via /api/auth/me, so no session handoff is
+// needed. ?next= overrides the role default: a relative path goes to the
+// role app, an absolute URL is honoured only if it is on the admin/home
+// app origin.
 
 function redirectAfterLogin(session: Session, next: string | null): void {
-  const demo = encodeDemoSession(session);
   const base = session.role === "admin" ? ADMIN_URL : HOME_URL;
   if (next) {
     if (next.startsWith("/") && !next.startsWith("//")) {
-      const url = new URL(`${base}${next}`);
-      url.searchParams.set("demo_session", demo);
-      window.location.href = url.toString();
+      window.location.href = `${base}${next}`;
       return;
     }
     try {
       const url = new URL(next);
       const allowed = [new URL(ADMIN_URL).origin, new URL(HOME_URL).origin];
       if (allowed.includes(url.origin)) {
-        url.searchParams.set("demo_session", demo);
         window.location.href = url.toString();
         return;
       }
@@ -49,7 +47,7 @@ function redirectAfterLogin(session: Session, next: string | null): void {
       // Not a valid URL — fall through to the role default.
     }
   }
-  redirectForRole(session.role, demo);
+  redirectForRole(session.role);
 }
 
 export default function LoginPage() {
@@ -59,25 +57,54 @@ export default function LoginPage() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [banner, setBanner] = useState("");
+  const [busy, setBusy] = useState(false);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<number | null>(null);
+  const tokenRef = useRef("");
 
-  // Already logged in? Skip the form — go straight to the role app.
-  // Except after an explicit logout (?logged_out=1): the role apps hold
-  // their own copy of the mock session (per-origin localStorage), so
-  // clear THIS origin's stale copy and show the form instead of
-  // bouncing straight back to the app the user just left.
+  // Turnstile widget (dev: Cloudflare always-pass test site key).
+  useEffect(() => {
+    let cancelled = false;
+    if (turnstileRef.current) {
+      renderTurnstile(turnstileRef.current, (token) => {
+        tokenRef.current = token;
+      })
+        .then((id) => {
+          if (!cancelled) widgetIdRef.current = id;
+        })
+        .catch(() => {
+          // Widget failed to load — submit will surface the backend's
+          // turnstile-required error if attempted without a token.
+        });
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Already logged in? Ask the backend (/me) — skip the form and go
+  // straight to the role app. Except after an explicit logout
+  // (?logged_out=1): end the server session and show the form instead
+  // of bouncing straight back.
   useEffect(() => {
     if (searchParams.get("logged_out") === "1") {
-      logout();
+      void logout();
       const next = new URLSearchParams(searchParams);
       next.delete("logged_out");
       const qs = next.toString();
       window.history.replaceState(null, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
       return;
     }
-    const session = getSession();
-    if (session) {
-      redirectForRole(session.role, encodeDemoSession(session));
-    }
+    let live = true;
+    fetchSession().then((session) => {
+      if (live && session) {
+        redirectAfterLogin(session, searchParams.get("next"));
+      }
+    });
+    return () => {
+      live = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function clearErrors() {
@@ -86,29 +113,47 @@ export default function LoginPage() {
     setBanner("");
   }
 
-  function fillDemo(demoEmail: string) {
-    setEmail(demoEmail);
-    setPassword(DEMO_PASSWORD);
-    clearErrors();
-  }
-
-  function submit(e: FormEvent) {
+  async function submit(e: FormEvent) {
     e.preventDefault();
     clearErrors();
-    const res = login(email, password);
-    if (!res.ok) {
-      if (res.error === "invalid-email") {
-        setEmailError("Enter a valid email address.");
-      } else if (res.error === "short-password") {
-        setPasswordError("Password must be at least 6 characters.");
-      } else if (res.error === "not-found") {
-        setBanner("No account found with this email. Check the email, or sign up for a new account.");
-      } else {
-        setBanner("Wrong password. Try again, or reset it with “Forgot password?”.");
-      }
+    const normalized = email.trim().toLowerCase();
+    if (!normalized || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) {
+      setEmailError("Enter a valid email address.");
       return;
     }
-    redirectAfterLogin(res.session, searchParams.get("next"));
+    if (!password) {
+      setPasswordError("Enter your password.");
+      return;
+    }
+    if (!tokenRef.current) {
+      setBanner("Please complete the verification check, then try again.");
+      return;
+    }
+    setBusy(true);
+    try {
+      const { user } = await api.login(normalized, password, tokenRef.current);
+      cacheUser(user);
+      redirectAfterLogin(sessionForUser(user), searchParams.get("next"));
+    } catch (err) {
+      // Turnstile tokens are single-use — reset for the next attempt.
+      if (widgetIdRef.current !== null) resetTurnstile(widgetIdRef.current);
+      tokenRef.current = "";
+      if (err instanceof ApiError) {
+        if (err.status === 401) {
+          setBanner(
+            "Invalid email or password. If you just signed up, verify your email first — unverified accounts can't log in.",
+          );
+        } else if (err.fields?.password) {
+          setPasswordError(err.message);
+        } else {
+          setBanner(err.message);
+        }
+      } else {
+        setBanner("Something went wrong. Please try again.");
+      }
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -153,34 +198,11 @@ export default function LoginPage() {
             className={`${inputClass} ${passwordError ? inputErrorClass : ""}`}
           />
         </Field>
-        <button type="submit" className={buttonPrimaryClass}>
-          Log in
+        <div ref={turnstileRef} className="flex justify-center" />
+        <button type="submit" className={buttonPrimaryClass} disabled={busy}>
+          {busy ? "Logging in…" : "Log in"}
         </button>
       </form>
-
-      <div className="mt-6 rounded-lg border border-primary-100 bg-primary-50 p-3">
-        <p className="text-xs font-semibold text-primary-700">Demo accounts — mock phase</p>
-        <p className="mt-1 text-xs text-body">
-          No real password yet — any password (6+ characters) works in this mock phase. Tap one
-          to fill it in.
-        </p>
-        <div className="mt-2 flex flex-col gap-1">
-          <button
-            type="button"
-            onClick={() => fillDemo(DEMO_ADMIN_EMAIL)}
-            className="rounded-md px-2 py-1 text-left text-xs font-medium text-primary-700 hover:bg-primary-100"
-          >
-            {DEMO_ADMIN_EMAIL} — Admin (Dus Mamud)
-          </button>
-          <button
-            type="button"
-            onClick={() => fillDemo(DEMO_CUSTOMER_EMAIL)}
-            className="rounded-md px-2 py-1 text-left text-xs font-medium text-primary-700 hover:bg-primary-100"
-          >
-            {DEMO_CUSTOMER_EMAIL} — Customer (Ramesh Sharma)
-          </button>
-        </div>
-      </div>
 
       <p className="mt-6 text-center text-sm text-muted">
         <Link to="/forgot-password" className="font-medium text-primary-700 hover:underline">
