@@ -1,0 +1,61 @@
+# One-off: POST /api/auth/login contract checks against the public
+# sslip base FROM THE RUNNER (direct internet, no local egress proxy —
+# the same POSTs timed out from the Muse VM, this run decides whether
+# that hang is proxy-specific or a real backend problem). Read-only in
+# effect: all logins use a nonexistent user and must be rejected.
+# Publishes the four HTTP codes as a "vps-login-test" commit status.
+name: Check login POSTs (public)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  statuses: write
+  contents: read
+
+jobs:
+  login-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Login POST contract checks from runner
+        id: lt
+        run: |
+          BASE=https://80-225-209-75.sslip.io
+          ORIGIN=https://kumbuild-account.pages.dev
+          BODY='{"email":"nobody@example.com","password":"Whatever1!"}'
+          echo "== A: no CSRF header (expect 403 csrf) =="
+          A=$(curl -s --max-time 30 -w '\nCODE=%{http_code}' -X POST "$BASE/api/auth/login" -H "Origin: $ORIGIN" -H "Content-Type: application/json" -d "{\"email\":\"nobody@example.com\",\"password\":\"Whatever1!\",\"turnstile_token\":\"x\"}" || echo 'CODE=CURLFAIL')
+          echo "$A"
+          echo "== B: real CSRF flow — token from /csrf JSON body, cookie+header, NO turnstile token (expect 400 turnstile; proves body-token double-submit passes) =="
+          TOK=$(curl -s --max-time 30 "$BASE/api/auth/csrf" -H "Origin: $ORIGIN" | jq -r '.csrf_token // empty')
+          echo "token fetched: $([ -n "$TOK" ] && echo yes || echo no)"
+          B=$(curl -s --max-time 30 -w '\nCODE=%{http_code}' -X POST "$BASE/api/auth/login" -H "Origin: $ORIGIN" -H "Content-Type: application/json" -H "Cookie: csrf_token=$TOK" -H "X-CSRF-Token: $TOK" -d "$BODY" || echo 'CODE=CURLFAIL')
+          echo "$B"
+          echo "== C: non-allowlisted origin (expect 403) =="
+          C=$(curl -s --max-time 30 -w '\nCODE=%{http_code}' -X POST "$BASE/api/auth/login" -H "Origin: https://evil.example.com" -H "Content-Type: application/json" -H "Cookie: csrf_token=$TOK" -H "X-CSRF-Token: $TOK" -d "{\"email\":\"nobody@example.com\",\"password\":\"Whatever1!\",\"turnstile_token\":\"x\"}" || echo 'CODE=CURLFAIL')
+          echo "$C"
+          AC=$(printf '%s' "$A" | grep -oE 'CODE=[0-9A-Z]+' | tail -1 | cut -d= -f2)
+          BC=$(printf '%s' "$B" | grep -oE 'CODE=[0-9A-Z]+' | tail -1 | cut -d= -f2)
+          CC=$(printf '%s' "$C" | grep -oE 'CODE=[0-9A-Z]+' | tail -1 | cut -d= -f2)
+          {
+            echo "## Login POST checks (runner-side)"
+            echo "- A no-csrf: $AC"
+            echo "- B body-token csrf, no turnstile: $BC"
+            echo "- C evil origin: $CC"
+            echo '```'
+            echo "$A"; echo "$B"; echo "$C"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "summary=A:$AC B:$BC C:$CC" >> "$GITHUB_OUTPUT"
+      - name: Publish login test as commit status
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUMMARY: ${{ steps.lt.outputs.summary }}
+        run: |
+          DESC=$(printf '%s' "$SUMMARY" | cut -c1-140)
+          PAYLOAD=$(jq -n --arg s "success" --arg c "vps-login-test" --arg d "$DESC" '{state:$s, context:$c, description:$d}')
+          curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d "$PAYLOAD" >/dev/null
