@@ -32,9 +32,81 @@ func TestValidatePhones(t *testing.T) {
 	if !ValidateIndianPhone("+919876543210") || !ValidateIndianPhone("+916123456789") {
 		t.Fatal("valid Indian mobiles rejected")
 	}
+	// Typed forms (trunk 0, bare country code, spaces) are accepted too.
+	for _, ok := range []string{"9876543210", "09876543210", "919876543210", "+91 98765 43210", "0091-98765-43210"} {
+		if !ValidateIndianPhone(ok) {
+			t.Errorf("typed-form Indian mobile rejected: %q", ok)
+		}
+	}
 	for _, bad := range []string{"+91987654321", "+911234567890", "+915876543210", "+14155552671", "+9198765432100"} {
 		if ValidateIndianPhone(bad) {
 			t.Errorf("invalid Indian phone accepted: %q", bad)
+		}
+	}
+}
+
+func TestNormalizeIndianMobile(t *testing.T) {
+	valid := map[string]string{
+		"9876543210":        "+919876543210",
+		"98765 43210":       "+919876543210",
+		"+919876543210":     "+919876543210",
+		"+91 98765 43210":   "+919876543210",
+		"+91-98765-43210":   "+919876543210",
+		"09876543210":       "+919876543210",
+		"098765 43210":      "+919876543210",
+		"(098765) 43210":    "+919876543210",
+		"919876543210":      "+919876543210",
+		"91 98765 43210":    "+919876543210",
+		"00919876543210":    "+919876543210",
+		"0091 98765 43210":  "+919876543210",
+		"6123456789":        "+916123456789",
+		"9198765432":        "+919198765432", // 10-digit number starting with 91 is NOT a country code
+		"  +919876543210  ": "+919876543210",
+	}
+	for in, want := range valid {
+		if got, ok := NormalizeIndianMobile(in); !ok || got != want {
+			t.Errorf("NormalizeIndianMobile(%q) = %q, %v; want %q, true", in, got, ok, want)
+		}
+	}
+	invalid := []string{
+		"", "   ", "5876543210", // starts with 5
+		"1234567890",      // starts with 1
+		"987654321",       // 9 digits
+		"98765432109",     // 11 digits, no trunk 0
+		"91987654321",     // country code + 9 digits
+		"+91987654321",    // +91 + 9 digits
+		"+9198765432100",  // +91 + 11 digits
+		"0091987654321",   // 0091 + 9 digits
+		"+14155552671",    // non-Indian
+		"+91987654321a",   // letter
+		"abcdefghij",      // letters
+		"+91 58765 43210", // Indian shape, starts with 5
+		"0987654321",      // trunk 0 + 9 digits
+	}
+	for _, in := range invalid {
+		if got, ok := NormalizeIndianMobile(in); ok {
+			t.Errorf("NormalizeIndianMobile(%q) = %q, true; want invalid", in, got)
+		}
+	}
+}
+
+func TestNormalizeWhatsApp(t *testing.T) {
+	valid := map[string]string{
+		"+919876543210":   "+919876543210",
+		"+91 98765 43210": "+919876543210",
+		"09876543210":     "+919876543210",
+		"9876543210":      "+919876543210", // Indian number, bare national form
+		"+14155552671":    "+14155552671",  // non-Indian strict E.164
+		"+442071234567":   "+442071234567",
+	}
+	for in, want := range valid {
+		if got, ok := NormalizeWhatsApp(in); !ok || got != want {
+			t.Errorf("NormalizeWhatsApp(%q) = %q, %v; want %q, true", in, got, ok, want)
+		}
+	}
+	for _, bad := range []string{"", "12345", "+012345678", "+91", "5876543210", "+1 415 555 2671"} {
+		if got, ok := NormalizeWhatsApp(bad); ok {
+			t.Errorf("NormalizeWhatsApp(%q) = %q, true; want invalid", bad, got)
 		}
 	}
 }
@@ -93,6 +165,19 @@ func TestValidateSignupInputValid(t *testing.T) {
 	if errs := ValidateSignupInput(in); len(errs) != 0 {
 		t.Fatalf("signup with alt email/GSTIN rejected: %v", errs)
 	}
+	// Messy typed phone forms validate, and normalise to E.164.
+	in = validSignup()
+	in.PhoneNo = "098765 43210"
+	in.WhatsAppNo = "+91 98765 43210"
+	if errs := ValidateSignupInput(in); len(errs) != 0 {
+		t.Fatalf("signup with typed-form phones rejected: %v", errs)
+	}
+	if got := in.NormalizedPhone(); got != "+919876543210" {
+		t.Fatalf("NormalizedPhone = %q", got)
+	}
+	if got := in.NormalizedWhatsApp(); got != "+919876543210" {
+		t.Fatalf("NormalizedWhatsApp = %q", got)
+	}
 }
 
 func TestValidateSignupInputInvalid(t *testing.T) {
@@ -107,7 +192,7 @@ func TestValidateSignupInputInvalid(t *testing.T) {
 		{"missing email", func(i *SignupInput) { i.Email = "" }, "email", CodeRequired},
 		{"weak password", func(i *SignupInput) { i.Password = "weakpass" }, "password", CodeWeakPassword},
 		{"bad phone", func(i *SignupInput) { i.PhoneNo = "+14155552671" }, "phone_no", CodeInvalidPhone},
-		{"bad whatsapp", func(i *SignupInput) { i.WhatsAppNo = "9876543210" }, "whatsapp_no", CodeInvalidWhatsApp},
+		{"bad whatsapp", func(i *SignupInput) { i.WhatsAppNo = "+012345678" }, "whatsapp_no", CodeInvalidWhatsApp},
 		{"bad alt email", func(i *SignupInput) { i.AlternativeEmail = "nope" }, "alternative_email", CodeInvalidAltEmail},
 		{"alt same as primary", func(i *SignupInput) { i.AlternativeEmail = "DUS@example.com" }, "alternative_email", CodeAltEmailSameAsPrimary},
 		{"missing city", func(i *SignupInput) { i.City = "" }, "city", CodeRequired},

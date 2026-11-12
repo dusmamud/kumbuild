@@ -13,9 +13,11 @@ import (
 	"github.com/google/uuid"
 )
 
-// userFieldsRequest is the §2 field set collected at signup and at admin
-// user-create. Role is forced by the server (never trusted from a signup
-// body); turnstile_token only applies to signup.
+// userFieldsRequest is the §2 field set shared by signup and admin
+// user-create. The billing fields are honoured ONLY at admin
+// create-customer; public signup ignores them entirely (no billing is
+// collected at signup). Role is forced by the server (never trusted
+// from a signup body); turnstile_token only applies to signup.
 type userFieldsRequest struct {
 	FullName         string `json:"full_name"`
 	Email            string `json:"email"`
@@ -93,12 +95,12 @@ func validateStaffInput(in auth.SignupInput) map[string]string {
 	}
 	if strings.TrimSpace(in.PhoneNo) == "" {
 		errs["phone_no"] = auth.CodeRequired
-	} else if !auth.ValidateIndianPhone(in.PhoneNo) {
+	} else if _, ok := auth.NormalizeIndianMobile(in.PhoneNo); !ok {
 		errs["phone_no"] = auth.CodeInvalidPhone
 	}
 	if strings.TrimSpace(in.WhatsAppNo) == "" {
 		errs["whatsapp_no"] = auth.CodeRequired
-	} else if !auth.ValidateE164(in.WhatsAppNo) {
+	} else if _, ok := auth.NormalizeWhatsApp(in.WhatsAppNo); !ok {
 		errs["whatsapp_no"] = auth.CodeInvalidWhatsApp
 	}
 	if alt := strings.TrimSpace(in.AlternativeEmail); alt != "" {
@@ -223,10 +225,12 @@ func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	// Staff have no password until they accept the invite (empty hash;
 	// login is impossible while status is invited anyway).
 	u := &store.User{
-		FullName:   strings.TrimSpace(req.FullName),
-		Email:      strings.TrimSpace(req.Email),
-		PhoneNo:    strings.TrimSpace(req.PhoneNo),
-		WhatsAppNo: strings.TrimSpace(req.WhatsAppNo),
+		FullName: strings.TrimSpace(req.FullName),
+		Email:    strings.TrimSpace(req.Email),
+		// Contact numbers are stored ONLY in E.164 form (normalised
+		// from whatever shape was typed; validation already passed).
+		PhoneNo:    in.NormalizedPhone(),
+		WhatsAppNo: in.NormalizedWhatsApp(),
 		Role:       role,
 		Status:     store.StatusPending,
 	}

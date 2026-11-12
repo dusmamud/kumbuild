@@ -304,13 +304,12 @@ func sessionCookie(rr *httptest.ResponseRecorder) *http.Cookie {
 	return nil
 }
 
-// signupBody builds a valid customer signup body.
+// signupBody builds a valid customer signup body. Signup collects NO
+// billing address (removed 2026-11-12), so none is sent.
 func signupBody(email, password string) map[string]any {
 	return map[string]any{
 		"full_name": "Test Customer", "email": email, "password": password,
 		"phone_no": "+919876543210", "whatsapp_no": "+919876543210",
-		"billing_name": "Test Customer", "address_line1": "1 Test Street",
-		"city": "Mumbai", "state": "Maharashtra", "pincode": "400001",
 		"turnstile_token": "test-token",
 	}
 }
@@ -485,13 +484,34 @@ func TestSignupHappyPath(t *testing.T) {
 	if len(mails) != 1 || mails[0].To != email {
 		t.Fatalf("expected 1 OTP mail to %s, got %+v", email, mails)
 	}
-	// Billing address stored.
-	b, err := e.billing.GetByUserID(context.Background(), u.ID)
-	if err != nil {
-		t.Fatalf("billing lookup: %v", err)
+	// Signup stores NO billing address.
+	if _, err := e.billing.GetByUserID(context.Background(), u.ID); err == nil {
+		t.Fatal("signup must not store a billing address")
 	}
-	if b.Pincode != "400001" || b.City != "Mumbai" || b.Country != "India" {
-		t.Fatalf("billing: %+v", b)
+}
+
+func TestSignupNormalizesPhonesAndIgnoresBilling(t *testing.T) {
+	e := newTestEnv(t)
+	email := e.uniqueEmail()
+	b := signupBody(email, e.testPassword())
+	// Messy typed phone forms must be normalised to E.164 for storage.
+	b["phone_no"] = "098765 43210"
+	b["whatsapp_no"] = "+91 98765 43210"
+	// Stray billing fields — even INVALID ones — are ignored at signup:
+	// not validated, not stored.
+	b["billing_name"] = "Ignored Person"
+	b["address_line1"] = "9 Nowhere Lane"
+	b["city"] = "Nowhere"
+	b["state"] = "Noland"
+	b["pincode"] = "123" // would be invalid-pincode if billing were validated
+	rr := e.do(t, "POST", "/api/auth/signup", b, reqOptions{csrf: true, ip: e.uniqueIP()})
+	mustStatus(t, rr, http.StatusCreated)
+	u := decodeUser(t, rr)
+	if u.PhoneNo != "+919876543210" || u.WhatsAppNo != "+919876543210" {
+		t.Fatalf("phones not normalised: %+v", u)
+	}
+	if _, err := e.billing.GetByUserID(context.Background(), u.ID); err == nil {
+		t.Fatal("signup must not store a billing address")
 	}
 }
 
@@ -504,13 +524,14 @@ func TestSignupValidationErrors(t *testing.T) {
 	if decodeErr(t, rr).Fields["email"] == "" {
 		t.Fatalf("expected email field error: %s", rr.Body.String())
 	}
-	// Bad pincode.
+	// Bad phone (billing fields are NOT part of signup validation
+	// anymore; the phone validator is the format gate here).
 	b = signupBody(e.uniqueEmail(), e.testPassword())
-	b["pincode"] = "123"
+	b["phone_no"] = "12345"
 	rr = e.do(t, "POST", "/api/auth/signup", b, reqOptions{csrf: true, ip: e.uniqueIP()})
 	mustErrCode(t, rr, http.StatusBadRequest, "validation-failed")
-	if decodeErr(t, rr).Fields["pincode"] != "invalid-pincode" {
-		t.Fatalf("expected invalid-pincode: %s", rr.Body.String())
+	if decodeErr(t, rr).Fields["phone_no"] != "invalid-phone" {
+		t.Fatalf("expected invalid-phone: %s", rr.Body.String())
 	}
 	// Weak password.
 	b = signupBody(e.uniqueEmail(), "weak")
@@ -519,14 +540,11 @@ func TestSignupValidationErrors(t *testing.T) {
 	if decodeErr(t, rr).Fields["password"] != "weak-password" {
 		t.Fatalf("expected weak-password: %s", rr.Body.String())
 	}
-	// Missing billing name.
+	// No billing fields at all: signup must NOT fail on billing
+	// (billing is not collected at signup anymore).
 	b = signupBody(e.uniqueEmail(), e.testPassword())
-	delete(b, "billing_name")
 	rr = e.do(t, "POST", "/api/auth/signup", b, reqOptions{csrf: true, ip: e.uniqueIP()})
-	mustErrCode(t, rr, http.StatusBadRequest, "validation-failed")
-	if decodeErr(t, rr).Fields["billing_name"] == "" {
-		t.Fatalf("expected billing_name field error: %s", rr.Body.String())
-	}
+	mustStatus(t, rr, http.StatusCreated)
 }
 
 func TestSignupDuplicateEmail409(t *testing.T) {
@@ -794,7 +812,15 @@ func TestMeUnauthorized(t *testing.T) {
 
 func TestMeIncludesBilling(t *testing.T) {
 	e := newTestEnv(t)
-	_, c := e.activeCustomer(t)
+	u, c := e.activeCustomer(t)
+	// Signup no longer collects billing, so seed the address the way
+	// it arrives now (admin/profile capture) — directly via the store.
+	if err := e.billing.Upsert(context.Background(), &store.BillingAddress{
+		UserID: u.ID, BillingName: "Test Customer", AddressLine1: "1 Test Street",
+		City: "Mumbai", State: "Maharashtra", Pincode: "400001", Country: "India",
+	}); err != nil {
+		t.Fatalf("seed billing: %v", err)
+	}
 	rr := e.do(t, "GET", "/api/auth/me", nil, reqOptions{cookies: []*http.Cookie{c}})
 	mustStatus(t, rr, http.StatusOK)
 	var resp struct {
@@ -1026,6 +1052,15 @@ func TestAdminCreateUser(t *testing.T) {
 	mails = e.mailer.mails()
 	if len(mails) != before+1 || mails[len(mails)-1].To != custEmail {
 		t.Fatalf("expected OTP mail to customer: %+v", mails)
+	}
+	// Admin-created customers DO keep their billing address (only the
+	// public signup stopped collecting it).
+	ab, err := e.billing.GetByUserID(context.Background(), u.ID)
+	if err != nil {
+		t.Fatalf("admin-created customer billing lookup: %v", err)
+	}
+	if ab.Pincode != "411001" || ab.City != "Pune" {
+		t.Fatalf("admin-created customer billing: %+v", ab)
 	}
 
 	// admin creating staff: 403.

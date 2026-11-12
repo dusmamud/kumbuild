@@ -54,8 +54,13 @@ func (h *Handler) Signup(w http.ResponseWriter, r *http.Request) {
 	}) {
 		return
 	}
-	// Billing is REQUIRED for customer signup.
-	if errs := auth.ValidateSignupInput(req.toSignupInput(true)); len(errs) > 0 {
+	// Public signup collects NO billing address (removed 2026-11-12 —
+	// minimal-field registration; billing is captured later, e.g. by an
+	// admin or a profile flow). Any billing fields in the payload are
+	// IGNORED: not validated, not stored (HasBilling=false, nil billing
+	// to store.Create below).
+	in := req.toSignupInput(false)
+	if errs := auth.ValidateSignupInput(in); len(errs) > 0 {
 		writeValidationError(w, errs)
 		return
 	}
@@ -78,18 +83,21 @@ func (h *Handler) Signup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	u := &store.User{
-		FullName:   strings.TrimSpace(req.FullName),
-		Email:      strings.TrimSpace(req.Email),
-		PhoneNo:    strings.TrimSpace(req.PhoneNo),
-		WhatsAppNo: strings.TrimSpace(req.WhatsAppNo),
+		FullName: strings.TrimSpace(req.FullName),
+		Email:    strings.TrimSpace(req.Email),
+		// Contact numbers are stored ONLY in E.164 form (normalised
+		// from whatever shape was typed; validation already passed).
+		PhoneNo:    in.NormalizedPhone(),
+		WhatsAppNo: in.NormalizedWhatsApp(),
 		Role:       store.RoleCustomer,
 		Status:     store.StatusPending,
 	}
 	if alt := strings.TrimSpace(req.AlternativeEmail); alt != "" {
 		u.AlternativeEmail = &alt
 	}
-	// User + billing address in one transaction (store.Create).
-	if err := h.Users.Create(r.Context(), u, hash, req.toBilling()); err != nil {
+	// No billing address at signup: nil billing (store.Create handles
+	// it — staff/seed users are created the same way).
+	if err := h.Users.Create(r.Context(), u, hash, nil); err != nil {
 		if isUniqueViolation(err) {
 			middleware.WriteError(w, http.StatusConflict, "exists", "an account with this email already exists")
 			return
