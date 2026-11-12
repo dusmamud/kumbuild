@@ -247,7 +247,11 @@ function Progress({ current }: { current: number }) {
                 }`}
                 aria-current={active ? "step" : undefined}
               >
-                {done ? "✓" : i + 1}
+                {done ? (
+                  "✓"
+                ) : active ? (
+                  <span className="h-2 w-2 rounded-full bg-white" aria-hidden />
+                ) : null}
               </span>
               <span
                 className={`hidden truncate text-xs font-medium min-[420px]:block ${
@@ -270,9 +274,7 @@ function Progress({ current }: { current: number }) {
         />
       </div>
       <p className="mt-2 text-xs font-medium text-muted" role="status">
-        {current < 3
-          ? `Step ${current + 1} of 3 — ${STEP_HEADINGS[current]}`
-          : "Final step — Verify your email"}
+        {current < 3 ? STEP_HEADINGS[current] : "Final step — Verify your email"}
       </p>
     </div>
   );
