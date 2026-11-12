@@ -1,37 +1,64 @@
 # One-off check of the Kumbuild API on the VPS after deploy.
-# Reports service state, healthz, journal tail, and the LENGTH only of
-# each value in /etc/kumbuild/api.env (never the values themselves).
+# Runs plain ssh from the runner (same pattern as ssh-diagnose.yml),
+# captures the remote output, and publishes the key facts as a commit
+# status (context "vps-check") on the checked commit — the status
+# description carries the current Quick Tunnel URL, which changes on
+# every cloudflared restart. Secret VALUES are never printed: api.env
+# is reported as name + length only.
 name: Check API on VPS
 
 on:
   workflow_dispatch:
+
+permissions:
+  statuses: write
+  contents: read
 
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - name: Check kumbuild-api on VPS
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_PORT }}
-          command_timeout: 5m
-          script: |
-            set +e
-            echo "--- services ---"
-            systemctl is-active postgresql redis kumbuild-api cloudflared
-            echo "--- healthz ---"
-            curl -fsS http://localhost:8080/healthz && echo " HEALTHZ-OK" || echo "HEALTHZ-FAILED"
-            echo "--- api.env value lengths (names + lengths only) ---"
-            sudo awk -F= '/^[A-Z_]+=/{print $1, "len=" length(substr($0, index($0,"=")+1))}' /etc/kumbuild/api.env
-            echo "--- kumbuild-api journal (last 15) ---"
-            sudo journalctl -u kumbuild-api -n 15 --no-pager
-            echo "--- cloudflared journal (last 15, tunnel URL) ---"
-            sudo journalctl -u cloudflared -n 30 --no-pager | grep -E "trycloudflare|ERR|error" | tail -5
-            echo "--- quick tunnel URL + external healthz test ---"
-            TUN=$(sudo journalctl -u cloudflared --no-pager | grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" | tail -1)
-            echo "TUNNEL_URL=$TUN"
-            if [ -n "$TUN" ]; then curl -fsS "$TUN/healthz" && echo " TUNNEL-HEALTHZ-OK" || echo "TUNNEL-HEALTHZ-FAILED"; fi
-            echo "CHECK-DONE"
+        id: check
+        run: |
+          mkdir -p ~/.ssh && printf '%s' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/vps.key && chmod 600 ~/.ssh/vps.key
+          ssh -i ~/.ssh/vps.key -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=accept-new ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' > check-output.txt 2>&1 <<'REMOTE' || true
+          set +e
+          echo "--- services (postgresql redis kumbuild-api cloudflared) ---"
+          systemctl is-active postgresql redis kumbuild-api cloudflared
+          echo "--- healthz ---"
+          curl -fsS http://localhost:8080/healthz && echo " HEALTHZ-OK" || echo "HEALTHZ-FAILED"
+          echo "--- api.env value lengths (names + lengths only) ---"
+          sudo awk -F= '/^[A-Z_]+=/{print $1, "len=" length(substr($0, index($0,"=")+1))}' /etc/kumbuild/api.env
+          echo "--- kumbuild-api journal (last 8) ---"
+          sudo journalctl -u kumbuild-api -n 8 --no-pager
+          TUN=$(sudo journalctl -u cloudflared --no-pager | grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" | tail -1)
+          echo "TUNNEL_URL=$TUN"
+          if [ -n "$TUN" ]; then curl -fsS "$TUN/healthz" && echo " TUNNEL-HEALTHZ-OK" || echo "TUNNEL-HEALTHZ-FAILED"; fi
+          echo "CHECK-DONE"
+          REMOTE
+          rm -f ~/.ssh/vps.key
+          cat check-output.txt
+          {
+            echo "## VPS check"
+            echo '```'
+            cat check-output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          TUN=$(grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" check-output.txt | tail -1)
+          HEALTH=$(grep -q "HEALTHZ-OK" check-output.txt && echo ok || echo FAIL)
+          TUNHEALTH=$(grep -q "TUNNEL-HEALTHZ-OK" check-output.txt && echo ok || echo FAIL)
+          echo "tunnel_url=$TUN" >> "$GITHUB_OUTPUT"
+          echo "summary=health:$HEALTH tunnel-health:$TUNHEALTH $TUN" >> "$GITHUB_OUTPUT"
+      - name: Publish check result as commit status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUMMARY: ${{ steps.check.outputs.summary }}
+        run: |
+          STATE=success
+          case "$SUMMARY" in *FAIL*) STATE=failure;; esac
+          DESC=$(printf '%s' "$SUMMARY" | cut -c1-140)
+          curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d "{\"state\":\"$STATE\",\"context\":\"vps-check\",\"description\":\"$DESC\"}"
