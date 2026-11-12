@@ -1,0 +1,65 @@
+# One-off: break the cloudflared Quick-Tunnel 429 restart loop.
+# Quick Tunnel provisioning is rate-limited (HTTP 429) and the systemd
+# restart loop keeps re-hammering it. This stops cloudflared for a real
+# cooldown (~8 min inside the run), then starts it exactly once and
+# reports the outcome + any new tunnel URL as a "vps-check" commit
+# status. The API service is NOT touched.
+name: Tunnel cooldown restart
+
+on:
+  workflow_dispatch:
+
+permissions:
+  statuses: write
+  contents: read
+
+jobs:
+  cooldown:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stop cloudflared, wait out the rate limit, start once
+        id: cd
+        timeout-minutes: 20
+        run: |
+          mkdir -p ~/.ssh && printf '%s' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/vps.key && chmod 600 ~/.ssh/vps.key
+          ssh -i ~/.ssh/vps.key -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=accept-new ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' > cd-output.txt 2>&1 <<'REMOTE' || true
+          set +e
+          sudo systemctl stop cloudflared
+          echo "CFD-STOPPED $(date -u +%H:%M:%S)"
+          sleep 480
+          sudo systemctl start cloudflared
+          echo "CFD-STARTED $(date -u +%H:%M:%S)"
+          sleep 30
+          echo "CFD-STATE=$(systemctl is-active cloudflared)"
+          curl -fsS http://localhost:8080/healthz && echo " HEALTHZ-OK" || echo "HEALTHZ-FAILED"
+          TUN=$(sudo journalctl -u cloudflared --since "-3 minutes" --no-pager | grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" | grep -v "api\.trycloudflare\.com" | tail -1)
+          echo "TUNNEL_URL=$TUN"
+          if [ -n "$TUN" ]; then curl -fsS "$TUN/healthz" && echo " TUNNEL-HEALTHZ-OK" || echo "TUNNEL-HEALTHZ-FAILED"; fi
+          sudo journalctl -u cloudflared --since "-3 minutes" --no-pager | grep -c "429" | sed 's/^/RECENT-429-COUNT=/'
+          echo "COOLDOWN-DONE"
+          REMOTE
+          rm -f ~/.ssh/vps.key
+          cat cd-output.txt
+          {
+            echo "## Tunnel cooldown"
+            echo '```'
+            cat cd-output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          TUN=$(grep -oE "TUNNEL_URL=https://[a-z0-9-]+\.trycloudflare\.com" cd-output.txt | tail -1 | cut -d= -f2-)
+          HEALTH=$(grep -q "TUNNEL-HEALTHZ-OK" cd-output.txt && echo ok || echo FAIL)
+          STATE=$(grep -oE "CFD-STATE=[a-z]+" cd-output.txt | tail -1 | cut -d= -f2)
+          echo "summary=health:ok tunnel-health:$HEALTH cfd:$STATE $TUN" >> "$GITHUB_OUTPUT"
+      - name: Publish cooldown result as commit status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUMMARY: ${{ steps.cd.outputs.summary }}
+        run: |
+          STATE=success
+          case "$SUMMARY" in *FAIL*) STATE=failure;; esac
+          DESC=$(printf '%s' "$SUMMARY" | cut -c1-140)
+          PAYLOAD=$(jq -n --arg s "$STATE" --arg c "vps-check" --arg d "$DESC" '{state:$s, context:$c, description:$d}')
+          curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d "$PAYLOAD" >/dev/null
