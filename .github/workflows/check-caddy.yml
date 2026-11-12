@@ -1,0 +1,75 @@
+# One-off read-only diagnostics for the Caddy front door: caddy state,
+# listeners, latest cert/error journal lines, firewall state (via ssh),
+# plus a runner-side public curl of the sslip hostname (this VM and the
+# VPS itself cannot authoritatively test the public path). Publishes
+# compact markers as commit statuses (vps-caddy-diag / vps-caddy-err).
+name: Check Caddy on VPS
+
+on:
+  workflow_dispatch:
+
+permissions:
+  statuses: write
+  contents: read
+
+jobs:
+  check-caddy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Public curl from runner
+        id: pub
+        run: |
+          HC=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://80-225-209-75.sslip.io/healthz || echo 000)
+          HB=$(curl -s --max-time 20 https://80-225-209-75.sslip.io/healthz || true)
+          PC=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 http://80-225-209-75.sslip.io/healthz || echo 000)
+          echo "pub=pub-https:$HC pub-http:$PC body:$HB" >> "$GITHUB_OUTPUT"
+      - name: VPS-side caddy diagnostics
+        id: diag
+        run: |
+          mkdir -p ~/.ssh && printf '%s' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/vps.key && chmod 600 ~/.ssh/vps.key
+          ssh -i ~/.ssh/vps.key -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=accept-new ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' > diag-output.txt 2>&1 <<'REMOTE' || true
+          set +e
+          echo "CADDY_ACTIVE=$(systemctl is-active caddy)"
+          echo "LISTEN=$(sudo ss -tlnp 2>/dev/null | grep -E ':(80|443)[[:space:]]' | grep -c caddy)"
+          echo "FW_STATE=$(sudo firewall-cmd --state 2>/dev/null || echo none)"
+          echo "FW_SERVICES=$(sudo firewall-cmd --permanent --list-services 2>/dev/null)"
+          echo "CERT_OK=$(sudo journalctl -u caddy --no-pager | grep -ac 'certificate obtained')"
+          echo "CERT_LINE=$(sudo journalctl -u caddy --no-pager | grep -a 'certificate obtained' | tail -1 | cut -c1-200)"
+          echo "ERR_LINE=$(sudo journalctl -u caddy --no-pager | grep -a '"level":"error"' | tail -1 | cut -c1-220)"
+          echo "--- caddy journal (last 12) ---"
+          sudo journalctl -u caddy -n 12 --no-pager | tail -12 | sed 's/^/J /'
+          echo "DIAG-DONE"
+          REMOTE
+          rm -f ~/.ssh/vps.key
+          cat diag-output.txt
+          {
+            echo "## Caddy diagnostics"
+            echo '```'
+            cat diag-output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          CA=$(grep -E '^CADDY_ACTIVE=' diag-output.txt | tail -1 | cut -d= -f2-)
+          LI=$(grep -E '^LISTEN=' diag-output.txt | tail -1 | cut -d= -f2-)
+          CO=$(grep -E '^CERT_OK=' diag-output.txt | tail -1 | cut -d= -f2-)
+          EL=$(grep -E '^ERR_LINE=' diag-output.txt | tail -1 | cut -d= -f2-)
+          echo "summary=caddy:$CA listeners:$LI cert-obtained:$CO" >> "$GITHUB_OUTPUT"
+          echo "errline=$EL" >> "$GITHUB_OUTPUT"
+      - name: Publish diagnostics as commit statuses
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUB: ${{ steps.pub.outputs.pub }}
+          SUMMARY: ${{ steps.diag.outputs.summary }}
+          ERRLINE: ${{ steps.diag.outputs.errline }}
+        run: |
+          post_status() {
+            local context="$1" state="$2" desc="$3"
+            DESC=$(printf '%s' "$desc" | cut -c1-140)
+            PAYLOAD=$(jq -n --arg s "$state" --arg c "$context" --arg d "$DESC" '{state:$s, context:$c, description:$d}')
+            curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+              -d "$PAYLOAD" >/dev/null
+          }
+          post_status "vps-caddy-diag" "success" "$PUB $SUMMARY"
+          post_status "vps-caddy-err" "success" "$ERRLINE"
