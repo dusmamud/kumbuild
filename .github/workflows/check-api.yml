@@ -35,6 +35,9 @@ jobs:
           TUN=$(sudo journalctl -u cloudflared --no-pager | grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" | grep -v "api\.trycloudflare\.com" | tail -1)
           echo "TUNNEL_URL=$TUN"
           if [ -n "$TUN" ]; then curl -fsS "$TUN/healthz" && echo " TUNNEL-HEALTHZ-OK" || echo "TUNNEL-HEALTHZ-FAILED"; fi
+          echo "SVC_LINE=$(systemctl is-active postgresql redis kumbuild-api cloudflared | tr '\n' ' ')"
+          echo "ENV_LINE=$(sudo awk -F= '/^(ALLOWED_ORIGINS|APP_BASE_URL)=/{printf "%s len=%d ", $1, length(substr($0, index($0,"=")+1))}' /etc/kumbuild/api.env)"
+          echo "CFD_LINE=$(sudo journalctl -u cloudflared -n 60 --no-pager | grep -aE 'ERR|error|Registered|failed|tunnel' | tail -1 | cut -c1-200)"
           echo "CHECK-DONE"
           REMOTE
           rm -f ~/.ssh/vps.key
@@ -50,15 +53,28 @@ jobs:
           TUNHEALTH=$(grep -q "TUNNEL-HEALTHZ-OK" check-output.txt && echo ok || echo FAIL)
           echo "tunnel_url=$TUN" >> "$GITHUB_OUTPUT"
           echo "summary=health:$HEALTH tunnel-health:$TUNHEALTH $TUN" >> "$GITHUB_OUTPUT"
+          echo "svc=$(grep -E '^SVC_LINE=' check-output.txt | tail -1 | cut -d= -f2-)" >> "$GITHUB_OUTPUT"
+          echo "envline=$(grep -E '^ENV_LINE=' check-output.txt | tail -1 | cut -d= -f2-)" >> "$GITHUB_OUTPUT"
+          echo "cfdline=$(grep -E '^CFD_LINE=' check-output.txt | tail -1 | cut -d= -f2-)" >> "$GITHUB_OUTPUT"
       - name: Publish check result as commit status
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
           SUMMARY: ${{ steps.check.outputs.summary }}
+          SVC: ${{ steps.check.outputs.svc }}
+          ENVLINE: ${{ steps.check.outputs.envline }}
+          CFDLINE: ${{ steps.check.outputs.cfdline }}
         run: |
+          post_status() {
+            local context="$1" state="$2" desc="$3"
+            DESC=$(printf '%s' "$desc" | cut -c1-140)
+            PAYLOAD=$(jq -n --arg s "$state" --arg c "$context" --arg d "$DESC" '{state:$s, context:$c, description:$d}')
+            curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+              -d "$PAYLOAD" >/dev/null
+          }
           STATE=success
           case "$SUMMARY" in *FAIL*) STATE=failure;; esac
-          DESC=$(printf '%s' "$SUMMARY" | cut -c1-140)
-          curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
-            -d "{\"state\":\"$STATE\",\"context\":\"vps-check\",\"description\":\"$DESC\"}"
+          post_status "vps-check" "$STATE" "$SUMMARY"
+          post_status "vps-services" "success" "svc: $SVC | $ENVLINE"
+          post_status "vps-cloudflared" "success" "$CFDLINE"
