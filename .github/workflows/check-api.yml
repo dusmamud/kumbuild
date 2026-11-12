@@ -32,7 +32,7 @@ jobs:
           sudo awk -F= '/^[A-Z_]+=/{print $1, "len=" length(substr($0, index($0,"=")+1))}' /etc/kumbuild/api.env
           echo "--- kumbuild-api journal (last 8) ---"
           sudo journalctl -u kumbuild-api -n 8 --no-pager
-          TUN=$(sudo journalctl -u cloudflared --no-pager | grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" | tail -1)
+          TUN=$(sudo journalctl -u cloudflared --no-pager | grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" | grep -v "api\.trycloudflare\.com" | tail -1)
           echo "TUNNEL_URL=$TUN"
           if [ -n "$TUN" ]; then curl -fsS "$TUN/healthz" && echo " TUNNEL-HEALTHZ-OK" || echo "TUNNEL-HEALTHZ-FAILED"; fi
           echo "CHECK-DONE"
@@ -45,7 +45,7 @@ jobs:
             cat check-output.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-          TUN=$(grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" check-output.txt | tail -1)
+          TUN=$(grep -oE "https://[a-z0-9-]+\.trycloudflare\.com" | grep -v "api\.trycloudflare\.com" check-output.txt | tail -1)
           HEALTH=$(grep -q "HEALTHZ-OK" check-output.txt && echo ok || echo FAIL)
           TUNHEALTH=$(grep -q "TUNNEL-HEALTHZ-OK" check-output.txt && echo ok || echo FAIL)
           echo "tunnel_url=$TUN" >> "$GITHUB_OUTPUT"
