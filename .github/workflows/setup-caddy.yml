@@ -1,0 +1,145 @@
+# One-off: install Caddy on the VPS as the stable HTTPS front door for
+# the Kumbuild API — hostname 80-225-209-75.sslip.io (resolves to the
+# VPS public IP), Let's Encrypt cert, reverse_proxy to 127.0.0.1:8080.
+# Replaces the Cloudflare Quick Tunnel (rate-limited, HTTP 429).
+# Runs plain ssh from the runner (same pattern as check-api.yml),
+# captures remote output, and publishes compact marker lines as commit
+# statuses (contexts vps-caddy / vps-caddy-journal) — no secret values
+# are ever printed.
+name: Setup Caddy on VPS
+
+on:
+  workflow_dispatch:
+
+permissions:
+  statuses: write
+  contents: read
+
+jobs:
+  setup-caddy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Install and configure Caddy on VPS
+        id: caddy
+        run: |
+          mkdir -p ~/.ssh && printf '%s' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/vps.key && chmod 600 ~/.ssh/vps.key
+          ssh -i ~/.ssh/vps.key -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=20 -o StrictHostKeyChecking=accept-new ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' > caddy-output.txt 2>&1 <<'REMOTE' || true
+          set +e
+          echo "--- OS / firewall report ---"
+          cat /etc/os-release | head -2
+          echo "FIREWALLD_ACTIVE=$(systemctl is-active firewalld 2>/dev/null)"
+          sudo firewall-cmd --permanent --list-services 2>/dev/null | sed 's/^/FW_SERVICES=/'
+          sudo iptables -L INPUT -n 2>/dev/null | head -8 | sed 's/^/IPT /'
+          free -h | head -2
+
+          echo "--- Install Caddy (official GitHub release tarball, no dnf) ---"
+          if command -v caddy >/dev/null 2>&1; then
+            echo "CADDY_PRESENT=$(caddy version 2>/dev/null | head -1)"
+          else
+            cd /tmp
+            curl -fL --retry 3 --connect-timeout 15 --max-time 240 -o caddy.tar.gz https://github.com/caddyserver/caddy/releases/download/v2.8.4/caddy_2.8.4_linux_amd64.tar.gz
+            tar -xzf caddy.tar.gz caddy
+            sudo install -m 0755 caddy /usr/bin/caddy
+            rm -f caddy caddy.tar.gz
+            echo "CADDY_INSTALLED=$(caddy version 2>/dev/null | head -1)"
+          fi
+          id caddy >/dev/null 2>&1 || sudo useradd --system --home-dir /var/lib/caddy --create-home --shell /usr/sbin/nologin caddy
+          sudo mkdir -p /etc/caddy /var/lib/caddy /var/log/caddy
+          sudo chown caddy:caddy /var/lib/caddy /var/log/caddy
+
+          echo "--- Host firewall: open http/https if firewalld active ---"
+          if [ "$(systemctl is-active firewalld 2>/dev/null)" = "active" ]; then
+            sudo firewall-cmd --permanent --add-service=http
+            sudo firewall-cmd --permanent --add-service=https
+            sudo firewall-cmd --reload
+            echo "FW_AFTER=$(sudo firewall-cmd --permanent --list-services 2>/dev/null)"
+          else
+            echo "FW_AFTER=firewalld-not-active"
+          fi
+
+          echo "--- Caddyfile ---"
+          sudo tee /etc/caddy/Caddyfile >/dev/null <<'CADDYFILE'
+          80-225-209-75.sslip.io {
+          	encode gzip
+          	reverse_proxy 127.0.0.1:8080
+          }
+          CADDYFILE
+          sudo chown caddy:caddy /etc/caddy/Caddyfile
+          /usr/bin/caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile && echo "CADDYFILE_VALID=yes" || echo "CADDYFILE_VALID=no"
+
+          echo "--- systemd unit ---"
+          sudo tee /etc/systemd/system/caddy.service >/dev/null <<'UNIT'
+          [Unit]
+          Description=Caddy
+          Documentation=https://caddyserver.com/docs/
+          After=network.target network-online.target
+          Requires=network-online.target
+          [Service]
+          Type=notify
+          User=caddy
+          Group=caddy
+          Environment=HOME=/var/lib/caddy XDG_DATA_HOME=/var/lib/caddy XDG_CONFIG_HOME=/var/lib/caddy
+          ExecStart=/usr/bin/caddy run --environ --config /etc/caddy/Caddyfile
+          ExecReload=/usr/bin/caddy reload --config /etc/caddy/Caddyfile --force
+          TimeoutStartSec=60
+          TimeoutStopSec=5s
+          LimitNOFILE=1048576
+          PrivateTmp=true
+          ProtectSystem=full
+          AmbientCapabilities=CAP_NET_BIND_SERVICE
+          [Install]
+          WantedBy=multi-user.target
+          UNIT
+          sudo systemctl daemon-reload
+          sudo systemctl enable caddy
+          sudo systemctl restart caddy
+
+          echo "--- Wait / verify (up to ~3 min) ---"
+          curl -fsS http://127.0.0.1:8080/healthz && echo " API-HEALTHZ-OK" || echo "API-HEALTHZ-FAILED"
+          for i in 1 2 3 4 5 6; do
+            sleep 25
+            ACT=$(systemctl is-active caddy 2>/dev/null)
+            CODE=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 https://80-225-209-75.sslip.io/healthz 2>/dev/null)
+            echo "TRY$i caddy=$ACT https_code=$CODE"
+            if [ "$CODE" = "200" ]; then echo "HTTPS_EARLY_OK=yes"; break; fi
+          done
+          echo "CADDY_ACTIVE=$(systemctl is-active caddy 2>/dev/null)"
+          echo "--- caddy journal (last 30) ---"
+          sudo journalctl -u caddy -n 30 --no-pager | tail -30 | sed 's/^/J /'
+          echo "CERT_LINE=$(sudo journalctl -u caddy --no-pager 2>/dev/null | grep -aiE 'certificate obtained|obtain.*cert|acme|error|failed' | tail -1 | cut -c1-220)"
+          echo "CADDY-SETUP-DONE"
+          REMOTE
+          rm -f ~/.ssh/vps.key
+          cat caddy-output.txt
+          {
+            echo "## Caddy setup"
+            echo '```'
+            cat caddy-output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          CA=$(grep -E '^CADDY_ACTIVE=' caddy-output.txt | tail -1 | cut -d= -f2-)
+          AH=$(grep -q 'API-HEALTHZ-OK' caddy-output.txt && echo ok || echo FAIL)
+          EO=$(grep -q 'HTTPS_EARLY_OK=yes' caddy-output.txt && echo ok || echo pending)
+          CL=$(grep -E '^CERT_LINE=' caddy-output.txt | tail -1 | cut -d= -f2-)
+          echo "summary=caddy:$CA api:$AH https:$EO" >> "$GITHUB_OUTPUT"
+          echo "certline=$CL" >> "$GITHUB_OUTPUT"
+      - name: Publish caddy result as commit status
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUMMARY: ${{ steps.caddy.outputs.summary }}
+          CERTLINE: ${{ steps.caddy.outputs.certline }}
+        run: |
+          post_status() {
+            local context="$1" state="$2" desc="$3"
+            DESC=$(printf '%s' "$desc" | cut -c1-140)
+            PAYLOAD=$(jq -n --arg s "$state" --arg c "$context" --arg d "$DESC" '{state:$s, context:$c, description:$d}')
+            curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+              -d "$PAYLOAD" >/dev/null
+          }
+          STATE=success
+          case "$SUMMARY" in *FAIL*) STATE=failure;; esac
+          post_status "vps-caddy" "$STATE" "$SUMMARY"
+          post_status "vps-caddy-journal" "success" "$CERTLINE"
