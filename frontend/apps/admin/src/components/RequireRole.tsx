@@ -1,32 +1,64 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { acceptDemoSession, getSession, type Role, type Session } from "@kumbuild/lib";
-import { ACCOUNT_URL } from "../lib/urls";
+import { fetchSession, type Role, type Session } from "@kumbuild/lib";
+import { ACCOUNT_URL, HOME_URL } from "../lib/urls";
 
 /**
- * Route guard (mock phase, UX only — NOT security).
- * Accepts the DEMO ONLY ?demo_session= handoff FIRST (it writes the
- * session to localStorage), then reads the session into state so the
- * first render after the handoff shows the app instead of a blank page.
- * No session (or wrong role) -> central login on account.kumbuild.com.
- * Real role enforcement happens in the Go backend, per API call.
+ * Route guard (real backend). The session is validated against the Go
+ * API (GET /api/auth/me, cookie session) on mount — the localStorage
+ * profile cache alone never grants access.
+ * - No session -> central login on the account app (with ?next= back).
+ * - A signed-in CUSTOMER is staff-blocked here with a clear message
+ *   instead of a redirect loop: the admin area is staff-only
+ *   (super_admin / admin / customer_service on the backend).
+ * Real role enforcement still happens in the Go backend, per API call.
  */
 export default function RequireRole({ role, children }: { role: Role; children: ReactNode }) {
   const [session, setSession] = useState<Session | null | undefined>(undefined);
 
   useEffect(() => {
-    acceptDemoSession();
-    setSession(getSession());
+    let live = true;
+    fetchSession().then((s) => {
+      if (live) setSession(s);
+    });
+    return () => {
+      live = false;
+    };
   }, []);
 
   useEffect(() => {
-    if (session === undefined) return;
-    if (!session || session.role !== role) {
+    if (session === null) {
       const next = encodeURIComponent(window.location.pathname + window.location.search);
       window.location.href = `${ACCOUNT_URL}/login?next=${next}`;
     }
-  }, [session, role]);
+  }, [session]);
 
-  if (session === undefined) return null;
-  if (!session || session.role !== role) return null;
+  if (session === undefined || session === null) return null;
+
+  if (session.role !== role) {
+    return (
+      <main className="mx-auto flex min-h-screen max-w-xl flex-col items-center justify-center px-4 text-center">
+        <h1 className="font-display text-2xl font-semibold text-ink">Staff only</h1>
+        <p className="mt-2 text-sm text-muted">
+          You&apos;re signed in as {session.email} with a customer account. The admin area is
+          for Kumbuild staff only.
+        </p>
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+          <a
+            href={HOME_URL}
+            className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-700"
+          >
+            Go to your dashboard
+          </a>
+          <a
+            href={`${ACCOUNT_URL}/login`}
+            className="rounded-lg border border-line px-4 py-2 text-sm font-semibold text-ink hover:bg-card"
+          >
+            Log in with a staff account
+          </a>
+        </div>
+      </main>
+    );
+  }
+
   return <>{children}</>;
 }
