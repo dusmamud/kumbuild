@@ -6,11 +6,11 @@ import { ACCOUNT_URL, WEB_URL } from "../lib/urls";
 import { LocaleSwitcher } from "../lib/i18n";
 import ThemeToggle from "./ThemeToggle";
 
-function handleLogout() {
-  logout();
-  // ?logged_out=1: the account app holds its OWN copy of the mock
-  // session (per-origin localStorage) — the login page clears it on
-  // arrival, otherwise it would bounce straight back here.
+async function handleLogout() {
+  // Real logout: deletes the server session (Go API) + local cache.
+  // ?logged_out=1 tells the account login page to show the form
+  // instead of bouncing back here on its /me check.
+  await logout();
   window.location.href = `${ACCOUNT_URL}/login?logged_out=1`;
 }
 

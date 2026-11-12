@@ -19,8 +19,9 @@ export default function ProfilePage() {
 
   const customer = getCustomerByEmail(session.email);
 
-  function handleLogout() {
-    logout();
+  async function handleLogout() {
+    // Real logout: deletes the server session (Go API) + local cache.
+    await logout();
     window.location.href = `${ACCOUNT_URL}/login`;
   }
 
