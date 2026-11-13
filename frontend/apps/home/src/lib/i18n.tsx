@@ -62,6 +62,22 @@ const LOCALE_LABELS: Record<Locale, string> = {
   as: "অসমীয়া",
 };
 
+/**
+ * 2-letter codes for the collapsed pill below `md` — same codes as the
+ * account app (RESPONSIVE_P0_REPORT.md §1). The full names need ~243px;
+ * the home header also carries the nav links + Log out, so below 768px
+ * the single row only fits with the short codes (~160px). Same four
+ * buttons, same behaviour — only the label shortens below `md`.
+ * (Account collapses below `sm`; home needs `md` because of the extra
+ * header content — at 640 the full pill + Log out overflows 58px.)
+ */
+const LOCALE_SHORT: Record<Locale, string> = {
+  "en-US": "EN",
+  hi: "हिं",
+  bn: "বাং",
+  as: "অ",
+};
+
 export function LocaleSwitcher() {
   const { locale } = useLocale();
   return (
@@ -78,7 +94,8 @@ export function LocaleSwitcher() {
               : "rounded-full px-2.5 py-1 text-muted hover:text-ink"
           }
         >
-          {LOCALE_LABELS[l]}
+          <span className="md:hidden">{LOCALE_SHORT[l]}</span>
+          <span className="hidden md:inline">{LOCALE_LABELS[l]}</span>
         </button>
       ))}
     </div>

@@ -14,7 +14,7 @@ const items = dict.v2.marquee.items;
     <div data-reveal>
       <SectionHead no={no} title={dict.v2.marquee.label} />
     </div>
-    <ul class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+    <ul class="mt-10 grid grid-cols-2 gap-4 max-[359px]:grid-cols-1 sm:grid-cols-3 lg:grid-cols-4">
       {items.map((label, i) => (
         <li data-reveal style={`--reveal-delay:${(i % 4) * 60}ms`}>
           <a

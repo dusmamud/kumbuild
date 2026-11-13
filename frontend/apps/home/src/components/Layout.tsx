@@ -19,13 +19,17 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen flex-col bg-paper">
       <header className="border-b border-line bg-card">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2 sm:h-16 sm:flex-nowrap sm:py-0">
-          <Link to="/" className="flex shrink-0 items-center gap-2">
+          <Link to="/" className="flex min-w-0 shrink-0 items-center gap-2">
             <img
               src="/logo/kumbuild-logo.svg"
               alt="Kumbuild"
-              className="h-8 w-8"
+              className="h-8 w-8 shrink-0"
             />
-            <span className="font-display text-lg font-semibold text-ink">
+            {/* Wordmark hidden below sm (same as the account header):
+                at <640px the header only fits the logo mark + theme
+                toggle + compact pill + Log out icon. The mark alone
+                still links home. */}
+            <span className="hidden truncate font-display text-lg font-semibold text-ink sm:inline">
               Kumbuild
             </span>
           </Link>
@@ -64,10 +68,15 @@ export default function Layout({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={handleLogout}
+              aria-label="Log out"
               className="flex items-center gap-1.5 rounded-md border border-line bg-card px-2.5 py-1.5 text-sm font-medium text-body hover:text-ink"
             >
               <LogOut className="h-4 w-4" />
-              <span className="hidden sm:inline">Log out</span>
+              {/* "Log out" text only from md: below 768px the single row
+                  (wordmark + nav + toggle + pill + this button) only fits
+                  with the icon alone — the button stays fully visible and
+                  keeps its accessible name via aria-label. */}
+              <span className="hidden md:inline">Log out</span>
             </button>
           </div>
         </div>
