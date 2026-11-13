@@ -4,8 +4,8 @@
 > assistant ne chuna (user: "aap best theme apply karo"). **v3 rule (Dus, 2026-11-11 — v2 ka "sab light-only"
 > faisla supersede karta hai): chhah apps (Next.js `apps/app` ko chhod kar) ki color grading EK hai — web app
 > sirf light theme me rahega, baaki paanch apps (account, admin, blog, docs, home) me light AUR dark dono
-> honge, aur dark palette sab me ek hi canonical warm-charcoal set hai (§4).** Shuru me 3 locales: English (US)
-> default, Hindi, Bengali.
+> honge, aur dark palette sab me ek hi canonical warm-charcoal set hai (§4).** 4 locales: English (US)
+> default, Hindi, Bengali, Assamese (2026-11-13 ko `as` add hua — §6 updated).
 >
 > **Source of truth (2026-11-11 rewrite):** web app ka theme likha ja chuka hai — ye doc ab plan nahi, uska record
 > hai. Light theme ke liye source of truth **`frontend/apps/web/src/styles/theme.css` (v2 warm paper,
@@ -27,7 +27,7 @@
 | Blog (`apps/blog`, Astro) | **Light + dark (v3)** — `--kb-*` tokens (`src/styles/theme.css`); dark is app ke tokens hi canonical dark set hain (§4). Toggle + `kb-theme` + no-flash script, blog ke BaseLayout me. |
 | Docs (`apps/docs`, Astro + Starlight) | **Light + dark (v3)** — wahi grading Starlight ke `--sl-color-*` variables par mapped (`src/styles/starlight.css`); Starlight ka built-in toggle. Dark grays canonical set se hi liye gaye hain. |
 | Legacy Next.js (`apps/app` — auth / home / admin) | **System / light / dark tha.** Default = system (device ki setting). User light ya dark choose kar sakta tha, choice save hoti thi. **Ye app LEGACY hai — iska slate dark legacy hai; naye apps ka dark canonical §4 warm-charcoal set hai.** |
-| Locales (shuru me) | **3: `en-US` (default), `hi` (Hindi), `bn` (Bengali).** Baad me aur add ho sakte hain, par URL structure abhi se final hai — launch ke baad badalna matlab redirects + SEO loss. |
+| Locales | **4: `en-US` (default), `hi` (Hindi), `bn` (Bengali), `as` (Assamese — 2026-11-13 ko add hua).** Baad me aur add ho sakte hain, par URL structure abhi se final hai — launch ke baad badalna matlab redirects + SEO loss. |
 | Shared strings | Ek hi source of truth — sab apps wahi dictionaries use karenge (Section 6). Vite apps abhi English-only hain (locale plumbing scaffolded hai) — app pages ki full i18n baad me hogi. |
 
 ## 2. Primary colour scale (v2 — `theme.css` se, verify kiya)
@@ -191,11 +191,12 @@ panel har theme me "ink panel" hi dikhta hai, jaise web ke ink sections.
 | `en-US` | English (US) | `kumbuild.com/` — **koi prefix nahi** (default) | Default locale. Har page pehle English me banega. |
 | `hi` | Hindi (हिन्दी) | `kumbuild.com/hi/` | Devanagari script. |
 | `bn` | Bengali (বাংলা) | `kumbuild.com/bn/` | Bengali script. |
+| `as` | Assamese (অসমীয়া) | `kumbuild.com/as/` | Bengali-Assamese script — Noto Sans Bengali se render hota hai (§6.5). Web me 18 `/as/` pages, dict parity poori (20 top-level keys, en-US jaisi). |
 
-- **URL structure: subfolders** (`/hi/`, `/bn/`) — Exa-verified web practice: ek domain, ek deploy, SEO ke liye sabse simple. Subdomain ya alag domain nahi.
+- **URL structure: subfolders** (`/hi/`, `/bn/`, `/as/`) — Exa-verified web practice: ek domain, ek deploy, SEO ke liye sabse simple. Subdomain ya alag domain nahi.
 - **Default locale ka prefix nahi:** English URLs `/pricing/` jaise rahenge, `/en-US/pricing/` nahi. Ye launch se pehle final hai — baad me badla to har URL redirect karna padega.
 - **Slugs translate nahi honge (shuru me):** `/hi/pricing/` — slug English hi rahega, sirf content Hindi me. Translated slugs SEO ke liye behtar hote hain par routing complexity badhate hain; chhoti site ke liye same slug hi sahi hai. Baad me decide karke badla ja sakta hai.
-- **Language switcher:** header me hamesha dikhega (EN | हिंदी | বাংলা). Switch karne par **wahi page** dusri locale me khulega — home par wapas nahi bhejna.
+- **Language switcher:** header me hamesha dikhega (EN | हिंदी | বাংলা | অসমীয়া). Switch karne par **wahi page** dusri locale me khulega — home par wapas nahi bhejna.
 
 ### 6.2 Sab apps me ek hi setup
 
@@ -207,6 +208,7 @@ i18n: {
   locales: [
     { path: "hi", codes: ["hi"] },
     { path: "bn", codes: ["bn"] },
+    { path: "as", codes: ["as"] },
     { path: "en-US", codes: ["en-US", "en"] },
   ],
   defaultLocale: "en-US",
@@ -214,12 +216,12 @@ i18n: {
 }
 ```
 
-- Default locale unprefixed, `hi`/`bn` prefixed. Links banate time code hand-rolled `localePath` use karta hai (`frontend/packages/config/theme.ts` se, `src/i18n/utils.ts` me `pageUrl`) — Astro ka `getRelativeLocaleUrl()` code me **0 baar** use hota hai; behaviour same hai, sirf helper alag hai.
+- Default locale unprefixed, `hi`/`bn`/`as` prefixed. Links banate time code hand-rolled `localePath` use karta hai (`frontend/packages/config/theme.ts` se, `src/i18n/utils.ts` me `pageUrl`) — Astro ka `getRelativeLocaleUrl()` code me **0 baar** use hota hai; behaviour same hai, sirf helper alag hai.
 - `redirectToDefaultLocale` **false** rakho — `/` par English site khulegi, redirect nahi hoga.
 
 **Vite apps (`apps/account`, `apps/admin`, `apps/home`) — URL prefix + shared dicts:**
 
-- Locale URL ke pehle segment se padha jata hai (`/hi/...`, `/bn/...`; en-US bina prefix). Router `basename` se kaam karta hai; `LocaleSwitcher` wahi page dusri locale me kholta hai.
+- Locale URL ke pehle segment se padha jata hai (`/hi/...`, `/bn/...`, `/as/...`; en-US bina prefix). Router `basename` se kaam karta hai; `LocaleSwitcher` wahi page dusri locale me kholta hai.
 - Dicts wahi shared files hain (`frontend/packages/lib/src/i18n/*.json`).
 - **Note (2026-11-11):** 3 Vite apps abhi English-only hain — locale plumbing (`LocaleProvider` + `LocaleSwitcher`) scaffolded hai, page strings English me hain. App pages ki full i18n baad me hogi.
 
@@ -228,22 +230,23 @@ i18n: {
 ```ts
 // i18n/routing.ts
 export const routing = defineRouting({
-  locales: ["en-US", "hi", "bn"],
+  locales: ["en-US", "hi", "bn", "as"],
   defaultLocale: "en-US",
   localePrefix: "as-needed", // default unprefixed, baaki prefixed
 });
 ```
 
-- App Router me Next.js ka purana built-in `i18n` config **kaam nahi karta** (wo Pages Router ka tha) — isliye `next-intl` use hoga. **Static export me middleware nahi chalta** (Exa-verified, next-intl docs 2026-11-09): default locale (en-US) root par hai (bina prefix), hi/bn `[locale]/` tree me hain; locale server se negotiate nahi hota.
+- App Router me Next.js ka purana built-in `i18n` config **kaam nahi karta** (wo Pages Router ka tha) — isliye `next-intl` use hoga. **Static export me middleware nahi chalta** (Exa-verified, next-intl docs 2026-11-09): default locale (en-US) root par hai (bina prefix), hi/bn/as `[locale]/` tree me hain; locale server se negotiate nahi hota.
 - **Detection priority (LOCKED):** 1) URL me locale, 2) user ki saved choice (LocaleSwitcher link — client-side), 3) default `en-US`. URL hamesha jeetega — cookie se redirect loop nahi banana. `Accept-Language` header server pe nahi padha jata (koi server hi nahi hai).
 
 ### 6.3 Shared dictionaries — ek source of truth
 
-- Strings **ek jagah** rahenge: `frontend/packages/lib/src/i18n/` — `en-US.json`, `hi.json`, `bn.json`. Sab apps (Astro + Vite) wahi files import karenge. Kisi bhi app me apni copy nahi banegi — copy bani to dono drift karenge. (Legacy Next.js app bhi wahi dicts use karta hai — `apps/app/src/i18n/request.ts:3` imports `getDictionary`.)
+- Strings **ek jagah** rahenge: `frontend/packages/lib/src/i18n/` — `en-US.json`, `hi.json`, `bn.json`, `as.json` (Assamese, 2026-11-13). Sab apps (Astro + Vite) wahi files import karenge. Kisi bhi app me apni copy nahi banegi — copy bani to dono drift karenge. (Legacy Next.js app bhi wahi dicts use karta hai — `apps/app/src/i18n/request.ts:3` imports `getDictionary`.)
 - **Keys namespaced** honge: `nav.pricing`, `pricing.business.title` jaise — flat keys nahi. (Note: doc ke purane examples `pricing.business.title` / `order.form.name.label` literal keys ke roop me exist nahi karte — order keys namespace ke andar flat hain; structure broad sense me namespaced hai.)
 - **Plurals / variables ICU MessageFormat se:** `{count, plural, one {# page} other {# pages}}` — Hindi/Bengali me plural rules English se alag hote hain, hard-coded `s` mat lagao.
-- **Missing key rule (as implemented, 2026-11-11):** `getDictionary` sirf **whole-dictionary fallback** karta hai (`?? enUS`) — ek key missing ho to per-key fallback **nahi** hota, aur koi warning log bhi nahi hai. Aaj ye rule test nahi hua kyunki compile-time parity hai (`type Dictionary = typeof enUS` — missing key build error hai) aur aaj saari keys teeno locales me maujood hain. Purana doc rule ("en-US dikhega + warning log hoga") implementation se match nahi karta — ya to per-key fallback implement karo, ya rule ko yahi likha rehne do.
-- **Translation workflow:** user (Dus) ya translator JSON edit karega — code change nahi. Har PR me check: har key teeno locales me hai ya fallback list me hai.
+- **Missing key rule (as implemented, 2026-11-11):** `getDictionary` sirf **whole-dictionary fallback** karta hai (`?? enUS`) — ek key missing ho to per-key fallback **nahi** hota, aur koi warning log bhi nahi hai. Aaj ye rule test nahi hua kyunki compile-time parity hai (`type Dictionary = typeof enUS` — missing key build error hai) aur aaj saari keys chaaron locales me maujood hain. Purana doc rule ("en-US dikhega + warning log hoga") implementation se match nahi karta — ya to per-key fallback implement karo, ya rule ko yahi likha rehne do.
+- **Translation workflow:** user (Dus) ya translator JSON edit karega — code change nahi. Har PR me check: har key chaaron locales me hai ya fallback list me hai.
+- **Humanization (2026-11-13):** Hindi aur Bengali dicts humanize hue — 100% Devanagari aur authentic Bangla (machine-translated feel nahi). Nayi keys likhte time wahi standard rakho — seedha angrezi ka shabd-shah anuvaad nahi.
 
 ### 6.4 SEO — hreflang, canonical, sitemap
 
@@ -256,15 +259,15 @@ ka **ek bhi occurrence nahi** hai, aur `astro.config.mjs` me `@astrojs/sitemap` 
 - **`x-default`:** `https://kumbuild.com/` (English default) par point karega.
 - **Canonical:** har locale page ka canonical **khud** hoga — Hindi page ko English par canonicalize mat karo, warna Google Hindi URL ignore kar dega.
 - **Sitemap:** har locale ke liye alag URLs, sirf wo pages jo us locale me actually exist karte hain (fallback English wale pages list nahi honge).
-- **`<html lang>`:** har page par sahi — `en-US`, `hi`, `bn` (`Layout.astro` me `lang={locale}` — implement hai). Bina iske screen reader galat pronunciation karega.
+- **`<html lang>`:** har page par sahi — `en-US`, `hi`, `bn`, `as` (`Layout.astro` me `lang={locale}` — implement hai). Bina iske screen reader galat pronunciation karega.
 - **`site:`** `astro.config.mjs` me `https://kumbuild.com` hai (absolute URL generation ke liye ready hai).
 
 ### 6.5 Fonts, numbers, dates
 
-- **Fonts:** Latin ke liye Inter/system stack. **Hindi ke liye Noto Sans Devanagari, Bengali ke liye Noto Sans Bengali** — Poppins me Bengali glyphs nahi hote, isliye wo use nahi hoga. Doc kehta tha fonts `unicode-range` se load honge — **web src me authored `unicode-range` ka 0 occurrence hai** (Google ka served CSS apne aap include kar sakta hai — authored rule ke roop me record nahi hai).
+- **Fonts:** Latin ke liye Inter/system stack. **Hindi ke liye Noto Sans Devanagari, Bengali ke liye Noto Sans Bengali** — Poppins me Bengali glyphs nahi hote, isliye wo use nahi hoga. **Assamese ke liye alag font nahi chahiye** — Assamese Bengali-Assamese script me likha jaata hai, isliye Noto Sans Bengali hi usko render karta hai (Layout me koi naya font add nahi hua). Doc kehta tha fonts `unicode-range` se load honge — **web src me authored `unicode-range` ka 0 occurrence hai** (Google ka served CSS apne aap include kar sakta hai — authored rule ke roop me record nahi hai).
 - **Numbers / currency:** `Intl.NumberFormat(locale)` use karo. **Paise hamesha Indian grouping me:** `Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" })` — chahe UI locale koi bhi ho, ₹7,999 aise hi dikhega. **As implemented:** ye admin/home/app me hai (`formatINR` — "₹7,999 style — en-IN grouping, no decimals"), par **public site (web) pe nahi** — web prices JSON me hardcoded ₹ strings hain (display Indian grouping me sahi hai, mechanism doc se alag hai).
 - **Dates:** `Intl.DateTimeFormat(locale)` — Hindi me date Hindi format me, English me US format me.
-- **Text expansion:** Hindi/Bengali text English se ~20–30% lamba hota hai — buttons/cards me fixed height mat rakho, wrap hone do. (Layouts ke against verify nahi kiya — guidance hai, measured fact nahi.)
+- **Text expansion:** Hindi/Bengali/Assamese text English se ~20–30% lamba hota hai — buttons/cards me fixed height mat rakho, wrap hone do. (Layouts ke against verify nahi kiya — guidance hai, measured fact nahi.)
 
 ## 7. Tokens kahan rahenge (code banate time)
 
