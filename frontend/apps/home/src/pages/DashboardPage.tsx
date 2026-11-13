@@ -115,7 +115,7 @@ export default function DashboardPage() {
             </p>
             <a
               href={`${WEB_URL}/order`}
-              className="mt-5 inline-flex items-center gap-2 rounded-lg bg-cta px-5 py-2.5 text-sm font-semibold text-white hover:bg-cta-hover"
+              className="mt-5 inline-flex items-center gap-2 rounded-lg bg-cta px-5 py-3 text-sm font-semibold text-white hover:bg-cta-hover"
             >
               Order my website
               <ArrowRight className="h-4 w-4" />

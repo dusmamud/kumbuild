@@ -62,6 +62,20 @@ const LOCALE_LABELS: Record<Locale, string> = {
   as: "অসমীয়া",
 };
 
+/**
+ * 2-letter codes for the collapsed pill below `sm`. The full names need
+ * ~250px and overflow every phone (98px scroll at 320px); the short
+ * codes need ~160px, so the header fits at 320px with the logo mark
+ * and the 44px theme toggle. Same four buttons, same behaviour —
+ * only the label shortens below `sm`.
+ */
+const LOCALE_SHORT: Record<Locale, string> = {
+  "en-US": "EN",
+  hi: "हिं",
+  bn: "বাং",
+  as: "অ",
+};
+
 export function LocaleSwitcher() {
   const { locale } = useLocale();
   return (
@@ -78,7 +92,8 @@ export function LocaleSwitcher() {
               : "rounded-full px-2.5 py-1 text-muted hover:text-ink"
           }
         >
-          {LOCALE_LABELS[l]}
+          <span className="sm:hidden">{LOCALE_SHORT[l]}</span>
+          <span className="hidden sm:inline">{LOCALE_LABELS[l]}</span>
         </button>
       ))}
     </div>

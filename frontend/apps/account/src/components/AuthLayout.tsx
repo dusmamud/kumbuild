@@ -29,19 +29,29 @@ import { WEB_URL } from "../lib/urls";
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div className="auth-bg flex min-h-screen flex-col">
-      <header className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-6">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-6">
         <a
           href={WEB_URL}
-          className="flex items-center gap-2.5"
+          className="flex min-w-0 shrink-0 items-center gap-2.5"
           aria-label="Kumbuild — back to kumbuild.com"
         >
-          <img src="/logo/kumbuild-logo.svg" alt="" className="h-9 w-9" />
-          <span className="font-display text-lg font-semibold text-ink">Kumbuild</span>
+          <img src="/logo/kumbuild-logo.svg" alt="" className="h-9 w-9 shrink-0" />
+          {/* Wordmark hidden below sm: at <640px the header only fits the
+              logo mark + compact pill + theme toggle (~260px at 320px).
+              The logo mark alone still links home. */}
+          <span className="hidden truncate font-display text-lg font-semibold text-ink sm:inline">
+            Kumbuild
+          </span>
         </a>
-        <nav className="flex items-center gap-2 sm:gap-3" aria-label="Account">
+        <nav className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3" aria-label="Account">
+          {/* Back link only from md: below 768px the full header
+              (wordmark + this link + toggle + full pill) needs 603px
+              but only W-48px is available, so it wrapped at 640px.
+              The logo above already links to kumbuild.com, so
+              nothing is lost below md. */}
           <a
             href={WEB_URL}
-            className="hidden text-sm font-medium text-muted hover:text-ink sm:block"
+            className="hidden text-sm font-medium text-muted hover:text-ink md:block"
           >
             Back to kumbuild.com
           </a>

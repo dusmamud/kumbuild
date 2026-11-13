@@ -194,7 +194,7 @@ export const inputClass =
 export const inputErrorClass = "border-danger focus:border-danger focus:ring-danger/30";
 
 export const buttonPrimaryClass =
-  "inline-flex w-full items-center justify-center rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-700 dark:hover:bg-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 disabled:opacity-50";
+  "inline-flex w-full items-center justify-center rounded-lg bg-primary-600 px-4 py-3 text-sm font-semibold text-white hover:bg-primary-700 dark:hover:bg-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 disabled:opacity-50";
 
 export function ErrorBanner({
   children,
