@@ -1,8 +1,19 @@
 @import "tailwindcss";
+@import "@radix-ui/colors/slate-dark.css";
+
+/* Tailwind v4's default dark: variant follows prefers-color-scheme,
+   not the app's data-theme toggle — re-point it at
+   [data-theme="dark"], like the account/admin/home apps do. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* Kumbuild blog theme — the main site's warm-paper grading, extended
    with a dark theme (Dus's decision 2026-11-11: blog + docs get
    light AND dark; the main site stays light-only per THEME.md).
+   Dark = Radix Colors slateDark (imported above), mapped onto the
+   --kb-* tokens exactly like account/admin/home (THEME.md v4) —
+   paper slate-1 #111113, surfaces slate-2/3, text slate-12.
+   Radix's dark scales resolve under the .dark class, so the
+   no-flash script and theme toggle sync .dark alongside data-theme.
    Tokens are CSS variables so components stay theme-agnostic:
    :root is light, [data-theme="dark"] overrides. */
 @theme inline {
@@ -16,6 +27,7 @@
   --color-primary-700: var(--kb-primary-700);
   --color-primary-800: var(--kb-primary-800);
   --color-primary-900: var(--kb-primary-900);
+  --color-primary-tint: var(--kb-primary-tint);
   --color-cta: var(--kb-cta);
   --color-cta-hover: var(--kb-cta-hover);
   --color-ink: var(--kb-ink);
@@ -48,6 +60,7 @@
   --kb-primary-700: #0069c7;
   --kb-primary-800: #004e8f;
   --kb-primary-900: #00325c;
+  --kb-primary-tint: #e8f3fe;
   --kb-cta: #c2410c;
   --kb-cta-hover: #9a3412;
   --kb-star: #d97706;
@@ -71,21 +84,23 @@
 }
 
 [data-theme="dark"] {
-  /* Dark — warm charcoal, tinted toward the same ink, not slate-blue.
-     Primary brightens one step for text (THEME.md dark rules). */
-  --kb-paper: #141210;
-  --kb-surface: #1d1a17;
-  --kb-card: #211e1a;
-  --kb-ink: #f5f2ec;
-  --kb-body: #d6d0c6;
-  --kb-muted: #a39a8d;
-  --kb-faint: #6f675e;
-  --kb-line: #322d28;
+  /* Dark — Radix Colors slateDark: neutrals come from the slateDark
+     scale (paper slate-1 #111113, surfaces slate-2/3, text
+     slate-12, lines slate-6), same mapping as account/admin/home.
+     Primary brightens one step for text. */
+  --kb-paper: var(--slate-1);
+  --kb-surface: var(--slate-2);
+  --kb-card: var(--slate-3);
+  --kb-ink: var(--slate-12);
+  --kb-body: var(--slate-12);
+  --kb-muted: var(--slate-11);
+  --kb-faint: var(--slate-10);
+  --kb-line: var(--slate-6);
   --kb-primary-600: #3392f6;
   --kb-primary-700: #66adf9;
+  --kb-primary-tint: #0b2f52;
   /* CTA keeps the light theme's deep orange: the brighter #e8590c
-     only reaches ~3.6:1 with white text (AA fail), #c2410c is 5.2:1
-     and still reads clearly as orange on warm charcoal. */
+     only reaches ~3.6:1 with white text (AA fail), #c2410c is 5.2:1. */
   --kb-cta: #c2410c;
   --kb-cta-hover: #9a3412;
   --kb-star: #fbbf24;
@@ -106,7 +121,16 @@ body {
 }
 
 ::selection {
-  background: var(--kb-primary-200);
+  background: var(--kb-primary-100);
+  color: var(--kb-ink);
+}
+
+/* Dark selection: the light #CCE4FD chip on near-white dark text is
+   unreadable, so dark uses the deep primary tint instead (same fix
+   as the account app). */
+[data-theme="dark"] ::selection {
+  background: var(--kb-primary-tint);
+  color: var(--kb-ink);
 }
 
 /* Reading typography for article bodies rendered from Markdown. */

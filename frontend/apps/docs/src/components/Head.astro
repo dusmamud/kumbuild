@@ -10,7 +10,17 @@ import Default from "@astrojs/starlight/components/Head.astro";
   href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
 />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f6" />
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141210" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111113" />
+<!-- Radix slateDark vars resolve under .dark; Starlight toggles data-theme, so keep .dark in sync (initial + on change). Runs inline in <head>, after Starlight's own theme script, so the first paint already has the right class. -->
+<script is:inline>
+  (function () {
+    function sync() {
+      document.documentElement.classList.toggle("dark", document.documentElement.dataset.theme === "dark");
+    }
+    sync();
+    new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  })();
+</script>
 <!-- Mock phase only: pages.dev pe *.kumbuild.com links ko sibling *.pages.dev URLs pe badal do. Custom domain lagne ke baad ye kuch nahi karega. -->
 <script>
   (function () {

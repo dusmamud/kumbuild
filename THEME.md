@@ -1,17 +1,18 @@
 # THEME.md — Kumbuild theme, color grading aur locales
 
-> **Status (2026-11-11): UPDATED to v3.** Theme Option A "Trust Blue" user ne apply karne ko bola — best option
-> assistant ne chuna (user: "aap best theme apply karo"). **v3 rule (Dus, 2026-11-11 — v2 ka "sab light-only"
-> faisla supersede karta hai): chhah apps (Next.js `apps/app` ko chhod kar) ki color grading EK hai — web app
+> **Status (2026-11-13): UPDATED to v4.** Theme Option A "Trust Blue" user ne apply karne ko bola — best option
+> assistant ne chuna (user: "aap best theme apply karo"). **v4 rule (Dus, 2026-11-12–13 — v3 ka warm-charcoal dark
+> set supersede ho gaya): chhah apps (Next.js `apps/app` ko chhod kar) ki color grading EK hai — web app
 > sirf light theme me rahega, baaki paanch apps (account, admin, blog, docs, home) me light AUR dark dono
-> honge, aur dark palette sab me ek hi canonical warm-charcoal set hai (§4).** 4 locales: English (US)
+> honge, aur dark palette sab me ek hi canonical Radix slateDark set hai (§4).** Dus ne 2026-11-12 ko
+> account/admin/home ka dark Radix slateDark par le gaya; 2026-11-13 ko blog/docs me bhi wahi apply hua. 4 locales: English (US)
 > default, Hindi, Bengali, Assamese (2026-11-13 ko `as` add hua — §6 updated).
 >
 > **Source of truth (2026-11-11 rewrite):** web app ka theme likha ja chuka hai — ye doc ab plan nahi, uska record
 > hai. Light theme ke liye source of truth **`frontend/apps/web/src/styles/theme.css` (v2 warm paper,
-> BLUEPRINT 2026-11-10)** hai. Dark theme ke liye source of truth **blog app ke tokens
-> (`frontend/apps/blog/src/styles/theme.css` ke `--kb-*` dark values, §4)** hain — baaki chaar dark apps wahi
-> set use karte hain. Neeche §2–§3–§5 ki values wahi se li gayi hain (khud verify ki gayi). **Purana v1
+> BLUEPRINT 2026-11-10)** hai. Dark theme ke liye source of truth **@radix-ui/colors 3.0.0 ka slateDark scale** hai — har dark app
+> use `@import "@radix-ui/colors/slate-dark.css"` se laata hai aur apne tokens par map karta hai (§4);
+> reference mapping account ki `index.css` hai (Dus, 2026-11-12). Neeche §2–§3–§5 ki values wahi se li gayi hain (khud verify ki gayi). **Purana v1
 > (slate — pure white #FFFFFF, slate text) ab nahi chalta.** `frontend/packages/config/theme.ts` ke color tokens
 > (BLUE/LIGHT) ko **koi app value ke roop me import nahi karta** — sirf `Locale` type aur web me `localePath`
 > use hote hain (verify kiya) — wo v1 values rakhta hai aur source of truth **nahi** hai (drift §9 me).
@@ -26,7 +27,7 @@
 | Vite apps (`apps/account`, `apps/admin`, `apps/home`) | **Light + dark (v3)** — teeno ki `src/index.css` ek hi canonical token file hai (`--kb-*` variables, blog wali structure): light = §3 values, dark = §4 canonical set. Theme toggle header me hai; choice `localStorage` key `kb-theme` me save hoti hai, `index.html` ka inline script first paint se pehle `data-theme` set karta hai (no-flash). |
 | Blog (`apps/blog`, Astro) | **Light + dark (v3)** — `--kb-*` tokens (`src/styles/theme.css`); dark is app ke tokens hi canonical dark set hain (§4). Toggle + `kb-theme` + no-flash script, blog ke BaseLayout me. |
 | Docs (`apps/docs`, Astro + Starlight) | **Light + dark (v3)** — wahi grading Starlight ke `--sl-color-*` variables par mapped (`src/styles/starlight.css`); Starlight ka built-in toggle. Dark grays canonical set se hi liye gaye hain. |
-| Legacy Next.js (`apps/app` — auth / home / admin) | **System / light / dark tha.** Default = system (device ki setting). User light ya dark choose kar sakta tha, choice save hoti thi. **Ye app LEGACY hai — iska slate dark legacy hai; naye apps ka dark canonical §4 warm-charcoal set hai.** |
+| Legacy Next.js (`apps/app` — auth / home / admin) | **System / light / dark tha.** Default = system (device ki setting). User light ya dark choose kar sakta tha, choice save hoti thi. **Ye app LEGACY hai — iska slate dark legacy hai; naye apps ka dark canonical §4 Radix slateDark set hai.** |
 | Locales | **4: `en-US` (default), `hi` (Hindi), `bn` (Bengali), `as` (Assamese — 2026-11-13 ko add hua).** Baad me aur add ho sakte hain, par URL structure abhi se final hai — launch ke baad badalna matlab redirects + SEO loss. |
 | Shared strings | Ek hi source of truth — sab apps wahi dictionaries use karenge (Section 6). Vite apps abhi English-only hain (locale plumbing scaffolded hai) — app pages ki full i18n baad me hogi. |
 
@@ -97,25 +98,26 @@ Warm neutrals (`@theme` — Tailwind utilities ke naam):
 ye values kahin code me nahi hain; `--info` (`#0284C7`) sirf legacy `globals.css` aur `theme.ts` me hai, web me nahi.
 Naya semantic bg chahiye to pehle token banao, hard-coded hex mat likho.
 
-## 4. Dark theme tokens (v3 canonical — paanch apps: account, admin, blog, docs, home)
+## 4. Dark theme tokens (v4 canonical — Radix slateDark — paanch apps: account, admin, blog, docs, home)
 
-**Ek hi dark palette sab paanch dark apps me.** Values blog ke `--kb-*` tokens se li gayi hain (source of
-truth wahi file hai); docs unhe `--sl-color-*` par map karta hai, Vite apps apni `index.css` me wahi set
-rakhte hain. Web app (`apps/web`) is section se bahar hai — wo light-only hai (§1), usme dark CSS likhna
-mana hai.
+**Ek hi dark palette sab paanch dark apps me.** Values @radix-ui/colors 3.0.0 ke slateDark scale se aati
+hain — har dark app `@import "@radix-ui/colors/slate-dark.css"` karta hai aur scale ko apne tokens par map
+karta hai (Vite/blog `--kb-*` par, docs `--sl-color-*` par). Radix ki dark variables `.dark` class ke neeche
+resolve hoti hain, isliye har app `data-theme` ke saath `.dark` class bhi sync karta hai (§5). Web app
+(`apps/web`) is section se bahar hai — wo light-only hai (§1), usme dark CSS likhna mana hai.
 
 | Token | Dark value | Light counterpart (§3) / note |
 |---|---|---|
-| paper / bg | #141210 | #FAF9F6 — warm charcoal, ink ki taraf tinted, slate-blue nahi |
-| surface (nav, sidebar, section bg) | #1D1A17 | #F3F1EC |
-| card | #211E1A | #FFFFFF |
-| surface-hover | #322D28 | line value hi reuse hota hai |
-| line / hairline | #322D28 | #E7E2D9 |
-| line-strong / hairline-light | #453F39 | #DDD6C9 |
-| ink (headings) | #F5F2EC | #1C1917 |
-| body text | #D6D0C6 | #44403C |
-| muted | #A39A8D | #6F675E |
-| faint | #6F675E | #A8A29E |
+| paper / bg | `var(--slate-1)` #111113 | #FAF9F6 |
+| surface (nav, sidebar, section bg) | `var(--slate-2)` #18191B | #F3F1EC |
+| card | `var(--slate-3)` #212225 | #FFFFFF |
+| surface-hover | `var(--slate-4)` #272A2D | line value hi reuse hota hai (blog/docs me token nahi hai) |
+| line / hairline | `var(--slate-6)` #363A3F | #E7E2D9 |
+| line-strong / hairline-light | `var(--slate-7)` #43484E | #DDD6C9 |
+| ink (headings) | `var(--slate-12)` #EDEEF0 | #1C1917 |
+| body text | `var(--slate-12)` #EDEEF0 | #44403C — dark me body ink jaisa hi bright hai (Dus ka mapping) |
+| muted | `var(--slate-11)` #B0B4BA | #6F675E |
+| faint | `var(--slate-10)` #777B84 | #A8A29E |
 | primary-600 (button bg) | #3392F6 | #0072C8 — dark me ek step bright |
 | primary-700 (text links) | #66ADF9 | #0069C7 |
 | primary tint (badge bg) | #0B2F52 | #E8F3FE |
@@ -125,7 +127,7 @@ mana hai.
 | live-strong (buttons, white text) | #15803D, hover #127032 | same dono themes — bright live button bg par white text fail hai |
 | warn | #FBBF24 | #D97706 |
 | danger (text/icons) | #F87171 | #DC2626 |
-| live-soft / danger-soft (tint bgs) | base colour ka 12–14% tint paper par (blog/docs me solid equivalents, Vite apps me `color-mix`) | #E6F5EC / #FEF2F2 |
+| live-soft / danger-soft (tint bgs) | base colour ka 12–14% tint paper par — Vite apps me `color-mix` (base #111113); blog/docs me ye tokens nahi hain | #E6F5EC / #FEF2F2 |
 
 **Fixed ink panel rule:** brand strip aur ink panels dono themes me fixed `#1C1917` bg + white text +
 `#4ADE80` live dot rakhte hain (blog header, docs strip) — ye token se nahi badalte, ye jaan-boojh kar hai:
@@ -134,7 +136,11 @@ panel har theme me "ink panel" hi dikhta hai, jaise web ke ink sections.
 **LEGACY slate dark (sirf purana Next.js `apps/app`):** us app ke dark tokens slate ramp par the
 (`--bg #0F172A`, `--surface #1E293B`, `--border #334155`, text `#F1F5F9 / #CBD5E1 / #94A3B8`, semantic
 `--success #4ADE80`, `--warning #FBBF24`, `--error #F87171`, `--info #38BDF8`). Ye values naye apps me
-**nahi** chalte — canonical dark upar wala warm-charcoal set hai.
+**nahi** chalte — canonical dark upar wala Radix slateDark set hai.
+
+**RETIRED (v4, 2026-11-13):** v3 ka hand-rolled warm-charcoal set (paper #141210, surface #1D1A17, card
+#211E1A, ink #F5F2EC, body #D6D0C6, muted #A39A8D, line #322D28) kisi app me ab use nahi hota — blog/docs
+bhi 2026-11-13 ko slateDark par aa gaye. Purane values ko naye code me mat lao.
 
 ## 5. Theme behaviour — kaise kaam karta hai (v2, coded)
 
@@ -146,27 +152,34 @@ panel har theme me "ink panel" hi dikhta hai, jaise web ke ink sections.
 - **Scroll reveal (2026-11-11 fix):** content default visible hai. Sirf jab JS proven present ho (`<head>` inline script `html` par `.js` class lagata hai, first paint se pehle) tab `[data-reveal]` elements `opacity: 0` + `translateY(16px)` se start hote hain; observer `.is-in` lagata hai (0.7s, ease `cubic-bezier(0.22, 1, 0.36, 1)`). JS band ho to hidden state kabhi apply nahi hota — `<noscript>` fallback bhi hai. Ye rule sirf `prefers-reduced-motion: no-preference` me chalta hai.
 - **Motion tokens:** `--ease-out: cubic-bezier(0.22, 1, 0.36, 1)`; marquee `42s linear infinite` (hover par pause hota hai); live-pulse `2.4s ease-in-out infinite`; hero float `kb-float 7s ease-in-out infinite` (reduced-motion me disabled). **Known gap:** marquee aur live-pulse ka `prefers-reduced-motion` gating abhi bhi nahi hai (§9).
 
-### Vite apps (`apps/account`, `apps/admin`, `apps/home`) — light + dark (v3)
+### Vite apps (`apps/account`, `apps/admin`, `apps/home`) — light + dark (v4)
 
 - Teeno ki `src/index.css` ek hi canonical token file hai (byte-identical copies): `@theme inline` mapping +
-  `:root` light (§3 values) + `[data-theme="dark"]` (§4 canonical set). Naya token teeno copies me ek saath
-  badlo — ya shared import banao (abhi copy hi pattern hai).
+  `:root` light (§3 values) + `[data-theme="dark"]` (§4 Radix slateDark set, `@radix-ui/colors` 3.0.0 se
+  import). Naya token teeno copies me ek saath badlo — ya shared import banao (abhi copy hi pattern hai).
 - **Toggle:** har app ke header me `ThemeToggle` component (Lucide sun/moon). Click par `data-theme` flip
-  hota hai aur choice `localStorage` key `kb-theme` me save hoti hai — blog ke saath ek hi key, taaki user ki
-  pasand sab apps me ek jaisi rahe.
+  hota hai, `.dark` class bhi sync hoti hai (Radix vars isi class ke neeche resolve hote hain), aur choice
+  `localStorage` key `kb-theme` me save hoti hai — blog ke saath ek hi key, taaki user ki pasand sab apps me
+  ek jaisi rahe.
 - **No-flash rule:** `index.html` ke `<head>` me inline script — paint se pehle `kb-theme`/system padh ke
-  `data-theme` set karta hai (blog wala hi pattern).
+  `data-theme` + `.dark` class set karta hai (blog wala hi pattern).
+- **Tailwind `dark:` variant:** v4 default `prefers-color-scheme` follow karta hai — isliye teeno CSS files me
+  `@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *))` hai, taaki `dark:` styles
+  toggle ke saath chalein (Dus ka catch, 2026-11-12 — pehle `dark:hover` sirf OS-dark par chalta tha).
 - Contrast rules (Section 2) dono themes me lagu hain. Cards hamesha `bg-card` token se — `bg-white`
   hard-code mat karo (dark me safed reh jayega). White text wale green button ke liye `bg-live-strong`,
   bright `bg-live` sirf text/dots ke liye hai.
 
-### Blog (`apps/blog`) aur Docs (`apps/docs`) — light + dark (v3)
+### Blog (`apps/blog`) aur Docs (`apps/docs`) — light + dark (v4)
 
-- Blog: `--kb-*` tokens (`src/styles/theme.css`) — iske dark values hi canonical set hain (§4). Toggle
-  BaseLayout ke header me; `kb-theme` + no-flash script wahi pattern.
+- Blog: `--kb-*` tokens (`src/styles/theme.css`) — dark values Radix slateDark se (§4), Vite apps wala hi
+  mapping. Toggle BaseLayout ke header me; `kb-theme` + no-flash script wahi pattern, dono `.dark` class bhi
+  sync karte hain. `dark:` variant ke liye wahi `@custom-variant` rule hai.
 - Docs: Starlight ka built-in toggle; grading `--sl-color-*` mapping se (`src/styles/starlight.css`) —
   dhyaan do, Starlight me `:root` = dark values aur `:root[data-theme="light"]` = light values hote hain
-  (ulta convention). Brand strip dono themes me fixed ink panel hai (§4 rule).
+  (ulta convention). Dark values Radix slateDark se (§4). `.dark` sync `Head.astro` ke inline script se hota
+  hai — pehli baar `data-theme` padh ke, phir `MutationObserver` se har toggle par. Brand strip dono themes me
+  fixed ink panel hai (§4 rule).
 
 ### LEGACY — Next.js (`apps/app`) — system / light / dark (tha)
 
@@ -273,9 +286,9 @@ ka **ek bhi occurrence nahi** hai, aur `astro.config.mjs` me `@astrojs/sitemap` 
 
 - **Source of truth (light, web):** `frontend/apps/web/src/styles/theme.css` — `@theme` tokens + `:root` vars. Naya token yahin banao.
 - Shared tokens file: `frontend/packages/config/theme.ts` — **color tokens ke liye source of truth nahi hai** (v1 values, koi app value ke roop me import nahi karta — sirf `Locale` type + web ka `localePath`). Is file ke colors ko dekh ke naya code mat likho.
-- Vite apps: `apps/account/src/index.css`, `apps/admin/src/index.css`, `apps/home/src/index.css` — ek hi canonical token file ki copies (light §3 + dark §4, v3 me rebuild hui — purani drift §9 item 2 resolved). Naya token banate time teeno copies bhi update karo, ya shared import banao.
-- Blog: `apps/blog/src/styles/theme.css` — `--kb-*` tokens; **dark values ka source of truth yahi hai** (§4).
-- Docs: `apps/docs/src/styles/starlight.css` — wahi grading `--sl-color-*` par mapped.
+- Vite apps: `apps/account/src/index.css`, `apps/admin/src/index.css`, `apps/home/src/index.css` — ek hi canonical token file ki copies (light §3 + dark §4 Radix slateDark, v4). Naya token banate time teeno copies bhi update karo, ya shared import banao.
+- Blog: `apps/blog/src/styles/theme.css` — `--kb-*` tokens; dark values Radix slateDark se (§4).
+- Docs: `apps/docs/src/styles/starlight.css` — wahi grading `--sl-color-*` par mapped (dark Radix slateDark se, §4).
 - Legacy Next.js: `apps/app/src/app/globals.css` — `:root` light + `[data-theme="dark"]` dark.
 - Dictionaries: `frontend/packages/lib/src/i18n/*.json` (Section 6.3).
 
@@ -295,7 +308,7 @@ ka **ek bhi occurrence nahi** hai, aur `astro.config.mjs` me `@astrojs/sitemap` 
 Ye code fixes hain, doc fixes nahi — isliye yahan sirf record kiya hai (Dus production se pehle fix karega):
 
 1. **`theme.ts` v1 colors unused:** `theme.ts` ke BLUE/LIGHT values doc v1 se match karte hain par web `theme.css` (v2) se nahi — aur koi app unhe value ke roop me import nahi karta. Blue-600 teen taraf alag hai: doc #0072C8 = CSS #0072c8 ≠ `theme.ts` #0079D7 — ek value chuno. Fix: ya to `theme.ts` colors ko v2 se sync karo, ya file se color tokens hatao (sirf Locale/localePath rakho).
-2. **Vite `index.css` copies stale — RESOLVED (v3, 2026-11-11):** teeno copies canonical token file se rebuild ho gayi hain (light §3 + dark §4 + `data-theme` toggle); pre-fix `[data-reveal]` rule aur unused marquee/float blocks hat gaye (Vite apps me unka koi use nahi tha). Copies ab bhi haath se sync hoti hain — drift check ya shared import aage ka kaam hai. **v3 me ye bhi band hua:** blog/docs is doc me pehle shaamil hi nahi the — §1/§4/§5/§7 me ab dono apps recorded hain.
+2. **Vite `index.css` copies stale — RESOLVED (v3, 2026-11-11):** teeno copies canonical token file se rebuild ho gayi hain (light §3 + dark §4 + `data-theme` toggle); pre-fix `[data-reveal]` rule aur unused marquee/float blocks hat gaye (Vite apps me unka koi use nahi tha). Copies ab bhi haath se sync hoti hain — drift check ya shared import aage ka kaam hai. **v3 me ye bhi band hua:** blog/docs is doc me pehle shaamil hi nahi the — §1/§4/§5/§7 me ab dono apps recorded hain. **v4 (2026-11-13):** dark set warm-charcoal se Radix slateDark par badla — paanchon dark apps ab ek hi scale use karte hain, theme split khatam.
 3. **hreflang / canonical / sitemap not implemented** (§6.4) — implement karo ya scope se hatao.
 4. **Missing-key rule as written not implemented** (§6.3) — per-key fallback + warning log implement karo, ya rule ko as-implemented likha rehne do (abhi wahi hai).
 5. **Sora 800:** doc se hata diya (load nahi hota) — agar headings ko 800 chahiye to font URL me jodo, warna 700 hi max hai.

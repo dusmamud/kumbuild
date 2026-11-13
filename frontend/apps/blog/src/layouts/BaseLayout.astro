@@ -41,6 +41,7 @@ const year = new Date().getFullYear();
         try { saved = localStorage.getItem("kb-theme"); } catch (e) {}
         var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
         document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document.documentElement.classList.toggle("dark", dark);
       })();
     </script>
     <title>{fullTitle}</title>
@@ -65,7 +66,7 @@ const year = new Date().getFullYear();
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="alternate" type="application/rss+xml" title="Kumbuild Blog RSS" href="/rss.xml" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f6" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141210" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111113" />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -269,6 +270,7 @@ const year = new Date().getFullYear();
       document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
         const next = root.dataset.theme === "dark" ? "light" : "dark";
         root.dataset.theme = next;
+        root.classList.toggle("dark", next === "dark");
         try { localStorage.setItem("kb-theme", next); } catch (e) {}
         paintToggle();
       });
