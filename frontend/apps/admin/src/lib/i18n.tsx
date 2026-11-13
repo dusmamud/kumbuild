@@ -59,6 +59,7 @@ const LOCALE_LABELS: Record<Locale, string> = {
   "en-US": "English",
   hi: "हिंदी",
   bn: "বাংলা",
+  as: "অসমীয়া",
 };
 
 export function LocaleSwitcher() {
