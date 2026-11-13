@@ -495,10 +495,10 @@ export default function SignupPage() {
     return (
       <AuthLayout>
         <FadeIn>
-          <h1 className="text-center font-display text-2xl font-semibold text-ink">
+          <h1 className="font-display text-2xl font-semibold text-ink">
             Verify your email
           </h1>
-          <p className="mt-1 text-center text-sm text-muted">
+          <p className="mt-1 text-sm text-muted">
             One last step — confirm the code we emailed you.
           </p>
 
@@ -541,7 +541,7 @@ export default function SignupPage() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-muted">
+          <p className="mt-6 text-sm text-muted">
             Didn&apos;t get the code?{" "}
             <button
               type="button"
@@ -563,10 +563,10 @@ export default function SignupPage() {
 
   return (
     <AuthLayout>
-      <h1 className="text-center font-display text-2xl font-semibold text-ink">
+      <h1 className="font-display text-2xl font-semibold text-ink">
         Create your account
       </h1>
-      <p className="mt-1 text-center text-sm text-muted">
+      <p className="mt-1 text-sm text-muted">
         Sign up to order your website and track its progress with Kumbuild.
         Three short steps — we only ask for the essentials.
       </p>
@@ -634,7 +634,7 @@ export default function SignupPage() {
                 <button type="submit" className={buttonPrimaryClass}>
                   Continue
                 </button>
-                <p className="text-center text-xs text-muted">
+                <p className="text-xs text-muted">
                   No payment or billing details are needed to sign up.
                 </p>
               </div>
@@ -786,7 +786,7 @@ export default function SignupPage() {
                 </div>
 
                 <TurnstileSlot tokenRef={tokenRef} widgetIdRef={widgetIdRef} />
-                <p className="text-center text-xs text-muted">
+                <p className="text-xs text-muted">
                   By creating an account, you agree to our{" "}
                   <a
                     href={`${WEB_URL}/terms`}
@@ -824,7 +824,7 @@ export default function SignupPage() {
                     </button>
                   </div>
                 </div>
-                <p className="text-center text-xs text-muted">
+                <p className="text-xs text-muted">
                   We&apos;ll email you a 6-digit code to verify your address.
                 </p>
               </div>
@@ -833,12 +833,12 @@ export default function SignupPage() {
         </FadeIn>
       </form>
 
-      <p className="mt-6 text-center text-sm text-muted">
+      <div className="mt-6 border-t border-line pt-5 text-sm text-muted">
         Already have an account?{" "}
         <Link to="/login" className="font-medium text-primary-700 hover:underline">
           Log in
         </Link>
-      </p>
+      </div>
     </AuthLayout>
   );
 }

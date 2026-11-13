@@ -3,105 +3,73 @@ import { LocaleSwitcher } from "../lib/i18n";
 import ThemeToggle from "./ThemeToggle";
 import { WEB_URL } from "../lib/urls";
 
-// Shared shell for the auth pages — SPLIT PANEL (see
-// ~/workspace/shot-tools/login-signup-research/RESEARCH.md §1: signup is a
-// selling moment, so the form shares the page with ONE honest proof asset
-// instead of sitting alone on plain paper).
+// Shared shell for the auth pages — CENTERED CARD, rebuilt from scratch
+// (2026-11-12). Dus rejected three layouts in a row: the original centered
+// card, the no-card bare form, and the split panel with a demo screenshot.
+// This is a deliberate return to the card — but executed properly, because
+// the references Dus named (Google, Meta, Spotify auth in 2026) are ALL
+// centered cards. The original card failed because it was plain — no top
+// nav, no card treatment, empty background — not because cards are wrong.
 //
-// - Form side first in DOM (the panel must never gate the form); on lg+ the
-//   panel is visually left via lg:order-1 / form lg:order-2.
-// - Left panel: hidden below lg — mobile gets the form alone, full-width
-//   with 16px side padding. Panel background is a TINTED NEUTRAL theme
-//   surface (light: --kb-surface; dark: Radix slate-2), never a saturated
-//   brand flood, never a gradient.
-// - ONE proof asset: a real sample-site screenshot from the web app
-//   (frontend/apps/web/public/demo/shop.png, copied to this app's
-//   public/demo/ — the account app is a separate deployment, so it must
-//   not hotlink the web app). Caption reuses the honest wording from
-//   frontend/apps/web/src/components/Examples.astro: a demo shop website,
-//   NOT a testimonial (ours are labelled samples).
-// - Logo rule: the logo lives in the panel on lg+; below lg the panel is
-//   hidden, so a small logo sits above the form there — one logo visible
-//   at a time, never zero, never two.
-// - Form side stays NO-CARD: plain paper, 400px column, ThemeToggle +
-//   LocaleSwitcher top-right, footer lines under the form.
+// Composition:
+// - A real top nav: Kumbuild logo + wordmark left (the ONE logo per view);
+//   ThemeToggle + LocaleSwitcher + "Back to kumbuild.com" right. The nav
+//   gives the page a header area, so the card never floats in empty space.
+// - A non-empty background: warm paper with a quiet dot texture
+//   (.auth-bg in index.css — dots in the theme line colour only, no
+//   colour gradient, no saturated flood).
+// - A real card: bg-card, 1px line border, 16px radius, subtle two-layer
+//   shadow, 440px column, generous p-6/sm:p-8 padding. Headings are
+//   LEFT-aligned inside the card (Google-style hierarchy), not centred.
+// - The card is vertically centred in the viewport at desktop widths,
+//   with a trust line under it (SSL · No card · Terms · Privacy) so the
+//   1440 view reads finished, not sparse.
 // - TurnstileSlot, OTP countdown, RHF+zod, a11y, motion, sonner, and the
 //   terms/privacy line all live in the pages — untouched by this shell.
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="grid min-h-screen bg-paper lg:grid-cols-2">
-      {/* Form side — first in DOM. */}
-      <div className="flex flex-col lg:order-2">
-        <header className="flex items-center justify-end gap-2 px-4 pt-4 sm:px-6">
-          <ThemeToggle />
-          <LocaleSwitcher />
-        </header>
-        <main className="flex flex-1 flex-col items-center px-4 py-8">
-          <div className="w-full max-w-[400px]">
-            <a
-              href={WEB_URL}
-              className="mb-6 flex justify-center lg:hidden"
-              aria-label="Kumbuild — back to kumbuild.com"
-            >
-              <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" className="h-12 w-12" />
-            </a>
-            {children}
-          </div>
-          <p className="mt-8 text-center text-sm text-muted">
-            Kumbuild — Tell us what to build.
-          </p>
-          <p className="mt-1 text-center text-sm">
-            <a href={WEB_URL} className="font-medium text-primary-700 hover:underline">
-              Back to kumbuild.com
-            </a>
-          </p>
-        </main>
-      </div>
-
-      {/* Proof panel — hidden below lg. */}
-      <aside className="hidden flex-col bg-surface px-10 py-8 lg:order-1 lg:flex xl:px-14">
+    <div className="auth-bg flex min-h-screen flex-col">
+      <header className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-6">
         <a
           href={WEB_URL}
-          className="flex items-center gap-3"
+          className="flex items-center gap-2.5"
           aria-label="Kumbuild — back to kumbuild.com"
         >
-          <img src="/logo/kumbuild-logo.svg" alt="" className="h-10 w-10" />
-          <span className="text-lg font-semibold text-ink">Kumbuild</span>
+          <img src="/logo/kumbuild-logo.svg" alt="" className="h-9 w-9" />
+          <span className="font-display text-lg font-semibold text-ink">Kumbuild</span>
         </a>
-        <figure className="flex flex-1 flex-col justify-center py-10">
-          <div className="overflow-hidden rounded-xl border border-line bg-white">
-            <div className="flex items-center gap-2 border-b border-line bg-white px-3 py-2">
-              <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-line" />
-              <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-line" />
-              <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-line" />
-              <span className="ml-1 truncate rounded-md border border-line bg-surface px-2 py-0.5 font-mono text-xs text-muted">
-                sharma-general-store.in
-              </span>
-            </div>
-            <img
-              src="/demo/shop.png"
-              alt="Demo shop website — Sharma General Store, with products, prices and WhatsApp ordering"
-              width="1280"
-              height="800"
-              className="block aspect-[8/5] w-full object-cover object-top"
-            />
-          </div>
-          <figcaption className="mt-3 text-sm text-body">
-            <span className="font-semibold text-ink">Sharma General Store</span> — sample
-            shop website built with Kumbuild
-          </figcaption>
-        </figure>
-        <p className="text-sm text-muted">
-          SSL secure · No card needed to sign up ·{" "}
-          <a href={`${WEB_URL}/terms`} className="font-medium text-primary-700 hover:underline">
-            Terms
-          </a>{" "}
-          ·{" "}
-          <a href={`${WEB_URL}/privacy`} className="font-medium text-primary-700 hover:underline">
-            Privacy
+        <nav className="flex items-center gap-2 sm:gap-3" aria-label="Account">
+          <a
+            href={WEB_URL}
+            className="hidden text-sm font-medium text-muted hover:text-ink sm:block"
+          >
+            Back to kumbuild.com
           </a>
-        </p>
-      </aside>
+          <ThemeToggle />
+          <LocaleSwitcher />
+        </nav>
+      </header>
+
+      <main className="flex flex-1 items-center justify-center px-4 py-10 sm:px-6">
+        <div className="w-full max-w-[460px]">
+          <div className="auth-card rounded-2xl border border-line bg-card p-6 shadow-[0_1px_2px_rgb(0_0_0/0.05),0_12px_32px_-12px_rgb(0_0_0/0.18)] sm:p-8 dark:shadow-[0_1px_2px_rgb(0_0_0/0.4),0_16px_40px_-12px_rgb(0_0_0/0.6)]">
+            {children}
+          </div>
+          <p className="mt-6 text-center text-sm text-muted">
+            SSL secure · No card needed to sign up ·{" "}
+            <a href={`${WEB_URL}/terms`} className="font-medium text-primary-700 hover:underline">
+              Terms
+            </a>{" "}
+            ·{" "}
+            <a href={`${WEB_URL}/privacy`} className="font-medium text-primary-700 hover:underline">
+              Privacy
+            </a>
+          </p>
+          <p className="mt-1 text-center text-sm text-muted">
+            Kumbuild — Tell us what to build.
+          </p>
+        </div>
+      </main>
     </div>
   );
 }

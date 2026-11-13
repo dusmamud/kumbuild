@@ -234,3 +234,15 @@ html[data-theme="dark"] [data-sonner-toaster][data-sonner-theme="dark"] {
 
 /* Step transitions live in components/ui.tsx now (StepSlide, motion/react);
    the hand-rolled kb-step-enter-* classes were removed 2026-11-12. */
+
+/* Auth pages (AuthLayout, rebuilt 2026-11-12): a quiet dot texture on the
+   page background so the centred card never sits on empty paper. Dots use
+   the theme line colour only — no hue, no colour gradient, no flood. */
+.auth-bg {
+  background-color: var(--kb-paper);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--kb-line) 60%, transparent) 1px,
+    transparent 1.5px
+  );
+  background-size: 22px 22px;
+}

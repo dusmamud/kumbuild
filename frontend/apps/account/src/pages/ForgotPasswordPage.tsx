@@ -88,10 +88,10 @@ export default function ForgotPasswordPage() {
 
   return (
     <AuthLayout>
-      <h1 className="text-center font-display text-2xl font-semibold text-ink">
+      <h1 className="font-display text-2xl font-semibold text-ink">
         Forgot password
       </h1>
-      <p className="mt-1 text-center text-sm text-muted">
+      <p className="mt-1 text-sm text-muted">
         Enter your account email — we&apos;ll send a reset link if an account exists.
       </p>
 
@@ -124,11 +124,11 @@ export default function ForgotPasswordPage() {
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-muted">
+      <div className="mt-6 border-t border-line pt-5 text-sm text-muted">
         <Link to="/login" className="font-medium text-primary-700 hover:underline">
           Back to login
         </Link>
-      </p>
+      </div>
     </AuthLayout>
   );
 }

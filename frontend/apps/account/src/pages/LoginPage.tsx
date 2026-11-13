@@ -176,10 +176,10 @@ export default function LoginPage() {
 
   return (
     <AuthLayout>
-      <h1 className="text-center font-display text-2xl font-semibold text-ink">
+      <h1 className="font-display text-2xl font-semibold text-ink">
         Log in to Kumbuild
       </h1>
-      <p className="mt-1 text-center text-sm text-muted">Log in to continue to Kumbuild.</p>
+      <p className="mt-1 text-sm text-muted">Log in to continue to Kumbuild.</p>
 
       {banner ? (
         <div className="mt-6">
@@ -225,12 +225,12 @@ export default function LoginPage() {
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-muted">
+      <div className="mt-6 border-t border-line pt-5 text-sm text-muted">
         Don&apos;t have an account?{" "}
         <Link to="/signup" className="font-medium text-primary-700 hover:underline">
           Sign up
         </Link>
-      </p>
+      </div>
     </AuthLayout>
   );
 }
