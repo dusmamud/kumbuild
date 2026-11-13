@@ -6,7 +6,7 @@ export { localePath };
 
 /** Resolve the locale for a page: Astro.currentLocale or the default. */
 export function resolveLocale(currentLocale: string | undefined): Locale {
-  if (currentLocale === "hi" || currentLocale === "bn") return currentLocale;
+  if (currentLocale === "hi" || currentLocale === "bn" || currentLocale === "as") return currentLocale;
   return "en-US";
 }
 

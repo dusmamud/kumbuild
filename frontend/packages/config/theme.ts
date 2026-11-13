@@ -3,7 +3,7 @@
 // Primary is the logo blue #008EFD everywhere. Astro uses light only;
 // the Next.js app also uses the dark tokens below.
 
-export const LOCALES = ["en-US", "hi", "bn"] as const;
+export const LOCALES = ["en-US", "hi", "bn", "as"] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "en-US";
 

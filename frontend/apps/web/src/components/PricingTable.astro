@@ -34,7 +34,7 @@ function resolvedFeatures(slug: string, seen = new Set<string>()): string[] {
 
 /** Page-count features supersede rather than accumulate: a plan with its
     own page allowance ("Up to 5 pages") does not also include the lower
-    plan's ("1 page"). Detected by the word for "page" in all 3 locales. */
+    plan's ("1 page"). Detected by the word for "page" in all 4 locales. */
 const isPageCount = (f: string) => /page|पेज|পেজ/i.test(f);
 
 function finalFeatures(slug: string): string[] {

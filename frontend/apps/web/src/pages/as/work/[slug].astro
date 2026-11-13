@@ -1,0 +1,10 @@
+---
+import WorkCasePage from "../../../components/pages/WorkCasePage.astro";
+import { dictFor } from "../../../i18n/utils";
+export function getStaticPaths() {
+  return dictFor("as").v2.work.projects.map((p) => ({ params: { slug: p.slug } }));
+}
+const dict = dictFor("as");
+const slug = Astro.params.slug ?? "";
+---
+<WorkCasePage dict={dict} locale={"as"} slug={slug} />

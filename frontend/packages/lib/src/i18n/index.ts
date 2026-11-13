@@ -1,9 +1,10 @@
 import enUS from "./en-US.json";
 import hi from "./hi.json";
 import bn from "./bn.json";
+import as from "./as.json";
 import type { Locale } from "@kumbuild/config";
 
-export const dictionaries = { "en-US": enUS, hi, bn } as const;
+export const dictionaries = { "en-US": enUS, hi, bn, as } as const;
 
 export type Dictionary = typeof enUS;
 
@@ -13,5 +14,5 @@ export function getDictionary(locale: string): Dictionary {
 }
 
 export function isLocale(value: string): value is Locale {
-  return value === "en-US" || value === "hi" || value === "bn";
+  return value === "en-US" || value === "hi" || value === "bn" || value === "as";
 }
