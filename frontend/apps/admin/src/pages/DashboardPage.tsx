@@ -24,7 +24,11 @@ export default function DashboardPage() {
         subtitle="Aaj ke orders, pending kaam aur revenue — mock data."
       />
 
-      <div className="grid gap-4 sm:grid-cols-4">
+      {/* 2 cols at sm–lg: at 640–700 the 4-col row squeezed the revenue
+          value ("₹32,999" at text-3xl is 112px wide in a 100px content
+          box — 14px past its own box at 640). 4 cols again at lg+, where
+          each card has ~196px of content width. */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <p className="text-sm text-muted">Total orders</p>
           <p className="mt-1 text-3xl font-bold">{orders.length}</p>

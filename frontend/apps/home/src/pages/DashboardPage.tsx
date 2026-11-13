@@ -123,9 +123,17 @@ export default function DashboardPage() {
           </section>
         ) : (
           <>
+            {/* 1 column below 420px: the fixed 3-col row is cramped under
+                ~406px — at 320 the "₹3,999" value (61px) already spills
+                7px past its 56px content box and both multi-word labels
+                wrap to 2 lines; at 360 a realistic larger balance
+                ("₹14,999", 72px) spills past the 69px box. Measured: the
+                "Balance due" label needs 84.4px, which the 3-col content
+                box only reaches at ≥406px; 419px leaves ~5px of margin.
+                3 cols again from 420px, where labels stay on one line. */}
             <section
               aria-label="Summary"
-              className="mt-6 grid grid-cols-3 gap-3"
+              className="mt-6 grid grid-cols-3 gap-3 max-[419px]:grid-cols-1"
             >
               <div className="rounded-xl border border-line bg-card p-4">
                 <p className="text-xs font-medium tracking-wide text-muted uppercase">

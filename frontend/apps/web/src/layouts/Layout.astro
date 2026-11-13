@@ -86,7 +86,12 @@ const noteParts = dict.hero.note.split(" · ");
         <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
           <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2 text-ink">
             <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" class="h-8 w-8" />
-            <span class="font-display text-[17px] font-bold">Kumbuild</span>
+            {/* Wordmark hidden below 360px: at 320 the header row (logo +
+                "Order now" + hamburger) needs ~306px but only 288px are
+                available, so the right div spilled 2px past the viewport.
+                Logo mark alone below 360 — same pattern as the account /
+                home headers, which hide the wordmark below sm. */}
+            <span class="font-display text-[17px] font-bold max-[359px]:hidden">Kumbuild</span>
           </a>
 
           <nav class="ml-7 hidden items-center gap-4 whitespace-nowrap text-[14px] xl:flex" aria-label="Main">
@@ -181,6 +186,17 @@ const noteParts = dict.hero.note.split(" · ");
               </span>
               <svg class="h-5 w-5 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
             </a>
+            {/* Per-service links — below xl the desktop Services dropdown
+                never renders, so without these the four service pages were
+                unreachable at 768–1279 (mobile menu only linked /services). */}
+            <div class="border-b border-line py-1.5">
+              {dict.services.items.map((s) => (
+                <a href={pageUrl(locale, `/services/${s.slug}`)} class="flex items-center justify-between gap-4 py-2.5 pl-11 pr-1 text-[16px] font-medium text-body transition-colors duration-200 hover:text-primary-700">
+                  {s.title}
+                  <svg class="h-4 w-4 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+                </a>
+              ))}
+            </div>
             {links.map((l, i) => (
               <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={mobileLink(l.href === current)}>
                 <span class="flex items-baseline gap-3.5">
