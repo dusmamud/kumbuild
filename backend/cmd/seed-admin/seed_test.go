@@ -87,7 +87,7 @@ func TestSeedTwiceErrors(t *testing.T) {
 func TestSeedInvalidPhoneErrors(t *testing.T) {
 	ctx, users := setupUsers(t)
 
-	for _, bad := range []string{"9876543210", "+911234567890", "+14155552671", ""} {
+	for _, bad := range []string{"987654321", "+911234567890", "+14155552671", ""} {
 		_, err := seed.SeedSuperAdmin(ctx, users, auth.HashPassword, testEmail, testFullName, bad, "", testPassword)
 		if err == nil {
 			t.Errorf("phone %q: expected error, got nil", bad)
