@@ -9,6 +9,18 @@ const item = dict.services.items.find((i) => i.slug === slug) ?? dict.services.i
 const page = sv.pages[slug as keyof typeof sv.pages] ?? sv.pages["business-website"];
 const waLink = `https://wa.me/${dict.v2.contact.waNumber}?text=${encodeURIComponent(dict.v2.contact.waText)}`;
 const orderUrl = `${pageUrl(locale, "/order")}?service=${item.slug}`;
+/* Two example websites per service. Landing Page has no project of its
+   own — Thread & Thistle (Instagram-seller landing) and Iron Paradise
+   (gym offer landing) are the closest fits. */
+const examplesByService: Record<string, string[]> = {
+  "business-website": ["bright-minds-tuition", "thread-and-thistle-boutique"],
+  "landing-page": ["thread-and-thistle-boutique", "iron-paradise-gym"],
+  "booking-website": ["glow-and-co-salon", "iron-paradise-gym"],
+  "catalogue-website": ["crumbs-and-craft-bakery", "spice-route-restaurant"],
+};
+const examples = (examplesByService[item.slug] ?? []).flatMap(
+  (s) => dict.v2.work.projects.find((p) => p.slug === s) ?? [],
+);
 const chevronIcon = '<path d="m9 18 6-6-6-6"/>';
 const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
 ---
@@ -45,6 +57,42 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
       <img src={page.img} alt={`${item.title} — ${item.for}`} width="1600" height="1000" class="block aspect-[16/10] w-full object-cover object-top sm:aspect-[16/8]" />
     </figure>
   </section>
+
+  {/* Example websites for this service — two previews, right up front */}
+  {examples.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 pt-12 sm:pt-14" data-reveal>
+      <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{dict.examples.title}</h2>
+      <div class="mt-6 grid gap-5 sm:grid-cols-2">
+        {examples.map((p) => (
+          <a
+            href={pageUrl(locale, `/preview/${p.slug}`)}
+            class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
+          >
+            <span class="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-2.5">
+              <span class="h-2.5 w-2.5 rounded-full bg-[#E8B4AE]" aria-hidden="true"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-[#EBD9A8]" aria-hidden="true"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-[#AED8BC]" aria-hidden="true"></span>
+              <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{p.slug}.in</span>
+            </span>
+            <span class="block overflow-hidden">
+              <img src={p.img} alt={`${p.name} — ${p.type}, ${p.city}`} width="1280" height="800" loading="lazy" class="block aspect-[8/5] w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]" />
+            </span>
+            <span class="flex flex-1 flex-col p-6">
+              <span class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <span class="font-display text-[clamp(1rem,1rem+0.5vw,1.375rem)] font-semibold text-ink">{p.name}</span>
+                <span class="font-mono text-[12px] text-muted">{p.type} · {p.city}</span>
+              </span>
+              <span class="mt-2.5 flex-1 text-base leading-[28px] text-body line-clamp-2">{p.desc}</span>
+              <span class="mt-5 inline-flex min-h-[44px] items-center gap-1.5 border-t border-line pt-4 text-base font-semibold text-primary-700">
+                {dict.preview.viewPreview}
+                <Icon name="arrow-right" class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 
   {/* Includes + order rail */}
   <section class="mx-auto max-w-6xl px-4 py-12 sm:py-14" data-reveal>

@@ -37,6 +37,10 @@ const meta = [
         <h1 class="font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{project.name}</h1>
         <p class="mt-3 font-mono text-[13px] text-muted">{project.type} · {project.city}</p>
       </div>
+      <a href={pageUrl(locale, `/preview/${project.slug}`)} class="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border border-line bg-white px-5 py-3 text-base font-semibold text-ink transition duration-200 hover:bg-paper active:scale-[0.98]">
+        {dict.preview.viewPreview}
+        <Icon name="arrow-right" class="h-[18px] w-[18px]" />
+      </a>
     </div>
     <figure class="mt-8 overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,25,23,0.08)]">
       <div class="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-2.5">

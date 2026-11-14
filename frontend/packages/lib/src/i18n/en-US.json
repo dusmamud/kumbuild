@@ -464,6 +464,10 @@
     "summaryTitle": "Your order at a glance",
     "summarySteps": "What happens next"
   },
+  "preview": {
+    "back": "Back",
+    "viewPreview": "View preview"
+  },
   "pricing": {
     "note": "Prices are draft and will be confirmed before you pay.",
     "packages": [

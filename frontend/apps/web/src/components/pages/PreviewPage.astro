@@ -1,0 +1,109 @@
+---
+/* One work example, shown large: the example website is the star, framed
+   by the slim Kumbuild preview bar (Back + Order) instead of the full
+   site header. Uses PreviewLayout — no Lenis, no data-reveal. */
+import PreviewLayout from "../../layouts/PreviewLayout.astro";
+import Icon from "../Icon.astro";
+import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; slug: string; }
+const { dict, locale, slug } = Astro.props;
+const work = dict.v2.work;
+const labels = work.caseLabels;
+const idx = Math.max(0, work.projects.findIndex((p) => p.slug === slug));
+const project = work.projects[idx];
+/* Service slug by project slug — NOT by translated title: the hi/bn/as
+   project.service strings do not match the translated services.items
+   titles, so a title match would mis-route every non-English order link. */
+const serviceByProject: Record<string, string> = {
+  "bright-minds-tuition": "business-website",
+  "thread-and-thistle-boutique": "business-website",
+  "glow-and-co-salon": "booking-website",
+  "iron-paradise-gym": "booking-website",
+  "crumbs-and-craft-bakery": "catalogue-website",
+  "spice-route-restaurant": "catalogue-website",
+};
+const serviceSlug = serviceByProject[project.slug] ?? "business-website";
+const orderHref = `${pageUrl(locale, "/order")}?service=${serviceSlug}`;
+const meta = [
+  { label: labels.service, value: project.service },
+  { label: labels.city, value: project.city },
+  { label: labels.result, value: project.result },
+];
+---
+
+<PreviewLayout
+  title={project.name}
+  description={project.desc}
+  locale={locale}
+  backHref={pageUrl(locale, "/examples")}
+  backLabel={dict.preview.back}
+  homeHref={pageUrl(locale, "/")}
+  orderHref={orderHref}
+  orderLabel={dict.nav.order}
+>
+  {/* Name + result */}
+  <section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+    <h1 class="font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{project.name}</h1>
+    <p class="mt-3 font-mono text-[13px] text-muted">{project.type} · {project.city}</p>
+    <p class="mt-4 flex items-center gap-2 text-base font-medium text-ink">
+      <Icon name="trending-up" class="h-[18px] w-[18px] shrink-0 text-live" />
+      {project.result}
+    </p>
+  </section>
+
+  {/* The example website, large, in a browser-chrome frame */}
+  <section class="mx-auto max-w-6xl px-4 pt-8 sm:px-6 sm:pt-10">
+    <figure class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,25,23,0.08)]">
+      <div class="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-2.5">
+        <span class="h-2.5 w-2.5 rounded-full bg-[#E8B4AE]" aria-hidden="true"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#EBD9A8]" aria-hidden="true"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#AED8BC]" aria-hidden="true"></span>
+        <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{project.slug}.in</span>
+      </div>
+      <img src={project.img} alt={`${project.name} — ${project.type}, ${project.city}`} width="1600" height="900" fetchpriority="high" class="block aspect-[16/9] w-full object-cover object-top sm:aspect-[21/10]" />
+    </figure>
+  </section>
+
+  {/* Overview + story + meta */}
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+    <div class="grid gap-6 lg:grid-cols-[1fr_340px] lg:gap-10">
+      <div>
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.overview}</h2>
+        <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{project.desc}</p>
+        <h2 class="mt-10 font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.story}</h2>
+        <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">{project.story}</p>
+      </div>
+      <aside class="h-fit rounded-2xl border border-line bg-white p-6 sm:p-7 lg:sticky lg:top-24">
+        <dl>
+          {meta.map((row, i) => (
+            <div class={i > 0 ? "mt-5 border-t border-line pt-5" : ""}>
+              <dt class="font-mono text-[12px] font-medium uppercase tracking-wide text-muted">{row.label}</dt>
+              <dd class="mt-1.5 text-base font-medium leading-[24px] text-ink">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <a href={orderHref} class="mt-6 flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-cta px-4 py-3 text-base font-semibold text-white transition duration-200 hover:bg-cta-hover active:scale-[0.98]">
+          {dict.nav.order}
+          <Icon name="arrow-right" class="h-[18px] w-[18px]" />
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  {/* Deliverables */}
+  <section class="border-y border-line bg-surface">
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+      <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.deliverables}</h2>
+      <ul class="mt-7 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+        {project.deliverables.map((d) => (
+          <li class="flex gap-3 text-base leading-[26px] text-body">
+            <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-live-soft text-live">
+              <Icon name="check" class="h-4 w-4" />
+            </span>
+            <span>{d}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</PreviewLayout>

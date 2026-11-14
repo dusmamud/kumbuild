@@ -1,0 +1,10 @@
+---
+import PreviewPage from "../../../components/pages/PreviewPage.astro";
+import { dictFor } from "../../../i18n/utils";
+export function getStaticPaths() {
+  return dictFor("bn").v2.work.projects.map((p) => ({ params: { slug: p.slug } }));
+}
+const dict = dictFor("bn");
+const slug = Astro.params.slug ?? "";
+---
+<PreviewPage dict={dict} locale={"bn"} slug={slug} />
