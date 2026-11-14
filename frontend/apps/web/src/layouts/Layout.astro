@@ -10,9 +10,15 @@ interface Props {
   dict: Dictionary;
   /** page slug without locale prefix, e.g. "/pricing" or "/" */
   slug: string;
+  /** Background of the section at the top of the page — the header bar
+      matches it at rest, so there is no colour step. "surface" for pages
+      whose first section is bg-surface (home hero, about intro); "paper"
+      everywhere else (default). On scroll the header always becomes
+      bg-paper/92 + blur + divider + shadow. */
+  headerTopBg?: "paper" | "surface";
 }
 
-const { title, description, locale, dict, slug } = Astro.props;
+const { title, description, locale, dict, slug, headerTopBg = "paper" } = Astro.props;
 const nav = dict.nav;
 const v2 = dict.v2;
 const current = pageUrl(locale, slug);
@@ -82,7 +88,7 @@ const noteParts = dict.hero.note.split(" · ");
     </div>
 
     <header id="site-header" class="sticky top-0 z-50">
-      <div class="relative z-10 border-b border-transparent bg-transparent transition-[box-shadow,border-color,background-color] duration-300" id="header-bar">
+      <div class={`relative z-10 border-b border-transparent ${headerTopBg === "surface" ? "bg-surface" : "bg-paper"} transition-[box-shadow,border-color,background-color] duration-300`} id="header-bar" data-rest-bg={headerTopBg === "surface" ? "bg-surface" : "bg-paper"}>
         <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
           <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2 text-ink">
             <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" class="h-8 w-8" />
@@ -265,6 +271,15 @@ const noteParts = dict.hero.note.split(" · ");
         /* Accordion resets when the menu closes, so the next open starts
            clean with Services collapsed. */
         if (!open) setMobileServices(false);
+        /* The menu overlay is bg-paper — force the header to paper while it
+           is open, so a surface-top page (home, about) doesn't show a band
+           over the menu. On close, restore the scroll-appropriate state. */
+        if (open) {
+          headerBar.classList.remove(restBg, "bg-paper/92");
+          headerBar.classList.add("bg-paper");
+        } else {
+          onScrollHeader();
+        }
         /* Lenis keeps its own scroll position — body overflow alone does not
            stop it, and the page jumps when the menu closes. Stop it for real. */
         const lenis = window.__lenis;
@@ -373,13 +388,13 @@ const noteParts = dict.hero.note.split(" · ");
 
       /* Header gains depth once the page is scrolled. */
       const headerBar = document.getElementById("header-bar");
+      const restBg = headerBar.dataset.restBg || "bg-paper";
       const onScrollHeader = () => {
         const sc = window.scrollY > 8;
-        /* At rest the bar is transparent, so it melts into whatever section
-           is at the top of the page (the hero is bg-surface, not paper —
-           a fixed paper fill would show a colour step). Once scrolled it
-           gains its paper fill + blur + divider + shadow. */
-        headerBar.classList.toggle("bg-transparent", !sc);
+        /* At rest the bar matches the section at the top of the page
+           (data-rest-bg: bg-surface on home/about, bg-paper elsewhere).
+           Once scrolled it gains its paper fill + blur + divider + shadow. */
+        headerBar.classList.toggle(restBg, !sc);
         headerBar.classList.toggle("bg-paper/92", sc);
         headerBar.classList.toggle("backdrop-blur-md", sc);
         headerBar.style.boxShadow = sc ? "0 8px 24px rgba(28,25,23,0.07)" : "none";
