@@ -1,0 +1,91 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CtaBand from "../CtaBand.astro";
+import Icon from "../Icon.astro";
+import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; }
+const { dict, locale } = Astro.props;
+const m = dict.maintenance;
+const r = dict.pricing.renewal;
+const docsUrl = "https://docs.kumbuild.com/your-website/payments-and-renewal/";
+---
+
+<Layout title={m.title} description={m.subtitle} locale={locale} dict={dict} slug="/maintenance">
+  {/* Hero + price */}
+  <section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+    <div data-reveal class="max-w-3xl">
+      <h1 class="font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{m.title}</h1>
+      <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">{m.subtitle}</p>
+    </div>
+    <div data-reveal class="mt-8 grid items-center gap-6 rounded-2xl border border-line bg-surface px-6 py-8 sm:px-8 lg:grid-cols-[auto_1fr_auto] lg:gap-10">
+      <span class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-primary-700">
+        <Icon name="refresh-cw" class="h-6 w-6" />
+      </span>
+      <div>
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.7vw,1.5rem)] font-semibold leading-snug text-ink">{r.title}</h2>
+        <p class="mt-1.5 max-w-2xl text-base leading-[28px] text-body">{r.desc}</p>
+        <p class="mt-2 text-sm font-medium text-live">{m.firstYear}</p>
+      </div>
+      <div class="lg:text-right">
+        <p class="font-display text-[clamp(1.375rem,1.2rem+1vw,1.875rem)] font-semibold tabular-nums text-ink">{r.price} <span class="font-sans text-sm font-medium text-muted">/ {r.per}</span></p>
+        <p class="mt-1 max-w-xs text-sm leading-[22px] text-muted lg:ml-auto">{dict.pricing.note}</p>
+      </div>
+    </div>
+  </section>
+
+  {/* What's included */}
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+    <h2 data-reveal class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-ink">{m.includedTitle}</h2>
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {m.included.map((item) => (
+        <li data-reveal class="rounded-2xl border border-line bg-white p-6">
+          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary-700">
+            <Icon name={item.icon} class="h-5 w-5" />
+          </span>
+          <h3 class="mt-4 font-display text-lg font-semibold leading-snug text-ink">{item.title}</h3>
+          <p class="mt-1.5 text-base leading-[26px] text-body">{item.text}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {/* How renewal works */}
+  <section class="border-y border-line bg-surface" data-reveal>
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+      <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-ink">{m.howTitle}</h2>
+      <ol class="mt-7 grid gap-x-8 gap-y-5 sm:grid-cols-3">
+        {m.howSteps.map((step, i) => (
+          <li class="border-t border-line pt-4">
+            <span class="font-mono text-sm font-medium text-primary-700">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="mt-2 font-display text-lg font-semibold leading-snug text-ink">{step.title}</h3>
+            <p class="mt-1.5 text-base leading-[26px] text-body">{step.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {/* Good to know */}
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+    <h2 data-reveal class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-ink">{m.notesTitle}</h2>
+    <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {m.notes.map((note) => (
+        <article data-reveal class="rounded-2xl border border-line bg-white p-6 sm:p-7">
+          <h3 class="font-display text-[clamp(1rem,0.95rem+0.5vw,1.25rem)] font-semibold leading-snug text-ink">{note.title}</h3>
+          <p class="mt-2 text-base leading-[28px] text-body">{note.text}</p>
+        </article>
+      ))}
+    </div>
+    <div data-reveal class="mt-10 flex flex-wrap items-center justify-between gap-x-8 gap-y-5 rounded-2xl border border-line bg-surface px-6 py-6 sm:px-8">
+      <div class="max-w-xl">
+        <h2 class="font-display text-lg font-semibold text-ink">{m.docsTitle}</h2>
+        <p class="mt-1.5 text-base leading-[28px] text-body">{m.docsText}</p>
+      </div>
+      <a href={docsUrl} class="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl bg-ink px-5 py-3 text-base font-semibold text-white transition hover:bg-black active:scale-[0.98]">
+        {m.docsLink}
+        <Icon name="arrow-up-right" class="h-[18px] w-[18px]" />
+      </a>
+    </div>
+  </section>
+  <CtaBand dict={dict} locale={locale} />
+</Layout>

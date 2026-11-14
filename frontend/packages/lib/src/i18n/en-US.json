@@ -348,6 +348,78 @@
     "viewAll": "See all industries"
   },
   "locale": "en-US",
+  "maintenance": {
+    "docsLink": "Read Payments and renewal in the docs",
+    "docsText": "Renewal terms, refunds and how changes work are all written up in our help docs.",
+    "docsTitle": "The full details",
+    "firstYear": "First year included in your package",
+    "howSteps": [
+      {
+        "text": "Before your renewal date, we message you on WhatsApp — nothing is ever charged silently.",
+        "title": "We remind you"
+      },
+      {
+        "text": "Pay through the Razorpay link on WhatsApp — UPI, cards, net-banking.",
+        "title": "You pay ₹1,999"
+      },
+      {
+        "text": "Domain, hosting, updates and support keep running for one more year.",
+        "title": "Another year, covered"
+      }
+    ],
+    "howTitle": "How renewal works",
+    "included": [
+      {
+        "icon": "globe",
+        "text": "Your domain name is renewed on time, every year — you never have to think about expiry dates.",
+        "title": "Domain renewal"
+      },
+      {
+        "icon": "gauge",
+        "text": "Fast cloud hosting keeps your website live and quick to load, day and night.",
+        "title": "Hosting"
+      },
+      {
+        "icon": "shield-check",
+        "text": "Security updates are applied and backups are kept, so your website stays safe and recoverable.",
+        "title": "Security updates & backups"
+      },
+      {
+        "icon": "refresh-cw",
+        "text": "A phone number, timings, a price or a line or two — message us on WhatsApp and it is done.",
+        "title": "Small updates"
+      },
+      {
+        "icon": "message-circle",
+        "text": "A question or a problem? Message us on WhatsApp — no tickets, no waiting on hold.",
+        "title": "Support on WhatsApp"
+      },
+      {
+        "icon": "lock",
+        "text": "Your domain, your content and your customer data are yours — always.",
+        "title": "Your content stays yours"
+      }
+    ],
+    "includedTitle": "What the renewal covers",
+    "navLabel": "Maintenance",
+    "notes": [
+      {
+        "text": "Prices move, new products arrive, timings shift. Small text and photo changes are turned around quickly over WhatsApp. Bigger changes, like a new page, are quoted fairly before we start.",
+        "title": "Changes after launch"
+      },
+      {
+        "text": "Care-plan renewals can be cancelled any time; your website stays live until the end of the paid period, and your domain and content remain yours.",
+        "title": "Cancel any time"
+      },
+      {
+        "text": "50% advance when you order, the remaining 50% after you approve the preview, before your website goes live. Payment is through Razorpay — UPI, cards, net-banking and wallets.",
+        "title": "How payment works"
+      }
+    ],
+    "notesTitle": "Good to know",
+    "subtitle": "Your website stays live, fast and up to date — without you touching anything. The first year is included in your package; after that, one simple yearly renewal covers it all.",
+    "title": "Maintenance & renewal"
+  },
   "name": "English",
   "nativeName": "English",
   "nav": {

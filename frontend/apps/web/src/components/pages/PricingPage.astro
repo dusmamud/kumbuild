@@ -5,7 +5,7 @@ import PricingTable from "../PricingTable.astro";
 import TestimonialsSection from "../TestimonialsSection.astro";
 import SectionHead from "../SectionHead.astro";
 import CtaBand from "../CtaBand.astro";
-import type { Dictionary, Locale } from "../../i18n/utils";
+import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
 const r = dict.pricing.renewal;
@@ -32,6 +32,7 @@ const r = dict.pricing.renewal;
       <div>
         <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.7vw,1.5rem)] font-semibold leading-snug text-ink">{r.title}</h2>
         <p class="mt-1.5 max-w-2xl text-base leading-[28px] text-body">{r.desc}</p>
+        <a href={pageUrl(locale, "/maintenance")} class="mt-2 inline-flex min-h-[44px] items-center gap-1.5 text-base font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700">{dict.common.learnMore} →</a>
       </div>
       <p class="font-display text-[clamp(1.375rem,1.2rem+1vw,1.875rem)] font-semibold tabular-nums text-ink">{r.price} <span class="font-sans text-sm font-medium text-muted">/ {r.per}</span></p>
     </div>

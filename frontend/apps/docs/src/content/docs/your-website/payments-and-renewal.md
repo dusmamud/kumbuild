@@ -22,6 +22,8 @@ Your package includes the first year. After that, a yearly renewal of **₹1,999
 - Security updates and backups
 - Your website staying live and fast
 
+See the [maintenance page](https://kumbuild.com/maintenance) for everything the renewal covers.
+
 We remind you on WhatsApp before the renewal date — nothing is charged silently. If you choose not to renew, your website's files and domain are still yours; see [How Kumbuild works](/getting-started/how-kumbuild-works/#what-you-own).
 
 ## Refunds
