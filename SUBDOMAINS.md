@@ -84,6 +84,32 @@ Sirf logged-in customer. Bina login ke koi bhi page kholo to `account.kumbuild.c
 
 **Customer ko status yahan bhi dikhta hai aur WhatsApp pe bhi milta hai** — dono chalte hain.
 
+## 5. blog.kumbuild.com — Blog (Astro 7)
+
+Login nahi chahiye. Kumbuild ka blog — dukaandaaron ke liye website, WhatsApp orders aur pricing par articles. English-only hai (Hindi/Bengali articles abhi sirf purane /blog me hain — uska redirect faisla pending hai).
+
+| Route | Page | Kya hoga |
+|---|---|---|
+| `/` | Blog home | Saare posts ki list + search (Cmd+K, Pagefind) |
+| `/[slug]` | Article | Ek post — breadcrumbs, share, JSON-LD |
+| `/topic/[topic]` | Topic | Ek topic ke posts |
+| `/rss.xml` | RSS feed | Saare posts ka feed |
+
+3 posts live hain: `why-your-shop-needs-a-website`, `whatsapp-orders-from-your-website`, `what-a-website-should-cost`. Astro 7 + React islands + Tailwind 4, Markdown collections. Light + dark (Radix slateDark, THEME.md v4). Live: https://kumbuild-blog.pages.dev/ — custom domain blog.kumbuild.com Dus khud add karega.
+
+## 6. docs.kumbuild.com — Help docs (Astro 7 + Starlight)
+
+Login nahi chahiye. Customers ke liye help aur guides — order, preview, payment, renewal, Google par dikhna.
+
+| Group | Pages | Kya hoga |
+|---|---|---|
+| Start here | index, how-kumbuild-works, order-your-website | Shuruaat — Kumbuild kaise kaam karta hai, website order karo |
+| Your website | preview-and-revisions, payments-and-renewal, changes-after-launch | Preview/revision, payment/renewal, launch ke baad changes |
+| Grow | get-found-on-google | Google par dikhna |
+| Help | faq, contact | Aam sawaal, contact |
+
+9 pages, 4 groups. Astro 7 + Starlight 0.42.10, Sora/Inter, light + dark (Radix slateDark, THEME.md v4). Live: https://kumbuild-docs.pages.dev/ — custom domain docs.kumbuild.com Dus khud add karega.
+
 ## Guards matrix (client-side — static SPAs me server guard nahi hota)
 
 | Kholne wala | `kumbuild.com` | `account.kumbuild.com` | `admin.kumbuild.com` | `home.kumbuild.com` |
