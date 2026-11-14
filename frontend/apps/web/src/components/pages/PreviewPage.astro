@@ -24,6 +24,14 @@ const serviceByProject: Record<string, string> = {
 };
 const serviceSlug = serviceByProject[project.slug] ?? "business-website";
 const orderHref = `${pageUrl(locale, "/order")}?service=${serviceSlug}`;
+/* More examples: the other 5 work projects + the 3 demo sites. Demo names
+   stay English — the demo sites are English-only. */
+const others = work.projects.filter((p) => p.slug !== project.slug);
+const demos = [
+  { slug: "sharma-general-store", name: "Sharma General Store", meta: "General store · Pune", img: "/demo/sites/shop-hero.webp" },
+  { slug: "smile-dental-clinic", name: "Smile Dental Clinic", meta: "Dental clinic · Indore", img: "/demo/sites/clinic-hero.webp" },
+  { slug: "glow-salon", name: "Glow Salon", meta: "Unisex salon · Bengaluru", img: "/demo/sites/salon-hero.webp" },
+];
 const meta = [
   { label: labels.service, value: project.service },
   { label: labels.city, value: project.city },
@@ -104,6 +112,41 @@ const meta = [
           </li>
         ))}
       </ul>
+    </div>
+  </section>
+
+  {/* More examples — image-led cards on purpose: each example shows its
+      own colours, no kumbuild card grading (no white card, no border,
+      no browser frame). The whole card is the link. */}
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+    <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{dict.preview.moreExamples}</h2>
+    <div class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {others.map((p) => (
+        <a href={pageUrl(locale, `/preview/${p.slug}`)} class="group relative block overflow-hidden rounded-2xl">
+          <img src={p.img} alt={`${p.name} — ${p.type}, ${p.city}`} width="800" height="600" loading="lazy" class="block aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
+          <span class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" aria-hidden="true"></span>
+          <span class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">
+            <Icon name="arrow-right" class="h-4 w-4" />
+          </span>
+          <span class="absolute inset-x-0 bottom-0 p-4">
+            <span class="block font-display text-base font-semibold leading-snug text-white">{p.name}</span>
+            <span class="mt-0.5 block text-[13px] text-white/80">{p.type} · {p.city}</span>
+          </span>
+        </a>
+      ))}
+      {demos.map((d) => (
+        <a href={`/demo/${d.slug}/`} class="group relative block overflow-hidden rounded-2xl">
+          <img src={d.img} alt={`${d.name} — ${d.meta}`} width="800" height="600" loading="lazy" class="block aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
+          <span class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" aria-hidden="true"></span>
+          <span class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">
+            <Icon name="arrow-right" class="h-4 w-4" />
+          </span>
+          <span class="absolute inset-x-0 bottom-0 p-4">
+            <span class="block font-display text-base font-semibold leading-snug text-white">{d.name}</span>
+            <span class="mt-0.5 block text-[13px] text-white/80">{d.meta}</span>
+          </span>
+        </a>
+      ))}
     </div>
   </section>
 </PreviewLayout>
