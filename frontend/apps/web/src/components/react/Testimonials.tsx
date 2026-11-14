@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { Star, ArrowLeft, ArrowRight, Quote, Pause, Play } from "lucide-react";
 
 export interface Testimonial {
@@ -31,6 +31,7 @@ export default function Testimonials({ items, labels }: { items: Testimonial[]; 
     { loop: true, align: "start", skipSnaps: false },
     [autoplay.current]
   );
+  const reduceMotion = useReducedMotion();
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
@@ -46,11 +47,11 @@ export default function Testimonials({ items, labels }: { items: Testimonial[]; 
           {items.map((t, i) => (
             <motion.figure
               key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="flex min-w-0 shrink-0 grow-0 basis-full flex-col rounded-2xl border border-line bg-white p-6 transition-shadow duration-300 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)] sm:basis-[calc(50%-10px)] lg:basis-[calc(33.333%-14px)]"
+              className="flex min-w-0 shrink-0 grow-0 basis-full flex-col rounded-2xl border border-line bg-white p-6 transition-shadow duration-300 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)] md:basis-[calc(50%-10px)] lg:basis-[calc(33.333%-14px)]"
             >
               <span className="flex items-center justify-between">
                 <Quote className="h-6 w-6 text-primary-500" strokeWidth={1.5} aria-hidden />

@@ -417,28 +417,37 @@ const noteParts = dict.hero.note.split(" · ");
       );
       document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
 
-      /* Back to top. */
+      /* Floating actions — back to top + WhatsApp. Both hide while the
+         footer is in view (so they never cover footer links) and while
+         scrolling down (so they never cover the content being read);
+         they return on scroll-up. Thresholds unchanged: FAB past 500px,
+         back-to-top past 700px. */
       const toTop = document.getElementById("to-top");
-      window.addEventListener("scroll", () => {
-        const show = window.scrollY > 700;
-        toTop.classList.toggle("opacity-0", !show);
-        toTop.classList.toggle("invisible", !show);
-        toTop.classList.toggle("pointer-events-none", !show);
-        toTop.style.transform = show ? "translateY(0)" : "translateY(8px)";
-      }, { passive: true });
-
-      /* WhatsApp FAB — appears only after the hero scrolls away, so it
-         never covers the hero stats or the top of a form. */
       const waFab = document.getElementById("wa-fab");
-      const onScrollFab = () => {
-        const show = window.scrollY > 500;
-        waFab.classList.toggle("opacity-0", !show);
-        waFab.classList.toggle("invisible", !show);
-        waFab.classList.toggle("pointer-events-none", !show);
-        waFab.style.transform = show ? "translateY(0)" : "translateY(8px)";
-      };
-      window.addEventListener("scroll", onScrollFab, { passive: true });
-      onScrollFab();
+      let lastFabY = window.scrollY;
+      let footerVisible = false;
+      function setFabVisible(el, show) {
+        el.classList.toggle("opacity-0", !show);
+        el.classList.toggle("invisible", !show);
+        el.classList.toggle("pointer-events-none", !show);
+        el.style.transform = show ? "translateY(0)" : "translateY(8px)";
+      }
+      function onScrollFabs() {
+        const y = window.scrollY;
+        const scrollingUp = y < lastFabY;
+        lastFabY = y;
+        setFabVisible(toTop, y > 700 && !footerVisible && scrollingUp);
+        setFabVisible(waFab, y > 500 && !footerVisible && scrollingUp);
+      }
+      const footerEl = document.querySelector("footer");
+      if (footerEl) {
+        new IntersectionObserver((entries) => {
+          footerVisible = entries[0].isIntersecting;
+          onScrollFabs();
+        }).observe(footerEl);
+      }
+      window.addEventListener("scroll", onScrollFabs, { passive: true });
+      onScrollFabs();
       toTop.addEventListener("click", () => {
         /* Native smooth scroll fights Lenis's raf loop — ride Lenis when on. */
         if (window.__lenis) window.__lenis.scrollTo(0);

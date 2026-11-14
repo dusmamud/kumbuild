@@ -20,7 +20,7 @@ const c = dict.v2.compare;
       <table class="w-full min-w-[620px] border-collapse text-left">
         <thead>
           <tr class="border-b border-line">
-            <th scope="col" class="px-6 py-5"><span class="sr-only">Compare</span></th>
+            <th scope="col" class="sticky left-0 z-10 bg-white px-6 py-5"><span class="sr-only">Compare</span></th>
             <th scope="col" class="bg-primary-50 px-5 py-5">
               <span class="flex items-center gap-2 font-display text-base font-semibold text-ink">
                 <img src="/logo/kumbuild-logo.svg" alt="" width="22" height="22" class="h-[22px] w-[22px]" />
@@ -34,7 +34,7 @@ const c = dict.v2.compare;
         <tbody>
           {c.rows.map((r) => (
             <tr class="border-b border-line last:border-b-0">
-              <th scope="row" class="px-6 py-4 text-base font-semibold text-ink">{r.label}</th>
+              <th scope="row" class="sticky left-0 z-10 bg-white px-6 py-4 text-base font-semibold text-ink">{r.label}</th>
               <td class="bg-primary-50 px-5 py-4">
                 <span class="flex items-center gap-2.5 text-base font-medium text-ink">
                   <span class="flex h-[20px] w-[20px] shrink-0 items-center justify-center rounded-full bg-live text-white">
@@ -45,13 +45,13 @@ const c = dict.v2.compare;
               </td>
               <td class="px-5 py-4">
                 <span class="flex items-center gap-2.5 text-base text-muted">
-                  <Icon name="x" class="h-4 w-4 shrink-0 text-faint" />
+                  <Icon name="x" class="h-4 w-4 shrink-0 text-muted" />
                   {r.diy}
                 </span>
               </td>
               <td class="px-5 py-4">
                 <span class="flex items-center gap-2.5 text-base text-muted">
-                  <Icon name="minus" class="h-4 w-4 shrink-0 text-faint" />
+                  <Icon name="minus" class="h-4 w-4 shrink-0 text-muted" />
                   {r.free}
                 </span>
               </td>

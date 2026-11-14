@@ -69,18 +69,18 @@ const miniProducts = [
               srcset="/hero/shop-owner-520.jpg 520w, /hero/shop-owner-1040.jpg 1040w"
               sizes="(max-width: 520px) 100vw, 520px"
               alt="A shop owner smiling in his general store — the kind of business Kumbuild builds websites for"
-              width="1000"
-              height="1080"
+              width="1252"
+              height="1866"
               class="aspect-[4/5] w-full rounded-[24px] object-cover object-[50%_22%] shadow-[0_32px_64px_-32px_rgba(28,25,23,0.4)] sm:aspect-[5/5.4]"
               loading="eager"
               fetchpriority="high"
             />
           </picture>
-          <figcaption class="absolute right-4 top-4 flex items-center gap-2 rounded-full bg-white/95 py-1.5 pl-2.5 pr-3.5 text-[13px] font-semibold text-ink shadow-[0_8px_20px_-8px_rgba(28,25,23,0.4)] backdrop-blur-sm">
-            <span class="flex h-5 w-5 items-center justify-center rounded-full bg-green-600">
+          <figcaption class="absolute right-4 top-4 flex max-w-[calc(100%-2rem)] items-center gap-2 rounded-full bg-white/95 py-1.5 pl-2.5 pr-3.5 text-[13px] font-semibold text-ink shadow-[0_8px_20px_-8px_rgba(28,25,23,0.4)] backdrop-blur-sm">
+            <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-600">
               <svg class="h-3 w-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
             </span>
-            {home.slip.rows[2].k} · {home.slip.rows[2].v}
+            <span class="truncate">{home.slip.rows[2].k} · {home.slip.rows[2].v}</span>
           </figcaption>
         </figure>
 
@@ -117,9 +117,9 @@ const miniProducts = [
 
         {/* Order slip — the signature, tucked at the photo's lower right. */}
         <div class="mx-auto mt-5 w-[232px] max-w-[86vw] rounded-[16px] border border-line bg-white p-4 shadow-[0_24px_40px_-24px_rgba(28,25,23,0.35)] xl:absolute xl:-bottom-10 xl:-right-4">
-          <div class="flex items-baseline justify-between gap-3">
-            <p class="font-mono text-xs text-muted">{home.slip.heading} · {home.slip.ref}</p>
-            <p class="text-xs font-semibold text-primary-700">{home.slip.business}</p>
+          <div>
+            <p class="truncate whitespace-nowrap font-mono text-xs text-muted">{home.slip.heading} · {home.slip.ref}</p>
+            <p class="mt-0.5 text-xs font-semibold text-primary-700">{home.slip.business}</p>
           </div>
           <dl class="mt-1.5">
             {home.slip.rows.slice(0, 2).map((r) => (

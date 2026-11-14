@@ -98,7 +98,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #008efd;
+  outline: 2px solid var(--color-primary-600);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -157,13 +157,16 @@ body {
   background: #a8a29e;
 }
 
-/* Hero website-card float — disabled for reduced motion. */
+/* Motion disabled for reduced motion: hero float, marquee scroll,
+   live-pulse dots. */
 @keyframes kb-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-7px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-\[kb-float_7s_ease-in-out_infinite\] { animation: none; }
+  .animate-marquee { animation: none; }
+  .animate-live-pulse { animation: none; }
 }
 
 /* Mobile-only typography tightening (<640px). Everything here is scoped

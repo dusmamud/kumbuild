@@ -6,11 +6,12 @@ interface Props { dict: Dictionary; }
 const { dict } = Astro.props;
 const t = dict.v2.tech;
 /* Icons per group, locked to the dictionary item order:
-   Build / Experience / Hosting & payments. */
+   Build / Experience / Hosting & payments / Workflow. */
 const groupIcons = [
   ["rocket", "layers", "smartphone", "zap", "code", "wind"],
   ["trending-up", "gauge", "refresh-cw", "award"],
   ["globe", "wallet", "message-circle", "search"],
+  ["zap", "layers", "refresh-cw", "code"],
 ];
 /* Real brand logos (Simple Icons, public/tech/) where one exists;
    items without a logo fall back to the Lucide-style icon above. */
@@ -28,7 +29,7 @@ const groupLogos = [
       <SectionHead title={t.title} subtitle={t.subtitle} />
     </div>
     {t.groups.map((group, gi) => (
-      <div class={gi === 0 ? "mt-12" : "mt-14"}>
+      <div class={gi === 0 ? "mt-10" : "mt-12"}>
         <h3 data-reveal class="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.14em] text-muted">
           {group.label}
           <span class="h-px flex-1 bg-line" aria-hidden="true"></span>
@@ -38,7 +39,7 @@ const groupLogos = [
             <li
               data-reveal
               style={`--reveal-delay:${(i % 4) * 60}ms`}
-              class="rounded-2xl border border-line bg-white p-5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
+              class="rounded-2xl border border-line bg-white p-5 transition-[border-color,box-shadow] duration-300 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
             >
               <span class="flex items-center gap-3">
                 {groupLogos[gi]?.[i] ? (

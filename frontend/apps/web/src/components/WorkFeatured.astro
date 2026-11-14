@@ -8,7 +8,7 @@ const w = dict.v2.work;
 const featured = w.projects.slice(0, 3);
 ---
 
-<section class="bg-paper">
+<section class="border-y border-line bg-surface">
   <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
     <div data-reveal>
       <SectionHead no={no} title={w.title} subtitle={w.subtitle} />
@@ -61,7 +61,7 @@ const featured = w.projects.slice(0, 3);
       ))}
     </div>
     <div class="mt-10" data-reveal>
-      <a href={pageUrl(locale, "/examples")} class="inline-flex items-center gap-2 text-base font-semibold text-primary-700 transition-colors duration-200 hover:text-primary-800">
+      <a href={pageUrl(locale, "/examples")} class="inline-flex min-h-[44px] items-center gap-2 text-base font-semibold text-primary-700 transition-colors duration-200 hover:text-primary-800">
         {dict.v2.ui.allWork}
         <Icon name="arrow-right" class="h-4 w-4" />
       </a>

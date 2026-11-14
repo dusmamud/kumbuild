@@ -1,7 +1,7 @@
 ---
-import type { Dictionary } from "../i18n/utils";
-interface Props { dict: Dictionary; }
-const { dict } = Astro.props;
+import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; }
+const { dict, locale } = Astro.props;
 const b = dict.v2.homeV2;
 ---
 
@@ -38,6 +38,14 @@ const b = dict.v2.homeV2;
           </li>
         ))}
       </ul>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a href={pageUrl(locale, "/order")} class="inline-flex items-center justify-center gap-2 rounded-xl bg-cta px-7 py-3.5 text-base font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-cta-hover active:scale-[0.98]">
+          {dict.hero.ctaOrder}
+        </a>
+        <a href={pageUrl(locale, "/pricing")} class="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-7 py-3.5 text-base font-semibold text-ink transition-colors duration-200 hover:border-primary-300 hover:text-primary-700">
+          {dict.hero.ctaPricing}
+        </a>
+      </div>
     </div>
   </div>
 </section>

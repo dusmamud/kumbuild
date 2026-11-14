@@ -13,11 +13,18 @@ const items = [...m.items, ...m.items];
   <div class="marquee-track relative overflow-hidden py-6 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
     <div class="animate-marquee flex w-max items-center gap-10 pr-10" aria-hidden="true">
       {items.map((item) => (
-        <span class="flex items-center gap-10 whitespace-nowrap font-display text-lg font-semibold text-ink/60">
+        <span class="flex items-center gap-10 whitespace-nowrap font-display text-lg font-semibold text-ink/70">
           {item}
           <span class="h-1.5 w-1.5 rounded-full bg-primary-300" aria-hidden="true"></span>
         </span>
       ))}
     </div>
   </div>
+  {/* The animated track is aria-hidden (it duplicates the items for the
+      loop), so screen readers get this static list instead. */}
+  <ul class="sr-only">
+    {m.items.map((item) => (
+      <li>{item}</li>
+    ))}
+  </ul>
 </section>

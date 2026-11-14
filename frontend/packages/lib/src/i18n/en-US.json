@@ -172,7 +172,7 @@
         "v": "3–5"
       },
       {
-        "k": "starting price, one-time",
+        "k": "starting price, one‑time",
         "v": "₹3,999"
       },
       {
@@ -281,10 +281,7 @@
           "Up to 5 pages",
           "Everything in Starter",
           "Services + gallery",
-          "About your business",
-          "Mobile responsive",
-          "Basic SEO",
-          "SSL (https)"
+          "About your business"
         ],
         "name": "Business",
         "per": "one-time",

@@ -16,20 +16,20 @@ const fmtDate = (iso: string) =>
 <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
   <div data-reveal class="flex flex-wrap items-end justify-between gap-x-8 gap-y-5">
     <SectionHead title={b.title} subtitle={b.subtitle} />
-    <a href={pageUrl(locale, "/blog")} class="inline-flex min-h-[40px] items-center gap-1.5 text-base font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700">
+    <a href={pageUrl(locale, "/blog")} class="inline-flex min-h-[44px] items-center gap-1.5 text-base font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700">
       {b.allPosts}
       <Icon name="arrow-right" class="h-4 w-4" />
     </a>
   </div>
-  <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {b.posts.map((post) => (
       <a
         data-reveal
         href={pageUrl(locale, `/blog/${post.slug}`)}
-        class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
+        class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
       >
         <span class="relative block overflow-hidden">
-          <img src={post.img} alt={post.title} width="1200" height="675" loading="lazy" class="aspect-[16/9] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+          <img src={post.img} alt={post.title} width="1200" height="675" loading="lazy" class="aspect-[16/9] w-full object-cover transition duration-500 group-hover:scale-[1.04]" />
           <span class="absolute bottom-3 left-3 rounded-full bg-white/95 px-2.5 py-1 font-mono text-xs font-medium text-primary-700 shadow-sm">{post.tag}</span>
         </span>
         <span class="flex flex-1 flex-col p-6">
