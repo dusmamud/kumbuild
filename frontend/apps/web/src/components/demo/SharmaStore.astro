@@ -1,0 +1,285 @@
+---
+/* Demo website: Sharma General Store — a neighbourhood kirana in Pune.
+   Standalone demo site (English only, hardcoded content). Uses PreviewLayout
+   so the Kumbuild bar (Back + Order) sits above the demo. No data-reveal. */
+import PreviewLayout from "../../layouts/PreviewLayout.astro";
+import Icon from "../Icon.astro";
+
+const wa = (text: string) =>
+  `https://wa.me/919876543210?text=${encodeURIComponent(text)}`;
+const orderWa = wa("Hi Sharma General Store! I'd like to place an order.");
+
+const categories = [
+  {
+    name: "Staples",
+    items: [
+      { name: "Chakki Atta", unit: "5 kg", price: "₹240" },
+      { name: "Basmati Rice", unit: "1 kg", price: "₹120" },
+      { name: "Toor Dal", unit: "1 kg", price: "₹165" },
+    ],
+  },
+  {
+    name: "Spices & masala",
+    items: [
+      { name: "Turmeric Powder", unit: "100 g", price: "₹35" },
+      { name: "Red Chilli Powder", unit: "100 g", price: "₹40" },
+    ],
+  },
+  {
+    name: "Daily needs",
+    items: [
+      { name: "Sunflower Oil", unit: "1 L", price: "₹135" },
+      { name: "Tea", unit: "250 g", price: "₹140" },
+      { name: "Bath Soap", unit: "1 pc", price: "₹45" },
+    ],
+  },
+  {
+    name: "Fresh",
+    items: [
+      { name: "Onions", unit: "1 kg", price: "₹35" },
+      { name: "Tomatoes", unit: "1 kg", price: "₹30" },
+    ],
+  },
+];
+
+const steps = [
+  { title: "Send your list", text: "Message your shopping list on WhatsApp — in Hindi or English, either works." },
+  { title: "We confirm the total", text: "We reply with the prices and the total before packing anything." },
+  { title: "Pick up or home delivery", text: "Collect from the shop, or get it delivered nearby the same day." },
+];
+---
+
+<PreviewLayout
+  title="Sharma General Store — Kirana in Kothrud, Pune"
+  description="Sharma General Store: your neighbourhood kirana in Pune. Daily staples, spices and fresh produce with fair prices and WhatsApp ordering."
+  locale="en-US"
+  backHref="/services/catalogue-website/"
+  backLabel="Back"
+  homeHref="/"
+  orderHref="/order?service=catalogue-website"
+  orderLabel="Order now"
+  footerText="Demo website built by Kumbuild — Sharma General Store is a fictional shop."
+>
+  <style is:global>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+
+  <div class="bg-[#faf6ec] font-sans text-[#3a3428]">
+    {/* Demo mini header */}
+    <div class="border-b border-[#e5dcc3] bg-[#fffdf5] sm:sticky sm:top-14 sm:z-40">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 sm:px-6">
+        <a href="#top" class="flex items-center gap-2.5">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#1e4a28] text-white">
+            <Icon name="store" class="h-5 w-5" />
+          </span>
+          <span class="font-display text-lg font-bold leading-tight text-[#1e4a28]">Sharma General Store</span>
+        </a>
+        <nav class="order-3 flex w-full gap-1 overflow-x-auto pb-1 sm:order-none sm:w-auto sm:pb-0" aria-label="Store sections">
+          <a href="#products" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#3a3428] transition-colors hover:bg-[#efe8d2] hover:text-[#1e4a28]">Products</a>
+          <a href="#offers" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#3a3428] transition-colors hover:bg-[#efe8d2] hover:text-[#1e4a28]">Offers</a>
+          <a href="#visit" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#3a3428] transition-colors hover:bg-[#efe8d2] hover:text-[#1e4a28]">Visit us</a>
+        </nav>
+        <a
+          href={orderWa}
+          target="_blank"
+          rel="noopener"
+          class="ml-auto inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#1e4a28] px-4 py-2.5 text-[15px] font-semibold text-white transition hover:bg-[#16361e] active:scale-[0.98]"
+        >
+          <Icon name="message-circle" class="h-[18px] w-[18px]" />
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    {/* Hero */}
+    <section id="top" class="mx-auto max-w-6xl scroll-mt-20 px-4 pt-10 sm:scroll-mt-36 sm:px-6 sm:pt-14">
+      <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        <div>
+          <p class="font-mono text-[13px] font-medium uppercase tracking-wide text-[#2f6b3a]">Kirana · Kothrud, Pune</p>
+          <h1 class="mt-3 font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-[#1e4a28]">
+            Everything your kitchen needs, just around the corner.
+          </h1>
+          <p class="mt-4 max-w-xl text-base leading-[28px] text-[#5c5344] sm:text-lg sm:leading-[30px]">
+            A family-run general store serving Kothrud for years. Fresh stock every week,
+            fair prices on the shelf, and your monthly ration sorted over one WhatsApp message.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href={orderWa}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#1e4a28] px-5 py-3 text-base font-semibold text-white transition hover:bg-[#16361e] active:scale-[0.98]"
+            >
+              <Icon name="message-circle" class="h-[18px] w-[18px]" />
+              Order on WhatsApp
+            </a>
+            <a
+              href="#products"
+              class="inline-flex min-h-[44px] items-center rounded-xl border border-[#d8cda8] bg-white px-5 py-3 text-base font-semibold text-[#1e4a28] transition hover:bg-[#f3edd8] active:scale-[0.98]"
+            >
+              See products &amp; prices
+            </a>
+          </div>
+          <p class="mt-5 flex items-center gap-2 text-sm text-[#6f6750]">
+            <Icon name="clock" class="h-4 w-4 shrink-0 text-[#2f6b3a]" />
+            Open today 8:00 am – 9:00 pm · Free home delivery within 2 km on orders over ₹500
+          </p>
+        </div>
+        <div class="overflow-hidden rounded-2xl border border-[#e5dcc3] shadow-[0_16px_40px_rgba(30,74,40,0.12)]">
+          <img
+            src="/demo/sites/shop-hero.webp"
+            alt="Inside Sharma General Store — wooden shelves stocked with sacks of grain, jars of spices and cooking oil"
+            width="1600"
+            height="1067"
+            class="block aspect-[3/2] w-full object-cover"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+    </section>
+
+    {/* Today's offer */}
+    <section id="offers" class="mx-auto max-w-6xl scroll-mt-20 px-4 pt-12 sm:scroll-mt-36 sm:px-6">
+      <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 rounded-2xl bg-[#1e4a28] px-6 py-6 sm:px-8">
+        <div>
+          <p class="font-mono text-[12px] font-medium uppercase tracking-wide text-[#fbbf24]">Today's offer</p>
+          <p class="mt-1.5 font-display text-lg font-semibold leading-snug text-white sm:text-xl">
+            Buy 5 kg atta, get 250 g tea free.
+          </p>
+          <p class="mt-1 text-sm leading-[22px] text-[#d9e8d5]">Order on WhatsApp before 6 pm — the offer ends today.</p>
+        </div>
+        <a
+          href={wa("Hi Sharma General Store! I want today's atta + tea offer.")}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-xl bg-[#fbbf24] px-5 py-3 text-base font-semibold text-[#1e4a28] transition hover:bg-[#f59e0b] active:scale-[0.98]"
+        >
+          Claim on WhatsApp
+          <Icon name="arrow-right" class="h-[18px] w-[18px]" />
+        </a>
+      </div>
+    </section>
+
+    {/* Products */}
+    <section id="products" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:scroll-mt-36 sm:px-6 sm:py-14">
+      <div class="grid gap-8 lg:grid-cols-[1fr_320px] lg:gap-10">
+        <div>
+          <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-[#1e4a28]">Products &amp; prices</h2>
+          <p class="mt-2 max-w-2xl text-base leading-[28px] text-[#5c5344]">
+            The everyday list, with prices on display. Something missing? Message us — if it is a kirana item, we probably stock it.
+          </p>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2">
+            {categories.map((cat) => (
+              <div class="rounded-2xl border border-[#e5dcc3] bg-white p-6">
+                <h3 class="font-display text-lg font-semibold text-[#1e4a28]">{cat.name}</h3>
+                <ul class="mt-4">
+                  {cat.items.map((item, i) => (
+                    <li class={i > 0 ? "mt-3 border-t border-dashed border-[#e5dcc3] pt-3" : ""}>
+                      <span class="flex items-baseline justify-between gap-4">
+                        <span class="text-base leading-[26px] text-[#3a3428]">
+                          {item.name} <span class="text-sm text-[#8a7f68]">· {item.unit}</span>
+                        </span>
+                        <span class="shrink-0 font-display text-base font-semibold tabular-nums text-[#1e4a28]">{item.price}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+        <aside class="h-fit overflow-hidden rounded-2xl border border-[#e5dcc3] bg-white">
+          <img
+            src="/demo/sites/shop-products.webp"
+            alt="Rice, atta, dal, spices, oil and fresh vegetables laid out on a wooden table"
+            width="1200"
+            height="800"
+            loading="lazy"
+            class="block aspect-[3/2] w-full object-cover"
+          />
+          <div class="p-6">
+            <h3 class="font-display text-lg font-semibold text-[#1e4a28]">Fresh stock, every week</h3>
+            <p class="mt-2 text-base leading-[26px] text-[#5c5344]">
+              Rice, dal and spices arrive in small batches so nothing sits on the shelf for months.
+              Vegetables come in every morning.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    {/* How ordering works */}
+    <section class="border-y border-[#e5dcc3] bg-[#f3edd8]">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+        <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-[#1e4a28]">Ordering is simple</h2>
+        <ol class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-3">
+          {steps.map((step, i) => (
+            <li class="border-t-2 border-[#2f6b3a] pt-4">
+              <span class="font-mono text-sm font-medium text-[#2f6b3a]">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="mt-2 font-display text-lg font-semibold leading-snug text-[#1e4a28]">{step.title}</h3>
+              <p class="mt-1.5 text-base leading-[26px] text-[#5c5344]">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* Visit us */}
+    <section id="visit" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:scroll-mt-36 sm:px-6 sm:py-14">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="rounded-2xl border border-[#e5dcc3] bg-white p-6 sm:p-8">
+          <h2 class="flex items-center gap-2.5 font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-[#1e4a28]">
+            <Icon name="map-pin" class="h-5 w-5 shrink-0 text-[#2f6b3a]" />
+            Visit the shop
+          </h2>
+          <p class="mt-3 text-base leading-[28px] text-[#5c5344]">
+            Main Road, Kothrud, Pune — two minutes from the bus stop, next to the vegetable market.
+            Parking for two-wheelers right outside.
+          </p>
+          <p class="mt-4 flex items-start gap-2 text-base leading-[26px] text-[#5c5344]">
+            <Icon name="check" class="mt-1 h-[18px] w-[18px] shrink-0 text-[#2f6b3a]" />
+            UPI, cards and cash accepted. Monthly accounts available for regular families.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-[#e5dcc3] bg-white p-6 sm:p-8">
+          <h2 class="flex items-center gap-2.5 font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-[#1e4a28]">
+            <Icon name="clock" class="h-5 w-5 shrink-0 text-[#2f6b3a]" />
+            Timings
+          </h2>
+          <ul class="mt-3 text-base leading-[28px] text-[#5c5344]">
+            <li class="flex items-baseline justify-between gap-4 border-b border-dashed border-[#e5dcc3] py-2.5">
+              <span>Monday – Saturday</span>
+              <span class="shrink-0 font-semibold tabular-nums text-[#1e4a28]">8:00 am – 9:00 pm</span>
+            </li>
+            <li class="flex items-baseline justify-between gap-4 py-2.5">
+              <span>Sunday</span>
+              <span class="shrink-0 font-semibold tabular-nums text-[#1e4a28]">9:00 am – 1:00 pm</span>
+            </li>
+          </ul>
+          <a
+            href={orderWa}
+            target="_blank"
+            rel="noopener"
+            class="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#1e4a28] px-5 py-3 text-base font-semibold text-white transition hover:bg-[#16361e] active:scale-[0.98]"
+          >
+            <Icon name="message-circle" class="h-[18px] w-[18px]" />
+            Send your list on WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* Demo footer */}
+    <footer class="border-t border-[#e5dcc3] bg-[#f3edd8]">
+      <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+        <p class="font-display text-base font-semibold text-[#1e4a28]">Sharma General Store · Kothrud, Pune</p>
+        <p class="mt-2 max-w-2xl text-sm leading-[22px] text-[#6f6750]">
+          Demo website — this shop is fictional. Prices, timings and details are samples to show
+          what a Kumbuild website looks like for a neighbourhood store.
+        </p>
+      </div>
+    </footer>
+  </div>
+</PreviewLayout>

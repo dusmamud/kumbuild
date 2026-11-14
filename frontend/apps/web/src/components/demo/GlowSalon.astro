@@ -1,0 +1,272 @@
+---
+/* Demo website: Glow Salon — a unisex salon in Bengaluru.
+   Standalone demo site (English only, hardcoded content). Uses PreviewLayout
+   so the Kumbuild bar (Back + Order) sits above the demo. No data-reveal. */
+import PreviewLayout from "../../layouts/PreviewLayout.astro";
+import Icon from "../Icon.astro";
+
+const wa = (text: string) =>
+  `https://wa.me/919876543210?text=${encodeURIComponent(text)}`;
+const bookWa = wa("Hi Glow Salon! I'd like to book an appointment.");
+
+const services = [
+  { name: "Haircut", desc: "Cut, wash and blow-dry — for men and women.", price: "₹399", time: "30 min" },
+  { name: "Hair Spa", desc: "Deep-conditioning spa with a head massage.", price: "₹999", time: "60 min" },
+  { name: "Facial", desc: "Clean-up to glow facial, matched to your skin type.", price: "₹1,299", time: "60 min" },
+  { name: "Manicure", desc: "Shaping, cuticle care and polish of your choice.", price: "₹499", time: "45 min" },
+  { name: "Pedicure", desc: "Soak, scrub, massage and polish — feet done right.", price: "₹599", time: "45 min" },
+  { name: "Beard Trim", desc: "Shape-up with a hot towel finish.", price: "₹199", time: "20 min" },
+  { name: "Hair Colour", desc: "Global colour or highlights, with a patch test first.", price: "₹2,499", time: "120 min" },
+  { name: "Bridal Package", desc: "Hair, makeup, draping and a trial session before the day.", price: "₹14,999", time: "Full day" },
+];
+
+const stylists = [
+  { name: "Priya", role: "Senior stylist", detail: "Colour, balayage and bridal looks. Eight years behind the chair, and she still sketches every bridal look first." },
+  { name: "Arjun", role: "Barber & grooming", detail: "Classic and modern cuts, beard sculpting and clean shaves. Book him on weekends — his chair fills fast." },
+];
+---
+
+<PreviewLayout
+  title="Glow Salon — Unisex Salon in Indiranagar, Bengaluru"
+  description="Glow Salon: a unisex salon in Bengaluru. Haircuts, colour, facials, manicure and bridal packages with clear prices and WhatsApp booking."
+  locale="en-US"
+  backHref="/services/booking-website/"
+  backLabel="Back"
+  homeHref="/"
+  orderHref="/order?service=booking-website"
+  orderLabel="Order now"
+  footerText="Demo website built by Kumbuild — Glow Salon is a fictional salon."
+>
+  <style is:global>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+
+  <div class="bg-[#fdf6f3] font-sans text-[#4c3a40]">
+    {/* Demo mini header */}
+    <div class="border-b border-[#f0d9de] bg-[#fffbf9] sm:sticky sm:top-14 sm:z-40">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 sm:px-6">
+        <a href="#top" class="flex items-center gap-2.5">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#9d174d] text-white">
+            <Icon name="scissors" class="h-5 w-5" />
+          </span>
+          <span class="font-display text-lg font-bold leading-tight text-[#4a1f33]">Glow Salon</span>
+        </a>
+        <nav class="order-3 flex w-full gap-1 overflow-x-auto pb-1 sm:order-none sm:w-auto sm:pb-0" aria-label="Salon sections">
+          <a href="#services" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#4c3a40] transition-colors hover:bg-[#fbe9ef] hover:text-[#4a1f33]">Services</a>
+          <a href="#stylists" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#4c3a40] transition-colors hover:bg-[#fbe9ef] hover:text-[#4a1f33]">Stylists</a>
+          <a href="#offers" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#4c3a40] transition-colors hover:bg-[#fbe9ef] hover:text-[#4a1f33]">Offers</a>
+          <a href="#book" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#4c3a40] transition-colors hover:bg-[#fbe9ef] hover:text-[#4a1f33]">Book</a>
+        </nav>
+        <a
+          href={bookWa}
+          target="_blank"
+          rel="noopener"
+          class="ml-auto inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#9d174d] px-4 py-2.5 text-[15px] font-semibold text-white transition hover:bg-[#83123f] active:scale-[0.98]"
+        >
+          <Icon name="calendar-check" class="h-[18px] w-[18px]" />
+          Book on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    {/* Hero */}
+    <section id="top" class="mx-auto max-w-6xl scroll-mt-20 px-4 pt-10 sm:scroll-mt-36 sm:px-6 sm:pt-14">
+      <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        <div>
+          <p class="font-mono text-[13px] font-medium uppercase tracking-wide text-[#9d174d]">Unisex salon · Indiranagar, Bengaluru</p>
+          <h1 class="mt-3 font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-[#4a1f33]">
+            Look good, feel lighter.
+          </h1>
+          <p class="mt-4 max-w-xl text-base leading-[28px] text-[#6b5560] sm:text-lg sm:leading-[30px]">
+            A calm, unisex salon in Indiranagar — good cuts, honest prices, and stylists who listen
+            before they pick up the scissors. Walk-ins welcome, bookings on WhatsApp.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href={bookWa}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#9d174d] px-5 py-3 text-base font-semibold text-white transition hover:bg-[#83123f] active:scale-[0.98]"
+            >
+              <Icon name="calendar-check" class="h-[18px] w-[18px]" />
+              Book on WhatsApp
+            </a>
+            <a
+              href="#services"
+              class="inline-flex min-h-[44px] items-center rounded-xl border border-[#e8c8d1] bg-white px-5 py-3 text-base font-semibold text-[#4a1f33] transition hover:bg-[#fbe9ef] active:scale-[0.98]"
+            >
+              See services &amp; prices
+            </a>
+          </div>
+          <p class="mt-5 flex items-center gap-2 text-sm text-[#8a7380]">
+            <Icon name="star" class="h-4 w-4 shrink-0 text-[#9d174d]" />
+            Open every day 10:00 am – 8:00 pm · No appointment needed for a haircut
+          </p>
+        </div>
+        <div class="overflow-hidden rounded-2xl border border-[#f0d9de] shadow-[0_16px_40px_rgba(74,31,51,0.12)]">
+          <img
+            src="/demo/sites/salon-hero.webp"
+            alt="Inside Glow Salon — styling chairs in front of lit mirrors, warm evening light"
+            width="1600"
+            height="1067"
+            class="block aspect-[3/2] w-full object-cover"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+    </section>
+
+    {/* Offer of the month */}
+    <section id="offers" class="mx-auto max-w-6xl scroll-mt-20 px-4 pt-12 sm:scroll-mt-36 sm:px-6">
+      <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 rounded-2xl bg-[#4a1f33] px-6 py-6 sm:px-8">
+        <div>
+          <p class="font-mono text-[12px] font-medium uppercase tracking-wide text-[#f9a8d4]">Offer of the month</p>
+          <p class="mt-1.5 font-display text-lg font-semibold leading-snug text-white sm:text-xl">
+            Hair spa + facial combo at ₹1,999 — save ₹300.
+          </p>
+          <p class="mt-1 text-sm leading-[22px] text-[#e8c8d1]">This month only. Mention the offer when you book.</p>
+        </div>
+        <a
+          href={wa("Hi Glow Salon! I'd like the hair spa + facial combo offer.")}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-xl bg-[#f9a8d4] px-5 py-3 text-base font-semibold text-[#4a1f33] transition hover:bg-[#f472b6] active:scale-[0.98]"
+        >
+          Claim on WhatsApp
+          <Icon name="arrow-right" class="h-[18px] w-[18px]" />
+        </a>
+      </div>
+    </section>
+
+    {/* Services */}
+    <section id="services" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:scroll-mt-36 sm:px-6 sm:py-14">
+      <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-[#4a1f33]">Services &amp; prices</h2>
+      <p class="mt-2 max-w-2xl text-base leading-[28px] text-[#6b5560]">
+        Every service lists its price and how long it takes — so you can plan your visit, not guess it.
+      </p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <article class="flex flex-col rounded-2xl border border-[#f0d9de] bg-white p-6">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="font-display text-lg font-semibold leading-snug text-[#4a1f33]">{s.name}</h3>
+              <span class="shrink-0 rounded-full bg-[#fbe9ef] px-2.5 py-1 font-mono text-[12px] font-medium text-[#9d174d]">{s.time}</span>
+            </div>
+            <p class="mt-2 flex-1 text-base leading-[26px] text-[#6b5560]">{s.desc}</p>
+            <p class="mt-4 border-t border-dashed border-[#f0d9de] pt-3 font-display text-xl font-semibold tabular-nums text-[#4a1f33]">{s.price}</p>
+          </article>
+        ))}
+        <article class="flex flex-col justify-between rounded-2xl border border-[#f0d9de] bg-[#4a1f33] p-6">
+          <div>
+            <h3 class="font-display text-lg font-semibold leading-snug text-white">Not sure what you need?</h3>
+            <p class="mt-2 text-base leading-[26px] text-[#e8c8d1]">
+              Message us a photo of your hair or a look you like — we will suggest the right service and the exact price.
+            </p>
+          </div>
+          <a
+            href={wa("Hi Glow Salon! I need help picking a service.")}
+            target="_blank"
+            rel="noopener"
+            class="mt-5 inline-flex min-h-[44px] w-fit items-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#4a1f33] transition hover:bg-[#fbe9ef] active:scale-[0.98]"
+          >
+            <Icon name="message-circle" class="h-[18px] w-[18px]" />
+            Ask on WhatsApp
+          </a>
+        </article>
+      </div>
+    </section>
+
+    {/* Stylists */}
+    <section id="stylists" class="border-y border-[#f0d9de] bg-white">
+      <div class="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:scroll-mt-36 sm:px-6 sm:py-14">
+        <div class="grid items-center gap-8 lg:grid-cols-[1fr_320px] lg:gap-10">
+          <div>
+            <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-[#4a1f33]">Your stylists</h2>
+            <div class="mt-8 grid gap-6 sm:grid-cols-2">
+              {stylists.map((s) => (
+                <article class="rounded-2xl border border-[#f0d9de] bg-[#fdf6f3] p-6">
+                  <span class="flex h-11 w-11 items-center justify-center rounded-full bg-[#9d174d] font-display text-lg font-bold text-white" aria-hidden="true">
+                    {s.name[0]}
+                  </span>
+                  <h3 class="mt-4 font-display text-lg font-semibold text-[#4a1f33]">{s.name}</h3>
+                  <p class="font-mono text-[12px] font-medium uppercase tracking-wide text-[#9d174d]">{s.role}</p>
+                  <p class="mt-2 text-base leading-[26px] text-[#6b5560]">{s.detail}</p>
+                </article>
+              ))}
+            </div>
+            <p class="mt-6 flex items-start gap-2 text-base leading-[26px] text-[#6b5560]">
+              <Icon name="check" class="mt-1 h-[18px] w-[18px] shrink-0 text-[#9d174d]" />
+              Ask for your stylist by name when you book — we will hold their chair for you.
+            </p>
+          </div>
+          <div class="overflow-hidden rounded-2xl border border-[#f0d9de]">
+            <img
+              src="/demo/sites/salon-hands.webp"
+              alt="A stylist blow-drying a client's long hair, seen from behind"
+              width="1200"
+              height="800"
+              loading="lazy"
+              class="block aspect-[3/2] w-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Timings + book */}
+    <section id="book" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:scroll-mt-36 sm:px-6 sm:py-14">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="rounded-2xl border border-[#f0d9de] bg-white p-6 sm:p-8">
+          <h2 class="flex items-center gap-2.5 font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-[#4a1f33]">
+            <Icon name="clock" class="h-5 w-5 shrink-0 text-[#9d174d]" />
+            Timings
+          </h2>
+          <ul class="mt-3 text-base leading-[28px] text-[#6b5560]">
+            <li class="flex items-baseline justify-between gap-4 border-b border-dashed border-[#f0d9de] py-2.5">
+              <span>Every day</span>
+              <span class="shrink-0 font-semibold tabular-nums text-[#4a1f33]">10:00 am – 8:00 pm</span>
+            </li>
+            <li class="flex items-baseline justify-between gap-4 py-2.5">
+              <span>Walk-ins</span>
+              <span class="shrink-0 font-semibold text-[#4a1f33]">Welcome — bookings get priority</span>
+            </li>
+          </ul>
+          <p class="mt-4 flex items-start gap-2 text-base leading-[26px] text-[#6b5560]">
+            <Icon name="map-pin" class="mt-1 h-[18px] w-[18px] shrink-0 text-[#9d174d]" />
+            Indiranagar, Bengaluru — above the bakery on 100 Feet Road, two minutes from the metro.
+          </p>
+        </div>
+        <div class="flex flex-col justify-between rounded-2xl bg-[#9d174d] p-6 sm:p-8">
+          <div>
+            <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-white">Book your chair</h2>
+            <p class="mt-2 text-base leading-[28px] text-[#fbcfe8]">
+              Tell us the service, your stylist if you have one, and when suits you.
+              We confirm within an hour — usually much faster.
+            </p>
+          </div>
+          <a
+            href={bookWa}
+            target="_blank"
+            rel="noopener"
+            class="mt-6 inline-flex min-h-[44px] w-fit items-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#4a1f33] transition hover:bg-[#fbe9ef] active:scale-[0.98]"
+          >
+            <Icon name="message-circle" class="h-[18px] w-[18px]" />
+            Book on WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* Demo footer */}
+    <footer class="border-t border-[#f0d9de] bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+        <p class="font-display text-base font-semibold text-[#4a1f33]">Glow Salon · Indiranagar, Bengaluru</p>
+        <p class="mt-2 max-w-2xl text-sm leading-[22px] text-[#8a7380]">
+          Demo website — this salon is fictional. Services, prices and details are samples to show
+          what a Kumbuild website looks like for a salon.
+        </p>
+      </div>
+    </footer>
+  </div>
+</PreviewLayout>

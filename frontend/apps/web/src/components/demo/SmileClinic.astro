@@ -1,0 +1,267 @@
+---
+/* Demo website: Smile Dental Clinic — a dental clinic in Indore.
+   Standalone demo site (English only, hardcoded content). Uses PreviewLayout
+   so the Kumbuild bar (Back + Order) sits above the demo. No data-reveal. */
+import PreviewLayout from "../../layouts/PreviewLayout.astro";
+import Icon from "../Icon.astro";
+
+const wa = (text: string) =>
+  `https://wa.me/919876543210?text=${encodeURIComponent(text)}`;
+const bookWa = wa("Hi Smile Dental Clinic! I'd like to book an appointment.");
+
+const treatments = [
+  { name: "Dental Check-up", desc: "Full mouth check-up, X-ray if needed, and a clear treatment plan.", price: "₹300", time: "20 min" },
+  { name: "Teeth Cleaning", desc: "Scaling and polishing that leaves your teeth smooth and fresh.", price: "₹1,500", time: "45 min" },
+  { name: "Tooth Filling", desc: "Tooth-coloured fillings for cavities — done in a single visit.", price: "₹1,200", time: "30 min" },
+  { name: "Root Canal Treatment", desc: "Painless single-visit root canal with a crown plan explained up front.", price: "₹5,000", time: "60 min" },
+  { name: "Braces Consultation", desc: "For children and adults — alignment options, timelines and honest costs.", price: "₹500", time: "30 min" },
+  { name: "Teeth Whitening", desc: "Safe in-clinic whitening, up to 6 shades lighter in one sitting.", price: "₹6,000", time: "60 min" },
+];
+
+const steps = [
+  { title: "Book on WhatsApp", text: "Message us and pick a slot that suits you — mornings or evenings, six days a week." },
+  { title: "Check-up & clear plan", text: "We explain what you need, what it costs, and what can wait. No surprises." },
+  { title: "Gentle treatment", text: "Sterilised tools, a painless-first approach, and aftercare on WhatsApp." },
+];
+---
+
+<PreviewLayout
+  title="Smile Dental Clinic — Dentist in Indore"
+  description="Smile Dental Clinic: gentle, honest dentistry in Indore. Check-ups, cleaning, fillings, root canals and whitening with clear prices."
+  locale="en-US"
+  backHref="/services/booking-website/"
+  backLabel="Back"
+  homeHref="/"
+  orderHref="/order?service=booking-website"
+  orderLabel="Order now"
+  footerText="Demo website built by Kumbuild — Smile Dental Clinic is a fictional clinic."
+>
+  <style is:global>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+
+  <div class="bg-[#f2f8fa] font-sans text-[#33464e]">
+    {/* Demo mini header */}
+    <div class="border-b border-[#d5e8ec] bg-white sm:sticky sm:top-14 sm:z-40">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 sm:px-6">
+        <a href="#top" class="flex items-center gap-2.5">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0e7490] text-white">
+            <Icon name="stethoscope" class="h-5 w-5" />
+          </span>
+          <span class="font-display text-lg font-bold leading-tight text-[#0b3b4a]">Smile Dental Clinic</span>
+        </a>
+        <nav class="order-3 flex w-full gap-1 overflow-x-auto pb-1 sm:order-none sm:w-auto sm:pb-0" aria-label="Clinic sections">
+          <a href="#treatments" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#33464e] transition-colors hover:bg-[#e0f2f5] hover:text-[#0b3b4a]">Treatments</a>
+          <a href="#doctor" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#33464e] transition-colors hover:bg-[#e0f2f5] hover:text-[#0b3b4a]">Doctor</a>
+          <a href="#timings" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#33464e] transition-colors hover:bg-[#e0f2f5] hover:text-[#0b3b4a]">Timings</a>
+          <a href="#book" class="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-3 text-[15px] font-semibold text-[#33464e] transition-colors hover:bg-[#e0f2f5] hover:text-[#0b3b4a]">Book</a>
+        </nav>
+        <a
+          href={bookWa}
+          target="_blank"
+          rel="noopener"
+          class="ml-auto inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#0e7490] px-4 py-2.5 text-[15px] font-semibold text-white transition hover:bg-[#0a5a70] active:scale-[0.98]"
+        >
+          <Icon name="calendar-check" class="h-[18px] w-[18px]" />
+          Book appointment
+        </a>
+      </div>
+    </div>
+
+    {/* Hero */}
+    <section id="top" class="mx-auto max-w-6xl scroll-mt-20 px-4 pt-10 sm:scroll-mt-36 sm:px-6 sm:pt-14">
+      <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        <div>
+          <p class="font-mono text-[13px] font-medium uppercase tracking-wide text-[#0e7490]">Dental clinic · Indore</p>
+          <h1 class="mt-3 font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-[#0b3b4a]">
+            Gentle dentistry, honest prices.
+          </h1>
+          <p class="mt-4 max-w-xl text-base leading-[28px] text-[#52666e] sm:text-lg sm:leading-[30px]">
+            A small family dental clinic where nobody is rushed and nothing is hidden.
+            Sterilised equipment, a painless-first approach, and the full cost explained before we begin.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href={bookWa}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#0e7490] px-5 py-3 text-base font-semibold text-white transition hover:bg-[#0a5a70] active:scale-[0.98]"
+            >
+              <Icon name="calendar-check" class="h-[18px] w-[18px]" />
+              Book appointment
+            </a>
+            <a
+              href="#treatments"
+              class="inline-flex min-h-[44px] items-center rounded-xl border border-[#bcd9e0] bg-white px-5 py-3 text-base font-semibold text-[#0b3b4a] transition hover:bg-[#e0f2f5] active:scale-[0.98]"
+            >
+              See treatments &amp; prices
+            </a>
+          </div>
+          <p class="mt-5 flex items-center gap-2 text-sm text-[#6b7f86]">
+            <Icon name="shield-check" class="h-4 w-4 shrink-0 text-[#0e7490]" />
+            Same-day slots kept for tooth pain — message us on WhatsApp.
+          </p>
+        </div>
+        <div class="overflow-hidden rounded-2xl border border-[#d5e8ec] shadow-[0_16px_40px_rgba(11,59,74,0.10)]">
+          <img
+            src="/demo/sites/clinic-hero.webp"
+            alt="Inside Smile Dental Clinic — a bright treatment room with a dental chair, teal cabinets and a large window"
+            width="1600"
+            height="1067"
+            class="block aspect-[3/2] w-full object-cover"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+    </section>
+
+    {/* Treatments */}
+    <section id="treatments" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:scroll-mt-36 sm:px-6 sm:py-14">
+      <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-[#0b3b4a]">Treatments &amp; prices</h2>
+      <p class="mt-2 max-w-2xl text-base leading-[28px] text-[#52666e]">
+        Fixed prices, told to you before treatment starts. If something costs more than listed here, we say so first.
+      </p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {treatments.map((t) => (
+          <article class="flex flex-col rounded-2xl border border-[#d5e8ec] bg-white p-6">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="font-display text-lg font-semibold leading-snug text-[#0b3b4a]">{t.name}</h3>
+              <span class="shrink-0 rounded-full bg-[#e0f2f5] px-2.5 py-1 font-mono text-[12px] font-medium text-[#0e7490]">{t.time}</span>
+            </div>
+            <p class="mt-2 flex-1 text-base leading-[26px] text-[#52666e]">{t.desc}</p>
+            <p class="mt-4 border-t border-dashed border-[#d5e8ec] pt-3 font-display text-xl font-semibold tabular-nums text-[#0b3b4a]">{t.price}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {/* Doctor */}
+    <section id="doctor" class="border-y border-[#d5e8ec] bg-white">
+      <div class="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:scroll-mt-36 sm:px-6 sm:py-14">
+        <div class="grid items-center gap-8 lg:grid-cols-[1fr_320px] lg:gap-10">
+          <div>
+            <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-[#0b3b4a]">Meet your dentist</h2>
+            <p class="mt-4 font-display text-xl font-semibold text-[#0b3b4a]">Dr. Ananya Sharma, BDS</p>
+            <p class="mt-2 max-w-2xl text-base leading-[28px] text-[#52666e]">
+              Dr. Sharma believes a good dentist explains first and treats second. Every appointment
+              starts with a conversation — what hurts, what worries you, and what the options are —
+              so you always know what is happening and why.
+            </p>
+            <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+              <li class="flex gap-2.5 text-base leading-[26px] text-[#33464e]">
+                <Icon name="check" class="mt-1 h-[18px] w-[18px] shrink-0 text-[#0e7490]" />
+                Painless-first treatment, always
+              </li>
+              <li class="flex gap-2.5 text-base leading-[26px] text-[#33464e]">
+                <Icon name="check" class="mt-1 h-[18px] w-[18px] shrink-0 text-[#0e7490]" />
+                Sterilised instruments, every patient
+              </li>
+              <li class="flex gap-2.5 text-base leading-[26px] text-[#33464e]">
+                <Icon name="check" class="mt-1 h-[18px] w-[18px] shrink-0 text-[#0e7490]" />
+                Children and nervous patients welcome
+              </li>
+              <li class="flex gap-2.5 text-base leading-[26px] text-[#33464e]">
+                <Icon name="check" class="mt-1 h-[18px] w-[18px] shrink-0 text-[#0e7490]" />
+                Aftercare follow-up on WhatsApp
+              </li>
+            </ul>
+          </div>
+          <div class="overflow-hidden rounded-2xl border border-[#d5e8ec]">
+            <img
+              src="/demo/sites/clinic-tools.webp"
+              alt="Sterilised dental instruments laid out on a tray, a gloved hand adjusting one"
+              width="1200"
+              height="800"
+              loading="lazy"
+              class="block aspect-[3/2] w-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* What to expect + book */}
+    <section id="book" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:scroll-mt-36 sm:px-6 sm:py-14">
+      <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-[#0b3b4a]">What to expect</h2>
+      <ol class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-3">
+        {steps.map((step, i) => (
+          <li class="border-t-2 border-[#0e7490] pt-4">
+            <span class="font-mono text-sm font-medium text-[#0e7490]">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="mt-2 font-display text-lg font-semibold leading-snug text-[#0b3b4a]">{step.title}</h3>
+            <p class="mt-1.5 text-base leading-[26px] text-[#52666e]">{step.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-10 flex flex-wrap items-center justify-between gap-x-8 gap-y-5 rounded-2xl bg-[#0b3b4a] px-6 py-6 sm:px-8">
+        <div>
+          <h3 class="font-display text-lg font-semibold text-white sm:text-xl">Book your visit</h3>
+          <p class="mt-1 max-w-xl text-base leading-[26px] text-[#c7dde3]">
+            Tell us what you need on WhatsApp and we will confirm a slot — usually within an hour.
+          </p>
+        </div>
+        <a
+          href={bookWa}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#0b3b4a] transition hover:bg-[#e0f2f5] active:scale-[0.98]"
+        >
+          <Icon name="message-circle" class="h-[18px] w-[18px]" />
+          Book on WhatsApp
+        </a>
+      </div>
+    </section>
+
+    {/* Timings + location */}
+    <section id="timings" class="mx-auto max-w-6xl scroll-mt-20 px-4 pb-12 sm:scroll-mt-36 sm:px-6 sm:pb-14">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="rounded-2xl border border-[#d5e8ec] bg-white p-6 sm:p-8">
+          <h2 class="flex items-center gap-2.5 font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-[#0b3b4a]">
+            <Icon name="clock" class="h-5 w-5 shrink-0 text-[#0e7490]" />
+            Timings
+          </h2>
+          <ul class="mt-3 text-base leading-[28px] text-[#52666e]">
+            <li class="flex items-baseline justify-between gap-4 border-b border-dashed border-[#d5e8ec] py-2.5">
+              <span>Monday – Saturday, morning</span>
+              <span class="shrink-0 font-semibold tabular-nums text-[#0b3b4a]">10:00 am – 1:00 pm</span>
+            </li>
+            <li class="flex items-baseline justify-between gap-4 border-b border-dashed border-[#d5e8ec] py-2.5">
+              <span>Monday – Saturday, evening</span>
+              <span class="shrink-0 font-semibold tabular-nums text-[#0b3b4a]">4:00 – 8:00 pm</span>
+            </li>
+            <li class="flex items-baseline justify-between gap-4 py-2.5">
+              <span>Sunday</span>
+              <span class="shrink-0 font-semibold text-[#0b3b4a]">Closed</span>
+            </li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-[#d5e8ec] bg-white p-6 sm:p-8">
+          <h2 class="flex items-center gap-2.5 font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-[#0b3b4a]">
+            <Icon name="map-pin" class="h-5 w-5 shrink-0 text-[#0e7490]" />
+            Find the clinic
+          </h2>
+          <p class="mt-3 text-base leading-[28px] text-[#52666e]">
+            MG Road, Indore — first floor, above the pharmacy, lift available.
+            Walk-ins are welcome, but booked patients are seen first.
+          </p>
+          <p class="mt-4 flex items-start gap-2 text-base leading-[26px] text-[#52666e]">
+            <Icon name="heart" class="mt-1 h-[18px] w-[18px] shrink-0 text-[#0e7490]" />
+            Tooth pain? Message us — we keep same-day emergency slots every day.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* Demo footer */}
+    <footer class="border-t border-[#d5e8ec] bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+        <p class="font-display text-base font-semibold text-[#0b3b4a]">Smile Dental Clinic · Indore</p>
+        <p class="mt-2 max-w-2xl text-sm leading-[22px] text-[#6b7f86]">
+          Demo website — this clinic is fictional. Treatments, prices and details are samples to show
+          what a Kumbuild website looks like for a clinic.
+        </p>
+      </div>
+    </footer>
+  </div>
+</PreviewLayout>
