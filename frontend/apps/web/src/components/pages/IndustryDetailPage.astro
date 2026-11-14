@@ -1,0 +1,203 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Icon from "../Icon.astro";
+import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; slug: string; }
+const { dict, locale, slug } = Astro.props;
+const ind = dict.industries;
+const sv = dict.v2.servicesV2;
+const item = ind.items.find((i) => i.slug === slug) ?? ind.items[0];
+const page = ind.pages[slug as keyof typeof ind.pages] ?? ind.pages["shops-stores"];
+const service = dict.services.items.find((s) => s.slug === item.service) ?? dict.services.items[0];
+const caseStudy = page.caseSlug
+  ? dict.v2.work.projects.find((p) => p.slug === page.caseSlug)
+  : undefined;
+const waLink = `https://wa.me/${dict.v2.contact.waNumber}?text=${encodeURIComponent(dict.v2.contact.waText)}`;
+const orderUrl = `${pageUrl(locale, "/order")}?service=${item.service}`;
+/* Service icons follow the locked dictionary order in Services.astro. */
+const serviceIcons: Record<string, string> = {
+  "business-website": "globe",
+  "landing-page": "rocket",
+  "booking-website": "calendar-check",
+  "catalogue-website": "book-open",
+};
+/* Real pixel sizes of the hero images (work + service mockups). */
+const imgDims: Record<string, [number, number]> = {
+  "shops-stores": [2048, 1152],
+  "clinics-doctors": [800, 800],
+  "tuition-coaching": [1920, 1280],
+  "salons-parlours": [2048, 1152],
+  "restaurants-cafes": [2048, 1152],
+  "instagram-home-sellers": [800, 800],
+};
+const [imgW, imgH] = imgDims[item.slug] ?? [1600, 1000];
+/* Real pixel sizes of the featured case images. */
+const caseDims: Record<string, [number, number]> = {
+  "thread-and-thistle-boutique": [2048, 1152],
+  "bright-minds-tuition": [1920, 1280],
+  "glow-and-co-salon": [2048, 1152],
+  "spice-route-restaurant": [2048, 1152],
+};
+const [caseW, caseH] = caseStudy ? (caseDims[caseStudy.slug] ?? [1600, 1000]) : [1600, 1000];
+/* Browser-frame address: the featured case's site, else the service page. */
+const frameHost = caseStudy
+  ? `${caseStudy.name.toLowerCase().replace(/[^a-z0-9]+/g, "")}.in`
+  : `${service.slug}.in`;
+const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
+---
+
+<Layout title={item.title} description={page.intro} locale={locale} dict={dict} slug={`/industries/${item.slug}`}>
+  {/* Breadcrumb + intro */}
+  <section class="mx-auto max-w-6xl px-4 pt-10 sm:pt-14" data-reveal>
+    <nav aria-label="breadcrumb">
+      <ol class="flex flex-wrap items-center gap-1.5 text-sm text-muted">
+        <li>
+          <a href={pageUrl(locale, "/industries")} class="-my-2 inline-flex min-h-[40px] items-center font-medium text-primary-600 transition-colors duration-200 hover:text-primary-700">{ind.navLabel}</a>
+        </li>
+        <li aria-hidden="true"><Icon name="chevron-right" class="h-4 w-4 text-faint" /></li>
+        <li class="text-body" aria-current="page">{item.title}</li>
+      </ol>
+    </nav>
+    <h1 class="mt-6 max-w-3xl font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{page.h1}</h1>
+    <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{page.intro}</p>
+    <p class="mt-5 flex flex-wrap items-baseline gap-x-2 text-base">
+      <span class="font-mono text-[13px] font-medium uppercase tracking-wide text-muted">{sv.detailFor}</span>
+      <a href={pageUrl(locale, `/services/${service.slug}`)} class="font-medium text-primary-700 transition-colors duration-200 hover:text-primary-600">{service.title}</a>
+    </p>
+  </section>
+
+  {/* Hero image in a browser-chrome frame */}
+  <section class="mx-auto max-w-6xl px-4 pt-10 sm:pt-12" data-reveal>
+    <figure class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,25,23,0.08)]">
+      <div class="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-2.5">
+        <span class="h-2.5 w-2.5 rounded-full bg-[#E8B4AE]" aria-hidden="true"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#EBD9A8]" aria-hidden="true"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#AED8BC]" aria-hidden="true"></span>
+        <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{frameHost}</span>
+      </div>
+      <img src={page.img} alt={`${item.title} — ${service.title}`} width={imgW} height={imgH} class="block aspect-[16/10] w-full object-cover object-top sm:aspect-[16/8]" />
+    </figure>
+  </section>
+
+  {/* Best-fit service — which kumbuild service fits this business */}
+  <section class="mx-auto max-w-6xl px-4 pt-10 sm:pt-12" data-reveal>
+    <a href={pageUrl(locale, `/services/${service.slug}`)} class="group flex flex-wrap items-center gap-x-5 gap-y-3 rounded-2xl border border-line bg-white p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)] sm:p-7">
+      <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white">
+        <Icon name={serviceIcons[service.slug] ?? "globe"} class="h-6 w-6" />
+      </span>
+      <span class="min-w-0 flex-1">
+        <span class="block font-mono text-[12px] font-medium uppercase tracking-wide text-muted">{sv.detailFor}</span>
+        <span class="mt-0.5 block font-display text-lg font-semibold text-ink">{service.title}</span>
+        <span class="mt-1 block text-base leading-[26px] text-body">{service.desc}</span>
+      </span>
+      <Icon name="arrow-right" class="h-5 w-5 shrink-0 text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-primary-600" />
+    </a>
+  </section>
+
+  {/* Includes + order rail */}
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:py-14" data-reveal>
+    <div class="grid gap-6 lg:grid-cols-[1fr_340px] lg:gap-10">
+      <div class="rounded-2xl border border-line bg-white p-6 sm:p-8">
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{sv.detailIncludes}</h2>
+        <ul class="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+          {page.features.map((f) => (
+            <li class="flex gap-3 text-base leading-[26px] text-body">
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-live-soft text-live">
+                <Icon name="check" class="h-4 w-4" />
+              </span>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <aside class="h-fit rounded-2xl border border-line bg-white p-6 sm:p-7 lg:sticky lg:top-24">
+        <h2 class="font-display text-lg font-semibold text-ink">{dict.pricing.title}</h2>
+        <p class="mt-2 text-base leading-[28px] text-body">{dict.hero.note}</p>
+        <a href={orderUrl} class="mt-5 flex items-center justify-center gap-2 rounded-xl bg-cta px-4 py-3 text-base font-semibold text-white transition duration-200 hover:bg-cta-hover active:scale-[0.98]">
+          {dict.nav.order}
+          <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
+        </a>
+        <a href={pageUrl(locale, "/pricing")} class="mt-4 inline-flex items-center gap-1.5 text-base font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700">
+          {dict.hero.ctaPricing}
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
+        </a>
+        <p class="mt-5 border-t border-line pt-4 text-[13px] leading-[20px] text-muted">{dict.pricing.note}</p>
+      </aside>
+    </div>
+  </section>
+
+  {/* Featured case study — only where an existing case fits this industry */}
+  {caseStudy && (
+    <section class="mx-auto max-w-6xl px-4 pb-12 sm:pb-14" data-reveal>
+      <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{ind.caseTitle}</h2>
+      <a href={pageUrl(locale, `/work/${caseStudy.slug}`)} class="group mt-6 grid overflow-hidden rounded-2xl border border-line bg-white transition-[border-color,box-shadow] duration-300 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)] sm:grid-cols-[300px_1fr] lg:grid-cols-[360px_1fr]">
+        <img src={caseStudy.img} alt={caseStudy.name} width={caseW} height={caseH} loading="lazy" class="aspect-[16/10] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[240px]" />
+        <div class="p-6 sm:p-8">
+          <p class="text-sm font-medium text-muted">{caseStudy.type} · {caseStudy.city}</p>
+          <h3 class="mt-2 font-display text-xl font-semibold text-ink">{caseStudy.name}</h3>
+          <p class="mt-2 text-base leading-[28px] text-body">{caseStudy.desc}</p>
+          <p class="mt-4 flex items-start gap-2 text-base leading-[26px] text-body">
+            <Icon name="trending-up" class="mt-0.5 h-5 w-5 shrink-0 text-live" />
+            <span><span class="font-semibold text-ink">{dict.v2.work.caseLabels.result}: </span>{caseStudy.result}</span>
+          </p>
+          <span class="mt-5 inline-flex min-h-[44px] items-center gap-1.5 text-base font-semibold text-primary-600 transition-colors duration-200 group-hover:text-primary-700">
+            {dict.v2.ui.viewCase}
+            <Icon name="arrow-right" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" />
+          </span>
+        </div>
+      </a>
+    </section>
+  )}
+
+  {/* Process strip — the same five steps as How it works, titles only */}
+  <section class="border-y border-line bg-surface" data-reveal>
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:py-14">
+      <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{dict.how.title}</h2>
+      <ol class="mt-7 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-5">
+        {dict.how.steps.map((step, i) => (
+          <li class="flex min-w-0 items-baseline gap-3 border-t border-line pt-4 lg:border-t-0 lg:pt-0">
+            <span class="font-mono text-sm font-medium text-primary-700">{String(i + 1).padStart(2, "0")}</span>
+            <span class="text-base font-medium leading-[24px] text-ink">{step.title}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {/* Other industries — the way onward from a detail page */}
+  <section class="mx-auto max-w-6xl px-4 pt-12 sm:pt-14" data-reveal>
+    <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{ind.otherTitle}</h2>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {ind.items.filter((o) => o.slug !== item.slug).map((o) => (
+        <a href={pageUrl(locale, `/industries/${o.slug}`)} class="group flex items-start gap-3.5 rounded-2xl border border-line bg-white p-5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white">
+            <Icon name={o.icon} class="h-5 w-5" />
+          </span>
+          <span class="min-w-0">
+            <span class="block text-base font-semibold text-ink">{o.title}</span>
+            <span class="mt-0.5 block text-sm leading-[22px] text-muted">{o.need}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {/* CTA band */}
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:py-16" data-reveal>
+    <div class="rounded-2xl border border-line bg-white p-6 sm:p-10">
+      <div class="flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
+        <div class="max-w-xl">
+          <h2 class="font-display text-[clamp(1.375rem,1.2rem+1.1vw,2rem)] font-semibold leading-[1.25] text-ink">{sv.detailCtaTitle}</h2>
+          <p class="mt-2 text-base leading-[28px] text-body">{sv.detailCtaText}</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <a href={orderUrl} class="inline-flex items-center gap-2 rounded-xl bg-cta px-5 py-3 text-base font-semibold text-white transition duration-200 hover:bg-cta-hover active:scale-[0.98]">
+            {dict.nav.order}
+            <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
+          </a>
+          <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-5 py-3 text-base font-semibold text-ink transition duration-200 hover:bg-paper active:scale-[0.98]">{dict.contact.whatsapp}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

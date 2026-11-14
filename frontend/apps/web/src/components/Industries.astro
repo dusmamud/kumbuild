@@ -6,6 +6,9 @@ interface Props { dict: Dictionary; locale: Locale; no?: string; }
 const { dict, locale, no } = Astro.props;
 /* Icons matched to the marquee business types, same order in all locales. */
 const icons = ["store", "scissors", "stethoscope", "graduation-cap", "coffee", "shirt", "dumbbell", "utensils", "zap", "sofa", "plane", "chef-hat"];
+/* Marquee business types mapped to their industry page, same order.
+   Types without a dedicated page yet link to the industries index. */
+const industryLinks: (string | null)[] = ["shops-stores", "salons-parlours", "clinics-doctors", "tuition-coaching", "restaurants-cafes", "shops-stores", null, "restaurants-cafes", null, null, null, "instagram-home-sellers"];
 const items = dict.v2.marquee.items;
 ---
 
@@ -18,7 +21,7 @@ const items = dict.v2.marquee.items;
       {items.map((label, i) => (
         <li data-reveal style={`--reveal-delay:${(i % 4) * 60}ms`}>
           <a
-            href={pageUrl(locale, "/services")}
+            href={pageUrl(locale, industryLinks[i] ? `/industries/${industryLinks[i]}` : "/industries")}
             class="group flex items-center gap-3.5 rounded-2xl border border-line bg-white px-5 py-4 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
           >
             <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white">
@@ -29,5 +32,11 @@ const items = dict.v2.marquee.items;
         </li>
       ))}
     </ul>
+    <div class="mt-8 text-center">
+      <a href={pageUrl(locale, "/industries")} class="inline-flex min-h-[44px] items-center gap-1.5 text-base font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700">
+        {dict.industries.viewAll}
+        <Icon name="arrow-right" class="h-5 w-5" />
+      </a>
+    </div>
   </div>
 </section>

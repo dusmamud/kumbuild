@@ -209,6 +209,144 @@
     "subtitle": "Five steps. You tell us, we build — you only review and approve.",
     "title": "How it works"
   },
+  "industries": {
+    "caseTitle": "See it in action",
+    "items": [
+      {
+        "icon": "store",
+        "need": "Your products, prices and offers — customers check on their phone and order on WhatsApp",
+        "service": "catalogue-website",
+        "slug": "shops-stores",
+        "title": "Shops & stores"
+      },
+      {
+        "icon": "stethoscope",
+        "need": "Treatments, timings and an appointment enquiry — patients know what to expect before they call",
+        "service": "booking-website",
+        "slug": "clinics-doctors",
+        "title": "Clinics & doctors"
+      },
+      {
+        "icon": "graduation-cap",
+        "need": "Courses, batches and fees — parents enquire on WhatsApp instead of walking in",
+        "service": "business-website",
+        "slug": "tuition-coaching",
+        "title": "Tuition & coaching"
+      },
+      {
+        "icon": "scissors",
+        "need": "Services with prices and photos of your work — bookings come straight to your WhatsApp",
+        "service": "booking-website",
+        "slug": "salons-parlours",
+        "title": "Salons & parlours"
+      },
+      {
+        "icon": "utensils",
+        "need": "Your menu with photos — customers see what is on before they arrive or order",
+        "service": "catalogue-website",
+        "slug": "restaurants-cafes",
+        "title": "Restaurants & cafes"
+      },
+      {
+        "icon": "instagram",
+        "need": "One link for your bio that turns followers into WhatsApp enquiries",
+        "service": "landing-page",
+        "slug": "instagram-home-sellers",
+        "title": "Instagram & home sellers"
+      }
+    ],
+    "navLabel": "Industries",
+    "otherTitle": "Other kinds of business",
+    "pages": {
+      "shops-stores": {
+        "h1": "A website that works while your shop is shut",
+        "intro": "Customers check prices and offers on their phone before they visit — or instead of visiting. Your website shows your products, your prices and your offers, and turns a look into a WhatsApp order.",
+        "features": [
+          "Your products with photos, names and prices",
+          "WhatsApp order button on every product",
+          "Offers and new arrivals, easy to update",
+          "Google Maps with your exact location",
+          "Click-to-call on every page",
+          "Shows up on Google with basic local SEO"
+        ],
+        "img": "/work/work-boutique.webp",
+        "caseSlug": "thread-and-thistle-boutique"
+      },
+      "clinics-doctors": {
+        "h1": "Patients who arrive knowing what to expect",
+        "intro": "Before they call, patients want to know what you treat, when you are available and what a visit costs. Your website answers all three — and takes appointment enquiries while you are with a patient.",
+        "features": [
+          "Treatments and services, explained plainly",
+          "Timings and consultation days, always current",
+          "Appointment enquiry form on WhatsApp",
+          "Doctor profiles and qualifications",
+          "Google Maps with your exact location",
+          "Shows up on Google with basic local SEO"
+        ],
+        "img": "/services/service-booking.webp",
+        "caseSlug": ""
+      },
+      "tuition-coaching": {
+        "h1": "Parents decide before they walk in",
+        "intro": "Parents compare courses, batches and fees online before they ever visit. Your website lays it all out — classes, timings, results — and takes admission enquiries on WhatsApp.",
+        "features": [
+          "Courses by class and subject",
+          "Batch timings, clearly listed",
+          "Results and topper section",
+          "Admission enquiry form on WhatsApp",
+          "Fees approach, explained up front",
+          "Works fast on every phone"
+        ],
+        "img": "/work/work-tuition.webp",
+        "caseSlug": "bright-minds-tuition"
+      },
+      "salons-parlours": {
+        "h1": "Appointments that arrive while your chairs are full",
+        "intro": "Your phone rings most when every stylist has a client in the chair. Your website answers prices and timings itself — and appointment requests arrive as tidy WhatsApp messages you confirm between clients.",
+        "features": [
+          "Services with prices and durations",
+          "Photos of your work, in a gallery",
+          "Appointment request form on WhatsApp",
+          "Stylist profiles",
+          "Offer of the month section",
+          "Google Maps with your exact location"
+        ],
+        "img": "/work/work-salon.webp",
+        "caseSlug": "glow-and-co-salon"
+      },
+      "restaurants-cafes": {
+        "h1": "Your menu, the way customers actually see it",
+        "intro": "Customers check the menu on their phone before they arrive — or before they order in. Your website carries the full menu with photos and prices, and takes table bookings and orders on WhatsApp.",
+        "features": [
+          "Full menu with photos and prices",
+          "Dish photo gallery",
+          "Table booking on WhatsApp",
+          "Takeaway orders on WhatsApp",
+          "Timings and location with Google Maps",
+          "Shows up on Google with basic local SEO"
+        ],
+        "img": "/work/work-restaurant.webp",
+        "caseSlug": "spice-route-restaurant"
+      },
+      "instagram-home-sellers": {
+        "h1": "One link that turns followers into customers",
+        "intro": "Your Instagram bio gets one link. Make it a page that shows your products, your prices and a WhatsApp button — so followers become enquiries instead of scrolling past.",
+        "features": [
+          "One page, built for your bio link",
+          "Your products with photos and prices",
+          "WhatsApp enquiry button, always visible",
+          "Your story, in your own words",
+          "Loads fast on every phone",
+          "Easy to update when stock changes"
+        ],
+        "img": "/services/service-landing.webp",
+        "caseSlug": "thread-and-thistle-boutique"
+      }
+    },
+    "subtitle": "Every business sells differently. Pick yours — the website is built around how your customers actually find you, and how they reach you.",
+    "title": "Websites for your kind of business",
+    "viewAll": "See all industries"
+  },
   "locale": "en-US",
   "name": "English",
   "nativeName": "English",

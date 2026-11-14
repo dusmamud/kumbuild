@@ -1,0 +1,10 @@
+---
+import IndustryDetailPage from "../../components/pages/IndustryDetailPage.astro";
+import { dictFor } from "../../i18n/utils";
+export function getStaticPaths() {
+  return dictFor("en-US").industries.items.map((item) => ({ params: { slug: item.slug } }));
+}
+const dict = dictFor("en-US");
+const slug = Astro.params.slug ?? "";
+---
+<IndustryDetailPage dict={dict} locale={"en-US"} slug={slug} />

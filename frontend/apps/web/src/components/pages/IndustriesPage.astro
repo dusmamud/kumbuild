@@ -1,0 +1,43 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CtaBand from "../CtaBand.astro";
+import Icon from "../Icon.astro";
+import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; }
+const { dict, locale } = Astro.props;
+const ind = dict.industries;
+const sv = dict.v2.servicesV2;
+const serviceFor = (slug: string) => dict.services.items.find((s) => s.slug === slug) ?? dict.services.items[0];
+---
+
+<Layout title={ind.title} description={ind.subtitle} locale={locale} dict={dict} slug="/industries">
+  <section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+    <h1 class="max-w-2xl font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{ind.title}</h1>
+    <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">{ind.subtitle}</p>
+  </section>
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {ind.items.map((item) => {
+        const service = serviceFor(item.service);
+        return (
+          <li data-reveal>
+            <a href={pageUrl(locale, `/industries/${item.slug}`)} class="group flex h-full flex-col rounded-2xl border border-line bg-white p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]">
+              <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white">
+                <Icon name={item.icon} class="h-5 w-5" />
+              </span>
+              <span class="mt-4 flex items-center gap-2 font-display text-lg font-semibold leading-snug text-ink">
+                {item.title}
+                <Icon name="arrow-right" class="h-5 w-5 shrink-0 text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-primary-600" />
+              </span>
+              <span class="mt-1.5 flex-1 text-base leading-[26px] text-body">{item.need}</span>
+              <span class="mt-4 border-t border-line pt-3 text-sm leading-[22px] text-muted">
+                {sv.detailFor}: <span class="font-medium text-primary-700">{service.title}</span>
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+  <CtaBand dict={dict} locale={locale} />
+</Layout>

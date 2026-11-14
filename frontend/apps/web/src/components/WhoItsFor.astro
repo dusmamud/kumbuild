@@ -1,19 +1,27 @@
 ---
 import SectionHead from "./SectionHead.astro";
-import type { Dictionary } from "../i18n/utils";
-interface Props { dict: Dictionary; no?: string; }
-const { dict, no } = Astro.props;
+import Icon from "./Icon.astro";
+import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
+interface Props { dict: Dictionary; locale: Locale; no?: string; }
+const { dict, locale, no } = Astro.props;
 const home = dict.home;
+/* Audiences and industry pages share the same order in all locales. */
+const industrySlug = (i: number) => dict.industries.items[i]?.slug ?? "";
 ---
 
 <section class="border-y border-line bg-surface">
   <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
   <SectionHead no={no} title={home.whoTitle} subtitle={home.whoSubtitle} />
   <ul class="mt-10 border-b border-line">
-    {home.audiences.map((a) => (
-      <li class="grid items-baseline gap-2 border-t border-line py-5 sm:grid-cols-12 sm:gap-4">
-        <p class="font-display text-[clamp(0.9375rem,0.9rem+0.35vw,1.125rem)] font-semibold text-ink sm:col-span-4">{a.name}</p>
-        <p class="text-base leading-[28px] text-body sm:col-span-8">{a.need}</p>
+    {home.audiences.map((a, i) => (
+      <li class="border-t border-line">
+        <a href={pageUrl(locale, `/industries/${industrySlug(i)}`)} class="group grid items-baseline gap-2 py-5 sm:grid-cols-12 sm:gap-4">
+          <span class="flex items-center gap-2 font-display text-[clamp(0.9375rem,0.9rem+0.35vw,1.125rem)] font-semibold text-ink transition-colors duration-200 group-hover:text-primary-700 sm:col-span-4">
+            {a.name}
+            <Icon name="arrow-right" class="h-4 w-4 shrink-0 text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-primary-600" />
+          </span>
+          <span class="text-base leading-[28px] text-body sm:col-span-8">{a.need}</span>
+        </a>
       </li>
     ))}
   </ul>
