@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 // Kumbuild public site — kumbuild.com
@@ -7,7 +8,15 @@ import tailwindcss from "@tailwindcss/vite";
 // (no URL prefix), hi -> /hi/, bn -> /bn/, as -> /as/.
 export default defineConfig({
   site: "https://kumbuild.com",
-  integrations: [react()],
+  integrations: [
+    react(),
+    sitemap({
+      // Locale 404 pages are real directory routes (/hi/404/ etc.) so the
+      // integration includes them by default; error pages don't belong in
+      // a sitemap. (The root 404 is excluded automatically.)
+      filter: (page) => !page.endsWith("/404/"),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
