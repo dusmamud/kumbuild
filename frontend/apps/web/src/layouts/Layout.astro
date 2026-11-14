@@ -37,8 +37,8 @@ const desktopLink = (active: boolean) =>
     : "font-medium text-body transition-colors duration-200 hover:text-ink";
 const mobileLink = (active: boolean) =>
   active
-    ? "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[22px] font-semibold leading-tight text-primary-700"
-    : "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[22px] font-semibold leading-tight text-ink";
+    ? "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[20px] font-semibold leading-tight text-primary-700"
+    : "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[20px] font-semibold leading-tight text-ink";
 const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v2.contact.waText)}`;
 /* Footer/top-strip note ("Starting at ₹3,999 · Delivery in …") is split on
    its separators so each fact stays on one line — the strip may wrap
@@ -164,7 +164,7 @@ const noteParts = dict.hero.note.split(" · ");
             <button
               id="menu-btn"
               type="button"
-              class="rounded-lg border border-line bg-white p-2.5 text-ink transition-colors duration-200 hover:bg-surface xl:hidden"
+              class="rounded-lg border border-line bg-white p-3 text-ink transition-colors duration-200 hover:bg-surface xl:hidden"
               aria-expanded="false"
               aria-controls="mobile-menu"
               aria-label="Menu"
@@ -176,33 +176,44 @@ const noteParts = dict.hero.note.split(" · ");
         </div>
       </div>
 
-      <div id="mobile-menu" data-lenis-prevent class="invisible fixed inset-0 z-0 translate-y-2 overflow-y-auto bg-paper opacity-0 transition-[opacity,transform,visibility] duration-200 xl:hidden">
+      <div id="mobile-menu" data-lenis-prevent class="invisible fixed inset-0 z-0 translate-y-2 overflow-y-auto bg-paper opacity-0 transition-[opacity,transform,visibility] duration-200 motion-reduce:transition-none xl:hidden">
         <div class="flex min-h-full flex-col px-5 pb-8 pt-[68px] sm:px-8">
           <nav class="flex flex-col" aria-label="Mobile">
-            <a href={pageUrl(locale, "/services")} class={mobileLink(onServices)}>
-              <span class="flex items-baseline gap-3.5">
-                <span class="font-mono text-xs font-normal text-muted">01</span>
-                {nav.services}
-              </span>
-              <svg class="h-5 w-5 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
-            </a>
-            {/* Per-service links — below xl the desktop Services dropdown
-                never renders, so without these the four service pages were
-                unreachable at 768–1279 (mobile menu only linked /services). */}
-            <div class="border-b border-line py-1.5">
-              {dict.services.items.map((s) => (
-                <a href={pageUrl(locale, `/services/${s.slug}`)} class="flex items-center justify-between gap-4 py-2.5 pl-11 pr-1 text-[16px] font-medium text-body transition-colors duration-200 hover:text-primary-700">
-                  {s.title}
-                  <svg class="h-4 w-4 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
-                </a>
-              ))}
+            {/* Services is an accordion button, not a link: tapping it expands
+                the four service pages with a smooth grid-rows animation
+                (300ms, same pattern as the FAQ accordion). The landing page
+                stays one tap away via "See all services" inside the panel.
+                Below xl the desktop dropdown never renders, so without this
+                panel the four service pages were unreachable at 768–1279. */}
+            <button
+              type="button"
+              id="mobile-services-btn"
+              class={mobileLink(onServices) + " w-full text-left"}
+              aria-expanded="false"
+              aria-controls="mobile-services-sub"
+            >
+              <span>{nav.services}</span>
+              <svg id="mobile-services-chevron" class="h-5 w-5 shrink-0 text-muted transition-transform duration-300 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="mobile-services-sub" class="grid transition-[grid-template-rows] duration-300 ease-out [grid-template-rows:0fr] motion-reduce:transition-none" inert>
+              <div class="overflow-hidden">
+                <div class="border-b border-line py-1.5">
+                  <a href={pageUrl(locale, "/services")} class="flex items-center justify-between gap-4 py-3 pl-11 pr-1 text-[16px] font-semibold text-ink transition-colors duration-200 hover:text-primary-700">
+                    {v2.nav.allServices}
+                    <svg class="h-4 w-4 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+                  </a>
+                  {dict.services.items.map((s) => (
+                    <a href={pageUrl(locale, `/services/${s.slug}`)} class="flex items-center justify-between gap-4 py-3 pl-11 pr-1 text-[16px] font-medium text-body transition-colors duration-200 hover:text-primary-700">
+                      {s.title}
+                      <svg class="h-4 w-4 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
-            {links.map((l, i) => (
+            {links.map((l) => (
               <a href={l.href} aria-current={l.href === current ? "page" : undefined} class={mobileLink(l.href === current)}>
-                <span class="flex items-baseline gap-3.5">
-                  <span class="font-mono text-xs font-normal text-muted">{String(i + 2).padStart(2, "0")}</span>
-                  {l.label}
-                </span>
+                <span>{l.label}</span>
                 <svg class={`h-5 w-5 shrink-0 ${l.href === current ? "text-primary-500" : "text-muted"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
               </a>
             ))}
@@ -245,6 +256,9 @@ const noteParts = dict.hero.note.split(" · ");
         iconClose.classList.toggle("hidden", !open);
         btn.setAttribute("aria-expanded", String(open));
         document.body.style.overflow = open ? "hidden" : "";
+        /* Accordion resets when the menu closes, so the next open starts
+           clean with Services collapsed. */
+        if (!open) setMobileServices(false);
         /* Lenis keeps its own scroll position — body overflow alone does not
            stop it, and the page jumps when the menu closes. Stop it for real. */
         const lenis = window.__lenis;
@@ -252,6 +266,43 @@ const noteParts = dict.hero.note.split(" · ");
       }
       btn.addEventListener("click", () => setOpen(menu.classList.contains("invisible")));
       menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+
+      /* Services accordion — button + grid-rows animation (300ms). While
+         collapsed the panel is inert, so its links leave the tab order and
+         screen readers skip them. */
+      const mServicesBtn = document.getElementById("mobile-services-btn");
+      const mServicesSub = document.getElementById("mobile-services-sub");
+      const mServicesChevron = document.getElementById("mobile-services-chevron");
+      function setMobileServices(open) {
+        mServicesSub.classList.toggle("[grid-template-rows:0fr]", !open);
+        mServicesSub.classList.toggle("[grid-template-rows:1fr]", open);
+        mServicesSub.inert = !open;
+        mServicesChevron.classList.toggle("rotate-180", open);
+        mServicesBtn.setAttribute("aria-expanded", String(open));
+      }
+      mServicesBtn.addEventListener("click", () =>
+        setMobileServices(mServicesBtn.getAttribute("aria-expanded") !== "true")
+      );
+
+      /* Focus trap: while the menu is open, Tab cycles through the menu's
+         own links and buttons only. Escape exits and returns focus to the
+         hamburger button (see the keydown handler below). */
+      menu.addEventListener("keydown", (e) => {
+        if (e.key !== "Tab") return;
+        const items = [...menu.querySelectorAll("a[href], button:not([disabled])")].filter(
+          (el) => !el.closest("[inert]")
+        );
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      });
 
       const localeBtn = document.getElementById("locale-btn");
       const localeMenu = document.getElementById("locale-menu");
@@ -305,9 +356,12 @@ const noteParts = dict.hero.note.split(" · ");
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
+          const menuWasOpen = !menu.classList.contains("invisible");
           setOpen(false);
           setLocaleOpen(false);
           setServices(false);
+          /* Focus returns to the trigger that opened the menu. */
+          if (menuWasOpen) btn.focus();
         }
       });
 
