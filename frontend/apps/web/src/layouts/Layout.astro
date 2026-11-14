@@ -82,7 +82,7 @@ const noteParts = dict.hero.note.split(" · ");
     </div>
 
     <header id="site-header" class="sticky top-0 z-50">
-      <div class="relative z-10 border-b border-transparent bg-paper/92 backdrop-blur-md transition-[box-shadow,border-color] duration-300" id="header-bar">
+      <div class="relative z-10 border-b border-transparent bg-transparent transition-[box-shadow,border-color,background-color] duration-300" id="header-bar">
         <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
           <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2 text-ink">
             <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" class="h-8 w-8" />
@@ -375,6 +375,13 @@ const noteParts = dict.hero.note.split(" · ");
       const headerBar = document.getElementById("header-bar");
       const onScrollHeader = () => {
         const sc = window.scrollY > 8;
+        /* At rest the bar is transparent, so it melts into whatever section
+           is at the top of the page (the hero is bg-surface, not paper —
+           a fixed paper fill would show a colour step). Once scrolled it
+           gains its paper fill + blur + divider + shadow. */
+        headerBar.classList.toggle("bg-transparent", !sc);
+        headerBar.classList.toggle("bg-paper/92", sc);
+        headerBar.classList.toggle("backdrop-blur-md", sc);
         headerBar.style.boxShadow = sc ? "0 8px 24px rgba(28,25,23,0.07)" : "none";
         headerBar.style.borderColor = sc ? "#ddd6c9" : "";
       };
