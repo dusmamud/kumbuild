@@ -1,0 +1,35 @@
+---
+/* The Kumbuild preview bar: the slim header for example-preview and demo
+   pages. Back on the left, Kumbuild wordmark in the middle, Order on the
+   right. No nav, no dropdowns — the example below is the star. */
+interface Props {
+  backHref: string;
+  backLabel: string;
+  homeHref: string;
+  orderHref: string;
+  orderLabel: string;
+}
+const { backHref, backLabel, homeHref, orderHref, orderLabel } = Astro.props;
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
+    <a
+      href={backHref}
+      class="inline-flex min-h-[44px] items-center gap-1.5 text-[15px] font-semibold text-body transition-colors duration-200 hover:text-ink"
+    >
+      <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5" /><path d="m12 19-7-7 7-7" /></svg>
+      {backLabel}
+    </a>
+    <a href={homeHref} class="mx-auto flex shrink-0 items-center gap-2 text-ink">
+      <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" class="h-8 w-8" />
+      <span class="font-display text-[17px] font-bold max-[359px]:hidden">Kumbuild</span>
+    </a>
+    <a
+      href={orderHref}
+      class="inline-flex min-h-[44px] items-center rounded-xl bg-cta px-4 py-2.5 text-[15px] font-semibold text-white transition duration-200 hover:bg-cta-hover active:scale-[0.98]"
+    >
+      {orderLabel}
+    </a>
+  </div>
+</header>

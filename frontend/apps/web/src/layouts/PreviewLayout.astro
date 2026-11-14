@@ -1,0 +1,96 @@
+---
+/* Minimal layout for example-preview and demo pages: same head/meta/fonts
+   as the main Layout, but only the PreviewBar on top and a slim footer —
+   no site nav, no announcement strip, no floating buttons. Deliberately
+   no Lenis and no [data-reveal] handling: preview/demo pages do not use
+   data-reveal, so everything renders visible with plain native scroll. */
+import "../styles/theme.css";
+import PreviewBar from "../components/PreviewBar.astro";
+import type { Locale } from "../i18n/utils";
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  backHref: string;
+  backLabel: string;
+  homeHref: string;
+  orderHref: string;
+  orderLabel: string;
+  footerText?: string;
+}
+
+const {
+  title,
+  description,
+  locale,
+  backHref,
+  backLabel,
+  homeHref,
+  orderHref,
+  orderLabel,
+  footerText = "© 2026 Kumbuild",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Kumbuild</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#faf9f6" />
+    <meta property="og:title" content={`${title} — Kumbuild`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og/kumbuild-og.png" />
+    <link rel="icon" type="image/svg+xml" href="/logo/kumbuild-logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
+    />
+  </head>
+  <body class="min-h-screen bg-paper text-body">
+    <PreviewBar backHref={backHref} backLabel={backLabel} homeHref={homeHref} orderHref={orderHref} orderLabel={orderLabel} />
+    <slot />
+    <footer class="border-t border-line bg-paper">
+      <div class="mx-auto max-w-6xl px-4 py-5 text-center text-[13px] text-muted sm:px-6">
+        <p>{footerText}</p>
+      </div>
+    </footer>
+    <!-- Mock phase only: pages.dev pe *.kumbuild.com links ko sibling *.pages.dev URLs pe badal do. Custom domain lagne ke baad ye kuch nahi karega. -->
+    <script>
+      (function () {
+        function rewrite() {
+          if (!window.location.hostname.endsWith(".pages.dev")) return;
+          var map = {
+            "kumbuild.com": "kumbuild-web.pages.dev",
+            "blog.kumbuild.com": "kumbuild-blog.pages.dev",
+            "docs.kumbuild.com": "kumbuild-docs.pages.dev",
+            "account.kumbuild.com": "kumbuild-account.pages.dev",
+            "auth.kumbuild.com": "kumbuild-account.pages.dev",
+            "admin.kumbuild.com": "kumbuild-admin.pages.dev",
+            "home.kumbuild.com": "kumbuild-home.pages.dev",
+          };
+          document.querySelectorAll('a[href*="kumbuild.com"]').forEach(function (a) {
+            try {
+              var u = new URL(a.getAttribute("href"), window.location.origin);
+              if (map[u.hostname]) {
+                u.hostname = map[u.hostname];
+                a.setAttribute("href", u.toString());
+              }
+            } catch (e) {}
+          });
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", rewrite);
+        } else {
+          rewrite();
+        }
+      })();
+    </script>
+  </body>
+</html>
