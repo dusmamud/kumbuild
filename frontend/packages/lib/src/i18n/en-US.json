@@ -744,7 +744,47 @@
             "Full menu section",
             "Reviews section",
             "Responsive AVIF/WebP images"
-          ]
+          ],
+          "bestFor": "Andhra restaurant owners who want customers to browse the biryani menu, order online and book a table without calling.",
+          "summary": "Kanigiri is a restaurant demo site built around an Andhra menu: biryanis, rice, curries and breads with spice levels, a Veg-only filter and search, plus online ordering, table booking, offers and reviews. Everything runs in the browser as a working demo — you can fill a cart and start an order, but no real food is ordered and no payment is taken.",
+          "problem": "A typical small-town restaurant problem: the menu lives on a phone photo or a food-app listing, so regulars cannot see prices or spice levels before they order; orders come through apps that take a cut, and table bookings arrive by phone during the lunch rush. Offers and loyalty live nowhere, so repeat customers get nothing for coming back. This is a demo scenario for this kind of business — Kanigiri is not a real restaurant and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One menu-led site where ordering, table booking and offers sit on the same pages as the dishes, instead of sending customers to food apps.",
+              "why": "Regulars decide what to eat first and only then think about ordering or booking. Keeping the whole journey next to the menu means fewer steps between a dish and an order, and the restaurant keeps the direct-order saving instead of paying app commission."
+            },
+            {
+              "decision": "Spice levels, a Veg-only filter and search on the menu, so a customer can find a dish that fits their taste in seconds.",
+              "why": "Andhra food is spicy, and spice tolerance varies from table to table. Labelling heat and filtering by Veg answers the two questions every customer asks before they order anything."
+            },
+            {
+              "decision": "Ordering stays a browser demo with a clear mock note and no payment step, and offers are labelled mock too.",
+              "why": "The demo exists to show the ordering flow, not to take money or promise discounts. A real restaurant would connect its own ordering, payment and offer system, and set its own prices."
+            }
+          ],
+          "includes": [
+            "Menu with spice levels and Veg filter",
+            "Online ordering with cart (demo, no payment)",
+            "Table booking page",
+            "Offers and combos page",
+            "Customer reviews page",
+            "Catering enquiry page",
+            "Gallery and contact pages"
+          ],
+          "tryIt": [
+            "Filter the menu by Veg only on /menu and search for a dish by name",
+            "Add a biryani to the cart on /order and walk through the three-step demo checkout",
+            "Open /offers to see the direct-order saving, family bucket and lunch thali deals",
+            "Read the reviews on /reviews and open a dish page from the menu",
+            "Use the Book a Table button on the home page and fill in the booking form"
+          ],
+          "limitations": [
+            "Demo data only — the dishes, prices, offers and opening hours are illustrative, and the phone number and address are placeholders; the footer calls the site a mock for design review",
+            "No real orders, payments or table bookings are made — the cart and checkout run in your browser only",
+            "The reviews are written demo copy, not real guest reviews, and the ratings on the site are part of that copy",
+            "No client results or metrics exist yet — this demo has never run a real restaurant, so nothing about orders or sales can be claimed"
+          ],
+          "nextStep": "Want a restaurant website like this? Order the Catalogue / Menu Website service and we will build it with your real menu, prices and booking setup."
         },
         {
           "slug": "lumina-beauty-studio",
@@ -762,7 +802,48 @@
             "Services with prices in ₹",
             "Gallery & bridal pages",
             "Blog & reviews pages"
-          ]
+          ],
+          "bestFor": "beauty salon owners who want customers to see services and prices, pick a treatment and book an appointment online.",
+          "summary": "Lumina is a beauty salon demo site: six services with starting prices and durations, a four-step booking form, bridal and party makeup pages, a gallery, pricing, reviews and a blog. Everything runs in the browser as a working demo — you can pick a service and walk through the booking steps, but no real appointment is made.",
+          "problem": "A typical salon problem: services and prices live only in messages or on a rate card at the counter, so customers cannot compare treatments or know what a visit costs before they call; bookings come in by phone and get double-booked or forgotten; and bridal enquiries arrive with no detail about the look, date or venue. This is a demo scenario for this kind of business — Lumina is not a real salon and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Prices and durations shown on every service, with a four-step booking flow, instead of 'call for prices' and phone-only booking.",
+              "why": "A salon customer decides on price and time before anything else. Showing both up front lets her compare treatments and book in minutes, instead of waiting for a callback to learn the cost."
+            },
+            {
+              "decision": "Bridal gets its own pages and packages, separate from everyday services like hair, nails and skin.",
+              "why": "A bride books months ahead, compares looks and packages, and needs a trial — a very different journey from a haircut. Mixing the two would bury the salon's highest-value service in a list of quick treatments."
+            },
+            {
+              "decision": "Booking stays a browser demo that validates name, mobile and date, with no account and no payment step.",
+              "why": "The demo shows the booking journey, not a real diary. A real salon would connect its own calendar and payment, and confirm bookings by phone as the demo promises."
+            }
+          ],
+          "includes": [
+            "Six services with prices and durations",
+            "Four-step booking form with validation",
+            "Bridal makeup and packages pages",
+            "Pricing page with honest starting prices",
+            "Photo gallery of salon work",
+            "Customer reviews page",
+            "Blog with beauty and bridal posts",
+            "Contact page with hours and offers"
+          ],
+          "tryIt": [
+            "Pick a service on /book and walk through the four booking steps to the details form",
+            "Compare starting prices and durations on /services for hair, nails and skin",
+            "Open /bridal to see the bridal packages and booking flow for weddings",
+            "Browse the gallery and filter it by bridal, hair, nails or skin work",
+            "Read the first-visit, bridal-combo and refer-a-friend offers listed on the home page"
+          ],
+          "limitations": [
+            "Demo data only — the services, prices and offers are illustrative, and the phone number, email and address are placeholders; the footer calls the site a mock for design approval",
+            "No real appointments are booked and no payment is taken — the booking form runs in your browser only",
+            "The reviews are presented as real client reviews, but this is a demo site — no real client reviews exist yet",
+            "No client results or metrics exist yet — this demo has never run a real salon, so nothing about bookings or revenue can be claimed"
+          ],
+          "nextStep": "Want a salon website like this? Order the Booking / Enquiry Website service and we will build it with your real services, prices and booking setup."
         },
         {
           "slug": "aura",
@@ -780,7 +861,47 @@
             "Cart drawer & 3-step demo checkout",
             "Wishlist & compare (max 3)",
             "Lookbook with 4 curated looks"
-          ]
+          ],
+          "bestFor": "fashion sellers who want shoppers to browse collections and lookbook outfits, then buy the pieces without messaging first.",
+          "summary": "AURA Essentials is a fashion-store demo: 12 products with shop filters, search and sorting, a lookbook with four curated looks, a cart and wishlist, and a three-step demo checkout. The AURA20 code takes 20% off at the cart, and the order number can be tracked on the site. Everything runs in the browser as a working demo — no payment is taken and nothing is shipped.",
+          "problem": "A typical fashion-shop problem: the collection lives as photos on social media, so shoppers cannot see prices, sizes or whether something is in stock; questions about fit and availability arrive by message all day; and styling inspiration is scattered across posts instead of sitting next to the products. A store pairing looks with buyable pieces and showing sizes up front would end most of that. This is a demo scenario for this kind of business — AURA is not a real shop and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "A lookbook with four curated looks next to the shop, instead of a catalogue with no styling.",
+              "why": "Fashion shoppers buy outfits, not isolated items. Showing a look with its pieces linked lets a visitor go from inspiration to cart in one step."
+            },
+            {
+              "decision": "One demo checkout for the whole purchase, with a clear note that no payment is taken and no card details are sent anywhere.",
+              "why": "The demo exists to show the flow, not to take money. A visitor can try the full journey safely, and a real shop would connect its own payment provider."
+            },
+            {
+              "decision": "The AURA20 code on the deals page, applied at the cart, rather than hidden discounts.",
+              "why": "A visible code gives a first-time buyer a reason to finish the order now. Showing it in the demo lets a shop owner see exactly how the discount appears on the subtotal."
+            }
+          ],
+          "includes": [
+            "Shop with filters, search and sorting",
+            "12 product pages and category pages",
+            "Lookbook with four curated looks",
+            "Cart drawer, wishlist and compare (max 3)",
+            "Three-step demo checkout with AURA- order numbers",
+            "Deals page with the AURA20 code",
+            "Gift cards and order tracking",
+            "Size guide, shipping and returns pages"
+          ],
+          "tryIt": [
+            "Open a lookbook look and add one of its pieces to the cart",
+            "Enter AURA20 at the cart page and watch 20% come off the subtotal",
+            "Complete the demo checkout and note your AURA- order number",
+            "Paste the order number into /track/ to see its status"
+          ],
+          "limitations": [
+            "Demo data only — the products, prices and stock are illustrative, and the contact details on the site are placeholders",
+            "No real orders, payments or deliveries are made — the checkout takes no payment and sends no card details anywhere",
+            "The star counts shown on product pages are reference figures from the design, not real customer reviews",
+            "No client results or metrics exist yet — this demo has never run a real fashion shop, so nothing about sales can be claimed"
+          ],
+          "nextStep": "Want a fashion store like this? Order the Catalogue / Menu Website service and we will build it with your real products, prices and payment setup."
         },
         {
           "slug": "sunshine-international-school",
@@ -798,7 +919,48 @@
             "Fees & online fee-payment page",
             "Parent portal & virtual tour",
             "Hindi version & site search"
-          ]
+          ],
+          "bestFor": "school leaders who want parents to find admissions, fees and school life in one place without calling the office.",
+          "summary": "Sunshine is a 43-page school demo site: admissions by stage from Pre-Primary to senior school, a fee structure with demo online payment, a parent portal, a six-stop virtual tour and a Hindi version of the home page. Everything runs in the browser as a working demo — you can look up a demo pupil and walk through a fee payment, but no real money moves.",
+          "problem": "A typical school problem: parents phone the office for the same answers — admission dates, fee amounts, transport routes — because the website is a thin brochure with no detail; fee collection means queues and paper receipts; and open days only reach families who can visit in person. This is a demo scenario for this kind of business — Sunshine is not a real school and had no real parent problem to solve.",
+          "approach": [
+            {
+              "decision": "Admissions split by stage — Pre-Primary, Primary and senior school — instead of one long admissions page for every age.",
+              "why": "Parents of a three-year-old and parents of a Class XI student ask completely different questions about age, documents and fees, so each stage gets its own page with its own answers."
+            },
+            {
+              "decision": "Fee payment and the parent portal stay in the browser as a demo, with demo pupil numbers and no real money moving.",
+              "why": "The point is to show parents the flow — look up a ward, check the term summary, pay — without anyone risking a real payment or real pupil data."
+            },
+            {
+              "decision": "A Hindi version of the home page and a six-stop virtual tour sit beside the English pages, not behind a download.",
+              "why": "Many parents read Hindi first, and many families cannot visit before applying, so the tour and the Hindi page answer their first questions from home."
+            }
+          ],
+          "includes": [
+            "Admissions pages by stage (Pre-Primary to senior school)",
+            "Fee structure with demo online payment",
+            "Parent portal with demo login",
+            "Six-stop virtual tour of the campus",
+            "Hindi version of the home page",
+            "Notice board, news and circulars",
+            "Site search across pages",
+            "Contact page with school hours"
+          ],
+          "tryIt": [
+            "Open /admissions/pre-primary/ and read the age, documents and fee note for Nursery and KG",
+            "Look up demo pupil SIS2026001 on /fee-payment/ and walk through the demo payment to the success screen",
+            "Log in to /parent-portal/ with any name and a four-character password to see the demo dashboard",
+            "Take the six-stop virtual tour from the main gate to the auditorium and see every stop",
+            "Switch to the Hindi home page at /hi/ and use site search to find the fees page"
+          ],
+          "limitations": [
+            "Demo data only — the fees, pupil records, attendance figures and contact details (123 Education Street, +91 98765 43210) are placeholders",
+            "No real fee payment is made — the payment flow ends in a demo success screen and no money moves",
+            "The testimonials page says its quotes are demo content, not words from real parents, students or alumni",
+            "No client results or metrics exist yet — this demo has never run a real school, so nothing about admissions or fee collection can be claimed"
+          ],
+          "nextStep": "Want a school website like this? Order the Business Website service and we will build it with your real admissions, fees and parent pages."
         },
         {
           "slug": "apex-athletics",
@@ -816,7 +978,48 @@
             "Class schedule & programs",
             "Coach profiles",
             "BMI & fitness calculators"
-          ]
+          ],
+          "bestFor": "gym owners who want visitors to compare programmes and memberships, meet the coaches and start a free trial online.",
+          "summary": "APEX Athletics is a gym demo site: four training programmes, coach profiles, membership plans, a class schedule, a BMI calculator and a seven-day free-trial signup. Everything runs in the browser as a working demo — you can try the calculator and fill in the trial form, but no real membership is created.",
+          "problem": "A typical gym problem: programmes, prices and class times live in a PDF or behind a phone call, so a visitor cannot tell which programme fits or what a membership costs; trials are booked by phone and never followed up; and the coaches — the real reason people join — stay invisible until the first visit. This is a demo scenario for this kind of business — APEX is not a real gym and had no real member problem to solve.",
+          "approach": [
+            {
+              "decision": "Programmes first — four clear training paths with duration and level — before any mention of price.",
+              "why": "People join a gym for a result, not a rate card. Showing the training first lets a visitor pick the path that fits, and the membership page then only has to answer what it costs."
+            },
+            {
+              "decision": "A seven-day free trial with no card required, instead of a paid first month or a phone-only signup.",
+              "why": "Trying a gym is a commitment, and nobody commits from a web page alone. A free week with full access and a coach assessment lets the gym earn the membership instead of asking for it up front."
+            },
+            {
+              "decision": "Tools on the site — a BMI calculator and a fitness-calculators hub — that recommend a programme from the visitor's own numbers.",
+              "why": "A visitor who measures something is already deciding. The calculators give a useful answer in seconds and point to the right programme, which is more helpful than a generic 'contact us' form."
+            }
+          ],
+          "includes": [
+            "Four training programmes with detail pages",
+            "Membership plans with monthly prices",
+            "Coach profiles with credentials",
+            "Class schedule page",
+            "BMI and fitness calculators",
+            "Seven-day free-trial signup",
+            "Member success-stories page",
+            "Free tour booking page"
+          ],
+          "tryIt": [
+            "Move the sliders on /bmi-calculator and see which programme it recommends for you",
+            "Compare the Basic, Premium and Elite plans on /membership and their prices",
+            "Fill in the seven-day free-trial form on /free-trial — no card details are asked",
+            "Open /coaches to meet the three coaches and read their specialties and credentials",
+            "Check the class times on /schedule and book a free tour on /book-a-tour"
+          ],
+          "limitations": [
+            "Demo data only — the programmes, prices, coaches and opening hours are illustrative, and the phone number, email and address are placeholders",
+            "No real memberships, trials or payments are made — the join form says nothing is sent to a server yet",
+            "The success stories and member figures are demo copy, not measured results from a real gym",
+            "No client results or metrics exist yet — this demo has never run a real gym, so nothing about members or progress can be claimed"
+          ],
+          "nextStep": "Want a gym website like this? Order the Booking / Enquiry Website service and we will build it with your real programmes, prices and trial setup."
         },
         {
           "slug": "flavoro",
@@ -834,7 +1037,48 @@
             "Table reservations page",
             "Catering & private-dining pages",
             "Gift cards & gallery"
-          ]
+          ],
+          "bestFor": "restaurant owners who want customers to browse the menu, order online and book a table without calling.",
+          "summary": "Flavoro is a complete restaurant demo site: a menu with online ordering and a cart, table reservations, catering and private dining pages, gift cards, a gallery and a blog. Everything runs in the browser as a working demo — you can add dishes to the cart and fill in a reservation form, but nothing is a real order.",
+          "problem": "A typical restaurant problem: the menu lives as a PDF or a social-media post, so customers can't see prices or dietary options before they visit; orders and table bookings come in by phone, which ties up staff during service; and catering or private-dining enquiries get lost in messages. This is a demo scenario for this kind of business — Flavoro is not a real restaurant and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One site for the whole customer journey — menu, ordering, reservations, catering and gift cards — instead of separate pages or links.",
+              "why": "A restaurant visitor usually decides everything in one visit: what to eat, whether to book, and whether to order. Splitting those across tools loses people at each step."
+            },
+            {
+              "decision": "Ordering and reservations stay in the browser as a demo, with a clear demo note and no payment step.",
+              "why": "The point of the demo is to show the flow, not to take money. A visitor can try the full journey safely, and a real restaurant would connect its own ordering and payment provider."
+            },
+            {
+              "decision": "Dietary tags (Veg, Vegan, Gluten-Free, Spicy) on menu items, plus an open-now indicator.",
+              "why": "Dietary information is usually the first thing a customer checks after price, and opening hours decide whether they order now or later — so both sit on the menu, not buried in a FAQ."
+            }
+          ],
+          "includes": [
+            "Menu with dietary tags and dish pages",
+            "Online ordering with cart (demo checkout, no payment)",
+            "Table reservations form",
+            "Catering and private-dining pages",
+            "Gift cards page",
+            "Photo gallery",
+            "Blog",
+            "Contact page with opening hours and open-now indicator"
+          ],
+          "tryIt": [
+            "Add a dish to the cart on /order/ and go through the demo checkout — no payment is taken",
+            "Fill in the reservation form on /reservations/ and see the confirmation flow",
+            "Filter the menu by Veg, Vegan or Gluten-Free",
+            "Open /catering/ and /private-dining/ to see how event enquiries are presented",
+            "Check the opening-hours indicator on the home page"
+          ],
+          "limitations": [
+            "Demo data only — the dishes, prices, reviews and opening hours are illustrative, and the contact details (+1234 567 8900, 123 Food Street, info@flavoro.com) are placeholders",
+            "No real orders, payments or table bookings are made — the order flow is confirmed on your device only",
+            "The testimonials on the site are labelled samples, not real guest reviews",
+            "No client results or metrics exist yet — this demo has never run a real restaurant, so nothing about sales or bookings can be claimed"
+          ],
+          "nextStep": "Want a restaurant website like this? Order the Catalogue / Menu Website service and we will build it with your real menu, prices and booking setup."
         },
         {
           "slug": "shopmate",
@@ -852,7 +1096,46 @@
             "Cart & wishlist with header count",
             "Checkout to invoice & tracking",
             "Deals, compare & gift cards"
-          ]
+          ],
+          "bestFor": "general-store owners who want shoppers to search, compare and check out online without phoning in every order.",
+          "summary": "ShopMate is a general online shop demo: live search, category browsing, best sellers and deals, a cart and wishlist, and a full order flow from checkout to invoice and tracking. Shoppers can apply the WELCOME10 promo code and follow an order with its ID. Everything runs in the browser as a working demo — no real payment is taken and no parcel is shipped.",
+          "problem": "A typical general store problem: customers message or call to ask about stock and prices, because there is no catalogue to check; orders arrive as scattered chats, so prices and addresses get mixed up; and after a sale there is no invoice or tracking link to send. A website that lists products, takes the order and shows its status would end most of that back-and-forth. This is a demo scenario for this kind of business — ShopMate is not a real store and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One shop for every category — search, deals, best sellers and the full order flow — instead of a separate page per department.",
+              "why": "A general-store shopper rarely knows the category first; they search for the item. Putting search, deals and checkout in one place means the journey from finding to paying never leaves the site."
+            },
+            {
+              "decision": "The whole order journey in the demo — cart, checkout, invoice and tracking — with a clear demo note and no payment step.",
+              "why": "The point is to show the flow end to end, including the invoice and the tracking page a customer would actually receive. A real store would connect its own payment provider and courier."
+            },
+            {
+              "decision": "A promo code (WELCOME10) and a wishlist with a header count, so the demo shows how a store nudges a first order.",
+              "why": "First orders are the hardest to win, and a small code plus a saved list are the two cheapest tools a small shop has. Both work in the demo, so a visitor can see the effect immediately."
+            }
+          ],
+          "includes": [
+            "Live search and category browsing",
+            "Best sellers, new arrivals and deals pages",
+            "Cart and wishlist with header count",
+            "Checkout with WELCOME10 promo code",
+            "Order confirmation, demo invoice and tracking",
+            "Compare and gift cards",
+            "Blog, help and contact pages"
+          ],
+          "tryIt": [
+            "Search for a product on /shop and open its product page",
+            "Add items to the cart and apply WELCOME10 at checkout",
+            "Complete the demo checkout and open the invoice it generates",
+            "Copy your order ID and paste it into /track-order to see its status"
+          ],
+          "limitations": [
+            "Demo data only — the products, prices and deals are illustrative, and the contact details (hello@shopmate.store, +1 (555) 123-4567) are placeholders",
+            "No real orders, payments or deliveries are made — the invoice is labelled a demo invoice and no parcel is shipped",
+            "The contact form states that no email is actually sent, so enquiries go nowhere at all",
+            "No client results or metrics exist yet — this demo has never run a real store, so nothing about sales can be claimed"
+          ],
+          "nextStep": "Want an online shop like this? Order the Catalogue / Menu Website service and we will build it with your real products, prices and payment setup."
         },
         {
           "slug": "dental-clinic",
@@ -870,7 +1153,47 @@
             "Book-appointment flow",
             "Pricing & insurance pages",
             "Smile gallery & reviews"
-          ]
+          ],
+          "bestFor": "dental clinic owners who want patients to compare treatments, check prices and insurance, and request an appointment online.",
+          "summary": "NaviX is a dental clinic demo site: ten services with detail pages and starting prices, an appointment-booking form, transparent pricing, insurance information, a smile gallery and a team page. Everything runs in the browser as a working demo — you can pick a treatment and fill in the booking form, but no real appointment is made.",
+          "problem": "A typical dental clinic problem: treatments and prices live in a brochure or behind a phone call, so patients cannot compare a cleaning with an implant or know what their insurance covers; appointments are booked by phone during office hours; and new patients arrive with no idea what the first visit involves. This is a demo scenario for this kind of business — NaviX is not a real clinic and had no real patient problem to solve.",
+          "approach": [
+            {
+              "decision": "Every treatment gets its own page with a starting price, visits and duration, instead of a single price list.",
+              "why": "Dental work is expensive and frightening, and patients compare carefully. Showing what a treatment includes, how long it takes and what it starts at answers the questions that decide whether they call at all."
+            },
+            {
+              "decision": "Insurance gets its own page naming the accepted plans, and pricing is shown before any booking step.",
+              "why": "Cover is usually the first question a patient asks after price. Naming the plans up front saves a phone call for both sides, and honest pricing builds the trust a clinic needs before anyone sits in the chair."
+            },
+            {
+              "decision": "Booking stays a browser demo that says so plainly, with the request stored only on the visitor's device.",
+              "why": "The demo shows the booking journey, not a real diary. A real clinic would connect its own scheduling and confirmation system, and verify insurance before the visit."
+            }
+          ],
+          "includes": [
+            "Ten services with detail pages",
+            "Appointment-booking form with time slots",
+            "Transparent pricing page",
+            "Insurance page naming accepted plans",
+            "Smile gallery and reviews pages",
+            "New-patients and emergency pages",
+            "Team page with dentist profiles"
+          ],
+          "tryIt": [
+            "Pick a service and a time slot on /book-appointment and fill in the demo form",
+            "Compare starting prices, visits and durations on /pricing for all ten services",
+            "Open /insurance to check which dental plans the clinic says it accepts",
+            "Browse the smile gallery and read the patient reviews on the /reviews page",
+            "Open /team to meet the four dentists and read about their specialties"
+          ],
+          "limitations": [
+            "Demo data only — the treatments, prices and insurance details are illustrative, and the phone number, email and address are placeholders",
+            "No real appointments are booked — the form says so plainly and stores the request only in your browser",
+            "The reviews are presented as real patient feedback, but this is a demo site — no real patients exist yet",
+            "No client results or metrics exist yet — this demo has never run a real clinic, so nothing about patients or treatments can be claimed"
+          ],
+          "nextStep": "Want a clinic website like this? Order the Booking / Enquiry Website service and we will build it with your real services, prices and booking setup."
         },
         {
           "slug": "lumina-beauty-studio-salon",
@@ -888,7 +1211,47 @@
             "Services with prices in ₹",
             "Gallery & bridal pages",
             "Blog & reviews pages"
-          ]
+          ],
+          "bestFor": "salon owners who want customers to browse hair, nail and skin services, see honest prices and book online.",
+          "summary": "This salon demo shows the everyday side of Lumina: hair styling, nail care, skin treatments and beauty treatments with starting prices and durations, plus a four-step booking form, a gallery and a blog. Everything runs in the browser as a working demo — you can pick a treatment and walk through the booking steps, but no real appointment is made.",
+          "problem": "A typical salon problem: the price list lives on a card at the counter or in chat messages, so a customer cannot check what a haircut or facial costs before she visits; bookings come by phone and clash with walk-ins; and first-time visitors have no way to see the work before they trust a new artist. This is a demo scenario for this kind of business — Lumina is not a real salon and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Everyday services lead the site — hair, nails, skin and beauty treatments — with prices and durations on each one.",
+              "why": "Most salon visits are regular treatments, not weddings. Putting prices and durations on the everyday services answers the question a repeat customer asks every time: what does it cost and how long will it take."
+            },
+            {
+              "decision": "A four-step booking flow that asks for service, artist, date and details, with no account needed.",
+              "why": "Booking should take minutes, not a phone call and a callback. Four short steps — and validation on name, mobile and date — keep the form quick while catching the mistakes that cause missed appointments."
+            },
+            {
+              "decision": "A gallery with filters by bridal, hair, nails and skin, so visitors judge the work before they book.",
+              "why": "Nobody books a new salon on price alone — they want to see the work. Filtered photos let a visitor find exactly the treatment she is considering and see what the studio can do."
+            }
+          ],
+          "includes": [
+            "Hair, nail, skin and beauty services",
+            "Starting prices and durations per service",
+            "Four-step booking form with validation",
+            "Photo gallery with work filters",
+            "First-visit and referral offers",
+            "Full pricing page",
+            "Blog and reviews pages"
+          ],
+          "tryIt": [
+            "Pick a service on /book and walk through the four booking steps to the details form",
+            "Compare starting prices and durations on /services for hair, nails and skin",
+            "Filter the gallery by hair, nails or skin to see that kind of work",
+            "Read the first-visit offer on the home page and check what it covers",
+            "Open a service detail page from /services to see what is included"
+          ],
+          "limitations": [
+            "Demo data only — the services, prices and offers are illustrative, and the phone number, email and address are placeholders; the footer calls the site a mock for design approval",
+            "No real appointments are booked and no payment is taken — the booking form runs in your browser only",
+            "The reviews are presented as real client reviews, but this is a demo site — no real client reviews exist yet",
+            "No client results or metrics exist yet — this demo has never run a real salon, so nothing about bookings or revenue can be claimed"
+          ],
+          "nextStep": "Want a salon website like this? Order the Booking / Enquiry Website service and we will build it with your real services, prices and booking setup."
         },
         {
           "slug": "adiyo",
@@ -906,7 +1269,48 @@
             "Competitor comparison pages",
             "Request-a-demo & login flows",
             "Features, solutions & industry pages"
-          ]
+          ],
+          "bestFor": "B2B SaaS teams who want buyers to understand the product, test the value with a calculator and request a demo without a sales call first.",
+          "summary": "Adiyo is a B2B SaaS marketing demo for an AI sales platform: feature and solution pages, competitor comparisons, pricing, an interactive ROI calculator and a request-a-demo flow. Visitors can try a demo workspace with sample deals and log in with demo credentials. Everything runs in the browser as a working demo — no real account is created and no data leaves your browser.",
+          "problem": "A typical B2B SaaS problem: the product is hard to explain in one page, so buyers bounce before they understand what it does; pricing stays hidden behind a sales call, which slows down serious buyers; and every competitor claims the same thing, so the differences never get compared. This is a demo scenario for this kind of business — Adiyo is not a real software company and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "An interactive demo on the features page — click a sample deal and see the insight, the signals and the coaching cue — instead of screenshots alone.",
+              "why": "Buyers of sales software need to feel the product, not read about it. Letting them click a real-looking deal shows the insight in seconds, where a feature list only promises it."
+            },
+            {
+              "decision": "An ROI calculator that turns the visitor's own numbers — reps, deal size and win rate — into an estimated return, with a clear demo disclaimer.",
+              "why": "A generic promise of higher win rates convinces nobody. When buyers enter their own pipeline numbers, the value becomes theirs to judge — and the disclaimer keeps the estimate honest."
+            },
+            {
+              "decision": "Comparison pages against Gong and Clari, plus a demo login with sample pipeline data, so buyers can judge the product on their own terms.",
+              "why": "Serious buyers always compare, whether the site helps them or not. Naming the alternatives and opening a sample workspace makes the comparison happen on the demo instead of on a competitor's site."
+            }
+          ],
+          "includes": [
+            "Interactive demo with sample deals",
+            "ROI calculator with sliders",
+            "Comparison pages (Gong, Clari)",
+            "Pricing page (three tiers)",
+            "Request-a-demo form (three-step pilot)",
+            "Demo login workspace (sample data)",
+            "Features, solutions and industry pages",
+            "Integrations and customer-story pages"
+          ],
+          "tryIt": [
+            "Click a sample deal in the interactive demo on /features/ and read its insight, signals and coaching cue",
+            "Move the sliders on /roi-calculator/ and see how your pipeline numbers change the estimated return",
+            "Sign in on /login/ with the demo credentials and explore the sample pipeline workspace",
+            "Open /compare/gong/ and /compare/clari/ to see how Adiyo positions itself against rivals",
+            "Fill in the request-a-demo form on /request-demo/ and see the three-step pilot it describes"
+          ],
+          "limitations": [
+            "Demo data only — the deals, pipeline numbers and customer names (Nimbus, Fieldset, Loopwork) are sample content, and the contact details are placeholders",
+            "No real account, demo or purchase happens — the login uses fixed demo credentials, and the request-a-demo form sends nothing to a real sales team",
+            "No client results or metrics exist yet — the headline figures ($45B influenced deals, 50% win-rate lift) are demo copy with no measured basis",
+            "The customer quotes are illustrative, not real buyer feedback — the same names appear as sample deals in the interactive demo"
+          ],
+          "nextStep": "Want a B2B SaaS website like this? Order the Business Website service and we will build it with your real product story, pricing and demo flow."
         },
         {
           "slug": "aura-audio",
@@ -924,7 +1328,46 @@
             "Compare & wishlist",
             "Cart drawer & demo checkout",
             "Journal & technology pages"
-          ]
+          ],
+          "bestFor": "audio brands who want shoppers to compare headphones side by side, save favourites and check out online without visiting a store.",
+          "summary": "AURA Audio is a premium audio e-commerce demo store: eight products including headphones, earbuds, a speaker and a watch, with product pages, compare and wishlist, a cart drawer and demo checkout. Everything runs in the browser as a working demo — you can compare models and go through checkout, but no payment is processed and nothing ships.",
+          "problem": "A typical audio-brand problem: headphones differ in sound, battery and comfort, so shoppers need a side-by-side comparison before they spend; questions about shipping, returns and warranty arrive by email and chat, and the answers live in scattered pages. A visitor who cannot compare models or find the warranty terms leaves without buying. This is a demo scenario for this kind of business — AURA Audio is not a real brand and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Compare and wishlist sit at the centre of the shop, instead of treating them as extras after the product list.",
+              "why": "Headphone buyers rarely decide on the first product they open, so the shortlist has to be easy to build. Comparing models side by side answers the real question — which one is right for me — instead of making the shopper remember specs."
+            },
+            {
+              "decision": "Checkout stays a demo with a clear warning not to enter real card details, and no account is needed.",
+              "why": "The point of the demo is to show the buying flow, not to take money. Guest checkout with a visible demo note lets a visitor try the full journey safely, and a real store would connect its own payment provider."
+            },
+            {
+              "decision": "Technology and journal pages explain the sound, so the shop sells on understanding, not only on pictures.",
+              "why": "Audio is hard to judge from a photo, so buyers look for explanations — how the noise cancelling works, what the battery really does. Those pages give the reasons to buy that a product photo cannot."
+            }
+          ],
+          "includes": [
+            "Eight products with detail pages",
+            "Side-by-side product compare",
+            "Wishlist and cart drawer",
+            "Demo checkout with guest option",
+            "Journal and technology pages",
+            "Order tracking page",
+            "Support pages with FAQ"
+          ],
+          "tryIt": [
+            "Compare two headphones on /compare/ and save a favourite to the wishlist",
+            "Add the bestseller AURA One to the bag and go through the demo checkout on /checkout/",
+            "Search on /products/ for 'buds' and open a product page to read its reviews",
+            "Open /technology/ to see how the noise cancelling and battery features are explained"
+          ],
+          "limitations": [
+            "Demo data only — the products, prices and reviews are illustrative, and the contact details (hello@aura.audio) are placeholders",
+            "No real order, payment or shipment happens — the checkout is a demo and the receipt email is a mock",
+            "The product reviews carry invented reviewer names and are demo content, not real customer feedback",
+            "No client results or metrics exist yet — this demo has never sold real audio gear, so nothing about sales can be claimed"
+          ],
+          "nextStep": "Want an audio store like this? Order the Catalogue / Menu Website service and we will build it with your real products, prices and checkout setup."
         },
         {
           "slug": "aurelia-palace",
@@ -942,7 +1385,46 @@
             "Rooms with compare",
             "Dining reservation & spa booking",
             "Offers, gift cards & loyalty pages"
-          ]
+          ],
+          "bestFor": "luxury hotel owners who want guests to compare rooms, book dining and spa treatments, and complete a booking online without calling the front desk.",
+          "summary": "The Aurelia Palace is a luxury hotel demo site for a palace hotel in Jaipur: six rooms and suites with a compare tool, three restaurants with table reservations, spa booking, offers, gift cards and a loyalty page. The booking flow runs from room selection to a confirmation page, and everything works in the browser as a working demo — no real room is booked and no payment is taken.",
+          "problem": "A typical luxury hotel problem: guests phone the front desk for rates and availability, so staff spend the day answering the same questions instead of looking after guests; dining and spa bookings arrive by phone too, and offers live in emails that guests never find. A visitor who cannot see rooms, prices and open tables in one place books elsewhere or not at all. This is a demo scenario for this kind of business — the palace is not a real hotel and had no real guest problem to solve.",
+          "approach": [
+            {
+              "decision": "One booking journey for rooms, dining and spa, instead of separate phone calls or enquiry forms for each.",
+              "why": "A hotel guest usually plans the whole stay in one visit: the room, where to eat, and a spa treatment. Splitting those across calls and forms loses the booking at each step, so the demo keeps them in one flow."
+            },
+            {
+              "decision": "The booking runs end to end in the browser, from room selection to a confirmation page, with no payment step.",
+              "why": "The demo exists to show the flow, not to take money or hold a real room. A visitor can try the full journey safely, and a real hotel would connect its own booking engine and payment provider."
+            },
+            {
+              "decision": "Room compare, restaurant pages and spa rituals sit beside the booking flow, so guests decide with prices and details in front of them.",
+              "why": "Guests compare rooms by size, view and price, and check the restaurants before they book. Putting that information next to the booking step answers the questions that would otherwise become a phone call."
+            }
+          ],
+          "includes": [
+            "Six rooms and suites with compare",
+            "Three restaurants with table reservations",
+            "Spa booking with eight rituals",
+            "Booking flow to confirmation page",
+            "Offers, gift cards and loyalty pages",
+            "Guest reviews page (mock scores)",
+            "Experiences, weddings and meetings pages"
+          ],
+          "tryIt": [
+            "Compare two rooms on /rooms/compare/ and open a room page to see its size, view and nightly price",
+            "Start a booking on /book/, pick dates and a room, and follow it through to the confirmation page",
+            "Reserve a table on /dining/reserve/ and book a spa ritual on /spa/book/",
+            "Open /offers/ to see the Stay 3, Pay 2 offer and its validity dates"
+          ],
+          "limitations": [
+            "Demo data only — the rooms, prices, review scores and contact details (+91 141 456 7890, 12 Rajmahal Road, Jaipur) are illustrative, and the footer says so",
+            "No real booking, payment or reservation is made — the booking flow ends on a demo confirmation page",
+            "The review scores on the reviews page are labelled mock demo data, not real guest feedback",
+            "No client results or metrics exist yet — this demo has never run a real hotel, so nothing about bookings or revenue can be claimed"
+          ],
+          "nextStep": "Want a hotel website like this? Order the Booking / Enquiry Website service and we will build it with your real rooms, rates and booking setup."
         },
         {
           "slug": "ayaan-raza-portfolio",
@@ -960,7 +1442,47 @@
             "Blog with RSS feed",
             "Resume & services pages",
             "Contact & booking forms"
-          ]
+          ],
+          "bestFor": "developers and freelancers who want clients to read project case studies, see services and prices, and book a call without a long email exchange.",
+          "summary": "Ayaan Raza is a personal portfolio demo site for a full-stack developer: four project case studies, a blog with demo posts and an RSS feed, services with pricing, a resume page, and contact and book-a-call forms. Everything runs in the browser as a working demo — you can read the case studies and pick a call slot, but no real call is booked and nothing is sent.",
+          "problem": "A typical freelancer problem: the work lives in scattered repos and screenshots, so a client cannot tell what was actually built or how; services and prices stay vague, and booking a call takes a long email exchange. A client who cannot see a relevant project or a clear next step hires someone else. This is a demo scenario for this kind of site — Ayaan Raza is a demo persona and had no real client problem to solve.",
+          "approach": [
+            {
+              "decision": "Four full case studies instead of a grid of screenshots, so a client sees the problem, the stack and the result of each project.",
+              "why": "A screenshot shows what something looked like, not what was built or how it works. A case study with the stack and the outcome lets a client judge whether this developer can do their project."
+            },
+            {
+              "decision": "A book-a-call page with day and time pickers, instead of asking every client to propose times by email.",
+              "why": "The back-and-forth of finding a time is the slowest part of starting a project, so the demo shows the slots directly. A client picks a day and an hour and gets a written quote afterwards, with no email thread."
+            },
+            {
+              "decision": "Demo labels stay visible — fictional client names, demo posts and a fake phone number are marked as such on the site.",
+              "why": "A portfolio is a trust document, so hiding that the content is invented would be dishonest. Marking the demo content plainly lets a visitor judge the design without mistaking fiction for real work."
+            }
+          ],
+          "includes": [
+            "Four project case studies",
+            "Blog with demo posts and RSS",
+            "Services with pricing pages",
+            "Resume and tech-stack pages",
+            "Book-a-call day and time picker",
+            "Contact form (browser validation only)",
+            "Testimonials from fictional clients",
+            "Now and uses pages"
+          ],
+          "tryIt": [
+            "Read a case study on /projects/ — Foodly, Shopio, WalletWise or FitTrack — and check its stack",
+            "Pick a day and a time on /book/ and see the demo booking flow",
+            "Search the blog on /blog/ and open a post to see the demo-post label",
+            "Open /services/ for the four services and /resume/ for the full resume"
+          ],
+          "limitations": [
+            "Demo data only — the projects, clients and contact details (hello@ayaanraza.demo, +91 00000 00000) are fictional or fake, as the site labels them",
+            "No real call is booked and no message is sent — the forms validate in the browser only",
+            "The testimonials are labelled as kind words from fictional clients, not feedback from real clients",
+            "No client results or metrics exist yet — this demo has never run a real freelance business, so nothing about clients or income can be claimed"
+          ],
+          "nextStep": "Want a portfolio website like this? Order the Business Website service and we will build it with your real projects, services and booking setup."
         },
         {
           "slug": "cloudpilot",
@@ -978,7 +1500,47 @@
             "Pricing monthly/yearly toggle",
             "Help centre with live search",
             "Demo login & request-demo form"
-          ]
+          ],
+          "bestFor": "SaaS teams who want buyers to try the product's value, compare plans and sign in with a demo account before talking to sales.",
+          "summary": "CloudPilot is a SaaS product demo site: three tools, pricing with a monthly/yearly toggle, an ROI calculator with live sliders, a help centre with live search, and a demo login. Everything runs in the browser as a working demo — you can move the calculator sliders and sign in with the demo account, but no real workspace or subscription is created.",
+          "problem": "A typical SaaS problem: buyers will not talk to sales until they can see what the product is worth to them — what it saves, what it costs, and whether it fits their team. Pricing pages hide the numbers behind a sales call, and help pages bury answers in long articles. A buyer who cannot work out the value alone moves on to a competitor. This is a demo scenario for this kind of business — CloudPilot is not a real product and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "An ROI calculator leads the pitch, with live sliders for team size, manual hours and hourly cost.",
+              "why": "A buyer trusts their own numbers more than a vendor's claims, so the calculator works with figures they enter. It is deliberately conservative and says so, which makes the result believable instead of salesy."
+            },
+            {
+              "decision": "Pricing is shown openly with a monthly/yearly toggle, and the page states plainly that all prices are demo data.",
+              "why": "Hidden pricing is the fastest way to lose a SaaS buyer, so the demo shows real-looking plans with a toggle. Labelling them as demo data keeps the page honest while still showing how pricing would work."
+            },
+            {
+              "decision": "A demo login with a pre-filled account, instead of a sign-up wall that blocks the product tour.",
+              "why": "A visitor who has to create an account before seeing anything usually leaves. The demo account lets anyone sign in in one click, so the product — not the form — does the convincing."
+            }
+          ],
+          "includes": [
+            "Three tools pages (FlowMaster, TeamSync, InsightPro)",
+            "Pricing with monthly/yearly toggle",
+            "ROI calculator with live sliders",
+            "Help centre with live search",
+            "Demo login with pre-filled account",
+            "Product tour and integrations pages",
+            "Compare pages and customer stories",
+            "Request-demo and contact forms"
+          ],
+          "tryIt": [
+            "Move the sliders on /roi-calculator/ and watch the yearly savings and payback period update live",
+            "Sign in on /login/ with the demo account demo@cloudpilot.app and password demo1234",
+            "Switch the pricing toggle on /pricing/ between monthly and yearly to see the 20% difference",
+            "Search the help centre on /help/ and open a tool page like /tools/flowmaster/"
+          ],
+          "limitations": [
+            "Demo data only — the prices, savings figures and customer stories are illustrative, and the pricing page says so",
+            "No real account, workspace or subscription is created — the demo login signs you into a mock product",
+            "The ROI results assume the calculator automates 60% of manual hours — your mileage will vary, as the page notes",
+            "No client results or metrics exist yet — this demo has never run a real SaaS product, so nothing about signups or revenue can be claimed"
+          ],
+          "nextStep": "Want a SaaS website like this? Order the Business Website service and we will build it with your real product, pricing and signup setup."
         },
         {
           "slug": "coolair",
@@ -996,7 +1558,48 @@
             "Instant quote calculator",
             "Track-booking page",
             "Symptom finder & service areas"
-          ]
+          ],
+          "bestFor": "AC repair and service businesses whose customers need a price, a booking slot and a way to track the visit without calling.",
+          "summary": "CoolAir is an AC repair and service demo for Mumbai, Thane, Navi Mumbai and Pune: nine services, a five-step booking flow with a slot picker, an instant quote calculator, a symptom finder and booking tracking. Visitors can check a price, book a visit and follow it up afterwards. Everything runs in the browser as a working demo — bookings are saved on your device only, and no technician is dispatched.",
+          "problem": "A typical AC service problem: the phone rings all day with the same questions — what will it cost, when can someone come, is the technician on the way — while the technician is on a job and cannot answer. Prices are quoted from memory, so two customers hear two different numbers, and a customer who misses the call books with whoever answers first. This is a demo scenario for this kind of business — CoolAir is not a real AC company and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One booking flow for the whole job — pick a service, get a quote, choose a slot and track the visit — instead of separate phone calls for each step.",
+              "why": "A customer with a broken AC wants the visit sorted in one go. Splitting price, booking and tracking across calls and messages means every step can stall, and the customer who waits longest books elsewhere."
+            },
+            {
+              "decision": "A price range before booking, from an instant quote calculator and a published rate card, instead of a price quoted only on the phone.",
+              "why": "Nobody books a repair they cannot afford, and a price agreed after diagnosis protects both sides. Showing the range first lets a customer decide before a technician is sent out."
+            },
+            {
+              "decision": "A symptom finder that names the likely cause, the fix and the price, so customers arrive knowing what the visit involves.",
+              "why": "Most AC problems are one of a handful of faults, and a customer who can describe the symptom gets a faster diagnosis. It also tells them honestly when the answer is a simple filter wash, not a repair."
+            }
+          ],
+          "includes": [
+            "Nine AC services with detail pages",
+            "Five-step booking with slot picker",
+            "Instant quote calculator",
+            "Symptom finder (8 common problems)",
+            "Track-booking page (browser-saved bookings)",
+            "Transparent price list and AMC plans",
+            "Service-area pages for four cities",
+            "Reviews, FAQ, offers and emergency page"
+          ],
+          "tryIt": [
+            "Pick a service, AC type, brand and problem on /get-quote/ and see the estimated price range",
+            "Go through the five-step booking on /book/ and get a demo confirmation with a booking ID",
+            "Enter that booking ID on /track-booking/ to see the saved booking details",
+            "Tap a symptom on /symptoms/ to see its likely cause, fix and price",
+            "Compare one-time service prices with the yearly AMC plans on /prices/ before you book"
+          ],
+          "limitations": [
+            "Demo data only — the phone number (+91 98765 43210), address, technician names, prices and reviews are mock values, as the site footer states",
+            "No real booking is made — the five-step flow saves the booking in your browser only, and no technician is dispatched or payment taken",
+            "No client results or metrics exist yet — this demo has never run a real AC business, so nothing about bookings, response times or satisfaction can be claimed",
+            "The customer reviews are labelled mock on the site, and the counters for jobs and customers are mock values too"
+          ],
+          "nextStep": "Want an AC service website like this? Order the Booking / Enquiry Website service and we will build it with your real services, prices and booking setup."
         },
         {
           "slug": "creatix",
@@ -1014,7 +1617,48 @@
             "Blog with six articles",
             "Careers with role pages",
             "Booking page & on-site search"
-          ]
+          ],
+          "bestFor": "creative agencies who want clients to see the work, the process and fixed prices before they book a free call.",
+          "summary": "Creatix is a creative agency demo: four services with starting prices, six project case studies with filters, a blog, careers with role pages, a five-step process and a book-a-call page. Visitors can browse the work, read the articles and pick a day and time for a call. Everything runs in the browser as a demo — the booking opens your email app and nothing is sent until you press send.",
+          "problem": "A typical creative agency problem: the work lives in scattered decks and social posts, so a buyer cannot see the range in one place; prices are quoted only after a call, which loses buyers who want a number first; and the process is a mystery, so clients fear surprise bills and endless revisions. This is a demo scenario for this kind of business — Creatix is not a real agency and had no real client problem to solve.",
+          "approach": [
+            {
+              "decision": "Fixed starting prices on every service and package, published on the site, instead of 'contact us for a quote'.",
+              "why": "A buyer who cannot see a number will not book a call to ask for one. Publishing the starting price filters out the wrong budgets early and lets serious buyers arrive ready to talk scope."
+            },
+            {
+              "decision": "A five-step process page with weeks, who you talk to and when you approve, so the journey from first call to launch is visible.",
+              "why": "Agencies lose buyers to fear of the unknown more than to price. Showing each step, its timing and the approval points turns a leap of faith into a plan a buyer can picture."
+            },
+            {
+              "decision": "Six project case studies with filters, a blog and a team page, so the work and the people behind it are on show before any call.",
+              "why": "Buyers hire people, not a homepage. Seeing real-looking projects, honest writing and the team behind them lets a buyer decide the agency fits before spending half an hour on a call."
+            }
+          ],
+          "includes": [
+            "Four services with fixed prices",
+            "Six project case studies (filterable)",
+            "Blog with six articles",
+            "Careers page with four roles",
+            "Five-step process page",
+            "Book-a-call page (demo booking)",
+            "On-site search and reviews page",
+            "Pricing page (four packages)"
+          ],
+          "tryIt": [
+            "Filter the six projects on /projects/ by Branding, 3D & CGI or Motion and open a case study",
+            "Pick a service, day and time on /book/ and see the demo booking open in your email app",
+            "Read the five-step process on /process/ to see the weeks, approvals and launch plan",
+            "Use the on-site search on /search/ to find a service, project or article",
+            "Open /careers/ and a role page to see how open positions are presented"
+          ],
+          "limitations": [
+            "Demo data only — the client names are labelled mock demo names on the clients page, and the contact details (+91 98765 43210) are placeholders",
+            "No real booking or enquiry is made — the book-a-call form opens your email app and nothing is sent until you press send",
+            "No client results or metrics exist yet — the home-page figures (2,000+ clients, 150M+ revenue) and the 4.9/212 review average are demo copy",
+            "The client quotes name founders and companies that are not real clients — treat them as illustrative, not as references you can call"
+          ],
+          "nextStep": "Want a creative agency website like this? Order the Business Website service and we will build it with your real work, services and booking flow."
         },
         {
           "slug": "dovax",
@@ -1032,7 +1676,46 @@
             "Working cart with free-shipping progress",
             "Wishlist & checkout flow",
             "Technology & sustainability pages"
-          ]
+          ],
+          "bestFor": "sneaker brands who want shoppers to browse by style, check the size guide and buy online without a store visit.",
+          "summary": "Dovax is a sneakers-store demo: 16 products across men's, women's, sale and new-arrival pages, product pages with a size guide, a cart and wishlist, and a demo checkout. Free shipping applies above ₹999, and the site has technology and sustainability pages. Everything runs in the browser as a working demo — the checkout takes no real payment and no shoes are shipped.",
+          "problem": "A typical sneaker-brand problem: the range lives as photos on social media, so shoppers cannot filter by style, check sizes or see prices; questions about fit and returns arrive by message all day; and there is no single place to buy, so sales leak to marketplaces. A store with categories, a size guide and checkout would end most of that. This is a demo scenario for this kind of business — Dovax is not a real shop and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Separate men's, women's, sale and new-arrival pages, plus a search page, instead of one mixed catalogue.",
+              "why": "Sneaker shoppers usually know the style they want before they arrive. Category pages plus search get them to the right pair in one or two taps."
+            },
+            {
+              "decision": "A size guide that states Dovax fits true to size, on its own page and linked from products.",
+              "why": "Fit is the main reason shoes get returned. A clear size guide up front answers the question before the order, not after the return."
+            },
+            {
+              "decision": "A demo checkout with a clear note that no real payment is processed, and free shipping shown above ₹999.",
+              "why": "The demo shows the full purchase flow without taking money. A real store would connect its own payment provider, and the shipping threshold is part of the offer a shopper actually sees."
+            }
+          ],
+          "includes": [
+            "Men's, women's, sale and new-arrivals pages",
+            "16 product pages",
+            "Cart, wishlist and search",
+            "Demo checkout with no real payment",
+            "Size guide with fit note",
+            "Technology and sustainability pages",
+            "Blog, help and contact pages"
+          ],
+          "tryIt": [
+            "Browse /men/ or /women/ and open a product page",
+            "Open /size-guide/ and check the fit note before adding shoes to the cart",
+            "Add shoes to the cart and go through the demo checkout",
+            "Open /technology/ and /sustainability/ to see how the brand story is told"
+          ],
+          "limitations": [
+            "Demo data only — the shoes, prices and stock are illustrative, and the contact details on the site are placeholders",
+            "No real orders, payments or deliveries are made — the checkout states no real payment is processed",
+            "The free-shipping threshold (₹999) and returns policy are demo terms, not a real store's terms",
+            "No client results or metrics exist yet — this demo has never run a real sneaker shop, so nothing about sales or returns can be claimed"
+          ],
+          "nextStep": "Want a sneaker store like this? Order the Catalogue / Menu Website service and we will build it with your real products, sizes and payment setup."
         },
         {
           "slug": "durora",
@@ -1050,7 +1733,46 @@
             "Day-by-day schedule",
             "Demo ticket checkout",
             "Venue & gallery pages"
-          ]
+          ],
+          "bestFor": "festival organisers who want visitors to see the lineup, check the schedule and buy tickets without emailing for details.",
+          "summary": "Durora is a music-festival demo for Berlin, 14–16 August 2027: a lineup with artist pages, a day-by-day schedule, venue and gallery pages, and a demo ticket checkout for Day, Weekend and VIP passes. The site states 60+ artists across five stages, with six artist pages live so far. Everything runs in the browser as a working demo — the checkout takes no payment and books nothing.",
+          "problem": "A typical festival problem: the lineup lives as a poster image, so fans cannot read about an artist or see which day they play; ticket questions — which pass, what is included, how much — arrive by message; and practical details like venue, gates and times are buried in posts. A site with artist pages, a schedule and ticket options would end most of that. This is a demo scenario for this kind of festival — Durora is not a real festival and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "A lineup page with an artist page for each act, plus a schedule by day, instead of a poster image.",
+              "why": "Festival-goers decide by artist and by day. Artist pages with stage and time let a fan plan the weekend before buying a ticket."
+            },
+            {
+              "decision": "Three ticket passes — Day, Weekend and VIP — with a demo checkout that states it takes no payment and books nothing.",
+              "why": "The pass choice is the purchase decision, so it sits on its own page with clear prices. The demo shows the flow without taking money from anyone."
+            },
+            {
+              "decision": "Venue, gallery, info and FAQ pages next to the lineup, so practical questions are answered on the site.",
+              "why": "Gates, times and the venue decide whether a fan can actually come. Answering them on the site stops the messages asking where and when."
+            }
+          ],
+          "includes": [
+            "Lineup with six artist detail pages",
+            "Day-by-day schedule for three days",
+            "Ticket passes: Day €69, Weekend €149, VIP €249",
+            "Demo ticket checkout with no payment",
+            "Venue and gallery pages",
+            "Info and FAQ pages",
+            "Contact, terms and privacy pages"
+          ],
+          "tryIt": [
+            "Open /lineup/ and read an artist page for stage and time",
+            "Check the schedule by day on /schedule/ to plan your visit",
+            "Open /tickets/ and compare the Day, Weekend and VIP passes",
+            "Go through the demo checkout and read the note that nothing is booked"
+          ],
+          "limitations": [
+            "Demo data only — the festival, artists and ticket prices are illustrative, and the contact details on the site are placeholders",
+            "The site advertises 60+ artists across five stages, but only six artist pages are live so far — more names are announced as coming soon",
+            "No real tickets are sold and no payment is taken — the checkout states it books nothing",
+            "No client results or metrics exist yet — this demo has never run a real festival, so nothing about ticket sales or attendance can be claimed"
+          ],
+          "nextStep": "Want a festival site like this? Order the Booking / Enquiry Website service and we will build it with your real lineup, schedule and ticketing setup."
         },
         {
           "slug": "electdove",
@@ -1068,7 +1790,47 @@
             "Add to bag & checkout flow",
             "EMI calculator & trade-in",
             "Rewards & gift-card pages"
-          ]
+          ],
+          "bestFor": "electronics sellers who want customers to compare devices, check EMIs and trade in an old phone without visiting the shop.",
+          "summary": "Electdove is an electronics-store demo: a shop by brand and category, a cart and checkout, an EMI calculator, a trade-in estimator, rewards and gift cards. Shoppers can browse eight products from Apple, Samsung, Google and Sony, estimate monthly payments and apply a trade-in value to the bag. Everything runs in the browser as a working demo — the EMI calculator and trade-in estimates are labelled demo tools.",
+          "problem": "A typical electronics-shop problem: customers ask the same questions before every purchase — which model, what monthly, what is my old phone worth — because the catalogue has no prices, EMI figures or trade-in values; comparisons happen in chats, not on the site, and the sale still needs a shop visit. A store showing devices, EMIs and trade-in credit together would end most of that. This is a demo scenario — Electdove is not a real shop and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Shop by brand and category with compare, instead of one long product list.",
+              "why": "Electronics buyers usually start from a brand or a device type and then compare two or three models. Brand pages plus compare match how the decision actually happens."
+            },
+            {
+              "decision": "An EMI calculator and a trade-in estimator on the site, both labelled as demo tools with indicative figures.",
+              "why": "Monthly cost and trade-in value are usually the two numbers that decide a purchase. Showing them up front answers the questions that otherwise arrive by message."
+            },
+            {
+              "decision": "Rewards and gift cards next to the shop, so the demo shows how a store brings a buyer back for the next device.",
+              "why": "Electronics buyers return when the next device is due. Rewards and gift cards give the store a reason to stay in touch between purchases."
+            }
+          ],
+          "includes": [
+            "Shop by brand (Apple, Samsung, Google, Sony)",
+            "Eight product pages with categories",
+            "Cart, wishlist, compare and checkout",
+            "EMI calculator (demo, indicative figures)",
+            "Trade-in estimator with bag credit",
+            "Rewards and gift-card pages",
+            "Deals and new-arrivals pages",
+            "Order tracking, help and contact pages"
+          ],
+          "tryIt": [
+            "Open /emi-calculator/ and estimate the monthly cost of a device",
+            "Get a trade-in estimate on /trade-in/ and apply it to your bag",
+            "Compare two products side by side from the shop",
+            "Add a product to the bag and open the checkout page"
+          ],
+          "limitations": [
+            "Demo data only — the products, prices and EMI figures are illustrative, and the contact email (hello@electdove.store) is a placeholder",
+            "No real orders or payments are made — the EMI calculator states no payment is processed and trade-in values are demo estimates",
+            "The trade-in value is indicative only — the site says the final value is confirmed only after a physical check",
+            "No client results or metrics exist yet — this demo has never run a real electronics shop, so nothing about sales can be claimed"
+          ],
+          "nextStep": "Want an electronics store like this? Order the Catalogue / Menu Website service and we will build it with your real products, prices and payment setup."
         },
         {
           "slug": "femine",
@@ -1086,7 +1848,47 @@
             "Coaching services with detail pages",
             "Pricing & booking pages",
             "Blog, events & free guide"
-          ]
+          ],
+          "bestFor": "women who want practical one-to-one coaching to speak up, decide clearly and grow in their career.",
+          "summary": "Femine is a personality-coaching demo site: a ten-question confidence quiz, five one-to-one coaching programmes with pricing, a free thirty-minute introductory call, and a blog, events and a free guide. Everything runs in the browser as a working demo — you can take the quiz and fill in the booking form, but no real session is booked.",
+          "problem": "A typical coaching problem: a capable woman stays quiet in the meetings that matter, says yes when she means no, and has three career ideas with zero decisions — but coaching is sold as vague motivation, so she cannot tell what she would actually get. This is a demo scenario for this kind of business — Femine is not a real coaching practice and had no real client problem to solve.",
+          "approach": [
+            {
+              "decision": "A free ten-question quiz first, which points each visitor to the programme that fits her confidence style.",
+              "why": "Most visitors do not know which programme they need — they only know the feeling. The quiz turns that feeling into a named style and a concrete next step, instead of asking them to choose from five similar-sounding programmes."
+            },
+            {
+              "decision": "Five focused programmes, each sixty minutes, one-to-one and online, with the same per-session price and a free first call.",
+              "why": "Coaching is personal, so the demo sells a conversation, not a course. One clear format and one price keep the choice simple: pick the problem, not the package."
+            },
+            {
+              "decision": "The free call is booked by a form that opens in the visitor's own email app, with no account and no payment.",
+              "why": "A first call should cost nothing and commit to nothing. Using the visitor's own email keeps the demo honest about what it can do, and a real practice would connect its own calendar and booking system."
+            }
+          ],
+          "includes": [
+            "Confidence quiz with results flow",
+            "Five coaching programmes with detail pages",
+            "Free 30-minute introductory call booking",
+            "Pricing with session packs and gifts",
+            "Blog, events and free guide",
+            "Challenges and resources pages",
+            "Client stories (testimonials) page"
+          ],
+          "tryIt": [
+            "Take the ten-question quiz on /quiz and see which confidence style it gives you",
+            "Pick a day and time on /book and fill in the free-call form",
+            "Compare the single session, Growth Pack and Transform Pack prices on /pricing",
+            "Open a programme page from /services to read what a session covers",
+            "Browse the free guide and resources pages to see what visitors get for free"
+          ],
+          "limitations": [
+            "Demo data only — the coach, programmes, prices and opening hours are illustrative, and the site has no real practice behind it",
+            "No real sessions are booked and no payment is taken — the booking form opens in your email app instead",
+            "The testimonials page presents quotes as real client stories, but this is a demo site — no real clients exist yet",
+            "No client results or metrics exist yet — this demo has never coached anyone, so nothing about outcomes can be claimed"
+          ],
+          "nextStep": "Want a coaching website like this? Order the Booking / Enquiry Website service and we will build it with your real programmes, prices and booking setup."
         },
         {
           "slug": "forgefit",
@@ -1104,7 +1906,47 @@
             "Book-a-free-session page",
             "Results & pricing pages",
             "Blog, challenges & tools"
-          ]
+          ],
+          "bestFor": "personal trainers who want clients to compare programmes, check prices and book a free session online.",
+          "summary": "ForgeFit is a personal-training demo site built around one coach: four training programmes with prices, a free-session booking page with day and time slots, BMI and calorie tools, results and pricing pages. Everything runs in the browser as a working demo — you can pick a slot and fill in the booking form, but no real session is booked.",
+          "problem": "A typical trainer problem: programmes and prices live in chat messages, so a new client cannot compare one-to-one coaching with an online plan or know what it costs; bookings are arranged by phone and clash with sessions; and results live as screenshots, so nobody can tell what the training actually delivers. This is a demo scenario for this kind of business — ForgeFit is not a real training practice and had no real client problem to solve.",
+          "approach": [
+            {
+              "decision": "One coach, one voice — the whole site is built around a single trainer, not a faceless gym brand.",
+              "why": "People hire a trainer, not a logo. Putting the coach's method, assessment-first approach and Indian-food-first nutrition up front lets a visitor decide whether this is the right person before they book."
+            },
+            {
+              "decision": "A free thirty-minute session booked by picking a day and a time slot, with no payment and no account.",
+              "why": "The first session is the sale — a chat, an assessment and one honest plan. Letting a visitor pick a real slot makes the offer concrete, and the demo stays honest that nothing is actually booked."
+            },
+            {
+              "decision": "Free BMI and calorie tools on the site that feed straight into the booking page.",
+              "why": "A visitor who checks their numbers is already thinking about starting. The tools give a useful answer in seconds and end with a clear next step — book a free session and build a plan around those numbers."
+            }
+          ],
+          "includes": [
+            "Four training programmes with detail pages",
+            "Free-session booking with day and time slots",
+            "BMI and calorie calculators",
+            "Results page with transformations",
+            "Transparent pricing page",
+            "Blog, challenges and free guide",
+            "Coach profile page"
+          ],
+          "tryIt": [
+            "Pick a day and a time slot on /book and fill in the free-session form",
+            "Try the BMI and calorie calculators on /tools and see your protein target",
+            "Compare the four programmes, their prices and formats on the /programs page",
+            "Read the client transformations on /results and check the pricing on /pricing",
+            "Browse the challenges and free-guide pages to see the free plans on offer"
+          ],
+          "limitations": [
+            "Demo data only — the coach, programmes and prices are illustrative, and the phone number and email are placeholders",
+            "No real sessions are booked and no payment is taken — the booking form says no data leaves your browser",
+            "The results and testimonials are demo copy with named clients, not verified results from real training",
+            "No client results or metrics exist yet — this demo has never trained anyone, so nothing about progress can be claimed"
+          ],
+          "nextStep": "Want a trainer website like this? Order the Booking / Enquiry Website service and we will build it with your real programmes, prices and booking setup."
         },
         {
           "slug": "havenly",
@@ -1122,7 +1964,46 @@
             "6 property detail pages",
             "Mortgage calculator",
             "Home-valuation & saved properties"
-          ]
+          ],
+          "bestFor": "estate agents who want buyers to search homes by location and price, compare shortlisted properties and request a valuation without a phone call.",
+          "summary": "Havenly is a real-estate demo site for homes in Morocco: six property listings with detail pages, search filters by location, type and price, a mortgage calculator, a home-valuation form and saved properties. Everything runs in the browser as a working demo — you can filter homes and move the calculator sliders, but no real viewing or sale happens.",
+          "problem": "A typical estate-agent problem: listings live in scattered messages and photo albums, so buyers cannot filter by location, type or price before they call; valuations and mortgage questions arrive by phone, and shortlisted homes get lost between calls. A buyer who cannot compare homes side by side moves on to the next agent. This is a demo scenario for this kind of business — Havenly is not a real agency and had no real buyer problem to solve.",
+          "approach": [
+            {
+              "decision": "Search and filters come first — location, type and price — instead of a long list of homes to scroll through.",
+              "why": "A buyer knows roughly where they want to live and what they can pay before they look at a single home. Filters that match that thinking cut the list to a few homes worth opening, instead of showing everything at once."
+            },
+            {
+              "decision": "A mortgage calculator and a valuation form sit on the site, with results worked out in the browser and nothing sent or stored.",
+              "why": "Monthly payments and a rough home value are the two numbers a buyer or seller checks before calling an agent. Answering them on the site turns a casual browser into someone ready to enquire."
+            },
+            {
+              "decision": "Saved homes and a compare page, so a shortlist survives across visits instead of living in memory.",
+              "why": "Nobody buys a home in one sitting, so the shortlist has to wait for the buyer. Saving and comparing homes on the site keeps the decision in one place instead of scattered screenshots and notes."
+            }
+          ],
+          "includes": [
+            "Six property listings with detail pages",
+            "Search filters by location, type, price",
+            "Mortgage calculator with live sliders",
+            "Home-valuation estimate form",
+            "Saved properties and compare page",
+            "Agents, areas and services pages",
+            "Contact page with enquiry form"
+          ],
+          "tryIt": [
+            "Filter the homes on /properties/ by location, type and price, then open a property detail page",
+            "Move the sliders on /tools/mortgage-calculator/ and watch the monthly payment update instantly",
+            "Fill in the valuation form on /valuation/ and see the estimate it returns",
+            "Save a home and compare two saved homes side by side on /compare/"
+          ],
+          "limitations": [
+            "Demo data only — the homes, prices and contact details (hello@havenlly.pages.dev, +91 98765 43210, 12 Boulevard d'Anfa, Casablanca) are placeholders",
+            "No real viewing, valuation visit or sale happens — the calculator and valuation form only estimate in your browser",
+            "The testimonials and their 5.0 average are demo content, not verified reviews from real buyers or sellers",
+            "No client results or metrics exist yet — this demo has never sold a real home, so nothing about sales or enquiries can be claimed"
+          ],
+          "nextStep": "Want a property website like this? Order the Booking / Enquiry Website service and we will build it with your real listings, prices and enquiry setup."
         },
         {
           "slug": "kumquote",
@@ -1140,7 +2021,47 @@
             "Full-text search & random quote",
             "Browse by author, tag & collection",
             "Favourites & quote submission"
-          ]
+          ],
+          "bestFor": "readers and writers who want a searchable library of well-known quotes with the meaning behind each one.",
+          "summary": "KumQuote is a quotes library demo with 1,207 quotes across 12 categories — browse by author, category, tag or collection, search the full text, or open a random quote. Every quote carries a short meaning in plain words, and a quote of the day appears on the home page. Everything runs in the browser as a working demo — the library is free to browse and nothing is sold.",
+          "problem": "A typical quote-library problem: good quotes are scattered across books, posts and screenshots, so finding the right one for a speech or a post takes ages; the wording is often wrong and the author misattributed; and there is no short explanation of what the quote actually means. A searchable library with correct attributions and plain meanings would end most of that. This is a demo scenario for this kind of library — KumQuote is a demonstration library, not a published reference work.",
+          "approach": [
+            {
+              "decision": "Every quote with a short meaning in plain words, not just the words and the author.",
+              "why": "A quote is only useful if the reader knows how to use it. The meaning turns a nice line into something a reader can actually quote in a speech or a post."
+            },
+            {
+              "decision": "Browse by author, category, tag and collection, plus full-text search and a random quote, instead of one long list.",
+              "why": "Nobody reads a library front to back. People arrive with a topic or an author in mind, so the site is organised around the ways they actually search."
+            },
+            {
+              "decision": "Suggestions reviewed before publishing, with invented quotes and wrong attributions always refused.",
+              "why": "A quote library is only as good as its attributions. The review step is what keeps the library trustworthy, and the disclaimer is honest that famous attributions are sometimes disputed."
+            }
+          ],
+          "includes": [
+            "1,207 quotes across 12 categories",
+            "Browse by author, category, tag and collection",
+            "Full-text search across all quotes",
+            "Random quote and quote of the day",
+            "Favourites list for saved quotes",
+            "Submit-a-quote form with review",
+            "RSS feed and newsletter page",
+            "About, disclaimer and contact pages"
+          ],
+          "tryIt": [
+            "Search the full library for a topic on /search/",
+            "Open /random/ a few times to see how the random quote works",
+            "Save a quote to favourites and open /favorites/ to see it listed",
+            "Open a category on /categories/ and read the meaning under a quote"
+          ],
+          "limitations": [
+            "Demo library — the 1,207 quotes are a curated collection chosen by the site, not a complete or verified reference work",
+            "Attributions of famous quotes are sometimes disputed — the site's own disclaimer says wordings vary and meanings are its own explanations",
+            "Submitted quotes are only suggestions — nothing is published until reviewed, and invented quotes are refused",
+            "No client results or metrics exist yet — this demo has never run a real library, so nothing about readership can be claimed"
+          ],
+          "nextStep": "Want a content library like this? Order the Business Website service and we will build it with your real content, categories and search setup."
         },
         {
           "slug": "lumiere",
@@ -1158,7 +2079,47 @@
             "Discovery sets & journal",
             "Cart, wishlist & demo checkout",
             "Gift cards & order tracking"
-          ]
+          ],
+          "bestFor": "perfume and beauty brands who want shoppers to explore scents by collection, try discovery sets and buy online without visiting a store.",
+          "summary": "Lumière Parfums is a luxury perfume demo store: twelve fragrances with product pages, six collections, discovery sets, gift cards, a journal and ingredient pages, plus a cart, wishlist and three-step demo checkout. Everything runs in the browser as a working demo — you can fill the bag and go through checkout, but no payment is taken and nothing ships.",
+          "problem": "A typical perfume-brand problem: scents cannot be smelled through a screen, so shoppers need stories, ingredients and notes to choose; discovery sets and gift cards are the usual way in, but they sit apart from the shop. A visitor who cannot compare fragrances or try a small set first leaves without buying. This is a demo scenario for this kind of business — Lumière is not a real perfume house and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Shop by collection and by scent, with filters for who it is for, what it smells of and what it costs.",
+              "why": "Nobody buys perfume by name alone, so the site has to help a shopper narrow twelve scents to one. Filters and collections do that job before the shopper reads a single product page."
+            },
+            {
+              "decision": "Discovery sets and gift cards sit beside the full bottles, so a first-time buyer can try small before committing.",
+              "why": "A new scent is a gamble at full-bottle prices, and a gift needs no size guess. Small sets and gift cards lower the first purchase, which is the hardest step for a perfume brand to earn."
+            },
+            {
+              "decision": "Checkout stays a demo with a clear note and no payment step, instead of pretending to take real orders.",
+              "why": "The point of the demo is to show the buying flow, not to take money. A visitor can try the full journey safely, and a real store would connect its own payment provider."
+            }
+          ],
+          "includes": [
+            "Twelve fragrances with product pages",
+            "Six collections to shop by",
+            "Discovery sets page",
+            "Gift cards page",
+            "Cart, wishlist and demo checkout",
+            "Journal and ingredients pages",
+            "Order tracking page",
+            "Search and best-sellers pages"
+          ],
+          "tryIt": [
+            "Filter the twelve fragrances on /shop/ by who they are for, their notes and their price",
+            "Add a fragrance to the bag and go through the demo checkout on /checkout/ — no payment is taken",
+            "Open /discovery-sets/ and /gift-cards/ to see how trying small and gifting are presented",
+            "Track a demo order on /track/ using an order number like LM-123456"
+          ],
+          "limitations": [
+            "Demo data only — the fragrances, prices and contact details (hello@lumiere-parfums.example, 12 Rue de la Paix, Paris) are placeholders",
+            "No real order, payment or shipment happens — the checkout is a demo and no card is charged",
+            "Free shipping over $75 and complimentary samples are demo promises, not a real store policy",
+            "No client results or metrics exist yet — this demo has never sold a real fragrance, so nothing about sales can be claimed"
+          ],
+          "nextStep": "Want a perfume or beauty store like this? Order the Catalogue / Menu Website service and we will build it with your real products, prices and checkout setup."
         },
         {
           "slug": "luxury-furniture",
@@ -1176,7 +2137,47 @@
             "Live search filtering",
             "Cart, wishlist & demo checkout",
             "Showrooms, financing & trade pages"
-          ]
+          ],
+          "bestFor": "furniture stores who want shoppers to browse by room or category, compare pieces and check out online before visiting a showroom.",
+          "summary": "Furniture is a luxury furniture demo store: shop by category or by room, product pages with a cart and wishlist, a demo checkout with a confirmation page, plus showroom, financing, trade and delivery pages. Everything runs in the browser as a working demo — you can fill the cart and check out, but no payment is taken and nothing is delivered.",
+          "problem": "A typical furniture-store problem: a sofa or table is a big purchase, so shoppers want to see it in a room, check its size and compare it with other pieces before they commit; showroom visits, financing questions and delivery details all arrive as separate phone calls. A visitor who cannot picture a piece at home or find delivery terms leaves without buying. This is a demo scenario for this kind of business — the store is not real and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Shop by room as well as by category, so a shopper starts from the space they are furnishing, not a product list.",
+              "why": "Furniture is bought for a room, not in isolation, so the room is the natural starting point. A living-room view shows pieces together, which a category list of sofas alone cannot do."
+            },
+            {
+              "decision": "Showrooms, financing, trade and delivery get their own pages, instead of hiding that information in a FAQ.",
+              "why": "A big purchase raises practical questions — where to see it, how to pay for it, and how it arrives. Answering them on dedicated pages keeps shoppers moving instead of sending them to the phone."
+            },
+            {
+              "decision": "Checkout stays a demo with a clear footer note that prices and stock are illustrative, and no payment step.",
+              "why": "The point of the demo is to show the buying flow, not to take money. A visitor can try the full journey safely, and a real store would connect its own payment and delivery setup."
+            }
+          ],
+          "includes": [
+            "Shop by category and by room",
+            "Product pages with cart and wishlist",
+            "Demo checkout with confirmation page",
+            "Showrooms page (three locations)",
+            "Financing and trade pages",
+            "Delivery and returns pages",
+            "Live search and deals pages",
+            "Order tracking page"
+          ],
+          "tryIt": [
+            "Browse a room on /rooms/ and a category on /categories/, then open a product page",
+            "Add a piece to the cart and go through the demo checkout — no payment is taken",
+            "Use the live search on /shop/ to find a piece by name",
+            "Open /showrooms/ for the three showroom locations and /financing/ for payment options"
+          ],
+          "limitations": [
+            "Demo data only — the products, prices, stock and contact details (hello@furniture.example, (985) 555-0148, Covington, LA) are illustrative",
+            "No real order, payment or delivery happens — the checkout ends on a demo confirmation page",
+            "Showroom addresses and opening hours are demo content, not a real store you can visit",
+            "No client results or metrics exist yet — this demo has never sold real furniture, so nothing about sales can be claimed"
+          ],
+          "nextStep": "Want a furniture store like this? Order the Catalogue / Menu Website service and we will build it with your real products, prices and checkout setup."
         },
         {
           "slug": "mr-l-production",
@@ -1194,7 +2195,46 @@
             "Services with detail pages",
             "Blog with six articles",
             "Validated contact form & FAQ"
-          ]
+          ],
+          "bestFor": "video and creative studios who want clients to see past work, understand the services and send an enquiry without a first phone call.",
+          "summary": "Mr. L Production is a video-production studio demo site: six portfolio case studies with filters, three services with detail pages, a blog, team and process pages, and a validated contact form. Everything runs in the browser as a working demo — you can filter the portfolio, read the case studies and fill in the contact form, but the studio, its clients and its enquiries are not real.",
+          "problem": "A typical creative-studio problem: the work speaks for itself, but it lives in scattered showreels and social posts, so a client cannot see the range or how a project was made; services and prices stay vague, and enquiries arrive without the details needed to quote. A client who cannot find a relevant case study or a next step moves on to another studio. This is a demo scenario for this kind of business — Mr. L Production is not a real studio and had no real client problem to solve.",
+          "approach": [
+            {
+              "decision": "The portfolio leads with filterable case studies, instead of a showreel that shows everything and explains nothing.",
+              "why": "A client hires a studio for a kind of work they have already done well, so they need to find a matching case fast. Filters by discipline and a full case page do that job better than a montage of clips."
+            },
+            {
+              "decision": "Three services with their own detail pages, so a client sees exactly what each service includes before enquiring.",
+              "why": "Vague service lists force every enquiry to start with the same questions, which wastes the studio's time. Detail pages answer the scope question first, so the enquiries that arrive are already serious."
+            },
+            {
+              "decision": "A validated contact form with the enquiry prefilled from the page, instead of a bare email address.",
+              "why": "A good enquiry carries the project details the studio needs to quote, so the form asks for them up front. Prefilling the enquiry from the page the visitor came from saves them retyping it."
+            }
+          ],
+          "includes": [
+            "Six portfolio case studies with filters",
+            "Three services with detail pages",
+            "Blog with six articles",
+            "Validated contact form",
+            "Team and process pages",
+            "Client testimonials page",
+            "FAQ and search pages"
+          ],
+          "tryIt": [
+            "Filter the portfolio on /portfolio/ by Branding, Web Design or Motion and open a case study",
+            "Open a service detail page on /services/ to see exactly what each service includes",
+            "Fill in the validated contact form on /contact/ and see what messages wrong details produce",
+            "Read the six blog articles on /blog/ and the process pages on /process/"
+          ],
+          "limitations": [
+            "Demo data only — the studio, its clients, the case studies and the contact details (hello@mr-l-production.com, +91 98765 43210, Mumbai) are placeholders",
+            "The contact form is a demo flow — any message sent from it reaches nobody at a real studio",
+            "The testimonials are presented as client words but are demo content, not verified feedback from real clients",
+            "No client results or metrics exist yet — this demo has never run a real studio, so nothing about bookings or revenue can be claimed"
+          ],
+          "nextStep": "Want a studio website like this? Order the Business Website service and we will build it with your real work, services and contact setup."
         },
         {
           "slug": "nightclub",
@@ -1212,7 +2252,48 @@
             "Live countdown & gallery lightbox",
             "Guestlist, VIP & private-hire pages",
             "Visit & safety info pages"
-          ]
+          ],
+          "bestFor": "nightclub owners who want visitors to see upcoming events, join the guestlist and book VIP tables online.",
+          "summary": "NIGHTCLUB is a nightclub demo site: events with a month filter and detail pages, a live countdown, DJ profiles, a drinks menu, guestlist and VIP table booking, plus visit and safety information. Everything runs in the browser as a working demo — you can join the guestlist and request a table, but no real booking is made.",
+          "problem": "A typical nightclub problem: events live only on social media, so a visitor cannot see the whole month or what a night costs; guestlist names arrive by message and get lost at the door; and VIP tables are sold by phone with no clear minimum spend. This is a demo scenario for this kind of business — NIGHTCLUB is not a real club and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One site for the whole night out — events, guestlist, VIP tables, drinks and safety — instead of scattered social posts.",
+              "why": "A club night is decided in one evening: which night, who is playing, how to get in and what it costs. Putting every answer on one site means a visitor never has to message the club to find out."
+            },
+            {
+              "decision": "Guestlist and VIP table requests stay browser demos, with plain demo notes and no payment step.",
+              "why": "The demo shows the entry and table journey, not a real door list. A real club would connect its own ticketing and deposits, and confirm every request by phone as the demo promises."
+            },
+            {
+              "decision": "Visit and safety pages sit next to the events, with entry rules, hours and the Ask for Angela code word.",
+              "why": "A night out is only fun if people feel safe getting in and getting home. Entry rules, closing times and a clear way to ask for help answer the worries a first-time visitor has before they buy a ticket."
+            }
+          ],
+          "includes": [
+            "Events with month filter and detail pages",
+            "Live countdown to the next event",
+            "DJ profiles with detail pages",
+            "Drinks and bottle menu",
+            "Guestlist signup form",
+            "VIP table booking with three tiers",
+            "Visit and safety information pages",
+            "News page and photo gallery"
+          ],
+          "tryIt": [
+            "Filter the events by month on /events and open one to see its details",
+            "Join the guestlist on /guestlist by picking a night and leaving a name",
+            "Compare the three VIP table tiers and their minimum spends on /vip",
+            "Browse the drinks and bottle menu on /drinks to see cocktails and prices",
+            "Read the entry rules and opening hours on /visit and the safety page /safety"
+          ],
+          "limitations": [
+            "Demo data only — several event and news posts still carry lorem ipsum placeholder text, and the address and phone number are placeholders",
+            "No real tickets, guestlist places or table bookings are made — every form is a demo acknowledged on the page only",
+            "The VIP minimum spends and drinks prices are labelled placeholders — the club has not confirmed real prices yet",
+            "No client results or metrics exist yet — this demo has never run a real club, so nothing about nights or bookings can be claimed"
+          ],
+          "nextStep": "Want a nightclub website like this? Order the Booking / Enquiry Website service and we will build it with your real events, prices and booking setup."
         },
         {
           "slug": "painter",
@@ -1230,7 +2311,48 @@
             "Service-area pages per town",
             "Project portfolio with details",
             "Colour picker page"
-          ]
+          ],
+          "bestFor": "homeowners who want a painting price before calling, and a way to see colours on a real room first.",
+          "summary": "Painter is a painting-services demo site: an instant quote estimator, a colour visualizer with curated palettes, service pages for interior, exterior, commercial and cabinet painting, area pages for towns around Paintville, and a project portfolio. Everything runs in the browser as a working demo — you can build an estimate and try colours, but no real booking is made.",
+          "problem": "A typical painting problem: a homeowner has no idea what a job should cost, so they collect three quotes and still cannot compare them; choosing a colour from a tiny swatch feels like a gamble; and finding a painter who actually covers their town takes days of calls. This is a demo scenario for this kind of business — Painter is not a real company and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "An instant estimate from rooms and home size, instead of a quote that only arrives after a phone call.",
+              "why": "Price is the first question every homeowner asks, so the estimator answers it in under a minute and leaves the fixed quote for the booking step."
+            },
+            {
+              "decision": "A colour visualizer that paints a real room photo, instead of rows of small swatches on a white page.",
+              "why": "A colour looks completely different on a wall than on a swatch, so trying it on a room photo with adjustable intensity helps a homeowner commit."
+            },
+            {
+              "decision": "One service-area page per town around Paintville, instead of a single list of places served.",
+              "why": "A homeowner searches for a painter in their own town by name, so each town page can answer that search directly and show what is offered there."
+            }
+          ],
+          "includes": [
+            "Instant quote estimator by rooms and size",
+            "Colour visualizer with curated palettes",
+            "Service pages for five painting services",
+            "Service-area pages per town",
+            "Project portfolio with detail pages",
+            "Pricing, process and guarantee pages",
+            "Reviews page and FAQ",
+            "Booking and contact pages"
+          ],
+          "tryIt": [
+            "Build an instant estimate on /quote/ by setting rooms, home size and finishes",
+            "Try a colour on the room photo on /colors/ and tune its intensity",
+            "Open your town's page from /areas/ and see what services are offered there",
+            "Browse a project on /projects/ and open its detail page for the full story",
+            "Start a booking on /book/ and read the four-step process on /process/"
+          ],
+          "limitations": [
+            "Demo data only — the projects, reviews and contact details (+1 234 567 8900, 123 Color Street, hello@painter.com) are placeholders",
+            "No real booking or payment is made — the quote is an instant estimate and the booking form is a demo",
+            "The reviews and project stories are invented demo content, not words or jobs from real customers",
+            "No client results or metrics exist yet — this demo has never run a real painting company, so nothing about jobs or prices can be claimed"
+          ],
+          "nextStep": "Want a painting-services website like this? Order the Booking / Enquiry Website service and we will build it with your real services, areas and quote flow."
         },
         {
           "slug": "shoemate",
@@ -1248,7 +2370,47 @@
             "Cart, wishlist & demo checkout",
             "Compare, rewards & gift cards",
             "Fit finder & brand pages"
-          ]
+          ],
+          "bestFor": "shoe sellers who want customers to find the right pair by brand, size and fit, then check out without a phone call.",
+          "summary": "Shoemate is a shoe-store demo: 12 products across 12 brands, shop filters and search, a cart and wishlist, compare, rewards and a fit finder. The three-step demo checkout issues an order number starting with SM- and the order can be tracked on the site. Everything runs in the browser as a working demo — no payment is taken and no shoes are shipped.",
+          "problem": "A typical shoe-shop problem: customers keep asking the same questions — is this in my size, how does it fit — because the catalogue lives on social media with no sizes or prices; orders come in by message, so sizes get mixed up, and there is no tracking link after a sale. A shop showing sizes, fit help and order status in one place would end most of that. This is a demo scenario — Shoemate is not a real shop and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Shop by brand and category with filters and search, plus a fit finder and size guide, instead of a plain product grid.",
+              "why": "Shoe buyers filter by brand first and worry about fit second. Giving them both up front cuts the messages asking whether a pair runs true to size."
+            },
+            {
+              "decision": "A three-step demo checkout with no payment step, and demo tracking that lives in the browser only.",
+              "why": "The demo shows the full journey — cart, checkout, confirmation, tracking — without taking money or card details. A real shop would connect its own payment provider and courier."
+            },
+            {
+              "decision": "The SHOEMATE10 promo code and a rewards page, so the demo shows how a store brings a first-time buyer back.",
+              "why": "A code on the first order and rewards for returning are the simplest retention tools a shoe shop has. Both are live in the demo, so a visitor can try them rather than take our word for it."
+            }
+          ],
+          "includes": [
+            "Shop with filters, search and 12 brand pages",
+            "12 product pages with size guide",
+            "Cart, wishlist and three-step demo checkout",
+            "Compare up to three pairs",
+            "Fit finder tool",
+            "Rewards, gift cards and drops pages",
+            "Order tracking with SM- order numbers",
+            "Blog with three guides"
+          ],
+          "tryIt": [
+            "Filter the shop by brand and open a product page to check its sizes",
+            "Use the fit finder and read the size guide before adding shoes to the cart",
+            "Apply SHOEMATE10 at the demo checkout and note your SM- order number",
+            "Paste the order number into /track/ to see the demo tracking status"
+          ],
+          "limitations": [
+            "Demo data only — the shoes, prices and stock are illustrative, and the contact email is labelled a placeholder, not a live inbox",
+            "No real orders, payments or deliveries are made — tracking works only for orders placed in this browser",
+            "The quotes on the home page are labelled sample quotes, not real customer reviews at all",
+            "No client results or metrics exist yet — this demo has never run a real shoe shop, so nothing about sales or fit can be claimed"
+          ],
+          "nextStep": "Want a shoe store like this? Order the Catalogue / Menu Website service and we will build it with your real products, sizes and payment setup."
         },
         {
           "slug": "tax-lawyer-landing",
@@ -1266,7 +2428,48 @@
             "Case evaluator tool",
             "Practice areas & case results",
             "Free-consultation flow & Hindi version"
-          ]
+          ],
+          "bestFor": "people facing a tax notice or dispute who want to check their position before paying for a consultation.",
+          "summary": "MSY Law is a tax law-firm demo site: practice areas, team profiles and case results, plus income-tax, GST and advance-tax calculators, a four-question case evaluator and a free-consultation flow. Everything runs in the browser as a working demo — you can run the calculators and the evaluator, but the results are estimates only, not tax advice.",
+          "problem": "A typical tax-law problem: a notice arrives with a deadline, and the person has no idea whether it is serious, what it might cost, or which lawyer to trust; meanwhile calculators on the internet give a number with no explanation and no one to ask. This is a demo scenario for this kind of business — MSY Law is not a real firm and had no real client problem to solve.",
+          "approach": [
+            {
+              "decision": "Calculators that show their working under FY 2026–27 rules, instead of a single unexplained number.",
+              "why": "A person facing a tax notice needs to trust the maths before trusting the firm, so every calculator explains each step and says plainly that its result is an estimate only."
+            },
+            {
+              "decision": "A four-question case evaluator before the consultation form, instead of asking visitors to write their whole story first.",
+              "why": "Most visitors do not know how strong their case is, so four quick questions give them a first read and the confidence to describe their situation."
+            },
+            {
+              "decision": "A free-consultation flow with a date and time picker, kept clearly separate from the calculators and case results.",
+              "why": "Booking a consultation is a bigger step than running a calculator, so it sits at the end of the journey, after the visitor has already learned something useful."
+            }
+          ],
+          "includes": [
+            "Income-tax, GST and advance-tax calculators",
+            "Four-question case evaluator tool",
+            "Free-consultation flow with time picker",
+            "Practice-area pages for six tax areas",
+            "Case results and team profiles",
+            "City pages for five locations",
+            "Blog, resources and FAQ",
+            "Hindi version of the home page"
+          ],
+          "tryIt": [
+            "Run the income-tax calculator on /tools/income-tax-calculator/ and read the working it shows",
+            "Compare the result with the GST calculator and the advance-tax calculator on /tools/",
+            "Answer the four questions on /case-evaluator/ and read the instant result it gives for your case",
+            "Start the free consultation on /free-consultation/ and pick a date and time slot",
+            "Open a practice-area page and a city page to see how services and locations are presented"
+          ],
+          "limitations": [
+            "Demo data only — the team, case results and contact details (+91 98110 12345) are placeholders",
+            "No real consultation or case is started — the consultation form is a demo submission and no lawyer replies",
+            "Calculator results are estimates only, not tax advice — the site itself says to confirm with a professional before acting",
+            "No client results or metrics exist yet — this demo has never run a real firm, so nothing about cases won or fees saved can be claimed"
+          ],
+          "nextStep": "Want a law-firm website like this? Order the Booking / Enquiry Website service and we will build it with your real practice areas, tools and consultation flow."
         },
         {
           "slug": "techdova",
@@ -1284,7 +2487,48 @@
             "Local cart & checkout",
             "Compare, wishlist & search",
             "Gift cards, rewards & trade-in"
-          ]
+          ],
+          "bestFor": "tech retailers who want shoppers to browse products, compare them side by side and check out in the language they prefer.",
+          "summary": "TechDova is a bilingual English and French tech store demo: 12 products across six categories, with search and filters, a local cart and checkout, product comparison, a wishlist, gift cards, rewards and trade-in. Visitors can switch language, apply a promo code and complete a demo checkout. Everything runs in the browser as a working demo — no order is real and no payment is taken.",
+          "problem": "A typical tech-store problem: shoppers compare the same phone or laptop on five different sites, so a store that only lists products loses them at the comparison step; prices and stock are unclear, which kills trust before checkout; and a shopper who prefers French cannot use a site that only speaks English. This is a demo scenario for this kind of business — TechDova is not a real store and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One store in two languages — English and French from a language picker on the home page — instead of two separate sites.",
+              "why": "A shopper buys in the language they think in. Splitting the store in two would double every update, while one bilingual store keeps products, prices and stock in a single place."
+            },
+            {
+              "decision": "Comparison, wishlist and filters on the shop itself, so the decision happens on the store instead of on a rival's site.",
+              "why": "Nobody buys a laptop after reading one product page. Shoppers narrow down by brand, price and rating, then compare the final two side by side — the store that supports that keeps the sale."
+            },
+            {
+              "decision": "Checkout, gift cards and order tracking stay in the browser as a demo, with demo codes and notes saying nothing is charged.",
+              "why": "The point of the demo is to show the buying flow, not to take money. A visitor can try the full journey safely, and a real store would connect its own payment and delivery providers."
+            }
+          ],
+          "includes": [
+            "Bilingual storefront (English and French)",
+            "Shop with filters, search and sort",
+            "12 products across six categories",
+            "Local cart and demo checkout",
+            "Compare, wishlist and product pages",
+            "Gift cards with demo balance check",
+            "Rewards, trade-in and deals pages",
+            "Order tracking and help pages"
+          ],
+          "tryIt": [
+            "Pick a language on the home page, then browse the same store in English and French",
+            "Filter /en/shop/ by brand, rating or stock and sort by price to narrow the 12 products",
+            "Add a product to the cart, apply the code TECHDOVA10 and go through the demo checkout — no payment is taken",
+            "Check a fictional gift-card balance on /en/gift-cards/ using the demo code DEMO-1000",
+            "Add two products to compare on /en/compare/ and see them side by side"
+          ],
+          "limitations": [
+            "Demo data only — the 12 products, prices in DA, ratings and review counts are illustrative, and the testimonials are labelled fictional demo content",
+            "No real order or payment is made — the cart and checkout run in your browser only, and gift-card balances are fictional",
+            "No client results or metrics exist yet — this demo has never run a real store, so nothing about sales, delivery or returns can be claimed",
+            "The free delivery, 30-day returns and warranty promises are demo copy — no delivery, return or warranty service exists behind them"
+          ],
+          "nextStep": "Want a tech store website like this? Order the Catalogue / Menu Website service and we will build it with your real products, prices and checkout setup."
         },
         {
           "slug": "tina-style",
@@ -1302,7 +2546,46 @@
             "Mini shop with checkout",
             "Lookbook & videos pages",
             "Blog & FAQ pages"
-          ]
+          ],
+          "bestFor": "fashion creators who want one link that sends followers to their content, lookbook and a small shop.",
+          "summary": "Tina Style is a fashion link-in-bio demo with a mini shop: one home page linking to fashion, lifestyle and travel content, eight products with their own pages, a cart and checkout, a lookbook, videos and a blog. Visitors can follow the links, browse the looks and shop the pieces. Everything runs in the browser as a working demo — the product prices are labelled demo placeholders.",
+          "problem": "A typical creator problem: links to content, videos and products are scattered across bios and posts, so followers give up tapping around; there is no single place to shop the pieces shown in a look; and questions about cost and where to buy arrive by message all day. One page gathering the links, the looks and the shop would end most of that. This is a demo scenario for this kind of business — Tina Style is not a real creator shop and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One link-in-bio home page that gathers every link — content, videos, lookbook and shop — instead of a bio full of separate links.",
+              "why": "Followers arrive from one tap and leave after a few seconds. A single page that shows everything at a glance keeps them long enough to find the shop."
+            },
+            {
+              "decision": "A small shop of eight products with its own pages, cart and checkout, kept separate from the content links.",
+              "why": "Browsing looks and buying pieces are different moods. Keeping the shop as its own section means a follower who came to shop is not wading through blog posts to find a price."
+            },
+            {
+              "decision": "Prices labelled as demo placeholders in the shop data, with a thank-you page at the end of checkout.",
+              "why": "The demo shows the full buying flow without pretending the prices or the order are real. A real creator would put in her own products, prices and payment provider."
+            }
+          ],
+          "includes": [
+            "Link-in-bio home page",
+            "Mini shop with eight product pages",
+            "Cart, checkout and thank-you page",
+            "Lookbook page with styled looks",
+            "Videos page with creator clips",
+            "Blog with six travel posts",
+            "About, FAQ and contact pages"
+          ],
+          "tryIt": [
+            "Open the home page and follow a link to the blog, videos or shop",
+            "Open a product page in /shop/ and add the item to the cart",
+            "Open the cart and go to /checkout/ to see the demo checkout",
+            "Browse the lookbook and open a video on /videos/"
+          ],
+          "limitations": [
+            "Demo data only — the eight product prices are labelled demo placeholders in the shop data",
+            "No real orders or payments are made — the shop is a browser demo with no backend behind it",
+            "The contact email (hello@tinastyle.com) is a placeholder address, not a checked inbox for real messages",
+            "No client results or metrics exist yet — this demo has never run a real creator shop, so nothing about sales or followers can be claimed"
+          ],
+          "nextStep": "Want a link-in-bio shop like this? Order the Catalogue / Menu Website service and we will build it with your real links, products and payment setup."
         },
         {
           "slug": "tricent-public-school",
@@ -1320,7 +2603,48 @@
             "Parent login & fee payment",
             "Virtual tour & gallery",
             "News, notices & results"
-          ]
+          ],
+          "bestFor": "school leaders who want parents to apply, pay fees and check notices online instead of visiting the office.",
+          "summary": "Tricent is a CBSE school demo site from Nursery to Class XII: admissions with a Hindi page, parent login, demo online fee payment, a virtual tour, and news, notices and results pages. Everything runs in the browser as a working demo — you can try the fee payment and the parent login, but no real payment is processed.",
+          "problem": "A typical school problem: admission enquiries arrive by phone and on paper, so the office repeats the same answers and forms go missing; fee collection means queues at the accounts office; and notices pinned on a board never reach parents who cannot visit. This is a demo scenario for this kind of business — Tricent is not a real school and had no real parent problem to solve.",
+          "approach": [
+            {
+              "decision": "Admissions in three simple steps with a Hindi admissions page, instead of a single English form and a phone number.",
+              "why": "Many parents in Patna read Hindi first, and a short stepped process with a clear class list is easier to finish than one long form."
+            },
+            {
+              "decision": "Fee payment stays a clearly labelled demo, with a mock receipt and a warning never to enter real card details.",
+              "why": "Parents must be able to try the payment flow safely, and a demo that looks like a real payment page would be misleading without the labels."
+            },
+            {
+              "decision": "Notices, news and results live on their own pages, kept separate from the admissions and fees journey.",
+              "why": "Parents check notices and results again and again through the year, so those pages need to stay easy to find long after admissions are done."
+            }
+          ],
+          "includes": [
+            "Admissions flow with Hindi page",
+            "Online fee payment (demo, no real payment)",
+            "Parent login with demo access",
+            "Virtual tour with campus spots",
+            "News, notices and results pages",
+            "Prospectus and downloads pages",
+            "Photo gallery and school timings",
+            "Contact page with school hours"
+          ],
+          "tryIt": [
+            "Fill in the three-step admissions form on /admissions/ and pick a class from Nursery to Class XI",
+            "Open /admissions-hindi/ and read the 2027–28 admissions details in Hindi instead of English",
+            "Try the demo fee payment on /pay-fees/ and reach the mock receipt without entering real details",
+            "Log in at /parent-login/ with any email and a four-character password to see the demo portal",
+            "Take the virtual tour and check the latest notices and Class X and XII results pages"
+          ],
+          "limitations": [
+            "Demo data only — the fees, results figures and contact details (+91 75440 00044, info@tricentpublicschool.com) are placeholders",
+            "No real fee payment is processed — the payment page shows a mock receipt and stores no payment details",
+            "The results and testimonials on the site are demo content, not a real school's published results or parents' words",
+            "No client results or metrics exist yet — this demo has never run a real school, so nothing about admissions or collections can be claimed"
+          ],
+          "nextStep": "Want a school website like this? Order the Business Website service and we will build it with your real admissions, fees and notice pages."
         },
         {
           "slug": "zesty",
@@ -1338,7 +2662,47 @@
             "Cart drawer & orders flow",
             "Favourites, rewards & gift cards",
             "Delivery-areas & catering pages"
-          ]
+          ],
+          "bestFor": "food-delivery businesses who want customers to browse the menu, order in a few taps and track the food without calling.",
+          "summary": "Zesty is a food-delivery demo: a menu with search, dish pages and a Veg filter, a cart drawer, a demo checkout, an orders page with tracking, favourites, rewards and gift cards. It also has catering, delivery areas and an offers page. Everything runs in the browser as a working demo — the checkout takes no real payment and catering enquiries are not sent anywhere.",
+          "problem": "A typical food-delivery problem: the menu lives as photos or a PDF, so customers cannot search dishes, filter by Veg or see prices; orders arrive by phone or message, so addresses and items get mixed up; and after ordering there is no tracking link, so customers call to ask where the food is. A menu with search, a cart and live tracking would end most of that. This is a demo scenario — Zesty is not a real delivery service and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One menu with search, a Veg filter and sorting, plus a dish page for every item, instead of a photo of the menu.",
+              "why": "Hungry customers search for a dish or filter by Veg first and check the price second. A searchable menu answers both in seconds, where a photo of a menu answers neither."
+            },
+            {
+              "decision": "A demo checkout in a cart drawer with a clear note that no real payment is taken, and an orders page with tracking.",
+              "why": "The demo shows the whole journey from dish to door, including the tracking a customer would actually watch. A real service would connect its own payment provider and riders."
+            },
+            {
+              "decision": "Catering kept as its own demo page with an enquiry note, instead of mixing party orders into the food menu.",
+              "why": "Catering is a different sale — platters, dates and headcounts, not single dishes. Its own page with its own enquiry form keeps the two journeys from confusing each other."
+            }
+          ],
+          "includes": [
+            "Menu with search, Veg filter and sorting",
+            "12 dish pages",
+            "Cart drawer and demo checkout",
+            "Orders page with tracking",
+            "Favourites, rewards and gift cards",
+            "Offers and how-it-works pages",
+            "Catering and delivery-areas pages",
+            "Demo sign-in and account page"
+          ],
+          "tryIt": [
+            "Filter the menu by Veg on /menu/ and open a dish page",
+            "Add dishes to the cart and open the demo checkout — no payment is taken",
+            "Open /orders/ to see how order tracking is shown",
+            "Open /catering/ and read the demo note on the enquiry form"
+          ],
+          "limitations": [
+            "Demo data only — the dishes, prices and delivery areas are illustrative, and the contact details on the site are placeholders",
+            "No real orders, payments or deliveries are made — the checkout states no real payment is taken",
+            "Catering enquiries are not sent anywhere — the page states it is a demo page with no real booking",
+            "No client results or metrics exist yet — this demo has never run a real delivery service, so nothing about orders or delivery times can be claimed"
+          ],
+          "nextStep": "Want a food-delivery site like this? Order the Catalogue / Menu Website service and we will build it with your real menu, prices and delivery setup."
         }
       ],
       "caseLabels": {
@@ -1347,7 +2711,16 @@
         "deliverables": "What we built",
         "service": "Service",
         "city": "City",
-        "result": "The result"
+        "result": "The result",
+        "summaryBox": "At a glance",
+        "bestFor": "Best for",
+        "problem": "The problem",
+        "demoNote": "Demo scenario — a typical situation for this kind of business, not a real client's problem.",
+        "approach": "How we approached it",
+        "includes": "What the demo includes",
+        "tryIt": "What you can try",
+        "limitations": "Limitations",
+        "nextStep": "Your next step"
       }
     },
     "testimonials": {

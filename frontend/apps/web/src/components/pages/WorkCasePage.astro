@@ -63,6 +63,108 @@ const meta = [
     </figure>
   </section>
 
+  {/* Summary box */}
+  {project.bestFor && project.summary && (
+    <section class="mx-auto max-w-6xl px-4 pt-10 sm:pt-12" data-reveal>
+      <div class="rounded-2xl border border-line bg-white p-6 sm:p-7">
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.summaryBox}</h2>
+        <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">
+          <span class="font-semibold text-ink">{labels.bestFor}: </span>{project.bestFor}
+        </p>
+        <p class="mt-3 max-w-2xl text-base leading-[28px] text-body">{project.summary}</p>
+        {project.liveUrl && (
+          <p class="mt-5">
+            <a href={project.liveUrl} target="_blank" rel="noopener" class="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border border-line bg-white px-5 py-3 text-base font-semibold text-ink transition duration-200 hover:bg-paper active:scale-[0.98]">
+              {dict.preview.visitLive}
+              <Icon name="arrow-right" class="h-[18px] w-[18px]" />
+            </a>
+          </p>
+        )}
+      </div>
+    </section>
+  )}
+
+  {/* Problem / approach / includes / try-it / limitations / next step */}
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:py-14" data-reveal>
+    {project.problem && (
+      <div>
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.problem}</h2>
+        {labels.demoNote && (
+          <p class="mt-4 max-w-2xl rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-[22px] text-muted">{labels.demoNote}</p>
+        )}
+        <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{project.problem}</p>
+      </div>
+    )}
+
+    {project.approach && project.approach.length > 0 && (
+      <div class="mt-12">
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.approach}</h2>
+        <ol class="mt-7 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+          {project.approach.map((a, i) => (
+            <li class="flex gap-3 text-base leading-[26px] text-body">
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-live-soft font-mono text-[13px] font-semibold text-live">{i + 1}</span>
+              <span>
+                <span class="block font-semibold text-ink">{a.decision}</span>
+                <span class="mt-1 block">{a.why}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )}
+
+    {project.includes && project.includes.length > 0 && (
+      <div class="mt-12">
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.includes}</h2>
+        <ul class="mt-7 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+          {project.includes.map((item) => (
+            <li class="flex gap-3 text-base leading-[26px] text-body">
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-live-soft text-live">
+                <Icon name="check" class="h-4 w-4" />
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {project.tryIt && project.tryIt.length > 0 && (
+      <div class="mt-12">
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.tryIt}</h2>
+        <ol class="mt-7 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+          {project.tryIt.map((step, i) => (
+            <li class="flex gap-3 text-base leading-[26px] text-body">
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-live-soft font-mono text-[13px] font-semibold text-live">{i + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )}
+
+    {project.limitations && project.limitations.length > 0 && (
+      <div class="mt-12">
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.limitations}</h2>
+        <ul class="mt-7 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+          {project.limitations.map((item) => (
+            <li class="flex gap-3 text-base leading-[26px] text-body">
+              <span class="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-faint" aria-hidden="true"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {project.nextStep && (
+      <div class="mt-12">
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{labels.nextStep}</h2>
+        <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{project.nextStep}</p>
+      </div>
+    )}
+  </section>
+
   {/* Overview + meta table */}
   <section class="mx-auto max-w-6xl px-4 py-12 sm:py-14" data-reveal>
     <div class="grid gap-6 lg:grid-cols-[1fr_340px] lg:gap-10">
@@ -128,6 +230,9 @@ const meta = [
             {dict.hero.ctaOrder}
             <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={arrowIcon} />
           </a>
+          {project.liveUrl && (
+            <a href={project.liveUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-5 py-3 text-base font-semibold text-ink transition duration-200 hover:bg-paper active:scale-[0.98]">{dict.preview.visitLive}</a>
+          )}
           <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-5 py-3 text-base font-semibold text-ink transition duration-200 hover:bg-paper active:scale-[0.98]">{dict.contact.whatsapp}</a>
         </div>
       </div>
