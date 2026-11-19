@@ -1,4 +1,143 @@
 ---
-import SharmaStore from "../../components/demo/SharmaStore.astro";
+/* Demo page: ShopMate — a general e-commerce store, live at
+   https://shopmates.pages.dev. Mirrors the PreviewPage pattern: a
+   browser-chrome frame with the real thumbnail and live address, a
+   "Visit live site" button, and an overview of what the demo actually
+   shows. No iframe embed. English only. The route stays
+   /demo/sharma-general-store/ so existing links keep working. */
+import PreviewLayout from "../../layouts/PreviewLayout.astro";
+import Icon from "../../components/Icon.astro";
+
+const liveUrl = "https://shopmates.pages.dev";
+const liveHost = "shopmates.pages.dev";
+const img = "/work/work-shopmate.webp";
+const features = [
+  "Shop by category, best sellers, new arrivals and deals — up to 50% off",
+  "Product pages with a working cart and wishlist, and a live header cart count",
+  "Live search across the whole catalogue",
+  "A full order flow: checkout, order success, invoice, orders list and track-order",
+  "Compare products, recently viewed items and gift cards",
+  "Testimonials and newsletter signup on the home page",
+];
+const others = [
+  { slug: "smile-dental-clinic", name: "NaviX Family Dental Care", meta: "Dental clinic · Austin, TX", img: "/work/work-dental-clinic.webp" },
+  { slug: "glow-salon", name: "Lumina Beauty Studio", meta: "Beauty salon · Mumbai", img: "/work/work-lumina-beauty-studio.webp" },
+];
+const meta = [
+  { label: "Service", value: "Catalogue website" },
+  { label: "Location", value: "Online" },
+  { label: "Live site", value: liveHost },
+];
 ---
-<SharmaStore />
+
+<PreviewLayout
+  title="ShopMate — General e-commerce store"
+  description="ShopMate is a live demo of a general online store built by Kumbuild: categories, best sellers, live search, a working cart and a full order flow from checkout to tracking."
+  locale="en-US"
+  backHref="/examples/"
+  backLabel="Back"
+  homeHref="/"
+  orderHref="/order?service=catalogue-website"
+  orderLabel="Order now"
+  footerText="Demo website built by Kumbuild — ShopMate is a live demo, not a real shop."
+>
+  {/* Name + type */}
+  <section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+    <h1 class="font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">ShopMate</h1>
+    <p class="mt-3 font-mono text-[13px] text-muted">General e-commerce store · Online</p>
+  </section>
+
+  {/* The demo website, large, in a browser-chrome frame */}
+  <section class="mx-auto max-w-6xl px-4 pt-8 sm:px-6 sm:pt-10">
+    <figure class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,25,23,0.08)]">
+      <div class="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-2.5">
+        <span class="h-2.5 w-2.5 rounded-full bg-[#E8B4AE]" aria-hidden="true"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#EBD9A8]" aria-hidden="true"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-[#AED8BC]" aria-hidden="true"></span>
+        <a href={liveUrl} target="_blank" rel="noopener" class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-primary-700 hover:text-primary-600">{liveHost}</a>
+      </div>
+      <img src={img} alt="ShopMate — general e-commerce store, online" width="1600" height="900" fetchpriority="high" class="block aspect-[16/9] w-full object-cover object-top sm:aspect-[21/10]" />
+    </figure>
+  </section>
+
+  {/* Overview + meta */}
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+    <div class="grid gap-6 lg:grid-cols-[1fr_340px] lg:gap-10">
+      <div>
+        <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">Overview</h2>
+        <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">
+          ShopMate is a general online store — groceries, household goods, electronics and more,
+          all in one shop. Browse categories and best sellers, search live as you type, and follow
+          a full order through: cart, checkout, invoice and tracking.
+        </p>
+        <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">
+          A live demo website built by Kumbuild — ShopMate isn't a real shop, so nothing here can
+          be bought. It shows what a Kumbuild website can do for a general store.
+        </p>
+      </div>
+      <aside class="h-fit rounded-2xl border border-line bg-white p-6 sm:p-7 lg:sticky lg:top-24">
+        <dl>
+          {meta.map((row, i) => (
+            <div class={i > 0 ? "mt-5 border-t border-line pt-5" : ""}>
+              <dt class="font-mono text-[12px] font-medium uppercase tracking-wide text-muted">{row.label}</dt>
+              <dd class="mt-1.5 text-base font-medium leading-[24px] text-ink">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <a href="/order?service=catalogue-website" class="mt-6 flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-cta px-4 py-3 text-base font-semibold text-white transition duration-200 hover:bg-cta-hover active:scale-[0.98]">
+          Order now
+          <Icon name="arrow-right" class="h-[18px] w-[18px]" />
+        </a>
+        <a href={liveUrl} target="_blank" rel="noopener" class="mt-3 flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-line bg-white px-4 py-3 text-base font-semibold text-ink transition duration-200 hover:border-primary-600 hover:text-primary-700 active:scale-[0.98]">
+          Visit live site
+          <Icon name="arrow-up-right" class="h-[18px] w-[18px]" />
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  {/* What this demo shows */}
+  <section class="border-y border-line bg-surface">
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+      <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">What this demo shows</h2>
+      <ul class="mt-7 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+        {features.map((f) => (
+          <li class="flex gap-3 text-base leading-[26px] text-body">
+            <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-live-soft text-live">
+              <Icon name="check" class="h-4 w-4" />
+            </span>
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* More examples — image-led cards on purpose: each example shows its
+      own colours, no kumbuild card grading (no white card, no border,
+      no browser frame). The whole card is the link. */}
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+    <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">More examples</h2>
+    <div class="mt-7 grid gap-4 sm:grid-cols-2">
+      {others.map((d) => (
+        <a href={`/demo/${d.slug}/`} class="group relative block overflow-hidden rounded-2xl">
+          <img src={d.img} alt={`${d.name} — ${d.meta}`} width="800" height="600" loading="lazy" class="block aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
+          <span class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" aria-hidden="true"></span>
+          <span class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">
+            <Icon name="arrow-right" class="h-4 w-4" />
+          </span>
+          <span class="absolute inset-x-0 bottom-0 p-4">
+            <span class="block font-display text-base font-semibold leading-snug text-white">{d.name}</span>
+            <span class="mt-0.5 block text-[13px] text-white/80">{d.meta}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+    <p class="mt-6">
+      <a href="/examples/" class="inline-flex items-center gap-2 text-base font-semibold text-primary-700 hover:text-primary-600">
+        See all examples
+        <Icon name="arrow-right" class="h-[18px] w-[18px]" />
+      </a>
+    </p>
+  </section>
+</PreviewLayout>

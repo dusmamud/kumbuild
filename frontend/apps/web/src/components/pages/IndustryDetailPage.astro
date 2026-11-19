@@ -31,18 +31,19 @@ const imgDims: Record<string, [number, number]> = {
   "instagram-home-sellers": [800, 800],
 };
 const [imgW, imgH] = imgDims[item.slug] ?? [1600, 1000];
-/* Real pixel sizes of the featured case images. */
-const caseDims: Record<string, [number, number]> = {
-  "thread-and-thistle-boutique": [2048, 1152],
-  "bright-minds-tuition": [1920, 1280],
-  "glow-and-co-salon": [2048, 1152],
-  "spice-route-restaurant": [2048, 1152],
-};
-const [caseW, caseH] = caseStudy ? (caseDims[caseStudy.slug] ?? [1600, 1000]) : [1600, 1000];
-/* Browser-frame address: the featured case's site, else the service page. */
-const frameHost = caseStudy
-  ? `${caseStudy.name.toLowerCase().replace(/[^a-z0-9]+/g, "")}.in`
-  : `${service.slug}.in`;
+/* Featured case images use the default size — the old per-image sizes
+   referred to the retired mock screenshots, and the new /work/
+   thumbnails have no recorded pixel sizes yet. */
+const [caseW, caseH] = [1600, 1000];
+/* Browser-frame address: the featured case's live site when it has one,
+   else the name-derived fake address, else the service page. */
+const caseHost = caseStudy?.liveUrl
+  ? caseStudy.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
+  : null;
+const frameHost = caseHost
+  ?? (caseStudy
+    ? `${caseStudy.name.toLowerCase().replace(/[^a-z0-9]+/g, "")}.in`
+    : `${service.slug}.in`);
 const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
 ---
 

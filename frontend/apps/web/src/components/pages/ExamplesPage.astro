@@ -9,9 +9,15 @@ const work = dict.v2.work;
 ---
 
 <Layout title={work.title} description={work.subtitle} locale={locale} dict={dict} slug={slug}>
-  <section class="mx-auto max-w-6xl px-4 pt-10 pb-14 sm:pt-14 sm:pb-16" data-reveal>
-    <h1 class="max-w-2xl font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{work.title}</h1>
-    <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{work.subtitle}</p>
+  <section class="mx-auto max-w-6xl px-4 pt-10 pb-14 sm:pt-14 sm:pb-16">
+    {/* No data-reveal on this section: with 34 cards it is ~7,900px tall,
+      so the 12% observer threshold can never fire in a normal viewport and
+      the whole grid stays hidden. The intro keeps its own small reveal;
+      the grid itself is always visible. */}
+    <div data-reveal>
+      <h1 class="max-w-2xl font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{work.title}</h1>
+      <p class="mt-4 max-w-2xl text-base leading-[28px] text-body sm:text-lg sm:leading-[30px]">{work.subtitle}</p>
+    </div>
     <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {work.projects.map((p) => (
         <a
@@ -22,7 +28,7 @@ const work = dict.v2.work;
             <span class="h-2.5 w-2.5 rounded-full bg-[#E8B4AE]" aria-hidden="true"></span>
             <span class="h-2.5 w-2.5 rounded-full bg-[#EBD9A8]" aria-hidden="true"></span>
             <span class="h-2.5 w-2.5 rounded-full bg-[#AED8BC]" aria-hidden="true"></span>
-            <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{p.slug}.in</span>
+            <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{p.liveUrl ? p.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "") : `${p.slug}.in`}</span>
           </span>
           <span class="block overflow-hidden">
             <img src={p.img} alt={`${p.name} — ${p.type}, ${p.city}`} width="1280" height="800" loading="lazy" class="block aspect-[8/5] w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]" />

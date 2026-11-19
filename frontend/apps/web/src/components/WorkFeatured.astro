@@ -31,7 +31,7 @@ const featured = w.projects.slice(0, 3);
             </span>
             <span class="mx-auto flex min-w-0 items-center gap-1.5 rounded-md bg-white px-2.5 py-1 font-mono text-xs text-muted">
               <Icon name="lock" class="h-3 w-3 shrink-0 text-live" />
-              <span class="truncate">{p.slug}.in</span>
+              <span class="truncate">{p.liveUrl ? p.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "") : `${p.slug}.in`}</span>
             </span>
             <span class="hidden w-10 lg:block" aria-hidden="true"></span>
           </span>

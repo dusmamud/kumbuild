@@ -10,13 +10,13 @@ const page = sv.pages[slug as keyof typeof sv.pages] ?? sv.pages["business-websi
 const waLink = `https://wa.me/${dict.v2.contact.waNumber}?text=${encodeURIComponent(dict.v2.contact.waText)}`;
 const orderUrl = `${pageUrl(locale, "/order")}?service=${item.slug}`;
 /* Two example websites per service. Landing Page has no project of its
-   own — Thread & Thistle (Instagram-seller landing) and Iron Paradise
-   (gym offer landing) are the closest fits. */
+   own — Tina Style (link-in-bio landing) and Durora (festival landing)
+   are the closest fits. */
 const examplesByService: Record<string, string[]> = {
-  "business-website": ["bright-minds-tuition", "thread-and-thistle-boutique"],
-  "landing-page": ["thread-and-thistle-boutique", "iron-paradise-gym"],
-  "booking-website": ["glow-and-co-salon", "iron-paradise-gym"],
-  "catalogue-website": ["crumbs-and-craft-bakery", "spice-route-restaurant"],
+  "business-website": ["creatix", "sunshine-international-school"],
+  "landing-page": ["tina-style", "durora"],
+  "booking-website": ["lumina-beauty-studio", "dental-clinic"],
+  "catalogue-website": ["shopmate", "flavoro"],
 };
 const examples = (examplesByService[item.slug] ?? []).flatMap(
   (s) => dict.v2.work.projects.find((p) => p.slug === s) ?? [],
@@ -72,7 +72,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
               <span class="h-2.5 w-2.5 rounded-full bg-[#E8B4AE]" aria-hidden="true"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-[#EBD9A8]" aria-hidden="true"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-[#AED8BC]" aria-hidden="true"></span>
-              <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{p.slug}.in</span>
+              <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{p.liveUrl ? p.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "") : `${p.slug}.in`}</span>
             </span>
             <span class="block overflow-hidden">
               <img src={p.img} alt={`${p.name} — ${p.type}, ${p.city}`} width="1280" height="800" loading="lazy" class="block aspect-[8/5] w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]" />

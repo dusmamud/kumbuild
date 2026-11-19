@@ -4,12 +4,12 @@ import type { Dictionary } from "../i18n/utils";
 interface Props { dict: Dictionary; no?: string; }
 const { dict, no } = Astro.props;
 const e = dict.examples;
-/* Real preview designs — the same screenshots the hero shows, one per
-   business type. Replace files in public/demo/ to change them. */
+/* Real demo sites — one per business type, with their live address in
+   the browser bar. Thumbnails live in public/work/ (work-<slug>.webp). */
 const demos = [
-  { img: "/demo/shop.png", url: "sharma-general-store.in", name: "Sharma General Store", type: "Shop website", alt: "Demo shop website — Sharma General Store, with products, prices and WhatsApp ordering" },
-  { img: "/demo/clinic.png", url: "smile-dental-clinic.in", name: "Smile Dental Clinic", type: "Clinic website", alt: "Demo clinic website — Smile Dental Clinic, with treatments, prices and appointment booking" },
-  { img: "/demo/salon.png", url: "glow-salon.in", name: "Glow Salon", type: "Salon website", alt: "Demo salon website — Glow Salon, with services, prices and WhatsApp booking" },
+  { img: "/work/work-shopmate.webp", url: "shopmates.pages.dev", name: "ShopMate", type: "Online store", alt: "ShopMate online store — products, cart, checkout and order tracking" },
+  { img: "/work/work-dental-clinic.webp", url: "navix-dental.pages.dev", name: "NaviX Dental", type: "Dental clinic", alt: "NaviX dental clinic — treatments, pricing and appointment booking" },
+  { img: "/work/work-lumina-beauty-studio.webp", url: "lumina-beauty-studio.pages.dev", name: "Lumina Beauty Studio", type: "Beauty salon", alt: "Lumina Beauty Studio — services, pricing and booking" },
 ];
 ---
 

@@ -270,7 +270,7 @@
           "Shows up on Google with basic local SEO"
         ],
         "img": "/work/work-boutique.webp",
-        "caseSlug": "thread-and-thistle-boutique"
+        "caseSlug": "shopmate"
       },
       "clinics-doctors": {
         "h1": "Patients who arrive knowing what to expect",
@@ -284,7 +284,7 @@
           "Shows up on Google with basic local SEO"
         ],
         "img": "/services/service-booking.webp",
-        "caseSlug": ""
+        "caseSlug": "dental-clinic"
       },
       "tuition-coaching": {
         "h1": "Parents decide before they walk in",
@@ -298,7 +298,7 @@
           "Works fast on every phone"
         ],
         "img": "/work/work-tuition.webp",
-        "caseSlug": "bright-minds-tuition"
+        "caseSlug": "sunshine-international-school"
       },
       "salons-parlours": {
         "h1": "Appointments that arrive while your chairs are full",
@@ -312,7 +312,7 @@
           "Google Maps with your exact location"
         ],
         "img": "/work/work-salon.webp",
-        "caseSlug": "glow-and-co-salon"
+        "caseSlug": "lumina-beauty-studio"
       },
       "restaurants-cafes": {
         "h1": "Your menu, the way customers actually see it",
@@ -326,7 +326,7 @@
           "Shows up on Google with basic local SEO"
         ],
         "img": "/work/work-restaurant.webp",
-        "caseSlug": "spice-route-restaurant"
+        "caseSlug": "flavoro"
       },
       "instagram-home-sellers": {
         "h1": "One link that turns followers into customers",
@@ -340,7 +340,7 @@
           "Easy to update when stock changes"
         ],
         "img": "/services/service-landing.webp",
-        "caseSlug": "thread-and-thistle-boutique"
+        "caseSlug": "tina-style"
       }
     },
     "subtitle": "Every business sells differently. Pick yours — the website is built around how your customers actually find you, and how they reach you.",
@@ -726,114 +726,618 @@
     },
     "work": {
       "title": "Recent work",
-      "subtitle": "Real kinds of businesses, real websites. These are sample projects with placeholder details — the same care goes into yours.",
+      "subtitle": "Live demo websites built by Kumbuild — real working demos you can open and try. They are not client projects, and none of them is a placeholder.",
       "projects": [
         {
-          "slug": "crumbs-and-craft-bakery",
-          "name": "Crumbs & Craft",
-          "type": "Bakery & cafe",
-          "city": "Pune",
+          "slug": "kanigiri-restaurant",
+          "name": "Kanigiri Restaurant",
+          "type": "Restaurant",
+          "city": "Online",
           "service": "Catalogue / Menu Website",
-          "img": "/work/work-bakery.webp",
-          "liveUrl": "https://creatiix.pages.dev/",
-          "result": "Weekend cake orders now start on WhatsApp",
-          "desc": "A warm catalogue site for a neighbourhood bakery — full menu with photos and prices, and a WhatsApp order button on every cake.",
-          "story": "The owner took cake orders on calls she kept missing during the morning rush. We put the whole menu online with clear prices, so customers now browse at home and message a ready-made order.",
+          "img": "/work/work-kanigiri-restaurant.webp",
+          "liveUrl": "https://kanigiri-restaurant.pages.dev",
+          "result": "Live demo — dish carousel, full menu & reviews on one page",
+          "desc": "A single-page restaurant site for Kanigiri Restaurant — Mutton Biryani hero, a dish carousel, the full menu and reviews, all on one page.",
+          "story": "Open the demo to browse the menu and dishes. It is a one-page site, so everything — hero, dishes, menu and reviews — sits on the home page.",
           "deliverables": [
-            "Menu catalogue with 40+ items",
-            "WhatsApp ordering on every item",
-            "Custom cake enquiry form",
-            "Google Maps and timings"
+            "Dish carousel with Mutton Biryani hero",
+            "Full menu section",
+            "Reviews section",
+            "Responsive AVIF/WebP images"
           ]
         },
         {
-          "slug": "glow-and-co-salon",
-          "name": "Glow & Co.",
-          "type": "Salon & spa",
-          "city": "Bengaluru",
+          "slug": "lumina-beauty-studio",
+          "name": "Lumina Beauty Studio",
+          "type": "Beauty salon",
+          "city": "Mumbai",
           "service": "Booking / Enquiry Website",
-          "img": "/work/work-salon.webp",
-          "liveUrl": null,
-          "result": "Appointments come in while the chairs stay busy",
-          "desc": "A booking website for a unisex salon — services with prices and durations, stylist profiles, and an appointment form that lands on WhatsApp.",
-          "story": "The salon's phone rang most when every stylist had a client in the chair. The new site answers prices and timings itself, and appointment requests arrive as tidy WhatsApp messages the owner confirms between clients.",
+          "img": "/work/work-lumina-beauty-studio.webp",
+          "liveUrl": "https://lumina-beauty-studio.pages.dev",
+          "result": "Live demo — services & pricing in ₹, booking form & gallery",
+          "desc": "A 17-page beauty salon site — services with prices in rupees, a booking form, gallery, bridal pages and a blog.",
+          "story": "Visitors can browse services and prices, look through the gallery, and fill in the booking form, which validates name, Indian mobile number and date.",
           "deliverables": [
-            "Services with prices and durations",
-            "Appointment request form",
-            "Stylist profiles",
-            "Offer of the month section"
+            "Booking form with validation",
+            "Services with prices in ₹",
+            "Gallery & bridal pages",
+            "Blog & reviews pages"
           ]
         },
         {
-          "slug": "thread-and-thistle-boutique",
-          "name": "Thread & Thistle",
-          "type": "Clothing boutique",
-          "city": "Jaipur",
+          "slug": "aura",
+          "name": "AURA Essentials",
+          "type": "Fashion e-commerce",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-aura.webp",
+          "liveUrl": "https://aura-design.pages.dev",
+          "result": "Live demo — shop, cart, checkout, wishlist & lookbook",
+          "desc": "A full fashion storefront — shop with filters, search and sorting, 12 products, a lookbook with four curated looks, and a demo checkout.",
+          "story": "Shoppers can filter and search products, add to cart or wishlist, compare up to three items, and walk through a three-step demo checkout that issues an AURA order number.",
+          "deliverables": [
+            "Shop with filters, sort & search",
+            "Cart drawer & 3-step demo checkout",
+            "Wishlist & compare (max 3)",
+            "Lookbook with 4 curated looks"
+          ]
+        },
+        {
+          "slug": "sunshine-international-school",
+          "name": "Sunshine International School",
+          "type": "School",
+          "city": "New Delhi",
           "service": "Business Website",
-          "img": "/work/work-boutique.webp",
-          "liveUrl": null,
-          "result": "Instagram followers finally have somewhere to go",
-          "desc": "A business website for a boutique that sold only through Instagram — collections, the story behind the shop, and directions that bring people to the door.",
-          "story": "Followers loved the reels but could not find prices, timings or the shop itself. The website gives the boutique a permanent home: collections to browse, the owner's story, and a visit-us section with parking and landmark details.",
+          "img": "/work/work-sunshine-international-school.webp",
+          "liveUrl": "https://sunshine-international-school.pages.dev",
+          "result": "Live demo — admissions, fees, parent portal & virtual tour",
+          "desc": "A 43-page school website — admissions by stage, fees with online payment, parent portal, virtual tour and a Hindi version.",
+          "story": "Parents can explore admissions, check fees, use the parent portal, take the virtual tour and read the site in Hindi.",
           "deliverables": [
-            "Collection galleries",
-            "About and story pages",
-            "Visit-us with Maps and landmarks",
-            "Instagram feed link section"
+            "Admissions flow with per-stage pages",
+            "Fees & online fee-payment page",
+            "Parent portal & virtual tour",
+            "Hindi version & site search"
           ]
         },
         {
-          "slug": "bright-minds-tuition",
-          "name": "Bright Minds",
-          "type": "Tuition centre",
-          "city": "Lucknow",
-          "service": "Business Website",
-          "img": "/work/work-tuition.webp",
-          "liveUrl": null,
-          "result": "Admission enquiries doubled in the first month",
-          "desc": "A clear, parent-friendly website for a tuition centre — courses by class, batch timings, results, and an admission enquiry form.",
-          "story": "Parents asked the same five questions on every call. The site answers them up front — classes, batches, fees approach, results — so calls now come from parents who are ready to enrol.",
-          "deliverables": [
-            "Courses by class and subject",
-            "Batch timings table",
-            "Results and topper section",
-            "Admission enquiry form"
-          ]
-        },
-        {
-          "slug": "iron-paradise-gym",
-          "name": "Iron Paradise",
+          "slug": "apex-athletics",
+          "name": "APEX ATHLETICS",
           "type": "Gym & fitness",
-          "city": "Hyderabad",
+          "city": "New York",
           "service": "Booking / Enquiry Website",
-          "img": "/work/work-gym.webp",
-          "liveUrl": null,
-          "result": "Trial-class bookings doubled in the first month",
-          "desc": "A high-energy gym site with class timings, trainer profiles and one-tap trial booking on WhatsApp.",
-          "story": "Iron Paradise had a strong Instagram following but no way to convert it — every enquiry meant manual DM replies. The new site puts class timings, trainer profiles and pricing up front, with a trial-booking button that opens WhatsApp with the message pre-written.",
+          "img": "/work/work-apex-athletics.webp",
+          "liveUrl": "https://apex-athletics-gym.pages.dev",
+          "result": "Live demo — membership, class schedule, coaches & calculators",
+          "desc": "A gym and fitness-club site — membership plans, class schedule, coach profiles, BMI and fitness calculators, and free-trial booking.",
+          "story": "Visitors can compare membership plans, check the class schedule, meet the coaches, try the BMI calculator and book a free trial or a tour.",
           "deliverables": [
-            "5-page gym website",
-            "Class timetable page",
-            "Trainer profiles",
-            "WhatsApp trial booking"
+            "Membership plans & join flow",
+            "Class schedule & programs",
+            "Coach profiles",
+            "BMI & fitness calculators"
           ]
         },
         {
-          "slug": "spice-route-restaurant",
-          "name": "Spice Route",
-          "type": "Restaurant & cafe",
-          "city": "Kochi",
+          "slug": "flavoro",
+          "name": "Flavoro Restaurant",
+          "type": "Restaurant",
+          "city": "Online",
           "service": "Catalogue / Menu Website",
-          "img": "/work/work-restaurant.webp",
-          "liveUrl": null,
-          "result": "Weekend table bookings moved fully online",
-          "desc": "A warm restaurant site with the full menu, photos of signature dishes and table booking in two taps.",
-          "story": "Spice Route's menu lived in blurry photos on a review site, and weekend bookings came through phone calls the staff kept missing. The new site carries the full menu with prices, photos of the signature dishes and a booking button that has taken weekend reservations fully online.",
+          "img": "/work/work-flavoro.webp",
+          "liveUrl": "https://flavoro.pages.dev",
+          "result": "Live demo — menu, online ordering, reservations & catering",
+          "desc": "A full restaurant site — menu with online ordering and cart, table reservations, catering, private dining and gift cards.",
+          "story": "Visitors can browse the menu, order online, book a table, explore catering and private dining, and buy gift cards.",
           "deliverables": [
-            "Menu website with prices",
-            "Dish photo gallery",
-            "Table booking button",
-            "Google Maps & hours"
+            "Menu with online order & cart",
+            "Table reservations page",
+            "Catering & private-dining pages",
+            "Gift cards & gallery"
+          ]
+        },
+        {
+          "slug": "shopmate",
+          "name": "ShopMate",
+          "type": "General e-commerce",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-shopmate.webp",
+          "liveUrl": "https://shopmates.pages.dev",
+          "result": "Live demo — full order flow from cart to invoice & tracking",
+          "desc": "A general multi-category online shop — live search, best sellers, deals, and a complete order flow from checkout to invoice and tracking.",
+          "story": "Shoppers can search and browse categories, add items to cart and wishlist, check out, and follow the order through invoice and tracking pages.",
+          "deliverables": [
+            "Live search & category browsing",
+            "Cart & wishlist with header count",
+            "Checkout to invoice & tracking",
+            "Deals, compare & gift cards"
+          ]
+        },
+        {
+          "slug": "dental-clinic",
+          "name": "NaviX Technologies Family Dental Care",
+          "type": "Dental clinic",
+          "city": "Austin",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-dental-clinic.webp",
+          "liveUrl": "https://navix-dental.pages.dev",
+          "result": "Live demo — 10 services, appointment booking & pricing",
+          "desc": "A dental clinic site — ten services with detail pages, an appointment-booking flow, pricing, insurance info and a smile gallery.",
+          "story": "Patients can read about each treatment, check pricing and insurance, view the smile gallery and start an appointment booking.",
+          "deliverables": [
+            "10 services with detail pages",
+            "Book-appointment flow",
+            "Pricing & insurance pages",
+            "Smile gallery & reviews"
+          ]
+        },
+        {
+          "slug": "lumina-beauty-studio-salon",
+          "name": "Lumina Beauty Studio",
+          "type": "Beauty salon",
+          "city": "Mumbai",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-lumina-beauty-studio-salon.webp",
+          "liveUrl": "https://lumina-beauty-studio.pages.dev",
+          "result": "Live demo — services & pricing in ₹, booking form & gallery",
+          "desc": "A 17-page beauty salon site — services with prices in rupees, a booking form, gallery, bridal pages and a blog.",
+          "story": "Visitors can browse services and prices, look through the gallery, and fill in the booking form, which validates name, Indian mobile number and date.",
+          "deliverables": [
+            "Booking form with validation",
+            "Services with prices in ₹",
+            "Gallery & bridal pages",
+            "Blog & reviews pages"
+          ]
+        },
+        {
+          "slug": "adiyo",
+          "name": "Adiyo",
+          "type": "B2B SaaS",
+          "city": "Online",
+          "service": "Business Website",
+          "img": "/work/work-adiyo.webp",
+          "liveUrl": "https://adiyo.pages.dev",
+          "result": "Live demo — ROI calculator, comparisons & request-a-demo",
+          "desc": "A B2B SaaS marketing site for an AI sales platform — features, solutions, industries, pricing and an interactive ROI calculator.",
+          "story": "Visitors can explore features and solutions, try the ROI calculator, compare against competitors and request a demo.",
+          "deliverables": [
+            "Interactive ROI calculator",
+            "Competitor comparison pages",
+            "Request-a-demo & login flows",
+            "Features, solutions & industry pages"
+          ]
+        },
+        {
+          "slug": "aura-audio",
+          "name": "AURA Audio",
+          "type": "Audio e-commerce",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-aura-audio.webp",
+          "liveUrl": "https://auraaudioo.pages.dev",
+          "result": "Live demo — product catalogue, compare, wishlist & checkout",
+          "desc": "A premium audio e-commerce site — headphones catalogue with product pages, compare and wishlist, cart drawer and demo checkout.",
+          "story": "Shoppers can browse headphones, compare models side by side, save favourites and walk through the demo checkout.",
+          "deliverables": [
+            "Product catalogue with detail pages",
+            "Compare & wishlist",
+            "Cart drawer & demo checkout",
+            "Journal & technology pages"
+          ]
+        },
+        {
+          "slug": "aurelia-palace",
+          "name": "The Aurelia Palace",
+          "type": "Luxury hotel",
+          "city": "Jaipur",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-aurelia-palace.webp",
+          "liveUrl": "https://aureliapalace.pages.dev",
+          "result": "Live demo — rooms, dining, spa & full booking flow",
+          "desc": "A 5-star luxury palace hotel site — rooms with compare, dining reservations, spa booking and a demo booking flow to confirmation.",
+          "story": "Guests can compare rooms, reserve a table, book the spa and complete a demo booking from selection to confirmation.",
+          "deliverables": [
+            "Demo booking flow to confirmation",
+            "Rooms with compare",
+            "Dining reservation & spa booking",
+            "Offers, gift cards & loyalty pages"
+          ]
+        },
+        {
+          "slug": "ayaan-raza-portfolio",
+          "name": "Ayaan Raza",
+          "type": "Personal portfolio",
+          "city": "Online",
+          "service": "Business Website",
+          "img": "/work/work-ayaan-raza-portfolio.webp",
+          "liveUrl": "https://ayaan-raza-portfolio.pages.dev",
+          "result": "Live demo — case studies, blog, resume & booking",
+          "desc": "A personal portfolio site for a full-stack developer — project case studies, blog with RSS, resume, services and pricing.",
+          "story": "Visitors can read four project case studies, browse the blog, view the resume and use the contact and booking forms.",
+          "deliverables": [
+            "Project case studies",
+            "Blog with RSS feed",
+            "Resume & services pages",
+            "Contact & booking forms"
+          ]
+        },
+        {
+          "slug": "cloudpilot",
+          "name": "CloudPilot",
+          "type": "SaaS platform",
+          "city": "Online",
+          "service": "Business Website",
+          "img": "/work/work-cloudpilot.webp",
+          "liveUrl": "https://cloudpilot-saas.pages.dev",
+          "result": "Live demo — ROI calculator, pricing toggle & demo login",
+          "desc": "A SaaS product site — three tools, pricing with monthly/yearly toggle, ROI calculator, help centre with live search and a demo login.",
+          "story": "Visitors can try the ROI calculator, search the help centre, compare plans and sign in with the demo account.",
+          "deliverables": [
+            "ROI calculator with live sliders",
+            "Pricing monthly/yearly toggle",
+            "Help centre with live search",
+            "Demo login & request-demo form"
+          ]
+        },
+        {
+          "slug": "coolair",
+          "name": "CoolAir",
+          "type": "AC repair & service",
+          "city": "Mumbai",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-coolair.webp",
+          "liveUrl": "https://coolaiir.pages.dev",
+          "result": "Live demo — 5-step booking, instant quote & track-booking",
+          "desc": "An AC repair and service site — nine services, a five-step booking flow with slot picker, instant quote calculator and booking tracking.",
+          "story": "Customers can pick a service, get an instant quote, book a slot in five steps and track the booking afterwards.",
+          "deliverables": [
+            "5-step booking with slot picker",
+            "Instant quote calculator",
+            "Track-booking page",
+            "Symptom finder & service areas"
+          ]
+        },
+        {
+          "slug": "creatix",
+          "name": "Creatix",
+          "type": "Creative agency",
+          "city": "Online",
+          "service": "Business Website",
+          "img": "/work/work-creatix.webp",
+          "liveUrl": "https://creatiix.pages.dev",
+          "result": "Live demo — services, projects, blog & booking",
+          "desc": "A creative agency site — services and project case studies, blog, careers, pricing and a booking page, with animated scrolling.",
+          "story": "Visitors can browse services and six project case studies, read the blog, check open roles and book a call.",
+          "deliverables": [
+            "Services & project case studies",
+            "Blog with six articles",
+            "Careers with role pages",
+            "Booking page & on-site search"
+          ]
+        },
+        {
+          "slug": "dovax",
+          "name": "Dovax",
+          "type": "Sneakers e-commerce",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-dovax.webp",
+          "liveUrl": "https://dovax.pages.dev",
+          "result": "Live demo — cart, checkout, wishlist & size guide",
+          "desc": "A sneakers e-commerce store — men's, women's and sale categories, product pages, a working cart with free-shipping progress and checkout.",
+          "story": "Shoppers can browse by category, add shoes to the cart, use the wishlist, and check out with a size guide on hand.",
+          "deliverables": [
+            "Category pages: men, women, sale",
+            "Working cart with free-shipping progress",
+            "Wishlist & checkout flow",
+            "Technology & sustainability pages"
+          ]
+        },
+        {
+          "slug": "durora",
+          "name": "Durora Music Festival",
+          "type": "Music festival",
+          "city": "Berlin",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-durora.webp",
+          "liveUrl": "https://durora.pages.dev",
+          "result": "Live demo — lineup, schedule & demo ticket checkout",
+          "desc": "A music festival site for Berlin, 14–16 August 2027 — artist lineup with detail pages, day-by-day schedule and demo ticket checkout.",
+          "story": "Visitors can explore the 60+ artist lineup, check the schedule by day, and try the demo ticket checkout for day, weekend and VIP passes.",
+          "deliverables": [
+            "Artist lineup with detail pages",
+            "Day-by-day schedule",
+            "Demo ticket checkout",
+            "Venue & gallery pages"
+          ]
+        },
+        {
+          "slug": "electdove",
+          "name": "Electdove",
+          "type": "Electronics e-commerce",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-electdove.webp",
+          "liveUrl": "https://electdove.pages.dev",
+          "result": "Live demo — cart, checkout, EMI calculator & trade-in",
+          "desc": "A premium electronics store — shop with brands and categories, working cart and checkout, EMI calculator and trade-in pages.",
+          "story": "Shoppers can browse products by brand, add to bag, check out, estimate EMIs and explore trade-in, rewards and gift cards.",
+          "deliverables": [
+            "Shop with brands & categories",
+            "Add to bag & checkout flow",
+            "EMI calculator & trade-in",
+            "Rewards & gift-card pages"
+          ]
+        },
+        {
+          "slug": "femine",
+          "name": "Femine",
+          "type": "Personality coaching",
+          "city": "Online",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-femine.webp",
+          "liveUrl": "https://femine.pages.dev",
+          "result": "Live demo — personality quiz, coaching services & booking",
+          "desc": "A personality-coaching site — a quiz with a results flow, coaching services with detail pages, pricing, events and a booking page.",
+          "story": "Visitors can take the personality quiz and see results, browse coaching services and pricing, and book a session.",
+          "deliverables": [
+            "Personality quiz & results flow",
+            "Coaching services with detail pages",
+            "Pricing & booking pages",
+            "Blog, events & free guide"
+          ]
+        },
+        {
+          "slug": "forgefit",
+          "name": "ForgeFit",
+          "type": "Gym & personal training",
+          "city": "Mumbai",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-forgefit.webp",
+          "liveUrl": "https://forgefits.pages.dev",
+          "result": "Live demo — training programs, pricing & free-session booking",
+          "desc": "A personal-training site — four training programs with detail pages, results and pricing, and a free-session booking page.",
+          "story": "Visitors can compare training programs, read results, check pricing and book a free session by picking a day and time slot.",
+          "deliverables": [
+            "4 training programs with detail pages",
+            "Book-a-free-session page",
+            "Results & pricing pages",
+            "Blog, challenges & tools"
+          ]
+        },
+        {
+          "slug": "havenly",
+          "name": "Havenly",
+          "type": "Real estate",
+          "city": "Morocco",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-havenly.webp",
+          "liveUrl": "https://havenlly.pages.dev",
+          "result": "Live demo — property search, mortgage calculator & valuation",
+          "desc": "A real-estate site for properties in Morocco — property search and filters, six property detail pages, mortgage calculator and home valuation.",
+          "story": "Home seekers can search properties by location, type and price, view detail pages with galleries, estimate a mortgage and request a valuation.",
+          "deliverables": [
+            "Property search & filters",
+            "6 property detail pages",
+            "Mortgage calculator",
+            "Home-valuation & saved properties"
+          ]
+        },
+        {
+          "slug": "kumquote",
+          "name": "KumQuote",
+          "type": "Quotes library",
+          "city": "Online",
+          "service": "Business Website",
+          "img": "/work/work-kumquote.webp",
+          "liveUrl": "https://kumquote.pages.dev",
+          "result": "Live demo — 1,200+ quotes, search, random & favourites",
+          "desc": "A quotes library with over 1,200 quotes across ten categories — browse by author, category, tag or collection, with full-text search.",
+          "story": "Readers can browse quotes by author or topic, search the full library, open a random quote, save favourites and submit a quote.",
+          "deliverables": [
+            "1,200+ quotes in 10 categories",
+            "Full-text search & random quote",
+            "Browse by author, tag & collection",
+            "Favourites & quote submission"
+          ]
+        },
+        {
+          "slug": "lumiere",
+          "name": "Lumière Parfums",
+          "type": "Luxury perfume e-commerce",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-lumiere.webp",
+          "liveUrl": "https://lumiere-parfums.pages.dev",
+          "result": "Live demo — 12 fragrances, collections & demo checkout",
+          "desc": "A luxury perfume store — twelve fragrances, six collections, discovery sets, cart and wishlist, and a three-step demo checkout.",
+          "story": "Visitors can shop by collection, read about ingredients and sustainability, and check out with gift cards and order tracking.",
+          "deliverables": [
+            "12 products & 6 collections",
+            "Discovery sets & journal",
+            "Cart, wishlist & demo checkout",
+            "Gift cards & order tracking"
+          ]
+        },
+        {
+          "slug": "luxury-furniture",
+          "name": "Furniture",
+          "type": "Furniture e-commerce",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-luxury-furniture.webp",
+          "liveUrl": "https://luxury-furniture.pages.dev",
+          "result": "Live demo — shop by room, cart, checkout & showrooms",
+          "desc": "A luxury furniture store — shop by category or by room, product pages, cart and wishlist, demo checkout with confirmation, and showroom info.",
+          "story": "Shoppers can browse furniture by room, filter collections with live search, check out, and explore financing, trade and delivery pages.",
+          "deliverables": [
+            "Shop by category & by room",
+            "Live search filtering",
+            "Cart, wishlist & demo checkout",
+            "Showrooms, financing & trade pages"
+          ]
+        },
+        {
+          "slug": "mr-l-production",
+          "name": "Mr. L Production",
+          "type": "Video production studio",
+          "city": "Online",
+          "service": "Business Website",
+          "img": "/work/work-mr-l-production.webp",
+          "liveUrl": "https://mr-l-production.pages.dev",
+          "result": "Live demo — portfolio, services & validated contact form",
+          "desc": "A video-production studio site — portfolio with case-study pages, services with detail pages, blog, team and a validated contact form.",
+          "story": "Visitors can filter the portfolio, read six project case studies, explore services and send a message through the contact form.",
+          "deliverables": [
+            "Portfolio with case-study pages",
+            "Services with detail pages",
+            "Blog with six articles",
+            "Validated contact form & FAQ"
+          ]
+        },
+        {
+          "slug": "nightclub",
+          "name": "NIGHTCLUB",
+          "type": "Nightclub",
+          "city": "Glasgow",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-nightclub.webp",
+          "liveUrl": "https://nights-club.pages.dev",
+          "result": "Live demo — events, guestlist, VIP & visit info",
+          "desc": "A nightclub site — events with month filter and detail pages, a live countdown, gallery with keyboard lightbox, guestlist and VIP pages.",
+          "story": "Visitors can browse upcoming events, join the guestlist, explore VIP and private hire, and find visit and safety information.",
+          "deliverables": [
+            "Events with month filter",
+            "Live countdown & gallery lightbox",
+            "Guestlist, VIP & private-hire pages",
+            "Visit & safety info pages"
+          ]
+        },
+        {
+          "slug": "painter",
+          "name": "Painter",
+          "type": "Painting services",
+          "city": "Online",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-painter.webp",
+          "liveUrl": "https://painter-static.pages.dev",
+          "result": "Live demo — instant quote, service areas & portfolio",
+          "desc": "A painting-services site — instant quote page, service-area pages per town, project portfolio and a colour picker.",
+          "story": "Visitors can get an instant estimate, find their town's service page, browse past projects and try the colour picker.",
+          "deliverables": [
+            "Instant quote / estimate page",
+            "Service-area pages per town",
+            "Project portfolio with details",
+            "Colour picker page"
+          ]
+        },
+        {
+          "slug": "shoemate",
+          "name": "Shoemate",
+          "type": "Shoe e-commerce",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-shoemate.webp",
+          "liveUrl": "https://shoemate.pages.dev",
+          "result": "Live demo — shop, checkout, compare, rewards & fit finder",
+          "desc": "A shoe e-commerce store — shop with filters and search, cart and wishlist, three-step demo checkout, compare, rewards and a fit finder.",
+          "story": "Shoppers can filter shoes by brand and category, compare up to three pairs, check out with a promo code and track the order.",
+          "deliverables": [
+            "Shop with filters & search",
+            "Cart, wishlist & demo checkout",
+            "Compare, rewards & gift cards",
+            "Fit finder & brand pages"
+          ]
+        },
+        {
+          "slug": "tax-lawyer-landing",
+          "name": "MSY Law",
+          "type": "Tax law firm",
+          "city": "Online",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-tax-lawyer-landing.webp",
+          "liveUrl": "https://tax-lawyer-landing.pages.dev",
+          "result": "Live demo — tax calculators, case evaluator & consultation",
+          "desc": "A tax law-firm site — practice areas, case results, team profiles, interactive tax calculators and a free-consultation flow, plus a Hindi version.",
+          "story": "Visitors can try the income-tax, GST and advance-tax calculators, use the case evaluator, and start a free consultation.",
+          "deliverables": [
+            "Income-tax, GST & advance-tax calculators",
+            "Case evaluator tool",
+            "Practice areas & case results",
+            "Free-consultation flow & Hindi version"
+          ]
+        },
+        {
+          "slug": "techdova",
+          "name": "TechDova",
+          "type": "Tech e-commerce",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-techdova.webp",
+          "liveUrl": "https://techdova.pages.dev",
+          "result": "Live demo — bilingual EN/FR store, cart & checkout",
+          "desc": "A tech e-commerce store in English and French — full local cart and checkout, product compare, wishlist, gift cards and rewards.",
+          "story": "Shoppers can switch between English and French, compare products, use promo codes and complete a local checkout with confirmation.",
+          "deliverables": [
+            "Bilingual EN/FR storefront",
+            "Local cart & checkout",
+            "Compare, wishlist & search",
+            "Gift cards, rewards & trade-in"
+          ]
+        },
+        {
+          "slug": "tina-style",
+          "name": "Tina Style",
+          "type": "Fashion link-in-bio & shop",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-tina-style.webp",
+          "liveUrl": "https://tina-style.pages.dev",
+          "result": "Live demo — link-in-bio, mini shop, lookbook & videos",
+          "desc": "A fashion link-in-bio site with a mini shop — links to fashion, lifestyle and travel content, product pages, cart and checkout.",
+          "story": "Visitors can follow Tina's links, browse the lookbook and videos, shop products and check out with a thank-you page.",
+          "deliverables": [
+            "Link-in-bio home page",
+            "Mini shop with checkout",
+            "Lookbook & videos pages",
+            "Blog & FAQ pages"
+          ]
+        },
+        {
+          "slug": "tricent-public-school",
+          "name": "Tricent Public School",
+          "type": "School",
+          "city": "Patna",
+          "service": "Business Website",
+          "img": "/work/work-tricent-public-school.webp",
+          "liveUrl": "https://tricent-public-school.pages.dev",
+          "result": "Live demo — admissions, fee payment, virtual tour & notices",
+          "desc": "A CBSE school site, Nursery to Class XII — admissions with a Hindi page, parent login, online fee payment, virtual tour and notices.",
+          "story": "Parents can explore admissions, pay fees online, take the virtual tour and check news, notices and results.",
+          "deliverables": [
+            "Admissions flow & prospectus",
+            "Parent login & fee payment",
+            "Virtual tour & gallery",
+            "News, notices & results"
+          ]
+        },
+        {
+          "slug": "zesty",
+          "name": "Zesty",
+          "type": "Food delivery",
+          "city": "Online",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-zesty.webp",
+          "liveUrl": "https://zeesty.pages.dev",
+          "result": "Live demo — menu, cart, orders, rewards & gift cards",
+          "desc": "A food-delivery site — menu with search and dish pages, cart drawer, orders flow, favourites, rewards and gift cards.",
+          "story": "Visitors can browse the menu, open dish pages, add food to the cart, place an order and check rewards and gift cards.",
+          "deliverables": [
+            "Menu with search & dish pages",
+            "Cart drawer & orders flow",
+            "Favourites, rewards & gift cards",
+            "Delivery-areas & catering pages"
           ]
         }
       ],
