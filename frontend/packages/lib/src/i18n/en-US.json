@@ -467,7 +467,8 @@
   "preview": {
     "back": "Back",
     "moreExamples": "More examples",
-    "viewPreview": "View preview"
+    "viewPreview": "View preview",
+    "visitLive": "Visit live site"
   },
   "pricing": {
     "note": "Prices are draft and will be confirmed before you pay.",
@@ -734,6 +735,7 @@
           "city": "Pune",
           "service": "Catalogue / Menu Website",
           "img": "/work/work-bakery.webp",
+          "liveUrl": "https://creatiix.pages.dev/",
           "result": "Weekend cake orders now start on WhatsApp",
           "desc": "A warm catalogue site for a neighbourhood bakery — full menu with photos and prices, and a WhatsApp order button on every cake.",
           "story": "The owner took cake orders on calls she kept missing during the morning rush. We put the whole menu online with clear prices, so customers now browse at home and message a ready-made order.",
@@ -751,6 +753,7 @@
           "city": "Bengaluru",
           "service": "Booking / Enquiry Website",
           "img": "/work/work-salon.webp",
+          "liveUrl": null,
           "result": "Appointments come in while the chairs stay busy",
           "desc": "A booking website for a unisex salon — services with prices and durations, stylist profiles, and an appointment form that lands on WhatsApp.",
           "story": "The salon's phone rang most when every stylist had a client in the chair. The new site answers prices and timings itself, and appointment requests arrive as tidy WhatsApp messages the owner confirms between clients.",
@@ -768,6 +771,7 @@
           "city": "Jaipur",
           "service": "Business Website",
           "img": "/work/work-boutique.webp",
+          "liveUrl": null,
           "result": "Instagram followers finally have somewhere to go",
           "desc": "A business website for a boutique that sold only through Instagram — collections, the story behind the shop, and directions that bring people to the door.",
           "story": "Followers loved the reels but could not find prices, timings or the shop itself. The website gives the boutique a permanent home: collections to browse, the owner's story, and a visit-us section with parking and landmark details.",
@@ -785,6 +789,7 @@
           "city": "Lucknow",
           "service": "Business Website",
           "img": "/work/work-tuition.webp",
+          "liveUrl": null,
           "result": "Admission enquiries doubled in the first month",
           "desc": "A clear, parent-friendly website for a tuition centre — courses by class, batch timings, results, and an admission enquiry form.",
           "story": "Parents asked the same five questions on every call. The site answers them up front — classes, batches, fees approach, results — so calls now come from parents who are ready to enrol.",
@@ -802,6 +807,7 @@
           "city": "Hyderabad",
           "service": "Booking / Enquiry Website",
           "img": "/work/work-gym.webp",
+          "liveUrl": null,
           "result": "Trial-class bookings doubled in the first month",
           "desc": "A high-energy gym site with class timings, trainer profiles and one-tap trial booking on WhatsApp.",
           "story": "Iron Paradise had a strong Instagram following but no way to convert it — every enquiry meant manual DM replies. The new site puts class timings, trainer profiles and pricing up front, with a trial-booking button that opens WhatsApp with the message pre-written.",
@@ -819,6 +825,7 @@
           "city": "Kochi",
           "service": "Catalogue / Menu Website",
           "img": "/work/work-restaurant.webp",
+          "liveUrl": null,
           "result": "Weekend table bookings moved fully online",
           "desc": "A warm restaurant site with the full menu, photos of signature dishes and table booking in two taps.",
           "story": "Spice Route's menu lived in blurry photos on a review site, and weekend bookings came through phone calls the staff kept missing. The new site carries the full menu with prices, photos of the signature dishes and a booking button that has taken weekend reservations fully online.",
