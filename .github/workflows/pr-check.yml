@@ -1,6 +1,7 @@
-# Kumbuild — PR check: saaton apps build hote hain ya nahi, deploy nahi hota.
-# Sirf build — production deploy nahi hoga. (Lint ka koi step nahi hai:
-# sirf kumbuild-app me "lint" script hai, baaki 6 apps me nahi.)
+# Kumbuild — PR check: teeno apps (web, blog, docs) build hote hain ya nahi,
+# deploy nahi hota. Sirf build — production deploy nahi hoga.
+# (account/admin/app/home apps 2026-11-21 ko repo se hata diye gaye hain —
+# woh ab alag projects me banenge, isliye unke build steps bhi hata diye.)
 name: PR check
 
 on:
@@ -20,15 +21,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Build web
         run: pnpm --filter kumbuild-web build
-      - name: Build account
-        run: pnpm --filter kumbuild-account build
-      - name: Build admin
-        run: pnpm --filter kumbuild-admin build
-      - name: Build home
-        run: pnpm --filter kumbuild-home build
       - name: Build blog
         run: pnpm --filter kumbuild-blog build
       - name: Build docs
         run: pnpm --filter kumbuild-docs build
-      - name: Build app (legacy)
-        run: pnpm --filter kumbuild-app build
