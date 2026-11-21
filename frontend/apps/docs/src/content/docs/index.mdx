@@ -3,6 +3,7 @@ title: Home
 description: Help and guides for Kumbuild customers — ordering, previews, payments, renewals and getting found on Google.
 template: splash
 hero:
+  title: Your website, explained in plain words
   tagline: Everything about your Kumbuild website, in plain words — how ordering works, what happens after you pay, and how to get the most from your site. Use the search above, or start with a guide below.
   actions:
     - text: How Kumbuild works
@@ -10,12 +11,12 @@ hero:
       icon: right-arrow
       variant: primary
     - text: Order your website
-      link: https://kumbuild.com/order
+      link: https://kumbuild-web.pages.dev/order/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+import { Card, CardGrid } from "@astrojs/starlight/components";
 
 ## Start with the basics
 
@@ -32,7 +33,7 @@ import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
   <Card title="Before you order" icon="pencil">
     The short checklist to have ready before you order — business details, photos, logo and WhatsApp number. [Read the guide](/getting-started/before-you-order/)
   </Card>
-  <Card title="Order your website" icon="pencil">
+  <Card title="Order your website" icon="right-arrow">
     What we need from you, what the order form asks, and what happens the moment you submit it. [Read the guide](/getting-started/order-your-website/)
   </Card>
   <Card title="Preview and revisions" icon="approve-check">
@@ -46,7 +47,7 @@ import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
 ## Your website, day to day
 
 <CardGrid>
-  <Card title="Content guide — photos and words" icon="pencil">
+  <Card title="Content guide — photos and words" icon="image">
     What to send us and how: photos that look sharp, words that sound like you. [Read the guide](/your-website/content-guide/)
   </Card>
   <Card title="Launch checklist" icon="approve-check">
@@ -63,22 +64,38 @@ import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
 ## More guides
 
 <CardGrid>
-  <LinkCard title="Payments and renewal" href="/your-website/payments-and-renewal/" description="The 50/50 payments and the ₹1,999/year renewal, in plain numbers." />
-  <LinkCard title="Preview and revisions" href="/your-website/preview-and-revisions/" description="See your website before the world does; two revision rounds are free." />
-  <LinkCard title="Get found on Google" href="/grow/get-found-on-google/" description="What we set up for you, and the two things that help most." />
-  <LinkCard title="Changes after launch" href="/your-website/changes-after-launch/" description="Prices, photos, new pages — how changes work once you are live." />
-  <LinkCard title="Troubleshooting" href="/help/troubleshooting/" description="Something not working — preview link, payment, Google listing — start here." />
-  <LinkCard title="Glossary" href="/help/glossary/" description="Plain definitions of the few technical words these guides cannot avoid." />
-  <LinkCard title="Changelog" href="/help/changelog/" description="What has changed on this docs site, newest first." />
+  <Card title="Get found on Google" icon="magnifier">
+    What we set up for you, and the two things that help most. [Read the guide](/grow/get-found-on-google/)
+  </Card>
+  <Card title="Changes after launch" icon="refresh">
+    Prices, photos, new pages — how changes work once you are live. [Read the guide](/your-website/changes-after-launch/)
+  </Card>
+  <Card title="Troubleshooting" icon="warning">
+    Something not working — preview link, payment, Google listing — start here. [Read the guide](/help/troubleshooting/)
+  </Card>
+  <Card title="Glossary" icon="open-book">
+    Plain definitions of the few technical words these guides cannot avoid. [Read the guide](/help/glossary/)
+  </Card>
+  <Card title="Changelog" icon="history">
+    What has changed on this docs site, newest first. [Read the guide](/help/changelog/)
+  </Card>
 </CardGrid>
 
 ## How help works here
 
 Three promises, so you always know where you stand:
 
-- **A person answers.** Support is WhatsApp with the team that built your site — no ticket queue, no bot maze.
-- **Plain words only.** If a guide needs a technical word, it explains it in the same line.
-- **Your site, your property.** Domain, content and data are yours; leaving never traps you. See [what you own](/getting-started/how-kumbuild-works/#what-you-own).
+<CardGrid>
+  <Card title="A person answers" icon="comment">
+    Support is WhatsApp with the team that built your site — no ticket queue, no bot maze.
+  </Card>
+  <Card title="Plain words only" icon="open-book">
+    If a guide needs a technical word, it explains it in the same line.
+  </Card>
+  <Card title="Your site, your property" icon="approve-check">
+    Domain, content and data are yours; leaving never traps you. See [what you own](/getting-started/how-kumbuild-works/#what-you-own).
+  </Card>
+</CardGrid>
 
 ## Still stuck?
 

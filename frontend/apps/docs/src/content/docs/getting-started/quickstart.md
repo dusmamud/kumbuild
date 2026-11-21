@@ -8,7 +8,7 @@ No reading marathon. This is the whole journey on one page — five steps, about
 ## The five steps
 
 1. **Decide** — pick the package that fits your business: Starter ₹3,999, Business ₹7,999, or Premium ₹14,999. Not sure? Pick the closest one; we confirm the right fit on WhatsApp before any payment. See [What you get](/getting-started/what-you-get/) if you want the details first.
-2. **Order** — fill the [order form](https://kumbuild.com/order). Two minutes: your business details, your package, your photos, your WhatsApp number. Nothing is charged at this step.
+2. **Order** — fill the [order form](https://kumbuild-web.pages.dev/order/). Two minutes: your business details, your package, your photos, your WhatsApp number. Nothing is charged at this step.
 3. **Share your content** — send us your business details, services and prices, and real photos of your shop or work. Phone photos are fine. The checklist is in [Before you order](/getting-started/before-you-order/).
 4. **Preview** — within 3–5 working days of the advance payment and complete content, we send a private preview link on WhatsApp. Check it on your phone, ask for changes — two revision rounds are free.
 5. **Launch** — approve the preview, pay the remaining 50%, and your website goes live on your domain, usually the same day.

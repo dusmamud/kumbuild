@@ -6,31 +6,47 @@
 import Default from "@astrojs/starlight/components/Footer.astro";
 
 const year = new Date().getFullYear();
+// Manual fix 2026-11-21: the old footer linked kumbuild.com and
+// blog.kumbuild.com — neither domain resolves (custom domain not
+// bought). All external links now point at the live *.pages.dev URLs;
+// flip them back when kumbuild.com is bought. Groups match the docs
+// sidebar (Start here / Your website / Grow), so no page sits in the
+// wrong group — "Changes after launch" was under Grow before.
 const cols = [
   {
     title: "Start here",
     links: [
+      { label: "Quickstart — 5 minutes", href: "/getting-started/quickstart/" },
       { label: "How Kumbuild works", href: "/getting-started/how-kumbuild-works/" },
+      { label: "What you get", href: "/getting-started/what-you-get/" },
+      { label: "Before you order", href: "/getting-started/before-you-order/" },
       { label: "Order your website", href: "/getting-started/order-your-website/" },
+    ],
+  },
+  {
+    title: "Your website",
+    links: [
       { label: "Preview and revisions", href: "/your-website/preview-and-revisions/" },
       { label: "Payments and renewal", href: "/your-website/payments-and-renewal/" },
+      { label: "Changes after launch", href: "/your-website/changes-after-launch/" },
+      { label: "Managing your site", href: "/your-website/managing-your-site/" },
     ],
   },
   {
     title: "Grow",
     links: [
       { label: "Get found on Google", href: "/grow/get-found-on-google/" },
-      { label: "Changes after launch", href: "/your-website/changes-after-launch/" },
-      { label: "Kumbuild blog", href: "https://blog.kumbuild.com" },
+      { label: "Your first customers online", href: "/grow/your-first-customers-online/" },
+      { label: "Kumbuild blog", href: "https://kumbuild-blog.pages.dev/" },
     ],
   },
   {
     title: "Kumbuild",
     links: [
-      { label: "kumbuild.com", href: "https://kumbuild.com" },
-      { label: "Pricing", href: "https://kumbuild.com/pricing" },
-      { label: "Recent work", href: "https://kumbuild.com/examples" },
-      { label: "Order a website", href: "https://kumbuild.com/order" },
+      { label: "kumbuild-web.pages.dev", href: "https://kumbuild-web.pages.dev/" },
+      { label: "Pricing", href: "https://kumbuild-web.pages.dev/pricing/" },
+      { label: "Recent work", href: "https://kumbuild-web.pages.dev/examples/" },
+      { label: "Order a website", href: "https://kumbuild-web.pages.dev/order/" },
     ],
   },
 ];
@@ -69,9 +85,9 @@ const cols = [
   <div class="kb-legal">
     <p>© {year} Kumbuild. Docs for customers — no jargon, ever.</p>
     <p class="kb-legal-links">
-      <a href="https://kumbuild.com/privacy">Privacy</a>
-      <a href="https://kumbuild.com/terms">Terms</a>
-      <a href="https://kumbuild.com/refund">Refund policy</a>
+      <a href="https://kumbuild-web.pages.dev/privacy/">Privacy</a>
+      <a href="https://kumbuild-web.pages.dev/terms/">Terms</a>
+      <a href="https://kumbuild-web.pages.dev/refund/">Refund policy</a>
     </p>
   </div>
 </div>
@@ -88,7 +104,10 @@ const cols = [
     grid-template-columns: 1fr;
   }
   @media (min-width: 50rem) {
-    .kb-footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+    .kb-footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+  }
+  @media (min-width: 72rem) {
+    .kb-footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; }
   }
   .kb-brand-row {
     display: flex; align-items: center; gap: 0.6rem;

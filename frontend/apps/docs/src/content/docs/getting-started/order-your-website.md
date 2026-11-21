@@ -3,7 +3,7 @@ title: Order your website
 description: What the order form asks, what we need from you, and what happens after you submit.
 ---
 
-Ordering takes about two minutes, on the [order form](https://kumbuild.com/order). Nothing is charged at this step.
+Ordering takes about two minutes, on the [order form](https://kumbuild-web.pages.dev/order/). Nothing is charged at this step.
 
 ## What the form asks
 

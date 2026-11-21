@@ -52,13 +52,19 @@ import ClientRouter from "astro/components/ClientRouter.astro";
             io.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.05 });
+      }, { threshold: 0.05, rootMargin: "0px 0px 100px 0px" });
       els.forEach(function (el) {
         if (seen.has(el)) return;
         seen.add(el);
         el.classList.add("kb-reveal");
         io.observe(el);
       });
+      /* Safety net (manual fix 2026-11-21): never leave content hidden.
+         If the observer never fires for an element — fast scroll, odd
+         layout, slow device — reveal everything after 1.2s anyway. */
+      setTimeout(function () {
+        els.forEach(function (el) { el.classList.add("kb-in"); });
+      }, 1200);
     }
     init();
     document.addEventListener("astro:page-load", init);

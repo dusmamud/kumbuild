@@ -99,6 +99,13 @@ h1#_top,
 header.header {
   display: flex;
   flex-direction: column;
+  /* Manual check 2026-11-21: Starlight gives the fixed header 12px of
+     vertical padding, which the strip math never counted — the strip sat
+     12px down inside the header and the fixed menu button (top 38px)
+     overlapped the strip by 6px on every mobile inner page. Zero the
+     outer vertical padding: strip now starts at y=0, the inner bar
+     takes the remaining height, and the button centers in it. */
+  padding-block: 0;
 }
 header.header > .header {
   flex: 1 1 auto;
@@ -482,8 +489,51 @@ header.header > .header {
   border-radius: var(--kb-radius-sm);
   transition: background-color var(--kb-duration-fast) var(--kb-ease);
 }
+@media (min-width: 50em) {
+  .sl-menu-button {
+    /* 4rem bar: center the 44px button in the bar below the strip. */
+    top: calc(var(--kb-strip-height, 2rem) + 0.625rem);
+  }
+}
 .sl-menu-button:hover {
   background: var(--sl-color-hairline-light);
+}
+
+/* --- Payments table: stack rows as labeled cards on phones.
+   Manual check 2026-11-21: the 3-column table scrolled sideways at
+   390px and its third column was cut mid-word ("Ho", "Ra", "Wh") — it
+   read as broken even though it could be swiped. Below 50rem each row
+   becomes a labeled card (label from data-label), so nothing clips. --- */
+@media (max-width: 50rem) {
+  .sl-markdown-content table.kb-pay-table thead {
+    display: none;
+  }
+  .sl-markdown-content table.kb-pay-table,
+  .sl-markdown-content table.kb-pay-table tbody,
+  .sl-markdown-content table.kb-pay-table tr,
+  .sl-markdown-content table.kb-pay-table td {
+    display: block;
+    width: 100%;
+  }
+  .sl-markdown-content table.kb-pay-table tr {
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: var(--kb-radius-sm);
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .sl-markdown-content table.kb-pay-table td {
+    border: 0;
+    padding: 0.25rem 0;
+  }
+  .sl-markdown-content table.kb-pay-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--sl-color-gray-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
 }
 site-search button[data-open-modal] {
   min-height: 2.75rem;
