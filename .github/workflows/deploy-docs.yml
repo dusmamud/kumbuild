@@ -1,5 +1,5 @@
 # Kumbuild — deploy kumbuild-docs (Astro 7 + Starlight) to Cloudflare Pages.
-# Project `kumbuild-docs` pehle se bana hua hai (Dus ne banaya);
+# Project `kumbuild-docs-4fs` Dus apne main Cloudflare account me banayega;
 # custom domain docs.kumbuild.com production me Dus khud add karega.
 # Trigger: push to main (docs ya shared packages badle to) ya manual.
 name: Deploy docs
@@ -32,7 +32,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter kumbuild-docs build
-      - run: pnpm exec wrangler pages deploy frontend/apps/docs/dist --project-name=kumbuild-docs
+      - run: pnpm exec wrangler pages deploy frontend/apps/docs/dist --project-name=kumbuild-docs-4fs
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

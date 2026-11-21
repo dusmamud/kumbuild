@@ -1,4 +1,4 @@
-# Kumbuild — deploy kumbuild-web (Astro) to Cloudflare Pages.
+# Kumbuild — deploy web (Astro) to Cloudflare Pages project kumbuild-main-8hs.
 # Trigger: push to main (web ya shared packages badle to) ya manual dispatch.
 # NOTE (verified is repo me): git-database API se kiye gaye push `push`
 # trigger CHALATE hain (runs 42619040220, 42621871402 push-triggered) —
@@ -27,7 +27,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter kumbuild-web build
-      - run: pnpm exec wrangler pages deploy frontend/apps/web/dist --project-name=kumbuild-web
+      - run: pnpm exec wrangler pages deploy frontend/apps/web/dist --project-name=kumbuild-main-8hs
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
