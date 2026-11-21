@@ -116,3 +116,490 @@ header.header > .header {
     height: 2.5rem;
   }
 }
+
+/* ==========================================================================
+   Kumbuild docs — design + motion pass (2026-11-21)
+   Mobile-first, inside Starlight's system. Starlight owns the layout
+   (sidebar, TOC, search, drawer, dark mode); this layer only grades it:
+   type, spacing, touch targets, hover/focus states and restrained motion.
+   Brand tokens come from frontend/apps/web/src/styles/theme.css
+   (Trust Blue #0072c8 / #3392f6, warm paper #faf9f6, ink #1c1917,
+   live green #15803d) and Radix slateDark in dark mode.
+   Motion language: one easing curve, 160–280ms, nothing that moves
+   layout, everything off under prefers-reduced-motion.
+   ========================================================================== */
+:root {
+  --kb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --kb-duration-fast: 160ms;
+  --kb-duration-med: 240ms;
+  --kb-duration-slow: 320ms;
+  --kb-radius: 0.75rem;
+  --kb-radius-sm: 0.5rem;
+  /* Content measure: 41rem ≈ 74–80ch at the 16–17px body size below. */
+  --sl-content-width: 41rem;
+}
+
+/* --- Base: smooth anchor scrolling (motion-safe only) + visible focus --- */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+:focus-visible {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+::selection {
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-text-accent);
+}
+
+/* --- Typography: 16px base on mobile, 17px from 50em; tighter headings --- */
+.sl-markdown-content {
+  font-size: var(--sl-text-body);
+  line-height: var(--sl-line-height);
+}
+@media (min-width: 50em) {
+  :root {
+    --sl-text-body: 1.0625rem;
+  }
+}
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6),
+.sl-heading-wrapper {
+  scroll-margin-top: calc(var(--sl-nav-height) + 1rem);
+}
+.sl-markdown-content h1 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.sl-markdown-content h2 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.sl-markdown-content h3 {
+  letter-spacing: -0.01em;
+}
+.sl-markdown-content p,
+.sl-markdown-content li {
+  overflow-wrap: break-word;
+}
+/* Content links: visible underline that thickens on hover/focus. */
+.sl-markdown-content a:not(.sl-link-button):not(.sl-heading-link) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition:
+    color var(--kb-duration-fast) var(--kb-ease),
+    text-decoration-thickness var(--kb-duration-fast) var(--kb-ease);
+}
+.sl-markdown-content a:not(.sl-link-button):not(.sl-heading-link):hover {
+  text-decoration-thickness: 2px;
+}
+.sl-markdown-content hr {
+  margin-block: 2.5rem;
+}
+
+/* --- Asides: rounded, roomy, brand-graded.
+   Starlight's note stays Trust Blue; tip is re-graded from Starlight's
+   default purple to Kumbuild live green (theme.css --color-live). --- */
+.starlight-aside {
+  border-radius: var(--kb-radius);
+  padding: 1.125rem 1.25rem;
+  margin-block: 1.5rem;
+}
+.starlight-aside--note {
+  --sl-color-asides-text-accent: var(--sl-color-text-accent);
+  --sl-color-asides-border: var(--sl-color-accent);
+  background-color: var(--sl-color-accent-low);
+}
+.starlight-aside--tip {
+  --sl-color-asides-text-accent: #166534;
+  --sl-color-asides-border: #15803d;
+  background-color: #e6f5ec;
+}
+:root:not([data-theme="light"]) .starlight-aside--tip {
+  --sl-color-asides-text-accent: #7ddba3;
+  --sl-color-asides-border: #46a758;
+  background-color: color-mix(in srgb, #46a758 14%, transparent);
+}
+.starlight-aside__title {
+  font-family: var(--kb-display-font);
+}
+.starlight-aside__content {
+  line-height: 1.7;
+}
+
+/* --- Hero (splash index): tighter tagline, 44px action buttons --- */
+.hero {
+  padding-block: 2rem 1.5rem;
+}
+.hero h1#_top {
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 2.625rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.hero .tagline {
+  font-size: clamp(1.0625rem, 1rem + 0.75vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+.hero .actions {
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.hero .actions .sl-link-button {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--kb-radius);
+  font-size: 1rem;
+  transition:
+    transform var(--kb-duration-fast) var(--kb-ease),
+    background-color var(--kb-duration-fast) var(--kb-ease),
+    border-color var(--kb-duration-fast) var(--kb-ease);
+}
+.hero .actions .sl-link-button svg {
+  transition: transform var(--kb-duration-fast) var(--kb-ease);
+}
+.hero .actions .sl-link-button:hover svg {
+  transform: translateX(2px);
+}
+.hero .actions .sl-link-button:active {
+  transform: translateY(1px);
+}
+
+/* --- Cards + link cards: 1 column mobile, 2 from 50em (Starlight grid),
+   lift + accent border on hover, arrow slides. Whole card is the target
+   (Starlight's a::before overlay), so 44px is met by the card itself. --- */
+.card-grid {
+  gap: 1rem;
+}
+@media (min-width: 50em) {
+  .card-grid {
+    gap: 1.5rem;
+  }
+}
+.card {
+  border-radius: var(--kb-radius);
+  padding: 1.25rem;
+  background: var(--sl-color-bg-nav);
+  transition:
+    transform var(--kb-duration-med) var(--kb-ease),
+    border-color var(--kb-duration-med) var(--kb-ease),
+    box-shadow var(--kb-duration-med) var(--kb-ease);
+}
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--sl-color-accent);
+}
+.card .title {
+  font-family: var(--kb-display-font);
+  font-size: 1.0625rem;
+}
+.card .title svg {
+  color: var(--sl-color-text-accent);
+  flex: none;
+}
+.sl-link-card {
+  border-radius: var(--kb-radius);
+  padding: 1.125rem 1.25rem;
+  transition:
+    transform var(--kb-duration-med) var(--kb-ease),
+    border-color var(--kb-duration-med) var(--kb-ease),
+    box-shadow var(--kb-duration-med) var(--kb-ease);
+}
+.sl-link-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--sl-color-accent);
+}
+.sl-link-card .title {
+  font-family: var(--kb-display-font);
+}
+.sl-link-card svg {
+  transition: transform var(--kb-duration-fast) var(--kb-ease);
+}
+.sl-link-card:hover svg {
+  transform: translateX(2px);
+}
+
+/* --- Tables: Starlight already makes tables scroll inside themselves
+   (display:block + overflow:auto); this grades the cells so the scroll
+   never clips the page. --- */
+.sl-markdown-content table {
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: var(--kb-radius);
+  font-size: 0.95rem;
+}
+.sl-markdown-content :is(th, td) {
+  padding: 0.75rem 1rem;
+}
+.sl-markdown-content th {
+  background: var(--sl-color-bg-inline-code);
+  font-weight: 600;
+  text-align: start;
+  white-space: nowrap;
+}
+.sl-markdown-content tbody tr + tr {
+  border-top: 1px solid var(--sl-color-hairline);
+}
+/* Audit F8: on phones the payments table fit by crushing — 3 columns
+   squeezed to ~110px each, the "How" cell wrapping to 5 lines with
+   mid-word breaks. A scrollable table only scrolls when its content is
+   wider than the container, so give cells a floor: at 390px the table
+   is now wider than the viewport and scrolls inside itself instead of
+   crushing. Two-column tables stay under the width and are unaffected. */
+@media (max-width: 50rem) {
+  .sl-markdown-content :is(th, td) {
+    min-width: 10rem;
+  }
+}
+
+/* --- Sidebar: 44px rows, clear active state, group labels match --- */
+.sidebar ul a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--kb-radius-sm);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  transition:
+    background-color var(--kb-duration-fast) var(--kb-ease),
+    color var(--kb-duration-fast) var(--kb-ease);
+}
+.sidebar ul a:hover {
+  background: var(--sl-color-hairline-light);
+}
+.sidebar ul a[aria-current="page"] {
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-text-accent);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--sl-color-accent);
+}
+.sidebar summary {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  cursor: pointer;
+  border-radius: var(--kb-radius-sm);
+}
+.sidebar summary:hover {
+  background: var(--sl-color-hairline-light);
+}
+/* Mobile drawer: slide + fade via @starting-style; backdrop fades.
+   Desktop sidebar is static, so this only applies under 50em. */
+@media (max-width: 50em) {
+  /* The popover element is sl-sidebar-pane#starlight__sidebar, NOT
+     nav.sidebar — Starlight's PageFrame renders the pane inside the nav. */
+  .sidebar-pane[popover] {
+    transition:
+      translate var(--kb-duration-med) var(--kb-ease),
+      opacity var(--kb-duration-med) var(--kb-ease);
+  }
+  .sidebar-pane[popover]:popover-open {
+    @starting-style {
+      translate: -102% 0;
+      opacity: 0;
+    }
+  }
+  .sidebar-pane[popover]::backdrop {
+    background: rgb(0 0 0 / 0.45);
+    transition: opacity var(--kb-duration-med) var(--kb-ease);
+    @starting-style {
+      opacity: 0;
+    }
+  }
+}
+
+/* --- Table of contents: 44px rows, accent bar on the current section --- */
+.right-sidebar a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  transition:
+    color var(--kb-duration-fast) var(--kb-ease),
+    border-color var(--kb-duration-fast) var(--kb-ease);
+}
+.right-sidebar a[aria-current="true"] {
+  color: var(--sl-color-text-accent);
+  border-color: var(--sl-color-accent);
+}
+mobile-starlight-toc summary {
+  min-height: 2.75rem;
+  border-radius: var(--kb-radius-sm);
+}
+mobile-starlight-toc summary .caret {
+  transition: transform var(--kb-duration-fast) var(--kb-ease);
+}
+mobile-starlight-toc details[open ] summary .caret {
+  transform: rotate(180deg);
+}
+
+/* --- Pagination (prev/next): full cards, 44px+, arrow nudge on hover --- */
+.pagination-links a {
+  min-height: 3.5rem;
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: var(--kb-radius);
+  padding: 0.875rem 1.125rem;
+  transition:
+    border-color var(--kb-duration-fast) var(--kb-ease),
+    transform var(--kb-duration-fast) var(--kb-ease);
+}
+.pagination-links a:hover {
+  border-color: var(--sl-color-accent);
+  transform: translateY(-1px);
+}
+.pagination-links a svg {
+  transition: transform var(--kb-duration-fast) var(--kb-ease);
+}
+.pagination-links a[rel="prev"]:hover svg {
+  transform: translateX(-2px);
+}
+.pagination-links a[rel="next"]:hover svg {
+  transform: translateX(2px);
+}
+.pagination-links .link-title {
+  font-family: var(--kb-display-font);
+}
+
+/* --- Header controls: 44px tap targets inside the bar.
+   The bar is 3.5rem (mobile) / 4rem (desktop); shrinking its vertical
+   padding to 0.375rem leaves exactly 44px for the controls. --- */
+header.header > .header {
+  padding-block: 0.375rem;
+}
+.sl-menu-button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  /* Starlight centers a 2rem button in the whole header (strip included);
+     this 44px button is re-centered in the bar itself: strip + bar pad. */
+  top: calc(var(--kb-strip-height, 2rem) + 0.375rem);
+  border-radius: var(--kb-radius-sm);
+  transition: background-color var(--kb-duration-fast) var(--kb-ease);
+}
+.sl-menu-button:hover {
+  background: var(--sl-color-hairline-light);
+}
+site-search button[data-open-modal] {
+  min-height: 2.75rem;
+  /* Audit F6: at phone widths Starlight renders this icon-only with
+     padding 0, so it measured 20px wide — under the 44px touch target.
+     A 44px floor fixes it; the desktop button (with "Search" text) is
+     already wider, so this changes nothing there. */
+  min-width: 2.75rem;
+  border-radius: var(--kb-radius-sm);
+  transition:
+    border-color var(--kb-duration-fast) var(--kb-ease),
+    background-color var(--kb-duration-fast) var(--kb-ease);
+}
+site-search button[data-open-modal]:hover {
+  border-color: var(--sl-color-accent);
+}
+starlight-theme-select select {
+  min-height: 2.75rem;
+}
+.site-title {
+  min-height: 2.75rem;
+  border-radius: var(--kb-radius-sm);
+}
+/* Safe-area insets: the outer header keeps Starlight's own padding
+   (including the menu-button reserve on sidebar pages — only the LEFT
+   side is widened here, so the reserve is never clobbered). */
+header.header {
+  padding-inline-start: max(var(--sl-nav-pad-x), env(safe-area-inset-left));
+}
+html:not([data-has-sidebar]) header.header {
+  padding-inline-end: max(var(--sl-nav-pad-x), env(safe-area-inset-right));
+}
+
+/* --- Search dialog: fade/slide in, softened backdrop, roomy input --- */
+site-search dialog {
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 1rem;
+  animation: kb-dialog-in var(--kb-duration-med) var(--kb-ease);
+}
+site-search dialog::backdrop {
+  background: rgb(0 0 0 / 0.45);
+  animation: kb-fade-in var(--kb-duration-med) var(--kb-ease);
+}
+@keyframes kb-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes kb-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.pagefind-ui__search-input {
+  min-height: 2.75rem;
+}
+
+/* --- Code blocks (defensive: no code blocks exist in the docs today):
+   round the frame to match cards; copy button keeps Starlight's size
+   and gets the global focus ring. --- */
+.expressive-code {
+  border-radius: var(--kb-radius);
+}
+.expressive-code figure {
+  border-radius: var(--kb-radius);
+}
+
+/* --- Scroll reveal: gated by html.kb-motion, which Head.astro adds
+   ONLY when JS runs AND prefers-reduced-motion is no-preference, so
+   no-JS and reduced-motion readers always see full content. --- */
+html.kb-motion .kb-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.5s var(--kb-ease),
+    transform 0.5s var(--kb-ease);
+}
+html.kb-motion .kb-reveal.kb-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- View transitions (ClientRouter in Head.astro): short cross-fade --- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 200ms;
+  animation-timing-function: var(--kb-ease);
+}
+
+/* --- Reduced motion: everything still, everything visible --- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  html.kb-motion .kb-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

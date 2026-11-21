@@ -9,8 +9,10 @@ Payments are simple and in the open — the price on the [pricing page](https://
 
 | When | How much | How |
 | --- | --- | --- |
-| To start the work | 50% of your package | Razorpay link on WhatsApp — UPI, cards, net-banking |
+| To start the work | 50% of your package | Razorpay link on WhatsApp |
 | When you approve the preview | The remaining 50% | Same Razorpay link flow |
+
+Pay through the link with UPI, cards, or net-banking.
 
 Work starts when the advance arrives, and the website goes live when the balance is paid.
 

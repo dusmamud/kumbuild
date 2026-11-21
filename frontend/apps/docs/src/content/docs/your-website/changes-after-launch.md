@@ -19,3 +19,7 @@ Want a new page — a festival offer, a new service, a gallery? That is a small 
 - New photos as phone photos — originals, not screenshots, look best
 
 That is all. We make the change, send you the updated link to check, and it goes live on your approval.
+
+## Next step
+
+[Payments and renewal](/your-website/payments-and-renewal/) — yearly renewal covers small changes like these, so check what is included before you ask.

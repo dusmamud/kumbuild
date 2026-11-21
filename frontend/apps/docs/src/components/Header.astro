@@ -29,7 +29,7 @@ import Default from "@astrojs/starlight/components/Header.astro";
        horizontal padding (--sl-nav-pad-x, equal to content-pad today). */
     height: var(--kb-strip-height, 2rem);
     flex: none;
-    padding: 0 1rem;
+    padding: 0 max(1rem, env(safe-area-inset-left)) 0 max(1rem, env(safe-area-inset-right));
     margin: 0 calc(-1 * var(--sl-nav-pad-x, 1rem));
   }
   .kb-strip p { margin: 0; display: flex; align-items: center; gap: 0.5rem; }
@@ -37,5 +37,19 @@ import Default from "@astrojs/starlight/components/Header.astro";
   .kb-strip-right { color: rgba(255,255,255,0.65); font-family: var(--sl-font-mono); font-size: 0.72rem; }
   .kb-strip a { color: #fff; text-decoration: none; font-weight: 500; }
   .kb-strip a:hover { text-decoration: underline; }
-  @media (max-width: 40rem) { .kb-strip-right { display: none; } }
+  /* Sidebar pages on MOBILE only: Starlight reserves room for the fixed
+     menu button on the right (gap + pad + button size) — cancel that too
+     so the strip bleeds edge-to-edge instead of stopping ~48px short.
+     From 50rem Starlight itself drops the reserve (menu button hidden),
+     so the base -pad-x margin is correct there and this must not apply.
+     The menu button sits below the strip, so nothing collides. */
+  @media (max-width: 50rem) {
+    html[data-has-sidebar] .kb-strip {
+      margin-inline-end: calc(-1 * (var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)));
+    }
+  }
+  /* Pre-existing specificity trap: `.kb-strip p { display: flex }`
+     (0,1,1) beats a bare `.kb-strip-right` (0,1,0), so the old rule
+     never hid the strip on mobile. Qualify it to (0,2,0). */
+  @media (max-width: 40rem) { .kb-strip .kb-strip-right { display: none; } }
 </style>

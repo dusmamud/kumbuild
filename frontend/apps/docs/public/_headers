@@ -1,0 +1,26 @@
+# Cloudflare Pages headers for the Kumbuild docs site (static Astro output).
+# HTML is never cached (so a new deploy is seen immediately); hashed
+# assets are immutable for a year; Pagefind search data is versioned
+# with the build, so a day of caching is safe.
+# Security headers: docs pages link out to WhatsApp/Razorpay, so a
+# permissive frame-ancestors DENY + nosniff + no-referrer-leak is right.
+
+/*.html
+  Cache-Control: no-cache
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/pagefind/*
+  Cache-Control: public, max-age=86400
+
+/logo/*
+  Cache-Control: public, max-age=86400
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin

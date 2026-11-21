@@ -1,8 +1,14 @@
 ---
 import Default from "@astrojs/starlight/components/Head.astro";
+import ClientRouter from "astro/components/ClientRouter.astro";
 ---
 
 <Default {...Astro.props} />
+<!-- Astro 7 view transitions: ClientRouter now lives in astro/components
+  (astro/transitions was removed in Astro 7 — no config change needed,
+  no experimental flag). Short cross-fade only; see starlight.css for the
+  duration + the reduced-motion kill-switch. -->
+<ClientRouter />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -21,6 +27,80 @@ import Default from "@astrojs/starlight/components/Head.astro";
     new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   })();
 </script>
+<!-- Scroll reveal (motion-safe only): adds html.kb-motion, then fades each
+  top-level content block / card in via IntersectionObserver. Gated on
+  prefers-reduced-motion so reduced-motion + no-JS readers never see
+  hidden content. Re-runs on astro:page-load (fires on first load and
+  after every ClientRouter navigation). -->
+<script>
+  (function () {
+    if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+    document.documentElement.classList.add("kb-motion");
+    var seen = new WeakSet();
+    function init() {
+      var els = document.querySelectorAll(
+        ".sl-markdown-content > *, .card-grid > *, .hero .copy, .hero .actions"
+      );
+      if (!("IntersectionObserver" in window)) {
+        els.forEach(function (el) { el.classList.add("kb-reveal", "kb-in"); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("kb-in");
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      els.forEach(function (el) {
+        if (seen.has(el)) return;
+        seen.add(el);
+        el.classList.add("kb-reveal");
+        io.observe(el);
+      });
+    }
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
+<!-- View-transition safety: Astro's router swaps <body> without re-running
+  Starlight's head theme script, so if a swap ever resets <html> attrs,
+  re-apply the stored theme (localStorage 'starlight-theme') after swap.
+  The .dark sync observer above then follows data-theme as usual. -->
+<script>
+  document.addEventListener("astro:after-swap", function () {
+    try {
+      var stored = localStorage.getItem("starlight-theme");
+      if (stored === "light" || stored === "dark") {
+        document.documentElement.dataset.theme = stored;
+      }
+    } catch (e) {}
+  });
+</script>
+<!-- Drawer focus (audit F9): Starlight's mobile drawer is a popover and
+  opens without moving focus, so keyboard users tab from the Menu button
+  instead of the top of the drawer. No Starlight fork needed — the
+  popover `toggle` event fires on open/close; capture it on document
+  (it does not bubble, and the listener must survive ClientRouter swaps)
+  and move focus to the first sidebar link on open. On close, if focus
+  was lost to <body>, return it to the Menu button. -->
+<script>
+  document.addEventListener(
+    "toggle",
+    function (e) {
+      if (!e.target || e.target.id !== "starlight__sidebar") return;
+      if (e.newState === "open") {
+        var first = e.target.querySelector("a[href]");
+        if (first) first.focus();
+      } else if (document.activeElement === document.body) {
+        var btn = document.querySelector("starlight-menu-btn button, [aria-controls='starlight__sidebar']");
+        if (btn) btn.focus();
+      }
+    },
+    true
+  );
+</script>
 <!-- Mock phase only: pages.dev pe *.kumbuild.com links ko sibling *.pages.dev URLs pe badal do. Custom domain lagne ke baad ye kuch nahi karega. -->
 <script>
   (function () {
@@ -30,10 +110,6 @@ import Default from "@astrojs/starlight/components/Head.astro";
         "kumbuild.com": "kumbuild-web.pages.dev",
         "blog.kumbuild.com": "kumbuild-blog.pages.dev",
         "docs.kumbuild.com": "kumbuild-docs.pages.dev",
-        "account.kumbuild.com": "kumbuild-account.pages.dev",
-        "auth.kumbuild.com": "kumbuild-account.pages.dev",
-        "admin.kumbuild.com": "kumbuild-admin.pages.dev",
-        "home.kumbuild.com": "kumbuild-home.pages.dev",
       };
       document.querySelectorAll('a[href*="kumbuild.com"]').forEach(function (a) {
         try {
@@ -50,5 +126,8 @@ import Default from "@astrojs/starlight/components/Head.astro";
     } else {
       rewrite();
     }
+    // ClientRouter navigations swap content without a full load — re-run
+    // the rewrite on every page swap too.
+    document.addEventListener("astro:page-load", rewrite);
   })();
 </script>

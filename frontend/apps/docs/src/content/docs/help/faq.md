@@ -26,3 +26,7 @@ Starter ₹3,999, Business ₹7,999, Premium ₹14,999. Yearly renewal is ₹1,9
 ## What if I don't like the website?
 
 Two revision rounds are free. See the preview, tell us the changes, and we will send a new preview. How rounds work is explained in [Preview and revisions](/your-website/preview-and-revisions/).
+
+## Can I get a refund?
+
+Changed your mind before work starts? The full advance comes back. The complete terms are on the [refund policy](https://kumbuild.com/refund), and the payment steps are in [Payments and renewal](/your-website/payments-and-renewal/).

@@ -18,7 +18,13 @@ jobs:
   deploy-docs:
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 0 — full history, so Starlight's git-based
+      # `lastUpdated` shows each file's true date instead of the deploy
+      # date on every page (audit F11). Shallow checkout (depth 1) made
+      # every live page say the deploy date.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:

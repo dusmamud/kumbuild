@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://docs.kumbuild.com/sitemap-index.xml
+Sitemap: https://kumbuild-docs.pages.dev/sitemap-index.xml
+# NOTE: docs.kumbuild.com is not bought yet. When Dus adds the custom
+# domain, change this back to https://docs.kumbuild.com/sitemap-index.xml
+# (and `site` + og:image in astro.config.mjs) — see audit F2.
