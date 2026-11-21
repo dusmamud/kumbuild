@@ -2703,6 +2703,885 @@
             "No client results or metrics exist yet — this demo has never run a real delivery service, so nothing about orders or delivery times can be claimed"
           ],
           "nextStep": "Want a food-delivery site like this? Order the Catalogue / Menu Website service and we will build it with your real menu, prices and delivery setup."
+        },
+        {
+          "slug": "happy-inn",
+          "name": "The Happy Inn",
+          "type": "Boutique hotel",
+          "city": "San Francisco",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-happy-inn.webp",
+          "liveUrl": "https://happy-inn.pages.dev",
+          "result": "Live demo — 4 rooms with rates, booking, spa, dining & weddings",
+          "desc": "A 23-room boutique hotel site in San Francisco — four rooms with rates, online booking, spa and dining pages, wedding packages, specials and a guest-review page.",
+          "story": "Visitors can check room availability, compare the four rooms and prices, book a stay with spa extras, browse wedding packages and read guest reviews.",
+          "deliverables": [
+            "Rooms with rates & live price calculator",
+            "Booking form with spa extras",
+            "Spa, dining & weddings pages",
+            "Specials, gift cards & reviews"
+          ],
+          "bestFor": "boutique hotel and inn owners who want guests to see rooms and rates, book direct and add spa treatments without calling.",
+          "summary": "The Happy Inn is a boutique hotel demo for a 23-room inn in San Francisco: four rooms with rates from $99 a night, a booking form with a live price calculator, a spa page, dining and wedding packages. Everything runs in the browser as a working demo — you can price a stay and fill in the booking form, but no room is really reserved and nothing is charged.",
+          "problem": "A typical small-hotel problem: rooms and rates live on booking sites that take a cut, so direct bookings stay rare; spa treatments, breakfast and wedding enquiries arrive by phone or email and get answered between check-ins; and seasonal offers sit in a PDF nobody updates. Guests compare prices elsewhere and book where the answer is fastest. This is a demo scenario for this kind of business — The Happy Inn is not a real hotel and had no real guest problem to solve.",
+          "approach": [
+            {
+              "decision": "One booking flow for the whole stay — rooms, dates, spa extras and price — instead of sending guests to a booking site.",
+              "why": "A guest decides on price first. Showing the total, with taxes, before confirming keeps the booking on the hotel's own site instead of losing it to a commission platform."
+            },
+            {
+              "decision": "Direct-booking reasons sit on every page — best-rate guarantee, free breakfast, free cancellation up to 48 hours before arrival.",
+              "why": "Small hotels win direct bookings on trust, not on price alone. Repeating the same four promises wherever a guest looks makes the case without a sales pitch."
+            },
+            {
+              "decision": "Weddings and events get their own packages with guest counts and starting prices, not a 'contact us' form.",
+              "why": "A couple planning a wedding wants a number before they enquire. Named packages with capacities and starting prices let them shortlist the inn in one visit, and the deposit terms are stated up front."
+            }
+          ],
+          "includes": [
+            "Four rooms with rates, sizes and booking links",
+            "Booking form with live price calculator (demo, no payment)",
+            "Spa page with six treatments and prices",
+            "Dining page with breakfast and veranda dinners",
+            "Wedding packages with guest counts and prices",
+            "Specials and offers page",
+            "Gift cards page",
+            "Guest reviews and area guide pages"
+          ],
+          "tryIt": [
+            "Price a stay on /book/ — pick a room and dates and watch the total update, taxes included",
+            "Add a spa treatment on the booking form and see the price change",
+            "Open /rooms/ and sort the four rooms by price or size, then open a room to see its details",
+            "Compare the three wedding packages on /weddings/ by guest count and price",
+            "Check the live weather widget and the 4.9 rating shown in the header"
+          ],
+          "limitations": [
+            "Demo data only — the rooms, rates, spa prices and wedding packages are illustrative, and the contact details (4319 Roosevelt Street, San Francisco, (012) 345-6789, bookings@the-happy-inn.com) are placeholders",
+            "No real rooms are reserved and no payment is taken — the booking form states nothing is charged in this demo",
+            "The 4.9 rating with 1,284 reviews and the guest quotes on the reviews page are demo copy, not real guest feedback",
+            "No client results or metrics exist yet — this demo has never run a real hotel, so nothing about bookings or revenue can be claimed"
+          ],
+          "nextStep": "Want a hotel website like this? Order the Booking / Enquiry Website service and we will build it with your real rooms, rates and booking setup."
+        },
+        {
+          "slug": "barber",
+          "name": "Barber",
+          "type": "Barbershop",
+          "city": "Mumbai",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-barber.webp",
+          "liveUrl": "https://barber-8da.pages.dev",
+          "result": "Live demo — services & prices in ₹, 4-step booking, products & memberships",
+          "desc": "A classic barbershop site in Bandra West, Mumbai — eight services with prices in rupees, a 4-step booking flow, barber profiles, a gallery with a before-and-after slider, products, gift cards and memberships.",
+          "story": "Visitors can browse services and prices, pick a barber, book a chair in four steps, shop beard oils and tools, and buy gift cards or a monthly membership.",
+          "deliverables": [
+            "4-step booking with barber & time choice",
+            "Services with prices in ₹",
+            "Barber profiles & gallery",
+            "Products, gift cards & memberships"
+          ],
+          "bestFor": "barbershop owners who want customers to see prices, pick their barber and book a chair online instead of phoning the shop.",
+          "summary": "Barber is a barbershop demo for a classic shop on Linking Road, Bandra West: eight services priced in rupees, four barber profiles, a four-step booking flow, a gallery, products, gift cards and two monthly memberships. Everything runs in the browser as a working demo — you can book a chair and add products to the cart, but no appointment is really made and nothing is charged.",
+          "problem": "A typical barbershop problem: prices live only on a board in the shop, so new customers call to ask; regulars follow a barber, not the shop, and lose their slot when that barber is off; and walk-ins queue while chairs sit empty at quiet hours. Bookings, product sales and gift cards all run on memory and phone calls. This is a demo scenario for this kind of business — Barber is not a real shop and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Booking in four steps — service, barber, date and time, details — with each barber's day off shown on their profile.",
+              "why": "Customers follow a barber, not a shop. Showing who is off which day stops bookings that would have to be moved, and keeps the chair matched to the right person."
+            },
+            {
+              "decision": "Prices are final and shown everywhere — on the services page, in the booking flow and on the home page.",
+              "why": "A first-time customer decides on price before they decide on a barber. No hidden charges at the chair means no awkward conversation at the till."
+            },
+            {
+              "decision": "Products, gift cards and memberships sit on the same site as booking, with payment at the shop.",
+              "why": "The oils and tools on the shelf are already part of the visit. Selling them online for collection at the shop turns a haircut into a second sale without any delivery or payment setup."
+            }
+          ],
+          "includes": [
+            "Eight services with prices in ₹ and durations",
+            "4-step booking flow (service, barber, date, details)",
+            "Four barber profiles with specialities and days off",
+            "Gallery with before-and-after slider and filters",
+            "Products shop with cart (pay at the shop)",
+            "Gift cards in ₹500, ₹1,000 and ₹2,000",
+            "Two monthly memberships",
+            "Blog and FAQ pages"
+          ],
+          "tryIt": [
+            "Book a chair on /book/ — pick a service, a barber and a time slot",
+            "Open /barbers/ and check which day each barber is off, so you book the right chair",
+            "Drag the before-and-after slider on /gallery/ to compare a cut before and after the chair",
+            "Add Cedarwood Beard Oil to the cart on /products/ and see the pay-at-shop note",
+            "Compare the two memberships on /products/ by monthly price and see which perks each one includes"
+          ],
+          "limitations": [
+            "Demo data only — the services, prices, barber profiles and shop details are illustrative, and the contact details (Shop 12, Linking Road, Bandra West, +91 98765 43210, hello@barber.shop) are placeholders",
+            "No real appointments are booked and no payment is taken — bookings are confirmed by a call-back and paid at the shop in the demo",
+            "The 4.9 rating with 312 reviews and the barbers' cut counts (for example 9,200+ cuts) are demo copy, not real customer feedback",
+            "No client results or metrics exist yet — this demo has never run a real barbershop, so nothing about bookings or revenue can be claimed"
+          ],
+          "nextStep": "Want a barbershop website like this? Order the Booking / Enquiry Website service and we will build it with your real services, prices and booking setup."
+        },
+        {
+          "slug": "greenbasket",
+          "name": "GreenBasket",
+          "type": "Grocery delivery",
+          "city": "Mumbai",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-greenbasket.webp",
+          "liveUrl": "https://greenbasket-4yz.pages.dev",
+          "result": "Live demo — grocery catalogue, cart, 3-step checkout & subscriptions",
+          "desc": "A grocery delivery site in Mumbai — eight categories and 16 products with prices in rupees, live search and filters, a cart with a free-delivery progress bar, a 3-step checkout, daily subscriptions, a membership pass and order tracking.",
+          "story": "Shoppers can search and filter groceries, add items to the cart, apply a coupon code, check out in three steps, subscribe to daily milk and bread, and track a mock order.",
+          "deliverables": [
+            "Grocery catalogue with search & filters",
+            "Cart & 3-step checkout",
+            "Daily subscriptions & membership pass",
+            "Recipes, stores & order tracking"
+          ],
+          "bestFor": "grocery store owners who want customers to browse, order and pay for daily essentials online instead of phoning in a list.",
+          "summary": "GreenBasket is a grocery delivery demo for Mumbai: eight categories and 16 products with prices in rupees, live search, a veg-only toggle and sorting, a cart with a free-delivery progress bar, a three-step checkout, daily subscriptions and a membership pass. Everything runs in the browser as a working demo — you can fill a basket and check out, but no groceries are really delivered and no payment is taken.",
+          "problem": "A typical grocery-store problem: orders come in by phone or message, so the shopkeeper writes down lists by hand and calls back about out-of-stock items; prices change daily and regulars never see them; and milk, bread and eggs — the daily staples — need a phone call every single morning. Delivery runs are planned on memory, not on orders. This is a demo scenario for this kind of business — GreenBasket is not a real store and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "The shop is a searchable catalogue with prices per unit, a veg-only toggle and sorting — not a PDF list or a photo album.",
+              "why": "Grocery shoppers compare by price per kilo and by category. Search and filters let them build a basket in minutes instead of dictating a list over the phone."
+            },
+            {
+              "decision": "Daily staples are subscriptions with a schedule — milk, eggs and bread — not one-off orders each morning.",
+              "why": "The same items are ordered every morning. A subscription removes the daily phone call for both the customer and the shop, and the delivery route becomes predictable."
+            },
+            {
+              "decision": "Checkout is three steps in the browser with a coupon code and a free-delivery progress bar over ₹499.",
+              "why": "A grocery basket is small and frequent, so checkout has to be fast. The progress bar shows exactly how far the basket is from free delivery, which is the one number shoppers check."
+            }
+          ],
+          "includes": [
+            "Eight categories with 16 products and ₹ prices",
+            "Live search, veg-only toggle and sorting",
+            "Cart drawer with free-delivery progress over ₹499",
+            "3-step checkout with coupon codes (demo, no payment)",
+            "Daily subscriptions for milk, eggs and bread",
+            "GreenBasket Pass membership (₹99/month)",
+            "Order tracking, recipes and store pages",
+            "Gift cards, bulk packs and help pages"
+          ],
+          "tryIt": [
+            "Search for apples on /shop/ and filter by the veg-only toggle, then sort the results by price",
+            "Add products to the cart and watch the free-delivery bar fill towards ₹499",
+            "Apply the WELCOME10 coupon code at checkout and watch the discount appear before you confirm",
+            "Open /subscriptions/ and set a daily milk delivery schedule, choosing every day or weekdays only",
+            "Track a mock order on /track-order/ and follow it through each of the five delivery steps"
+          ],
+          "limitations": [
+            "Demo data only — the products, prices, deals and store details are illustrative, and the contact details (Linking Road, Bandra West, Mumbai, +91 98765 43210) are placeholders",
+            "No real groceries are delivered and no payment is taken — checkout and tracking run on your device only",
+            "The '50,000+ happy customers' line and the four testimonials on the home page are demo copy, not real customer feedback",
+            "No client results or metrics exist yet — this demo has never run a real grocery store, so nothing about orders or revenue can be claimed"
+          ],
+          "nextStep": "Want a grocery website like this? Order the Catalogue / Menu Website service and we will build it with your real products, prices and delivery setup."
+        },
+        {
+          "slug": "whatever-is-lovely",
+          "name": "Whatever is Lovely",
+          "type": "Wedding planning",
+          "city": "Kansas City",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-whatever-is-lovely.webp",
+          "liveUrl": "https://whatever-is-lovely.pages.dev",
+          "result": "Live demo — 3 planning packages, pricing, process & consultation booking",
+          "desc": "A wedding planning studio site in Kansas City — three planning packages with fixed prices, a four-step process, six real-wedding stories, a preferred-vendor list, a gallery and a free-consultation booking flow.",
+          "story": "Couples can compare the three packages and prices, read the planning process, browse six weddings and twelve vendors, and book a free 20-minute consultation in four steps.",
+          "deliverables": [
+            "Three packages with fixed prices",
+            "Four-step planning process page",
+            "Six weddings & twelve vendors",
+            "Free-consultation booking flow"
+          ],
+          "bestFor": "wedding planners who want couples to compare packages, see real weddings and book a free consultation without a phone call first.",
+          "summary": "Whatever is Lovely is a wedding planning demo for a Kansas City studio: three packages from $1,850 to $6,500 with fixed prices in writing, a four-step planning process, six wedding stories, twelve preferred vendors and a gallery. Everything runs in the browser as a working demo — you can book a free consultation, but no date is really reserved and no deposit is taken.",
+          "problem": "A typical wedding-planning problem: couples cannot tell what planning costs, so they email three studios and wait days for a quote; the planner's past weddings live on social media, scattered and undated; and vendor recommendations arrive by word of mouth with no record of who was actually good. The first call happens before either side knows if the fit is right. This is a demo scenario for this kind of business — Whatever is Lovely is not a real studio and had no real couple's problem to solve.",
+          "approach": [
+            {
+              "decision": "Three packages with fixed prices in writing — Full Service from $6,500, Partial from $3,200, Day-Of from $1,850 — with a comparison table.",
+              "why": "Couples compare planners on price first. Fixed, published prices let them shortlist honestly, and the deposit and instalment terms are stated before anyone books a call."
+            },
+            {
+              "decision": "The process is four dated steps, from first hello to the big day, with what happens in each month band.",
+              "why": "A wedding feels overwhelming because the timeline is invisible. Showing the months — 9–6 for design, 6–1 for details — turns a year of planning into a plan a couple can picture."
+            },
+            {
+              "decision": "Past weddings and vendors are shown as named stories with venues and dates, and the reviews page labels its quotes as demo.",
+              "why": "Couples choose a planner on past weddings, not on promises. Named venues and dates make the work checkable, and labelling the demo reviews keeps the proof honest."
+            }
+          ],
+          "includes": [
+            "Three packages with fixed prices and comparison",
+            "Four-step planning process with month bands",
+            "Six wedding stories with venues and dates",
+            "Twelve preferred vendors and venue partners",
+            "Gallery with style, venue and season filters",
+            "Reviews page with a 4.9 rating (demo reviews)",
+            "Free-consultation booking in four steps",
+            "Team, pricing and FAQ pages"
+          ],
+          "tryIt": [
+            "Compare the three packages on /pricing/ and see what each one includes",
+            "Open /weddings/ and filter the six weddings by style or season, then open one to read its story",
+            "Follow the four-step process on /process/ from first hello to the big day",
+            "Book a free consultation on /book/ — pick a package, date and time",
+            "Filter the gallery on /gallery/ by venue, for example The Garden at Loose Park"
+          ],
+          "limitations": [
+            "Demo data only — the packages, prices, weddings, vendors and team are illustrative, and the contact details (hello@whateverislovely.com, (816) 555-0148, Kansas City, MO) are placeholders",
+            "No real consultations are booked and no deposit is taken — the booking flow confirms on your device only",
+            "The 4.9 rating from 312 couples and the '320+ weddings' line are demo copy — the reviews page itself labels its quotes as mock placeholders",
+            "No client results or metrics exist yet — this demo has never planned a real wedding, so nothing about bookings or revenue can be claimed"
+          ],
+          "nextStep": "Want a wedding planning website like this? Order the Booking / Enquiry Website service and we will build it with your real packages, prices and booking setup."
+        },
+        {
+          "slug": "coffee-lounge",
+          "name": "The Coffee Lounge",
+          "type": "Coffee shop",
+          "city": "Maple City",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-coffee-lounge.webp",
+          "liveUrl": "https://coffee-lounge.pages.dev",
+          "result": "Live demo — menu with ordering, 3 cafés, reservations & loyalty",
+          "desc": "A premium coffee shop site in Maple City — a 10-item menu with dietary filters and online ordering, three café locations, table reservations, brew guides, events, a loyalty programme, gift cards and a bean shop.",
+          "story": "Visitors can browse the menu, order for pickup or delivery, reserve a table at any of the three cafés, join the Coffee Loop loyalty programme, and buy beans, merch or gift cards.",
+          "deliverables": [
+            "Menu with filters & online ordering",
+            "Three café locations & reservations",
+            "Brew guides, events & loyalty",
+            "Bean shop, subscriptions & gift cards"
+          ],
+          "bestFor": "coffee shop owners who want customers to browse the menu, order ahead and book a table without queuing at the counter.",
+          "summary": "The Coffee Lounge is a coffee shop demo for three cafés in Maple City: a ten-item menu with dietary filters and online ordering, table reservations, brew guides, events, a loyalty programme with three tiers, gift cards and a bean shop. Everything runs in the browser as a working demo — you can order a coffee and reserve a table, but nothing is really made and no payment is taken.",
+          "problem": "A typical coffee shop problem: the menu lives on a chalkboard, so regulars know it and new customers do not; the morning queue forms at the counter while pickup orders wait by phone; and the three cafés run as separate places, so a regular at one is a stranger at the next. Loyalty is a paper stamp card in a drawer. This is a demo scenario for this kind of business — The Coffee Lounge is not a real café and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One menu for ordering, with dietary filters and prices before tax, plus pickup in about 15 minutes or delivery within 5 miles.",
+              "why": "Coffee is a habit, and habits need speed. Ordering ahead with a clear pickup time takes the queue out of the morning, and the filters answer the dietary question before it is asked."
+            },
+            {
+              "decision": "Three cafés on one site, each with its own hours, seats and booking link — not three separate sites.",
+              "why": "A regular moves between cafés during the week. One loyalty balance, one gift card and one menu across all three keeps the customer in the same system wherever they walk in."
+            },
+            {
+              "decision": "Brew guides and events sit next to the shop, not in a separate blog — so the café teaches as well as serves.",
+              "why": "A café sells skill as well as coffee. Step-by-step brew guides and workshops give regulars a reason to come back on a quiet day, and the bean shop turns that visit into a sale."
+            }
+          ],
+          "includes": [
+            "Ten-item menu with dietary filters and prices",
+            "Online ordering with pickup and delivery (demo, no payment)",
+            "Three café locations with hours and seat counts",
+            "Table reservations with free cancellation up to 2 hours",
+            "Brew guides for pour-over, cold brew and espresso",
+            "Events page with workshops, tastings and live music",
+            "Coffee Loop loyalty with three tiers and rewards",
+            "Bean shop, subscriptions and gift cards"
+          ],
+          "tryIt": [
+            "Filter the menu on /menu/ by Vegan or Gluten-free and sort by price",
+            "Add a cappuccino to the cart on /order/ and go through the demo checkout",
+            "Reserve a table on /reservations/ — pick a café, date and time slot",
+            "Follow the pour-over steps on /brew-guides/ (15 g coffee, 250 g water at 94°C)",
+            "Check your Coffee Loop points balance and tiers on /loyalty/ and see what each reward costs"
+          ],
+          "limitations": [
+            "Demo data only — the menu, prices, cafés and events are illustrative, and the contact details (123 Brew Street, Maple City, +1 (415) 987-6543, hello@thecoffeelounge.com) are placeholders",
+            "No real coffee is ordered and no payment is taken — the order and gift-card checkouts state no payment is taken in this demo",
+            "The 4.9 rating from 2,400+ guests and the six guest reviews are demo copy — the reviews page itself labels them mock data for design review",
+            "No client results or metrics exist yet — this demo has never run a real café, so nothing about sales or visits can be claimed"
+          ],
+          "nextStep": "Want a coffee shop website like this? Order the Catalogue / Menu Website service and we will build it with your real menu, prices and ordering setup."
+        },
+        {
+          "slug": "aurel-jewels",
+          "name": "Aurel Jewels",
+          "type": "Jewellery e-commerce",
+          "city": "New York",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-aurel-jewels.webp",
+          "liveUrl": "https://aurel-jewels.pages.dev",
+          "result": "Live demo — shop, cart, demo checkout, gift finder & bespoke",
+          "desc": "A fine jewellery storefront — rings, necklaces, earrings and bracelets with prices in dollars, a cart and wishlist, gift finder, bespoke page and a demo checkout.",
+          "story": "Shoppers can browse collections and best sellers, add pieces to the cart or wishlist, compare items, try the gift finder and walk through a demo checkout.",
+          "deliverables": [
+            "Shop with filters, search & sorting",
+            "Cart, wishlist & compare",
+            "Gift finder & ring-size guide",
+            "Demo checkout & order tracking"
+          ],
+          "bestFor": "jewellery shop owners who want customers to browse collections, compare pieces and check out online without visiting the boutique.",
+          "summary": "Aurel Jewels is a complete fine-jewellery demo shop: rings, necklaces, earrings and bracelets with prices in dollars, best sellers, collections, a gift finder and a bespoke page. Shoppers can add pieces to the cart or wishlist, compare items and go through a demo checkout with no payment step. Everything runs in the browser as a working demo — no payment is taken and nothing is shipped.",
+          "problem": "A typical jewellery-shop problem: the pieces live in a display case or a social-media feed, so customers can't see prices, compare rings or check whether a gift is ready to give before they visit. Enquiries about bespoke pieces, ring sizes and appointments arrive by message, and there is no easy way to show best sellers or gift ideas. This is a demo scenario for this kind of business — Aurel Jewels is not a real shop and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One shop for the whole buying journey — browse, compare, gift finder, bespoke and checkout — instead of a catalogue that sends people elsewhere to buy.",
+              "why": "A jewellery buyer usually decides slowly: comparing rings, checking a gift, then buying. Every extra step or external link is a chance to leave, so the demo keeps the full journey in one place."
+            },
+            {
+              "decision": "Checkout stays in the browser as a demo, with no payment step and no real shipping.",
+              "why": "The point of the demo is to show the checkout flow, not to take money. A visitor can try it safely, and a real shop would connect its own payment and shipping provider."
+            },
+            {
+              "decision": "Buying help sits next to the products — gift finder, ring-size guide and appointment booking — instead of buried in a help page.",
+              "why": "Ring size and gift choice are the two questions that stop a jewellery purchase. Answering them beside the product removes the reason to leave and ask elsewhere."
+            }
+          ],
+          "includes": [
+            "Shop with filters, search and sorting",
+            "Product pages with prices in dollars",
+            "Cart, wishlist and compare",
+            "Gift finder quiz",
+            "Bespoke and appointments pages",
+            "Ring-size finder and jewellery guides",
+            "Demo checkout and order tracking",
+            "Gift cards and rewards pages"
+          ],
+          "tryIt": [
+            "Add a ring to the cart on /shop/ and open the cart drawer — the header bag count goes from 0 to 1",
+            "Answer the gift finder questions on /gift-finder/ and see the recommended pieces",
+            "Try the ring-size finder on /guides/ring-size-finder/ and check the sizing help it gives",
+            "Browse the Bridal and Emerald collections on /collections/ and open a collection page"
+          ],
+          "limitations": [
+            "Demo data only — the pieces, prices and review counts are illustrative, and the boutique phone number (+1 (212) 555-0148) is a placeholder",
+            "No real orders, payments or shipping happen — the demo checkout places no real order",
+            "The customer quotes under 'Loved by thousands' are sample text on the home page, not real buyer reviews",
+            "No client results or metrics exist yet — this demo has never run a real jewellery shop, so nothing about sales can be claimed"
+          ],
+          "nextStep": "Want a jewellery website like this? Order the Catalogue / Menu Website service and we will build it with your real products, prices and checkout setup."
+        },
+        {
+          "slug": "florida-shine-car-wash",
+          "name": "Florida Shine Car Wash",
+          "type": "Car wash",
+          "city": "Florida",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-florida-shine-car-wash.webp",
+          "liveUrl": "https://florida-shine-car-wash.pages.dev",
+          "result": "Live demo — wash packages, booking, memberships & locations",
+          "desc": "A car wash site for Florida — three wash packages with prices in dollars, unlimited wash memberships, an online booking flow, eight locations and a Spanish version.",
+          "story": "Drivers can compare wash packages, join the unlimited wash club, book an appointment at one of eight Florida locations, and read the rain guarantee.",
+          "deliverables": [
+            "Wash packages with prices in $",
+            "Online booking flow",
+            "Unlimited wash memberships",
+            "8 locations with map & Spanish site"
+          ],
+          "bestFor": "car wash owners who want drivers to compare packages, book a wash and join a membership without calling the wash.",
+          "summary": "Florida Shine is a complete car wash demo site: three wash packages with prices in dollars, unlimited wash memberships from $19 a month, online booking, eight Florida locations and a Spanish version of the site. Visitors can take the wash quiz, compare packages and start a booking; everything runs in the browser as a working demo — no real wash is booked and no payment is taken.",
+          "problem": "A typical car wash problem: drivers can't tell the packages apart or find prices before they arrive, so they pick the cheapest wash or drive on; memberships are explained at the till instead of online, and rainy-day re-washes turn into arguments at the counter. This is a demo scenario for this kind of business — Florida Shine is not a real car wash and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Packages are compared side by side with prices up front — Basic $16, Premium $28, Deluxe Detail $45 — instead of a price list hidden behind a phone call.",
+              "why": "A driver decides in seconds at the wash entrance. Showing the three packages with exactly what each includes — and what it costs — lets them choose before they arrive instead of holding up the queue."
+            },
+            {
+              "decision": "Booking and memberships stay in the browser as a demo, with a clear rain guarantee and no payment step.",
+              "why": "The point of the demo is to show the flow — pick a package, a location and a time — not to take money. A real wash would connect its own booking and payment provider, and the rain guarantee shows how re-washes are handled."
+            },
+            {
+              "decision": "The whole site is also in Spanish, with the same packages, booking flow and locations.",
+              "why": "Florida drivers include many Spanish speakers, and a wash that only speaks English at the booking step loses them. The demo keeps both languages on the same pages, not a separate translated brochure."
+            }
+          ],
+          "includes": [
+            "Three wash packages with prices in $",
+            "Online booking with package, location and add-ons",
+            "Unlimited wash memberships from $19/month",
+            "Eight Florida locations with map",
+            "Wash quiz (which wash is right for me)",
+            "Rain guarantee and re-wash policy page",
+            "Gift cards, offers and loyalty pages",
+            "Spanish version of the site (/es/)"
+          ],
+          "tryIt": [
+            "Start a booking on /book/ — pick a wash package, a location and add-ons",
+            "Take the wash quiz on /quiz/ and see which wash it recommends",
+            "Compare the three packages on /packages/ and check what each wash includes",
+            "Open /rain-guarantee/ to see how a free re-wash works after it rains",
+            "Switch the site to Spanish with the EN/ES toggle in the header"
+          ],
+          "limitations": [
+            "Demo data only — the 4.8 rating, the 2,400+ reviews, the 2018 founding year and the eight locations are illustrative, and the phone number ((305) 555-0198) is a placeholder",
+            "No real washes are booked and no payment is taken — the booking flow is a demo",
+            "The driver quotes on the home page and the reviews page are sample text, not real customer reviews",
+            "No client results or metrics exist yet — this demo has never run a real car wash, so nothing about bookings or revenue can be claimed"
+          ],
+          "nextStep": "Want a car wash website like this? Order the Booking / Enquiry Website service and we will build it with your real packages, prices and booking setup."
+        },
+        {
+          "slug": "elevate-catering",
+          "name": "Elevate Catering",
+          "type": "Catering",
+          "city": "Mumbai",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-elevate-catering.webp",
+          "liveUrl": "https://elevate-catering.pages.dev",
+          "result": "Live demo — menus with prices, quote form, tastings & process",
+          "desc": "A catering site for weddings, corporate events and private parties — four menus with per-person prices in rupees, a quote form, tasting bookings, venues and a six-step process.",
+          "story": "Hosts can browse menus with prices, compare services, request a quote, book a tasting and follow the six steps from enquiry to event day.",
+          "deliverables": [
+            "4 menus with per-person prices in ₹",
+            "Quote form & tasting booking",
+            "6 services & 6-step process",
+            "Venues, areas & gallery pages"
+          ],
+          "bestFor": "caterers who want hosts to see menus and per-person prices, request a quote and book a tasting without a phone call first.",
+          "summary": "Elevate Catering is a complete catering demo site: four menus with per-person prices in rupees, six services from weddings to drop-off catering, a quote form, tasting bookings, venues and service areas. Hosts can compare menus, request a quote and follow the six-step process from enquiry to event day. Everything runs in the browser as a working demo — no real quote is sent and no tasting is really booked.",
+          "problem": "A typical catering problem: menus live as PDFs, so hosts can't see per-person prices or dietary options before they call; quotes take days of back-and-forth over messages, and tastings get booked by phone with no record of what was agreed. This is a demo scenario for this kind of business — Elevate Catering is not a real caterer and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Full menus in HTML — courses, dietary tags and per-person prices up front — never a PDF.",
+              "why": "Hosts compare caterers by menu and price first. A PDF hides both behind a download, so the demo puts every menu on the page where it can be read, shared and searched."
+            },
+            {
+              "decision": "Every event starts with a tasting, then a written proposal with one transparent per-person price.",
+              "why": "A tasting is how a host trusts a caterer, and a single written price is how they budget. The demo shows both steps before any money is discussed, so there are no surprise bills."
+            },
+            {
+              "decision": "Quote and tasting requests stay in the browser as a demo, with no payment step.",
+              "why": "The point of the demo is to show the enquiry flow — event type, date, guests and venue up front — not to take bookings. A real caterer would connect its own inbox and calendar."
+            }
+          ],
+          "includes": [
+            "Four menus with per-person prices in ₹",
+            "Quote form with tasting-day picker",
+            "Tasting booking page",
+            "Six services with detail pages",
+            "Six-step process from enquiry to event day",
+            "Venues and service-areas pages",
+            "Photo gallery and client pages",
+            "Reviews, blog and FAQ"
+          ],
+          "tryIt": [
+            "Fill in the quote form on /quote/ — event type, date, guests and venue",
+            "Browse the four menus on /menus/ and check the price per guest",
+            "Follow the six steps from enquiry to event day on the /process/ page",
+            "Compare the six services on /services/ — weddings, corporate, private parties and more",
+            "Check the service areas on /areas/ — Mumbai, Delhi, Bengaluru and destination weddings"
+          ],
+          "limitations": [
+            "Demo data only — the 850+ events, 48,000+ guests and 4.9 rating are illustrative, and the phone number (+91 98765 43210) is a placeholder",
+            "No real quotes are sent and no tasting is really booked — the forms are demos",
+            "The host quotes and named venues on the reviews page are sample text, not real client stories",
+            "No client results or metrics exist yet — this demo has never catered a real event, so nothing about bookings or revenue can be claimed"
+          ],
+          "nextStep": "Want a catering website like this? Order the Booking / Enquiry Website service and we will build it with your real menus, prices and enquiry setup."
+        },
+        {
+          "slug": "emily-carter",
+          "name": "Emily Carter",
+          "type": "English teacher",
+          "city": "London",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-emily-carter.webp",
+          "liveUrl": "https://emilycarter-english.pages.dev",
+          "result": "Live demo — courses, level test, trial booking & pricing",
+          "desc": "An English teacher's site — four courses from £24 a lesson, a free three-minute level test, free trial-lesson booking, pricing, schedule and resources for ages 7 and up.",
+          "story": "Students can take the free level test, browse courses by level, book a free trial lesson and check the schedule and pricing.",
+          "deliverables": [
+            "4 courses with levels & prices in £",
+            "Free 3-minute level test",
+            "Free trial-lesson booking",
+            "Pricing, schedule & resources"
+          ],
+          "bestFor": "English tutors who want students to find their level, see course prices and book a free trial lesson without emailing first.",
+          "summary": "Emily Carter is a complete English-teacher demo site: four courses from £24 a lesson for levels A1–C1, a free three-minute level test, free trial-lesson booking, pricing, a schedule and free resources. Students can take the level test, pick a course and book a trial lesson. Everything runs in the browser as a working demo — no real lesson is booked and no payment is taken.",
+          "problem": "A typical tutor problem: course details and prices live in messages, so students can't tell which course fits their level or what a lesson costs before they ask; trial lessons are arranged over email, and parents of younger learners have no clear way to check safeguarding or progress. This is a demo scenario for this kind of business — Emily Carter is not a real teacher and had no real student problem to solve.",
+          "approach": [
+            {
+              "decision": "A free three-minute level test comes before any course page asks the student for a booking.",
+              "why": "Students don't know their CEFR level, and a tutor can't recommend a course without it. The test answers the first question in three minutes, so the trial lesson starts with a plan instead of a guess."
+            },
+            {
+              "decision": "The first lesson is free and booked online, with prices in pounds on the pricing page.",
+              "why": "A trial lesson is how a student trusts a tutor, and an upfront price is how they budget. The demo shows both before any payment is discussed, so there is no awkward first email about money."
+            },
+            {
+              "decision": "Kids, teens and adults each get their own pages, with safeguarding first for younger learners.",
+              "why": "A parent books very differently from an adult learner: they want to know who teaches, how progress is reported and whether they can sit in. Separate pages answer those questions without mixing them into adult course copy."
+            }
+          ],
+          "includes": [
+            "Four courses with levels and prices in £",
+            "Free 3-minute level test with instant result",
+            "Free trial-lesson booking form",
+            "Pricing, schedule and how-it-works pages",
+            "Courses for kids & teens and for adults",
+            "Student results and testimonials pages",
+            "Free resources and blog",
+            "FAQ and contact pages"
+          ],
+          "tryIt": [
+            "Take the free level test on /level-test/ — 12 questions, about 3 minutes",
+            "Book a free trial lesson on /book/ — 25 minutes, online, completely free",
+            "Browse the four courses on /courses/ and check the price per lesson",
+            "Check the weekly schedule on /schedule/ and see when the lessons run",
+            "Open the results page on /results/ to see how student progress is presented"
+          ],
+          "limitations": [
+            "Demo data only — the 1,000+ students, 5+ years and lesson prices are illustrative, and the teacher is not a real person",
+            "No real lessons are booked and no payment is taken — the trial booking is a demo",
+            "The student quotes on the testimonials page are sample text, not reviews from real students",
+            "No client results or metrics exist yet — this demo has never taught a real student, so nothing about exam results can be claimed"
+          ],
+          "nextStep": "Want a tutor website like this? Order the Booking / Enquiry Website service and we will build it with your real courses, prices and booking setup."
+        },
+        {
+          "slug": "veenas-dance",
+          "name": "Veena's School of Indian Dances",
+          "type": "Dance school",
+          "city": "Melbourne",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-veenas-dance.webp",
+          "liveUrl": "https://veenas-dance.pages.dev",
+          "result": "Live demo — courses, timetable, trial booking & enrolment",
+          "desc": "An Indian dance school site in Melbourne — Bharatanatyam, Mohiniyattam, Kuchipudi and Hip Hop for ages 5 to adult, with a timetable, term dates, trial booking and enrolment.",
+          "story": "Families can browse courses by age and level, check the weekly timetable and term dates, book a free trial class and start enrolment.",
+          "deliverables": [
+            "4 dance forms with course pages",
+            "Timetable & classes-by-age pages",
+            "Free trial booking & enrolment",
+            "Arangetram, events & gallery"
+          ],
+          "bestFor": "dance schools who want families to see classes by age, check the timetable and book a free trial without phoning the studio.",
+          "summary": "Veena's School of Indian Dances is a dance-school demo site: four dance forms for ages 5 to adult, courses by age and level, a weekly timetable, term dates, teacher pages and a clear path from first class to Arangetram. Families can book a free trial class and start enrolment online. Everything runs in the browser as a working demo — no real class is booked and no payment is taken.",
+          "problem": "A typical dance-school problem: class times, ages and fees live in a chat group or a printed notice, so parents can't tell which class fits their child or what a term costs; trial classes are arranged by phone, and the path from first class to a debut performance is never written down. This is a demo scenario for this kind of business — Veena's School is not a real school and had no real family problem to solve.",
+          "approach": [
+            {
+              "decision": "Classes are sorted by age and level, with a clear path from first class to Arangetram.",
+              "why": "Parents ask two things first: is there a class for my child's age, and where does it lead. The demo answers both on the course pages, so families can see the whole journey before they enquire."
+            },
+            {
+              "decision": "The first class is a free trial, booked online, with a first-class guide for new families.",
+              "why": "A trial class is how a family trusts a dance school, and a written guide is how they arrive prepared. The demo shows both before any fee is discussed, so the first visit has no surprises."
+            },
+            {
+              "decision": "Child safety sits on its own page, with teacher checks and class policies stated plainly.",
+              "why": "Parents hand over their children, so trust comes before timetable. The demo puts safeguarding where a parent looks for it, instead of hiding it in a footer link."
+            }
+          ],
+          "includes": [
+            "Four dance forms with course pages",
+            "Classes by age and level",
+            "Weekly timetable and term dates",
+            "Free trial booking and enrolment",
+            "Teacher pages and Arangetram page",
+            "Events, performances and gallery",
+            "Pricing, fees and child-safety pages",
+            "Testimonials, FAQ and blog"
+          ],
+          "tryIt": [
+            "Book a free trial class on /book-trial/ — pick a dance form and a day",
+            "Check the weekly timetable on /timetable/ and find a class by age",
+            "Browse the courses by age on /classes-by-age/ and see the class levels",
+            "Open /enrol/ and start enrolment to see what the form asks for",
+            "Read the child-safety page on /child-safety/ to see the safeguarding promises made"
+          ],
+          "limitations": [
+            "Demo data only — the 18+ years, 650+ students and 42 Arangetrams are illustrative, and the studio address is labelled mock on the site",
+            "No real classes are booked and no payment is taken — trial booking and enrolment are demos",
+            "The family quotes on the testimonials page are sample text, not reviews from real parents",
+            "No client results or metrics exist yet — this demo has never run a real dance school, so nothing about enrolments can be claimed"
+          ],
+          "nextStep": "Want a dance school website like this? Order the Booking / Enquiry Website service and we will build it with your real classes, timetable and enrolment setup."
+        },
+        {
+          "slug": "apna-csc",
+          "name": "Apna Digital Seva Kendra",
+          "type": "CSC & Cyber Cafe",
+          "city": "Gaya",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-apna-csc.webp",
+          "liveUrl": "https://apna-csc.pages.dev",
+          "result": "Live demo — 47 service pages, scheme finder, tools & enquiry",
+          "desc": "A CSC & cyber cafe site for Gaya — 47 government services with fees, a scheme finder, free online tools, pricing and an enquiry form.",
+          "story": "Visitors can find a service, check its documents and fees, try the free tools, look up schemes, and send an enquiry with a visit date and time slot.",
+          "deliverables": [
+            "47 service pages with fees & documents",
+            "Scheme finder & updates feed",
+            "Free tools (UPI QR, GST, EMI & more)",
+            "Enquiry form with visit slot"
+          ],
+          "bestFor": "CSC and cyber cafe owners who want villagers to find a service, check its fee and documents, and enquire without a wasted trip to the shop.",
+          "summary": "Apna Digital Seva Kendra is a demo site for a CSC & cyber cafe in Gaya: 47 service pages for Aadhaar, PAN, certificates, banking and tickets, each with a documents checklist and the government fee shown separately from the shop charge. It also has a scheme finder, free browser tools and an enquiry form, and everything runs in the browser as a demo — no real application is filed.",
+          "problem": "A typical CSC problem: villagers travel to the shop to ask which documents a PAN or Ayushman card needs, or what the fee is, and the same questions are answered by phone all day. Scheme and job updates spread by word of mouth, so people miss last dates, and nobody can tell the government fee apart from the shop charge. This is a demo scenario for this kind of centre — Apna Digital Seva Kendra is not a real shop and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Every service gets its own page with a documents checklist and the government fee shown separately from the shop charge.",
+              "why": "A visitor usually comes with one job in mind — a PAN correction, a certificate, a ticket — and the first two questions are always what to bring and what it costs. Splitting the two fees also answers the trust question before it is asked."
+            },
+            {
+              "decision": "A scheme finder and an updates feed sit next to the services instead of hiding in a notice board or a WhatsApp group.",
+              "why": "Schemes and last dates change every week, and that is what brings people back to a CSC. Putting them on the site means the answer is there at midnight, not only when the shop is open."
+            },
+            {
+              "decision": "Free browser tools — photo and signature resize, UPI QR, GST and EMI calculators — work without signing in or uploading anything.",
+              "why": "These are the small jobs people already walk in for, and doing them free in the browser earns the visit that later becomes a paid service. Nothing leaves the device, so there is no account or privacy hurdle."
+            }
+          ],
+          "includes": [
+            "47 service pages with fees and documents",
+            "Scheme finder and updates feed",
+            "Free browser tools (UPI QR, GST, EMI)",
+            "Printable pricing chart with Print button",
+            "Enquiry form with visit date and time slot",
+            "Application status-check directory",
+            "Reviews and contact pages with opening hours"
+          ],
+          "tryIt": [
+            "Search for PAN card on the home page and open its service page to see the documents checklist and fees",
+            "Try the scheme finder on /schemes/ and filter schemes to match a visitor's situation",
+            "Generate a UPI QR code on /tools/ without signing in or uploading anything",
+            "Fill in the enquiry form on /enquiry/ and see the mock reference saved on your device",
+            "Open /pricing/ and use the Print button for the A4 rate chart"
+          ],
+          "limitations": [
+            "Demo data only — the phone number, email and Gaya address on the site are placeholders, and the owner name and CSC ID are invented for the demo",
+            "No real applications are filed — the enquiry form only saves a mock reference on your device, and status checks link out to official portals",
+            "The 4.8-star rating, 412 reviews and the 25,000-plus forms claim are demo copy shown by the site, not measured results",
+            "No client results or metrics exist yet — this demo has never run a real CSC, so nothing about footfall or income can be claimed"
+          ],
+          "nextStep": "Want a CSC or cyber cafe website like this? Order the Booking / Enquiry Website service and we will build it with your real services, fees and enquiry setup."
+        },
+        {
+          "slug": "edule-training-institute",
+          "name": "EduLe Training Institute",
+          "type": "Computer Training Institute",
+          "city": "Pune",
+          "service": "Booking / Enquiry Website",
+          "img": "/work/work-edule-training-institute.webp",
+          "liveUrl": "https://edule-training-institute.pages.dev",
+          "result": "Live demo — 13 courses, fees, EMI calculator & free demo class",
+          "desc": "A computer training institute site in Pune — 13 job-ready courses with fees and instalments, an EMI calculator, course finder quiz and free demo class booking.",
+          "story": "Students can compare courses, check fees and instalments, try the EMI calculator, take the course finder quiz and book a free demo class online or in the Pune classroom.",
+          "deliverables": [
+            "13 course pages with fees & syllabus",
+            "Course compare & finder quiz",
+            "EMI calculator & instalments",
+            "Free demo class booking"
+          ],
+          "bestFor": "students and parents who want to compare computer courses, see the full fee with instalments, and try a free demo class before enrolling.",
+          "summary": "EduLe is a demo site for a computer training institute in Pune: 13 job-ready courses across development, data science, design, business and finance, each with a syllabus, fees and next batch. It also has a course finder quiz, a compare tool, an EMI calculator, placement pages and a free demo class booking. Everything runs in the browser as a demo — bookings and enrolments are not real.",
+          "problem": "A typical training institute problem: course details live in a brochure or a WhatsApp chat, so parents cannot compare fees, duration and batch timings; demo-class and admission enquiries come in by phone and get lost; and nobody can tell what the certificate is worth. This is a demo scenario for this kind of institute — EduLe is not a real institute and had no real student problem to solve.",
+          "approach": [
+            {
+              "decision": "Courses are built for comparison — filters, a compare tool and a finder quiz — instead of one long list of course names.",
+              "why": "Nobody picks a course from a list alone; they weigh fees, duration, mode and jobs. The site answers those four questions on every course page so the choice can be made without a phone call."
+            },
+            {
+              "decision": "Fees are shown in full, with instalments and an EMI calculator, rather than 'call for fees'.",
+              "why": "Price is the first filter for most families, and hiding it only creates phone calls that end in the same number. Showing it upfront lets serious students move straight to the demo class."
+            },
+            {
+              "decision": "A free demo class can be booked online or in the Pune classroom before any enrolment step appears.",
+              "why": "A demo lesson is the institute's real sales pitch — one live class tells a student more than a brochure. The booking sits early so trying costs nothing."
+            }
+          ],
+          "includes": [
+            "13 course pages with syllabus and fees",
+            "Course compare and finder quiz",
+            "Fees table with instalments and EMI calculator",
+            "Free demo class booking form",
+            "Placements, alumni and scholarships pages",
+            "Certificates page with mock verification",
+            "Blog, FAQ and contact pages"
+          ],
+          "tryIt": [
+            "Filter the courses on /courses/ by category, level or mode and open a course to see its syllabus and fees",
+            "Take the course finder quiz on /finder/ and see which course it suggests",
+            "Work out instalments on the EMI calculator and check the fees table on /fees/",
+            "Book a free demo class on /demo/ for the online batch or the Pune classroom",
+            "Compare two courses side by side on /compare/ to weigh fees, duration and mode before choosing"
+          ],
+          "limitations": [
+            "Demo data only — the phone number, email and Pune address on the site are placeholders, and the institute itself is invented",
+            "No real enrolments, payments or demo-class bookings are made — forms and the mock sign-in stay on your device",
+            "The 4.8 rating, student counts, placement figures and graduate employers shown on the site are demo copy, not measured results",
+            "No client results or metrics exist yet — this demo has never run a real institute, so nothing about admissions or jobs can be claimed"
+          ],
+          "nextStep": "Want a training institute website like this? Order the Booking / Enquiry Website service and we will build it with your real courses, fees and admission setup."
+        },
+        {
+          "slug": "sweetcrust-bakery",
+          "name": "SweetCrust Bakery & Cafe",
+          "type": "Bakery & Cafe",
+          "city": "New York",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-sweetcrust-bakery.webp",
+          "liveUrl": "https://sweetcrust-bakery.pages.dev",
+          "result": "Live demo — shop, custom cakes, cart & mock checkout in $",
+          "desc": "A New York bakery and cafe site — 12 products with sizes and dietary filters, custom and wedding cakes, gift cards, subscriptions and a full cart-to-checkout flow.",
+          "story": "Shoppers can browse the shop, filter by dietary needs, customise a cake, add items to the cart, check out with a promo code and track a mock order.",
+          "deliverables": [
+            "Shop with dietary filters & 12 products",
+            "Custom, wedding & tasting pages",
+            "Cart, promo codes & mock checkout",
+            "Gift cards, subscriptions & loyalty"
+          ],
+          "bestFor": "bakery and cafe owners who want customers to browse cakes, order custom bakes and check out online instead of phoning every order in.",
+          "summary": "SweetCrust is a demo site for a bakery and cafe in New York: 12 products with sizes, cake messages and dietary filters for eggless, gluten-free and vegan bakes. It also has custom and wedding cakes, a cart with promo codes, a three-step mock checkout, gift cards and order tracking. Everything runs in the browser as a demo — no payment is taken and no cake is baked.",
+          "problem": "A typical bakery problem: the menu lives on social media, so customers cannot see prices, sizes or eggless options before they visit; custom-cake orders arrive as scattered messages with no date or details; and regulars have no easy way to reorder or buy a gift card. This is a demo scenario for this kind of bakery — SweetCrust is not a real bakery and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "The shop is built around dietary filters and sizes, not just pretty photos, so eggless, gluten-free and vegan buyers find their cake first.",
+              "why": "For a bakery, the first question after price is usually 'is it eggless?' — and a buyer who cannot filter for it leaves. Sizes and cake messages sit on the product page for the same reason."
+            },
+            {
+              "decision": "Custom, wedding and tasting orders get their own pages with a form, instead of living in phone messages.",
+              "why": "A custom cake needs a date, a size, a flavour and a message — details that get lost in chat. A form collects them once, so nothing is forgotten before the bake."
+            },
+            {
+              "decision": "Checkout stays a demo with promo codes and a slot picker, and no payment step.",
+              "why": "The point is to show the flow — cart, discount, slot, confirmation — without taking money. A real bakery would connect its own payment provider and delivery setup."
+            }
+          ],
+          "includes": [
+            "Shop with 12 products and dietary filters",
+            "Product pages with sizes and cake message",
+            "Custom, wedding and tasting order pages",
+            "Cart with promo codes and slot picker",
+            "Three-step mock checkout (no payment)",
+            "Gift cards, subscriptions and loyalty pages",
+            "Order tracking with a sample order number"
+          ],
+          "tryIt": [
+            "Filter the shop on /shop/ by eggless, gluten-free or vegan and open a product to see its sizes",
+            "Add a cake to the cart on /shop/ and apply the WELCOME10 promo code at checkout",
+            "Fill in the custom cake form on /custom-cakes/ with a date, size and message",
+            "Track the sample order SC-2026-1042 on /track-order/ to see the mock delivery status",
+            "Open /gift-cards/ and /subscriptions/ to see how repeat orders and gifting are presented"
+          ],
+          "limitations": [
+            "Demo data only — the phone number, email and New York address on the site are placeholders, and all prices are in US dollars",
+            "No real orders or payments are made — the checkout is a mock flow and the Apple and Google Pay buttons do nothing",
+            "The product ratings and review counts shown on the site are demo copy, not real customer reviews",
+            "No client results or metrics exist yet — this demo has never run a real bakery, so nothing about sales or repeat orders can be claimed"
+          ],
+          "nextStep": "Want a bakery website like this? Order the Catalogue / Menu Website service and we will build it with your real menu, prices and ordering setup."
+        },
+        {
+          "slug": "spice-route-restaurant",
+          "name": "SpiceRoute Restaurant & Bistro",
+          "type": "Restaurant",
+          "city": "Mumbai",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-spice-route-restaurant.webp",
+          "liveUrl": "https://spiceroute-bistro.pages.dev",
+          "result": "Live demo — menu, online ordering, reservations & private dining",
+          "desc": "A multi-cuisine restaurant site in Bandra West, Mumbai — menu with veg and spice filters, online ordering with GST, table reservations, private dining and offers.",
+          "story": "Visitors can browse the menu, order online, book a table, explore private dining and catering, and check offers and the gallery.",
+          "deliverables": [
+            "Menu with filters & 17 dish pages",
+            "Online ordering with cart & GST",
+            "Table reservations page",
+            "Private dining, catering & offers"
+          ],
+          "bestFor": "restaurant owners who want customers to browse the menu, order online and book a table without calling the restaurant first.",
+          "summary": "SpiceRoute is a demo site for a multi-cuisine restaurant in Bandra West, Mumbai: a menu of Indian, Continental and Asian dishes with veg and spice filters, plus 17 dish pages. It has online ordering with a cart, GST and free delivery over ₹499, table reservations, private dining and catering, offers and a gallery. Everything runs in the browser as a demo — no real order or booking is made.",
+          "problem": "A typical restaurant problem: the menu lives as a PDF or a social-media post, so customers cannot see prices or veg options before they visit; orders and table bookings come in by phone, which keeps staff on the phone during service; and private-dining enquiries get lost in messages. This is a demo scenario for this kind of business — SpiceRoute is not a real restaurant and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "One site for the whole customer journey — menu, ordering, reservations, private dining and offers — instead of separate pages or links.",
+              "why": "A diner usually decides in one visit what to eat, whether to book a table, and whether to order in. Every extra link is a chance to lose them."
+            },
+            {
+              "decision": "Ordering and reservations stay in the browser as a demo, with no payment step and mock availability.",
+              "why": "The point of the demo is to show the flow, not to take money. A visitor can try the full journey safely, and a real restaurant would connect its own ordering and payment provider."
+            },
+            {
+              "decision": "Veg and spice filters sit on the menu, plus an open-now indicator in the header.",
+              "why": "Dietary information is usually the first thing a customer checks after price, and opening hours decide whether they order now or later — so both sit where the decision happens, not in a FAQ."
+            }
+          ],
+          "includes": [
+            "Menu with veg and spice filters",
+            "17 dish pages with prices and ratings",
+            "Online ordering with cart and GST",
+            "Table reservations form",
+            "Private dining and catering pages",
+            "Offers and photo gallery",
+            "Contact page with hours and delivery zones"
+          ],
+          "tryIt": [
+            "Filter the menu on /menu/ by veg or spice level and open a dish to see its price and details",
+            "Add Hyderabadi Chicken Biryani to the cart on /order/ and go through the demo checkout",
+            "Fill in the reservation form on /reservations/ and see the mock availability flow",
+            "Open /private-dining/ and /catering/ to see how event enquiries are presented to visitors",
+            "Check the open-now indicator in the header and the delivery zones on /contact/"
+          ],
+          "limitations": [
+            "Demo data only — the phone number, email and Bandra West address on the site are placeholders",
+            "No real orders, payments or table bookings are made — the order flow is confirmed on your device only",
+            "The 4.8 rating, 3,200-plus reviews and dish ratings shown on the site are demo copy, not real guest reviews",
+            "No client results or metrics exist yet — this demo has never run a real restaurant, so nothing about sales or bookings can be claimed"
+          ],
+          "nextStep": "Want a restaurant website like this? Order the Catalogue / Menu Website service and we will build it with your real menu, prices and booking setup."
+        },
+        {
+          "slug": "bloom-and-co",
+          "name": "Bloom & Co.",
+          "type": "Flower Shop",
+          "city": "Mumbai",
+          "service": "Catalogue / Menu Website",
+          "img": "/work/work-bloom-and-co.webp",
+          "liveUrl": "https://bloom-and-co-bfk.pages.dev",
+          "result": "Live demo — 12 bouquets, occasions, subscriptions & gift cards",
+          "desc": "A Mumbai flower shop site — 12 bouquets with occasion and flower filters, a PIN-code delivery checker, subscriptions, gift cards and a mock checkout.",
+          "story": "Shoppers can browse bouquets by occasion, check delivery by PIN code, add a card message, subscribe to monthly flowers and buy gift cards.",
+          "deliverables": [
+            "Shop with 12 bouquets & filters",
+            "Occasion pages & PIN delivery checker",
+            "Subscriptions & gift cards",
+            "Mock checkout with card message"
+          ],
+          "bestFor": "florists and flower shop owners who want customers to find the right bouquet, check same-day delivery and order online without calling.",
+          "summary": "Bloom & Co. is a demo site for a flower shop in Mumbai: 12 bouquets with occasion and flower filters, plus a PIN-code checker for the delivery fee and today's cut-off. It also has monthly subscriptions, gift cards and a three-step mock checkout with a card message. Everything runs in the browser as a demo — no flowers are sent and no payment is taken.",
+          "problem": "A typical flower shop problem: bouquets live as photos in a chat, so customers cannot see prices or check same-day delivery before they order; occasion orders arrive as scattered messages with no date, address or card text; and regulars have no easy way to subscribe or send a gift card. This is a demo scenario for this kind of shop — Bloom & Co. is not a real florist and had no real customer problem to solve.",
+          "approach": [
+            {
+              "decision": "Delivery is answered before browsing — a PIN-code checker on the home page confirms the fee and today's cut-off first.",
+              "why": "Flowers are usually urgent — a birthday today, not next week — so the first question is always 'can it arrive today?' Answering it upfront stops shoppers from guessing and leaving."
+            },
+            {
+              "decision": "Bouquets are organised by occasion — birthday, anniversary, sympathy — instead of one long flower list.",
+              "why": "Nobody shops for flowers by species first; they shop for the moment. Occasion pages match how people actually think, and the filters handle the rest."
+            },
+            {
+              "decision": "Subscriptions and gift cards sit beside the shop, with checkout staying a demo and no payment step.",
+              "why": "Repeat flowers and gifts are the steady income of a florist, not one-off bouquets. Showing them next to the shop turns a single order into a reason to return."
+            }
+          ],
+          "includes": [
+            "Shop with 12 bouquets and filters",
+            "Occasion pages (birthday, anniversary, sympathy)",
+            "PIN-code delivery checker on home page",
+            "Subscriptions (Petal, Bloom, Grand Bloom)",
+            "Gift cards from ₹500 to ₹5,000",
+            "Mock checkout with card message",
+            "Plants, hampers and weddings pages"
+          ],
+          "tryIt": [
+            "Enter a Mumbai PIN code in the delivery checker on the home page to see the fee and cut-off",
+            "Filter the shop on /shop/ by occasion or flower and open a bouquet to see its price and details",
+            "Add a bouquet to the cart and write a card message at the mock checkout on /checkout/",
+            "Open /subscriptions/ to compare the Petal, Bloom and Grand Bloom monthly plans",
+            "Open /gift-cards/ to see the ₹500 to ₹5,000 gift card options for every occasion"
+          ],
+          "limitations": [
+            "Demo data only — the phone number, email and Bandra West address on the site are placeholders",
+            "No real orders or payments are made — the checkout is a mock flow and no flowers are delivered",
+            "The bouquet ratings, review counts and testimonials shown on the site are demo copy, not real customer reviews",
+            "No client results or metrics exist yet — this demo has never run a real flower shop, so nothing about sales or repeat orders can be claimed"
+          ],
+          "nextStep": "Want a flower shop website like this? Order the Catalogue / Menu Website service and we will build it with your real bouquets, prices and delivery setup."
         }
       ],
       "caseLabels": {
