@@ -5,13 +5,35 @@ import PricingTable from "../PricingTable.astro";
 import TestimonialsSection from "../TestimonialsSection.astro";
 import SectionHead from "../SectionHead.astro";
 import CtaBand from "../CtaBand.astro";
+import Icon from "../Icon.astro";
 import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
 const r = dict.pricing.renewal;
+/* Service + offer schema (SEO audit 2026-11-22): real plans, real prices
+   from the same dictionary the page renders — the two can never drift. */
+const pricingSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Website design and development",
+  serviceType: "Website design and development",
+  provider: { "@id": "https://kumbuild.com/#org" },
+  areaServed: "Worldwide",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Website plans",
+    itemListElement: dict.pricing.packages.map((p) => ({
+      "@type": "Offer",
+      name: p.name,
+      price: Number(String(p.price).replace(/[^0-9]/g, "")),
+      priceCurrency: "INR",
+      itemOffered: { "@type": "Service", name: p.name },
+    })),
+  },
+};
 ---
 
-<Layout title={dict.pricing.title} description={dict.pricing.subtitle} locale={locale} dict={dict} slug="/pricing">
+<Layout title={dict.meta.pricing.t} description={dict.meta.pricing.d} locale={locale} dict={dict} slug="/pricing" extraSchema={pricingSchema}>
   <section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
     <h1 class="max-w-2xl font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{dict.pricing.title}</h1>
     <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">{dict.pricing.subtitle}</p>
@@ -21,6 +43,22 @@ const r = dict.pricing.renewal;
     <SectionHead title={dict.v2.pricingTable.title} subtitle={dict.v2.pricingTable.subtitle} />
   </div>
   <PricingTable dict={dict} locale={locale} />
+  {/* What is included + renewal explained in words (SEO audit 2026-11-22):
+      the table compares plans, but the inclusions and the renewal logic
+      were nowhere in text a searcher (or a careful buyer) could read. */}
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <h2 class="font-display text-[clamp(1.5rem,1.2rem+1.4vw,2.25rem)] font-semibold leading-[1.2] text-ink">{dict.pricing.extra.heading}</h2>
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {dict.pricing.extra.items.map((item) => (
+        <li class="flex gap-3 rounded-2xl border border-line bg-white p-5 text-[15px] leading-[26px] text-body">
+          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-700"><Icon name="check" class="h-4 w-4" /></span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+    <h2 class="mt-12 font-display text-[clamp(1.5rem,1.2rem+1.4vw,2.25rem)] font-semibold leading-[1.2] text-ink">{dict.pricing.extra.renewalTitle}</h2>
+    <p class="mt-3 max-w-3xl text-base leading-[28px] text-body">{dict.pricing.extra.renewalText}</p>
+  </section>
   {/* Social proof right after the comparison, at the moment of decision:
       the same testimonials that sit above pricing on the home page. */}
   <TestimonialsSection dict={dict} />
@@ -32,7 +70,7 @@ const r = dict.pricing.renewal;
       <div>
         <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.7vw,1.5rem)] font-semibold leading-snug text-ink">{r.title}</h2>
         <p class="mt-1.5 max-w-2xl text-base leading-[28px] text-body">{r.desc}</p>
-        <a href={pageUrl(locale, "/maintenance")} class="mt-2 inline-flex min-h-[44px] items-center gap-1.5 text-base font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700">{dict.common.learnMore} →</a>
+        <a href={pageUrl(locale, "/maintenance")} class="mt-2 inline-flex min-h-[44px] items-center gap-1.5 text-base font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700">{r.link} →</a>
       </div>
       <p class="font-display text-[clamp(1.375rem,1.2rem+1vw,1.875rem)] font-semibold tabular-nums text-ink">{r.price} <span class="font-sans text-sm font-medium text-muted">/ {r.per}</span></p>
     </div>

@@ -11,10 +11,15 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      // Locale 404 pages are real directory routes (/hi/404/ etc.) so the
-      // integration includes them by default; error pages don't belong in
-      // a sitemap. (The root 404 is excluded automatically.)
-      filter: (page) => !page.endsWith("/404/"),
+      // Exclude: locale 404 pages (real directory routes, but error pages
+      // don't belong in a sitemap) and ALL demo/preview/work copies — they
+      // are noindexed showcase duplicates (SEO audit 2026-11-22: they were
+      // 399 of 511 sitemap URLs). Only real content pages stay.
+      filter: (page) =>
+        !page.endsWith("/404/") &&
+        !page.includes("/preview/") &&
+        !page.includes("/work/") &&
+        !page.includes("/demo/"),
     }),
   ],
   vite: {

@@ -11,7 +11,7 @@ const waDisplay = `+${dict.v2.contact.waNumber.slice(0, 2)} ${dict.v2.contact.wa
 const labelCls = "mb-1.5 block text-sm font-semibold text-ink";
 ---
 
-<Layout title={c.title} description={c.subtitle} locale={locale} dict={dict} slug="/contact">
+<Layout title={dict.meta.contact.t} description={dict.meta.contact.d} locale={locale} dict={dict} slug="/contact">
   <section class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
     <div data-reveal class="max-w-3xl">
       <h1 class="font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{c.title}</h1>

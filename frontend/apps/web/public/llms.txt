@@ -1,0 +1,19 @@
+# Kumbuild
+
+> Kumbuild is a done-for-you website service for anyone who needs a website — shops, clinics, salons, tuition centres, restaurants, creators and individuals, anywhere in the world. You tell us what you need; we design, build and maintain the website. One-time plans: Starter ₹3,999, Business ₹7,999, Premium ₹14,999. A yearly renewal of ₹1,999 covers domain, hosting and small updates. Process: order form, WhatsApp confirmation, 50% advance, preview in 3–5 working days, two free revision rounds, then launch on your own domain.
+
+## Key pages
+
+- [Pricing](https://kumbuild.com/pricing/): plans, what every plan includes, and how renewal works
+- [How it works](https://kumbuild.com/how-it-works/): the five steps from order to a live website
+- [Order](https://kumbuild.com/order/): the order form
+- [Examples](https://kumbuild.com/examples/): live demo websites you can open and try
+- [About](https://kumbuild.com/about/): who runs Kumbuild
+- [FAQ](https://kumbuild.com/faq/): common questions, answered plainly
+
+## Contact
+
+- WhatsApp: +91 91817 64691 (https://wa.me/919181764691)
+- Email: hello@kumbuild.com
+- Help docs: https://docs.kumbuild.com/
+- Blog: https://blog.kumbuild.com/

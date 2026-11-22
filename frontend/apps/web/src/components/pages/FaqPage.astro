@@ -7,7 +7,7 @@ interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
 ---
 
-<Layout title={dict.faq.title} description={dict.faq.subtitle} locale={locale} dict={dict} slug="/faq">
+<Layout title={dict.meta.faq.t} description={dict.meta.faq.d} locale={locale} dict={dict} slug="/faq">
   <section class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
     <div data-reveal>
       <h1 class="font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{dict.faq.title}</h1>

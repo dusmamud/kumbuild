@@ -13,7 +13,7 @@ const fmtDate = (iso: string) =>
   });
 ---
 
-<Layout title={b.title} description={b.subtitle} locale={locale} dict={dict} slug="/blog">
+<Layout title={dict.meta.blog.t} description={dict.meta.blog.d} locale={locale} dict={dict} slug="/blog">
   <section class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
     <div data-reveal>
       <h1 class="font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{b.title}</h1>

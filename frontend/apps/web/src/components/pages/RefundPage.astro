@@ -9,7 +9,7 @@ const r = dict.v2.refund;
 const waLink = `https://wa.me/${dict.v2.contact.waNumber}?text=${encodeURIComponent(dict.v2.contact.waText)}`;
 ---
 
-<Layout title={r.title} description={r.subtitle} locale={locale} dict={dict} slug="/refund">
+<Layout title={dict.meta.refund.t} description={dict.meta.refund.d} locale={locale} dict={dict} slug="/refund">
   <section class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
     <div data-reveal class="max-w-3xl">
       <h1 class="font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{r.title}</h1>

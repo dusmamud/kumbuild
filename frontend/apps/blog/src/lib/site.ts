@@ -41,6 +41,6 @@ export const BLOG_FAQS = [
 // and in the footer) — bylines and structured data use the same words.
 export const BLOG_AUTHOR = "Kumbuild team";
 
-export const WA_NUMBER = "919876543210";
+export const WA_NUMBER = "919181764691";
 export const waLink = (text: string) =>
   `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;

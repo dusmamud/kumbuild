@@ -40,6 +40,10 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} — Kumbuild</title>
     <meta name="description" content={description} />
+    {/* Demo/preview pages are client-showcase copies of the same projects
+        in 4 languages — they must not be indexed (duplicate content /
+        index bloat, SEO audit 2026-11-22). Links still work normally. */}
+    <meta name="robots" content="noindex, follow" />
     <meta name="theme-color" content="#faf9f6" />
     <meta property="og:title" content={`${title} — Kumbuild`} />
     <meta property="og:description" content={description} />

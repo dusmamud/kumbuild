@@ -1,31 +1,40 @@
 ---
 import SectionHead from "./SectionHead.astro";
 import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
-interface Props { dict: Dictionary; locale: Locale; no?: string; }
-const { dict, locale, no } = Astro.props;
+interface Props { dict: Dictionary; locale: Locale; no?: string; hideHead?: boolean; }
+const { dict, locale, no, hideHead = false } = Astro.props;
 const h = dict.how;
 ---
 
 <section class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
-  <SectionHead no={no} title={h.title} subtitle={h.subtitle} />
+  {!hideHead && <SectionHead no={no} title={h.title} subtitle={h.subtitle} />}
   {/* Timeline, not five separate tiles: the numbered steps are visibly
       joined — a horizontal line on desktop, a vertical line on mobile —
       so the visitor reads one process from Tell us to Go live. */}
-  <ol class="relative mx-auto mt-10 max-w-2xl sm:mt-12 lg:max-w-none">
+  {/* List semantics fixed 2026-11-22 (Lighthouse a11y: <li> must be a
+      direct child of the list, and lists may contain only <li>): the
+      decorative lines moved out into this wrapper and the grid classes
+      moved onto the <ol> itself. */}
+  <div class="relative mx-auto mt-10 max-w-2xl sm:mt-12 lg:max-w-none">
     <span class="absolute left-0 right-0 top-5 hidden h-0.5 bg-primary-100 lg:block" aria-hidden="true"></span>
     <span class="absolute bottom-5 left-5 top-5 hidden w-0.5 bg-primary-100 max-lg:block" aria-hidden="true"></span>
-    <div class="grid gap-8 lg:grid-cols-5 lg:gap-6">
+    <ol class="relative grid gap-8 lg:grid-cols-5 lg:gap-6">
       {h.steps.map((step, i) => (
         <li class="relative">
           <div class="flex items-center gap-3.5 lg:block">
             <span class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-600 font-display text-base font-semibold text-white shadow-sm">{i + 1}</span>
-            <h3 class="text-lg font-semibold leading-snug text-ink lg:mt-4">{step.title}</h3>
+            {/* Heading level follows context: under a SectionHead (home)
+                the steps are h3; on the How page the head is hidden and
+                the hero h1 makes the steps h2 — no skipped levels. */}
+            {hideHead
+              ? <h2 class="text-lg font-semibold leading-snug text-ink lg:mt-4">{step.title}</h2>
+              : <h3 class="text-lg font-semibold leading-snug text-ink lg:mt-4">{step.title}</h3>}
           </div>
           <p class="mt-2 pl-[54px] text-[15px] leading-[26px] text-body lg:mt-1.5 lg:pl-0">{step.desc}</p>
         </li>
       ))}
-    </div>
-  </ol>
+    </ol>
+  </div>
   {/* CTA right below the steps — the visitor now knows the process,
       so the next action sits here, not a scroll away. */}
   <div class="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row sm:items-center">

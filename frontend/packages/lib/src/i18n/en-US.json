@@ -2,7 +2,13 @@
   "about": {
     "p1": "Kumbuild is a done-for-you website service for small businesses. Shop owners, clinics, tuition centres, salons and restaurants tell us what they need — and we build the website for them.",
     "p2": "You don't need to learn code, hire a designer, or figure out hosting and domains. Tell us what to build, approve the preview, and go live.",
-    "title": "About Kumbuild"
+    "title": "About Kumbuild",
+    "founder": {
+      "heading": "Meet the founder",
+      "name": "Dus Mamud",
+      "role": "Founder — designs and builds every website",
+      "text": "Kumbuild is run by one person, on purpose. Dus designs and builds every website himself — no call centres, no hand-offs, no account managers. When you message Kumbuild, you talk to the person who will actually build your site. He also builds privacy-first tools under the name Dusrel."
+    }
   },
   "common": {
     "backHome": "Back to home",
@@ -207,7 +213,25 @@
       }
     ],
     "subtitle": "Five steps. You tell us, we build — you only review and approve.",
-    "title": "How it works"
+    "title": "How it works",
+    "extra": {
+      "heading": "What we need from you",
+      "intro": "Very little — and nothing technical.",
+      "items": [
+        "Your business name and what you do, in your own words",
+        "Your logo, if you have one — if not, we make a simple one",
+        "Photos of your shop, work or products — phone photos are fine",
+        "Your services and prices, roughly — we polish the words",
+        "Your WhatsApp number and address for the contact buttons"
+      ],
+      "note": "Send it all on WhatsApp, in pieces if you like. We organise it.",
+      "heading2": "What you own",
+      "text2": "Your domain, your content and your customer data are yours — not ours. If you ever move away from Kumbuild, everything goes with you: we hand over the files and help with the move. After launch we look after hosting, security updates and the yearly renewal, and small changes are a WhatsApp message away.",
+      "heading3": "Timings and payment, honestly",
+      "text3": "Most websites are ready in 3 to 5 working days from your advance. Payment is split: a 50% advance through Razorpay (UPI, card or netbanking) starts the work, and the remaining 50% is due only when you approve the preview and we go live. Two revision rounds on the preview are free — tell us what to change on WhatsApp, in your own words.",
+      "heading4": "After your website goes live",
+      "text4": "Your business will change — prices move, new products arrive, timings shift. Small changes are one WhatsApp message: send the new price, photo or hours and we update the site for you; the yearly renewal covers changes like these. Bigger changes, like a new page, are quoted fairly before we start and go through the same preview-and-approval flow. Hosting and security updates are handled by us throughout."
+    }
   },
   "industries": {
     "caseTitle": "See it in action",
@@ -526,11 +550,25 @@
       "desc": "Domain renewal, hosting, small updates (phone, timings, a line or two) and support.",
       "per": "per year",
       "price": "₹1,999",
-      "title": "Yearly renewal"
+      "title": "Yearly renewal",
+      "link": "See maintenance & renewal details"
     },
     "subtitle": "One-time prices. No hidden charges. Yearly renewal keeps your domain, hosting and small updates running.",
     "terms": "50% advance on order · remaining 50% on approval, before go-live · 2 free revision rounds · Payment by Razorpay (UPI, cards, netbanking, wallets).",
-    "title": "Simple pricing"
+    "title": "Simple pricing",
+    "extra": {
+      "heading": "What every plan includes",
+      "items": [
+        "Mobile-first design — your site looks right on the phones your customers actually use",
+        "WhatsApp enquiries — one-tap chat buttons, no forms that go nowhere",
+        "Google-ready basics — titles, descriptions and sitemap set up so people can find you",
+        "Domain and hosting setup — connected and secured (SSL) by us",
+        "Two free revision rounds on your preview before launch",
+        "Launch support — we stay on WhatsApp until your site is live and you are happy"
+      ],
+      "renewalTitle": "Renewal, in plain words",
+      "renewalText": "Your first payment builds the website. The yearly renewal of ₹1,999 keeps it alive: your domain name renewed, hosting paid, small updates (a phone number, timings, a line or two of text) done for you, and support when something looks wrong. If you ever stop renewing, your website files and domain are still yours — we hand everything over. No lock-ins, no hostage domains."
+    }
   },
   "privacy": {
     "intro": "Draft — this page will carry the full privacy policy before launch. Your details from the order form are used only to build your website and contact you about your order.",
@@ -584,7 +622,7 @@
       "refund": "Refund policy"
     },
     "contact": {
-      "waNumber": "919876543210",
+      "waNumber": "919181764691",
       "waText": "Hi Kumbuild, I want a website for my business.",
       "email": "hello@kumbuild.com",
       "submit": "Send enquiry",
@@ -3713,7 +3751,8 @@
             "For many small businesses that window is a half-empty listing, an old phone number, and a competitor right below with photos, timings and a website. The fix is not complicated: correct details everywhere, real photos, and one page of your own that answers the questions customers actually ask.",
             "A website you own is the one result nobody can edit but you. Prices, timings, photos, offers — current, because keeping them current is part of the job you hand to us."
           ],
-          "img": "/blog/blog-shop.webp"
+          "img": "/blog/blog-shop.webp",
+          "metaTitle": "Why your shop needs its own website"
         },
         {
           "slug": "whatsapp-orders-from-your-website",
@@ -3727,7 +3766,8 @@
             "So a small business website should not copy a big e-commerce store. It should show everything clearly — photos, names, prices — and put a WhatsApp button on every item, opening a chat with the order already written.",
             "That is how every Kumbuild catalogue is built. No commission, no new habits for your customers, and you keep the relationship that makes them come back."
           ],
-          "img": "/blog/blog-whatsapp.webp"
+          "img": "/blog/blog-whatsapp.webp",
+          "metaTitle": "Take WhatsApp orders from your website"
         },
         {
           "slug": "what-a-website-should-cost",
@@ -3741,7 +3781,8 @@
             "Agencies charge for account managers and offices. Freelancers charge less but disappear. A fixed-package service like Kumbuild charges for the work itself: the pages are defined, the price is on the website, and the renewal covers hosting, security and small changes.",
             "Whichever route you take, ask three questions before paying: What exactly is included? What does year two cost? And if I leave, what do I take with me? The answers tell you the real price."
           ],
-          "img": "/blog/blog-cost.webp"
+          "img": "/blog/blog-cost.webp",
+          "metaTitle": "What a small business website should cost"
         }
       ],
       "readNext": "Read next",
@@ -3940,6 +3981,104 @@
           ]
         }
       ]
+    }
+  },
+  "meta": {
+    "home": {
+      "t": "Tell us what to build.",
+      "d": "We build fast, mobile-first websites for shops, clinics, salons, tuition centres and anyone who needs one — preview first, pay when you are happy."
+    },
+    "about": {
+      "t": "About Kumbuild — the people behind your website",
+      "d": "Kumbuild is a done-for-you website service. Every website is designed, built and looked after by its founder — for customers anywhere in the world."
+    },
+    "blog": {
+      "t": "Notes for business owners",
+      "d": "Short, practical reads on getting customers from the internet — websites, WhatsApp, Google and pricing, explained without jargon or sales talk."
+    },
+    "contact": {
+      "t": "Contact Kumbuild — WhatsApp, email and timings",
+      "d": "Questions before ordering? Message us on WhatsApp at +91 91817 64691 or email hello@kumbuild.com — a real person replies, usually the same day."
+    },
+    "examples": {
+      "t": "Example websites we have built — live demos",
+      "d": "Live demo websites built by Kumbuild — real working demos you can open and try before you order. Shops, salons, clinics, restaurants and more."
+    },
+    "faq": {
+      "t": "Frequently asked questions",
+      "d": "Everything people usually ask before ordering a website — prices, timings, what we need from you, changes, renewal and refunds, answered plainly."
+    },
+    "how": {
+      "t": "How it works — from order to a live website",
+      "d": "Five simple steps: you tell us, we design a preview, you approve it, we build and launch — most websites are ready in 3 to 5 working days."
+    },
+    "maintenance": {
+      "t": "Maintenance & renewal",
+      "d": "Your website stays live, fast and up to date — without you touching anything. Renewal covers your domain, hosting and small updates, every year."
+    },
+    "order": {
+      "t": "Order your website — start in two minutes",
+      "d": "Tell us what you need in one short form. We confirm everything on WhatsApp, show you a preview first, and start only when you say yes."
+    },
+    "pricing": {
+      "t": "Simple pricing — websites from ₹3,999",
+      "d": "One-time prices with nothing hidden: Starter ₹3,999, Business ₹7,999, Premium ₹14,999. Yearly renewal keeps domain, hosting and updates covered."
+    },
+    "privacy": {
+      "t": "Privacy policy — how Kumbuild handles your data",
+      "d": "What details we collect when you order or message us, why we need them, who we share them with, and the choices you have. Plain language, no tricks."
+    },
+    "refund": {
+      "t": "Refund policy — pay only for work done",
+      "d": "The short version: if we have not started, you pay nothing. If we have started, you only pay for the work already done. No lock-ins, no surprises."
+    },
+    "terms": {
+      "t": "Terms of service — working with Kumbuild",
+      "d": "The basics of working together: 50% advance to start, two free revision rounds, what is included in every plan, and how renewal works."
+    },
+    "services": {
+      "business-website": {
+        "t": "Business websites that bring enquiries",
+        "d": "Everything a customer needs to trust you and reach you — services, story, photos, prices and one-tap WhatsApp contact, on a fast mobile-first site."
+      },
+      "landing-page": {
+        "t": "Landing pages for your social bio link",
+        "d": "Built for the link in your Instagram or Facebook bio. One page, one job: a visitor lands, sees your best work and taps to order on WhatsApp."
+      },
+      "booking-website": {
+        "t": "Booking & enquiry websites",
+        "d": "Let customers book a table, a chair or an appointment from your website — requests land on your WhatsApp, confirmed by you. No commissions, no middlemen."
+      },
+      "catalogue-website": {
+        "t": "Catalogue & menu websites",
+        "d": "Your full catalogue or menu on one fast page — photos, prices and a WhatsApp order button on every item. Update prices anytime with one message to us."
+      }
+    },
+    "industries": {
+      "shops-stores": {
+        "t": "Websites for shops & stores — more footfall",
+        "d": "Customers check prices and offers on their phone before they visit — or instead of visiting. Your website shows what you sell, at what price, first."
+      },
+      "clinics-doctors": {
+        "t": "Websites for clinics & doctors",
+        "d": "Before they call, patients want to know what you treat, when you are available and what it costs. Your website answers all three, clearly."
+      },
+      "tuition-coaching": {
+        "t": "Websites for tuition & coaching centres",
+        "d": "Parents compare courses, batches and fees online before they ever visit. Your website lays it all out — and takes admission enquiries on WhatsApp."
+      },
+      "salons-parlours": {
+        "t": "Websites for salons & parlours — more bookings",
+        "d": "Your phone rings most when every stylist has a client in the chair. Your website answers prices and timings, and takes bookings while you work."
+      },
+      "restaurants-cafes": {
+        "t": "Websites for restaurants & cafes",
+        "d": "Customers check the menu on their phone before they arrive — or before they order in. Your website shows the menu, photos, timings and location."
+      },
+      "instagram-home-sellers": {
+        "t": "Websites for Instagram & home sellers",
+        "d": "Your Instagram bio gets one link. Make it a page that shows your products, your prices and a WhatsApp order button — open all day, every day."
+      }
     }
   }
 }

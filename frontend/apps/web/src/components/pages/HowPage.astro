@@ -3,13 +3,53 @@ import Layout from "../../layouts/Layout.astro";
 import HowItWorks from "../HowItWorks.astro";
 import FaqSection from "../FaqSection.astro";
 import CtaBand from "../CtaBand.astro";
+import Icon from "../Icon.astro";
 import type { Dictionary, Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
 ---
 
-<Layout title={dict.how.title} description={dict.how.subtitle} locale={locale} dict={dict} slug="/how-it-works">
-  <HowItWorks dict={dict} locale={locale} />
+<Layout title={dict.meta.how.t} description={dict.meta.how.d} locale={locale} dict={dict} slug="/how-it-works">
+  {/* Page hero with the H1 — this page had no H1 at all (SEO audit
+      2026-11-22); the steps section below keeps its head hidden here
+      because the hero now carries title + subtitle. */}
+  <section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+    <h1 class="max-w-2xl font-display text-[clamp(1.75rem,1.35rem+2.1vw,3rem)] font-semibold leading-[1.15] text-ink">{dict.how.title}</h1>
+    <p class="mt-4 max-w-2xl text-base leading-[28px] text-body">{dict.how.subtitle}</p>
+  </section>
+  <HowItWorks dict={dict} locale={locale} hideHead />
+  {/* Depth sections (SEO audit 2026-11-22): the five steps alone were
+      ~250 words. These three blocks carry the facts a buyer (and a
+      search engine) needs — same facts as the docs, nothing invented. */}
+  <section class="mx-auto max-w-6xl px-4 pb-2 sm:px-6">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.25] text-ink">{dict.how.extra.heading}</h2>
+        <p class="mt-3 text-base leading-[28px] text-body">{dict.how.extra.intro}</p>
+        <ul class="mt-4 space-y-2.5">
+          {dict.how.extra.items.map((item) => (
+            <li class="flex gap-2.5 text-[15px] leading-[26px] text-body">
+              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-700"><Icon name="check" class="h-3.5 w-3.5" /></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-4 text-[15px] leading-[26px] text-body">{dict.how.extra.note}</p>
+      </div>
+      <div>
+        <h2 class="font-display text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.25] text-ink">{dict.how.extra.heading2}</h2>
+        <p class="mt-3 text-base leading-[28px] text-body">{dict.how.extra.text2}</p>
+      </div>
+      <div>
+        <h2 class="font-display text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.25] text-ink">{dict.how.extra.heading3}</h2>
+        <p class="mt-3 text-base leading-[28px] text-body">{dict.how.extra.text3}</p>
+      </div>
+      <div>
+        <h2 class="font-display text-[clamp(1.25rem,1.1rem+0.8vw,1.75rem)] font-semibold leading-[1.25] text-ink">{dict.how.extra.heading4}</h2>
+        <p class="mt-3 text-base leading-[28px] text-body">{dict.how.extra.text4}</p>
+      </div>
+    </div>
+  </section>
   {/* The steps alone left this page half-empty — a short FAQ teaser and
       the order CTA give it a reason to exist beyond the timeline. */}
   <FaqSection dict={dict} limit={3} />
