@@ -4,7 +4,7 @@ Done-for-you website service for small businesses. Customer batayega kya chahiye
 
 - **Brand:** Kumbuild
 - **Tagline:** Tell us what to build.
-- **Website:** kumbuild.com — landing + pricing + order (Astro, **LIVE** — https://kumbuild-web.pages.dev)
+- **Website:** kumbuild.com — landing + pricing + order (Astro, **LIVE** — https://kumbuild.com)
 - **Auth:** account.kumbuild.com — central login/signup, dono roles ke liye (React+Vite)
 - **Admin dashboard:** admin.kumbuild.com — sirf admin ke liye (React+Vite)
 - **Customer dashboard:** home.kumbuild.com — customer apne orders track karega (React+Vite)

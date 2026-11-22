@@ -95,7 +95,7 @@ Login nahi chahiye. Kumbuild ka blog — dukaandaaron ke liye website, WhatsApp 
 | `/topic/[topic]` | Topic | Ek topic ke posts |
 | `/rss.xml` | RSS feed | Saare posts ka feed |
 
-3 posts live hain: `why-your-shop-needs-a-website`, `whatsapp-orders-from-your-website`, `what-a-website-should-cost`. Astro 7 + React islands + Tailwind 4, Markdown collections. Light + dark (Radix slateDark, THEME.md v4). Live: https://kumbuild-blog.pages.dev/ — custom domain blog.kumbuild.com Dus khud add karega.
+3 posts live hain: `why-your-shop-needs-a-website`, `whatsapp-orders-from-your-website`, `what-a-website-should-cost`. Astro 7 + React islands + Tailwind 4, Markdown collections. Light + dark (Radix slateDark, THEME.md v4). Live: https://blog.kumbuild.com/ — custom domain blog.kumbuild.com Dus khud add karega.
 
 ## 6. docs.kumbuild.com — Help docs (Astro 7 + Starlight)
 
@@ -108,7 +108,7 @@ Login nahi chahiye. Customers ke liye help aur guides — order, preview, paymen
 | Grow | get-found-on-google | Google par dikhna |
 | Help | faq, contact | Aam sawaal, contact |
 
-9 pages, 4 groups. Astro 7 + Starlight 0.42.10, Sora/Inter, light + dark (Radix slateDark, THEME.md v4). Live: https://kumbuild-docs.pages.dev/ — custom domain docs.kumbuild.com Dus khud add karega.
+9 pages, 4 groups. Astro 7 + Starlight 0.42.10, Sora/Inter, light + dark (Radix slateDark, THEME.md v4). Live: https://docs.kumbuild.com/ — custom domain docs.kumbuild.com Dus khud add karega.
 
 ## Guards matrix (client-side — static SPAs me server guard nahi hota)
 

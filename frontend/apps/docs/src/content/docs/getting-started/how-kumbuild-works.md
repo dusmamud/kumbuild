@@ -7,7 +7,7 @@ Kumbuild is a done-for-you website service. You never open a website builder, wr
 
 ## The five steps
 
-1. **Tell us.** Fill the [order form](https://kumbuild-web.pages.dev/order/) — your business details, the package you want, your photos, and your WhatsApp number. Two minutes, no payment yet.
+1. **Tell us.** Fill the [order form](https://kumbuild.com/order/) — your business details, the package you want, your photos, and your WhatsApp number. Two minutes, no payment yet.
 2. **Advance.** We confirm the details with you on WhatsApp and share a Razorpay payment link for the 50% advance. Work starts when the advance arrives.
 3. **Preview.** Within 3–5 working days you get a private preview link of your website — real pages, your photos, your prices.
 4. **Approve.** You check the preview and can ask for changes — two revision rounds are free. Tell us on WhatsApp, in your own words; no forms.

@@ -37,7 +37,7 @@ A steady trickle of real reviews is the strongest local signal there is — stro
 
 ## 5. Write about what customers ask you
 
-Short, practical answers — what things cost, how to choose, what to expect — bring searchers to you before they are ready to buy. That is exactly what the [Kumbuild blog](https://kumbuild-blog.pages.dev) is for; start with [why your shop needs a website](https://kumbuild-blog.pages.dev/why-your-shop-needs-a-website/).
+Short, practical answers — what things cost, how to choose, what to expect — bring searchers to you before they are ready to buy. That is exactly what the [Kumbuild blog](https://blog.kumbuild.com) is for; start with [why your shop needs a website](https://blog.kumbuild.com/why-your-shop-needs-a-website/).
 
 :::note[Be patient with Google]
 A new website takes days — sometimes a couple of weeks — to appear in search results. That is normal. If your site still does not appear for its exact business name after two weeks, see [Troubleshooting](/help/troubleshooting/).

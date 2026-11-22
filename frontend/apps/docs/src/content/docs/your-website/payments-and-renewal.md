@@ -3,7 +3,7 @@ title: Payments and renewal
 description: The 50% advance, the balance on approval, and what the yearly renewal covers.
 ---
 
-Payments are simple and in the open — the price on the [pricing page](https://kumbuild-web.pages.dev/pricing/) is the price you pay.
+Payments are simple and in the open — the price on the [pricing page](https://kumbuild.com/pricing/) is the price you pay.
 
 ## How payment works
 
@@ -37,10 +37,10 @@ Your package includes the first year. After that, a yearly renewal of **₹1,999
 - Security updates and backups
 - Your website staying live and fast
 
-See the [maintenance page](https://kumbuild-web.pages.dev/maintenance/) for everything the renewal covers.
+See the [maintenance page](https://kumbuild.com/maintenance/) for everything the renewal covers.
 
 We remind you on WhatsApp before the renewal date — nothing is charged silently. If you choose not to renew, your website's files and domain are still yours; see [How Kumbuild works](/getting-started/how-kumbuild-works/#what-you-own).
 
 ## Refunds
 
-Changed your mind before work starts? The full advance comes back. Our complete refund terms are on the [refund policy](https://kumbuild-web.pages.dev/refund/).
+Changed your mind before work starts? The full advance comes back. Our complete refund terms are on the [refund policy](https://kumbuild.com/refund/).

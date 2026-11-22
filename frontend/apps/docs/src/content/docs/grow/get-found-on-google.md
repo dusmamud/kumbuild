@@ -21,4 +21,4 @@ Two things help more than everything else combined:
 
 ## Writing that brings customers
 
-Short, practical articles — what things cost, how to choose, what to expect — bring searchers to you before they are ready to buy. That is exactly what the [Kumbuild blog](https://kumbuild-blog.pages.dev) is for; start with [why your shop needs a website](https://kumbuild-blog.pages.dev/why-your-shop-needs-a-website/).
+Short, practical articles — what things cost, how to choose, what to expect — bring searchers to you before they are ready to buy. That is exactly what the [Kumbuild blog](https://blog.kumbuild.com) is for; start with [why your shop needs a website](https://blog.kumbuild.com/why-your-shop-needs-a-website/).

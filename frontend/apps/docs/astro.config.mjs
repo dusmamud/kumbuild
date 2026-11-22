@@ -1,14 +1,14 @@
-// Kumbuild docs — live at https://kumbuild-docs.pages.dev for now.
-// docs.kumbuild.com is NOT bought yet; when Dus buys/adds the custom
-// domain, point `site` (and the og:image URLs below) back to
-// https://docs.kumbuild.com — Starlight builds canonicals, sitemap and
-// og:url from `site`, so a wrong host poisons all three (audit F2).
+// Kumbuild docs — live at https://docs.kumbuild.com (custom domain
+// added 2026-11-21). Starlight builds canonicals, sitemap and og:url
+// from `site`, so it must always be the real domain — when it pointed
+// at kumbuild-docs.pages.dev, every docs page told Google the
+// pages.dev copy was the real one (fixed 2026-11-22).
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://kumbuild-docs.pages.dev",
+  site: "https://docs.kumbuild.com",
   integrations: [
     starlight({
       title: "Kumbuild Docs",
@@ -22,14 +22,14 @@ export default defineConfig({
           tag: "meta",
           attrs: {
             property: "og:image",
-            content: "https://kumbuild-docs.pages.dev/logo/kumbuild-logo.svg",
+            content: "https://docs.kumbuild.com/logo/kumbuild-logo.svg",
           },
         },
         {
           tag: "meta",
           attrs: {
             name: "twitter:image",
-            content: "https://kumbuild-docs.pages.dev/logo/kumbuild-logo.svg",
+            content: "https://docs.kumbuild.com/logo/kumbuild-logo.svg",
           },
         },
       ],

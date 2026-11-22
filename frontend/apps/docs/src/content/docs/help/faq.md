@@ -29,4 +29,4 @@ Two revision rounds are free. See the preview, tell us the changes, and we will 
 
 ## Can I get a refund?
 
-Changed your mind before work starts? The full advance comes back. The complete terms are on the [refund policy](https://kumbuild-web.pages.dev/refund/), and the payment steps are in [Payments and renewal](/your-website/payments-and-renewal/).
+Changed your mind before work starts? The full advance comes back. The complete terms are on the [refund policy](https://kumbuild.com/refund/), and the payment steps are in [Payments and renewal](/your-website/payments-and-renewal/).
