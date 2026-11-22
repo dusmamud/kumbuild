@@ -1,5 +1,6 @@
 ---
 import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
+import SmartImage from "./SmartImage.astro";
 interface Props { dict: Dictionary; locale: Locale; }
 const { dict, locale } = Astro.props;
 const b = dict.v2.homeV2;
@@ -8,11 +9,12 @@ const b = dict.v2.homeV2;
 <section class="bg-paper">
   <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-14">
     <figure data-reveal class="relative overflow-hidden rounded-[20px]">
-      <img
+      <SmartImage
         src="/work/work-flavoro.webp"
         alt="Flavoro restaurant website, live at flavoro.pages.dev — the kind of business Kumbuild builds websites for"
         width="2048"
         height="1152"
+        sizes="(max-width: 1024px) 100vw, 50vw"
         class="aspect-[4/3] w-full object-cover"
         loading="lazy"
       />

@@ -41,9 +41,9 @@
   --color-warn: #d97706;
   --color-danger: #dc2626;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     "Noto Sans Devanagari", "Noto Sans Bengali", sans-serif;
-  --font-display: "Sora", "Inter", "Noto Sans Devanagari",
+  --font-display: "Sora", "Sora Fallback", "Inter", "Inter Fallback", "Noto Sans Devanagari",
     "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
@@ -57,9 +57,11 @@
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+  /* Composited pulse (transform + opacity only) — box-shadow animation
+     Lighthouse ki non-composited warning deta tha aur paint mehenga tha. */
   @keyframes live-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgb(31 157 97 / 0.35); }
-    50% { box-shadow: 0 0 0 5px rgb(31 157 97 / 0); }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
   }
 }
 

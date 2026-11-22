@@ -9,12 +9,8 @@ import ClientRouter from "astro/components/ClientRouter.astro";
   no experimental flag). Short cross-fade only; see starlight.css for the
   duration + the reduced-motion kill-switch. -->
 <ClientRouter />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
-/>
+<!-- Fonts self-hosted (/fonts/fonts.css) — Google CDN request nahi. -->
+<link rel="stylesheet" href="/fonts/fonts.css" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f6" />
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111113" />
 <!-- Radix slateDark vars resolve under .dark; Starlight toggles data-theme, so keep .dark in sync (initial + on change). Runs inline in <head>, after Starlight's own theme script, so the first paint already has the right class. -->

@@ -1,5 +1,6 @@
 ---
 import "../styles/theme.css";
+import "../styles/fonts.css";
 import Icon from "../components/Icon.astro";
 import { pageUrl, type Dictionary, type Locale } from "../i18n/utils";
 
@@ -160,12 +161,12 @@ const noteParts = dict.hero.note.split(" · ");
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Kumbuild" />
-    <meta property="og:image" content="https://kumbuild.com/og/kumbuild-og.png" />
+    <meta property="og:image" content="https://kumbuild.com/og/kumbuild-og.jpg" />
     <meta property="og:locale" content={ogLocale} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={`${title} — Kumbuild`} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://kumbuild.com/og/kumbuild-og.png" />
+    <meta name="twitter:image" content="https://kumbuild.com/og/kumbuild-og.jpg" />
     <link rel="alternate" hreflang="en" href={altUrl("")} />
     <link rel="alternate" hreflang="hi" href={altUrl("/hi")} />
     <link rel="alternate" hreflang="bn" href={altUrl("/bn")} />
@@ -182,12 +183,10 @@ const noteParts = dict.hero.note.split(" · ");
     <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
     {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
     {extraSchema && <script type="application/ld+json" set:html={JSON.stringify(extraSchema)} />}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
-    />
+    <!-- Fonts self-hosted hain (/fonts/, fonts.css) — Google CDN par koi request nahi.
+         Sirf 2 critical faces preload: Inter 400 (body) + Sora 700 (hero H1). -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/sora-700-latin.woff2" />
   </head>
   <body class="min-h-screen bg-paper text-body">
     <div class="hidden bg-ink text-white md:block">
@@ -204,7 +203,7 @@ const noteParts = dict.hero.note.split(" · ");
       <div class={`relative z-10 border-b border-transparent ${headerTopBg === "surface" ? "bg-surface" : "bg-paper"} transition-[box-shadow,border-color,background-color] duration-300`} id="header-bar" data-rest-bg={headerTopBg === "surface" ? "bg-surface" : "bg-paper"}>
         <div class="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
           <a href={pageUrl(locale, "/")} class="flex shrink-0 items-center gap-2 text-ink">
-            <img src="/logo/kumbuild-logo.svg" alt="Kumbuild" width="32" height="32" class="h-8 w-8" />
+            <img src="/logo/kumbuild-logo.svg" alt="" width="32" height="32" class="h-8 w-8" />
             {/* Wordmark hidden below 360px: at 320 the header row (logo +
                 "Order now" + hamburger) needs ~306px but only 288px are
                 available, so the right div spilled 2px past the viewport.

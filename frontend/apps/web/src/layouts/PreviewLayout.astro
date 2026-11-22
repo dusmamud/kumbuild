@@ -5,6 +5,7 @@
    no Lenis and no [data-reveal] handling: preview/demo pages do not use
    data-reveal, so everything renders visible with plain native scroll. */
 import "../styles/theme.css";
+import "../styles/fonts.css";
 import PreviewBar from "../components/PreviewBar.astro";
 import type { Locale } from "../i18n/utils";
 
@@ -48,19 +49,14 @@ const {
     <meta property="og:title" content={`${title} — Kumbuild`} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://kumbuild.com/og/kumbuild-og.png" />
+    <meta property="og:image" content="https://kumbuild.com/og/kumbuild-og.jpg" />
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Kumbuild" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
-    />
+    <!-- Fonts self-hosted (/fonts/, fonts.css) — Google CDN request nahi. -->
   </head>
   <body class="min-h-screen bg-paper text-body">
     <PreviewBar backHref={backHref} backLabel={backLabel} homeHref={homeHref} orderHref={orderHref} orderLabel={orderLabel} />

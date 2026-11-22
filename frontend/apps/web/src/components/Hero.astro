@@ -50,25 +50,25 @@ const miniProducts = [
           {/*
             Hero photo as <picture>: AVIF first, WebP second, JPG fallback —
             the browser picks the first format it supports, so a browser
-            without AVIF gets WebP, and one without WebP gets JPG. Two
-            widths (520w = the figure's max width, 1040w = 2x for retina)
+            without AVIF gets WebP, and one without WebP gets JPG. Teen
+            widths (520w = figure ki max width, 768w = beech ka mobile/DPR size, 1040w = 2x retina)
             so phones never download the desktop file. fetchpriority="high":
             this is the LCP image.
           */}
           <picture>
             <source
               type="image/avif"
-              srcset="/hero/shop-owner-520.avif 520w, /hero/shop-owner-1040.avif 1040w"
+              srcset="/hero/shop-owner-520.avif 520w, /hero/shop-owner-768.avif 768w, /hero/shop-owner-1040.avif 1040w"
               sizes="(max-width: 520px) 100vw, 520px"
             />
             <source
               type="image/webp"
-              srcset="/hero/shop-owner-520.webp 520w, /hero/shop-owner-1040.webp 1040w"
+              srcset="/hero/shop-owner-520.webp 520w, /hero/shop-owner-768.webp 768w, /hero/shop-owner-1040.webp 1040w"
               sizes="(max-width: 520px) 100vw, 520px"
             />
             <img
               src="/hero/shop-owner-1040.jpg"
-              srcset="/hero/shop-owner-520.jpg 520w, /hero/shop-owner-1040.jpg 1040w"
+              srcset="/hero/shop-owner-520.jpg 520w, /hero/shop-owner-768.jpg 768w, /hero/shop-owner-1040.jpg 1040w"
               sizes="(max-width: 520px) 100vw, 520px"
               alt="A shop owner smiling in his general store — the kind of business Kumbuild builds websites for"
               width="1252"

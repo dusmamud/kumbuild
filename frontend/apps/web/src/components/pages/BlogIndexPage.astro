@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import SmartImage from "../SmartImage.astro";
 import CtaBand from "../CtaBand.astro";
 import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; }
@@ -27,7 +28,7 @@ const fmtDate = (iso: string) =>
           class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition duration-300 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)]"
         >
           <span class="relative block overflow-hidden">
-            <img src={post.img} alt={post.title} width="1200" height="675" loading="lazy" class="aspect-[16/9] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+            <SmartImage src={post.img} alt={post.title} width="1200" height="675" loading="lazy" class="aspect-[16/9] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
             <span class="absolute bottom-3 left-3 rounded-full bg-white/95 px-2.5 py-1 font-mono text-xs font-medium text-primary-700 shadow-sm">{post.tag}</span>
           </span>
           <span class="flex flex-1 flex-col p-6">

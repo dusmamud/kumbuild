@@ -3,6 +3,7 @@
    by the slim Kumbuild preview bar (Back + Order) instead of the full
    site header. Uses PreviewLayout — no Lenis, no data-reveal. */
 import PreviewLayout from "../../layouts/PreviewLayout.astro";
+import SmartImage from "../SmartImage.astro";
 import Icon from "../Icon.astro";
 import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; slug: string; }
@@ -129,7 +130,7 @@ const meta = [
           <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{project.slug}.in</span>
         )}
       </div>
-      <img src={project.img} alt={`${project.name} — ${project.type}, ${project.city}`} width="1600" height="900" fetchpriority="high" class="block aspect-[16/9] w-full object-cover object-top sm:aspect-[21/10]" />
+      <SmartImage src={project.img} alt={`${project.name} — ${project.type}, ${project.city}`} width="1600" height="900" fetchpriority="high" sizes="(max-width: 1200px) 100vw, 1152px" class="block aspect-[16/9] w-full object-cover object-top sm:aspect-[21/10]" />
     </figure>
   </section>
 
@@ -190,7 +191,7 @@ const meta = [
     <div class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {others.map((p) => (
         <a href={pageUrl(locale, `/preview/${p.slug}`)} class="group relative block overflow-hidden rounded-2xl">
-          <img src={p.img} alt={`${p.name} — ${p.type}, ${p.city}`} width="800" height="600" loading="lazy" class="block aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
+          <SmartImage src={p.img} alt={`${p.name} — ${p.type}, ${p.city}`} width="800" height="600" loading="lazy" class="block aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
           <span class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" aria-hidden="true"></span>
           <span class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">
             <Icon name="arrow-right" class="h-4 w-4" />

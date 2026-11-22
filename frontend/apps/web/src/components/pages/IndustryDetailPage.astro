@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import SmartImage from "../SmartImage.astro";
 import Icon from "../Icon.astro";
 import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
 interface Props { dict: Dictionary; locale: Locale; slug: string; }
@@ -76,7 +77,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
         <span class="h-2.5 w-2.5 rounded-full bg-[#AED8BC]" aria-hidden="true"></span>
         <span class="ml-2 truncate rounded-md bg-white px-2.5 py-0.5 font-mono text-[12px] text-muted">{frameHost}</span>
       </div>
-      <img src={page.img} alt={`${item.title} — ${service.title}`} width={imgW} height={imgH} class="block aspect-[16/10] w-full object-cover object-top sm:aspect-[16/8]" />
+      <SmartImage src={page.img} alt={`${item.title} — ${service.title}`} width={imgW} height={imgH} sizes="(max-width: 1200px) 100vw, 1152px" class="block aspect-[16/10] w-full object-cover object-top sm:aspect-[16/8]" />
     </figure>
   </section>
 
@@ -132,7 +133,7 @@ const arrowIcon = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
     <section class="mx-auto max-w-6xl px-4 pb-12 sm:pb-14" data-reveal>
       <h2 class="font-display text-[clamp(1.125rem,1.05rem+0.6vw,1.5rem)] font-semibold text-ink">{ind.caseTitle}</h2>
       <a href={pageUrl(locale, `/work/${caseStudy.slug}`)} class="group mt-6 grid overflow-hidden rounded-2xl border border-line bg-white transition-[border-color,box-shadow] duration-300 hover:border-primary-200 hover:shadow-[0_20px_40px_-24px_rgba(28,25,23,0.3)] sm:grid-cols-[300px_1fr] lg:grid-cols-[360px_1fr]">
-        <img src={caseStudy.img} alt={caseStudy.name} width={caseW} height={caseH} loading="lazy" class="aspect-[16/10] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[240px]" />
+        <SmartImage src={caseStudy.img} alt={caseStudy.name} width={caseW} height={caseH} loading="lazy" sizes="(max-width: 1024px) 100vw, 50vw" class="aspect-[16/10] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[240px]" />
         <div class="p-6 sm:p-8">
           <p class="text-sm font-medium text-muted">{caseStudy.type} · {caseStudy.city}</p>
           <h3 class="mt-2 font-display text-xl font-semibold text-ink">{caseStudy.name}</h3>

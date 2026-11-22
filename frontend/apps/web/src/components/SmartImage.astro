@@ -1,0 +1,69 @@
+---
+/* SmartImage — scripts/optimize-images.mjs ke naming convention par
+   <picture> emit karta hai: AVIF pehle, phir WebP, phir original format
+   fallback. Jo width-variant file asal me exist karti hai (build-time fs
+   check), sirf wahi srcset me aati hai; variant na ho to seedha <img>.
+   Master/original file hamesha fallback rehta hai — purane URLs kabhi
+   toot-te nahi. */
+import { existsSync } from "node:fs";
+import path from "node:path";
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number | string;
+  height?: number | string;
+  class?: string;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "low" | "auto";
+  sizes?: string;
+  widths?: number[];
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: className,
+  loading,
+  fetchpriority,
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  widths = [480, 800, 1280],
+} = Astro.props;
+
+const ext = src.split(".").pop()?.toLowerCase() ?? "";
+const stem = src.slice(0, -(ext.length + 1));
+const publicDir = path.join(process.cwd(), "public");
+const exists = (p: string) => existsSync(path.join(publicDir, p.replace(/^\//, "")));
+
+const avifSet = widths.filter((w) => exists(`${stem}-${w}.avif`)).map((w) => `${stem}-${w}.avif ${w}w`);
+const webpSet = widths.filter((w) => exists(`${stem}-${w}.webp`)).map((w) => `${stem}-${w}.webp ${w}w`);
+const origSet =
+  ext === "jpg" || ext === "jpeg" || ext === "png"
+    ? widths.filter((w) => exists(`${stem}-${w}.${ext}`)).map((w) => `${stem}-${w}.${ext} ${w}w`)
+    : [];
+const hasPicture = avifSet.length > 0 || webpSet.length > 0;
+---
+
+{
+  hasPicture ? (
+    <picture>
+      {avifSet.length > 0 && <source type="image/avif" srcset={avifSet.join(", ")} sizes={sizes} />}
+      {webpSet.length > 0 && <source type="image/webp" srcset={webpSet.join(", ")} sizes={sizes} />}
+      <img
+        src={src}
+        srcset={origSet.length > 0 ? origSet.join(", ") : undefined}
+        sizes={origSet.length > 0 ? sizes : undefined}
+        alt={alt}
+        width={width}
+        height={height}
+        class={className}
+        loading={loading}
+        fetchpriority={fetchpriority}
+      />
+    </picture>
+  ) : (
+    <img src={src} alt={alt} width={width} height={height} class={className} loading={loading} fetchpriority={fetchpriority} />
+  )
+}

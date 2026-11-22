@@ -12,7 +12,7 @@
    under the .dark class, so Head.astro syncs .dark with data-theme.
    Fonts: Sora + Inter, matching kumbuild.com. */
 :root {
-  --sl-font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans Devanagari", "Noto Sans Bengali", sans-serif;
+  --sl-font: "Inter", "Inter Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans Devanagari", "Noto Sans Bengali", sans-serif;
   --sl-font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
 
   /* Dark — Radix Colors slateDark, same mapping as the other apps:
@@ -73,7 +73,7 @@
 .sl-markdown-content h3,
 h1#_top,
 .site-title {
-  font-family: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Sora", "Sora Fallback", "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* --- Responsive fix (audit 2026-11-11): brand strip height compensation ---

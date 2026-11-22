@@ -7,6 +7,7 @@ import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import { NAV_LINKS, topicSlug } from "../lib/site";
 import "../styles/theme.css";
+import "../styles/fonts.css";
 
 interface Props {
   title: string;
@@ -68,12 +69,7 @@ const year = new Date().getFullYear();
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f6" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111113" />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
-    />
+    <!-- Fonts self-hosted (/fonts/, fonts.css) — Google CDN request nahi. -->
   </head>
   <body class="min-h-screen">
     <div class="bg-[#1c1917] text-white">

@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import SmartImage from "../SmartImage.astro";
 import CtaBand from "../CtaBand.astro";
 import Icon from "../../components/Icon.astro";
 import { pageUrl, type Dictionary, type Locale } from "../../i18n/utils";
@@ -46,7 +47,7 @@ const founderSchema = {
           </div>
         </div>
         <figure data-reveal class="relative lg:col-span-6">
-          <img src="/about/studio.webp" alt={v.imgAlt} width="1600" height="686" loading="lazy" class="aspect-[21/9] w-full rounded-[24px] border border-line object-cover shadow-[0_32px_64px_-32px_rgba(28,25,23,0.35)] lg:aspect-[4/3]" />
+          <SmartImage src="/about/studio.webp" alt={v.imgAlt} width="1600" height="686" loading="lazy" sizes="(max-width: 1200px) 100vw, 1152px" class="aspect-[21/9] w-full rounded-[24px] border border-line object-cover shadow-[0_32px_64px_-32px_rgba(28,25,23,0.35)] lg:aspect-[4/3]" />
           <figcaption class="mt-4 flex items-center justify-between gap-4 rounded-2xl border border-line bg-white px-5 py-4 shadow-[0_16px_32px_-20px_rgba(28,25,23,0.3)] xl:absolute xl:-bottom-6 xl:left-6 xl:mt-0 xl:w-[320px]">
             <span>
               <span class="block font-mono text-xs text-muted">{slip.heading} · {slip.ref}</span>
