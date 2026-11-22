@@ -27,6 +27,19 @@ const current = pageUrl(locale, slug);
    pins every page to kumbuild.com so the *.pages.dev copies of this
    project never compete with the real domain. */
 const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://kumbuild.com").href;
+/* hreflang: same page in every locale. Strip the current locale prefix
+   from the path, then rebuild one URL per locale (+ x-default = en). */
+const pathNoLocale = (() => {
+  const p = Astro.url.pathname;
+  for (const pre of ["/hi", "/bn", "/as"]) {
+    if (p === pre || p.startsWith(pre + "/")) return p.slice(pre.length) || "/";
+  }
+  return p;
+})();
+const altUrl = (pre: string) =>
+  new URL(pre + pathNoLocale, Astro.site ?? "https://kumbuild.com").href;
+const ogLocale =
+  locale === "hi" ? "hi_IN" : locale === "bn" ? "bn_IN" : locale === "as" ? "as_IN" : "en_US";
 const siteSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -96,14 +109,24 @@ const noteParts = dict.hero.note.split(" · ");
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Kumbuild" />
     <meta property="og:image" content="https://kumbuild.com/og/kumbuild-og.png" />
+    <meta property="og:locale" content={ogLocale} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={`${title} — Kumbuild`} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://kumbuild.com/og/kumbuild-og.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
-    <link rel="icon" type="image/svg+xml" href="/logo/kumbuild-logo.svg" />
+    <link rel="alternate" hreflang="en" href={altUrl("")} />
+    <link rel="alternate" hreflang="hi" href={altUrl("/hi")} />
+    <link rel="alternate" hreflang="bn" href={altUrl("/bn")} />
+    <link rel="alternate" hreflang="as" href={altUrl("/as")} />
+    <link rel="alternate" hreflang="x-default" href={altUrl("")} />
+    {/* Favicon set generated with RealFaviconGenerator (2026-11-22) from
+        the blue-bg logo master — see site.webmanifest for app icons. */}
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Kumbuild" />
+    <link rel="manifest" href="/site.webmanifest" />
     <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
