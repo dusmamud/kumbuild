@@ -187,19 +187,21 @@ const noteParts = dict.hero.note.split(" · ");
          Sirf 2 critical faces preload: Inter 400 (body) + Sora 700 (hero H1). -->
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/sora-700-latin.woff2" />
-    <!-- Google Analytics 4 — sirf main site par. PreviewLayout (demo/preview
-         pages) par jaan-bujh kar NAHI lagaya, warna demo traffic asli site ke
-         data me mil jayega. Cloudflare Web Analytics zone-level par alag se
-         pehle se on hai (beacon auto-injected). -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-Q7X43KZRGV"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "G-Q7X43KZRGV");
-    </script>
+    <!-- Google Tag Manager — saare marketing/analytics tags (GA4 abhi,
+         Meta Pixel / Google Ads aage) isi container GTM-KBCHZ72P se chalenge.
+         Direct gtag hata diya hai: GA4 GTM ke andar hai, dono rehte to
+         page_view double count hota. PreviewLayout (demo pages) par GTM bhi
+         jaan-bujh kar nahi lagaya. Cloudflare Web Analytics zone-level par
+         alag se pehle se on hai (beacon auto-injected). -->
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KBCHZ72P');</script>
   </head>
   <body class="min-h-screen bg-paper text-body">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KBCHZ72P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hidden bg-ink text-white md:block">
       <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-1.5 text-xs sm:px-6">
         <p class="flex items-center gap-2 text-white/85">
