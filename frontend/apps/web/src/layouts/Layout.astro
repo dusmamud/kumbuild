@@ -187,6 +187,17 @@ const noteParts = dict.hero.note.split(" · ");
          Sirf 2 critical faces preload: Inter 400 (body) + Sora 700 (hero H1). -->
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/sora-700-latin.woff2" />
+    <!-- Google Analytics 4 — sirf main site par. PreviewLayout (demo/preview
+         pages) par jaan-bujh kar NAHI lagaya, warna demo traffic asli site ke
+         data me mil jayega. Cloudflare Web Analytics zone-level par alag se
+         pehle se on hai (beacon auto-injected). -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-Q7X43KZRGV"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-Q7X43KZRGV");
+    </script>
   </head>
   <body class="min-h-screen bg-paper text-body">
     <div class="hidden bg-ink text-white md:block">
