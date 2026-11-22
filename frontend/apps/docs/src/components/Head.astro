@@ -113,9 +113,9 @@ import ClientRouter from "astro/components/ClientRouter.astro";
     function rewrite() {
       if (!window.location.hostname.endsWith(".pages.dev")) return;
       var map = {
-        "kumbuild.com": "kumbuild-web.pages.dev",
-        "blog.kumbuild.com": "kumbuild-blog.pages.dev",
-        "docs.kumbuild.com": "kumbuild-docs.pages.dev",
+        "kumbuild.com": "kumbuild-main-8hs.pages.dev",
+        "blog.kumbuild.com": "kumbuild-blog-7ha.pages.dev",
+        "docs.kumbuild.com": "kumbuild-docs-4fs.pages.dev",
       };
       document.querySelectorAll('a[href*="kumbuild.com"]').forEach(function (a) {
         try {

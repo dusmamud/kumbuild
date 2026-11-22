@@ -317,13 +317,9 @@ const year = new Date().getFullYear();
         function rewrite() {
           if (!window.location.hostname.endsWith(".pages.dev")) return;
           var map = {
-            "kumbuild.com": "kumbuild-web.pages.dev",
-            "blog.kumbuild.com": "kumbuild-blog.pages.dev",
-            "docs.kumbuild.com": "kumbuild-docs.pages.dev",
-            "account.kumbuild.com": "kumbuild-account.pages.dev",
-            "auth.kumbuild.com": "kumbuild-account.pages.dev",
-            "admin.kumbuild.com": "kumbuild-admin.pages.dev",
-            "home.kumbuild.com": "kumbuild-home.pages.dev",
+            "kumbuild.com": "kumbuild-main-8hs.pages.dev",
+            "blog.kumbuild.com": "kumbuild-blog-7ha.pages.dev",
+            "docs.kumbuild.com": "kumbuild-docs-4fs.pages.dev",
           };
           document.querySelectorAll('a[href*="kumbuild.com"]').forEach(function (a) {
             try {
