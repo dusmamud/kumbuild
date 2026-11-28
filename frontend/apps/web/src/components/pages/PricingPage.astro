@@ -119,7 +119,7 @@ const rc = dict.pricing.runningCosts;
   {/* Which plan is for whom — the customer-type map from the pricing doc. */}
   <section class="mx-auto max-w-6xl px-4 pb-12 sm:px-6">
     <SectionHead title={w.title} subtitle={w.subtitle} />
-    <div data-reveal class="mt-8 overflow-x-auto rounded-2xl border border-line bg-white" data-lenis-prevent>
+    <div data-reveal class="relative mt-8 overflow-x-auto rounded-2xl border border-line bg-white" data-lenis-prevent>
       <table class="w-full min-w-[560px] border-collapse text-left">
         <tbody>
           {w.items.map((row) => (

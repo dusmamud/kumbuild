@@ -76,6 +76,12 @@
 
 html {
   scroll-behavior: smooth;
+  /* Safety net: never let page-level horizontal overflow escape (e.g. an
+     absolutely-positioned element inside a sideways-scrolling table).
+     `clip` — not `hidden` — so no scroll container is created and the
+     sticky header keeps working. The real fix is `relative` on the table
+     scrollers; this only guards against the same class of bug elsewhere. */
+  overflow-x: clip;
 }
 html.lenis,
 html.lenis body {
@@ -92,6 +98,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 ::selection {
