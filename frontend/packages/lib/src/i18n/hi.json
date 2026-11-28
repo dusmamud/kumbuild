@@ -58,7 +58,7 @@
       },
       {
         "q": "वेबसाइट की कुल कीमत कितनी होगी?",
-        "a": "Starter ₹3,999, Business ₹7,999, Premium ₹14,999 (सभी शुरुआती दरें हैं)। हर साल का रिन्यूअल ₹1,999 है।"
+        "a": "Starter ₹7,999, Business ₹14,999, Premium ₹24,999। अलग ऑनलाइन Store प्लान ₹49,999 से शुरू। सालाना रिन्यूअल ₹2,999 है।"
       },
       {
         "q": "पेमेंट कैसे करना होगा?",
@@ -84,7 +84,6 @@
   },
   "footer": {
     "tagline": "बस बताइए क्या बनवाना है।",
-    "draftNote": "दर्शाई गई कीमतें शुरुआती प्रारूप हैं और पेमेंट से पहले कन्फ़र्म की जाएंगी।",
     "services": "सेवाएं",
     "company": "कंपनी",
     "legal": "कानूनी व नीतियां",
@@ -99,7 +98,7 @@
     "subtitle": "हम आपकी दुकान, क्लिनिक, ट्यूशन सेंटर, सैलून या रेस्तरां के लिए तेज़, मोबाइल-फ़र्स्ट वेबसाइट बनाते हैं — आपको बस बताना है क्या चाहिए। न कोड, न डिज़ाइन टूल्स, न कोई झंझट।",
     "ctaOrder": "मेरी वेबसाइट का ऑर्डर दें",
     "ctaPricing": "कीमतें देखें",
-    "note": "₹3,999 से शुरुआत · 3–5 कार्यदिवसों में डिलीवरी · 50% एडवांस · 2 मुफ़्त रिविज़न"
+    "note": "₹7,999 से शुरुआत · 3–7 कार्यदिवसों में डिलीवरी · 50% एडवांस · 2 मुफ़्त रिविज़न"
   },
   "home": {
     "whoTitle": "आपके जैसे व्यवसायों के लिए विशेष रूप से निर्मित",
@@ -137,7 +136,7 @@
         "k": "कार्यदिवसों में आपका प्रीव्यू तैयार"
       },
       {
-        "v": "₹3,999",
+        "v": "₹7,999",
         "k": "शुरुआती एकमुश्त कीमत"
       },
       {
@@ -172,7 +171,7 @@
       "rows": [
         {
           "k": "पैकेज",
-          "v": "Business — ₹7,999"
+          "v": "Business — ₹14,999"
         },
         {
           "k": "एडवांस",
@@ -384,7 +383,7 @@
       },
       {
         "text": "WhatsApp पर Razorpay लिंक से पेमेंट करें — UPI, कार्ड, नेट-बैंकिंग।",
-        "title": "आप ₹1,999 देते हैं"
+        "title": "आप ₹2,999 देते हैं"
       },
       {
         "text": "डोमेन, होस्टिंग, अपडेट और सहायता एक और साल चलती रहती है।",
@@ -497,77 +496,418 @@
   "pricing": {
     "title": "सरल और पारदर्शी कीमतें",
     "subtitle": "एकमुश्त शुरुआती कीमत। कोई छुपा शुल्क नहीं। वार्षिक रिन्यूअल से आपका डोमेन, होस्टिंग और सपोर्ट चालू रहता है।",
-    "note": "दर्शाई गई कीमतें शुरुआती प्रारूप हैं और पेमेंट से पहले कन्फ़र्म की जाएंगी।",
-    "terms": "ऑर्डर पर 50% एडवांस · मंज़ूरी मिलने पर बाकी 50%, लाइव होने से पहले · 2 मुफ़्त रिविज़न राउंड · Razorpay द्वारा सुरक्षित भुगतान (UPI, कार्ड, नेटबैंकिंग, वॉलेट)।",
+    "note": "ब्लॉग पोस्ट और स्टोर के प्रोडक्ट पेज की गिनती में नहीं आते। Business में 20 और Premium में 30 से ऊपर के पेज per-page रेट पर बनते हैं। लिखाई (कॉपीराइटिंग) दोनों बड़े प्लान में 10 पेज तक शामिल है।",
+    "terms": "ऑर्डर पर 50% एडवांस · मंज़ूरी मिलने पर बाकी 50%, लाइव होने से पहले · Premium और Store पर 2–3 किश्तों में भुगतान की सुविधा · 2 मुफ़्त रिविज़न राउंड (Starter और Business), Premium पर 3।",
     "packages": [
       {
-        "name": "Starter",
         "slug": "starter",
-        "price": "₹3,999",
-        "per": "एकमुश्त",
-        "bestFor": "छोटी दुकान या Instagram पेज के लिए — 1 पेज ही काफ़ी है।",
-        "cta": "Starter चुनें",
-        "features": [
-          "1 पेज",
-          "मोबाइल-फ़्रेंडली डिज़ाइन",
-          "WhatsApp बटन",
-          "Google Maps लोकेशन",
-          "संपर्क व पूछताछ फ़ॉर्म",
-          "बेसिक SEO",
-          "SSL (https) सुरक्षा"
-        ]
-      },
-      {
-        "name": "Business",
-        "slug": "business",
+        "name": "Starter",
         "price": "₹7,999",
         "per": "एकमुश्त",
-        "bestFor": "क्लिनिक, ट्यूशन, सैलून — जिन्हें एक संपूर्ण वेबसाइट चाहिए।",
-        "cta": "Business चुनें",
+        "bestFor": "छोटी दुकान, Instagram seller, personal page — एक साधारण वेबसाइट जो आपकी पहचान बताए।",
+        "cta": "Starter चुनें",
         "features": [
-          "5 पेज तक",
-          "Starter की सभी सुविधाएं",
-          "सेवाएं और फ़ोटो गैलरी",
-          "व्यवसाय का परिचय पेज"
+          "5 पेज की वेबसाइट (Home, About, Services, Gallery, Contact)",
+          "WhatsApp चैट बटन + क्लिक-टू-कॉल + enquiry form",
+          "Enquiry सीधा WhatsApp/email पर",
+          "Google Maps · Social media links",
+          "Basic SEO (title, description, sitemap)",
+          "Quality stock photos शामिल (आपकी असली photos हों तो वही best)",
+          "1 भाषा (English या Hindi)",
+          "CMS नहीं — छोटे बदलाव WhatsApp पर कहने से हम कर देंगे (Renewal में शामिल)",
+          "2 revision rounds · Delivery: 5–7 दिन"
         ]
       },
       {
-        "name": "Premium",
-        "slug": "premium",
+        "slug": "business",
+        "name": "Business",
         "price": "₹14,999",
         "per": "एकमुश्त",
-        "bestFor": "अपॉइंटमेंट बुकिंग, WhatsApp ऑर्डरिंग या बड़े उत्पाद कैटलॉग के लिए।",
+        "bestFor": "क्लिनिक, ट्यूशन, सैलून, रेस्टोरेंट, प्रोफेशनल — पूरी बिज़नेस वेबसाइट।",
+        "cta": "Business चुनें",
+        "features": [
+          "Starter की सभी सुविधाएं",
+          "20 पेज तक (core 5 पेज + Blog, FAQ, Price List, Team, Jobs जैसी extra pages)",
+          "अपना CMS login — दाम, photo, offers, timings, blog और listings (property/product) खुद बदलो; design टूट नहीं सकता (सिर्फ तय fields खुले), सुरक्षित login के साथ। Market में admin panel आम तौर पर ₹39,999 वाले plan से मिलता है — हम ₹14,999 में दे रहे हैं, ये हमारी सबसे बड़ी खासियत है",
+          "Logo design शामिल (अगर पहले से ना हो — 2 concepts, सारी files)",
+          "Copywriting शामिल — 10 पेज तक का text हम लिखेंगे; उसके ऊपर के pages का text customer देगा, या per-page लिखाई add-on से हम लिखेंगे",
+          "आपकी photos की editing/polish",
+          "Google Business Profile setup + reviews section + Google review link",
+          "Social media pages setup — Facebook + Instagram (profile photo, cover, bio)",
+          "WhatsApp Business profile setup — catalog + greeting message",
+          "1 business email (जैसे info@aapkinaam.com)",
+          "Form की emails spam में नहीं जाएंगी — सही email setup (SPF/DKIM)",
+          "2 भाषाएँ (जैसे English + Hindi)",
+          "Search Console + Analytics setup",
+          "हर enquiry WhatsApp + email पर तुरंत alert, और admin में पूरी list",
+          "Blog + FAQ section (CMS से खुद post करो)",
+          "Services के दाम वाली list (price list page)",
+          "Team/doctor/staff profiles · काम की gallery (before–after वाली photos के साथ, salon/interior के लिए ख़ास)",
+          "नौकरी वाला page — staff की ज़रूरत हो तो वहीं से enquiry",
+          "Offer वाला banner (CMS से खुद बदलो) · YouTube video लगाना",
+          "Live chat widget — website पर सीधी बात-चीत",
+          "1 महीना Care plan मुफ़्त",
+          "2 revision rounds · Delivery: 3–5 दिन (priority)"
+        ]
+      },
+      {
+        "slug": "premium",
+        "name": "Premium",
+        "price": "₹24,999",
+        "per": "एकमुश्त",
+        "bestFor": "जिसे वेबसाइट से सीधे orders/booking चाहिए।",
         "cta": "Premium चुनें",
         "features": [
           "Business की सभी सुविधाएं",
-          "बुकिंग व अपॉइंटमेंट फ़ॉर्म",
-          "WhatsApp ऑर्डर बटन",
-          "उत्पाद कैटलॉग / मेन्यू सूची",
-          "ज़रूरत के अनुसार पेज",
-          "बेसिक SEO",
-          "SSL (https) सुरक्षा"
+          "30 पेज तक · हल्की animations के साथ premium design",
+          "CMS पूरा खुला — staff के लिए अलग login (कौन क्या बदल सकता है, तय) + CMS training video (recorded)",
+          "Catalogue / menu + हर item पर WhatsApp order button",
+          "Booking / appointment form + Google Calendar booking — booking सीधा आपके Google Calendar में + customer को WhatsApp reminder",
+          "अपना dashboard — enquiries/bookings एक जगह, status के साथ, पूरी list Excel में download भी",
+          "Google reviews live + review माँगने का पूरा system — QR, link और WhatsApp पर भेजने वाले ready संदेश (templates)",
+          "Directory listings — JustDial, Sulekha, IndiaMART, Bing Places पर एक जैसी सही जानकारी (नाम, address, phone हर जगह एक)",
+          "Mini brand kit — logo के सारे version, brand colours, fonts, सारी files",
+          "10 ready-made social post designs",
+          "PWA — site phone पर app की तरह install हो",
+          "Advanced SEO — keyword research + local SEO + schema markup",
+          "Meta Pixel + conversion tracking · Cookie consent setup",
+          "AI search की तैयारी — ChatGPT और Google के AI जवाबों में आपका नाम आने के हिसाब से साफ़ data (llms.txt वगैरह)",
+          "Website के अंदर search · Offer popup · Web push notifications (offers सीधा customer के phone पर)",
+          "Lead magnet page — मुफ़्त guide/checklist के बदले enquiry लेना",
+          "Restaurant के लिए Zomato/Swiggy order buttons",
+          "Brochure/price list का PDF download site से",
+          "2 business email · 4 भाषाएँ (English, Hindi, Bengali, Assamese)",
+          "Counter के लिए print-ready QR code",
+          "WhatsApp के साथ call पर भी support",
+          "3 revision rounds · सबसे तेज़ delivery + सबसे पहले support",
+          "3 महीने Care plan मुफ़्त"
         ]
       }
     ],
     "renewal": {
       "title": "वार्षिक रिन्यूअल",
-      "price": "₹1,999",
+      "price": "₹2,999",
       "per": "प्रति वर्ष",
-      "desc": "डोमेन रिन्यूअल, तेज़ क्लाउड होस्टिंग, छोटे बदलाव (फ़ोन, समय या नई पंक्तियां) और तकनीकी सहायता।",
+      "desc": "डोमेन रिन्यूअल, होस्टिंग, छोटे बदलाव (फ़ोन, समय या एक-दो लाइन) और सपोर्ट — साथ में साल में एक बार पूरी साइट की हेल्थ जाँच।",
       "link": "रखरखाव और रिन्यूअल की पूरी जानकारी"
     },
     "extra": {
       "heading": "हर प्लान में शामिल है",
       "items": [
-        "मोबाइल-फ़र्स्ट डिज़ाइन — आपकी साइट उन फ़ोनों पर सही दिखती है जो आपके ग्राहक असल में इस्तेमाल करते हैं",
-        "WhatsApp पूछताछ — एक-टैप चैट बटन, ऐसे फ़ॉर्म नहीं जो कहीं नहीं जाते",
-        "Google के लिए तैयार बुनियाद — टाइटल, विवरण और साइटमैप ऐसे सेट कि लोग आपको खोज सकें",
-        "डोमेन और होस्टिंग सेटअप — हम जोड़ते हैं और सुरक्षित (SSL) करते हैं",
-        "लॉन्च से पहले प्रीव्यू पर दो मुफ़्त बदलाव के राउंड",
-        "लॉन्च सहायता — साइट लाइव होने और आपके संतुष्ट होने तक हम WhatsApp पर रहते हैं"
+        "Mobile-first design — आपकी साइट उन फ़ोन पर सही दिखेगी जो आपके ग्राहक सच में इस्तेमाल करते हैं",
+        "Domain आपके अपने नाम पर — पहला साल free domain, free hosting और free SSL",
+        "Favicon + app icon · CDN — दुनिया भर में तेज़ · 90+ speed score",
+        "Photos अपने आप optimize — site हल्की और तेज़",
+        "Accessibility basics — बड़े साफ़ अक्षर, सबके लिए आसान",
+        "WhatsApp/Facebook पर share करने पर सुंदर preview",
+        "Form पर spam protection · Google + Bing दोनों में sitemap submit",
+        "Site का सुरक्षित backup — पूरी copy हमेशा safe",
+        "पूरी polish — 404 page + form के बाद का thank-you page भी design के साथ",
+        "Basic Privacy और Terms pages आपकी site के लिए शामिल",
+        "आपके दिए text की सफ़ाई/proofreading",
+        "काम से पहले लिखित quote — कोई hidden charge नहीं",
+        "पहले design preview — पसंद आए तभी आगे का काम",
+        "Launch से पहले पूरी जाँच — हर page, link, form, phone पर test",
+        "Delivery की लिखित guarantee — तय तारीख़ quote में लिख कर देंगे",
+        "Handover guarantee — कभी छोड़ो तो domain, files, सारा data आपका; कोई lock-in नहीं",
+        "Launch के बाद 30 दिन मुफ़्त support",
+        "Launch पर 30-minute training call + 1-page guide",
+        "दूसरे साल से Renewal ₹2,999/year — domain renew + hosting + छोटे updates + साल में एक बार पूरी site की health जाँच"
       ],
       "renewalTitle": "रिन्यूअल, साफ़ शब्दों में",
-      "renewalText": "आपका पहला भुगतान वेबसाइट बनाता है। ₹1,999 का सालाना रिन्यूअल उसे ज़िंदा रखता है: आपका डोमेन नाम रिन्यू, होस्टिंग का भुगतान, छोटे अपडेट (फ़ोन नंबर, समय, एक-दो लाइन का टेक्स्ट) आपके लिए किए हुए, और कुछ गड़बड़ लगे तो सहायता। अगर आप कभी रिन्यूअल बंद करते हैं, तो भी आपकी वेबसाइट की फ़ाइलें और डोमेन आपके ही रहते हैं — हम सब सौंप देते हैं। कोई बंधन नहीं, कोई बंधक डोमेन नहीं।"
+      "renewalText": "आपका पहला भुगतान वेबसाइट बनाता है। ₹2,999 का सालाना रिन्यूअल उसे ज़िंदा रखता है: आपका डोमेन रिन्यू, होस्टिंग, छोटे बदलाव (फ़ोन नंबर, समय, एक-दो लाइन) आपके लिए, कुछ गड़बड़ लगे तो सपोर्ट, और साल में एक बार पूरी साइट की हेल्थ जाँच। कभी रिन्यूअल बंद कर दें तो भी वेबसाइट की फ़ाइलें और डोमेन आपके ही रहते हैं — हम सब कुछ सौंप देते हैं। कोई lock-in नहीं, कोई बंधक डोमेन नहीं। वेबसाइट का static हिस्सा आपका रहता है; dashboard, reminders और enquiry list जैसी backend सुविधाएँ रिन्यूअल न होने पर बंद हो जाएँगी — चाहें तो डोमेन/होस्टिंग खुद भी संभाल सकते हैं, क्योंकि डोमेन आपके नाम पर है।"
+    },
+    "honestyNote": "कुछ सुविधाएँ पीछे के सिस्टम से जुड़ी हैं — enquiry dashboard, online payment और Calendar booking। ये आपके प्लान में शामिल हैं और तैयार होते ही आपके लिए चालू कर दी जाएँगी।",
+    "store": {
+      "title": "पूरा ऑनलाइन स्टोर चाहिए?",
+      "subtitle": "Store एक अलग प्लान है — Premium की सब कुछ, साथ में बेचना।",
+      "name": "Store (E-commerce)",
+      "price": "₹49,999+",
+      "per": "से शुरू",
+      "bestFor": "पूरा ऑनलाइन स्टोर — market rate भी ₹49,999+ है।",
+      "cta": "Store के बारे में पूछें",
+      "features": [
+        "50 products तक शामिल (variants — size/colour के साथ); ज़्यादा पर add-on",
+        "Cart + आसान checkout (नाम, phone, address — बस)",
+        "Razorpay online payment (UPI, card, netbanking, wallet) + Cash on Delivery",
+        "Shiprocket/Delhivery से delivery setup — pincode checker, shipping charges के नियम",
+        "GST वाला bill हर order पर · Order की पूरी pipeline (नया → packed → भेजा → delivered) + नया order आते ही phone पर alert",
+        "Customer accounts + order tracking — customer खुद देखे order कहाँ है",
+        "Coupon/discount codes · Stock की निगरानी + कम stock की चेतावनी",
+        "छूटा हुआ cart वापस — आधा छोड़ा order, WhatsApp/email से reminder",
+        "Product reviews · Wishlist · नकली COD orders रोकने की जाँच",
+        "Facebook/Instagram Shop + Google Shopping से sync",
+        "Refund/shipping की policy pages · Store की SEO",
+        "बड़े store पर: multi-currency, gift wrap, gift card, loyalty points, sale countdown, back-in-stock alert — scope के हिसाब से"
+      ],
+      "note": "ऑर्डर फ़ॉर्म में कोई भी पैकेज चुनकर message में 'Store' लिख दें — Store का quote WhatsApp पर confirm करेंगे।"
+    },
+    "addons": {
+      "title": "Add-ons — किसी भी प्लान के साथ",
+      "subtitle": "छोटा setup काम ₹999–1,999, बीच का काम ₹2,999, बड़ा/custom काम ₹4,999 से, monthly वाले ₹999–2,999। 2–3 add-on लेने पर बड़ा प्लान ही सस्ता पड़े — इसीलिए ऐसे रखे हैं।",
+      "items": [
+        {
+          "name": "Care Plan",
+          "price": "₹999/month या ₹9,999/year",
+          "desc": "monthly visitor report (आसान Hindi में), CMS के अलावा वाले छोटे changes भी हम, site की निगरानी, Google reviews की निगरानी और जवाब, सबसे पहले जवाब।"
+        },
+        {
+          "name": "Directory listings package",
+          "price": "₹2,999",
+          "desc": "JustDial/Sulekha/IndiaMART/Bing पर सही listing + पुरानी ग़लत/duplicate listings की सफ़ाई। (Premium में शामिल)"
+        },
+        {
+          "name": "Online payment button",
+          "price": "₹1,999",
+          "desc": "बुकिंग/advance के लिए Razorpay link, बिना store के।"
+        },
+        {
+          "name": "Google Calendar booking",
+          "price": "₹1,999",
+          "desc": "Business के लिए। (Premium में शामिल)"
+        },
+        {
+          "name": "AI chat assistant",
+          "price": "₹4,999",
+          "desc": "आपके services/FAQ पर trained website chat।"
+        },
+        {
+          "name": "CRM / Google Sheet lead pipeline",
+          "price": "₹1,999",
+          "desc": "सारी enquiries एक Sheet/CRM में।"
+        },
+        {
+          "name": "Newsletter signup + email campaign setup",
+          "price": "₹1,999",
+          "desc": "offers email से भेजो।"
+        },
+        {
+          "name": "Social media संभालना",
+          "price": "₹2,999/month",
+          "desc": "महीने भर के posts + त्योहार वाले designs।"
+        },
+        {
+          "name": "Google Profile पर महीने के posts",
+          "price": "₹999/month",
+          "desc": "GBP हमेशा ताज़ा।"
+        },
+        {
+          "name": "Ads setup",
+          "price": "₹2,999",
+          "desc": "पहला Google/Meta campaign बनाना (ad का खर्चा customer का, अलग से; landing page चाहिए तो वो वाला add-on)।"
+        },
+        {
+          "name": "छोटा intro/promo video",
+          "price": "₹2,499 से",
+          "desc": "दुकान/business का video या reel।"
+        },
+        {
+          "name": "Event/शादी का page",
+          "price": "₹2,999",
+          "desc": "RSVP form, countdown और venue के map के साथ।"
+        },
+        {
+          "name": "Digital visiting card",
+          "price": "₹999",
+          "desc": "एक link वाला online card (Starter के लिए ख़ास)।"
+        },
+        {
+          "name": "Online class जोड़ना",
+          "price": "₹999",
+          "desc": "coaching के लिए Zoom/Google Meet setup।"
+        },
+        {
+          "name": "दाम गिनने वाला calculator",
+          "price": "₹4,999 से",
+          "desc": "तुरंत estimate (interior/courier जैसों के लिए)।"
+        },
+        {
+          "name": "Extra page / blog लिखाई",
+          "price": "₹1,499 per page · blog post ₹999",
+          "desc": "per page, SEO के हिसाब से।"
+        },
+        {
+          "name": "दूसरी branch का page",
+          "price": "₹1,999 per branch",
+          "desc": "हर branch का अलग page + Maps।"
+        },
+        {
+          "name": "Visiting card + letterhead/bill design",
+          "price": "₹999",
+          "desc": ""
+        },
+        {
+          "name": "पुरानी website से नई पर shift",
+          "price": "₹2,999 से",
+          "desc": "पुराना content + पुराने links का ध्यान।"
+        },
+        {
+          "name": "ज़्यादा business email IDs",
+          "price": "₹499 per ID (setup)",
+          "desc": "team के लिए।"
+        },
+        {
+          "name": "WhatsApp broadcast campaign",
+          "price": "₹999 per campaign",
+          "desc": "आपके customers को offer वाला संदेश भेजना (per-message खर्चा customer का)।"
+        },
+        {
+          "name": "WhatsApp auto-जवाब bot",
+          "price": "₹2,999",
+          "desc": "आम सवालों के जवाब अपने आप।"
+        },
+        {
+          "name": "हर महीने blog लिखाई pack",
+          "price": "₹2,999/month (4 posts)",
+          "desc": "SEO के लिए नियमित blog posts हम लिखेंगे।"
+        },
+        {
+          "name": "Website redesign",
+          "price": "₹9,999 से",
+          "desc": "पुरानी site का बिल्कुल नया रूप।"
+        },
+        {
+          "name": "सिर्फ एक landing page",
+          "price": "₹3,999",
+          "desc": "ads या किसी एक offer के लिए छोटा काम।"
+        },
+        {
+          "name": "त्योहार campaign pack",
+          "price": "₹1,999",
+          "desc": "Diwali/Eid sale के banner, posts और broadcast।"
+        },
+        {
+          "name": "Print design pack",
+          "price": "₹1,499",
+          "desc": "menu card, दुकान का board (flex), standee।"
+        },
+        {
+          "name": "YouTube channel setup",
+          "price": "₹1,499",
+          "desc": "banner, परिचय, पहले video की तैयारी।"
+        }
+      ]
+    },
+    "whoFor": {
+      "title": "किसके लिए कौन सा प्लान?",
+      "subtitle": "Plans feature पर बने हैं, इसीलिए हर type का customer इनमें fit होता है। अपनी पहचान देखें।",
+      "items": [
+        {
+          "who": "दुकान / किराना / शोरूम",
+          "plan": "Business",
+          "note": "catalogue + WhatsApp order; पूरी online बिक्री हो तो Store"
+        },
+        {
+          "who": "क्लिनिक / डॉक्टर / डेंटल",
+          "plan": "Premium",
+          "note": "booking + Google Calendar + WhatsApp reminder"
+        },
+        {
+          "who": "कोचिंग / ट्यूशन",
+          "plan": "Business",
+          "note": "enquiry + batch वाले pages; Calendar booking / online class add-on"
+        },
+        {
+          "who": "सैलून / पार्लर",
+          "plan": "Business",
+          "note": "price list + before–after gallery; booking add-on"
+        },
+        {
+          "who": "रेस्टोरेंट / कैफ़े / ढाबा",
+          "plan": "Premium",
+          "note": "menu, counter QR, Zomato/Swiggy"
+        },
+        {
+          "who": "Home baker / Instagram seller",
+          "plan": "Starter, फिर Business",
+          "note": "Starter से शुरू करें, Business बेहतर है"
+        },
+        {
+          "who": "जिम / योगा सेंटर",
+          "plan": "Business",
+          "note": "plans की price list, trainer profiles, trial की enquiry"
+        },
+        {
+          "who": "फ़ोटोग्राफ़र / creator / influencer",
+          "plan": "Business",
+          "note": "portfolio + सारे social links; brand kit Premium में"
+        },
+        {
+          "who": "CA / lawyer / consultant / कोई भी professional",
+          "plan": "Business",
+          "note": "profile + appointment"
+        },
+        {
+          "who": "Real estate agent / builder",
+          "plan": "Business",
+          "note": "CMS से खुद property listings जोड़ें"
+        },
+        {
+          "who": "होटल / guest house / homestay",
+          "plan": "Premium",
+          "note": "booking + Calendar"
+        },
+        {
+          "who": "Freelancer / student / personal brand",
+          "plan": "Starter",
+          "note": "portfolio और पहचान"
+        },
+        {
+          "who": "शादी / birthday / event",
+          "plan": "Starter + add-on",
+          "note": "Starter + Event page add-on"
+        },
+        {
+          "who": "NGO / मंदिर / community group",
+          "plan": "Starter",
+          "note": ""
+        }
+      ]
+    },
+    "exclusions": {
+      "title": "सिर्फ़ ये चीज़ें इस list से बाहर हैं",
+      "subtitle": "सिर्फ़ तीन चीज़ें — और क्यों।",
+      "items": [
+        {
+          "name": "Custom portal, mobile app, ERP/CRM बनाना",
+          "why": "₹70,000+ के custom काम; माँग आए तो अलग quote।"
+        },
+        {
+          "name": "Photo/video shoot के लिए आना",
+          "why": "Kumbuild पूरी दुनिया को online service देता है; shoot सिर्फ़ आस-पास में अलग बात करके।"
+        },
+        {
+          "name": "Company/trademark/GST registration",
+          "why": "website का काम नहीं; हम सही दिशा दिखा सकते हैं, बस।"
+        }
+      ]
+    },
+    "runningCosts": {
+      "title": "चलता खर्चा — साफ़ हिसाब",
+      "intro": "कुछ चीज़ें एक बार बनती हैं (website, CMS, setup) — वो plan के दाम में है। लेकिन तीन चीज़ों का खर्चा हर महीने तीसरी company को जाता है, इसलिए account customer के अपने नाम पर बनता है और bill सीधा उन्हीं का आता है। हम setup कर देते हैं, बीच में कुछ नहीं जोड़ते।",
+      "items": [
+        {
+          "name": "Business email",
+          "text": "Zoho Mail के free plan पर ₹0 (5 users तक, अपने domain पर)। ज़्यादा सुविधा चाहिए तो Zoho Lite ₹59/user/महीना या Google Workspace ₹99/user/महीना से — bill सीधा customer का।"
+        },
+        {
+          "name": "WhatsApp reminder (automatic)",
+          "text": "Meta का rate — booking/reminder (utility) सिर्फ़ ₹0.115 per message (200 reminders ≈ ₹27/महीना); offer वाले (marketing) message ₹0.8631 per message। Platform हम अपने backend से सीधा जोड़ते हैं, इसलिए अलग platform fee नहीं — सिर्फ़ per-message खर्चा, customer के account से।"
+        },
+        {
+          "name": "Email भेजना (form alerts, confirmations)",
+          "text": "शुरुआत में हमारे system से — छोटे volume पर खर्चा नगण्य है, Care/Renewal में समा जाता है। बड़ा campaign volume हो तो customer का अपना email account लगेगा।"
+        },
+        {
+          "name": "Domain renewal",
+          "text": "दूसरे साल से Renewal (₹2,999/yr) में शामिल है।"
+        },
+        {
+          "name": "Backend hosting (हमारी VPS पर)",
+          "text": "ये तीसरी company का bill नहीं — हमारा अपना shared backend है जो सारे customers को एक साथ संभालता है, इसलिए ये core plan में शामिल है। दूसरे साल से इसका खर्चा Renewal (₹2,999/yr) से चलता है — असल में Renewal ही hosting + backend + छोटे updates का सालाना खर्चा है। शर्तें (Terms में साफ़ लिखेंगे): (1) renewal न लेने पर website का static हिस्सा customer का रहता है (handover, कोई lock-in नहीं), लेकिन dashboard, reminders और enquiry list जैसी backend सुविधाएँ बंद हो जाएँगी; (2) आम business volume शामिल है — असाधारण बड़ा volume (रोज़ हज़ारों orders) हो तो उसके लिए अलग बात होगी।"
+        }
+      ],
+      "careNote": "Care vs Renewal — क्या ज़रूरी है? Care plan किसी भी plan के साथ ज़रूरी नहीं है — ये सिर्फ़ तभी लो जब महीने के छोटे changes, report और पहले जवाब चाहिए; न लो तो website वैसे ही चलती रहेगी। Renewal (₹2,999/साल) domain + hosting का खर्चा है — site चालू रखने के लिए किसी न किसी को हर साल ये देना ही पड़ता है; customer चाहे तो domain/hosting खुद संभाल ले (domain उनके नाम पर है), हम से Renewal लेना ज़बरदस्ती नहीं। न Renewal हो, न खुद का इंतज़ाम — तो domain expire होते ही site बंद हो जाएगी; लेकिन files और data उनके हैं, कभी भी ले जा सकते हैं (handover guarantee)।"
     }
   },
   "privacy": {
@@ -3857,7 +4197,7 @@
         },
         {
           "label": "पहले साल की लागत",
-          "us": "₹5,998 से शुरू",
+          "us": "₹7,999 से शुरू",
           "diy": "₹8,000+ और आपका समय",
           "free": "₹15,000+"
         }
@@ -4021,8 +4361,8 @@
       "d": "एक छोटे से फ़ॉर्म में बताइए आपको क्या चाहिए। हम WhatsApp पर सब पक्का करते हैं, पहले प्रीव्यू दिखाते हैं, और काम तभी शुरू करते हैं जब आप हाँ कहें।"
     },
     "pricing": {
-      "t": "साफ़ कीमतें — ₹3,999 से शुरू वेबसाइटें",
-      "d": "एक बार की कीमतें, कुछ छुपा नहीं: Starter ₹3,999, Business ₹7,999, Premium ₹14,999। सालाना रिन्यूअल से डोमेन, होस्टिंग और अपडेट चलते रहते हैं।"
+      "t": "साफ़ कीमतें — ₹7,999 से शुरू वेबसाइटें",
+      "d": "एक बार की कीमतें, कुछ छुपा नहीं: Starter ₹7,999, Business ₹14,999, Premium ₹24,999। सालाना रिन्यूअल ₹2,999 से डोमेन, होस्टिंग और अपडेट चलते रहते हैं।"
     },
     "privacy": {
       "t": "गोपनीयता नीति — Kumbuild डेटा कैसे संभालता है",

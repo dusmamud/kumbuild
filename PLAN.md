@@ -66,23 +66,26 @@ Detail `ABOUT.md` me hai. Short me:
 - Logo / branding: customer ka existing logo use hoga, naya logo design is service me nahi hai
 - Domain ka kharcha alag se nahi — renewal me included hai (draft), par domain naam customer choose karega
 
-## 5. Packages — DRAFT (final nahi hue)
+## 5. Packages — LIVE on pricing page (2026-11-28)
 
-Ye prices **draft** hain. User ne final nahi kiye. Inko website pe daalne se pehle final karna lazmi hai.
+Ye prices **2026-11-28 ko pricing page par live** hue — `SUDHRE-HUE-PLANS.md` v5 ke hisaab se. Detail `PRICING.md` me hai; poori list (Store + 28 add-ons + customer-type map + running costs) pricing page par hai.
 
-| Package | Price (draft) | Kya milega |
+| Package | Price | Kya milega |
 |---|---|---|
-| Starter | ₹3,999 one-time | 1 page website, WhatsApp button, Maps, contact form |
-| Business | ₹7,999 one-time | 5 pages tak, services + gallery + enquiry form + basic SEO |
-| Premium | ₹14,999 one-time | Booking / appointment system, WhatsApp order, catalogue, zyada pages |
-| Yearly renewal | ₹1,999 / saal | Domain + hosting + chhoti updates + support |
+| Starter | ₹7,999 one-time | 5 pages, WhatsApp button + click-to-call + enquiry form, Google Maps, basic SEO, 1 bhasha, CMS nahi |
+| Business | ₹14,999 one-time | 20 pages tak, apna CMS login, logo design, copywriting 10 pages, GBP setup, 1 business email, 2 bhashayein |
+| Premium | ₹24,999 one-time | 30 pages tak, CMS poora khula + staff logins, catalogue + WhatsApp order, booking + Google Calendar, dashboard, directory listings, brand kit, PWA, advanced SEO |
+| Store (E-commerce) | ₹49,999 se | 50 products tak, cart + checkout, Razorpay + COD, Shiprocket/Delhivery, GST bill, order pipeline |
+| Care Plan (add-on) | ₹999/month ya ₹9,999/year | Monthly report, chhote changes, site nigrani, Google reviews jawab |
+| Yearly renewal | ₹2,999 / saal | Domain + hosting + chhoti updates + support + saal me ek baar site health jaanch |
 
-### Payment terms (draft)
+### Payment terms
 
-- Advance 50% order ke time, baaki 50% delivery / approval pe
-- 2 revision rounds free. Uske baad har extra revision ka charge alag se (amount TBD)
-- Delivery time: 3–5 working days (draft) — preview link milne tak
-- Renewal na karne pe website band ho jayegi ya renewal ke baad hi chalegi — ye policy final karni hai (TBD)
+- Advance 50% order ke time, baaki 50% approval / delivery pe, live karne se pehle
+- Premium aur Store par 2–3 kishton me bhugtan ki suvidha
+- 2 revision rounds free (Starter/Business), Premium par 3. Uske baad har extra revision ka charge alag se (amount TBD)
+- Delivery time: Starter 5–7 din, Business 3–5 din (priority), Premium sabse tez
+- Renewal na karne pe: website ka static hissa customer ka rehta hai (handover, koi lock-in nahi), lekin dashboard, reminders aur enquiry list jaisi backend suvidhayein band ho jayengi. Domain customer ke naam par hai — chahe to domain/hosting khud sambhal le.
 
 ## 6. Order flow — customer ka safar
 
@@ -94,7 +97,7 @@ Ye prices **draft** hain. User ne final nahi kiye. Inko website pe daalne se peh
 6. **Advance do** — 50% payment karo; milne ke baad admin order ko `admin.kumbuild.com` me add karega, status: Received
 7. **Preview dekho** — 3–5 din (draft) me preview link milega — WhatsApp pe aur `home.kumbuild.com` (My orders) pe; dekho, changes batao ya approve karo (2 free rounds)
 8. **Baaki payment + live** — baaki 50% do, website live; live link WhatsApp pe aur `home.kumbuild.com` pe milega
-9. **Renewal** — har saal ₹1,999 (draft) pe domain + hosting + support
+9. **Renewal** — har saal ₹2,999 pe domain + hosting + support + yearly health check
 
 **Customer ka account hota hai.** Signup/login `account.kumbuild.com` pe hota hai; apne orders ka status customer `home.kumbuild.com` pe dekh sakta hai — aur status/preview/live link WhatsApp pe bhi milta rahega. (2026-11-09 wala "customer ka koi account nahi hai" plan 2026-11-11 ko superseded hai.)
 
@@ -116,7 +119,7 @@ Received → In progress → Preview ready → Revision → Approved → Live
 ## 8. Revenue model
 
 - One-time package fees (Starter / Business / Premium) — main income
-- Yearly renewal fees (₹1,999 draft) — repeat income, domain + hosting + support ke liye
+- Yearly renewal fees (₹2,999) — repeat income, domain + hosting + support + yearly health check ke liye
 - Extra revision / extra page ka charge — TBD, pehle 2 revisions free ke baad
 
 Kharcha: domain + hosting per website, Razorpay fees 2% + 18% GST on fee (detail `PAYMENTS.md` me — package-wise cost gin li gayi hai). Ye renewal price final karne se pehle ginna hoga, warna renewal ghate ka sauda ho sakta hai.
@@ -128,7 +131,7 @@ Kharcha: domain + hosting per website, Razorpay fees 2% + 18% GST on fee (detail
 - [x] Brand + tagline: Kumbuild — Tell us what to build.
 - [x] Service, customer, packages (draft), order flow
 - [x] Architecture, subdomains, deployment locked
-- [ ] Pricing final karna (user)
+- [x] Pricing final karna — 2026-11-28: naye plans (₹7,999 / ₹14,999 / ₹24,999 + Store ₹49,999 se, Renewal ₹2,999) pricing page par live. GBP products aur WhatsApp catalogue par abhi purane daam hain — phone se update karna baaki hai.
 - [x] Payment provider decide karna — Razorpay (LOCKED 2026-11-09)
 - [ ] Domain `kumbuild.com` ki status confirm karna (TBD — khareeda hai ya nahi, ye doc nahi batata)
 
@@ -166,11 +169,11 @@ Kharcha: domain + hosting per website, Razorpay fees 2% + 18% GST on fee (detail
 
 ## 12. Open decisions (kuch bhi assume mat karo)
 
-- [ ] Pricing final (₹3,999 / ₹7,999 / ₹14,999 / ₹1,999 — draft hain)
+- [x] Pricing final — naye plans 2026-11-28 ko pricing page par live (SUDHRE-HUE-PLANS.md v5: Starter ₹7,999 / Business ₹14,999 / Premium ₹24,999 / Store ₹49,999 se / Renewal ₹2,999 / Care ₹999/mo)
 - [x] Payment provider — Razorpay (LOCKED 2026-11-09)
 - [ ] `kumbuild.com` domain — khareeda ya nahi, kab khareedna hai (abhi nahi khareeda — user ko registrar pe check karna hai)
 - [ ] GitHub repo ka naam aur public / private
 - [x] Auth subdomain — `auth.kumbuild.com` khatam; ab `account.kumbuild.com` hai (central login/signup, 2026-11-11). `auth.kumbuilds.com` typo tha, irrelevant hai
 - [ ] Hafta me kitni websites bana sakte ho (capacity)
 - [ ] Extra revision / extra page ka charge
-- [ ] Renewal na karne pe website ka kya hoga
+- [x] Renewal na karne pe website ka kya hoga — tay hai: static hissa customer ka rehta hai (handover), dashboard/reminders/enquiry list band ho jayengi; pricing page aur Terms par likha hai

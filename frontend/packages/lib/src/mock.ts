@@ -187,7 +187,7 @@ export const orders: Order[] = [
     previewUrl: "https://preview.kumbuild.example/fashion-hub",
     liveUrl: "https://fashionhub.example",
     renewalDate: "2027-09-25",
-    notes: "Live hai. Renewal 25 Sep 2027 ko due hai (₹1,999/year).",
+    notes: "Live hai. Renewal 25 Sep 2027 ko due hai (₹2,999/year).",
   },
 ];
 

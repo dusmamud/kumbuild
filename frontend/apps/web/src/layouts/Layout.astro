@@ -93,7 +93,7 @@ const siteSchema = {
       logo: "https://kumbuild.com/logo/kumbuild-logo.png",
       email: "hello@kumbuild.com",
       telephone: "+91-91817-64691",
-      priceRange: "₹3,999 - ₹14,999",
+      priceRange: "₹7,999 - ₹49,999",
       areaServed: "Worldwide",
       parentOrganization: { "@id": "https://kumbuild.com/#org" },
     },
@@ -158,7 +158,7 @@ const mobileLink = (active: boolean) =>
     ? "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[20px] font-semibold leading-tight text-primary-700"
     : "flex items-center justify-between gap-4 border-b border-line py-4 font-display text-[20px] font-semibold leading-tight text-ink";
 const waLink = `https://wa.me/${v2.contact.waNumber}?text=${encodeURIComponent(v2.contact.waText)}`;
-/* Footer/top-strip note ("Starting at ₹3,999 · Delivery in …") is split on
+/* Footer/top-strip note ("Starting at ₹7,999 · Delivery in …") is split on
    its separators so each fact stays on one line — the strip may wrap
    between facts, never in the middle of one. */
 const noteParts = dict.hero.note.split(" · ");
@@ -626,7 +626,6 @@ const noteParts = dict.hero.note.split(" · ");
               </a>
             ))}
           </div>
-          <p class="mt-4 text-xs text-muted">{dict.footer.draftNote}</p>
         </div>
         <div>
           <p class="font-display text-[15px] font-semibold text-ink">{dict.footer.services}</p>

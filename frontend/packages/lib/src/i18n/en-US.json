@@ -55,7 +55,7 @@
         "q": "What do I need to give you?"
       },
       {
-        "a": "Starter ₹3,999, Business ₹7,999, Premium ₹14,999 (all draft). Yearly renewal is ₹1,999 (draft).",
+        "a": "Starter ₹7,999, Business ₹14,999, Premium ₹24,999. A separate online Store plan starts at ₹49,999. Yearly renewal is ₹2,999.",
         "q": "How much will a website cost?"
       },
       {
@@ -84,7 +84,6 @@
   },
   "footer": {
     "company": "Company",
-    "draftNote": "Prices shown are draft and will be confirmed before payment.",
     "legal": "Legal",
     "rights": "All rights reserved.",
     "services": "Services",
@@ -97,7 +96,7 @@
     "headlineA": "A ",
     "headlineAccent": "professional website",
     "headlineB": " for your business, ready in 3–5 days.",
-    "note": "Starting at ₹3,999 · Delivery in 3–5 working days · 50% advance · 2 free revisions",
+    "note": "Starting at ₹7,999 · Delivery in 3–7 working days · 50% advance · 2 free revisions",
     "subtitle": "We build a fast, mobile-first website for your shop, clinic, tuition centre, salon or restaurant — you just tell us what you need. No code, no design tools, no hassle.",
     "title": "Tell us what to build."
   },
@@ -155,7 +154,7 @@
       "rows": [
         {
           "k": "Package",
-          "v": "Business — ₹7,999"
+          "v": "Business — ₹14,999"
         },
         {
           "k": "Advance",
@@ -179,7 +178,7 @@
       },
       {
         "k": "starting price, one‑time",
-        "v": "₹3,999"
+        "v": "₹7,999"
       },
       {
         "k": "advance — the rest after you approve",
@@ -384,7 +383,7 @@
       },
       {
         "text": "Pay through the Razorpay link on WhatsApp — UPI, cards, net-banking.",
-        "title": "You pay ₹1,999"
+        "title": "You pay ₹2,999"
       },
       {
         "text": "Domain, hosting, updates and support keep running for one more year.",
@@ -495,79 +494,420 @@
     "visitLive": "Visit live site"
   },
   "pricing": {
-    "note": "Prices are draft and will be confirmed before you pay.",
+    "note": "Blog posts and store products don't count toward your page limit. Pages beyond 20 (Business) or 30 (Premium) are charged per page. Copywriting covers up to 10 pages in Business and Premium.",
     "packages": [
       {
-        "bestFor": "Small shop or Instagram page — one page is enough.",
+        "slug": "starter",
+        "name": "Starter",
+        "price": "₹7,999",
+        "per": "one-time",
+        "bestFor": "Small shop, Instagram seller or personal page — a simple site that says who you are.",
         "cta": "Choose Starter",
         "features": [
-          "1 page",
-          "Mobile responsive",
-          "WhatsApp button",
-          "Google Maps",
-          "Contact / enquiry form",
-          "Basic SEO",
-          "SSL (https)"
-        ],
-        "name": "Starter",
-        "per": "one-time",
-        "price": "₹3,999",
-        "slug": "starter"
+          "5 pages (Home, About, Services, Gallery, Contact)",
+          "WhatsApp chat button + click-to-call + enquiry form",
+          "Enquiries straight to your WhatsApp and email",
+          "Google Maps + social media links",
+          "Basic SEO (title, description, sitemap)",
+          "Quality stock photos included",
+          "1 language (English or Hindi)",
+          "No CMS — small changes done for you over WhatsApp (covered in Renewal)",
+          "2 free revision rounds · Delivery in 5–7 days"
+        ]
       },
       {
-        "bestFor": "Clinic, tuition, salon — you need a full website.",
+        "slug": "business",
+        "name": "Business",
+        "price": "₹14,999",
+        "per": "one-time",
+        "bestFor": "Clinic, tuition, salon, restaurant, professional — a full business website.",
         "cta": "Choose Business",
         "features": [
-          "Up to 5 pages",
           "Everything in Starter",
-          "Services + gallery",
-          "About your business"
-        ],
-        "name": "Business",
-        "per": "one-time",
-        "price": "₹7,999",
-        "slug": "business"
+          "Up to 20 pages (core 5 + Blog, FAQ, Price List, Team, Jobs and more)",
+          "Your own CMS login — change prices, photos, offers, timings, blog and listings (property/product) yourself; the design can't break (only set fields are editable), with secure login. Admin panels like this usually start at ₹39,999 elsewhere — our biggest advantage.",
+          "Logo design included (2 concepts, all files) if you don't have one",
+          "Copywriting included — we write the text for up to 10 pages",
+          "Your photos edited and polished",
+          "Google Business Profile setup + reviews section + Google review link",
+          "Social media pages setup — Facebook + Instagram (photo, cover, bio)",
+          "WhatsApp Business profile setup — catalogue + greeting message",
+          "1 business email (like info@yourname.com)",
+          "Form emails that don't land in spam — proper email setup (SPF/DKIM)",
+          "2 languages (e.g. English + Hindi)",
+          "Search Console + Analytics setup",
+          "Every enquiry alerts you instantly on WhatsApp and email, plus a full list in admin",
+          "Blog + FAQ section (post yourself from the CMS)",
+          "Price list page for your services",
+          "Team / doctor / staff profiles · Work gallery (with before–after photos)",
+          "Jobs page — take staff enquiries from the site",
+          "Offer banner (change it yourself from the CMS) · Add a YouTube video",
+          "Live chat widget — talk to visitors right on the site",
+          "1 month of Care plan free",
+          "2 free revision rounds · Delivery in 3–5 days (priority)"
+        ]
       },
       {
-        "bestFor": "Booking, WhatsApp orders or a catalogue.",
+        "slug": "premium",
+        "name": "Premium",
+        "price": "₹24,999",
+        "per": "one-time",
+        "bestFor": "You want orders and bookings straight from the website.",
         "cta": "Choose Premium",
         "features": [
           "Everything in Business",
-          "Booking / appointment form",
-          "WhatsApp order button",
-          "Catalogue / menu list",
-          "More pages as needed",
-          "Basic SEO",
-          "SSL (https)"
-        ],
-        "name": "Premium",
-        "per": "one-time",
-        "price": "₹14,999",
-        "slug": "premium"
+          "Up to 30 pages · Premium design with light animations",
+          "CMS fully open — separate logins for staff (who can change what is set) + recorded CMS training video",
+          "Catalogue / menu + WhatsApp order button on every item",
+          "Booking / appointment form + Google Calendar booking — bookings go straight into your Google Calendar, customer gets a WhatsApp reminder",
+          "Your own dashboard — enquiries and bookings in one place with status, downloadable as Excel",
+          "Google reviews live + a full review-request system — QR, link and ready WhatsApp templates",
+          "Directory listings — same correct details (name, address, phone) on JustDial, Sulekha, IndiaMART and Bing Places",
+          "Mini brand kit — all logo versions, brand colours, fonts, all files",
+          "10 ready-made social post designs",
+          "PWA — your site installs on phones like an app",
+          "Advanced SEO — keyword research + local SEO + schema markup",
+          "Meta Pixel + conversion tracking · Cookie consent setup",
+          "AI-search ready — clean data (llms.txt and more) so ChatGPT and Google's AI answers can mention you",
+          "Search inside the website · Offer popup · Web push notifications (offers straight to customers' phones)",
+          "Lead magnet page — collect enquiries in exchange for a free guide or checklist",
+          "Zomato / Swiggy order buttons for restaurants",
+          "Brochure / price-list PDF download from the site",
+          "2 business emails · 4 languages (English, Hindi, Bengali, Assamese)",
+          "Print-ready QR code for your counter",
+          "Support on call as well as WhatsApp",
+          "3 free revision rounds · Fastest delivery + first priority support",
+          "3 months of Care plan free"
+        ]
       }
     ],
     "renewal": {
-      "desc": "Domain renewal, hosting, small updates (phone, timings, a line or two) and support.",
+      "desc": "Domain renewal, hosting, small updates (phone, timings, a line or two) and support — plus a full site health check once a year.",
       "per": "per year",
-      "price": "₹1,999",
+      "price": "₹2,999",
       "title": "Yearly renewal",
       "link": "See maintenance & renewal details"
     },
     "subtitle": "One-time prices. No hidden charges. Yearly renewal keeps your domain, hosting and small updates running.",
-    "terms": "50% advance on order · remaining 50% on approval, before go-live · 2 free revision rounds · Payment by Razorpay (UPI, cards, netbanking, wallets).",
+    "terms": "50% advance on order · remaining 50% on approval, before go-live · Premium and Store can be paid in 2–3 instalments · 2 free revision rounds (Starter and Business), 3 on Premium.",
     "title": "Simple pricing",
     "extra": {
       "heading": "What every plan includes",
       "items": [
         "Mobile-first design — your site looks right on the phones your customers actually use",
-        "WhatsApp enquiries — one-tap chat buttons, no forms that go nowhere",
-        "Google-ready basics — titles, descriptions and sitemap set up so people can find you",
-        "Domain and hosting setup — connected and secured (SSL) by us",
-        "Two free revision rounds on your preview before launch",
-        "Launch support — we stay on WhatsApp until your site is live and you are happy"
+        "Domain in your own name — free domain, free hosting and free SSL for the first year",
+        "Favicon + app icon · CDN for fast loading worldwide · 90+ speed score",
+        "Photos optimised automatically — a light, fast site",
+        "Accessibility basics — big, clear text, easy for everyone",
+        "Beautiful preview when shared on WhatsApp and Facebook",
+        "Spam protection on forms · Sitemap submitted to Google and Bing",
+        "Secure backup — a full copy of your site, always safe",
+        "Full polish — 404 page and thank-you page designed too",
+        "Basic Privacy and Terms pages for your site included",
+        "We clean up and proofread the text you give us",
+        "Written quote before work starts — no hidden charges",
+        "Design preview first — work continues only if you like it",
+        "Full check before launch — every page, link, form and phone tested",
+        "Delivery date in writing — the date is written in your quote",
+        "Handover guarantee — domain, files and all your data are yours if you ever leave; no lock-in",
+        "30 days of free support after launch",
+        "30-minute training call + 1-page guide at launch",
+        "Renewal ₹2,999/year from the second year — domain, hosting, small updates and a yearly health check"
       ],
       "renewalTitle": "Renewal, in plain words",
-      "renewalText": "Your first payment builds the website. The yearly renewal of ₹1,999 keeps it alive: your domain name renewed, hosting paid, small updates (a phone number, timings, a line or two of text) done for you, and support when something looks wrong. If you ever stop renewing, your website files and domain are still yours — we hand everything over. No lock-ins, no hostage domains."
+      "renewalText": "Your first payment builds the website. The yearly renewal of ₹2,999 keeps it alive: your domain renewed, hosting paid, small updates (a phone number, timings, a line or two of text) done for you, support when something looks wrong, and a full site health check once a year. If you ever stop renewing, your website files and domain are still yours — we hand everything over. No lock-ins, no hostage domains. The static part of your site stays yours; dashboard, reminders and the enquiry list need the backend, so they stop if renewal lapses — you can also manage domain and hosting yourself, since the domain is in your name."
+    },
+    "honestyNote": "A few features depend on systems still being set up — the enquiry dashboard, online payment and Calendar booking. They are included in your plan and will switch on for you as soon as they are ready.",
+    "store": {
+      "title": "Need a full online store?",
+      "subtitle": "Store is a separate plan — everything in Premium, plus selling.",
+      "name": "Store (E-commerce)",
+      "price": "₹49,999+",
+      "per": "starting at",
+      "bestFor": "A complete online store — market rate is ₹49,999+ too.",
+      "cta": "Ask about Store",
+      "features": [
+        "Up to 50 products included (with variants — size, colour); more as an add-on",
+        "Cart + easy checkout (name, phone, address — that's it)",
+        "Razorpay online payment (UPI, card, netbanking, wallet) + Cash on Delivery",
+        "Delivery setup with Shiprocket / Delhivery — pincode checker, shipping-charge rules",
+        "GST bill on every order · Full order pipeline (new → packed → shipped → delivered) + phone alert on every new order",
+        "Customer accounts + order tracking — customers see where their order is",
+        "Coupon / discount codes · Stock watch + low-stock alerts",
+        "Abandoned cart recovery — WhatsApp / email reminders for half-finished orders",
+        "Product reviews · Wishlist · Checks that block fake COD orders",
+        "Facebook / Instagram Shop + Google Shopping sync",
+        "Refund and shipping policy pages · Store SEO",
+        "For bigger stores: multi-currency, gift wrap, gift cards, loyalty points, sale countdown, back-in-stock alerts — as per scope"
+      ],
+      "note": "In the order form, pick any package and write “Store” in your message — we confirm the Store quote with you on WhatsApp."
+    },
+    "addons": {
+      "title": "Add-ons — add to any plan",
+      "subtitle": "Small setup jobs ₹999–1,999, mid jobs ₹2,999, bigger custom work from ₹4,999, monthly items ₹999–2,999. Taking 2–3 add-ons often makes the bigger plan cheaper — that's by design.",
+      "items": [
+        {
+          "name": "Care Plan",
+          "price": "₹999/month or ₹9,999/year",
+          "desc": "Monthly visitor report in simple language, small changes beyond the CMS done by us, site monitoring, Google reviews watched and answered, first priority replies."
+        },
+        {
+          "name": "Directory listings package",
+          "price": "₹2,999",
+          "desc": "Correct listings on JustDial, Sulekha, IndiaMART and Bing, plus cleaning up old wrong or duplicate listings. (Included in Premium.)"
+        },
+        {
+          "name": "Online payment button",
+          "price": "₹1,999",
+          "desc": "Razorpay link for booking or advance, without a full store."
+        },
+        {
+          "name": "Google Calendar booking",
+          "price": "₹1,999",
+          "desc": "For Business. (Included in Premium.)"
+        },
+        {
+          "name": "AI chat assistant",
+          "price": "₹4,999",
+          "desc": "Website chat trained on your services and FAQs."
+        },
+        {
+          "name": "CRM / Google Sheet lead pipeline",
+          "price": "₹1,999",
+          "desc": "All enquiries in one Sheet or CRM."
+        },
+        {
+          "name": "Newsletter signup + email campaign setup",
+          "price": "₹1,999",
+          "desc": "Send offers by email."
+        },
+        {
+          "name": "Social media handling",
+          "price": "₹2,999/month",
+          "desc": "A month of posts + festival designs."
+        },
+        {
+          "name": "Google Profile monthly posts",
+          "price": "₹999/month",
+          "desc": "Your Google profile stays fresh."
+        },
+        {
+          "name": "Ads setup",
+          "price": "₹2,999",
+          "desc": "Your first Google / Meta campaign set up (ad spend is yours, separate; landing page is a separate add-on)."
+        },
+        {
+          "name": "Short intro / promo video",
+          "price": "from ₹2,499",
+          "desc": "A video or reel for your shop or business."
+        },
+        {
+          "name": "Event / wedding page",
+          "price": "₹2,999",
+          "desc": "RSVP form, countdown and venue map."
+        },
+        {
+          "name": "Digital visiting card",
+          "price": "₹999",
+          "desc": "An online card on one link. (Made for Starter.)"
+        },
+        {
+          "name": "Online class setup",
+          "price": "₹999",
+          "desc": "Zoom / Google Meet setup for coaching."
+        },
+        {
+          "name": "Price calculator",
+          "price": "from ₹4,999",
+          "desc": "Instant estimates (for interiors, courier and similar)."
+        },
+        {
+          "name": "Extra page / blog writing",
+          "price": "₹1,499 per page · blog post ₹999",
+          "desc": "Per page, written for SEO."
+        },
+        {
+          "name": "Second branch page",
+          "price": "₹1,999 per branch",
+          "desc": "A separate page + Maps for each branch."
+        },
+        {
+          "name": "Visiting card + letterhead / bill design",
+          "price": "₹999",
+          "desc": ""
+        },
+        {
+          "name": "Move from an old website",
+          "price": "from ₹2,999",
+          "desc": "Old content kept, old links looked after."
+        },
+        {
+          "name": "Extra business email IDs",
+          "price": "₹499 per ID (setup)",
+          "desc": "For your team."
+        },
+        {
+          "name": "WhatsApp broadcast campaign",
+          "price": "₹999 per campaign",
+          "desc": "An offer message to your customers (per-message cost is yours)."
+        },
+        {
+          "name": "WhatsApp auto-reply bot",
+          "price": "₹2,999",
+          "desc": "Common questions answered automatically."
+        },
+        {
+          "name": "Monthly blog writing pack",
+          "price": "₹2,999/month (4 posts)",
+          "desc": "Regular SEO blog posts, written by us."
+        },
+        {
+          "name": "Website redesign",
+          "price": "from ₹9,999",
+          "desc": "A completely new look for your old site."
+        },
+        {
+          "name": "A single landing page",
+          "price": "₹3,999",
+          "desc": "For ads or one offer."
+        },
+        {
+          "name": "Festival campaign pack",
+          "price": "₹1,999",
+          "desc": "Diwali / Eid sale banners, posts and broadcast."
+        },
+        {
+          "name": "Print design pack",
+          "price": "₹1,499",
+          "desc": "Menu card, shop board (flex), standee."
+        },
+        {
+          "name": "YouTube channel setup",
+          "price": "₹1,499",
+          "desc": "Banner, introduction, first video ready."
+        }
+      ]
+    },
+    "whoFor": {
+      "title": "Which plan is for whom?",
+      "subtitle": "Plans are built on features, so every kind of customer fits. Find yourself here.",
+      "items": [
+        {
+          "who": "Shop / kirana / showroom",
+          "plan": "Business",
+          "note": "Catalogue + WhatsApp order; full online selling → Store"
+        },
+        {
+          "who": "Clinic / doctor / dental",
+          "plan": "Premium",
+          "note": "Booking + Google Calendar + WhatsApp reminder"
+        },
+        {
+          "who": "Coaching / tuition",
+          "plan": "Business",
+          "note": "Enquiry + batch pages; Calendar booking / online class add-on"
+        },
+        {
+          "who": "Salon / parlour",
+          "plan": "Business",
+          "note": "Price list + before–after gallery; booking add-on"
+        },
+        {
+          "who": "Restaurant / cafe / dhaba",
+          "plan": "Premium",
+          "note": "Menu, counter QR, Zomato / Swiggy"
+        },
+        {
+          "who": "Home baker / Instagram seller",
+          "plan": "Starter, then Business",
+          "note": "Start with Starter, Business is better"
+        },
+        {
+          "who": "Gym / yoga centre",
+          "plan": "Business",
+          "note": "Plan price lists, trainer profiles, trial enquiries"
+        },
+        {
+          "who": "Photographer / creator / influencer",
+          "plan": "Business",
+          "note": "Portfolio + all social links; brand kit in Premium"
+        },
+        {
+          "who": "CA / lawyer / consultant / any professional",
+          "plan": "Business",
+          "note": "Profile + appointment"
+        },
+        {
+          "who": "Real estate agent / builder",
+          "plan": "Business",
+          "note": "Add property listings yourself from the CMS"
+        },
+        {
+          "who": "Hotel / guest house / homestay",
+          "plan": "Premium",
+          "note": "Booking + Calendar"
+        },
+        {
+          "who": "Freelancer / student / personal brand",
+          "plan": "Starter",
+          "note": "Portfolio and identity"
+        },
+        {
+          "who": "Wedding / birthday / event",
+          "plan": "Starter + add-on",
+          "note": "Starter + Event page add-on"
+        },
+        {
+          "who": "NGO / temple / community group",
+          "plan": "Starter",
+          "note": ""
+        }
+      ]
+    },
+    "exclusions": {
+      "title": "What is not in these plans",
+      "subtitle": "Only three things sit outside this list — and why.",
+      "items": [
+        {
+          "name": "Custom portal, mobile app, ERP / CRM",
+          "why": "₹70,000+ custom work; ask and we quote separately."
+        },
+        {
+          "name": "Photo / video shoot on location",
+          "why": "Kumbuild serves the whole world online; a shoot nearby is a separate conversation."
+        },
+        {
+          "name": "Company / trademark / GST registration",
+          "why": "Not website work — we can point you in the right direction."
+        }
+      ]
+    },
+    "runningCosts": {
+      "title": "Running costs — the full picture",
+      "intro": "Some things are built once (website, CMS, setup) — those are in your plan price. But three costs go to a third party every month, so those accounts are in your name and the bill comes straight to you. We set it up; we add nothing in between.",
+      "items": [
+        {
+          "name": "Business email",
+          "text": "₹0 on Zoho Mail's free plan (up to 5 users, on your domain). Want more? Zoho Lite from ₹59/user/month or Google Workspace from ₹99/user/month — billed straight to you."
+        },
+        {
+          "name": "WhatsApp reminders (automatic)",
+          "text": "Meta's rate — booking/reminder (utility) messages just ₹0.115 per message (200 reminders ≈ ₹27/month); offer (marketing) messages ₹0.8631 per message. We connect the platform straight from our backend, so there is no separate platform fee — only the per-message cost, from your account."
+        },
+        {
+          "name": "Sending email (form alerts, confirmations)",
+          "text": "At first, from our system — at small volumes the cost is negligible and fits inside Care / Renewal. For big campaign volumes, your own email account is used."
+        },
+        {
+          "name": "Domain renewal",
+          "text": "Included in Renewal (₹2,999/yr) from the second year."
+        },
+        {
+          "name": "Backend hosting (on our VPS)",
+          "text": "Not a third-party bill — our own shared backend serves all customers together, so it is included in your core plan. From the second year its cost runs from Renewal (₹2,999/yr): Renewal is really the yearly cost of hosting + backend + small updates. Terms: (1) if you don't renew, the static part of your website stays yours (handover, no lock-in), but dashboard, reminders and the enquiry list stop; (2) normal business volume is included — unusually large volume (thousands of orders a day) is quoted separately."
+        }
+      ],
+      "careNote": "Care vs Renewal — what is essential? Care is NOT compulsory with any plan — take it only if you want monthly small changes, a report and first replies; without it your website runs just the same. Renewal (₹2,999/year) is the domain + hosting cost — someone has to pay it every year to keep the site on; you can manage domain and hosting yourself if you like (the domain is in your name), Renewal with us is not forced. With neither Renewal nor your own arrangement, the site stops when the domain expires — but the files and data are yours, take them any time (handover guarantee)."
     }
   },
   "privacy": {
@@ -3857,7 +4197,7 @@
         },
         {
           "label": "First-year cost",
-          "us": "From ₹5,998",
+          "us": "From ₹7,999",
           "diy": "₹8,000+ and your time",
           "free": "₹15,000+"
         }
@@ -4021,8 +4361,8 @@
       "d": "Tell us what you need in one short form. We confirm everything on WhatsApp, show you a preview first, and start only when you say yes."
     },
     "pricing": {
-      "t": "Simple pricing — websites from ₹3,999",
-      "d": "One-time prices with nothing hidden: Starter ₹3,999, Business ₹7,999, Premium ₹14,999. Yearly renewal keeps domain, hosting and updates covered."
+      "t": "Simple pricing — websites from ₹7,999",
+      "d": "One-time prices with nothing hidden: Starter ₹7,999, Business ₹14,999, Premium ₹24,999. Yearly renewal ₹2,999 keeps domain, hosting and updates covered."
     },
     "privacy": {
       "t": "Privacy policy — how Kumbuild handles your data",
